@@ -1,7 +1,6 @@
 # Build tools
 
-Produces [`SemOps-Manual-A4.pdf`](../SemOps-Manual-A4.pdf) — the A4 print
-edition — from the Markdown chapters.
+Produces the A4 print edition from the Markdown chapters.
 
 ```bash
 cd tools
@@ -10,8 +9,20 @@ npx puppeteer browsers install chrome-headless-shell   # once
 node build-pdf.mjs
 ```
 
-Output lands in `build/` (git-ignored). Copy the finished PDF to the repo root
-to publish it.
+Output lands in `build/SemOps-Manual-A4.pdf`, which is git-ignored — the PDF is
+**published as a release asset, not committed**, so the repository does not gain
+a ~3 MB binary on every revision.
+
+To publish a new edition:
+
+```bash
+cp build/SemOps-Manual-A4.pdf build/SemOps-Manual-vX.Y.Z-A4.pdf
+gh release create vX.Y.Z build/SemOps-Manual-vX.Y.Z-A4.pdf \
+  --title "vX.Y.Z — The SemOps Manual" --notes-file NOTES.md --latest
+```
+
+Version the asset filename. A downloaded `SemOps-Manual-A4.pdf` is ambiguous
+once a reader has two of them.
 
 ## What it does
 

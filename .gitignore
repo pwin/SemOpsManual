@@ -1,6 +1,8 @@
-# Build output. The published PDF is committed at the repo root; everything
-# else under build/ is regenerable by tools/build-pdf.mjs.
+# Build output, all regenerable by tools/build-pdf.mjs. The PDF ships as a
+# GitHub release asset rather than a committed file, so that the repository
+# does not gain a ~3 MB binary on every revision.
 build/
+SemOps-Manual*.pdf
 
 # Toolchain
 tools/node_modules/
