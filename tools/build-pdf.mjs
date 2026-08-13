@@ -103,6 +103,8 @@ function assemble() {
       // outline does that job, so keep only the framing material.
       md = md
         .replace(/<h1 align="center">[\s\S]*?<\/p>\s*---\s*/, '')
+        // "Read it on paper" points at this very document; drop it in print.
+        .replace(/## Read it on paper[\s\S]*?(?=## Contents)/, '')
         .replace(/## Contents[\s\S]*?(?=## How to read it)/, '')
         .replace(/<p align="center">[\s\S]*?<\/p>\s*$/, '');
       md = `# ${entry.title}\n\n${md.replace(/^##\s+What this is/m, '## What this is')}`;
@@ -228,7 +230,7 @@ function writeAndRender(chapters, indexMd) {
   const meta = `---
 title: "The SemOps Manual"
 subtitle: "Running a semantic practice the way you run software"
-author: "Semantechs"
+author: "Peter Winstanley"
 date: "${date}"
 papersize: a4
 margin:

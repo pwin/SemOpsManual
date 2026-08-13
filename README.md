@@ -159,6 +159,23 @@ Appendix A for anyone extending the manual.
 
 ---
 
+## Licence
+
+MIT — © 2026 Peter Winstanley. See [LICENSE](LICENSE).
+
+This covers the text, the diagrams and the build tooling: use it, adapt it, and
+put it in front of your own organisation. Attribution is required; a warranty is
+not offered.
+
+Two things the licence does not reach. The **Semantechs mark** in
+[`assets/`](assets/) is a trademark, and a copyright licence does not grant
+rights in it — reuse the manual freely, but replace the branding if you
+republish. The **third-party vocabularies** referenced throughout (the W3C
+Organization Ontology, FOAF) carry their own terms, as do the two toolchains the
+manual documents.
+
+---
+
 <p align="center">
   <img src="assets/semantechs-logo-320.png" alt="" width="72"><br/>
   <sub><b>Semantechs</b> · Turtle, OWL, SPARQL — and the operating discipline around them</sub>

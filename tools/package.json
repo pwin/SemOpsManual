@@ -3,6 +3,8 @@
   "private": true,
   "type": "module",
   "description": "Build the A4 print edition of the SemOps Manual",
+  "license": "MIT",
+  "author": "Peter Winstanley",
   "scripts": {
     "pdf": "node build-pdf.mjs",
     "diagrams": "node render-diagrams.mjs",
