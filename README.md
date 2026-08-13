@@ -79,9 +79,9 @@ nobody adopts.
 ## Read it on paper
 
 **[Download the A4 PDF](https://github.com/pwin/SemOpsManual/releases/latest)** —
-the whole manual as a 76-page A4 document: title page, contents with page
-numbers, every diagram rendered, and an index of commands, flags and check
-identifiers.
+the whole manual as a single A4 document: title page, contents with page
+numbers, all nineteen diagrams rendered, and an index of commands, flags and
+check identifiers.
 
 The PDF is published as a release asset rather than committed, so the repository
 does not carry a fresh multi-megabyte binary for every revision. Build it

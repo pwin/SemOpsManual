@@ -52,10 +52,15 @@ someone forgot to reload.
 ```bash
 python -m ontology_suite consistency-remote \
   --query-endpoint http://localhost:3030/acme/sparql \
-  --manifest examples/acme_robotics/manifest.json \
+  --manifest graphs.json \
   --auth-user admin --auth-password secret \
   --out-dir out/consistency-remote
 ```
+
+> **`graphs.json` is not bundled with the fixture, and cannot be.** Unlike every
+> other command in Part III, this one has no runnable file to point at, because
+> a manifest binds *your* store's named-graph URIs — which nobody else can know.
+> You write it once, as below.
 
 ### The manifest is the interesting part
 

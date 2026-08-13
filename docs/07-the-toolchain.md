@@ -137,7 +137,7 @@ And the editor-side equivalents, by VS Code command:
 | You want to… | Command |
 |---|---|
 | Start a new ontology with imports wired up | *New Ontology* |
-| Add a class in the right place in the hierarchy | *Add Class* / *Add Subclass* / *Add Sibling Class* |
+| Add a class in the right place in the hierarchy | *Add Class or Category* / *Add Subclass* / *Add Sibling Class* |
 | Run the registry locally, in-process | *Run Local Checks* |
 | See the model as a picture | *Visualize Subject Graph* |
 | Draft an ontology and query from a raw CSV | *Infer Ontology + Query from CSV* |
@@ -194,8 +194,13 @@ check it demonstrates:
 | Term | Flaw | Check it triggers |
 |---|---|---|
 | `acme:Contractor` | `rdfs:subClassOf acme:Employee` **and** `owl:disjointWith acme:Employee` | `LOG-001` — logically unsatisfiable |
-| `acme:hasSkill` | no `rdfs:label` | `QUA-001` |
+| `acme:hasSkill` | no `rdfs:label`, and no `skos:prefLabel` either | `QUA-001`, `QUA-004` |
 | `acme:reports_to` | local name is not lowerCamelCase; no domain or range | `STY-002`, `STR-003` |
+
+That is **five findings**, and five is exactly what the scoped run in
+[Chapter 9](09-continuous-integration.md) reports — the fixture's flaws and the
+gate's output account for each other completely, which is the property that
+makes it usable as a teaching example.
 
 `acme-org-v2.ttl` is a plausible next release: it renames `acme:Engineer` to
 `acme:SoftwareEngineer` — a breaking change, *with* a migration annotation — and

@@ -259,6 +259,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # version-diff compares against the base branch, so the default
+          # shallow checkout is not enough.
+          fetch-depth: 0
       - uses: astral-sh/setup-uv@v5
       - run: uv sync
 
@@ -283,8 +287,10 @@ jobs:
       # 3. Is this release breaking, and does anything downstream break with it?
       - name: Change impact
         run: |
+          # The "old" side is the ontology as it stands on the base branch.
+          git show "origin/${{ github.base_ref }}:ontology/acme-org.ttl" > /tmp/base.ttl
           uv run ontology-quality-suite version-diff \
-            ontology/acme-org.ttl.base ontology/acme-org.ttl \
+            /tmp/base.ttl ontology/acme-org.ttl \
             --json --fail-on major
         continue-on-error: true   # informational: a MAJOR bump needs sign-off, not a block
 
