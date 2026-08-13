@@ -149,7 +149,8 @@ team actually owns produces **5**.
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{
   'fontSize':'15px','fontFamily':'Segoe UI, Helvetica, Arial, sans-serif',
-  'lineColor':'#14243A','primaryTextColor':'#14243A'}}}%%
+  'lineColor':'#14243A','primaryTextColor':'#14243A',
+  'edgeLabelBackground':'#FFFFFF'}}}%%
 flowchart LR
     RUN["Same ontology,<br/>same 50 checks"]
     A["<b>296 findings</b><br/>everything in the<br/>merged graph"]

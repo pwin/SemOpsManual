@@ -31,7 +31,8 @@ rdflib. The VS Code extension reads *the same data*, copied into its own
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{
   'fontSize':'15px','fontFamily':'Segoe UI, Helvetica, Arial, sans-serif',
-  'lineColor':'#14243A','primaryTextColor':'#14243A'}}}%%
+  'lineColor':'#14243A','primaryTextColor':'#14243A',
+  'edgeLabelBackground':'#FFFFFF'}}}%%
 flowchart TD
     REG[("<b>Check registry</b><br/>registry.json<br/>sparql/*.rq · shapes/*.ttl<br/><i>engine-agnostic data</i>")]
 

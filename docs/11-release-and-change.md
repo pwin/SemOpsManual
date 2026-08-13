@@ -206,7 +206,8 @@ an unattended CI job that commits its own output.
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{
   'fontSize':'15px','fontFamily':'Segoe UI, Helvetica, Arial, sans-serif',
-  'lineColor':'#14243A','primaryTextColor':'#14243A'}}}%%
+  'lineColor':'#14243A','primaryTextColor':'#14243A',
+  'edgeLabelBackground':'#FFFFFF'}}}%%
 flowchart TD
     CH["Ontology change<br/>proposed"]
     VD["version-diff<br/><i>is it breaking?</i>"]

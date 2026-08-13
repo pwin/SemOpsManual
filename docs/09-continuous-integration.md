@@ -160,7 +160,8 @@ registry, the same engine:
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{
   'fontSize':'15px','fontFamily':'Segoe UI, Helvetica, Arial, sans-serif',
-  'lineColor':'#14243A','primaryTextColor':'#14243A'}}}%%
+  'lineColor':'#14243A','primaryTextColor':'#14243A',
+  'edgeLabelBackground':'#FFFFFF'}}}%%
 flowchart TD
     ONT["acme-org-v1.ttl<br/>+ org: + foaf:"]
 

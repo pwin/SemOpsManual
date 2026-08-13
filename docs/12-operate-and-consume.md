@@ -20,7 +20,8 @@ and this chapter is explicit about which parts are real and which are grey.
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{
   'fontSize':'15px','fontFamily':'Segoe UI, Helvetica, Arial, sans-serif',
-  'lineColor':'#14243A','primaryTextColor':'#14243A'}}}%%
+  'lineColor':'#14243A','primaryTextColor':'#14243A',
+  'edgeLabelBackground':'#FFFFFF'}}}%%
 flowchart TD
     S7["<b>7 · Runtime validation</b><br/>consistency-remote<br/><i>covered</i>"]
     S8["<b>8 · Observability</b><br/>metrics · dashboards · logs<br/><i>not covered</i>"]

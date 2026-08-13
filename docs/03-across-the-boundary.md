@@ -39,7 +39,8 @@ The last row is the one most often missed, and it dominates supply-chain work.
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{
   'fontSize':'15px','fontFamily':'Segoe UI, Helvetica, Arial, sans-serif',
-  'lineColor':'#14243A','primaryTextColor':'#14243A'}}}%%
+  'lineColor':'#14243A','primaryTextColor':'#14243A',
+  'edgeLabelBackground':'#FFFFFF'}}}%%
 flowchart TD
     subgraph PEER["A · Peer consortium"]
         P1["Firm A"] --- P0(("Shared<br/>vocabulary"))
@@ -58,6 +59,8 @@ flowchart TD
         O0(("Public standard<br/>W3C · industry body"))
         O1["Anyone"] --> O0
     end
+
+    PEER ~~~ CHAIN ~~~ OPEN
 
     classDef human fill:#FFE6DA,stroke:#FD5B1C,stroke-width:2px,color:#14243A;
     classDef govern fill:#FFF0D6,stroke:#FE8902,stroke-width:2px,color:#14243A;
@@ -178,7 +181,8 @@ The protocol that works looks like this:
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{
   'fontSize':'15px','fontFamily':'Segoe UI, Helvetica, Arial, sans-serif',
-  'lineColor':'#14243A','primaryTextColor':'#14243A'}}}%%
+  'lineColor':'#14243A','primaryTextColor':'#14243A',
+  'edgeLabelBackground':'#FFFFFF'}}}%%
 flowchart TD
     A["Change proposed"]
     B{"version-diff<br/>says MAJOR?"}

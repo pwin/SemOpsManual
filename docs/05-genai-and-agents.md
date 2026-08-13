@@ -39,7 +39,8 @@ has collapsed. The cost of knowing whether it is right has not.**
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{
   'fontSize':'15px','fontFamily':'Segoe UI, Helvetica, Arial, sans-serif',
-  'lineColor':'#14243A','primaryTextColor':'#14243A'}}}%%
+  'lineColor':'#14243A','primaryTextColor':'#14243A',
+  'edgeLabelBackground':'#FFFFFF'}}}%%
 flowchart LR
     G["<b>Generation</b><br/>was weeks<br/>now minutes"]
     V["<b>Verification</b><br/>was the easy part<br/>now the bottleneck"]
@@ -148,7 +149,8 @@ This is safe **exactly to the degree that the gate is real**.
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{
   'fontSize':'15px','fontFamily':'Segoe UI, Helvetica, Arial, sans-serif',
-  'lineColor':'#14243A','primaryTextColor':'#14243A'}}}%%
+  'lineColor':'#14243A','primaryTextColor':'#14243A',
+  'edgeLabelBackground':'#FFFFFF'}}}%%
 flowchart TD
     A["Agent proposes<br/>ontology change"]
     B["CI gate<br/>--fail-on Violation"]

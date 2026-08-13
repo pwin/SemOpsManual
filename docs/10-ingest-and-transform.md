@@ -24,7 +24,8 @@ What it does provide is a three-stage pipeline arranged on one principle:
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{
   'fontSize':'15px','fontFamily':'Segoe UI, Helvetica, Arial, sans-serif',
-  'lineColor':'#14243A','primaryTextColor':'#14243A'}}}%%
+  'lineColor':'#14243A','primaryTextColor':'#14243A',
+  'edgeLabelBackground':'#FFFFFF'}}}%%
 flowchart TD
     S1["<b>1 · sketch</b><br/>static analysis of the query<br/><i>no CSV · seconds</i>"]
     S2["<b>2 · triplify</b><br/>run the CSV through oxi-gen<br/><i>real RDF out</i>"]

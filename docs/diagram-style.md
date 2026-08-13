@@ -108,7 +108,8 @@ Copy this block verbatim into new diagrams:
 ```
 %%{init: {'theme':'base','themeVariables':{
   'fontSize':'15px','fontFamily':'Segoe UI, Helvetica, Arial, sans-serif',
-  'lineColor':'#14243A','primaryTextColor':'#14243A'}}}%%
+  'lineColor':'#14243A','primaryTextColor':'#14243A',
+  'edgeLabelBackground':'#FFFFFF'}}}%%
 ```
 
 `fontSize` is set at 15px rather than the 16px default because it holds a little
@@ -179,6 +180,50 @@ Full-resolution original: [`assets/semantechs-logo.png`](../assets/semantechs-lo
 (1024×1024). Use [`assets/semantechs-logo-320.png`](../assets/semantechs-logo-320.png)
 for in-page headers — at 320 px it is a tenth of the file size and no page in
 this manual displays the mark above 160 px.
+
+---
+
+## A.9 The print edition
+
+`tools/build-pdf.mjs` produces the A4 PDF. It renders every Mermaid block to a
+PNG through a headless Chromium, assembles the chapters into one Markdown file,
+generates the index, and runs pandoc → typst.
+
+```bash
+cd tools && npm install && npx puppeteer browsers install chrome-headless-shell
+node build-pdf.mjs
+```
+
+Four things learned building it are worth knowing before you add a diagram.
+
+**Mermaid needs a real browser.** Its layout comes from actual text metrics
+(`getBBox`), which no DOM shim supplies accurately. A jsdom-based render produces
+boxes of the wrong size. Diagrams are rasterised at `deviceScaleFactor: 3` rather
+than passed through as SVG, so their text never depends on the PDF engine
+resolving the right webfont.
+
+**The width rule has a hard number in print.** A diagram is placed into the
+~170 mm text block, so a diagram *W* pixels wide renders its 15px labels at
+`15 / W × 170` mm. Keeping labels at or above 8pt means:
+
+> **W ≤ ~910 px.** The build prints a warning for any diagram over that.
+
+Two diagrams originally breached it — both because side-by-side subgraphs, not
+node count, set the width. §A.1's "5 nodes per rank" rule does not constrain
+subgraphs, so check the rendered pixel width, not just the node count.
+
+**Force subgraphs to stack with invisible links.** Mermaid places unconnected
+subgraphs side by side, which is what blew the width budget. An invisible link
+stacks them vertically and improves the web rendering too:
+
+```
+PEER ~~~ CHAIN ~~~ OPEN
+```
+
+**Beware cycles.** A feedback edge drawn straight back to the first node makes
+Mermaid's layout break the cycle by hoisting the *last* group to the top — the
+nine-stage pipeline rendered as Run/Author/Ship until the loop was redrawn as a
+terminal node. If a diagram's vertical order looks wrong, a back edge is why.
 
 ---
 

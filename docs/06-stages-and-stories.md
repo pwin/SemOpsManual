@@ -28,7 +28,8 @@ be how it decomposes conceptually:
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{
   'fontSize':'15px','fontFamily':'Segoe UI, Helvetica, Arial, sans-serif',
-  'lineColor':'#14243A','primaryTextColor':'#14243A'}}}%%
+  'lineColor':'#14243A','primaryTextColor':'#14243A',
+  'edgeLabelBackground':'#FFFFFF'}}}%%
 flowchart TD
     subgraph AUTHOR["Author — write the artefact"]
         direction LR
@@ -45,15 +46,18 @@ flowchart TD
         S7["7 · Runtime<br/>validation"] --> S8["8 · Observability<br/>& feedback"] --> S9["9 · Consumption<br/>APIs · apps · AI"]
     end
 
-    AUTHOR --> SHIP --> RUN
-    RUN -. "feedback changes<br/>the model" .-> AUTHOR
+    S3 --> S4
+    S6 --> S7
+    S9 -. "feedback" .-> LOOP["back to stage 1<br/><i>see §6.5</i>"]
 
     classDef human fill:#FFE6DA,stroke:#FD5B1C,stroke-width:2px,color:#14243A;
     classDef ci fill:#D9F4FA,stroke:#02B7D4,stroke-width:2px,color:#14243A;
     classDef data fill:#ECF7D5,stroke:#7CBA07,stroke-width:2px,color:#14243A;
     classDef ops fill:#D9F5EC,stroke:#0CB88E,stroke-width:2px,color:#14243A;
     classDef gap fill:#F1F3F5,stroke:#8A93A0,stroke-width:2px,color:#14243A,stroke-dasharray:4 3;
+    classDef govern fill:#FFF0D6,stroke:#FE8902,stroke-width:2px,color:#14243A;
     class S1,S2 human; class S3 ci; class S4,S5 gap; class S6 data; class S7 ci; class S8 gap; class S9 ops;
+    class LOOP govern;
 ```
 
 The colours are load-bearing. Grey with a dashed border means **this manual's
@@ -109,7 +113,8 @@ single next thing to fix?"
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{
   'fontSize':'15px','fontFamily':'Segoe UI, Helvetica, Arial, sans-serif',
-  'lineColor':'#14243A','primaryTextColor':'#14243A'}}}%%
+  'lineColor':'#14243A','primaryTextColor':'#14243A',
+  'edgeLabelBackground':'#FFFFFF'}}}%%
 flowchart TD
     L1["<b>1 · Ad-hoc</b><br/>'we have a KG somewhere'"]
     L2["<b>2 · Structured</b><br/>'ontologies like code'"]
@@ -245,7 +250,8 @@ each chapter answers a small set of them with real commands.
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{
   'fontSize':'15px','fontFamily':'Segoe UI, Helvetica, Arial, sans-serif',
-  'lineColor':'#14243A','primaryTextColor':'#14243A'}}}%%
+  'lineColor':'#14243A','primaryTextColor':'#14243A',
+  'edgeLabelBackground':'#FFFFFF'}}}%%
 flowchart TD
     NEED["Business need<br/><i>governance prioritises</i>"]
     MODEL["Semantic modelling<br/><i>stages 1–2</i>"]

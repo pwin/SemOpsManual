@@ -60,7 +60,8 @@ bending."**
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{
   'fontSize':'15px','fontFamily':'Segoe UI, Helvetica, Arial, sans-serif',
-  'lineColor':'#14243A','primaryTextColor':'#14243A'}}}%%
+  'lineColor':'#14243A','primaryTextColor':'#14243A',
+  'edgeLabelBackground':'#FFFFFF'}}}%%
 flowchart TD
     subgraph BEFORE["Point-to-point: quadratic"]
         A1["CRM"] --- B1["Billing"]
@@ -78,6 +79,8 @@ flowchart TD
         C2["Support"] --> M
         D2["Analytics"] --> M
     end
+
+    BEFORE ~~~ AFTER
 
     classDef human fill:#FFE6DA,stroke:#FD5B1C,stroke-width:2px,color:#14243A;
     classDef govern fill:#FFF0D6,stroke:#FE8902,stroke-width:2px,color:#14243A;
@@ -149,7 +152,8 @@ trough and hit it on schedule gains credibility.
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{
   'fontSize':'15px','fontFamily':'Segoe UI, Helvetica, Arial, sans-serif',
-  'lineColor':'#14243A','primaryTextColor':'#14243A'}}}%%
+  'lineColor':'#14243A','primaryTextColor':'#14243A',
+  'edgeLabelBackground':'#FFFFFF'}}}%%
 flowchart LR
     T1["<b>Months 0–3</b><br/>Slower than<br/>point-to-point"]
     T2["<b>Months 3–9</b><br/>Parity, plus<br/>reusable assets"]

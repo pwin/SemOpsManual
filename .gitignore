@@ -1,0 +1,7 @@
+# Build output. The published PDF is committed at the repo root; everything
+# else under build/ is regenerable by tools/build-pdf.mjs.
+build/
+
+# Toolchain
+tools/node_modules/
+node_modules/

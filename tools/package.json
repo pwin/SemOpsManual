@@ -1,0 +1,16 @@
+{
+  "name": "semops-manual-tools",
+  "private": true,
+  "type": "module",
+  "description": "Build the A4 print edition of the SemOps Manual",
+  "scripts": {
+    "pdf": "node build-pdf.mjs",
+    "diagrams": "node render-diagrams.mjs",
+    "chromium": "puppeteer browsers install chrome-headless-shell"
+  },
+  "dependencies": {
+    "mermaid": "^11.12.0",
+    "puppeteer": "^24.0.0",
+    "puppeteer-core": "^24.0.0"
+  }
+}

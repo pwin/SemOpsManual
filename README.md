@@ -50,7 +50,8 @@ honest ledger.
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{
   'fontSize':'15px','fontFamily':'Segoe UI, Helvetica, Arial, sans-serif',
-  'lineColor':'#14243A','primaryTextColor':'#14243A'}}}%%
+  'lineColor':'#14243A','primaryTextColor':'#14243A',
+  'edgeLabelBackground':'#FFFFFF'}}}%%
 flowchart TD
     P1["<b>I — Why it is hard</b><br/>business, people, partners,<br/>provenance, machines"]
     P2["<b>II — The frame</b><br/>stages, roles, maturity"]
@@ -72,6 +73,17 @@ failure modes that kill semantic programmes are overwhelmingly organisational,
 cognitive and commercial rather than technical. A team that can run every
 command in Part III and has not read Part I will build something correct that
 nobody adopts.
+
+---
+
+## Read it on paper
+
+**[SemOps-Manual-A4.pdf](SemOps-Manual-A4.pdf)** — the whole manual as a
+76-page A4 document: title page, contents with page numbers, every diagram
+rendered, and an index of commands, flags and check identifiers.
+
+Rebuild it with `cd tools && npm install && node build-pdf.mjs` — see
+[tools/](tools/).
 
 ---
 

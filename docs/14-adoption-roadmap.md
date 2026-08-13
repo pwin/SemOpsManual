@@ -18,7 +18,8 @@ unreviewed model.
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{
   'fontSize':'15px','fontFamily':'Segoe UI, Helvetica, Arial, sans-serif',
-  'lineColor':'#14243A','primaryTextColor':'#14243A'}}}%%
+  'lineColor':'#14243A','primaryTextColor':'#14243A',
+  'edgeLabelBackground':'#FFFFFF'}}}%%
 flowchart TD
     P0["<b>Phase 0 · Baseline</b><br/>instrument the cost<br/><i>1–2 weeks</i>"]
     P1["<b>Phase 1 · Level 2</b><br/>ontologies like code<br/><i>days</i>"]
