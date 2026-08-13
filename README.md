@@ -29,8 +29,8 @@ tested and runnable today**:
 
 | Toolchain | What it is | Where it fits |
 |---|---|---|
-| `consolidated_ontology_suite_python` | A Python CLI and library — 50-check registry, OWL2 reasoning, version diffing, CSV→RDF triplification, auto-repair, live-triplestore checks. Published to PyPI as `ontology-quality-suite` | Automation: CI gates, release control, pipelines |
-| `consolidated_ontology_suite_webapp` | The **Ontology Development Suite** VS Code extension — in-process SPARQL/SHACL/OWL2-RL engines via WASM, live diagnostics, graph view, query workbench | The author's desk: the loop before CI |
+| **Ontology Quality Suite**<br/>[GitHub](https://github.com/pwin/consolidated-ontology-quality-suite-python) · [PyPI](https://pypi.org/project/ontology-quality-suite/) | A Python CLI and library — 50-check registry, OWL2 reasoning, version diffing, CSV→RDF triplification, auto-repair, live-triplestore checks. `pip install ontology-quality-suite` | Automation: CI gates, release control, pipelines |
+| **Ontology Development Suite**<br/>[GitHub](https://github.com/pwin/consolidated-ontology-quality-suite-webapp) | A VS Code extension — in-process SPARQL/SHACL/OWL2-RL engines via WASM, live diagnostics, graph view, query workbench | The author's desk: the loop before CI |
 
 Every command shown in Part III was **executed for real** while writing this
 manual, against the ontology suite's own bundled `examples/acme_robotics/`

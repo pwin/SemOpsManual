@@ -67,7 +67,7 @@ broken today.
 | Step | Command or action |
 |---|---|
 | Ontology, shapes, queries into Git | — |
-| Install the extension on every modeller's machine | `.vsix` from the webapp repo |
+| Install the extension on every modeller's machine | `.vsix` from the [webapp repo](https://github.com/pwin/consolidated-ontology-quality-suite-webapp) |
 | Establish the local loop | *Run Local Checks*, Ontology Outline, *Show Metrics* |
 | Run the tightest gate by hand | `ontology --ontology <yours> --import-dir vendor/vocab` |
 | Vendor your imports | Copy upstream vocabularies into `vendor/vocab`; never rely on `--allow-network` |

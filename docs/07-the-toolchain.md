@@ -10,7 +10,8 @@ Two tools, and one architectural idea that matters more than either of them.
 
 | | **Ontology Quality Suite** | **Ontology Development Suite** |
 |---|---|---|
-| Repository | `consolidated_ontology_suite_python` | `consolidated_ontology_suite_webapp` |
+| Repository | [pwin/consolidated-ontology-quality-suite-python](https://github.com/pwin/consolidated-ontology-quality-suite-python) | [pwin/consolidated-ontology-quality-suite-webapp](https://github.com/pwin/consolidated-ontology-quality-suite-webapp) |
+| Distribution | [PyPI: `ontology-quality-suite`](https://pypi.org/project/ontology-quality-suite/) | `.vsix` from the repository |
 | Form | Python CLI + importable library | VS Code extension |
 | Runtime | Python; optional Java for DL reasoning | In-process WASM/JS — no Python or Java needed |
 | Belongs in | CI, release control, pipelines, scheduled jobs | The author's editor, before anything is committed |
@@ -69,6 +70,10 @@ reads.
 
 ### The Python suite
 
+[PyPI](https://pypi.org/project/ontology-quality-suite/) ·
+[source](https://github.com/pwin/consolidated-ontology-quality-suite-python) ·
+requires Python 3.11+
+
 ```bash
 pip install ontology-quality-suite
 ```
@@ -99,7 +104,13 @@ commands were actually run while writing it.
 
 ### The VS Code extension
 
-Install the `.vsix` from the webapp repository. Core functionality — authoring,
+[Source](https://github.com/pwin/consolidated-ontology-quality-suite-webapp) —
+install the `.vsix` from the repository. It is not on the Marketplace, so
+install it with *Extensions: Install from VSIX…* in the command palette, or:
+
+```bash
+code --install-extension ontology-dev-suite-<version>.vsix
+``` Core functionality — authoring,
 live diagnostics, local checks, metrics, graph view, query workbench — has **no
 external runtime dependency at all**: Oxigraph, `shacl-engine` and
 `eyereasoner` are WASM or pure JS.
@@ -179,9 +190,10 @@ an IRI prefix off by one character produced a confidently empty report.
 
 ## 7.5 The fixture used throughout Part III
 
-Every command in Part III runs against `examples/acme_robotics/` in the Python
-suite — a small org chart built on two real, standards-track vocabularies rather
-than an invented domain:
+Every command in Part III runs against
+[`examples/acme_robotics/`](https://github.com/pwin/consolidated-ontology-quality-suite-python/tree/main/examples/acme_robotics)
+in the Python suite — a small org chart built on two real, standards-track
+vocabularies rather than an invented domain:
 
 | Vocabulary | Used for |
 |---|---|
@@ -216,23 +228,27 @@ vocabularies actually use.
 
 ## 7.6 Where the deeper documentation lives
 
-This manual is the SemOps layer. For tool-level depth, the suite's own docs:
+This manual is the SemOps layer. For tool-level depth, the suite's own
+[`docs/`](https://github.com/pwin/consolidated-ontology-quality-suite-python/tree/main/docs):
 
 | Document | Covers |
 |---|---|
-| `PRIMER.md` | Task-oriented guide, worked examples, CI wiring, adoption path |
-| `CHECKS.md` | All 50 checks, by category |
-| `ARCHITECTURE.md` | Engine comparison, benchmarks, file loading |
-| `REASONING.md` | Reasoner backends and their real limitations |
-| `CONSISTENCY_AND_REPAIR.md` | Finding-kind → fix-kind → confidence table |
-| `EXTENDING.md` | Authoring your own checks |
-| `FUSEKI.md` | Live-triplestore manifest spec and Python API |
-| `VERSIONING.md` | Semver rules for ontologies |
-| `UPDATING.md` | Sequencing and rollback for coordinated rollouts |
-| `ACME_ROBOTICS_WALKTHROUGH.md` | The fixture, end to end, plus two runnable notebooks |
+| [`PRIMER.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/main/docs/PRIMER.md) | Task-oriented guide, worked examples, CI wiring, adoption path |
+| [`CHECKS.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/main/docs/CHECKS.md) | All 50 checks, by category |
+| [`ARCHITECTURE.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/main/docs/ARCHITECTURE.md) | Engine comparison, benchmarks, file loading |
+| [`REASONING.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/main/docs/REASONING.md) | Reasoner backends and their real limitations |
+| [`CONSISTENCY_AND_REPAIR.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/main/docs/CONSISTENCY_AND_REPAIR.md) | Finding-kind → fix-kind → confidence table |
+| [`EXTENDING.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/main/docs/EXTENDING.md) | Authoring your own checks |
+| [`FUSEKI.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/main/docs/FUSEKI.md) | Live-triplestore manifest spec and Python API |
+| [`VERSIONING.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/main/docs/VERSIONING.md) | Semver rules for ontologies |
+| [`UPDATING.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/main/docs/UPDATING.md) | Sequencing and rollback for coordinated rollouts |
+| [`ACME_ROBOTICS_WALKTHROUGH.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/main/docs/ACME_ROBOTICS_WALKTHROUGH.md) | The fixture, end to end, plus two runnable notebooks |
 
-The webapp repository's `README.md` and `TUTORIAL.md` do the same for the
-extension.
+The webapp repository's
+[`README.md`](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/main/README.md)
+and
+[`TUTORIAL.md`](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/main/TUTORIAL.md)
+do the same for the extension.
 
 ---
 
