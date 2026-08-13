@@ -169,9 +169,16 @@ Industry asks: *did this stop a bad change reaching production, without costing
 the team more attention than the bad change would have?*
 
 The second question has a term the first does not: **the human cost of the
-output**. A checker with better recall that produces 296 findings where 5 are
-yours ([Chapter 2](02-people-and-cognition.md)) scores well on the research
-metric and fails in practice, because a gate nobody triages is not a gate.
+output**. A checker with better recall that produces three hundred findings
+where 5 are yours ([Chapter 2](02-people-and-cognition.md)) scores well on the
+research metric and fails in practice, because a gate nobody triages is not a
+gate.
+
+Reproducibility divides the two cultures the same way. That unscoped run drifts
+by a few findings between identical invocations
+([Chapter 9](09-continuous-integration.md)) — immaterial to a recall benchmark
+computed once against a gold standard, and disqualifying for a build gate a team
+has to trust twenty times a day.
 
 This is why [Chapter 9](09-continuous-integration.md)'s central recommendation
 is about *scoping the report*, not about check quality. The checks were already

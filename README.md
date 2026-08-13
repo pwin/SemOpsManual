@@ -149,8 +149,17 @@ maturity-level framing wholesale.
 ## Conventions
 
 Findings, commands and outputs in Part III are real. Where a number appears
-(*"296 findings"*, *"confidence 100%"*) it is the number the tool printed on the
+(*"5 findings"*, *"confidence 100%"*) it is the number the tool printed on the
 run described, not an illustrative figure.
+
+**Two of those numbers are not reproducible, and both are labelled where they
+appear.** The *unscoped* check totals — around 294 for `checks`, around 363 for
+`data` — drift by a few findings between identical runs, traced to a single
+check ([Chapter 13](docs/13-coverage-and-gaps.md) §13.4). And a scoped `data`
+run reports 36 or 37 depending on whether the optional DL reasoner starts. Every
+figure the manual recommends acting on is exactly reproducible across repeated
+runs; the unstable ones are all in the position of *"here is what you should not
+do"*.
 
 Grey boxes and dashed borders in diagrams mean **not covered by this
 toolchain**. They are a deliberate, load-bearing part of the notation — see

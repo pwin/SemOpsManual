@@ -139,12 +139,13 @@ to reason with.
 Every design decision in a semantic toolchain either spends or conserves this
 budget. Three places where the spending is visible and avoidable:
 
-### The 296-finding report
+### The ~300-finding report
 
 Running the full check registry over the manual's fixture with its real `org:`
-and FOAF imports resolved produces — verified, not illustrative —
-**296 findings**. Adding a single flag that scopes the report to the terms the
-team actually owns produces **5**.
+and FOAF imports resolved produces **close to 300 findings** — five consecutive
+runs gave 290, 292, 294, 294 and 295. Adding a single flag that scopes the
+report to the terms the team actually owns produces **5**, exactly and
+repeatably.
 
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{
@@ -153,7 +154,7 @@ team actually owns produces **5**.
   'edgeLabelBackground':'#FFFFFF'}}}%%
 flowchart LR
     RUN["Same ontology,<br/>same 50 checks"]
-    A["<b>296 findings</b><br/>everything in the<br/>merged graph"]
+    A["<b>~294 findings</b><br/>everything in the<br/>merged graph"]
     B["<b>5 findings</b><br/>scoped to terms<br/>the team owns"]
 
     RUN -->|"no scope flag"| A
@@ -167,12 +168,17 @@ flowchart LR
     class RUN ci; class A human; class B ci; class X gap;
 ```
 
-Both numbers are correct. The 296-finding run is genuinely checking every triple
-in the merged graph, including the internal documentation habits of the W3C
+Both numbers are correct. The wide run is genuinely checking every triple in the
+merged graph, including the internal documentation habits of the W3C
 Organization Ontology. It is also **cognitively useless as a gate**: no team
-triages 296 findings per commit, so within two sprints the gate is either
-switched off or ignored, and the four findings that were actually theirs are
-lost with the rest.
+triages three hundred findings per commit, so within two sprints the gate is
+either switched off or ignored, and the handful of findings that were actually
+theirs are lost with the rest.
+
+That the wide number also drifts by a few between runs is a second, smaller
+argument for the same conclusion — a gate whose output a reader cannot
+reproduce teaches them not to trust it. [Chapter 9](09-continuous-integration.md)
+traces that drift to a single check.
 
 This is the single most important practical lesson in the manual, and
 [Chapter 9](09-continuous-integration.md) works through it with the real

@@ -134,17 +134,49 @@ honest about what it does not know — but upstream definitions were not pulled 
 Reported as observed rather than diagnosed.
 ([Ch. 12](12-operate-and-consume.md))
 
-### The DL reasoner behaved differently in two commands, same session
+### The DL reasoner starts, or does not, at random
 
-The `ontology` pass emitted `REA-022` — *external DL reasoner unavailable*, with
-an internal `UnboundLocalError` from the bridge. The `data` pass, same machine,
-same fixture, same session, ran HermiT successfully and emitted `REA-021`,
-correctly finding `acme:Contractor` unsatisfiable.
+The reasoner sometimes emits `REA-022` — *external DL reasoner unavailable*,
+with an internal `UnboundLocalError` from the bridge — and sometimes runs
+normally and emits `REA-021`, correctly finding `acme:Contractor` unsatisfiable.
 
-No explanation established. What made it *safe* is that the failing path said so
-loudly instead of reporting success — the pattern
-[Chapter 4](04-from-research-to-industry.md) recommends for every research-lineage
-dependency.
+An earlier draft of this manual reported this as a difference between the
+`ontology` and `data` commands, on the strength of one run of each. That was
+wrong, and running the same command repeatedly shows why: three consecutive
+`ontology` runs gave `REA-021` (reasoner working) once and `REA-022` twice. It
+is per-invocation flakiness, not a code path. The suite's own
+`ACME_ROBOTICS_WALKTHROUGH.md` says so directly — HermiT is *"occasionally
+environment-flaky in ways unrelated to this fixture (a transient internal error
+rather than a real unsatisfiability finding)"*.
+
+*Consequence for your gate:* a scoped `data` run reports 36 findings or 37
+depending on whether the reasoner started. Check which of `REA-021`/`REA-022` is
+present before investigating a changed count.
+
+What makes this safe to depend on is that the failing path says so loudly
+instead of reporting success — the pattern
+[Chapter 4](04-from-research-to-industry.md) recommends for every
+research-lineage dependency.
+
+### `STR-007` makes the unscoped run non-reproducible
+
+Five consecutive identical `checks --import-dir` runs over the fixture returned
+290, 292, 294, 294 and 295 findings. Warning (162) and Info (84) counts were
+identical every time; the whole drift sat in Violations, and diffing two
+divergent runs check by check found a single contributor — `STR-007`
+("predicate has no declared `rdf:type`") returned 13 on one run and 18 on
+another, accounting for the entire difference.
+
+`STR-007`'s query does an undeduplicated `?s ?focus ?o` match with no
+`DISTINCT`, over a merged graph carrying hundreds of blank-node OWL axioms from
+`org:` and FOAF — a plausible source of parse-order sensitivity, offered as a
+lead rather than a diagnosis. The suite's own walkthrough documents the effect
+without fully explaining it either.
+
+*Mitigation:* none needed for the recommended workflow — every scoped run in
+this manual is exactly reproducible across repeated invocations. Do not build a
+threshold, trend or regression test on the unscoped total.
+([Ch. 9](09-continuous-integration.md))
 
 ### pySHACL ignores `sh:severity` inside SPARQL-based constraints
 
@@ -171,6 +203,13 @@ Watch the **Warning trend** specifically. Violations get fixed because they brea
 the build; Warnings accumulate silently, and an accumulating Warning count is the
 observable signature of decay, visible in your own artefacts a year before anyone
 notices the model has drifted.
+
+**Trend the scoped runs, not the unscoped ones.** Per §13.4, the unscoped total
+drifts by a few findings between identical invocations, which would put noise
+into the series at roughly the magnitude of a year's real drift. The scoped runs
+are exactly reproducible, so any movement in them is signal. Conveniently, the
+Warning counts are the stable part even in the unscoped run — it is Violations
+that wander — so a Warning trend survives either choice.
 
 ---
 

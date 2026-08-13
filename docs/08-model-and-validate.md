@@ -192,6 +192,14 @@ rather than crashing or — far worse — silently reporting success, the suite
 emitted a first-class finding naming exactly which checks did not run and what
 that costs you in completeness.
 
+> **You may see 3 findings here, not 2.** The DL reasoner is intermittently
+> flaky; when it starts, `REA-022` is replaced by `REA-020` (the ontology is
+> inconsistent) and `REA-021` (`acme:Contractor` is unsatisfiable), giving three
+> independent confirmations of the same deliberate contradiction. Three runs of
+> this exact command in one session gave the reasoner-working result once and
+> the reasoner-failed result twice. Neither is an error;
+> [Chapter 13](13-coverage-and-gaps.md) §13.4 has the detail.
+
 **Want a specific OWL2 profile checked?** `--profile EL` (repeatable). It is off
 by default; ask for it explicitly when a downstream consumer needs a lighter
 profile.
@@ -214,10 +222,12 @@ python -m ontology_suite checks \
 ```
 
 Run exactly like that, against the fixture with its real `org:` and FOAF imports
-resolved, this reports **296 findings** — 50 Violations, 162 Warnings, 84 Infos.
+resolved, this reports **close to 300 findings** — a representative run gave 294
+(48 Violations, 162 Warnings, 84 Infos), and the total drifts by a few between
+identical runs.
 
-Four or five of those are Acme's. The rest are the registry doing its job
-thoroughly against the internals of the W3C Organization Ontology and FOAF.
+Five of those are Acme's. The rest are the registry doing its job thoroughly
+against the internals of the W3C Organization Ontology and FOAF.
 
 **That number is the subject of [Chapter 9](09-continuous-integration.md)**, and
 it is the most important practical lesson in this manual. Do not wire this

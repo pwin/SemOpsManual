@@ -120,10 +120,11 @@ ontology-quality-suite checks \
 ```
 
 **Do not skip `--own-namespace`.** Unscoped, the fixture in this manual produces
-296 findings where 5 are yours; the gate is dead within two sprints
-([Ch. 9](09-continuous-integration.md)). And do not reach for
-`--exclude-imports` instead — verified, it introduces four *false* findings,
-which damages trust faster than noise does.
+close to 300 findings where 5 are yours, and the total drifts between runs; the
+gate is dead within two sprints ([Ch. 9](09-continuous-integration.md)). And do
+not reach for `--exclude-imports` instead — verified, it introduces four *false*
+findings, which damages trust faster than noise does. The scoped run returns the
+same 5 findings every time, which is what a gate has to do.
 
 Verify the filter is live by pointing it at a known-failing input once. A gate
 that cannot fail is indistinguishable from a gate that passes.

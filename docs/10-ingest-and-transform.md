@@ -157,10 +157,11 @@ python -m ontology_suite data out/triplify/employees.ttl \
 ```
 
 ```
-Findings: 363 total (58 Violation, 185 Warning, 120 Info)
+Findings: 363 total (59 Violation, 185 Warning, 119 Info)
 ```
 
-Three hundred and sixty-three — and [Chapter 9](09-continuous-integration.md)'s
+Around three hundred and sixty — the same run-to-run drift as
+[Chapter 9](09-continuous-integration.md)'s unscoped figure, and the same
 lesson applies identically. Scope it:
 
 ```bash
@@ -173,8 +174,16 @@ python -m ontology_suite data out/triplify/employees.ttl \
 ```
 
 ```
-Findings: 37 total (13 Violation, 22 Warning, 2 Info)
+Findings: 36 total (12 Violation, 22 Warning, 2 Info)
 ```
+
+> **36 or 37, depending on one thing.** The scoped data run returns 36 findings
+> when the external DL reasoner fails to start and 37 when it succeeds — the
+> extra one is `REA-021`, HermiT's unsatisfiability finding on `acme:Contractor`,
+> discussed below. Everything else is identical. This is the *only* variation in
+> the scoped figures anywhere in the manual, it has a known cause, and the
+> difference is visible in the report: if `REA-021` is present you got the
+> reasoner, and if `REA-022` is present you did not.
 
 Note the namespace here is `https://acme.example.org/` — one level up from the
 ontology's `https://acme.example.org/ns/` — because the data individuals live
@@ -183,7 +192,7 @@ so it must cover **both** the schema terms and the instance IRIs. Choosing that
 prefix deliberately is part of designing your IRI scheme, and it is much easier
 to get right at the start than to retrofit.
 
-### What the 37 actually say
+### What those findings actually say
 
 Scoped, the findings become readable, and they fall into three genuinely
 different kinds — a distinction worth teaching a team explicitly, because
@@ -227,9 +236,9 @@ that is *never* populated across any extract is either dead vocabulary or a
 transformation that quietly stopped emitting it. Worth reviewing periodically;
 never worth failing a build on.
 
-### The reasoner, observed twice
+### The reasoner, when it turns up
 
-One finding in the scoped data run is worth flagging:
+When the DL reasoner starts, the scoped run carries one extra finding:
 
 ```
 REA-021 [Violation]  Class found unsatisfiable by an external DL reasoner
@@ -237,21 +246,31 @@ REA-021 [Violation]  Class found unsatisfiable by an external DL reasoner
    according to the hermit reasoner
 ```
 
-The HermiT DL reasoner ran here and independently confirmed what the pattern-
-based `LOG-001` found by a completely different route — a rule-based closure and
-a real description-logic reasoner agreeing on the same contradiction. Two
-independent confirmations of one deliberate flaw is the ideal outcome, and it is
-the reason the suite runs both rather than choosing.
+HermiT has independently confirmed what the pattern-based `LOG-001` found by a
+completely different route — a rule-based closure and a real description-logic
+reasoner agreeing on the same contradiction. Two independent confirmations of
+one deliberate flaw is the ideal outcome, and it is the reason the suite runs
+both rather than choosing.
 
-Worth recording honestly: in the `ontology` pass in
-[Chapter 8](08-model-and-validate.md), on the same machine and the same fixture,
-that same reasoner **failed to start** and emitted `REA-022` instead. Same tool,
-same session, different code path, different outcome. No explanation is offered
-here because none was established — but it is a live instance of
-[Chapter 4](04-from-research-to-industry.md)'s point: a research-lineage
-component's failure modes are yours to discover, and the thing that makes it
-safe to depend on is that the wrapper told you clearly which checks did not run,
-rather than reporting success.
+**When it does not start, you get `REA-022` instead**, and the run reports 36
+rather than 37. This is not a difference between the `ontology` and `data`
+commands, though an earlier draft of this manual presented it that way on the
+strength of two runs. Running the `ontology` command three times in one session
+settles it: the first invocation produced `LOG-001` + `REA-020` + `REA-021` with
+HermiT working, and the second and third produced `LOG-001` + `REA-022` with it
+failing. **Same command, same fixture, same session, different outcomes.**
+
+The suite's own `ACME_ROBOTICS_WALKTHROUGH.md` names this directly — HermiT is
+*"occasionally environment-flaky in ways unrelated to this fixture (a transient
+internal error rather than a real unsatisfiability finding)"* — so it is known
+instability in the owlready2/HermiT bridge that can hit any invocation, not a
+mystery about code paths.
+
+That is exactly [Chapter 4](04-from-research-to-industry.md)'s point, and the
+correction is part of it: a research-lineage component's failure modes are yours
+to discover, two data points are not a pattern, and what makes the dependency
+safe to hold is that the wrapper says clearly which checks did not run instead
+of reporting success.
 
 ### Large graphs
 

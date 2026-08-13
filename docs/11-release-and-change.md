@@ -58,6 +58,15 @@ Suggested version bump: MAJOR
 Note the argument order: **old first, then new**. Reversed, you get a diff
 describing the inverse release.
 
+**Note also `--exclude-imports` here, where §11.2 uses `--import-dir`.** That is
+deliberate, not a slip. `version-diff` is comparing Acme's own axioms against
+Acme's own axioms, and merging two identical copies of `org:` and FOAF into both
+sides adds nothing but time. `consistency` needs the opposite, because its
+TARQL-alignment check reads the transformation's vocabulary: without FOAF
+resolved, `foaf:name` and `foaf:mbox` are reported as undeclared properties that
+the ontology set does not contain. **Resolve imports when a check reasons about
+terms you did not define; exclude them when it only compares terms you did.**
+
 The verdict is derived from what happened to the axioms, not from what the
 author believed they were doing. One removed class makes it MAJOR regardless of
 the seven additive changes surrounding it, and regardless of anyone's view that

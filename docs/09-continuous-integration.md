@@ -40,7 +40,7 @@ and `consistency` and `pattern-consistency` use `--fail-on-misalignment` and
 
 ---
 
-## 9.2 The problem: 296 findings
+## 9.2 The problem: close to 300 findings
 
 Now run the full registry the obvious way — the whole 50-check catalogue against
 the ontology, with its real `org:` and FOAF imports resolved:
@@ -53,8 +53,25 @@ python -m ontology_suite checks \
 ```
 
 ```
-Findings: 296 total (50 Violation, 162 Warning, 84 Info)
+Findings: 294 total (48 Violation, 162 Warning, 84 Info)
 ```
+
+> **This number is not stable.** Five consecutive runs of exactly that command
+> gave 295, 292, 294, 290 and 294. The Warning count (162) and Info count (84) are identical every
+> time; the whole drift is in Violations, and diffing two divergent runs check
+> by check shows a single culprit — **`STR-007`** ("predicate has no declared
+> `rdf:type`") returned 13 findings on one run and 18 on another, accounting for
+> the entire difference. Its query does an undeduplicated `?s ?focus ?o` match
+> with no `DISTINCT`, over a merged graph containing hundreds of blank-node OWL
+> axioms from `org:` and FOAF, which is a plausible source of parse-order
+> sensitivity. The suite's own `ACME_ROBOTICS_WALKTHROUGH.md` acknowledges the
+> same effect: *"the Violation count varies by a few from run to run."*
+>
+> Read the figure as **"close to 300"**. Nothing in this chapter's argument
+> depends on the exact value — and the two numbers the argument *does* depend
+> on, below, are exactly reproducible. Every unstable figure in this manual is
+> an unscoped total; every scoped one holds, with a single documented exception
+> in [Chapter 10](10-ingest-and-transform.md) that has a visible cause.
 
 Every one of those findings is real. The suite is genuinely checking every
 triple in the merged graph — and the merged graph includes the entire W3C
@@ -62,10 +79,10 @@ Organization Ontology and the entire FOAF vocabulary, complete with their own
 internal documentation habits, blank-node axiom style and naming choices.
 
 Wire that into CI with `--fail-on Violation` and you have gated your build on
-fifty violations, of which approximately zero are yours. What happens next is
-predictable and happens every time: the team triages it once, concludes the tool
-is noisy, and either switches the gate off or adds `|| true`. The four findings
-that were genuinely theirs are lost with the other 292.
+around fifty violations, of which approximately zero are yours. What happens
+next is predictable and happens every time: the team triages it once, concludes
+the tool is noisy, and either switches the gate off or adds `|| true`. The
+handful of findings that were genuinely theirs are lost with the other ~290.
 
 > **This is the single most common way a semantic quality gate dies.** Not
 > because the checks are wrong — they are not — but because
@@ -89,8 +106,9 @@ python -m ontology_suite checks \
   --engine sparql --out-dir out/checks_excl --fail-on never
 ```
 
-296 findings become **9**. Enormously better, and still wrong. Here is the full
-breakdown:
+Nearly 300 findings become **9** — and unlike the unscoped figure, this one is
+exact: three consecutive runs each gave `9 total (1 Violation, 8 Warning,
+0 Info)`. Enormously better, and still wrong. Here is the full breakdown:
 
 ```
 2 × DAT-002  Warning    Dangling IRI reference
@@ -146,16 +164,23 @@ python -m ontology_suite checks \
 1 × STY-002  Warning    (naming style)
 ```
 
-**Five findings. All five are Acme's. None are artefacts.**
+**Five findings. All five are Acme's. None are artefacts.** Also exact: three
+consecutive runs each gave `5 total (1 Violation, 4 Warning, 0 Info)`, with the
+same five check identifiers every time.
 
 Compare the three runs directly — all three are the same ontology, the same
 registry, the same engine:
 
-| Run | Findings | Genuinely yours | Upstream noise | False |
-|---|---|---|---|---|
-| `--import-dir` alone | **296** | 5 | 291 | 0 |
-| `--exclude-imports` | **9** | 5 | 0 | **4** |
-| `--own-namespace` | **5** | 5 | 0 | 0 |
+| Run | Findings | Genuinely yours | Upstream noise | False | Reproducible? |
+|---|---|---|---|---|---|
+| `--import-dir` alone | **~294** | 5 | ~289 | 0 | no — 290–295 |
+| `--exclude-imports` | **9** | 5 | 0 | **4** | yes, exactly |
+| `--own-namespace` | **5** | 5 | 0 | 0 | yes, exactly |
+
+The unstable row is the one you are being told *not* to use. Both candidates for
+your actual gate return the same answer every time — which is itself a
+requirement of a gate, and a reason to prefer either of them to the unscoped
+run regardless of the noise argument.
 
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{
@@ -165,7 +190,7 @@ registry, the same engine:
 flowchart TD
     ONT["acme-org-v1.ttl<br/>+ org: + foaf:"]
 
-    A["<b>296 findings</b><br/>imports resolved,<br/>unfiltered"]
+    A["<b>~294 findings</b><br/>imports resolved,<br/>unfiltered · drifts"]
     B["<b>9 findings</b><br/>--exclude-imports<br/><i>4 of them false</i>"]
     C["<b>5 findings</b><br/>--own-namespace<br/><i>all genuine</i>"]
 
@@ -209,8 +234,7 @@ one.
 
 ### When to run the wide pass anyway
 
-Do not discard the 296-finding run; just stop putting it on the pull-request
-path. Run it **periodically, or when an imported vocabulary changes** — as an
+Do not discard the wide run; just stop putting it on the pull-request path. Run it **periodically, or when an imported vocabulary changes** — as an
 audit rather than a gate. That is when "FOAF published a new version and
 something in it now conflicts with our assumptions" becomes findable, and it is
 a genuinely different question from "did this PR break anything."
