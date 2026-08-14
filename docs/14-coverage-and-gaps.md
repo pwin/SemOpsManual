@@ -190,20 +190,19 @@ formulation, for the same focus node and value.
 (check_id, focus_node, value) when counting findings programmatically. Full
 comparison in [Ch. 7](07-the-toolchain.md) §7.4.
 
-### The WebAssembly build cannot run SHACL-AF rules
+### Rules do not fire in the editor
 
-The WASM API exposes `inference: "none" | "rdfs"` and nothing else — no
-`advanced`, no `iterateRules`. Rules are native-CLI and Python only.
+Not an engine limitation any more — a deliberate choice in the extension. The
+WebAssembly build gained `inference: "rules"` and `"rules-iterated"` at 0.1.8,
+and the extension bundles that engine, but its runner asks for `"none"`: the
+position being that inference belongs to the reasoner tier, and a SHACL finding
+should be about what the document says rather than what a second pass added
+underneath it.
 
-The consequence is a genuine divergence, not just a missing feature. On a shapes
-graph whose SPARQL rule the native engine rejects at compile time, the native CLI
-exits 2 with an error while the WASM build returns `conforms = true` with zero
-results — verified directly against the same file. One says *"I could not check
-this"*, the other says *"this is fine"*, which is the distinction
-[Ch. 4](04-from-research-to-industry.md) argues everything depends on.
+*Consequence:* if your shapes carry `sh:rule`, the editor's report and CI's
+report are answering different questions. Expect them to differ.
 
-*Mitigation:* treat browser and editor validation as validation-only. Run
-anything rule-bearing through the CLI or the Python binding
+*Mitigation:* run anything rule-bearing through the CLI or the Python binding
 ([Ch. 11](11-rules-and-inference.md) §11.7).
 
 ### SHACL validation cannot be scoped to a named graph
@@ -262,8 +261,8 @@ that wander — so a Warning trend survives either choice.
 
 ## 14.6 Gaps that have closed
 
-Worth recording, because the picture is not static. Two limitations documented in
-an earlier draft of this material no longer hold:
+Worth recording, because the picture is not static. Four limitations documented in
+earlier drafts of this material no longer hold:
 
 **Filtering findings to your own namespace.** Previously there was no way to say
 "only show findings in my own terms" on an import-inclusive run; the
@@ -280,10 +279,26 @@ appeared in the produced graph against the declared taxonomy. Verified: the
 fixture's `MKT` department, absent from a taxonomy declaring only `ENG`/`QA`/
 `SALES`, is correctly reported ([Ch. 12](12-release-and-change.md)).
 
-The lesson generalises: **re-verify the gaps list against the tools you actually
-have.** A limitation copied forward from an old document is indistinguishable
-from a current one, right up until someone wastes a week working around
-something that was fixed.
+**Rules in the WebAssembly build.** The previous edition of this manual said
+flatly that the WASM build could not run SHACL-AF rules, and that on one shapes
+graph it reported `conforms = true` where the native CLI errored — *"this is
+fine"* against *"I could not check this"*. Both are fixed. Every binding now
+takes `inference: "rules"`/`"rules-iterated"`, and the engine's differential
+harness reports **0 disagreements across all 473 documents** of the W3C corpus,
+where it previously reported one. What remains is a *choice* rather than a
+limitation: the editor asks for `"none"` ([§14.4](#144-rough-edges-all-encountered-while-writing-this-manual)).
+
+**`sh:declare` without `sh:prefixes`.** A SPARQL rule relying on a
+shapes-graph-level prefix declaration used to be rejected at compile time, taking
+the whole shapes graph with it — including for callers who never asked for rules.
+Rule compile errors are now held on the rule and raised only if it would have
+fired.
+
+The lesson generalises, and this edition is its own evidence: **re-verify the
+gaps list against the tools you actually have.** Two of the four above were
+corrected within a day of being written down. A limitation copied forward from an
+old document is indistinguishable from a current one, right up until someone
+wastes a week working around something that was fixed.
 
 ---
 

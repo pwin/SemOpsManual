@@ -27,15 +27,21 @@ directory, so nothing needs to exist on disk first and nothing outside that
 directory is touched. The setup cell reports which tools it found, and any cell
 needing something you do not have says so and skips rather than raising.
 
-Notebook 2 needs the `shacl` CLI on `PATH`. It shells out rather than using the
-Python binding because `inference="rules"` only arrived in **0.1.7** — earlier
-versions accept `"none"` and `"rdfs"` only, and say so:
+Notebook 2 needs the `shacl` CLI on `PATH`, and **0.1.8 or later**. It uses the
+CLI for most of its work because the CLI shows the exit code, which is what a CI
+job branches on; its last section does the same thing through the Python
+binding.
+
+Rules moved twice while this manual was being written — absent from the Python
+binding at 0.1.5, CLI-only at 0.1.7, in every binding from 0.1.8. On an older
+build the rule cells report:
 
 ```
 inference='rules' -> ERROR: unknown inference "rules"; use "none" or "rdfs"
 ```
 
-Check yours with `shacl --version`.
+which is the right failure — it names what it accepts rather than quietly
+validating without applying the rules. Check yours with `shacl --version`.
 
 ## Why the numbers here are small
 

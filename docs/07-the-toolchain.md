@@ -27,7 +27,19 @@ plus a directory of SPARQL `.rq` files and SHACL `.ttl` shape files. The Python
 CLI reads that data and evaluates it with pySHACL, a native Rust engine, and
 rdflib. The VS Code extension reads *the same data*, copied into its own
 `resources/checks-registry/`, and evaluates it with Oxigraph compiled to WASM,
-`shacl-engine`, and the EYE reasoner.
+the same Rust SHACL engine compiled to WebAssembly, and the EYE reasoner.
+
+> **The two runtimes recently converged.** Until version 0.10.0 the extension
+> used a JavaScript SHACL implementation. It now runs `shacl-wasm-node` — a
+> WebAssembly build of the same Rust engine the CLI uses natively. On the
+> extension's own workload, all six registry shape files against its bundled
+> ontology, the swap took **71,237 ms down to 324 ms** with identical findings
+> and severities, and fixed two shape files that had been crashing outright, so
+> `DAT-001` and `EFF-002` could never fire through the SHACL path at all.
+>
+> That makes the claim below stronger than it was: the rule that fails your
+> build is not merely the same *data* as the rule that underlined the problem in
+> your editor, it is now the same *engine* evaluating it.
 
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{
@@ -37,7 +49,7 @@ rdflib. The VS Code extension reads *the same data*, copied into its own
 flowchart TD
     REG[("<b>Check registry</b><br/>registry.json<br/>sparql/*.rq · shapes/*.ttl<br/><i>engine-agnostic data</i>")]
 
-    REG --> EXT["<b>VS Code extension</b><br/>Oxigraph WASM · shacl-engine<br/>EYE reasoner"]
+    REG --> EXT["<b>VS Code extension</b><br/>Oxigraph WASM · shacl-wasm<br/>EYE reasoner"]
     REG --> CLI["<b>Python CLI</b><br/>pyshacl · native Rust engine<br/>owlrl · HermiT"]
 
     EXT --> DESK["The desk<br/><i>live diagnostics</i>"]
@@ -114,7 +126,7 @@ code --install-extension ontology-dev-suite-<version>.vsix
 
 Core functionality — authoring, live diagnostics, local checks, metrics, graph
 view, query workbench — has **no external runtime dependency at all**: Oxigraph,
-`shacl-engine` and `eyereasoner` are WASM or pure JS.
+`shacl-wasm` and `eyereasoner` are WebAssembly or pure JS.
 
 The Python CLI is detected via the `ontologySuite.pythonCliPath` setting or on
 `PATH`, and is used only for the two commands that genuinely need it — *Run Deep

@@ -58,19 +58,24 @@ report = shapes.validate_file("data.ttl",
 print(report.conforms, len(report.results))
 ```
 
-> **Check your version before believing any of this.** While writing this
-> chapter the engine repository was at **0.1.7**, PyPI published **0.1.6**, and
-> the ontology suite's own environment had **0.1.5** installed — and 0.1.5's
-> Python binding does not support rules at all:
+> **Check your version before believing any of this.** Rules are new, and the
+> surface has moved twice in the space of writing this chapter. At **0.1.5** the
+> Python binding had no rules at all:
 >
 > ```
 > inference='rules' -> ERROR: unknown inference "rules"; use "none" or "rdfs"
 > ```
 >
-> That is the right failure — it names what it accepts, and does not quietly
-> validate without applying the rules. But it means a notebook or pipeline
-> written against 0.1.7 fails outright on 0.1.5 rather than degrading. Pin the
-> version, and check with `shacl --version`.
+> At **0.1.7** the CLI had them and the WebAssembly build did not. From
+> **0.1.8/0.1.9** every binding has them, and 0.1.9 also fixes a real defect in
+> which `$this` was not substituted into a CONSTRUCT-based rule — so a SPARQL
+> rule ran for **every node in the graph** rather than for its focus node. If
+> you wrote SPARQL rules against an earlier version, re-run them.
+>
+> The failure mode is at least the right one throughout: an unrecognised
+> `inference` value is an error naming what is accepted, never a silent
+> fallback that validates without applying the rules. Pin the version, and check
+> with `shacl --version`.
 
 ---
 
@@ -212,11 +217,18 @@ acme:Rules a sh:NodeShape ; sh:targetClass acme:Thing ;
               sh:construct """CONSTRUCT { $this acme:tagged true } WHERE { }""" ] .
 ```
 
-> **The `sh:prefixes` link is required.** A rule that omits it and relies on a
-> shapes-graph-level `sh:declare` alone is not resolved: the engine rejects the
-> whole shapes graph with a SPARQL prefix error, at compile time, whether or not
-> `-a` was passed. Verified against the W3C 1.2 rules corpus. Write
-> `sh:prefixes` explicitly, or keep the `PREFIX` line inside the query.
+Both forms work, and a rule that omits `sh:prefixes` entirely now falls back to
+the shapes graph's own `sh:declare` — which is how the W3C 1.2 rules corpus
+writes them.
+
+> **Fixed in 0.1.8; broken before it.** At 0.1.7 a rule relying on a
+> shapes-graph-level `sh:declare` alone was not resolved, and the engine
+> rejected the **whole shapes graph** with a SPARQL prefix error at compile
+> time, whether or not `-a` was passed — so a document that had validated fine
+> before rules existed stopped validating at all. Rule compile errors are now
+> held on the rule and raised only if that rule would have fired, which means
+> validation that never asked for rules is unaffected and a broken rule is still
+> not silently skipped. Another reason to check `shacl --version`.
 
 ---
 
@@ -319,26 +331,43 @@ live.
 | **Result annotations** (`sh:resultAnnotation`) | Extra properties from a SPARQL constraint's solution are not copied onto results |
 | **SHACL 1.2 Rules** (`RULE { } WHERE { }`) | A different design from SHACL-AF; its test corpus is vendored but not wired into the conformance harness |
 | **OWL-RL pre-inference** | RDFS is available and opt-in; nothing beyond it |
-| **Rules in the WebAssembly build** | **The WASM API has no rules at all** — see below |
+| **Rules in the VS Code extension** | The engine supports them; the extension does not yet ask for them — see below |
 
-### The WASM build cannot run rules
+### Rules in the browser: the engine can, the editor does not
 
-This is the gap most likely to catch you out, because everything else about the
-WASM build is the same engine. Its API exposes `inference: "none" | "rdfs"` and
-nothing more — there is no `advanced` option and no `iterateRules`.
+Every binding runs rules — CLI, Python and WebAssembly alike — through the same
+`inference` modes:
 
-The consequence is sharp. Given a shapes graph whose SPARQL rule the native
-engine rejects at compile time, the native CLI exits 2 with an error, and the
-**WASM build returns `conforms = true` with zero results** — verified directly
-against the same file. One says *"I could not check this"*; the other says
-*"this is fine"*.
+```js
+import { Validator } from 'shacl-wasm';
+const v = Validator.fromTurtle(shapesTurtle);
+const report = v.validateTurtle(dataTurtle, null, 'rules');   // or 'rules-iterated'
+```
 
-That is precisely the distinction [Chapter 4](04-from-research-to-industry.md)
-argues is the whole difference between a gate you can trust and one you cannot,
-and here it falls on the browser side. **If you are validating in the editor or
-the browser and your shapes carry rules, the rules are not running.** Use the
-native CLI or the Python binding for anything rule-bearing, and treat the WASM
-build as validation-only.
+Verified against the built package at 0.1.9: `"rules"` fires the rule and the
+derived data is validated, while an unrecognised mode is an **error** rather
+than a silent fallback to `"none"` — which is the failure behaviour that
+matters, because a browser quietly validating without applying rules would
+report conformance it never established.
+
+> **This is recent, and the manual said the opposite one version ago.** At 0.1.7
+> the WASM API exposed `"none"` and `"rdfs"` only. Worse, a shapes graph whose
+> SPARQL rule the native engine rejected at compile time returned
+> `conforms = true` from WASM — *"this is fine"* against *"I could not check
+> this"*, which is the distinction
+> [Chapter 4](04-from-research-to-industry.md) argues everything rests on. Both
+> the missing modes and the divergence are fixed: the engine's differential
+> harness now reports **0 disagreements across all 473 documents** of the W3C
+> corpus, where it previously reported one.
+
+**What has not changed is the editor.** The VS Code extension bundles the 0.1.9
+engine, so the capability is present, but its runner asks for `inference: "none"`
+deliberately — the reasoning being that inference belongs to the reasoner tier,
+and a SHACL finding should be about what the document says rather than what a
+second pass added underneath it. That is a defensible position and the manual
+does not argue with it; it just means **rules in your shapes do not fire in the
+editor today.** Use the CLI or the Python binding for anything rule-bearing, and
+expect the editor's report to differ from CI's when rules are in play.
 
 ### Named graphs are flattened
 

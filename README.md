@@ -92,14 +92,21 @@ yourself with `cd tools && npm install && node build-pdf.mjs` — see
 
 ## Run it yourself
 
-Three self-contained [notebooks](notebooks/) cover the parts where watching the
-tool behave teaches more than reading about it — the unscoped gate drowning in
-other people's findings, the four ways a SHACL rule silently does nothing, and a
-repair applying itself.
+Three self-contained Jupyter notebooks cover the parts where watching the tool
+behave teaches more than reading about it. Each writes its own fixtures to a
+temporary directory, so nothing needs to exist on disk first.
+
+| Notebook | Chapters | What you watch happen |
+|---|---|---|
+| [1 — Validation and the gate](notebooks/01-validation-and-the-gate.ipynb) | 8, 9 | An unscoped gate drowning in other people's findings, the flag that fixes it, and the near-miss filter that returns a confidently empty report |
+| [2 — Rules and inference](notebooks/02-rules-and-inference.ipynb) | 11 | SHACL-AF rules deriving triples, and all four ways a rule silently does nothing |
+| [3 — Release and change](notebooks/03-release-and-change.ipynb) | 12 | Evidence-based semver, change impact, and a repair applying itself — including the comment it mangles |
 
 ```bash
 pip install ontology-quality-suite shacl jupyterlab && jupyter lab
 ```
+
+See [notebooks/](notebooks/) for prerequisites and how they are generated.
 
 ---
 

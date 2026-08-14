@@ -66,9 +66,24 @@ function stripNav(md) {
   return md.replace(/\n---\n+\|[^\n]*\|\n\|[-\s|]+\|\n*$/g, '\n');
 }
 
-/** Flatten intra-manual links to their text; leave real URLs alone. */
+const GITHUB = 'https://github.com/pwin/SemOpsManual/blob/main';
+
+/**
+ * Chapter cross-references become plain text — the chapter is in the same
+ * document, so a link adds nothing on paper.
+ *
+ * Links to files that live only in the repository (notebooks, tooling) become
+ * absolute GitHub URLs instead. Flattening those would strand a print reader:
+ * "notebook 2" with no path is not something you can go and find.
+ */
 function flattenLinks(md) {
-  return md.replace(/\[([^\]]+)\]\(((?!https?:|mailto:)[^)]+)\)/g, '$1');
+  return md.replace(/\[([^\]]+)\]\(((?!https?:|mailto:)[^)]+)\)/g, (whole, text, target) => {
+    const clean = target.replace(/^\.\//, '').replace(/^\.\.\//, '');
+    if (/^(notebooks|tools|assets)\//.test(clean)) {
+      return `[${text}](${GITHUB}/${clean})`;
+    }
+    return text;
+  });
 }
 
 function pageBreak() {
@@ -105,7 +120,10 @@ function assemble() {
       md = md
         .replace(/<h1 align="center">[\s\S]*?<\/p>\s*---\s*/, '')
         // "Read it on paper" points at this very document; drop it in print.
-        .replace(/## Read it on paper[\s\S]*?(?=## Contents)/, '')
+        // Bounded to the next heading so it does not swallow the section after
+        // it -- "Run it yourself" must survive, since the notebooks are the one
+        // thing a print reader cannot see for themselves.
+        .replace(/## Read it on paper[\s\S]*?(?=\n## )/, '')
         .replace(/## Contents[\s\S]*?(?=## How to read it)/, '')
         .replace(/<p align="center">[\s\S]*?<\/p>\s*$/, '');
       md = `# ${entry.title}\n\n${md.replace(/^##\s+What this is/m, '## What this is')}`;
