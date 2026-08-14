@@ -40,7 +40,7 @@ why — see [Chapter 9](docs/09-continuous-integration.md) for the sharpest
 example, where the obvious flag is the wrong one.
 
 Where the toolchain has no answer for a SemOps concept, this manual says so
-plainly and marks it grey. [Chapter 13](docs/13-coverage-and-gaps.md) is the
+plainly and marks it grey. [Chapter 14](docs/14-coverage-and-gaps.md) is the
 honest ledger.
 
 ---
@@ -90,6 +90,19 @@ yourself with `cd tools && npm install && node build-pdf.mjs` — see
 
 ---
 
+## Run it yourself
+
+Three self-contained [notebooks](notebooks/) cover the parts where watching the
+tool behave teaches more than reading about it — the unscoped gate drowning in
+other people's findings, the four ways a SHACL rule silently does nothing, and a
+repair applying itself.
+
+```bash
+pip install ontology-quality-suite shacl jupyterlab && jupyter lab
+```
+
+---
+
 ## Contents
 
 ### Part I — Why this is hard
@@ -116,15 +129,16 @@ yourself with `cd tools && npm install && node build-pdf.mjs` — see
 | 8 | [Model and validate](docs/08-model-and-validate.md) | Stage 2 — the author's loop, in the editor, before anything reaches CI |
 | 9 | [Continuous integration](docs/09-continuous-integration.md) | Stage 3 — the gate; and the verified reason the obvious flag is the wrong one |
 | 10 | [Ingest and transform](docs/10-ingest-and-transform.md) | Stage 6 — CSV→RDF, cheapest check first, and whose problem a finding is |
-| 11 | [Release and change](docs/11-release-and-change.md) | Stages 1 and 4 — evidence-based semver, impact analysis, and repairs that apply themselves |
-| 12 | [Operate and consume](docs/12-operate-and-consume.md) | Stages 7–9 — live triplestores, documentation, and knowledge products |
+| 11 | [Rules and inference](docs/11-rules-and-inference.md) | SHACL-AF rules — deriving triples, the four silent hazards, rules at scale, and why the browser build cannot run them |
+| 12 | [Release and change](docs/12-release-and-change.md) | Stages 1 and 4 — evidence-based semver, impact analysis, and repairs that apply themselves |
+| 13 | [Operate and consume](docs/13-operate-and-consume.md) | Stages 7–9 — live triplestores, documentation, and knowledge products |
 
 ### Part IV — The ledger
 
 | # | Chapter | What it covers |
 |---|---|---|
-| 13 | [Coverage and gaps](docs/13-coverage-and-gaps.md) | The honest matrix: SemOps concept → command, or → grey |
-| 14 | [Adoption roadmap](docs/14-adoption-roadmap.md) | A sequenced path from Level 1 to Level 3, with what to do on the first day of each |
+| 14 | [Coverage and gaps](docs/14-coverage-and-gaps.md) | The honest matrix: SemOps concept → command, or → grey |
+| 15 | [Adoption roadmap](docs/15-adoption-roadmap.md) | A sequenced path from Level 1 to Level 3, with what to do on the first day of each |
 | A | [Diagram and brand conventions](docs/diagram-style.md) | The palette, and the width rules that keep every diagram readable on screen and on A4 |
 
 ---
@@ -155,7 +169,7 @@ run described, not an illustrative figure.
 **Two of those numbers are not reproducible, and both are labelled where they
 appear.** The *unscoped* check totals — around 294 for `checks`, around 363 for
 `data` — drift by a few findings between identical runs, traced to a single
-check ([Chapter 13](docs/13-coverage-and-gaps.md) §13.4). And a scoped `data`
+check ([Chapter 14](docs/14-coverage-and-gaps.md) §14.4). And a scoped `data`
 run reports 36 or 37 depending on whether the optional DL reasoner starts. Every
 figure the manual recommends acting on is exactly reproducible across repeated
 runs; the unstable ones are all in the position of *"here is what you should not

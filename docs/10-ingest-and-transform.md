@@ -16,7 +16,7 @@ SemOps layer 4 asks for ETL orchestration, incremental ingestion, data-quality
 checks, error handling and provenance capture. This toolchain covers the
 **quality and correctness** half thoroughly and the **orchestration** half not
 at all — there is no scheduler here, and Airflow, Argo or Prefect remain the
-right answers for that ([Chapter 13](13-coverage-and-gaps.md)).
+right answers for that ([Chapter 14](14-coverage-and-gaps.md)).
 
 What it does provide is a three-stage pipeline arranged on one principle:
 **cheapest check first**.
@@ -320,7 +320,7 @@ provide it:
 - **Streaming.** This is batch. Kafka-shaped ingestion is out of scope.
 - **Provenance capture.** The tooling does not stamp provenance onto the output.
   Named graphs at load time are the practical answer
-  ([Chapter 12](12-operate-and-consume.md)), and it is far easier to do at ingest
+  ([Chapter 13](13-operate-and-consume.md)), and it is far easier to do at ingest
   than to retrofit.
 
 That last one is worth planning before your first production load, not after.
@@ -338,9 +338,9 @@ dimension**: quality checks automated, regressions caught early.
 Level 3 also expects orchestrated ETL and ingestion monitoring, which are not
 here. Level 4 expects continuous ingestion with error handling and retry logic —
 also not here. Those are real gaps, not omissions from this chapter; see
-[Chapter 13](13-coverage-and-gaps.md).
+[Chapter 14](14-coverage-and-gaps.md).
 
 ---
 
-| ← [9. Continuous integration](09-continuous-integration.md) | [11. Release and change →](11-release-and-change.md) |
+| ← [9. Continuous integration](09-continuous-integration.md) | [11. Rules and inference →](11-rules-and-inference.md) |
 |---|---|

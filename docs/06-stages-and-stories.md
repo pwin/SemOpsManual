@@ -63,7 +63,7 @@ flowchart TD
 The colours are load-bearing. Grey with a dashed border means **this manual's
 toolchain does not cover it** — stages 4, 5 and 8 are packaging, deployment and
 observability, and they are Kubernetes, Helm and Prometheus work rather than
-semantic work. [Chapter 13](13-coverage-and-gaps.md) is the full ledger; the
+semantic work. [Chapter 14](14-coverage-and-gaps.md) is the full ledger; the
 short version is that this toolchain owns the author and validation stages
 comprehensively, the ingestion stage substantially, and the deployment and
 observability stages not at all.
@@ -87,12 +87,12 @@ The pipeline says *what happens*. The operating model says *who answers for it*.
 
 | Layer | Purpose | Roles | Covered here? |
 |---|---|---|---|
-| **1 · Strategy & Governance** | Standards, approvals, stewardship, access policy | Semantic Product Owner, Ontology Owner / Domain Steward, Data Governance Lead, Enterprise Architect | **Partly** — the tooling supplies *evidence for* decisions, not the decision process ([Ch. 11](11-release-and-change.md)) |
-| **2 · Semantic Development** | Ontology design, versioning, SHACL, mappings, docs | Knowledge Engineer, Ontology Engineer, Semantic Modeller, Domain Expert | **Yes** — [Ch. 8](08-model-and-validate.md), [Ch. 12](12-operate-and-consume.md) |
+| **1 · Strategy & Governance** | Standards, approvals, stewardship, access policy | Semantic Product Owner, Ontology Owner / Domain Steward, Data Governance Lead, Enterprise Architect | **Partly** — the tooling supplies *evidence for* decisions, not the decision process ([Ch. 12](12-release-and-change.md)) |
+| **2 · Semantic Development** | Ontology design, versioning, SHACL, mappings, docs | Knowledge Engineer, Ontology Engineer, Semantic Modeller, Domain Expert | **Yes** — [Ch. 8](08-model-and-validate.md), [Ch. 13](13-operate-and-consume.md) |
 | **3 · Semantic CI/CD** | Automated validation, packaging, deployment | SemOps Engineer, DevOps Engineer, Automation Engineer | **Validation yes, packaging/deployment no** — [Ch. 9](09-continuous-integration.md) |
 | **4 · Data Integration** | ETL orchestration, quality checks, provenance | Data Engineer, ETL Developer, SemOps Engineer | **Partly** — transformation and quality yes; scheduling and orchestration no ([Ch. 10](10-ingest-and-transform.md)) |
-| **5 · Platform & Infrastructure** | Kubernetes, triple-store ops, backup, security | Platform / Cloud / Security Engineer | **No** — see [Ch. 13](13-coverage-and-gaps.md) |
-| **6 · Knowledge Consumption** | APIs, search, dashboards, products | App Developer, Data Scientist, Business Analyst, Product Owner | **Partly** — checking against a live store yes; serving an API no ([Ch. 12](12-operate-and-consume.md)) |
+| **5 · Platform & Infrastructure** | Kubernetes, triple-store ops, backup, security | Platform / Cloud / Security Engineer | **No** — see [Ch. 14](14-coverage-and-gaps.md) |
+| **6 · Knowledge Consumption** | APIs, search, dashboards, products | App Developer, Data Scientist, Business Analyst, Product Owner | **Partly** — checking against a live store yes; serving an API no ([Ch. 13](13-operate-and-consume.md)) |
 
 **Layer 1 deserves a specific caution.** It is the layer people assume software
 will provide and it is the layer software never provides. No tool approves a
@@ -149,7 +149,7 @@ Two observations that matter more than the table.
 **Level 2 → 3 is where the return is.** It is the cheapest transition with the
 largest effect, because it converts "we have standards" into "the standards are
 enforced without anyone remembering to enforce them." Most of the value in this
-manual is concentrated there, which is why [Chapter 14](14-adoption-roadmap.md)
+manual is concentrated there, which is why [Chapter 15](15-adoption-roadmap.md)
 sequences everything around reaching Level 3 and holding it.
 
 **Levels 4 and 5 are grey for a reason.** Level 4 is largely platform
@@ -197,7 +197,7 @@ each chapter answers a small set of them with real commands.
 > **As a domain expert who does not read Turtle**, I want to check that the model
 > matches how the business actually works.
 > → [Chapter 8](08-model-and-validate.md) (outline, graph view),
-> [Chapter 12](12-operate-and-consume.md) (`docgen`)
+> [Chapter 13](13-operate-and-consume.md) (`docgen`)
 
 > **As a knowledge engineer**, I want our own house rules enforced, not just the
 > generic ones.
@@ -211,7 +211,7 @@ each chapter answers a small set of them with real commands.
 
 > **As a reviewer**, I want to see what a pull request actually changed
 > semantically, not just textually.
-> → [Chapter 11](11-release-and-change.md) (`version-diff`)
+> → [Chapter 12](12-release-and-change.md) (`version-diff`)
 
 ### Ingesting
 
@@ -227,21 +227,21 @@ each chapter answers a small set of them with real commands.
 
 > **As a domain steward**, I need to know whether this release is breaking, and
 > what breaks, before I approve it.
-> → [Chapter 11](11-release-and-change.md) (`version-diff`, `consistency`)
+> → [Chapter 12](12-release-and-change.md) (`version-diff`, `consistency`)
 
 > **As the person who has to fix the fallout**, I want the mechanical part of the
 > migration done for me.
-> → [Chapter 11](11-release-and-change.md) (`--apply-repairs --min-confidence`)
+> → [Chapter 12](12-release-and-change.md) (`--apply-repairs --min-confidence`)
 
 ### Operating and consuming
 
 > **As a platform owner**, I want the same checks that guard the repository to
 > run against what is actually in the triple store.
-> → [Chapter 12](12-operate-and-consume.md) (`consistency-remote`)
+> → [Chapter 13](13-operate-and-consume.md) (`consistency-remote`)
 
 > **As an application developer or an agent**, I need documentation of what the
 > terms mean and a guarantee they will not change under me.
-> → [Chapter 12](12-operate-and-consume.md), [Chapter 5](05-genai-and-agents.md)
+> → [Chapter 13](13-operate-and-consume.md), [Chapter 5](05-genai-and-agents.md)
 
 ---
 

@@ -198,7 +198,7 @@ that costs you in completeness.
 > independent confirmations of the same deliberate contradiction. Three runs of
 > this exact command in one session gave the reasoner-working result once and
 > the reasoner-failed result twice. Neither is an error;
-> [Chapter 13](13-coverage-and-gaps.md) §13.4 has the detail.
+> [Chapter 14](14-coverage-and-gaps.md) §14.4 has the detail.
 
 **Want a specific OWL2 profile checked?** `--profile EL` (repeatable). It is off
 by default; ask for it explicitly when a downstream consumer needs a lighter

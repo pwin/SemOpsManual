@@ -38,10 +38,11 @@ const ORDER = [
   { file: 'docs/08-model-and-validate.md',    label: '8' },
   { file: 'docs/09-continuous-integration.md', label: '9' },
   { file: 'docs/10-ingest-and-transform.md',  label: '10' },
-  { file: 'docs/11-release-and-change.md',    label: '11' },
-  { file: 'docs/12-operate-and-consume.md',   label: '12' },
-  { file: 'docs/13-coverage-and-gaps.md',     label: '13' },
-  { file: 'docs/14-adoption-roadmap.md',      label: '14' },
+  { file: 'docs/11-rules-and-inference.md',   label: '11' },
+  { file: 'docs/12-release-and-change.md',    label: '12' },
+  { file: 'docs/13-operate-and-consume.md',   label: '13' },
+  { file: 'docs/14-coverage-and-gaps.md',     label: '14' },
+  { file: 'docs/15-adoption-roadmap.md',      label: '15' },
   { file: 'docs/diagram-style.md',            label: 'A' },
 ];
 

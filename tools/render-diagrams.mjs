@@ -33,10 +33,11 @@ const ORDER = [
   'docs/08-model-and-validate.md',
   'docs/09-continuous-integration.md',
   'docs/10-ingest-and-transform.md',
-  'docs/11-release-and-change.md',
-  'docs/12-operate-and-consume.md',
-  'docs/13-coverage-and-gaps.md',
-  'docs/14-adoption-roadmap.md',
+  'docs/11-rules-and-inference.md',
+  'docs/12-release-and-change.md',
+  'docs/13-operate-and-consume.md',
+  'docs/14-coverage-and-gaps.md',
+  'docs/15-adoption-roadmap.md',
   'docs/diagram-style.md',
 ];
 

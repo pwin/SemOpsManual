@@ -170,7 +170,7 @@ down.** Budget for discovering them the hard way.
 
 Inside one enterprise, a breaking ontology change is manageable: detect it, find
 the affected queries, fix them, ship together
-([Chapter 11](11-release-and-change.md) does all three, and the last one
+([Chapter 12](12-release-and-change.md) does all three, and the last one
 automatically).
 
 Across a boundary, the same change is a **negotiation with a lead time**. You
@@ -206,7 +206,7 @@ Two things make this workable rather than aspirational:
 **The bump decision must be evidence-based, not a judgement call.**
 `version-diff` classifies a change by inspecting what actually happened to the
 axioms — a removed class is MAJOR whatever the author intended. In
-[Chapter 11](11-release-and-change.md) it correctly returns `MAJOR` for the
+[Chapter 12](12-release-and-change.md) it correctly returns `MAJOR` for the
 fixture's release, on the evidence of one removed class, while still reporting
 the additive changes as minor. Across a boundary this matters enormously,
 because "is this breaking?" stops being a conversation and becomes a command
@@ -248,7 +248,12 @@ equipped to answer, provided someone decided to answer it.
   single decision that most improves cross-enterprise operability, and it is
   nearly free at ingest time and nearly impossible to retrofit. The suite's
   live-triplestore checking is named-graph aware precisely because this is the
-  expected topology ([Chapter 12](12-operate-and-consume.md)).
+  expected topology ([Chapter 13](13-operate-and-consume.md)).
+  **Note the limit:** named graphs give you provenance and lifecycle, not scoped
+  validation — SHACL is defined over a single graph and validates the union, so
+  checking one partner's contribution against one partner's contract means
+  extracting that graph and validating it on its own
+  ([Chapter 13](13-operate-and-consume.md) §13.1).
 - **Do not merge on ingest.** A merged graph cannot answer "which supplier
   asserted this?", and that is the question the incident review will ask.
 - **Record the conformance verdict, not just the data.** "This batch passed the

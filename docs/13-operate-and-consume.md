@@ -2,7 +2,7 @@
   <img src="../assets/semantechs-logo-320.png" alt="Semantechs" width="120">
 </p>
 
-# 12. Operate and consume
+# 13. Operate and consume
 
 > *Part III — The practice · SemOps stages 7–9 · Operating-model layer 6*
 
@@ -38,7 +38,7 @@ flowchart TD
 
 ---
 
-## 12.1 Runtime validation against a live store
+## 13.1 Runtime validation against a live store
 
 Everything so far has run against files in a repository. The moment the org
 chart moves from Git-tracked Turtle into a real triplestore, a new question
@@ -105,9 +105,27 @@ supplier asserted this?" either.
 
 It is nearly free at load time and effectively impossible to retrofit.
 
+> **But SHACL validation itself does not see them.** This is a boundary worth
+> knowing exactly, because it is easy to assume otherwise once your data is
+> partitioned. SHACL is defined over *one* data graph, and the engines behave
+> accordingly: quad syntaxes (TriG, N-Quads) parse fine, and every named graph
+> plus the default graph is merged into a single graph before validation.
+> Verified — a TriG file holding three subjects across two named graphs and the
+> default graph produces a report identical to the same triples flattened into
+> one Turtle file. There is no graph-selection option, no per-graph report, and
+> a rule's inferences are not attributed to a graph.
+>
+> So named graphs give you **provenance and lifecycle** — which partner sent
+> what, which graph to reload, which to drop — and they do not give you
+> **scoped validation**. If you need "validate supplier A's contribution against
+> supplier A's contract," extract that graph and validate it as its own
+> document. The `manifest.json` model above is built for exactly that: it binds
+> each graph to the ontology it should conform to, and checks them one at a
+> time rather than as a union.
+
 ---
 
-## 12.2 Documentation as a product: `docgen`
+## 13.2 Documentation as a product: `docgen`
 
 SemOps lists documentation as a first-class element — *"without it, semantic
 systems become opaque"* — and it is the artefact
@@ -192,7 +210,7 @@ Documentation maintained by hand is documentation that was true once.
 
 ---
 
-## 12.3 Observability: not covered
+## 13.3 Observability: not covered
 
 SemOps stage 8 wants graph size and growth metrics, query-performance
 dashboards, SPARQL log analysis, data-quality KPIs, provenance tracking and
@@ -216,7 +234,7 @@ CI artefacts a year before anyone notices the model has drifted.
 
 ---
 
-## 12.4 Knowledge products and APIs: not covered
+## 13.4 Knowledge products and APIs: not covered
 
 SemOps stage 9 wants SPARQL endpoints, GraphQL and REST APIs, search indexes,
 and data products. Neither tool serves an API, and neither should — that is
@@ -248,10 +266,10 @@ produced by earlier chapters, not by the API layer:
 
 | Consumer needs | Produced by | Chapter |
 |---|---|---|
-| Stable IRIs that do not change meaning | Evidence-based semver, migration annotations | [11](11-release-and-change.md) |
+| Stable IRIs that do not change meaning | Evidence-based semver, migration annotations | [12](12-release-and-change.md) |
 | To know what a term means | `docgen`, `rdfs:label` coverage (`QUA-001`) | This chapter, [8](08-model-and-validate.md) |
 | Confidence the data conforms | `data`, `consistency-remote` | [10](10-ingest-and-transform.md), this chapter |
-| To know who asserted what | Named graphs | [3](03-across-the-boundary.md), §12.1 |
+| To know who asserted what | Named graphs | [3](03-across-the-boundary.md), §13.1 |
 
 An API built on a graph that lacks these is an API that will be wrong
 occasionally and unpredictably — which is worse than being wrong reliably,
@@ -259,7 +277,7 @@ because consumers stop being able to calibrate their trust.
 
 ---
 
-## 12.5 Maturity checkpoint
+## 13.5 Maturity checkpoint
 
 `consistency-remote` against a live store, plus `docgen` on every commit, covers
 part of Level 4's *"semantic APIs managed and monitored"* — the *managed* half.
@@ -267,10 +285,10 @@ part of Level 4's *"semantic APIs managed and monitored"* — the *managed* half
 The *monitored* half needs an observability stack this toolchain does not
 provide, and Level 4 also expects Kubernetes deployment, automated environment
 promotion, and continuous ingestion with retry logic. Those are real gaps, and
-[Chapter 13](13-coverage-and-gaps.md) is where they are counted honestly rather
+[Chapter 14](14-coverage-and-gaps.md) is where they are counted honestly rather
 than glossed.
 
 ---
 
-| ← [11. Release and change](11-release-and-change.md) | [13. Coverage and gaps →](13-coverage-and-gaps.md) |
+| ← [12. Release and change](12-release-and-change.md) | [14. Coverage and gaps →](14-coverage-and-gaps.md) |
 |---|---|

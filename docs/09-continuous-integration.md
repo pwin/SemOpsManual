@@ -73,6 +73,15 @@ Findings: 294 total (48 Violation, 162 Warning, 84 Info)
 > an unscoped total; every scoped one holds, with a single documented exception
 > in [Chapter 10](10-ingest-and-transform.md) that has a visible cause.
 
+> **Why `--engine sparql` is pinned in every command here.** It is not
+> decoration, and it is not the default. Every count in this chapter is a
+> `--engine sparql` count; the default `native+sparql` returns **6** where this
+> chapter reports 5, because `LOG-001` is implemented in both formulations and
+> both fire. Pin the flag in CI for the same reason you pin a dependency
+> version — see [Chapter 7](07-the-toolchain.md) §7.4 for the full comparison,
+> including the pySHACL mode that reports five Violations where the native
+> engine reports two.
+
 Every one of those findings is real. The suite is genuinely checking every
 triple in the merged graph — and the merged graph includes the entire W3C
 Organization Ontology and the entire FOAF vocabulary, complete with their own
@@ -316,7 +325,7 @@ written on every run regardless of exit code.
 **A MAJOR bump should not block the build.** It should *demand a human*. The
 job above records it and continues; the enforcement belongs in a branch
 protection rule requiring a named reviewer, which is a governance control rather
-than a technical one. See [Chapter 11](11-release-and-change.md).
+than a technical one. See [Chapter 12](12-release-and-change.md).
 
 **Different PRs need different gates:**
 
@@ -324,7 +333,7 @@ than a technical one. See [Chapter 11](11-release-and-change.md).
 |---|---|
 | The ontology | `ontology`, then `checks --own-namespace` |
 | A transformation query | `sketch` first — it needs no CSV ([Ch. 10](10-ingest-and-transform.md)) |
-| A taxonomy of controlled values | `pattern-consistency` ([Ch. 11](11-release-and-change.md)) |
+| A taxonomy of controlled values | `pattern-consistency` ([Ch. 12](12-release-and-change.md)) |
 | Data | `data`, with `--sample N` if the graph is large |
 
 ---
@@ -368,6 +377,10 @@ validate before submitting rather than after being rejected.
 
 ---
 
+> **Run it:** [notebook 1 — Validation and the gate](../notebooks/01-validation-and-the-gate.ipynb)
+> builds a miniature version of this chapter's fixture and walks the same
+> comparison, including the near-miss filter that returns an empty report.
+
 ## 9.8 Maturity checkpoint
 
 A team running these gates on every pull request, with reports retained, is at
@@ -377,7 +390,7 @@ predictable releases, faster iteration, early detection of semantic regressions.
 Level 3's other dimensions — automated packaging, deployment to dev/test,
 orchestrated ETL, ingestion monitoring — are partly [Chapter 10](10-ingest-and-transform.md)
 and partly not covered by this toolchain at all
-([Chapter 13](13-coverage-and-gaps.md)).
+([Chapter 14](14-coverage-and-gaps.md)).
 
 This is the transition worth spending real effort on. It is also the one that
 makes agent participation safe: as [Chapter 5](05-genai-and-agents.md) argues, a

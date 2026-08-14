@@ -2,7 +2,7 @@
   <img src="../assets/semantechs-logo-320.png" alt="Semantechs" width="120">
 </p>
 
-# 11. Release and change
+# 12. Release and change
 
 > *Part III — The practice · SemOps stages 1 and 4 · Operating-model layers 1 and 2*
 
@@ -20,7 +20,7 @@ it turns *"is this a breaking change?"* from an opinion into a command.
 
 ---
 
-## 11.1 Evidence-based semver: `version-diff`
+## 12.1 Evidence-based semver: `version-diff`
 
 ```bash
 python -m ontology_suite version-diff \
@@ -58,7 +58,7 @@ Suggested version bump: MAJOR
 Note the argument order: **old first, then new**. Reversed, you get a diff
 describing the inverse release.
 
-**Note also `--exclude-imports` here, where §11.2 uses `--import-dir`.** That is
+**Note also `--exclude-imports` here, where §12.2 uses `--import-dir`.** That is
 deliberate, not a slip. `version-diff` is comparing Acme's own axioms against
 Acme's own axioms, and merging two identical copies of `org:` and FOAF into both
 sides adds nothing but time. `consistency` needs the opposite, because its
@@ -84,7 +84,7 @@ change notice so downstream tooling can act on it without parsing prose.
 
 ---
 
-## 11.2 Change impact: `consistency`
+## 12.2 Change impact: `consistency`
 
 Knowing a release is breaking is half the answer. *What* breaks is the other
 half.
@@ -128,7 +128,7 @@ files under `--out-dir/repairs`.
 
 ---
 
-## 11.3 The migration annotation, and its direction
+## 12.3 The migration annotation, and its direction
 
 The 100% confidence above is not pattern-matching on names. It comes from an
 explicit migration annotation in v2:
@@ -157,7 +157,7 @@ release notes.
 
 ---
 
-## 11.4 Applying repairs
+## 12.4 Applying repairs
 
 ```bash
 python -m ontology_suite consistency \
@@ -238,7 +238,7 @@ flowchart TD
 
 ---
 
-## 11.5 The taxonomy layer: `pattern-consistency`
+## 12.5 The taxonomy layer: `pattern-consistency`
 
 `consistency` has a documented blind spot: it has no notion of a **taxonomy** —
 a controlled vocabulary of permitted values sitting on top of the ontology.
@@ -306,7 +306,7 @@ Omit `--output-data` and this run reports clean — correctly, and uselessly.
 
 ---
 
-## 11.6 Governance: what the tooling does and does not do
+## 12.6 Governance: what the tooling does and does not do
 
 SemOps layer 1 wants approval workflows, stewardship roles and audit trails.
 **None of that is implemented here, and no tool should claim otherwise.** What
@@ -332,7 +332,11 @@ own `UPDATING.md` is the closest existing document to a governance playbook.
 
 ---
 
-## 11.7 Maturity checkpoint
+> **Run it:** [notebook 3 — Release and change](../notebooks/03-release-and-change.ipynb)
+> takes an ontology through a breaking release and applies the repair, including
+> the comment it mangles on the way.
+
+## 12.7 Maturity checkpoint
 
 `version-diff` on every release, `consistency` before merging a breaking change,
 and `pattern-consistency --output-data` where controlled vocabularies exist,
@@ -344,5 +348,5 @@ The rest of Level 5 is organisational, and no command produces it.
 
 ---
 
-| ← [10. Ingest and transform](10-ingest-and-transform.md) | [12. Operate and consume →](12-operate-and-consume.md) |
+| ← [11. Rules and inference](11-rules-and-inference.md) | [13. Operate and consume →](13-operate-and-consume.md) |
 |---|---|

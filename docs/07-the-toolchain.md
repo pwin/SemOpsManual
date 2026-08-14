@@ -110,10 +110,11 @@ install it with *Extensions: Install from VSIX…* in the command palette, or:
 
 ```bash
 code --install-extension ontology-dev-suite-<version>.vsix
-``` Core functionality — authoring,
-live diagnostics, local checks, metrics, graph view, query workbench — has **no
-external runtime dependency at all**: Oxigraph, `shacl-engine` and
-`eyereasoner` are WASM or pure JS.
+```
+
+Core functionality — authoring, live diagnostics, local checks, metrics, graph
+view, query workbench — has **no external runtime dependency at all**: Oxigraph,
+`shacl-engine` and `eyereasoner` are WASM or pure JS.
 
 The Python CLI is detected via the `ontologySuite.pythonCliPath` setting or on
 `PATH`, and is used only for the two commands that genuinely need it — *Run Deep
@@ -136,11 +137,11 @@ JVM excludes a class of supply-chain partners from self-service compliance.
 | Check CSV→RDF queries against the ontology, no CSV needed | `sketch` | [10](10-ingest-and-transform.md) |
 | Actually produce RDF from CSV | `triplify` | [10](10-ingest-and-transform.md) |
 | Assess real triplified data | `data` | [10](10-ingest-and-transform.md) |
-| Compare two versions, get MAJOR/MINOR/PATCH | `version-diff` | [11](11-release-and-change.md) |
-| Find and auto-repair ontology↔query drift | `consistency` | [11](11-release-and-change.md) |
-| Check a controlled-vocabulary layer too | `pattern-consistency` | [11](11-release-and-change.md) |
-| Run the checks against a **live** triplestore | `consistency-remote` | [12](12-operate-and-consume.md) |
-| Produce something a stakeholder can read | `docgen` | [12](12-operate-and-consume.md) |
+| Compare two versions, get MAJOR/MINOR/PATCH | `version-diff` | [12](12-release-and-change.md) |
+| Find and auto-repair ontology↔query drift | `consistency` | [12](12-release-and-change.md) |
+| Check a controlled-vocabulary layer too | `pattern-consistency` | [12](12-release-and-change.md) |
+| Run the checks against a **live** triplestore | `consistency-remote` | [13](13-operate-and-consume.md) |
+| Produce something a stakeholder can read | `docgen` | [13](13-operate-and-consume.md) |
 | Run everything applicable, one report | `run` | [9](09-continuous-integration.md) |
 
 And the editor-side equivalents, by VS Code command:
@@ -164,15 +165,51 @@ And the editor-side equivalents, by VS Code command:
 
 `checks`, `data` and `run` accept `--engine`. It defaults to `native+sparql`
 when the optional Rust SHACL engine is installed, and `both` (pyshacl) otherwise.
-This is not only about speed, though the speed difference is large — the suite's
-architecture documentation records benchmarks up to roughly 665× on a real-sized
-ontology.
 
-It is also about correctness. **pySHACL has a confirmed bug: it ignores
-`sh:severity` declared inside `sh:sparql` SPARQL-based constraints, reporting
-`Violation` regardless of what the shape actually says.** The native engine
-handles this correctly. If you have shapes that deliberately declare `Warning`
-severity inside SPARQL constraints and your CI is failing on them, this is why.
+Most documentation treats this as a speed switch. It is not: **it changes how
+many findings you get and what severity they carry.** All four modes, run
+against this manual's fixture with `--own-namespace`, same ontology, same
+registry:
+
+| `--engine` | Findings | Severity split | What happened |
+|---|---|---|---|
+| `native` | **4** | 1 V / 3 W | Runs the SHACL shapes only. **Misses `QUA-004`**, which exists only as a SPARQL check |
+| `sparql` | **5** | 1 V / 4 W | Runs the `.rq` checks only. The numbers used throughout this manual |
+| `native+sparql` | **6** | 2 V / 4 W | Union of both. Correct severities — and `LOG-001` twice |
+| `both` | **6** | **5 V** / 1 W | pyshacl + SPARQL. Same findings, **wrong severities** |
+
+Three things follow, and each matters more than the speed difference.
+
+**Neither half is complete alone.** The registry is implemented in two
+formulations — 39 SPARQL `.rq` files and 6 SHACL shape files — and they do not
+cover the same checks. `--engine native` silently misses `QUA-004` because that
+check exists only as SPARQL. Do not use a single-formulation mode expecting full
+coverage.
+
+**The union double-reports.** Under `native+sparql`, `LOG-001` appears twice for
+the same focus node and the same value — once with `sources: shacl`, once with
+`sources: sparql` — because the contradiction is implemented in both
+formulations and nothing deduplicates them. The two rows carry different message
+wording, so it reads like two findings. It is one. Deduplicate on
+(check_id, focus_node, value) if you are counting findings programmatically.
+
+**The pySHACL severity bug is visible right here.** Compare the last two rows:
+identical findings, but `both` reports **five Violations where `native+sparql`
+reports two**. pySHACL ignores `sh:severity` declared inside `sh:sparql`
+SPARQL-based constraints and reports `Violation` regardless of what the shape
+says; the native engine honours it. If your CI is failing on checks you
+deliberately declared as `Warning`, this is why — and with `--fail-on Violation`
+it is the difference between a green build and a red one.
+
+> **Pin `--engine` in CI.** It is the one flag whose default varies with what
+> happens to be installed on the machine, and it changes both the count and the
+> pass/fail outcome. A commit that passes on a developer's laptop and fails in
+> CI, with no code difference, is usually this.
+
+The speed difference is real too — the suite's architecture documentation
+records benchmarks up to roughly 665× on a real-sized ontology, and the engine's
+own harness measures 75–122× against pySHACL across 1k–100k instances with
+identical result counts at every size.
 
 ### `--verbose`
 

@@ -77,7 +77,7 @@ actually validate**, and that the formal artefact is generated from or checked
 against that form. Concretely, in this toolchain:
 
 - Generated reference documentation, not raw Turtle, is what goes to a domain
-  expert for review ([Chapter 12](12-operate-and-consume.md), `docgen`).
+  expert for review ([Chapter 13](13-operate-and-consume.md), `docgen`).
 - The extension's hierarchical outline and graph view render structure
   visually — a domain expert can see that `Contractor` sits under `Employee` and
   say "no, it does not," without reading a single axiom
@@ -234,10 +234,10 @@ against:
 
 | Human problem | Toolchain requirement | Where it lands |
 |---|---|---|
-| Priesthood, unreadable artefacts | Generated docs and visual structure for non-specialists | [Ch. 8](08-model-and-validate.md), [Ch. 12](12-operate-and-consume.md) |
+| Priesthood, unreadable artefacts | Generated docs and visual structure for non-specialists | [Ch. 8](08-model-and-validate.md), [Ch. 13](13-operate-and-consume.md) |
 | Cognitive overload at the gate | Findings scoped to what the team owns | [Ch. 9](09-continuous-integration.md) |
-| Maintenance fatigue | Drift detected mechanically; repairs proposed automatically | [Ch. 11](11-release-and-change.md) |
-| Territorial definitions | Change impact made explicit before merge, so decisions have evidence | [Ch. 11](11-release-and-change.md) |
+| Maintenance fatigue | Drift detected mechanically; repairs proposed automatically | [Ch. 12](12-release-and-change.md) |
+| Territorial definitions | Change impact made explicit before merge, so decisions have evidence | [Ch. 12](12-release-and-change.md) |
 
 If a tool does not reduce the load on the humans, it will be abandoned
 regardless of correctness. That is the whole argument, and it is worth carrying

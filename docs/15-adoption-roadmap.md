@@ -2,7 +2,7 @@
   <img src="../assets/semantechs-logo-320.png" alt="Semantechs" width="120">
 </p>
 
-# 14. Adoption roadmap
+# 15. Adoption roadmap
 
 > *Part IV — The ledger*
 
@@ -83,7 +83,7 @@ makes `--own-namespace` usable across both
 
 **Decide named graphs before the first production load.** Per-source named graphs
 are nearly free at load time and effectively impossible to retrofit
-([Ch. 12](12-operate-and-consume.md)).
+([Ch. 13](13-operate-and-consume.md)).
 
 **Exit criterion:** every modeller sees findings in their editor, and the
 ontology's history is in Git.
@@ -138,7 +138,7 @@ that cannot fail is indistinguishable from a gate that passes.
 | A taxonomy | `pattern-consistency --output-data` |
 
 `--output-data` is not optional in practice. Without it, per-row controlled
-values are invisible ([Ch. 11](11-release-and-change.md)).
+values are invisible ([Ch. 12](12-release-and-change.md)).
 
 ### Week 4 — documentation and artefacts
 
@@ -149,7 +149,7 @@ ontology-quality-suite docgen --ontology ontology/acme-org.ttl \
 
 Publish it. Then **retain `full_results.csv` from every run, timestamped** — it
 costs nothing and becomes your only quality time series
-([Ch. 13](13-coverage-and-gaps.md)).
+([Ch. 14](14-coverage-and-gaps.md)).
 
 **Exit criterion:** a pull request that breaks the ontology fails, and the
 failure names something the team owns.
@@ -170,7 +170,7 @@ failure names something the team owns.
 
 Add one governance control, which is a branch protection rule rather than a
 command: **a MAJOR bump requires a named reviewer.** The tool establishes the
-fact; the platform enforces the policy ([Ch. 11](11-release-and-change.md)).
+fact; the platform enforces the policy ([Ch. 12](12-release-and-change.md)).
 
 And one review-checklist item that will otherwise cost you an afternoon per
 occurrence: migration annotations are read **directionally**, from the retiring
@@ -197,7 +197,7 @@ Three additions, all cheap ([Ch. 3](03-across-the-boundary.md)):
 Level 4 is Kubernetes deployment, environment promotion, continuous ingestion
 with retry logic, an observability stack, and managed semantic APIs. Almost none
 of it is in this toolchain, and almost none of it needs specialist semantic
-tooling ([Ch. 13](13-coverage-and-gaps.md)).
+tooling ([Ch. 14](14-coverage-and-gaps.md)).
 
 What *is* here for Level 4:
 
@@ -252,5 +252,5 @@ If you read nothing else in this manual:
 
 ---
 
-| ← [13. Coverage and gaps](13-coverage-and-gaps.md) | [Appendix A: Diagram conventions →](diagram-style.md) |
+| ← [14. Coverage and gaps](14-coverage-and-gaps.md) | [Appendix A: Diagram conventions →](diagram-style.md) |
 |---|---|

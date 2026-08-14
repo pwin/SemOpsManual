@@ -99,7 +99,7 @@ Sampled from the Semantechs mark in [`assets/`](../assets/):
 
 Grey is reserved. It means "SemOps asks for this and the toolchain in this
 manual does not provide it" — the visual counterpart of
-[Chapter 13](13-coverage-and-gaps.md). Never use grey decoratively.
+[Chapter 14](14-coverage-and-gaps.md). Never use grey decoratively.
 
 ### The standard preamble
 
@@ -162,7 +162,7 @@ loop, a boundary crossing. It does not earn its place when it is:
   is searchable, which an SVG is not);
 - a sequence of commands (use a fenced code block).
 
-[Chapter 13](13-coverage-and-gaps.md)'s coverage matrix is the clearest case:
+[Chapter 14](14-coverage-and-gaps.md)'s coverage matrix is the clearest case:
 six operating-model layers against two toolchains is a table, and would have
 been a worse diagram.
 
@@ -227,5 +227,5 @@ terminal node. If a diagram's vertical order looks wrong, a back edge is why.
 
 ---
 
-| ← [13. Coverage and gaps](13-coverage-and-gaps.md) | [Contents](../README.md) |
+| ← [15. Adoption roadmap](15-adoption-roadmap.md) | [Contents](../README.md) |
 |---|---|

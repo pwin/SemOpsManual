@@ -191,7 +191,7 @@ all of them are variations on decay:
 Read that table as a specification. Each row is a requirement:
 
 - Drift must be **detected mechanically**, because humans will not notice it →
-  [Chapter 11](11-release-and-change.md), `version-diff` and `consistency`.
+  [Chapter 12](12-release-and-change.md), `version-diff` and `consistency`.
 - Maintenance must cost **minutes, not workshops**, or fatigue wins →
   [Chapter 8](08-model-and-validate.md), the in-editor loop.
 - Breakage must be **caught at the gate**, not in production →

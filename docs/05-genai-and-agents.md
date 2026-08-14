@@ -123,11 +123,11 @@ which is a convenient alignment:
 
 | Agent requirement | SemOps artefact | Chapter |
 |---|---|---|
-| Stable identifiers that do not silently change meaning | Versioned ontology, evidence-based semver | [11](11-release-and-change.md) |
-| Machine-readable descriptions of terms | Generated documentation, `rdfs:label`, definitions | [12](12-operate-and-consume.md) |
+| Stable identifiers that do not silently change meaning | Versioned ontology, evidence-based semver | [12](12-release-and-change.md) |
+| Machine-readable descriptions of terms | Generated documentation, `rdfs:label`, definitions | [13](13-operate-and-consume.md) |
 | A guarantee the data conforms to the model | SHACL/registry validation at ingest | [10](10-ingest-and-transform.md) |
-| Knowing what changed between versions | `version-diff`, migration annotations | [11](11-release-and-change.md) |
-| Knowing who asserted what | Named graphs, provenance | [3](03-across-the-boundary.md), [12](12-operate-and-consume.md) |
+| Knowing what changed between versions | `version-diff`, migration annotations | [12](12-release-and-change.md) |
+| Knowing who asserted what | Named graphs, provenance | [3](03-across-the-boundary.md), [13](13-operate-and-consume.md) |
 
 Note the second row in particular. The `QUA-001` check — *a term has no
 `rdfs:label`* — has always been easy to dismiss as documentation hygiene. When
@@ -188,7 +188,7 @@ human-authored, which were machine-proposed and human-approved? When a
 definition is later disputed, this is the first question, and it is
 unanswerable retrospectively.
 
-**Keep the confidence gate.** [Chapter 11](11-release-and-change.md)'s repair
+**Keep the confidence gate.** [Chapter 12](12-release-and-change.md)'s repair
 mechanism applies suggested fixes only at or above a confidence threshold — a
 100%-confidence rename derived from an explicit migration annotation applies; a
 name-similarity guess does not. That pattern generalises directly to agent

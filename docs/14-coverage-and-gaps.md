@@ -2,7 +2,7 @@
   <img src="../assets/semantechs-logo-320.png" alt="Semantechs" width="120">
 </p>
 
-# 13. Coverage and gaps
+# 14. Coverage and gaps
 
 > *Part IV — The ledger*
 
@@ -17,7 +17,7 @@ an afternoon; every one of them was hit while writing this manual.
 
 ---
 
-## 13.1 Coverage by pipeline stage
+## 14.1 Coverage by pipeline stage
 
 | Stage | SemOps wants | Covered? | By what |
 |---|---|---|---|
@@ -37,7 +37,7 @@ semantic, and have mature general-purpose answers.
 
 ---
 
-## 13.2 Coverage by operating-model layer
+## 14.2 Coverage by operating-model layer
 
 | Layer | Covered? | What is real | What is missing |
 |---|---|---|---|
@@ -55,24 +55,24 @@ at an assertion. The decision stays human, and should.
 
 ---
 
-## 13.3 Coverage of the ten SemOps elements
+## 14.3 Coverage of the ten SemOps elements
 
 | # | Element | Covered? | Where |
 |---|---|---|---|
-| 1 | Knowledge Lifecycle Management | **Yes** | [Ch. 11](11-release-and-change.md) |
+| 1 | Knowledge Lifecycle Management | **Yes** | [Ch. 12](12-release-and-change.md) |
 | 2 | Automated Deployment & Packaging | **No** | — |
 | 3 | Data Integration & ETL Orchestration | **Partial** | [Ch. 10](10-ingest-and-transform.md) — no orchestration |
-| 4 | Reasoning & Inference Operations | **Partial** | Reasoning and regression tests yes; incremental reasoning and performance monitoring no |
-| 5 | Knowledge Graph Observability | **No** | See [§13.5](#135-the-cheapest-thing-you-are-not-doing) |
+| 4 | Reasoning & Inference Operations | **Partial** | [Ch. 11](11-rules-and-inference.md) — SHACL-AF rules, RDFS closure, rule versioning and regression tests yes; **incremental** reasoning and performance monitoring no |
+| 5 | Knowledge Graph Observability | **No** | See [§14.5](#135-the-cheapest-thing-you-are-not-doing) |
 | 6 | Semantic Governance & Access Control | **Partial** | Evidence yes; RBAC and workflow no |
 | 7 | Semantic CI/CD Pipelines | **Partial** | Linting, SHACL, docs yes; packaging and deployment no |
 | 8 | Tooling Integration | **Partial** | Validator, reasoner, CI yes; triple store, K8s, monitoring no |
-| 9 | Knowledge Products & APIs | **No** | [Ch. 12](12-operate-and-consume.md) |
+| 9 | Knowledge Products & APIs | **No** | [Ch. 13](13-operate-and-consume.md) |
 | 10 | Documentation & Semantic Literacy | **Yes** | `docgen`, generated docs, this manual |
 
 ---
 
-## 13.4 Rough edges, all encountered while writing this manual
+## 14.4 Rough edges, all encountered while writing this manual
 
 Each of these is real, reproducible, and cost time. None is a reason not to use
 the tools; all are reasons to read this section first.
@@ -116,7 +116,7 @@ which v2.0.0 renames to `acme:SoftwareEngineer`"* — harmless, and nonsense.
 *Mitigation:* prefer the default dry-run `.patch` output in automation; review
 before applying. `--apply-repairs` suits a developer who will read the diff, not
 an unattended job that commits its own output.
-([Ch. 11](11-release-and-change.md))
+([Ch. 12](12-release-and-change.md))
 
 ### `docgen --ref` does not sniff serialisation format
 
@@ -124,7 +124,7 @@ Passing FOAF, published as RDF/XML, crashes with an rdflib **Turtle** parse
 error on the file's XML comment header.
 
 *Mitigation:* convert to Turtle, or pass only Turtle to `--ref`.
-([Ch. 12](12-operate-and-consume.md))
+([Ch. 13](13-operate-and-consume.md))
 
 ### `docgen` external-term resolution did not engage
 
@@ -132,7 +132,7 @@ Even with `--ref reference_vocab/org.ttl`, output reported *"5 external terms
 (0 resolved)"*. Terms are correctly *listed* as external — the documentation is
 honest about what it does not know — but upstream definitions were not pulled in.
 Reported as observed rather than diagnosed.
-([Ch. 12](12-operate-and-consume.md))
+([Ch. 13](13-operate-and-consume.md))
 
 ### The DL reasoner starts, or does not, at random
 
@@ -178,18 +178,65 @@ this manual is exactly reproducible across repeated invocations. Do not build a
 threshold, trend or regression test on the unscoped total.
 ([Ch. 9](09-continuous-integration.md))
 
+### `--engine` changes the finding count, and one check is double-reported
+
+The four engine modes do not agree, on the same ontology with the same registry
+and the same `--own-namespace` filter: `native` returns 4, `sparql` 5,
+`native+sparql` 6, `both` 6. `native` alone misses `QUA-004`, which exists only
+as a SPARQL check; the two union modes report `LOG-001` twice, once from each
+formulation, for the same focus node and value.
+
+*Mitigation:* pin `--engine` in CI, and deduplicate on
+(check_id, focus_node, value) when counting findings programmatically. Full
+comparison in [Ch. 7](07-the-toolchain.md) §7.4.
+
+### The WebAssembly build cannot run SHACL-AF rules
+
+The WASM API exposes `inference: "none" | "rdfs"` and nothing else — no
+`advanced`, no `iterateRules`. Rules are native-CLI and Python only.
+
+The consequence is a genuine divergence, not just a missing feature. On a shapes
+graph whose SPARQL rule the native engine rejects at compile time, the native CLI
+exits 2 with an error while the WASM build returns `conforms = true` with zero
+results — verified directly against the same file. One says *"I could not check
+this"*, the other says *"this is fine"*, which is the distinction
+[Ch. 4](04-from-research-to-industry.md) argues everything depends on.
+
+*Mitigation:* treat browser and editor validation as validation-only. Run
+anything rule-bearing through the CLI or the Python binding
+([Ch. 11](11-rules-and-inference.md) §11.7).
+
+### SHACL validation cannot be scoped to a named graph
+
+Quad syntaxes parse, and then every named graph and the default graph are merged
+into one before validation — SHACL is defined over a single data graph. Verified:
+a TriG file with subjects spread across two named graphs and the default graph
+gives a report identical to the same triples flattened into one Turtle file.
+There is no graph-selection option and no per-graph reporting.
+
+*Mitigation:* named graphs remain the right call for provenance and lifecycle
+([Ch. 3](03-across-the-boundary.md)); for per-graph validation, extract the
+graph and validate it as its own document, which is what the
+`consistency-remote` manifest model does ([Ch. 13](13-operate-and-consume.md)).
+
 ### pySHACL ignores `sh:severity` inside SPARQL-based constraints
 
 A confirmed upstream bug: severity declared inside `sh:sparql` constraints is
 ignored and everything reports as `Violation`. The native Rust engine handles it
 correctly.
 
+Measured on the fixture, this is a 2.5× inflation of the Violation count:
+`--engine both` reports **5 Violations / 1 Warning** where `native+sparql`
+reports **2 Violations / 4 Warning** — same six findings, different severities.
+With `--fail-on Violation` that is the difference between a green build and a
+red one, on identical inputs.
+
 *Mitigation:* `--engine native+sparql` where the native engine is available.
 ([Ch. 7](07-the-toolchain.md))
 
 ---
 
-## 13.5 The cheapest thing you are not doing
+## 14.5 The cheapest thing you are not doing
 
 Worth isolating because it is nearly free and almost universally skipped:
 
@@ -204,7 +251,7 @@ the build; Warnings accumulate silently, and an accumulating Warning count is th
 observable signature of decay, visible in your own artefacts a year before anyone
 notices the model has drifted.
 
-**Trend the scoped runs, not the unscoped ones.** Per §13.4, the unscoped total
+**Trend the scoped runs, not the unscoped ones.** Per §14.4, the unscoped total
 drifts by a few findings between identical invocations, which would put noise
 into the series at roughly the magnitude of a year's real drift. The scoped runs
 are exactly reproducible, so any movement in them is signal. Conveniently, the
@@ -213,7 +260,7 @@ that wander — so a Warning trend survives either choice.
 
 ---
 
-## 13.6 Gaps that have closed
+## 14.6 Gaps that have closed
 
 Worth recording, because the picture is not static. Two limitations documented in
 an earlier draft of this material no longer hold:
@@ -231,7 +278,7 @@ row rather than being hard-coded in the query text was genuinely uncatchable —
 find. Passing `--output-data` now catches it, by comparing values that actually
 appeared in the produced graph against the declared taxonomy. Verified: the
 fixture's `MKT` department, absent from a taxonomy declaring only `ENG`/`QA`/
-`SALES`, is correctly reported ([Ch. 11](11-release-and-change.md)).
+`SALES`, is correctly reported ([Ch. 12](12-release-and-change.md)).
 
 The lesson generalises: **re-verify the gaps list against the tools you actually
 have.** A limitation copied forward from an old document is indistinguishable
@@ -240,14 +287,14 @@ something that was fixed.
 
 ---
 
-## 13.7 What to do about the real gaps
+## 14.7 What to do about the real gaps
 
 | Gap | Practical answer |
 |---|---|
 | Packaging and deployment | Standard container and Helm tooling. A triple store deploys like any stateful service |
 | Orchestration | Airflow, Argo Workflows or Prefect, calling these commands as steps |
 | Observability | Prometheus and Grafana — plus retained `full_results.csv` as the semantic-quality series |
-| APIs and knowledge products | Application development. Embed the SPARQL engine in the service ([Ch. 12](12-operate-and-consume.md)) |
+| APIs and knowledge products | Application development. Embed the SPARQL engine in the service ([Ch. 13](13-operate-and-consume.md)) |
 | Approval workflows, RBAC | Branch protection rules and your existing identity platform. The tools supply the evidence; the platform enforces the policy |
 | Incremental and streaming ingestion | Your pipeline's responsibility. These commands are batch |
 | Provenance capture | Named graphs at load time. Decide before your first production load |
@@ -258,5 +305,5 @@ that are not covered do not need specialist tooling.**
 
 ---
 
-| ← [12. Operate and consume](12-operate-and-consume.md) | [14. Adoption roadmap →](14-adoption-roadmap.md) |
+| ← [13. Operate and consume](13-operate-and-consume.md) | [15. Adoption roadmap →](15-adoption-roadmap.md) |
 |---|---|
