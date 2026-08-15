@@ -173,14 +173,18 @@ Findings, commands and outputs in Part III are real. Where a number appears
 (*"5 findings"*, *"confidence 100%"*) it is the number the tool printed on the
 run described, not an illustrative figure.
 
-**Two of those numbers are not reproducible, and both are labelled where they
-appear.** The *unscoped* check totals — around 294 for `checks`, around 363 for
-`data` — drift by a few findings between identical runs, traced to a single
-check ([Chapter 14](docs/14-coverage-and-gaps.md) §14.4). And a scoped `data`
-run reports 36 or 37 depending on whether the optional DL reasoner starts. Every
-figure the manual recommends acting on is exactly reproducible across repeated
-runs; the unstable ones are all in the position of *"here is what you should not
-do"*.
+**One number still moves, and it is labelled where it appears.** A scoped `data`
+run reports 36 or 37 depending on whether the optional DL reasoner starts —
+visible in the report itself, since `REA-021` present means it ran and `REA-022`
+means it did not. Everything else is now exactly reproducible across repeated
+runs.
+
+Earlier editions carried a longer caveat here, because the unscoped totals used
+to drift by a few findings between identical invocations. That was a defect in
+how findings were merged rather than anything about the ontology, and it is
+fixed ([Chapter 14](docs/14-coverage-and-gaps.md) §14.6). The episode is why
+[Chapter 9](docs/09-continuous-integration.md) §9.8 argues for asserting on
+check identifiers rather than counts.
 
 Grey boxes and dashed borders in diagrams mean **not covered by this
 toolchain**. They are a deliberate, load-bearing part of the notation — see
