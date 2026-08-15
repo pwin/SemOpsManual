@@ -40,7 +40,7 @@ and `consistency` and `pattern-consistency` use `--fail-on-misalignment` and
 
 ---
 
-## 9.2 The problem: close to 300 findings
+## 9.2 The problem: 301 findings
 
 Now run the full registry the obvious way — the whole 50-check catalogue against
 the ontology, with its real `org:` and FOAF imports resolved:
@@ -53,34 +53,26 @@ python -m ontology_suite checks \
 ```
 
 ```
-Findings: 294 total (48 Violation, 162 Warning, 84 Info)
+Findings: 301 total (55 Violation, 162 Warning, 84 Info)
 ```
 
-> **This number is not stable.** Five consecutive runs of exactly that command
-> gave 295, 292, 294, 290 and 294. The Warning count (162) and Info count (84) are identical every
-> time; the whole drift is in Violations, and diffing two divergent runs check
-> by check shows a single culprit — **`STR-007`** ("predicate has no declared
-> `rdf:type`") returned 13 findings on one run and 18 on another, accounting for
-> the entire difference. Its query does an undeduplicated `?s ?focus ?o` match
-> with no `DISTINCT`, over a merged graph containing hundreds of blank-node OWL
-> axioms from `org:` and FOAF, which is a plausible source of parse-order
-> sensitivity. The suite's own `ACME_ROBOTICS_WALKTHROUGH.md` acknowledges the
-> same effect: *"the Violation count varies by a few from run to run."*
+> **This number used to wander, and no longer does.** Five consecutive runs now
+> give 301 every time. Earlier editions of this manual reported it as "close to
+> 300" and documented a drift of 289–298, traced to `STR-007` returning anywhere
+> between 12 and 21 findings on identical input.
 >
-> Read the figure as **"close to 300"**. Nothing in this chapter's argument
-> depends on the exact value — and the two numbers the argument *does* depend
-> on, below, are exactly reproducible. Every unstable figure in this manual is
-> an unscoped total; every scoped one holds, with a single documented exception
-> in [Chapter 10](10-ingest-and-transform.md) that has a visible cause.
-
-> **Why `--engine sparql` is pinned in every command here.** It is not
-> decoration, and it is not the default. Every count in this chapter is a
-> `--engine sparql` count; the default `native+sparql` returns **6** where this
-> chapter reports 5, because `LOG-001` is implemented in both formulations and
-> both fire. Pin the flag in CI for the same reason you pin a dependency
-> version — see [Chapter 7](07-the-toolchain.md) §7.4 for the full comparison,
-> including the pySHACL mode that reports five Violations where the native
-> engine reports two.
+> The cause was not the check. Several registry `CONSTRUCT`s deliberately bind
+> **two** values per result — `LOG-004`'s two inverses, `LOG-006`/`007`'s domain
+> and range, `REA-001`'s two disjoint classes, `STR-007`'s subject and object —
+> while the merge step read a single one via `Graph.value()`, an arbitrary pick
+> among them, and then deduplicated on it. Which value came back varied per run,
+> so rows collapsed differently each time. Values are now sorted and joined, so
+> the key is order-independent and the report shows both values instead of half
+> the finding.
+>
+> The lesson outlived the bug, and [§9.8](#98-testing-the-gate-itself) is about
+> it: **a count is a fragile thing to assert on.** The set of check identifiers
+> reported was stable throughout, even while the totals moved.
 
 Every one of those findings is real. The suite is genuinely checking every
 triple in the merged graph — and the merged graph includes the entire W3C
@@ -91,7 +83,7 @@ Wire that into CI with `--fail-on Violation` and you have gated your build on
 around fifty violations, of which approximately zero are yours. What happens
 next is predictable and happens every time: the team triages it once, concludes
 the tool is noisy, and either switches the gate off or adds `|| true`. The
-handful of findings that were genuinely theirs are lost with the other ~290.
+five findings that were genuinely theirs are lost with the other 296.
 
 > **This is the single most common way a semantic quality gate dies.** Not
 > because the checks are wrong — they are not — but because
@@ -115,7 +107,7 @@ python -m ontology_suite checks \
   --engine sparql --out-dir out/checks_excl --fail-on never
 ```
 
-Nearly 300 findings become **9** — and unlike the unscoped figure, this one is
+301 findings become **9** — and this one has always been
 exact: three consecutive runs each gave `9 total (1 Violation, 8 Warning,
 0 Info)`. Enormously better, and still wrong. Here is the full breakdown:
 
@@ -142,7 +134,7 @@ findings are the same artefact — they are against `foaf:` itself and
 `foaf:Person`, terms whose labels live upstream in a file you just declined to
 read.
 
-**`--exclude-imports` traded 291 irrelevant findings for 4 false ones.** In some
+**`--exclude-imports` traded 296 irrelevant findings for 4 false ones.** In some
 ways that is a worse failure: irrelevant findings get ignored, but false
 findings get *investigated*, and an engineer who spends an afternoon proving that
 `acme:Employee` is fine learns exactly the same lesson about the tool's
@@ -180,16 +172,15 @@ same five check identifiers every time.
 Compare the three runs directly — all three are the same ontology, the same
 registry, the same engine:
 
-| Run | Findings | Genuinely yours | Upstream noise | False | Reproducible? |
-|---|---|---|---|---|---|
-| `--import-dir` alone | **~294** | 5 | ~289 | 0 | no — 290–295 |
-| `--exclude-imports` | **9** | 5 | 0 | **4** | yes, exactly |
-| `--own-namespace` | **5** | 5 | 0 | 0 | yes, exactly |
+| Run | Findings | Genuinely yours | Upstream noise | False |
+|---|---|---|---|---|
+| `--import-dir` alone | **301** | 5 | 296 | 0 |
+| `--exclude-imports` | **9** | 5 | 0 | **4** |
+| `--own-namespace` | **5** | 5 | 0 | 0 |
 
-The unstable row is the one you are being told *not* to use. Both candidates for
-your actual gate return the same answer every time — which is itself a
-requirement of a gate, and a reason to prefer either of them to the unscoped
-run regardless of the noise argument.
+All three are now exactly reproducible across repeated runs. That was not true
+of the first row until recently, and the fact that it is the row you are being
+told *not* to use was a happy accident rather than a design.
 
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{
@@ -199,7 +190,7 @@ run regardless of the noise argument.
 flowchart TD
     ONT["acme-org-v1.ttl<br/>+ org: + foaf:"]
 
-    A["<b>~294 findings</b><br/>imports resolved,<br/>unfiltered · drifts"]
+    A["<b>301 findings</b><br/>imports resolved,<br/>unfiltered"]
     B["<b>9 findings</b><br/>--exclude-imports<br/><i>4 of them false</i>"]
     C["<b>5 findings</b><br/>--own-namespace<br/><i>all genuine</i>"]
 
@@ -381,7 +372,73 @@ validate before submitting rather than after being rejected.
 > builds a miniature version of this chapter's fixture and walks the same
 > comparison, including the near-miss filter that returns an empty report.
 
-## 9.8 Maturity checkpoint
+## 9.8 Testing the gate itself
+
+Everything so far has used the gate to test an ontology. This section is the
+other direction: **how do you know the gate still works?**
+
+It is a real question, and the suite's own history answers it. Four times it has
+shipped a check that quietly matched nothing — `REA-001` on a bad symmetry
+assumption, `DAT-001` twice (a `UNION` of `FILTER`-only branches that matches
+nothing under rdflib, and a boolean branch made unreachable because rdflib
+rewrites the stored lexical form of an ill-typed boolean), and `EFF-002` with an
+unjoined `$this`. Each was found only by running it against real data.
+
+> **A check that cannot fire is worse than no check, because it looks like
+> coverage.** It sits in the registry, it appears in the catalogue, it never
+> produces a finding, and everyone concludes that part of the model is clean.
+
+### The pattern: a fixture per error category
+
+The practice that catches this is a companion repository of **deliberately
+broken ontologies**, each isolating one category of error, each asserting the
+check identifiers it must trigger:
+
+| Fixture | Seeded error | Must report |
+|---|---|---|
+| `01-clean` | *(none — control)* | no Violation, no Warning |
+| `03-disjoint-classes` | class disjoint with its own superclass | `LOG-001`, `REA-001`, `REA-020` |
+| `06-datatype-conformance` | ill-formed `xsd:date`/`integer`/`boolean` | `DAT-001`, `CNF-003`, `CNF-004` |
+| `07-naming-style` | `snake_case` class, untagged label, deprecated term | `STY-001`, `STY-002`, `STY-003`, `QUA-001` |
+| `09-profile-violations` | `unionOf`, `complementOf`, `minCardinality 4` | `REA-010`, `REA-011`, `REA-012` |
+
+Three details make it work, and all three are worth copying.
+
+**Assert check identifiers, not counts.** This is the whole trick. A regression
+then shows up as *"`LOG-004` no longer fires"* — a named, actionable failure —
+rather than as *"expected 85 findings, got 83"*, which tells you nothing about
+what broke. It also survives exactly the kind of churn this manual has been
+documenting: while the unscoped total was drifting between 289 and 298, the
+**set of check identifiers never moved**, so a suite built on identifiers stayed
+green and meaningful throughout.
+
+**Keep a clean control.** One fixture with no seeded error at all, declaring its
+labels, domains, ranges and metadata properly, producing **no Violation and no
+Warning**. Without it you cannot attribute findings in the other fixtures to
+their seeded errors rather than to background noise — and the first draft of
+that control found a real inconsistency, `STR-002` flagging `skos:prefLabel`
+where its broader sibling `STR-007` stayed quiet about the same predicate.
+
+**Mark the error in the fixture.** Every seeded fault carries an `# ERROR:`
+comment naming the check it should trigger, so the fixture documents its own
+intent and a reader can tell a deliberate fault from an accidental one.
+
+### It pays for itself
+
+That companion repository is what surfaced the merge nondeterminism in
+[§9.2](#92-the-problem-301-findings), the severity misplacement in
+[Chapter 7](07-the-toolchain.md) §7.4, and the unreachable `DAT-001` branch —
+all of which are now fixed. Thirteen fixtures asserting 35 of the registry's 50
+checks was enough to find four real defects in the tool they were testing.
+
+The general form, for your own house rules
+([Chapter 8](08-model-and-validate.md)): every check you write gets a fixture
+that makes it fire, and the suite asserts it fires. Otherwise you find out it
+never did on the day it mattered.
+
+---
+
+## 9.9 Maturity checkpoint
 
 A team running these gates on every pull request, with reports retained, is at
 **maturity Level 3 — Automated Semantic Delivery** for the validation dimension:

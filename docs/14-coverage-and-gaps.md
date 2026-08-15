@@ -63,7 +63,7 @@ at an assertion. The decision stays human, and should.
 | 2 | Automated Deployment & Packaging | **No** | — |
 | 3 | Data Integration & ETL Orchestration | **Partial** | [Ch. 10](10-ingest-and-transform.md) — no orchestration |
 | 4 | Reasoning & Inference Operations | **Partial** | [Ch. 11](11-rules-and-inference.md) — SHACL-AF rules, RDFS closure, rule versioning and regression tests yes; **incremental** reasoning and performance monitoring no |
-| 5 | Knowledge Graph Observability | **No** | See [§14.5](#135-the-cheapest-thing-you-are-not-doing) |
+| 5 | Knowledge Graph Observability | **No** | See [§14.5](#145-the-cheapest-thing-you-are-not-doing) |
 | 6 | Semantic Governance & Access Control | **Partial** | Evidence yes; RBAC and workflow no |
 | 7 | Semantic CI/CD Pipelines | **Partial** | Linting, SHACL, docs yes; packaging and deployment no |
 | 8 | Tooling Integration | **Partial** | Validator, reasoner, CI yes; triple store, K8s, monitoring no |
@@ -158,53 +158,6 @@ instead of reporting success — the pattern
 [Chapter 4](04-from-research-to-industry.md) recommends for every
 research-lineage dependency.
 
-### `STR-007` makes the unscoped run non-reproducible
-
-Five consecutive identical `checks --import-dir` runs over the fixture returned
-290, 292, 294, 294 and 295 findings. Warning (162) and Info (84) counts were
-identical every time; the whole drift sat in Violations, and diffing two
-divergent runs check by check found a single contributor — `STR-007`
-("predicate has no declared `rdf:type`") returned 13 on one run and 18 on
-another, accounting for the entire difference.
-
-`STR-007`'s query does an undeduplicated `?s ?focus ?o` match with no
-`DISTINCT`, over a merged graph carrying hundreds of blank-node OWL axioms from
-`org:` and FOAF — a plausible source of parse-order sensitivity, offered as a
-lead rather than a diagnosis. The suite's own walkthrough documents the effect
-without fully explaining it either.
-
-*Mitigation:* none needed for the recommended workflow — every scoped run in
-this manual is exactly reproducible across repeated invocations. Do not build a
-threshold, trend or regression test on the unscoped total.
-([Ch. 9](09-continuous-integration.md))
-
-### `--engine` changes the finding count, and one check is double-reported
-
-The four engine modes do not agree, on the same ontology with the same registry
-and the same `--own-namespace` filter: `native` returns 4, `sparql` 5,
-`native+sparql` 6, `both` 6. `native` alone misses `QUA-004`, which exists only
-as a SPARQL check; the two union modes report `LOG-001` twice, once from each
-formulation, for the same focus node and value.
-
-*Mitigation:* pin `--engine` in CI, and deduplicate on
-(check_id, focus_node, value) when counting findings programmatically. Full
-comparison in [Ch. 7](07-the-toolchain.md) §7.4.
-
-### Rules do not fire in the editor
-
-Not an engine limitation any more — a deliberate choice in the extension. The
-WebAssembly build gained `inference: "rules"` and `"rules-iterated"` at 0.1.8,
-and the extension bundles that engine, but its runner asks for `"none"`: the
-position being that inference belongs to the reasoner tier, and a SHACL finding
-should be about what the document says rather than what a second pass added
-underneath it.
-
-*Consequence:* if your shapes carry `sh:rule`, the editor's report and CI's
-report are answering different questions. Expect them to differ.
-
-*Mitigation:* run anything rule-bearing through the CLI or the Python binding
-([Ch. 11](11-rules-and-inference.md) §11.7).
-
 ### SHACL validation cannot be scoped to a named graph
 
 Quad syntaxes parse, and then every named graph and the default graph are merged
@@ -218,20 +171,35 @@ There is no graph-selection option and no per-graph reporting.
 graph and validate it as its own document, which is what the
 `consistency-remote` manifest model does ([Ch. 13](13-operate-and-consume.md)).
 
-### pySHACL ignores `sh:severity` inside SPARQL-based constraints
+### `sh:severity` must sit on the shape, not inside `sh:sparql`
 
-A confirmed upstream bug: severity declared inside `sh:sparql` constraints is
-ignored and everything reports as `Violation`. The native Rust engine handles it
-correctly.
+SHACL defines `sh:severity` as a property of the **shape**. Declared inside a
+nested `sh:sparql [ … ]` constraint block it is in the wrong place: pyshacl
+ignores it there and falls back to the spec default of `sh:Violation`, while the
+native engine reads it anyway. Two engines, two answers, same file.
 
-Measured on the fixture, this is a 2.5× inflation of the Violation count:
-`--engine both` reports **5 Violations / 1 Warning** where `native+sparql`
-reports **2 Violations / 4 Warning** — same six findings, different severities.
-With `--fail-on Violation` that is the difference between a green build and a
-red one, on identical inputs.
+The suite's own shapes were authored that way, and the effect was not subtle —
+`--engine both` reported 5 Violations where `native+sparql` reported 2, so with
+`--fail-on Violation` a class named `person_record` failed CI exactly as hard as
+a logical contradiction. Fixed by moving the declaration onto the enclosing
+shape; both engines now match `registry.json`.
 
-*Mitigation:* `--engine native+sparql` where the native engine is available.
-([Ch. 7](07-the-toolchain.md))
+*Mitigation for your own shapes:* put `sh:severity` on the shape. If a gate is
+failing on something you declared `Warning`, check the placement before blaming
+the engine. ([Ch. 7](07-the-toolchain.md) §7.4)
+
+### `STR-002` and `STR-007` disagreed about external vocabularies
+
+`STR-002` exempted only `rdf:`, `rdfs:` and `owl:` by their individual namespace
+IRIs, while seven sibling checks exempt `http://www.w3.org/` wholesale — so using
+`skos:prefLabel` without redeclaring SKOS locally produced a Violation-severity
+"undefined property", while `STR-007`, the strictly broader check, stayed quiet
+about the same predicate on the same graph. Now consistent.
+
+*The general lesson:* two checks in the same registry that disagree with each
+other are worse than either rule alone, because the reader cannot tell which is
+intended. Whichever policy you pick — "declare every external term you use" is
+defensible — apply it uniformly.
 
 ---
 
@@ -261,7 +229,7 @@ that wander — so a Warning trend survives either choice.
 
 ## 14.6 Gaps that have closed
 
-Worth recording, because the picture is not static. Four limitations documented in
+Worth recording, because the picture is not static. Seven limitations documented in
 earlier drafts of this material no longer hold:
 
 **Filtering findings to your own namespace.** Previously there was no way to say
@@ -293,6 +261,25 @@ shapes-graph-level prefix declaration used to be rejected at compile time, takin
 the whole shapes graph with it — including for callers who never asked for rules.
 Rule compile errors are now held on the rule and raised only if it would have
 fired.
+
+**The unscoped run is reproducible.** Five identical invocations now return 301
+findings every time. The drift documented at length in earlier editions — 289 to
+298, traced to `STR-007` — was never in the check: several registry `CONSTRUCT`s
+bind two values per result, and the merge step read an arbitrary one of them and
+deduplicated on it. Values are sorted and joined now, and the report shows both
+instead of half the finding ([Ch. 9](09-continuous-integration.md) §9.2).
+
+**The engine modes agree.** `sparql`, `native+sparql` and `both` now return the
+same 5 scoped findings at the same severities; `LOG-001` is no longer reported
+twice. Only `--engine native` still differs, and for a stated reason — it runs
+the SHACL shapes only, and `QUA-004` exists solely as a SPARQL check.
+
+**`DAT-001` can detect an invalid `xsd:boolean`.** It could not: the check tests
+the stored lexical form with a regex, and rdflib rewrites the lexical form of an
+ill-typed boolean, so `"yes"^^xsd:boolean` is stored as `'false'` and matches.
+The branch was unreachable. A Python-side pass over `Literal.ill_typed` now
+supplements the two portable formulations, which also catches value-space
+violations no lexical regex can express, such as `"2021-02-30"^^xsd:date`.
 
 The lesson generalises, and this edition is its own evidence: **re-verify the
 gaps list against the tools you actually have.** Two of the four above were

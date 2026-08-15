@@ -157,12 +157,11 @@ python -m ontology_suite data out/triplify/employees.ttl \
 ```
 
 ```
-Findings: 363 total (59 Violation, 185 Warning, 119 Info)
+Findings: 372 total (68 Violation, 185 Warning, 119 Info)
 ```
 
-Around three hundred and sixty — the same run-to-run drift as
-[Chapter 9](09-continuous-integration.md)'s unscoped figure, and the same
-lesson applies identically. Scope it:
+Around three hundred and seventy, and the same lesson as
+[Chapter 9](09-continuous-integration.md) applies identically. Scope it:
 
 ```bash
 python -m ontology_suite data out/triplify/employees.ttl \

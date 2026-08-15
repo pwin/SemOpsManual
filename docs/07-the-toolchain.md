@@ -178,45 +178,55 @@ And the editor-side equivalents, by VS Code command:
 `checks`, `data` and `run` accept `--engine`. It defaults to `native+sparql`
 when the optional Rust SHACL engine is installed, and `both` (pyshacl) otherwise.
 
-Most documentation treats this as a speed switch. It is not: **it changes how
-many findings you get and what severity they carry.** All four modes, run
-against this manual's fixture with `--own-namespace`, same ontology, same
-registry:
+Most documentation treats this as a speed switch. It is mostly that now, but it
+was not always, and the history is instructive. All four modes, run against this
+manual's fixture with `--own-namespace`, same ontology, same registry:
 
-| `--engine` | Findings | Severity split | What happened |
+| `--engine` | Findings | Severity split | What it runs |
 |---|---|---|---|
-| `native` | **4** | 1 V / 3 W | Runs the SHACL shapes only. **Misses `QUA-004`**, which exists only as a SPARQL check |
-| `sparql` | **5** | 1 V / 4 W | Runs the `.rq` checks only. The numbers used throughout this manual |
-| `native+sparql` | **6** | 2 V / 4 W | Union of both. Correct severities — and `LOG-001` twice |
-| `both` | **6** | **5 V** / 1 W | pyshacl + SPARQL. Same findings, **wrong severities** |
+| `native` | **4** | 1 V / 3 W | The SHACL shapes only. **Misses `QUA-004`**, which exists only as a SPARQL check |
+| `sparql` | **5** | 1 V / 4 W | The `.rq` checks only. The numbers used throughout this manual |
+| `native+sparql` | **5** | 1 V / 4 W | Both, deduplicated |
+| `both` | **5** | 1 V / 4 W | pyshacl + SPARQL, deduplicated |
 
-Three things follow, and each matters more than the speed difference.
+Three of those four now agree exactly. One thing still follows, and one piece of
+history is worth carrying.
 
-**Neither half is complete alone.** The registry is implemented in two
+**Neither formulation is complete alone.** The registry is implemented in two
 formulations — 39 SPARQL `.rq` files and 6 SHACL shape files — and they do not
 cover the same checks. `--engine native` silently misses `QUA-004` because that
 check exists only as SPARQL. Do not use a single-formulation mode expecting full
-coverage.
+coverage; if you want one, `sparql` is the one with the broader registry behind
+it.
 
-**The union double-reports.** Under `native+sparql`, `LOG-001` appears twice for
-the same focus node and the same value — once with `sources: shacl`, once with
-`sources: sparql` — because the contradiction is implemented in both
-formulations and nothing deduplicates them. The two rows carry different message
-wording, so it reads like two findings. It is one. Deduplicate on
-(check_id, focus_node, value) if you are counting findings programmatically.
+**The severity lesson is about shape authoring, not about engines.** Until
+recently `--engine both` reported **5 Violations where `native+sparql` reported
+2** on identical findings, and this manual — along with a long comment in the
+suite's own source — attributed it to a pyshacl limitation. That was half right.
+pyshacl does ignore `sh:severity` in the position it was written, but the
+position was wrong: the shapes declared it inside each nested
+`sh:sparql [ … ]` constraint block, where SHACL defines it as a property of the
+**enclosing shape**. The native engine read it there anyway; pyshacl fell back to
+the spec default of `sh:Violation`. Moving the declaration onto the shape made
+both engines agree, and both now match `registry.json` exactly.
 
-**The pySHACL severity bug is visible right here.** Compare the last two rows:
-identical findings, but `both` reports **five Violations where `native+sparql`
-reports two**. pySHACL ignores `sh:severity` declared inside `sh:sparql`
-SPARQL-based constraints and reports `Violation` regardless of what the shape
-says; the native engine honours it. If your CI is failing on checks you
-deliberately declared as `Warning`, this is why — and with `--fail-on Violation`
-it is the difference between a green build and a red one.
+> The consequence while it lasted is worth remembering, because it is the
+> failure mode a severity mistake always produces: with `--fail-on Violation`, a
+> class named `person_record` failed CI exactly as hard as a logical
+> contradiction. **If your gate is failing on things you deliberately declared
+> `Warning`, check where `sh:severity` is attached before blaming the engine.**
 
-> **Pin `--engine` in CI.** It is the one flag whose default varies with what
-> happens to be installed on the machine, and it changes both the count and the
-> pass/fail outcome. A commit that passes on a developer's laptop and fails in
-> CI, with no code difference, is usually this.
+There is a governance postscript, and it is the more transferable half. Because
+the registry is shared, the same misplacement existed in the extension — which
+had built a workaround for it, treating correct engine behaviour as an engine
+bug. When the fix landed in the suite, the extension did not adopt the findings
+on trust: it assessed each against its own stack, concluded two did not apply
+and one applied in a different form, and then deleted its workaround.
+
+> **Shared artefacts require propagation with independent assessment, not
+> synchronisation.** A fix that is right for one runtime is a *hypothesis* about
+> the other. This is [Chapter 3](03-across-the-boundary.md)'s cross-boundary
+> problem in miniature, inside one organisation.
 
 The speed difference is real too — the suite's architecture documentation
 records benchmarks up to roughly 665× on a real-sized ontology, and the engine's
