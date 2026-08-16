@@ -281,7 +281,9 @@ description and — notably — a **remediation** string:
   "default_severity": "Violation",
   "title": "Employee missing an employee ID",
   "description": "An acme:Employee individual has no acme:hasEmployeeId value -- every employee record must be traceable to Acme's HR system of record.",
-  "remediation": "Add acme:hasEmployeeId \"ACM-NNNN\" to the employee, or fix the triplify query/CSV mapping that should have set it."
+  "remediation": "Add acme:hasEmployeeId \"ACM-NNNN\" to the employee, or fix the triplify query/CSV mapping that should have set it.",
+  "cucumber_feature": "Acme HR Data Quality",
+  "cucumber_scenario": "Every employee record carries a traceable employee ID"
 }
 ```
 
@@ -300,6 +302,13 @@ directory as well. Find it with:
 ```bash
 python -c "from ontology_suite import config; print(config.PACKAGE_RESOURCES)"
 ```
+
+**Fill in the cucumber fields.** They are not decoration: every run writes a
+`cucumber.json` in which each check becomes a scenario with a pass/fail status,
+which most CI systems render natively alongside unit tests
+([Chapter 9](09-continuous-integration.md) §9.5). A house rule with those two
+fields blank still works, and still appears — as an anonymous row nobody outside
+the team can interpret.
 
 **The remediation field is the deliverable.** A rule that says "ACM-001 failed"
 generates a ticket. A rule that says "add `acme:hasEmployeeId "ACM-NNNN"` to the

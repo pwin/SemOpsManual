@@ -309,9 +309,39 @@ want it: a build whose result depends on a third party's uptime is not
 reproducible, and an upstream vocabulary that changes silently changes your gate
 silently.
 
-**Upload the reports as artefacts.** `report.html` is the thing a reviewer
-actually reads; `full_results.csv` is the thing you diff between runs. Both are
-written on every run regardless of exit code.
+**Upload the reports as artefacts.** Every run writes rather more than the two
+files this manual has been quoting, and the extras are the ones that reach
+people who do not read CSVs:
+
+| File | Who it is for |
+|---|---|
+| `report.html` | A reviewer, reading the findings |
+| `full_results.csv` | Diffing between runs; the raw record |
+| `summary_by_check.md`, `summary_by_category.md` | A pull-request comment, or a status page |
+| `top_offenders.md` | "What should we fix first?" |
+| `cucumber.json` | Any CI system that already renders BDD results |
+| `features/`, `plots/` | The generated feature files and charts behind the above |
+
+`cucumber.json` is the one worth knowing about. Each check becomes a scenario
+under its category, with `Given`/`Then` steps and a pass/fail status:
+
+```
+Feature:  Structural Integrity
+Scenario: [STR-001] Every rdf:type used on an instance resolves to a
+          declared class
+  Given the combined ontology and data graph        passed
+  Then  Every rdf:type used on an instance …        passed
+```
+
+That format is understood by essentially every CI system's test reporting, which
+means semantic quality can appear on the same dashboard as unit tests without
+anyone writing an integration — and, per
+[Chapter 2](02-people-and-cognition.md), it renders findings in a form a
+non-specialist can read. The `cucumber_feature` and `cucumber_scenario` fields
+in a registry entry ([Chapter 8](08-model-and-validate.md)) are what populate it,
+which is a reason to fill them in on your own house rules.
+
+All of these are written on every run regardless of exit code.
 
 **A MAJOR bump should not block the build.** It should *demand a human*. The
 job above records it and continues; the enforcement belongs in a branch
@@ -421,7 +451,67 @@ where its broader sibling `STR-007` stayed quiet about the same predicate.
 
 **Mark the error in the fixture.** Every seeded fault carries an `# ERROR:`
 comment naming the check it should trigger, so the fixture documents its own
-intent and a reader can tell a deliberate fault from an accidental one.
+intent and a reader can tell a deliberate fault from an accidental one:
+
+```turtle
+# ERROR: class local name is snake_case, not UpperCamelCase -> STY-001
+# ERROR: no rdfs:label / skos:prefLabel at all               -> QUA-001
+:person_record a owl:Class ; rdfs:subClassOf owl:Thing .
+```
+
+### Four assertions, not one
+
+"Did the expected checks fire" is the obvious test and the weakest of the four
+worth writing. The full set:
+
+| Assertion | Guards against |
+|---|---|
+| **Expected ids fired** | A check silently ceasing to work |
+| **Forbidden ids did *not* fire** | False positives — a check becoming over-eager |
+| **Severity ceiling** | A finding quietly escalating; the clean control must produce nothing above `Warning` |
+| **Optional-reasoner ids** — asserted only when it ran | A flaky optional dependency turning into a red build |
+
+The second is the one teams skip, and it is what caught `STR-002` flagging
+`skos:prefLabel` where its broader sibling stayed quiet. **A check that starts
+firing when it should not is as much a regression as one that stops firing** —
+and it is the more damaging of the two, because it erodes trust in every other
+finding in the report.
+
+The fourth deserves its own note, because it is
+[Chapter 4](04-from-research-to-industry.md)'s argument made executable. Findings
+that only a full DL reasoner can produce — `REA-020`, `REA-021` — are asserted
+**only when that reasoner actually ran**, and reported as skipped otherwise. An
+optional dependency that fails a build when it is absent is not optional; one
+that silently reduces coverage is worse. Skipping, visibly, is the third option
+and the right one.
+
+### Two practical traps
+
+**Test against the library, not the report.** The harness imports
+`ontology_suite.pipeline` and compares structured result rows rather than
+scraping `report.html`. Report formats change; a test suite coupled to their
+text breaks for reasons that have nothing to do with the ontology.
+
+**A non-zero exit from a broken fixture is success.** The CLI exits 1 whenever a
+Violation is found, so every deliberately-broken fixture exits 1 — that is the
+fixture working. Wire that into CI naively and your fixture suite fails
+permanently. Either assert on the findings rather than the exit code, or pass
+`--fail-on never` when the exit code is not what you are testing.
+
+### The stage decides which checks can fire at all
+
+Worth knowing before you conclude a check is broken: the three stages expose
+different layers, and a check cannot fire in a stage that never runs it.
+
+| Stage | What runs | What cannot fire |
+|---|---|---|
+| `checks --ontology` | Registry SHACL + SPARQL over the ontology alone | Conformance (`CNF-*`), reasoning |
+| `data <file> --ontology` | The full pass — registry, ontology-vs-data conformance, `owlrl` closure and HermiT | Nothing, but it is the slowest |
+| `ontology --ontology` | The as-authored evaluation | Everything except profile membership — **and that only with `--profile`** |
+
+`REA-010`/`011`/`012` — the OWL2 profile checks — are the sharp case: they fire
+only from `ontology`, and only when `--profile` is passed. A team that runs
+`checks` and concludes their ontology is EL-clean has not tested that at all.
 
 ### It pays for itself
 
