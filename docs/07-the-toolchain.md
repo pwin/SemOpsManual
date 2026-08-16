@@ -312,6 +312,16 @@ and
 [`TUTORIAL.md`](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/main/TUTORIAL.md)
 do the same for the extension.
 
+There is also a third repository worth knowing about, though you do not install
+it: [`consolidated-ontology-quality-suite-python-testing`](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing)
+holds thirteen deliberately broken OWL2 ontologies and a harness asserting which
+registry checks each one must trigger. Its
+[`COMMANDS.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/main/COMMANDS.md)
+gives every fixture as both a harness invocation and the equivalent bare CLI
+command, which makes it a useful worked reference for the suite in general.
+[Chapter 9](09-continuous-integration.md) §9.8 is about the practice it
+demonstrates.
+
 ---
 
 | ← [6. Stages and stories](06-stages-and-stories.md) | [8. Model and validate →](08-model-and-validate.md) |

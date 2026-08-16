@@ -422,7 +422,11 @@ unjoined `$this`. Each was found only by running it against real data.
 
 The practice that catches this is a companion repository of **deliberately
 broken ontologies**, each isolating one category of error, each asserting the
-check identifiers it must trigger:
+check identifiers it must trigger. The one this section describes is real and
+public — [`consolidated-ontology-quality-suite-python-testing`](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing) — so the
+tables below can be read against
+[the fixtures themselves](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/tree/main/ontologies) and
+[the harness](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/main/detect.py):
 
 | Fixture | Seeded error | Must report |
 |---|---|---|
@@ -515,11 +519,18 @@ only from `ontology`, and only when `--profile` is passed. A team that runs
 
 ### It pays for itself
 
-That companion repository is what surfaced the merge nondeterminism in
+That [companion repository](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing) is what surfaced the merge nondeterminism in
 [§9.2](#92-the-problem-301-findings), the severity misplacement in
 [Chapter 7](07-the-toolchain.md) §7.4, and the unreachable `DAT-001` branch —
 all of which are now fixed. Thirteen fixtures asserting 35 of the registry's 50
 checks was enough to find four real defects in the tool they were testing.
+
+Its [`COMMANDS.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/main/COMMANDS.md) gives every fixture as both a
+harness invocation and the equivalent bare CLI command, which makes it usable as
+a worked reference for the suite generally, not only as a test suite. The two
+[`experiments/`](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/tree/main/experiments) scripts are worth a look as well:
+each isolates one of the defects above to about thirty lines, which is a good
+model for reporting a tool bug you want fixed rather than argued about.
 
 The general form, for your own house rules
 ([Chapter 8](08-model-and-validate.md)): every check you write gets a fixture
