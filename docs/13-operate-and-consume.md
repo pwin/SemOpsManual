@@ -69,23 +69,75 @@ from a named graph back to the transformation query that produced it, nor from a
 data graph to the ontology graph it is supposed to conform to. The manifest is
 where a project records that binding explicitly:
 
+It is a JSON file, and short enough to write by hand:
+
+```json
+{
+  "graphs": [
+    {
+      "graph_uri": "https://acme.example.org/graph/ontology/2.0.0",
+      "role": "ontology"
+    },
+    {
+      "graph_uri": "https://acme.example.org/graph/triplified/employees",
+      "role": "triplified_data",
+      "source_tarql": "queries/employees.rq",
+      "ontology_graph_uri": "https://acme.example.org/graph/ontology/2.0.0",
+      "notes": "nightly load from the HR extract"
+    }
+  ]
+}
+```
+
+Five fields, of which two are optional:
+
+| Field | Applies to | Meaning |
+|---|---|---|
+| `graph_uri` | both | The named graph's URI **as the store knows it** |
+| `role` | both | Exactly `"ontology"` or `"triplified_data"` — no other value means anything |
+| `source_tarql` | data only | Local path to the query that produced this graph |
+| `ontology_graph_uri` | data only | Which `"ontology"` graph this data must conform to |
+| `notes` | both | Free text; ignored by the tooling, read by humans |
+
+Or build it in Python, which is worth doing if the URIs come from somewhere
+programmatic:
+
 ```python
 from ontology_suite.remote.manifest import GraphManifest, GraphBinding
 
-manifest = GraphManifest(bindings=[
-    GraphBinding(
-        graph_uri="https://acme.example.org/graph/ontology/2.0.0",
-        role="ontology",
-    ),
-    GraphBinding(
-        graph_uri="https://acme.example.org/graph/triplified/employees",
-        role="triplified_data",
-        source_tarql="queries/employees.rq",
-        ontology_graph_uri="https://acme.example.org/graph/ontology/2.0.0",
-    ),
-])
-manifest.save("graphs.json")
+GraphManifest(bindings=[
+    GraphBinding(graph_uri="https://acme.example.org/graph/ontology/2.0.0",
+                 role="ontology"),
+    GraphBinding(graph_uri="https://acme.example.org/graph/triplified/employees",
+                 role="triplified_data",
+                 source_tarql="queries/employees.rq",
+                 ontology_graph_uri="https://acme.example.org/graph/ontology/2.0.0"),
+]).save("graphs.json")
 ```
+
+### Finding out what your graph URIs actually are
+
+The manifest must use the store's own URIs, not what you think you loaded. Ask
+the endpoint:
+
+```sparql
+SELECT ?g (COUNT(*) AS ?triples)
+WHERE { GRAPH ?g { ?s ?p ?o } }
+GROUP BY ?g ORDER BY DESC(?triples)
+```
+
+Run that first, every time, against a store you did not load yourself. A graph
+URI that differs by a trailing slash is the most common reason a three-way check
+reports nothing at all.
+
+> **`role` is not validated, and a typo costs you the whole check.** A manifest
+> saying `"triplified-data"` — hyphen instead of underscore — loads without
+> complaint, contributes zero data bindings, and the run completes successfully
+> having compared nothing. Verified. It is the same silent-zero shape as the
+> `--own-namespace` near-miss in
+> [Chapter 9](09-continuous-integration.md) §9.4, and the same defence applies:
+> confirm the check can fail before trusting that it passed. Point it at a graph
+> you know is wrong, once, and watch it complain.
 
 That structure enables a genuine **three-way check**: the live data graph, the
 ontology graph it claims to conform to, and the local query file that produced

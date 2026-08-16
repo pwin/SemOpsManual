@@ -322,6 +322,77 @@ publishing to supply-chain partners. A registry directory is a distributable
 thing: a partner can run your rules before submitting, instead of discovering
 them through rejection.
 
+### The contract a check has to satisfy
+
+`ACM-001` above is a `CONSTRUCT` that builds a `sh:ValidationResult`. That is the
+whole interface, and four properties are not optional:
+
+| Property | Why |
+|---|---|
+| `sh:resultSeverity` | Decides whether `--fail-on Violation` stops the build |
+| `sh:focusNode` | What the finding is *about*; also what `--own-namespace` filters on |
+| `sh:resultMessage` | What a human reads ([Chapter 2](02-people-and-cognition.md)) |
+| `sh:sourceConstraintComponent` | The check id, as `oq:<ID>` — without it the finding cannot be attributed |
+
+Add `sh:resultPath` and `sh:value` when there is a natural predicate or offending
+value. **Binding several of either on one result is fine and is often the honest
+thing to do** — a check complaining about two inverse properties should name
+both. They are sorted and joined, so the finding renders and deduplicates
+identically however the engine happens to order them. (It did not always: an
+arbitrary single pick was the cause of the wandering counts in
+[Chapter 9](09-continuous-integration.md) §9.2.)
+
+Queries must be self-contained — their own `PREFIX` declarations, no external
+state — because the runner discovers them by walking the directory and executes
+each on its own.
+
+### Writing the SHACL half too
+
+Most checks in the registry exist **twice**: once as a `.rq` file and once as a
+shape in `shapes/<category>.ttl`. That is what makes `--engine native+sparql`
+corroborate rather than merely combine, and it is worth copying for a check you
+intend to rely on.
+
+Prefer native SHACL core constraints — `sh:minCount`, `sh:pattern`, `sh:or`,
+`sh:disjoint`, property paths — where the check maps onto them cleanly, and fall
+back to `sh:sparql` with a `sh:select` mirroring the `.rq` file's `WHERE` clause
+where it does not. Name the shape `oq:<ID>` and nothing further is needed to
+attribute it.
+
+> **Put `sh:severity` on the shape, never inside the `sh:sparql [ … ]` block.**
+> SHACL defines it as a property of the shape. Inside the nested constraint it
+> parses fine, and is then read by some processors and ignored by others —
+> pyshacl substitutes `sh:Violation` — so the same shape yields different
+> severities under different `--engine` values. This is not hypothetical: the
+> suite's own shapes were authored that way, and the result was a class named
+> `person_record` failing CI exactly as hard as a logical contradiction
+> ([Chapter 7](07-the-toolchain.md) §7.4).
+>
+> If both formulations exist, they must also agree on `sh:resultPath` and
+> `sh:value`, or the same finding arrives under two dedup keys and is reported
+> twice.
+
+### When a graph pattern will not do it
+
+Some conditions cannot be expressed as a pattern over a single merged graph —
+anything needing arithmetic across the whole graph, or a library call. The suite
+supports a third form, a **native Python check**, for exactly those. It is the
+right escape hatch and the wrong default: a SPARQL check is portable across both
+engines and readable by anyone who knows SPARQL, and a Python one is neither.
+
+### Prove it fires before you trust it
+
+This is the step that gets skipped, and
+[Chapter 9](09-continuous-integration.md) §9.8 is the full argument for it. The
+short version: **a check that matches nothing looks exactly like a clean
+ontology.** The suite has shipped four checks that quietly matched nothing —
+including one whose `FILTER` assumed `owl:disjointWith` is symmetrised by
+reasoning, which it is not.
+
+Write a fixture that the check *must* flag, assert it fires, and keep it. The
+suite's own `docs/EXTENDING.md` has the complete authoring walkthrough,
+including registering a new category.
+
 ---
 
 ## 8.5 The loop, drawn
