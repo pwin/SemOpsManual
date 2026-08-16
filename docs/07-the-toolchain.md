@@ -11,7 +11,7 @@ Two tools, and one architectural idea that matters more than either of them.
 | | **Ontology Quality Suite** | **Ontology Development Suite** |
 |---|---|---|
 | Repository | [pwin/consolidated-ontology-quality-suite-python](https://github.com/pwin/consolidated-ontology-quality-suite-python) | [pwin/consolidated-ontology-quality-suite-webapp](https://github.com/pwin/consolidated-ontology-quality-suite-webapp) |
-| Distribution | [PyPI: `ontology-quality-suite`](https://pypi.org/project/ontology-quality-suite/) | `.vsix` from the repository |
+| Distribution | [PyPI: `ontology-quality-suite`](https://pypi.org/project/ontology-quality-suite/) | [`.vsix` from the latest release](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/releases/latest) |
 | Form | Python CLI + importable library | VS Code extension |
 | Runtime | Python; optional Java for DL reasoning | In-process WASM/JS — no Python or Java needed |
 | Belongs in | CI, release control, pipelines, scheduled jobs | The author's editor, before anything is committed |
@@ -116,9 +116,12 @@ commands were actually run while writing it.
 
 ### The VS Code extension
 
-[Source](https://github.com/pwin/consolidated-ontology-quality-suite-webapp) —
-install the `.vsix` from the repository. It is not on the Marketplace, so
-install it with *Extensions: Install from VSIX…* in the command palette, or:
+[Source](https://github.com/pwin/consolidated-ontology-quality-suite-webapp) ·
+[latest release](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/releases/latest)
+
+It is not on the Marketplace, so download the `.vsix` from the release — not
+from the repository tree, which carries older builds alongside the current one —
+and install it with *Extensions: Install from VSIX…* in the command palette, or:
 
 ```bash
 code --install-extension ontology-dev-suite-<version>.vsix
