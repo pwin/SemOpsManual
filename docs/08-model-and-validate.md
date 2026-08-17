@@ -65,9 +65,15 @@ says so.
 
 ### Live diagnostics, including one SHACL cannot give you
 
-*Run Local Checks* evaluates the registry's 39 SPARQL and 6 SHACL-SPARQL checks,
-plus OWL2-RL-style inference and contradiction detection, into the standard
-Problems panel.
+*Run Local Checks* evaluates the registry's 39 SPARQL and 6 SHACL-SPARQL check
+files — the same 50 checks the CLI runs — plus OWL2-RL-style inference and
+contradiction detection, into the standard Problems panel.
+
+It also runs **four checks the CLI does not have**: `VOC-001` below, and
+`MDL-001`/`002`/`003`, three gist-informed modelling-guidance checks
+([Chapter 7](07-the-toolchain.md) §7.1). Advice belongs where the author is,
+so seeing something here that never appears in CI is the design rather than a
+discrepancy.
 
 One check is worth calling out because it addresses a genuine blind spot in
 SHACL itself. **`VOC-001`, the closed-world vocabulary check**, catches the
@@ -142,6 +148,15 @@ contractors report to someone in Engineering?'"* Making them executable turns a
 modelling discussion into a regression suite, which is exactly the move
 [Chapter 2](02-people-and-cognition.md) recommends for surviving maintenance
 fatigue — the expert's requirement, captured once, checked forever.
+
+---
+
+> **How the editor behaviour in this section was established.** By reading the
+> extension's source and manifest, by its own test suite, and by driving the
+> packaged `.vsix` from a real install layout — **not** by working through a
+> live GUI session. The commands, checks and engines named here are verified to
+> exist and to run; the feel of using them is not something this manual has
+> measured. Treat screenshots-in-prose accordingly.
 
 ---
 

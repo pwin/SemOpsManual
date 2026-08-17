@@ -318,6 +318,38 @@ holds the graph **three times over**, once per permutation, with no streaming
 path: budget roughly 3 × 12 bytes per triple plus the interned strings, and do
 not reach for this on a graph too large to hold three sorted copies of.
 
+### The WebAssembly build has a different cost model
+
+Those figures are the native binary. The same engine compiled to WebAssembly —
+what the editor runs, and what a browser would — behaves differently at size,
+because wasm32 has a single linear memory that `memory.grow` may have to
+relocate, copying the whole heap.
+
+Measured on the engine's own scale probe, one compiled shapes graph against
+growing data:
+
+| instances | triples | first run | second run | resident |
+|---:|---:|---:|---:|---:|
+| 1,000 | 4,000 | 56 ms | 26 ms | 89 MB |
+| 10,000 | 40,000 | 205 ms | 137 ms | 76 MB |
+| 100,000 | 400,000 | **12,611 ms** | **3,119 ms** | 329 MB |
+
+At ontology scale — hundreds to low thousands of triples, which is what an
+editor validates — the difference is noise. At 400,000 triples the first run
+costs four times the second, and roughly nine of those twelve seconds are the
+heap being built rather than the graph being checked.
+
+Two consequences:
+
+- **Reuse the compiled validator.** A caller that validates one document per
+  process pays the growth cost every time; one that holds a `Validator` and
+  validates many pays it once. The API is shaped for the second, and the
+  difference is the table above.
+- **WebAssembly is not a drop-in for bulk data.** Editor validation, browser
+  validation, a partner checking their own submission — all fine. A nightly pass
+  over a production graph belongs on the native binary. This does not contradict
+  [§11.6](#116-rules-at-scale)'s numbers; it says which build they apply to.
+
 ---
 
 ## 11.7 What is not there

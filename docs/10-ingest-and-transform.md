@@ -100,6 +100,17 @@ any data moved.
 > but the flag reads like it takes a file. Point it at the containing folder, or
 > narrow with `--file-pattern`.
 
+Four extensions are recognised as transformation queries: **`.sparql`, `.rq`,
+`.tarql` and `.tq`**. The pairing with a CSV is by filename convention, which is
+the point worth drawing out — **the mapping is a query in source control**,
+diffable in a pull request and testable on its own, rather than transformation
+code buried in a script. That is what makes the ingest layer reviewable by
+someone who did not write it.
+
+> `.tq` and `.tarql` are the more recently added of the four and are lightly
+> exercised. If a query is not being picked up, check the extension before
+> anything else, and `--file-pattern` will narrow or widen the glob.
+
 Because `sketch` needs no CSV, no `oxi-gen` binary and no data access, it is the
 right gate for a pull request that changes a transformation query — it runs in
 seconds and needs no production data in CI.

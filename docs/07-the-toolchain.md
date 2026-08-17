@@ -76,6 +76,16 @@ It also means a project-specific check written once ([Chapter 8](08-model-and-va
 is available to both, which is how house rules stop being a wiki page nobody
 reads.
 
+**Shared does not mean identical.** The extension carries a verbatim copy of the
+50-check registry — same ids, same eight categories — and then adds four checks
+of its own that have no CLI equivalent: `VOC-001`, the closed-world vocabulary
+check described in [Chapter 8](08-model-and-validate.md), and `MDL-001`/`002`/
+`003`, three gist-informed modelling-guidance checks. So the editor can flag
+something CI will not. That is the right way round — advice belongs where the
+author is, and a build gate should not fail on a matter of modelling taste — but
+it is worth knowing before someone asks why a warning they saw while typing
+never appears in the pipeline.
+
 ---
 
 ## 7.2 Installing them
