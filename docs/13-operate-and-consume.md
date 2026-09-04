@@ -225,18 +225,31 @@ carry their upstream definitions into the page. Terms with no `--ref` supplied
 are still listed as external and unresolved, which is the honest outcome:
 better to say what is not known than to omit it.
 
-**Still open: the page is not byte-stable.** Three identical runs produce three
-different files. The *content* is now identical — the language-selection bug
-behind it is fixed, and hashing the output with every collection sorted gives
-one value across all three — but the order of the imports and class lists varies
-per run, because graph iteration order depends on Python's per-process string
-hashing.
+**Still open: the page is reshuffled on every run.** Three identical runs
+produce three different files. The *content* is canonical — the
+language-selection bug behind it is fixed, and hashing the output with every
+collection sorted gives one value across all three — but the **order** of the
+class, property, import and section lists varies per run. The cause is below
+`docgen`: rdflib holds triples in a `set`, and Python randomises string hashing
+per process, so the parser hands the extractor its triples in a different order
+each time ([Chapter 14](14-coverage-and-gaps.md) §14.4 traces it).
 
-That matters more for documentation than it would elsewhere. A reference page
-exists partly to answer *"what changed this release?"*, and that is unanswerable
-when every run reshuffles it. Until the collections are sorted on the way out,
-compare canonically rather than with a plain `diff`
-([Chapter 14](14-coverage-and-gaps.md) §14.4).
+That matters more for documentation than it would elsewhere, and in two ways. A
+reference page exists partly to answer *"what changed this release?"*, which is
+unanswerable when every run reshuffles it. And the rendered HTML — not just the
+JSON — presents the terms in a different reading order each time, interleaved
+across sections rather than grouped by them, so two colleagues generating the
+page from the same commit are handed the vocabulary in a different sequence.
+
+**If you generate the page in CI, set `PYTHONHASHSEED=0`.** That makes the
+output byte-reproducible today, which is enough to make the diff meaningful and
+the ordering stable for readers. It is a workaround, not the fix — the fix is to
+sort the lists on the way out — but it costs one environment variable:
+
+```yaml
+env:
+  PYTHONHASHSEED: "0"
+```
 
 ### Make it automatic
 
@@ -245,6 +258,8 @@ Level 3. That is one CI step:
 
 ```yaml
 - name: Reference documentation
+  env:
+    PYTHONHASHSEED: "0"        # until docgen sorts its own output
   run: |
     uv run ontology-quality-suite docgen \
       --ontology ontology/acme-org.ttl --out-dir docs/reference

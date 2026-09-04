@@ -143,12 +143,17 @@ values are invisible ([Ch. 12](12-release-and-change.md)).
 ### Week 4 — documentation and artefacts
 
 ```bash
-ontology-quality-suite docgen --ontology ontology/acme-org.ttl \
-  --out-dir docs/reference
+PYTHONHASHSEED=0 ontology-quality-suite docgen \
+  --ontology ontology/acme-org.ttl --out-dir docs/reference
 ```
 
-Publish it. Then **retain `full_results.csv` from every run, timestamped** — it
-costs nothing and becomes your only quality time series
+Publish it. The `PYTHONHASHSEED` is a workaround, not decoration: without
+it `docgen` reorders its own output on every run, so the page is undiffable
+and two readers get the terms in a different sequence
+([Ch. 13](13-operate-and-consume.md)).
+
+Then **retain `full_results.csv` from every run, timestamped** — it costs
+nothing and becomes your only quality time series
 ([Ch. 14](14-coverage-and-gaps.md)).
 
 **Exit criterion:** a pull request that breaks the ontology fails, and the

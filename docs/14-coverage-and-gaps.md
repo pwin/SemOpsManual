@@ -77,25 +77,50 @@ at an assertion. The decision stays human, and should.
 Each of these is real, reproducible, and cost time. None is a reason not to use
 the tools; all are reasons to read this section first.
 
-### `docgen` output is not byte-stable between runs
+### `docgen` reshuffles the page on every run
 
-Three identical runs produce three different files. The *content* is now
-identical — hashing the JSON with every collection sorted gives one value
-across all three — but the order of the imports list and of the class list
-varies per run, because the underlying graph iteration order depends on
-Python's per-process string hashing.
+Three identical runs produce three different files. The *content* is canonical —
+hashing the JSON with every collection sorted gives one value across all three —
+but the **order** of every top-level list varies per run: classes, properties,
+imports, and the sections they are grouped under.
 
-That is enough to make the generated documentation undiffable, which is the
-one thing generated documentation most needs to be: *"what changed in the
-reference page this release?"* is unanswerable when every run reshuffles it.
+**The cause is one level below `docgen`, which is why sorting the inner
+collections did not fix it.** The parser is an adapter over rdflib; rdflib's
+in-memory store holds triples in a **`set`**, and `Memory.triples()` yields them
+by iterating it. Set iteration order follows element hashes, rdflib's terms
+subclass `str`, and Python randomises string hashing per process. Everything
+downstream then faithfully preserves that arbitrary order — the extractor's
+subject index is a plain dict, so it records the order it was given, and the
+output lists are built by walking it.
 
-*Mitigation:* compare canonically — sort the collections before diffing — or
-treat the page as a build artefact to be read rather than reviewed.
-*Suggested improvement:* sort the collections on the way out.
+*The proof, and the workaround:* with `PYTHONHASHSEED=0` set in the
+environment, three runs produce one identical hash. Unpinned, three different
+ones. Nothing else changes.
+
+**It reaches the rendered page, not just the JSON.** On a fixture with three
+`# Section:` headers, five identical runs put the sections in three different
+orders, and `ontology-documentation.html` lists classes in a different reading
+order each time — interleaved across sections rather than grouped by them. The
+variable that feeds this is named `sections_in_order`, and the name is the only
+thing asserting an order.
+
+So the cost is not only that the page is undiffable — though it is, and
+*"what changed in the reference page this release?"* is the question a reference
+page most needs to answer. It is that **two readers of the same ontology, on the
+same commit, are handed the terms in a different sequence.** For the artefact
+[Chapter 2](02-people-and-cognition.md) nominates as the answer to the
+priesthood problem, a random reading order is a poor property.
+
+*Suggested improvement:* sort the three lists on the way out — and there is a
+better key than alphabetical available for free. The extractor already computes
+each subject's offset in the source text in order to assign its section, so
+sorting on that yields **document order**: what the author intended, and the
+only order under which the sections stay coherent.
+
+*Still open at 0.14.2*, re-checked for this edition rather than carried forward,
+and reported upstream as
+[issue #3](https://github.com/pwin/consolidated-ontology-quality-suite-python/issues/3).
 ([Ch. 13](13-operate-and-consume.md))
-
-*Still open at 0.14.2*, re-checked for this edition rather than carried
-forward: three runs, three raw hashes, one canonical hash.
 
 ### The DL reasoner starts, or does not, at random
 
