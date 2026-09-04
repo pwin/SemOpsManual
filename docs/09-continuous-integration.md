@@ -40,9 +40,9 @@ and `consistency` and `pattern-consistency` use `--fail-on-misalignment` and
 
 ---
 
-## 9.2 The problem: 301 findings
+## 9.2 The problem: 479 findings
 
-Now run the full registry the obvious way — the whole 50-check catalogue against
+Now run the full registry the obvious way — the whole 61-check catalogue against
 the ontology, with its real `org:` and FOAF imports resolved:
 
 ```bash
@@ -53,26 +53,29 @@ python -m ontology_suite checks \
 ```
 
 ```
-Findings: 301 total (55 Violation, 162 Warning, 84 Info)
+Findings: 479 total (55 Violation, 340 Warning, 84 Info)
 ```
 
-> **This number used to wander, and no longer does.** Five consecutive runs now
-> give 301 every time. Earlier editions of this manual reported it as "close to
-> 300" and documented a drift of 289–298, traced to `STR-007` returning anywhere
-> between 12 and 21 findings on identical input.
+> **Three consecutive runs give 479 every time.** That has not always been true.
+> An earlier edition reported "close to 300" with an observed drift of 289–298,
+> traced to several registry `CONSTRUCT`s binding **two** values per result —
+> `LOG-004`'s two inverses, `LOG-006`/`007`'s domain and range, `REA-001`'s two
+> disjoint classes — while the merge step read an arbitrary single one and
+> deduplicated on it. Values are sorted and joined now, and the report shows both
+> instead of half the finding.
 >
-> The cause was not the check. Several registry `CONSTRUCT`s deliberately bind
-> **two** values per result — `LOG-004`'s two inverses, `LOG-006`/`007`'s domain
-> and range, `REA-001`'s two disjoint classes, `STR-007`'s subject and object —
-> while the merge step read a single one via `Graph.value()`, an arbitrary pick
-> among them, and then deduplicated on it. Which value came back varied per run,
-> so rows collapsed differently each time. Values are now sorted and joined, so
-> the key is order-independent and the report shows both values instead of half
-> the finding.
+> The number then moved again, from 301 to 479, without the fixture changing at
+> all: the registry grew from 50 checks to 61, and two of the new ones —
+> `QUA-009` (no `skos:prefLabel` per language) and `QUA-010` (no
+> `skos:definition`) — fire on every undocumented term. **A registry upgrade
+> changes your findings while your ontology sits still.** Pin the version of the
+> suite in CI the way you pin any other dependency, and read a jump in the count
+> as "the rules moved" before assuming "the model got worse".
 >
-> The lesson outlived the bug, and [§9.8](#98-testing-the-gate-itself) is about
-> it: **a count is a fragile thing to assert on.** The set of check identifiers
-> reported was stable throughout, even while the totals moved.
+> The lesson underneath both episodes is [§9.8](#98-testing-the-gate-itself)'s:
+> **a count is a fragile thing to assert on.** Across every one of those
+> changes, the *set of check identifiers* behaved sensibly — it grew when checks
+> were added and was otherwise stable.
 
 Every one of those findings is real. The suite is genuinely checking every
 triple in the merged graph — and the merged graph includes the entire W3C
@@ -80,10 +83,10 @@ Organization Ontology and the entire FOAF vocabulary, complete with their own
 internal documentation habits, blank-node axiom style and naming choices.
 
 Wire that into CI with `--fail-on Violation` and you have gated your build on
-around fifty violations, of which approximately zero are yours. What happens
-next is predictable and happens every time: the team triages it once, concludes
-the tool is noisy, and either switches the gate off or adds `|| true`. The
-five findings that were genuinely theirs are lost with the other 296.
+55 violations, of which exactly one is yours. What happens next is predictable
+and happens every time: the team triages it once, concludes the tool is noisy,
+and either switches the gate off or adds `|| true`. The 23 findings that were
+genuinely theirs are lost with the other 456.
 
 > **This is the single most common way a semantic quality gate dies.** Not
 > because the checks are wrong — they are not — but because
@@ -107,17 +110,18 @@ python -m ontology_suite checks \
   --engine sparql --out-dir out/checks_excl --fail-on never
 ```
 
-301 findings become **9** — and this one has always been
-exact: three consecutive runs each gave `9 total (1 Violation, 8 Warning,
-0 Info)`. Enormously better, and still wrong. Here is the full breakdown:
+479 findings become **27**. Enormously better, and still wrong. Here is the
+full breakdown:
 
 ```
-2 × DAT-002  Warning    Dangling IRI reference
-1 × LOG-001  Violation  Class disjoint with its own ancestor
-1 × QUA-001  Warning    (missing label)
-3 × QUA-004  Warning    Resource missing skos:prefLabel
-1 × STR-003  Warning    (missing domain/range)
-1 × STY-002  Warning    (naming style)
+ 2 × DAT-002  Warning    Dangling IRI reference
+ 1 × LOG-001  Violation  Class disjoint with its own ancestor
+ 1 × QUA-001  Warning    (missing label)
+ 3 × QUA-004  Warning    Resource missing skos:prefLabel
+ 9 × QUA-009  Warning    No skos:prefLabel per language
+ 9 × QUA-010  Warning    No skos:definition
+ 1 × STR-003  Warning    (missing domain/range)
+ 1 × STY-002  Warning    (naming style)
 ```
 
 Inspect the two `DAT-002` findings and the cause is immediate:
@@ -134,7 +138,7 @@ findings are the same artefact — they are against `foaf:` itself and
 `foaf:Person`, terms whose labels live upstream in a file you just declined to
 read.
 
-**`--exclude-imports` traded 296 irrelevant findings for 4 false ones.** In some
+**`--exclude-imports` traded 456 irrelevant findings for 4 false ones.** In some
 ways that is a worse failure: irrelevant findings get ignored, but false
 findings get *investigated*, and an engineer who spends an afternoon proving that
 `acme:Employee` is fine learns exactly the same lesson about the tool's
@@ -158,25 +162,36 @@ python -m ontology_suite checks \
 ```
 
 ```
-1 × LOG-001  Violation  Class disjoint with its own ancestor
-1 × QUA-001  Warning    (missing label)
-1 × QUA-004  Warning    Resource missing skos:prefLabel  -> acme:hasSkill
-1 × STR-003  Warning    (missing domain/range)
-1 × STY-002  Warning    (naming style)
+ 1 × LOG-001  Violation  Class disjoint with its own ancestor
+ 1 × QUA-001  Warning    (missing label)
+ 1 × QUA-004  Warning    Resource missing skos:prefLabel  -> acme:hasSkill
+ 9 × QUA-009  Warning    No skos:prefLabel per language
+ 9 × QUA-010  Warning    No skos:definition
+ 1 × STR-003  Warning    (missing domain/range)
+ 1 × STY-002  Warning    (naming style)
 ```
 
-**Five findings. All five are Acme's. None are artefacts.** Also exact: three
-consecutive runs each gave `5 total (1 Violation, 4 Warning, 0 Info)`, with the
-same five check identifiers every time.
+**Twenty-three findings. All twenty-three are Acme's. None are artefacts.**
+Exact across repeated runs, with the same check identifiers every time.
+
+Eighteen of them are the documentation pair, `QUA-009` and `QUA-010`, firing
+once each on all nine of Acme's terms — the fixture declares `rdfs:label` on
+most of them but no `skos:prefLabel` and no `skos:definition` anywhere. That is
+a fair finding rather than noise, and it is a useful shape to recognise: **a
+check that fires on every term is telling you about a policy you have not
+adopted, not about nine separate mistakes.** Decide whether you want SKOS
+documentation; if you do, it is one pass of work, and if you do not, the
+`--registry` mechanism in [Chapter 8](08-model-and-validate.md) lets you drop
+both checks.
 
 Compare the three runs directly — all three are the same ontology, the same
 registry, the same engine:
 
 | Run | Findings | Genuinely yours | Upstream noise | False |
 |---|---|---|---|---|
-| `--import-dir` alone | **301** | 5 | 296 | 0 |
-| `--exclude-imports` | **9** | 5 | 0 | **4** |
-| `--own-namespace` | **5** | 5 | 0 | 0 |
+| `--import-dir` alone | **479** | 23 | 456 | 0 |
+| `--exclude-imports` | **27** | 23 | 0 | **4** |
+| `--own-namespace` | **23** | 23 | 0 | 0 |
 
 All three are now exactly reproducible across repeated runs. That was not true
 of the first row until recently, and the fact that it is the row you are being
@@ -190,9 +205,9 @@ told *not* to use was a happy accident rather than a design.
 flowchart TD
     ONT["acme-org-v1.ttl<br/>+ org: + foaf:"]
 
-    A["<b>301 findings</b><br/>imports resolved,<br/>unfiltered"]
-    B["<b>9 findings</b><br/>--exclude-imports<br/><i>4 of them false</i>"]
-    C["<b>5 findings</b><br/>--own-namespace<br/><i>all genuine</i>"]
+    A["<b>479 findings</b><br/>imports resolved,<br/>unfiltered"]
+    B["<b>27 findings</b><br/>--exclude-imports<br/><i>4 of them false</i>"]
+    C["<b>23 findings</b><br/>--own-namespace<br/><i>all genuine</i>"]
 
     ONT --> A
     ONT --> B
@@ -271,7 +286,7 @@ jobs:
         run: |
           uv run ontology-quality-suite ontology \
             --ontology ontology/acme-org.ttl \
-            --import-dir vendor/vocab \
+            --import-dir lib/vocab \
             --fail-on Violation
 
       # 2. Does it pass our rules, scoped to terms we own?
@@ -279,7 +294,7 @@ jobs:
         run: |
           uv run ontology-quality-suite checks \
             --ontology ontology/acme-org.ttl \
-            --import-dir vendor/vocab \
+            --import-dir lib/vocab \
             --own-namespace "https://acme.example.org/ns/" \
             --engine sparql \
             --fail-on Violation
@@ -303,8 +318,8 @@ jobs:
 
 Four points about that job.
 
-**Vendor your imports.** `--import-dir vendor/vocab` resolves `owl:imports`
-against local copies. `--allow-network` exists, and CI is the last place you
+**Keep local copies of your imports.** `--import-dir lib/vocab` resolves
+`owl:imports` against files in your own repository. `--allow-network` exists, and CI is the last place you
 want it: a build whose result depends on a third party's uptime is not
 reproducible, and an upstream vocabulary that changes silently changes your gate
 silently.

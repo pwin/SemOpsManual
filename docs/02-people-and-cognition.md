@@ -151,7 +151,7 @@ scopes the report to the terms the team actually owns produces **5**.
   'lineColor':'#14243A','primaryTextColor':'#14243A',
   'edgeLabelBackground':'#FFFFFF'}}}%%
 flowchart LR
-    RUN["Same ontology,<br/>same 50 checks"]
+    RUN["Same ontology,<br/>same 61 checks"]
     A["<b>301 findings</b><br/>everything in the<br/>merged graph"]
     B["<b>5 findings</b><br/>scoped to terms<br/>the team owns"]
 

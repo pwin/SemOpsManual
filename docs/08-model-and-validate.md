@@ -65,15 +65,17 @@ says so.
 
 ### Live diagnostics, including one SHACL cannot give you
 
-*Run Local Checks* evaluates the registry's 39 SPARQL and 6 SHACL-SPARQL check
-files — the same 50 checks the CLI runs — plus OWL2-RL-style inference and
+*Run Local Checks* evaluates the registry's 44 SPARQL and 6 SHACL-SPARQL check
+files — the same 61 checks the CLI runs — plus OWL2-RL-style inference and
 contradiction detection, into the standard Problems panel.
 
-It also runs **four checks the CLI does not have**: `VOC-001` below, and
-`MDL-001`/`002`/`003`, three gist-informed modelling-guidance checks
-([Chapter 7](07-the-toolchain.md) §7.1). Advice belongs where the author is,
-so seeing something here that never appears in CI is the design rather than a
-discrepancy.
+It also runs **three checks the CLI does not have** — `MDL-001`/`002`/`003`,
+gist-informed modelling-guidance checks ([Chapter 7](07-the-toolchain.md) §7.1).
+Advice belongs where the author is, so seeing something here that never appears
+in CI is the design rather than a discrepancy.
+
+`VOC-001` below used to be a fourth. It has since moved into the shared
+registry, so CI runs it too — the ordinary path for a check that has earned it.
 
 One check is worth calling out because it addresses a genuine blind spot in
 SHACL itself. **`VOC-001`, the closed-world vocabulary check**, catches the
@@ -223,8 +225,8 @@ profile.
 
 ## 8.3 The full registry: `checks`
 
-`ontology` is the schema-soundness subset. `checks` runs the whole 50-check
-catalogue across eight categories — structural integrity, logical cogency,
+`ontology` is the schema-soundness subset. `checks` runs the whole 61-check
+catalogue across ten categories — structural integrity, logical cogency,
 naming style, documentation, efficiency, data quality and more — against an
 ontology, a data graph, or both.
 

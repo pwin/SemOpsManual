@@ -69,8 +69,8 @@ broken today.
 | Ontology, shapes, queries into Git | — |
 | Install the extension on every modeller's machine | `.vsix` from the [webapp repo](https://github.com/pwin/consolidated-ontology-quality-suite-webapp) |
 | Establish the local loop | *Run Local Checks*, Ontology Outline, *Show Metrics* |
-| Run the tightest gate by hand | `ontology --ontology <yours> --import-dir vendor/vocab` |
-| Vendor your imports | Copy upstream vocabularies into `vendor/vocab`; never rely on `--allow-network` |
+| Run the tightest gate by hand | `ontology --ontology <yours> --import-dir lib/vocab` |
+| Keep local copies of your imports | Copy upstream vocabularies into `lib/vocab`; never rely on `--allow-network` |
 | Record your namespace | Copy the exact `@prefix` string somewhere the team can find. You will need it repeatedly, and getting it wrong fails silently ([Ch. 9](09-continuous-integration.md)) |
 
 Two habits to establish now, while it is cheap:
@@ -102,7 +102,7 @@ Phases 3 and 4.
 
 ```bash
 ontology-quality-suite ontology \
-  --ontology ontology/acme-org.ttl --import-dir vendor/vocab \
+  --ontology ontology/acme-org.ttl --import-dir lib/vocab \
   --fail-on Violation
 ```
 
@@ -114,7 +114,7 @@ one they learn to bypass.
 
 ```bash
 ontology-quality-suite checks \
-  --ontology ontology/acme-org.ttl --import-dir vendor/vocab \
+  --ontology ontology/acme-org.ttl --import-dir lib/vocab \
   --own-namespace "https://acme.example.org/" \
   --engine sparql --fail-on Violation
 ```

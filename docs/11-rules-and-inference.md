@@ -58,8 +58,8 @@ report = shapes.validate_file("data.ttl",
 print(report.conforms, len(report.results))
 ```
 
-> **Check your version before believing any of this.** Rules are new, and the
-> surface has moved twice in the space of writing this chapter. At **0.1.5** the
+> **Check your version before believing any of this.** Rules are recent and the
+> surface moved repeatedly while this chapter was being written. At **0.1.5** the
 > Python binding had no rules at all:
 >
 > ```
@@ -67,15 +67,51 @@ print(report.conforms, len(report.results))
 > ```
 >
 > At **0.1.7** the CLI had them and the WebAssembly build did not. From
-> **0.1.8/0.1.9** every binding has them, and 0.1.9 also fixes a real defect in
-> which `$this` was not substituted into a CONSTRUCT-based rule — so a SPARQL
-> rule ran for **every node in the graph** rather than for its focus node. If
-> you wrote SPARQL rules against an earlier version, re-run them.
+> **0.1.8** every binding has them, and 0.1.9 fixed a real defect in which
+> `$this` was not substituted into a CONSTRUCT-based rule — so a SPARQL rule ran
+> for **every node in the graph** rather than for its focus node. If you wrote
+> SPARQL rules against anything earlier, re-run them. The current release is
+> **0.2.0**.
 >
 > The failure mode is at least the right one throughout: an unrecognised
 > `inference` value is an error naming what is accepted, never a silent
 > fallback that validates without applying the rules. Pin the version, and check
 > with `shacl --version`.
+
+### What 0.2.0 changed, and why it is worth reading
+
+The major bump is one reordered argument: the JavaScript one-shot took
+`(shapes, data)` and now takes `(data, shapes)`, matching every other surface —
+the Python `validate(data, shapes)`, the CLI's `--data`/`--shapes`, and the Rust
+call underneath them all.
+
+Reordering a published signature is normally a poor trade. What makes it worth
+doing here is the failure it removes. A transposed call compiled the *data* as a
+shapes graph; a data graph declares no shapes; and **validating against no
+shapes conforms**. The caller was told their graph was valid when not one
+constraint had been evaluated — reachable by swapping two arguments, and silent.
+
+So both one-shots now refuse a shapes graph that declares nothing:
+
+```
+validate(data, shapes)   conforms = False | results = 1
+validate(shapes, data)   REFUSED: the shapes graph declares no shapes, so this
+                         would report that the data conforms without having
+                         checked anything
+```
+
+Verified both ways. Two things generalise beyond this tool:
+
+- **An empty rule set must not report success.** It is the same failure as a
+  check that matches nothing ([Chapter 9](09-continuous-integration.md) §9.8) and
+  the same as a filter that matches nothing (§9.4). Whenever "nothing to do" and
+  "all clear" produce the same output, the tool is unsafe at exactly the moment
+  it matters.
+- **Reordering a signature is only safe if getting it wrong is loud.** The
+  explicit `Validator`/`Shapes` path stays permissive on purpose — a caller who
+  compiled shapes deliberately can ask how it went, with `shapeCount` in
+  JavaScript or `len()` in Python. It is the convenience API, the one that hides
+  the compile step, that has to speak up.
 
 ---
 
@@ -361,7 +397,7 @@ live.
 |---|---|
 | **SHACL functions** (`sh:SPARQLFunction`) | A rule calling one errors — `unsupported node expression`, exit 2 — rather than returning empty |
 | **Result annotations** (`sh:resultAnnotation`) | Extra properties from a SPARQL constraint's solution are not copied onto results |
-| **SHACL 1.2 Rules** (`RULE { } WHERE { }`) | A different design from SHACL-AF; its test corpus is vendored but not wired into the conformance harness |
+| **SHACL 1.2 Rules** (`RULE { } WHERE { }`) | A different design from SHACL-AF; its test corpus ships with the engine but is not wired into the conformance harness |
 | **OWL-RL pre-inference** | RDFS is available and opt-in; nothing beyond it |
 | **Rules in the VS Code extension** | The engine supports them; the extension does not yet ask for them — see below |
 

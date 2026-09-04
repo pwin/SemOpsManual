@@ -18,6 +18,21 @@ Two tools, and one architectural idea that matters more than either of them.
 | SemOps stages | 3, 6, 7, and the release parts of 1 | 1, 2 |
 | Answers | "Does this pass?" | "What did I just do?" |
 
+> **Versions this edition was measured against.** Every number in Part III comes
+> from running these:
+>
+> | | Version | From |
+> |---|---|---|
+> | Ontology Quality Suite | **0.14.0** | PyPI `ontology-quality-suite` |
+> | Ontology Development Suite | **0.13.4** | `.vsix` from the repository's releases |
+> | SHACL Engine | **0.2.0** | PyPI `shacl`; npm `shacl-wasm`, `shacl-wasm-node` |
+>
+> These move quickly, and the counts in [Chapter 9](09-continuous-integration.md)
+> in particular depend on how many checks the registry holds — 61 at the time of
+> writing, up from 50 two editions ago. Expect your own numbers to differ if your
+> versions do, and see §9.2 on why that is a reason to pin them rather than a
+> reason to distrust the figures.
+
 ---
 
 ## 7.1 The idea: one registry, two runtimes
@@ -76,15 +91,21 @@ It also means a project-specific check written once ([Chapter 8](08-model-and-va
 is available to both, which is how house rules stop being a wiki page nobody
 reads.
 
-**Shared does not mean identical.** The extension carries a verbatim copy of the
-50-check registry — same ids, same eight categories — and then adds four checks
-of its own that have no CLI equivalent: `VOC-001`, the closed-world vocabulary
-check described in [Chapter 8](08-model-and-validate.md), and `MDL-001`/`002`/
-`003`, three gist-informed modelling-guidance checks. So the editor can flag
-something CI will not. That is the right way round — advice belongs where the
-author is, and a build gate should not fail on a matter of modelling taste — but
-it is worth knowing before someone asks why a warning they saw while typing
-never appears in the pipeline.
+**Shared does not mean identical.** The extension carries an exact copy of the
+61-check registry — same ids, same ten categories — and then adds three of its
+own with no CLI equivalent: `MDL-001`/`002`/`003`, gist-informed
+modelling-guidance checks. So the editor can flag something CI will not. That is
+the right way round — advice belongs where the author is, and a build gate
+should not fail on a matter of modelling taste — but it is worth knowing before
+someone asks why a warning they saw while typing never appears in the pipeline.
+
+**The boundary moves, and in the useful direction.** `VOC-001`, the closed-world
+vocabulary check in [Chapter 8](08-model-and-validate.md), began as one of those
+editor-only extras and is now in the shared registry, so CI runs it too. Expect
+that pattern: a check earns its way from advice into enforcement once it has
+proved it does not produce false positives. Worth remembering when deciding
+where to put a house rule of your own — the editor is a reasonable place to
+start.
 
 ---
 
@@ -206,7 +227,7 @@ Three of those four now agree exactly. One thing still follows, and one piece of
 history is worth carrying.
 
 **Neither formulation is complete alone.** The registry is implemented in two
-formulations — 39 SPARQL `.rq` files and 6 SHACL shape files — and they do not
+formulations — 44 SPARQL `.rq` files and 6 SHACL shape files — and they do not
 cover the same checks. `--engine native` silently misses `QUA-004` because that
 check exists only as SPARQL. Do not use a single-formulation mode expecting full
 coverage; if you want one, `sparql` is the one with the broader registry behind
@@ -306,7 +327,7 @@ This manual is the SemOps layer. For tool-level depth, the suite's own
 | Document | Covers |
 |---|---|
 | [`PRIMER.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/main/docs/PRIMER.md) | Task-oriented guide, worked examples, CI wiring, adoption path |
-| [`CHECKS.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/main/docs/CHECKS.md) | All 50 checks, by category |
+| [`CHECKS.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/main/docs/CHECKS.md) | All 61 checks, by category |
 | [`ARCHITECTURE.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/main/docs/ARCHITECTURE.md) | Engine comparison, benchmarks, file loading |
 | [`REASONING.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/main/docs/REASONING.md) | Reasoner backends and their real limitations |
 | [`CONSISTENCY_AND_REPAIR.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/main/docs/CONSISTENCY_AND_REPAIR.md) | Finding-kind → fix-kind → confidence table |

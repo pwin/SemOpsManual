@@ -83,7 +83,7 @@ python -m ontology_suite sketch \
 ```
 
 ```
-Findings: 35 total (0 Violation, 0 Warning, 35 Info)
+Findings: 38 total (0 Violation, 0 Warning, 38 Info)
 Sketch used 1 query file(s); 8 triples, 7 entities.
 ```
 
@@ -110,6 +110,45 @@ someone who did not write it.
 > `.tq` and `.tarql` are the more recently added of the four and are lightly
 > exercised. If a query is not being picked up, check the extension before
 > anything else, and `--file-pattern` will narrow or widen the glob.
+
+> **Second gotcha, and this one is legal input.** A `CONSTRUCT` template may end
+> without the optional `.` before its closing brace — `CONSTRUCT { ?s a ex:Thing
+> ; ex:name ?n }` is valid SPARQL. `sketch` writes that template into its own
+> `sketch.ttl` unterminated, then fails parsing the file it just wrote:
+> `BadSyntax: EOF found after object`. Adding the trailing dot fixes it.
+> Verified minimally, both ways. Until it is fixed, **write the dot**.
+
+### The query itself is now checked
+
+Five checks in the registry look at the transformation rather than the graph it
+produces, and they run in this stage:
+
+| Check | What it catches |
+|---|---|
+| `TQL-001` | One target variable bound by structurally different expressions in different query files |
+| `TQL-002` | A `?x_IRI` variable used in the `CONSTRUCT` but never bound |
+| `TQL-003` | A `CONSTRUCT` variable neither bound nor appearing in the `WHERE` |
+| `TQL-004` | A `?x_IRI` bound to `CONCAT` with nothing turning the result into an IRI |
+| `TQL-005` | A `?x_DT` variable never given a datatype with `STRDT()` |
+
+`TQL-004` is the one that repays reading twice. SPARQL's `CONCAT` returns a
+**string**, and TARQL does not coerce it, so a variable named `?person_IRI` that
+is built by `CONCAT` and never wrapped in `IRI()` silently produces string
+literals where the model says there should be IRIs. The data loads, the counts
+look right, and every join against those subjects finds nothing.
+
+Two of these rest on a naming convention — `?x_IRI` for a constructed IRI,
+`?x_DT` for a value given an explicit datatype. That is worth adopting even if
+you never run the checks: it puts the intent in the variable name, where a
+reviewer sees it.
+
+The stage also writes **`bind-facts.ttl`** beside the report — a node per `BIND`
+carrying its target, expression, skeleton, file and line, plus one per
+`CONSTRUCT` variable recording whether it is bound. The bound ones are included
+deliberately, so *"what does this query actually bind?"* is answerable rather
+than only *"where are the gaps?"* It is a small instance of a good habit: the
+transformation's own structure has been turned into a graph, so it can be
+queried with the same tools as everything else.
 
 Because `sketch` needs no CSV, no `oxi-gen` binary and no data access, it is the
 right gate for a pull request that changes a transformation query — it runs in
@@ -168,10 +207,10 @@ python -m ontology_suite data out/triplify/employees.ttl \
 ```
 
 ```
-Findings: 372 total (68 Violation, 185 Warning, 119 Info)
+Findings: 550 total (68 Violation, 363 Warning, 119 Info)
 ```
 
-Around three hundred and seventy, and the same lesson as
+Five hundred and fifty, and the same lesson as
 [Chapter 9](09-continuous-integration.md) applies identically. Scope it:
 
 ```bash
@@ -184,11 +223,11 @@ python -m ontology_suite data out/triplify/employees.ttl \
 ```
 
 ```
-Findings: 36 total (12 Violation, 22 Warning, 2 Info)
+Findings: 54 total (12 Violation, 40 Warning, 2 Info)
 ```
 
-> **36 or 37, depending on one thing.** The scoped data run returns 36 findings
-> when the external DL reasoner fails to start and 37 when it succeeds — the
+> **54 or 55, depending on one thing.** The scoped data run returns 54 findings
+> when the external DL reasoner fails to start and 55 when it succeeds — the
 > extra one is `REA-021`, HermiT's unsatisfiability finding on `acme:Contractor`,
 > discussed below. Everything else is identical. This is the *only* variation in
 > the scoped figures anywhere in the manual, it has a known cause, and the

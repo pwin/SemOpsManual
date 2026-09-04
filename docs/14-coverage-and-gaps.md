@@ -106,6 +106,26 @@ The flag reads like it accepts a file. It scans a folder.
 *Mitigation:* pass the containing folder; narrow with `--file-pattern`.
 ([Ch. 10](10-ingest-and-transform.md))
 
+### `sketch` fails on a CONSTRUCT with no trailing dot
+
+A `CONSTRUCT` template may end without the optional `.` before its closing
+brace — `CONSTRUCT { ?s a ex:Thing ; ex:name ?n }` is valid SPARQL. `sketch`
+copies the template into the `sketch.ttl` it writes without supplying a
+terminator, then fails parsing its own output:
+
+```
+ValueError: could not parse .../sketch.ttl as 'turtle' …
+BadSyntax: at line 11: EOF found after object
+```
+
+Verified minimally in both directions: identical query, dot present, works;
+dot absent, crashes. The fixture in Part III happens to write the dot, which is
+why the chapter's examples run.
+
+*Mitigation:* write the trailing dot. The failure is at least loud and names the
+file and position, so it costs minutes rather than an afternoon.
+([Ch. 10](10-ingest-and-transform.md))
+
 ### `--apply-repairs` rewrites comments as well as code
 
 The rename repair is a textual substitution across the whole file. A comment

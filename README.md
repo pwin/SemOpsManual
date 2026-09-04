@@ -29,7 +29,7 @@ tested and runnable today**:
 
 | Toolchain | What it is | Where it fits |
 |---|---|---|
-| **Ontology Quality Suite**<br/>[GitHub](https://github.com/pwin/consolidated-ontology-quality-suite-python) · [PyPI](https://pypi.org/project/ontology-quality-suite/) | A Python CLI and library — 50-check registry, OWL2 reasoning, version diffing, CSV→RDF triplification, auto-repair, live-triplestore checks. `pip install ontology-quality-suite` | Automation: CI gates, release control, pipelines |
+| **Ontology Quality Suite**<br/>[GitHub](https://github.com/pwin/consolidated-ontology-quality-suite-python) · [PyPI](https://pypi.org/project/ontology-quality-suite/) | A Python CLI and library — 61-check registry, OWL2 reasoning, version diffing, CSV→RDF triplification, auto-repair, live-triplestore checks. `pip install ontology-quality-suite` | Automation: CI gates, release control, pipelines |
 | **Ontology Development Suite**<br/>[GitHub](https://github.com/pwin/consolidated-ontology-quality-suite-webapp) | A VS Code extension — in-process SPARQL/SHACL/OWL2-RL engines via WASM, live diagnostics, graph view, query workbench | The author's desk: the loop before CI |
 
 Every command shown in Part III was **executed for real** while writing this
@@ -174,7 +174,7 @@ Findings, commands and outputs in Part III are real. Where a number appears
 run described, not an illustrative figure.
 
 **One number still moves, and it is labelled where it appears.** A scoped `data`
-run reports 36 or 37 depending on whether the optional DL reasoner starts —
+run reports 54 or 55 depending on whether the optional DL reasoner starts —
 visible in the report itself, since `REA-021` present means it ran and `REA-022`
 means it did not. Everything else is now exactly reproducible across repeated
 runs.
