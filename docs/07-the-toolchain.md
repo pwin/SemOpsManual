@@ -23,7 +23,7 @@ Two tools, and one architectural idea that matters more than either of them.
 >
 > | | Version | From |
 > |---|---|---|
-> | Ontology Quality Suite | **0.14.0** | PyPI `ontology-quality-suite` |
+> | Ontology Quality Suite | **0.14.0**, plus the six fixes recorded in [§14.6](14-coverage-and-gaps.md) that land in the next release | PyPI `ontology-quality-suite` |
 > | Ontology Development Suite | **0.13.4** | `.vsix` from the repository's releases |
 > | SHACL Engine | **0.2.0** | PyPI `shacl`; npm `shacl-wasm`, `shacl-wasm-node` |
 >

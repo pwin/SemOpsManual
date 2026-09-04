@@ -208,39 +208,35 @@ feed a documentation portal, a catalogue, or — per
 [Chapter 5](05-genai-and-agents.md) — an agent that needs to know what your terms
 mean.
 
-### Two rough edges found while running it
+### Two rough edges, both since fixed — and one that is not
 
-**`--ref` does not sniff serialisation format.** Passing the FOAF vocabulary,
-which is published as RDF/XML:
+**`--ref` used to assume Turtle.** Passing the FOAF vocabulary, which is
+published as RDF/XML, crashed with an rdflib *Turtle* parse error on the file's
+XML comment header — an unhelpful message, since it named a Turtle syntax
+problem in a file containing no Turtle. The format is now resolved from the
+content as well as the extension, which cuts both ways: `.owl` files written in
+Turtle are common enough that the override earns its keep in both directions.
 
-```bash
-python -m ontology_suite docgen --ontology acme-org-v1.ttl \
-  --ref reference_vocab/foaf.rdf --out-dir out/docgen
-```
+**External-term resolution did not engage.** Even with
+`--ref reference_vocab/org.ttl`, the output reported *"5 external terms
+(0 resolved)"*. It now reports *"(3 resolved)"* on the same command — the
+`--ref` vocabularies are read, and `foaf:Person` and `org:OrganizationalUnit`
+carry their upstream definitions into the page. Terms with no `--ref` supplied
+are still listed as external and unresolved, which is the honest outcome:
+better to say what is not known than to omit it.
 
-fails with an rdflib Turtle parse error — the RDF/XML comment header is read as
-Turtle:
+**Still open: the page is not byte-stable.** Three identical runs produce three
+different files. The *content* is now identical — the language-selection bug
+behind it is fixed, and hashing the output with every collection sorted gives
+one value across all three — but the order of the imports and class lists varies
+per run, because graph iteration order depends on Python's per-process string
+hashing.
 
-```
-rdflib.plugins.parsers.notation3.BadSyntax: at line 4 of <>:
-Bad syntax (expected '.' or '}' or ']' at end of statement)
-```
-
-Convert the vocabulary to Turtle first, or pass only Turtle files to `--ref`.
-This is a small thing that costs ten confusing minutes, and it is worth knowing
-before it happens to you rather than after.
-
-**External-term resolution did not engage in this run.** Even with
-`--ref reference_vocab/org.ttl` supplied, the output still reported
-*"5 external terms (0 resolved)"*. `foaf:Person` and `org:OrganizationalUnit`
-are correctly *listed* as external terms in both cases — the documentation is
-accurate about what it does and does not know — but their upstream definitions
-were not pulled into the page. Reported as observed; the behaviour may be
-sensitive to how the reference file declares its terms.
-
-Neither undermines the command. The generated page is genuinely the artefact to
-put in front of a domain expert, and being explicit about unresolved external
-terms is better than silently omitting them.
+That matters more for documentation than it would elsewhere. A reference page
+exists partly to answer *"what changed this release?"*, and that is unanswerable
+when every run reshuffles it. Until the collections are sorted on the way out,
+compare canonically rather than with a plain `diff`
+([Chapter 14](14-coverage-and-gaps.md) §14.4).
 
 ### Make it automatic
 

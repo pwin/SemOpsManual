@@ -77,81 +77,21 @@ at an assertion. The decision stays human, and should.
 Each of these is real, reproducible, and cost time. None is a reason not to use
 the tools; all are reasons to read this section first.
 
-### `--own-namespace` fails silently on a near-miss
+### `docgen` output is not byte-stable between runs
 
-`--own-namespace "http://example.org/acme#"` against a fixture whose namespace is
-`https://acme.example.org/ns/` returned:
+Three identical runs produce three different files. The *content* is now
+identical — hashing the JSON with every collection sorted gives one value
+across all three — but the order of the imports list and of the class list
+varies per run, because the underlying graph iteration order depends on
+Python's per-process string hashing.
 
-```
-Findings: 0 total (0 Violation, 0 Warning, 0 Info)
-```
+That is enough to make the generated documentation undiffable, which is the
+one thing generated documentation most needs to be: *"what changed in the
+reference page this release?"* is unanswerable when every run reshuffles it.
 
-It is a **literal IRI-prefix string match**. A wrong scheme, host or trailing
-separator produces silence, and silence is indistinguishable from success.
-
-*Mitigation:* copy the namespace from the ontology's `@prefix` line, and keep one
-deliberately-failing fixture in CI so a gate that cannot fail is detectable.
-*Suggested improvement:* warn when `--own-namespace` matches zero focus nodes
-while unfiltered findings exist. ([Ch. 9](09-continuous-integration.md))
-
-### `sketch --queries` requires a directory, not a file
-
-```
-FileNotFoundError: No files matching '*.sparql,*.rq,*.tarql,*.tq' found in
-examples/acme_robotics/employees.rq
-```
-
-The flag reads like it accepts a file. It scans a folder.
-
-*Mitigation:* pass the containing folder; narrow with `--file-pattern`.
-([Ch. 10](10-ingest-and-transform.md))
-
-### `sketch` fails on a CONSTRUCT with no trailing dot
-
-A `CONSTRUCT` template may end without the optional `.` before its closing
-brace — `CONSTRUCT { ?s a ex:Thing ; ex:name ?n }` is valid SPARQL. `sketch`
-copies the template into the `sketch.ttl` it writes without supplying a
-terminator, then fails parsing its own output:
-
-```
-ValueError: could not parse .../sketch.ttl as 'turtle' …
-BadSyntax: at line 11: EOF found after object
-```
-
-Verified minimally in both directions: identical query, dot present, works;
-dot absent, crashes. The fixture in Part III happens to write the dot, which is
-why the chapter's examples run.
-
-*Mitigation:* write the trailing dot. The failure is at least loud and names the
-file and position, so it costs minutes rather than an afternoon.
-([Ch. 10](10-ingest-and-transform.md))
-
-### `--apply-repairs` rewrites comments as well as code
-
-The rename repair is a textual substitution across the whole file. A comment
-reading *"every row is typed `acme:Engineer`, which v2.0.0 renames to
-`acme:SoftwareEngineer`"* became *"every row is typed `acme:SoftwareEngineer`,
-which v2.0.0 renames to `acme:SoftwareEngineer`"* — harmless, and nonsense.
-
-*Mitigation:* prefer the default dry-run `.patch` output in automation; review
-before applying. `--apply-repairs` suits a developer who will read the diff, not
-an unattended job that commits its own output.
-([Ch. 12](12-release-and-change.md))
-
-### `docgen --ref` does not sniff serialisation format
-
-Passing FOAF, published as RDF/XML, crashes with an rdflib **Turtle** parse
-error on the file's XML comment header.
-
-*Mitigation:* convert to Turtle, or pass only Turtle to `--ref`.
-([Ch. 13](13-operate-and-consume.md))
-
-### `docgen` external-term resolution did not engage
-
-Even with `--ref reference_vocab/org.ttl`, output reported *"5 external terms
-(0 resolved)"*. Terms are correctly *listed* as external — the documentation is
-honest about what it does not know — but upstream definitions were not pulled in.
-Reported as observed rather than diagnosed.
+*Mitigation:* compare canonically — sort the collections before diffing — or
+treat the page as a build artefact to be read rather than reviewed.
+*Suggested improvement:* sort the collections on the way out.
 ([Ch. 13](13-operate-and-consume.md))
 
 ### The DL reasoner starts, or does not, at random
@@ -300,6 +240,39 @@ ill-typed boolean, so `"yes"^^xsd:boolean` is stored as `'false'` and matches.
 The branch was unreachable. A Python-side pass over `Literal.ill_typed` now
 supplements the two portable formulations, which also catches value-space
 violations no lexical regex can express, such as `"2021-02-30"^^xsd:date`.
+
+**Six rough edges at once, after 0.14.0.** Every entry §14.4 carried in the
+previous edition has since been fixed — verified here, each in both directions:
+
+| Was | Now |
+|---|---|
+| `--own-namespace` near-miss returned a silent `0 total` | Warns that the filter matched none of the findings, and **names the namespaces actually present** |
+| `sketch --queries` rejected a file path | Accepts a file or a directory |
+| `sketch` crashed on a `CONSTRUCT` with no trailing `.` | Terminates each block on the way out; three failure shapes, one cause |
+| `--apply-repairs` rewrote comments as well as code | Substitutes outside comments — while still rewriting string literals, because a TARQL IRI template is built from them |
+| `docgen --ref` crashed on RDF/XML | Resolves the serialisation from content as well as extension |
+| `docgen` reported *"5 external terms (0 resolved)"* | *"(3 resolved)"* — the `--ref` vocabularies are read |
+
+A seventh was fixed that this manual never caught: `docgen` chose an annotation
+language by whichever literal the parser happened to yield first, so a `--ref`
+at a multilingual vocabulary — W3C's `org.ttl` carries `rdfs:comment` in four
+languages — produced definitions in a different language on different runs. It
+now prefers the document language, then an untagged literal, then the first in
+sorted order. Content is stable as a result; ordering is not, which is what
+§14.4 still records.
+
+Two details worth keeping, because they are the shape of a good fix rather than
+just its existence. The `sketch` crash **never produced wrong triples** — Turtle
+rejected the malformed output rather than splicing it into something plausible —
+so it was always a crash and never bad data, which is the first question to ask
+of any bug in a writer. And the `--own-namespace` warning fires *only when there
+were findings to lose*: a filter matching nothing on a genuinely clean run is
+not an error, and warning there would train people to ignore the message.
+
+> **Version note.** All six landed **after 0.14.0**. On 0.14.0 you will still
+> meet every one of them, so check `ontology-quality-suite --version` before
+> concluding the manual is wrong about your copy — and upgrade, since this is
+> six fixes in one release.
 
 The lesson generalises, and this edition is its own evidence: **re-verify the
 gaps list against the tools you actually have.** Two of the four above were

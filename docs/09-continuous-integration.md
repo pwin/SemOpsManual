@@ -231,12 +231,27 @@ The first attempt at that command, while writing this manual, used
 Findings: 0 total (0 Violation, 0 Warning, 0 Info)
 ```
 
-A confidently empty report. The fixture's namespace is
-`https://acme.example.org/ns/` — different scheme, different host, different
-separator. `--own-namespace` is a **literal IRI-prefix string match**, not a
-prefix-name lookup, and a near-miss produces silence rather than an error.
+A confidently empty report, and at the time indistinguishable from a passing
+gate. The fixture's namespace is `https://acme.example.org/ns/` — different
+scheme, host and separator. `--own-namespace` is a **literal IRI-prefix string
+match**, not a prefix-name lookup.
 
-Zero findings is exactly what a passing gate looks like. Two lessons:
+**The tool now says so.** Reported from this manual's own use, the same command
+today prints, before the count:
+
+```
+WARNING: --own-namespace http://example.org/acme# matched none of the 479
+findings, so this run reports nothing. It is a literal IRI-prefix match --
+check the scheme, host and trailing separator against the ontology's own
+@prefix line. Namespaces actually seen: http://purl.org/dc/elements/1.1/, …
+```
+
+Note where the warning does *not* fire: when there were no findings to lose in
+the first place. A filter matching nothing on a genuinely clean run is not an
+error, and warning there would train people to ignore the message.
+
+The warning goes to **stderr**, so a CI step that captures only stdout will not
+show it. Two lessons survive the fix:
 
 1. **Copy the namespace from the ontology, never from memory.** It is the string
    after `@prefix`, in full, including the trailing `/` or `#`.

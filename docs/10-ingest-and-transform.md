@@ -92,13 +92,11 @@ That is the shape the transformation will produce, derived from the query alone.
 A reviewer who expected fifteen predicates and sees eight has found a bug before
 any data moved.
 
-> **Gotcha, hit while writing this chapter:** `--queries` expects a **directory**,
-> not a file. Passing `--queries examples/acme_robotics/employees.rq` fails with
-> `No files matching '*.sparql,*.rq,*.tarql,*.tq' found in
-> examples/acme_robotics/employees.rq` — the path is treated as a folder to scan.
-> The message names the patterns it looked for, which is enough to diagnose it,
-> but the flag reads like it takes a file. Point it at the containing folder, or
-> narrow with `--file-pattern`.
+`--queries` takes either a file or a directory. It used to insist on a
+directory, failing on a file path with `No files matching '*.sparql,*.rq,…'` —
+if you meet that, you are on an older build
+([Chapter 14](14-coverage-and-gaps.md) §14.6). Use `--file-pattern` to narrow
+or widen the glob when pointing at a directory.
 
 Four extensions are recognised as transformation queries: **`.sparql`, `.rq`,
 `.tarql` and `.tq`**. The pairing with a CSV is by filename convention, which is
@@ -110,13 +108,6 @@ someone who did not write it.
 > `.tq` and `.tarql` are the more recently added of the four and are lightly
 > exercised. If a query is not being picked up, check the extension before
 > anything else, and `--file-pattern` will narrow or widen the glob.
-
-> **Second gotcha, and this one is legal input.** A `CONSTRUCT` template may end
-> without the optional `.` before its closing brace — `CONSTRUCT { ?s a ex:Thing
-> ; ex:name ?n }` is valid SPARQL. `sketch` writes that template into its own
-> `sketch.ttl` unterminated, then fails parsing the file it just wrote:
-> `BadSyntax: EOF found after object`. Adding the trailing dot fixes it.
-> Verified minimally, both ways. Until it is fixed, **write the dot**.
 
 ### The query itself is now checked
 

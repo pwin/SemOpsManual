@@ -187,10 +187,10 @@ The confidence gate is the safety mechanism: a 100%-confidence rename backed by
 an explicit annotation applies at a 0.7 threshold; a name-similarity guess does
 not. Automate what is evidenced; escalate what is inferred.
 
-### A caveat found by running it
+### It used to mangle comments, and the fix is instructive
 
-The repair is a **textual substitution across the whole file, including
-comments**. The fixture's query carries an explanatory comment:
+The repair was once a textual substitution across the whole file, comments
+included. The fixture's query carries an explanatory comment:
 
 ```sparql
 #   - every row is typed acme:Engineer, which v2.0.0 renames to
@@ -204,13 +204,22 @@ After `--apply-repairs`, that comment reads:
 #     acme:SoftwareEngineer (with a migration annotation) -- this query is
 ```
 
-Now nonsense. Functionally harmless — comments do not execute — but it is a real
-demonstration that the repair does not distinguish code from prose.
+— nonsense, and worse than leaving it alone. Comments do not execute, so nothing
+broke; the next reader was simply told something false.
 
-**The practical consequence:** prefer the default dry-run in automation, review
-the `.patch` files, and apply. `--apply-repairs` is excellent for a developer
-working locally who will read the diff before committing; it is a poor fit for
-an unattended CI job that commits its own output.
+**It now substitutes outside comments only**, so that line survives intact while
+the code on line 14 is rewritten. Verified both parts.
+
+The judgement underneath is worth borrowing. String **literals** are still
+rewritten, deliberately: in a TARQL query an IRI template is built out of them —
+`CONCAT("acme:_Engineer_", ?id)` — so a term rename usually *must* reach inside
+a literal. That is a decision about this domain, not a general rule, which is
+why the fix is not simply "substitute outside comments and strings".
+
+**The practical consequence is unchanged:** prefer the default dry-run in
+automation, review the `.patch` files, and apply. `--apply-repairs` suits a
+developer who will read the diff before committing, not an unattended job that
+commits its own output.
 
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{
