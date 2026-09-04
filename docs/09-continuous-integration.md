@@ -550,10 +550,11 @@ only from `ontology`, and only when `--profile` is passed. A team that runs
 ### It pays for itself
 
 That [companion repository](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing) is what surfaced the merge nondeterminism in
-[§9.2](#92-the-problem-301-findings), the severity misplacement in
+[§9.2](#92-the-problem-479-findings), the severity misplacement in
 [Chapter 7](07-the-toolchain.md) §7.4, and the unreachable `DAT-001` branch —
-all of which are now fixed. Thirteen fixtures asserting 35 of the registry's 50
-checks was enough to find four real defects in the tool they were testing.
+all of which are now fixed. Thirteen fixtures asserting 35 of the 50 checks the
+registry held at the time was enough to find four real defects in the tool they
+were testing.
 
 Its [`COMMANDS.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/main/COMMANDS.md) gives every fixture as both a
 harness invocation and the equivalent bare CLI command, which makes it usable as

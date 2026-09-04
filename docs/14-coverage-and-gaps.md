@@ -94,6 +94,9 @@ treat the page as a build artefact to be read rather than reviewed.
 *Suggested improvement:* sort the collections on the way out.
 ([Ch. 13](13-operate-and-consume.md))
 
+*Still open at 0.14.2*, re-checked for this edition rather than carried
+forward: three runs, three raw hashes, one canonical hash.
+
 ### The DL reasoner starts, or does not, at random
 
 The reasoner sometimes emits `REA-022` — *external DL reasoner unavailable*,
@@ -222,7 +225,7 @@ the whole shapes graph with it — including for callers who never asked for rul
 Rule compile errors are now held on the rule and raised only if it would have
 fired.
 
-**The unscoped run is reproducible.** Five identical invocations now return 301
+**The unscoped run is reproducible.** Five identical invocations now return 479
 findings every time. The drift documented at length in earlier editions — 289 to
 298, traced to `STR-007` — was never in the check: several registry `CONSTRUCT`s
 bind two values per result, and the merge step read an arbitrary one of them and
@@ -241,7 +244,7 @@ The branch was unreachable. A Python-side pass over `Literal.ill_typed` now
 supplements the two portable formulations, which also catches value-space
 violations no lexical regex can express, such as `"2021-02-30"^^xsd:date`.
 
-**Six rough edges at once, after 0.14.0.** Every entry §14.4 carried in the
+**Six rough edges at once, in 0.14.1.** Every entry §14.4 carried in the
 previous edition has since been fixed — verified here, each in both directions:
 
 | Was | Now |
@@ -269,16 +272,43 @@ of any bug in a writer. And the `--own-namespace` warning fires *only when there
 were findings to lose*: a filter matching nothing on a genuinely clean run is
 not an error, and warning there would train people to ignore the message.
 
-> **Version note.** All six landed **after 0.14.0**. On 0.14.0 you will still
-> meet every one of them, so check `ontology-quality-suite --version` before
-> concluding the manual is wrong about your copy — and upgrade, since this is
-> six fixes in one release.
+> **Version note.** All six landed in **0.14.1**, published a day after 0.14.0.
+> On 0.14.0 you will still meet every one of them, so check which version you
+> have before concluding the manual is wrong about your copy — and upgrade,
+> since this is six fixes in one release. (0.14.2 adds tests only; nothing an
+> installed CLI does changes between the two.)
+
+**Two more in the editor, in 0.13.5 — one of them a twin of a CLI fix above.**
+The same questions asked of the extension found the same comment-scanning defect
+behind rename, find-references, go-to-definition and the undeclared-prefix
+warning: a trailing comment was read as code, so renaming a term rewrote the
+comment explaining the rename. Separately, the unresolved-import warning claimed
+*"no workspace file declares this identity"* when resolution never searches the
+workspace — it walks the document's own directory tree — and now names the
+directory it searched and the candidate count. Both are in
+[Chapter 8](08-model-and-validate.md) §8.1.
+
+The twin is the interesting one. Two hand-written ports of one algorithm carried
+one defect and were fixed independently, days apart, with nothing comparing
+them; 0.13.6 and 0.14.2 add a shared sixteen-case fixture that both repositories
+carry, which is the subject of [Chapter 7](07-the-toolchain.md) §7.1 and the
+most transferable thing in this section. **A parity test over shared data cannot
+see behaviour that was written twice** — and the gap is invisible precisely
+while both copies agree about being wrong.
 
 The lesson generalises, and this edition is its own evidence: **re-verify the
-gaps list against the tools you actually have.** Two of the four above were
-corrected within a day of being written down. A limitation copied forward from an
-old document is indistinguishable from a current one, right up until someone
-wastes a week working around something that was fixed.
+gaps list against the tools you actually have.** Six were corrected within a day
+of being written down. A limitation copied forward from an old document is
+indistinguishable from a current one, right up until someone wastes a week
+working around something that was fixed.
+
+The obligation runs both ways, which this edition also demonstrates. Re-checking
+turned up a claim in [Chapter 7](07-the-toolchain.md) §7.1 that had gone the
+*other* way: a check reported as having earned its way into CI had only been
+declared there, and the CLI still cannot run it. **Verify the capabilities you
+credit a tool with as carefully as the limitations** — an overstatement is the
+harder error to catch, because nobody goes looking for a feature they have been
+told they already have.
 
 ---
 

@@ -65,8 +65,8 @@ says so.
 
 ### Live diagnostics, including one SHACL cannot give you
 
-*Run Local Checks* evaluates the registry's 44 SPARQL and 6 SHACL-SPARQL check
-files — the same 61 checks the CLI runs — plus OWL2-RL-style inference and
+*Run Local Checks* evaluates 44 SPARQL and 6 SHACL-SPARQL check files from the
+same 61-check registry the CLI reads — plus OWL2-RL-style inference and
 contradiction detection, into the standard Problems panel.
 
 It also runs **three checks the CLI does not have** — `MDL-001`/`002`/`003`,
@@ -74,8 +74,31 @@ gist-informed modelling-guidance checks ([Chapter 7](07-the-toolchain.md) §7.1)
 Advice belongs where the author is, so seeing something here that never appears
 in CI is the design rather than a discrepancy.
 
-`VOC-001` below used to be a fourth. It has since moved into the shared
-registry, so CI runs it too — the ordinary path for a check that has earned it.
+`VOC-001` below is a fourth of a different kind, and a **correction to an
+earlier edition of this manual**, which said it had moved into the shared
+registry "so CI runs it too". It is in the registry; the CLI still cannot
+produce it. Only the extension implements it, along with `REA-005` and
+`REA-006` — [Chapter 7](07-the-toolchain.md) §7.1 has the distinction between
+a check being *declared* and being *runnable*, which is the one to hold on to
+when reading `registry.json`.
+
+**Eleven go the other way.** The editor cannot produce `REA-020`/`021`/`022`
+(they need a full DL reasoner), `REA-010`/`011`/`012` (OWL2 profile membership,
+which it computes for the status bar but does not report as findings),
+`CNF-001`/`002`/`005` (a graph assessed against a *separate* ontology, where
+*Run Local Checks* merges the document with its imports so there is no
+"separate" left), or `TQL-004`/`TQL-005`
+([Chapter 10](10-ingest-and-transform.md) §10.2), which query the *BIND facts*
+graph the CLI builds from a TARQL query and the editor does not.
+
+Those last two are worth a sentence for the reason they are held back
+*explicitly*. The extension's coverage test treats the presence of a `.rq` file
+as proof the check runs — true of every other directory — so left alone they
+would have counted as implemented while being unable to fire, making the
+exception list assert something false **and still pass**. **A check that cannot
+fire and a check that found nothing are indistinguishable from the outside**:
+the same hazard as [§7.4](07-the-toolchain.md)'s silent `--own-namespace`
+filter, one layer up.
 
 One check is worth calling out because it addresses a genuine blind spot in
 SHACL itself. **`VOC-001`, the closed-world vocabulary check**, catches the
@@ -102,6 +125,15 @@ automatically. That scoping decision is the same instinct as
 [Chapter 9](09-continuous-integration.md)'s central lesson: **a check is only
 useful if its findings are about things you control.**
 
+**If you want this in CI, ask for `STR-001` instead.** Since the CLI cannot
+produce `VOC-001`, the practical question is what does gate on the typo above,
+and the answer is the one-graph structural form of the same question. Run
+against that exact file, the CLI reports eleven findings including `STR-001`;
+`VOC-001` is not among them. So the typo *is* caught at the gate — just under a
+different id and with narrower reach, since `VOC-001` also covers the axiom
+positions. Worth knowing before you write a CI rule naming the id you saw in
+the editor.
+
 ### Quick Fix, with the diff shown first
 
 Sixteen checks offer a one-click lightbulb repair, each computed from a real
@@ -112,6 +144,58 @@ confirmation showing the exact triples that will change.
 That confirmation step is not timidity. An auto-fix that silently rewrites an
 ontology teaches the team not to trust the tool, and one bad silent rewrite
 costs more confidence than fifty good ones earn.
+
+### Refactoring that knows what is a comment
+
+Rename, find-references and go-to-definition work on CURIEs across the
+document, which is what makes renaming a term a thirty-second operation rather
+than a careful grep.
+
+All three depend on one decision — *which text counts as code* — and until
+0.13.5 they got it subtly wrong, in a way worth knowing about because it is the
+same defect the CLI's `--apply-repairs` carried ([Chapter 12](12-release-and-change.md)),
+found independently in both. The scan skipped a line whose *first* non-space
+character was `#` but read a **trailing** comment in full, so
+
+```turtle
+ex:Dog a owl:Class .  # was ex:Dgo, renamed 2026-09-04
+```
+
+recorded a use of `ex:Dgo` inside the remark. Renaming rewrote the note that
+explained the rename; find-references inflated its count by every time anyone
+had written a term name in prose; and the undeclared-prefix warning, sharing the
+line of code, flagged `# TODO: use foo:Bar`. All three now mask comments first,
+using a scanner that preserves offsets — so a reported column still selects the
+right characters — and that knows both that `#` is the fragment separator in
+almost every RDF namespace, so `<http://example.org/ns#Term>` survives intact,
+and that a `#` inside a literal is not a comment.
+
+**CURIEs inside string literals are still scanned, deliberately.** A term named
+in an `sh:message` or an embedded query is a real reference, and dropping those
+would make find-references quietly incomplete — a worse failure than the
+occasional false positive it would save. The CLI arrives at the same behaviour
+from the opposite direction, because a TARQL IRI template is built out of string
+literals ([Chapter 12](12-release-and-change.md) §12.4). One behaviour, two
+reasons.
+
+### A warning that says where it actually looked
+
+Worth one paragraph because the lesson is general. The unresolved-import warning
+used to read *"no workspace file declares this identity or `owl:versionIRI`"*.
+Only the first three words were wrong, and they were the ones a reader acts on:
+resolution walks the **document's own directory tree**, never the workspace, so
+an ontology in a sibling folder produced a warning asserting as fact that it was
+not there — sending the reader after a file that was present all along, in a
+folder the resolver never opened.
+
+It now names the directory it searched and how many ontology files it found,
+which between them separate the two causes an IRI alone cannot: **none found**,
+so the location is the thing to check, and nothing was matched against; or
+**candidates, none matching**, where the path was right and the real cause is
+that a file holding the whole vocabulary still cannot satisfy an import without
+an `a owl:Ontology` header. **A diagnostic should assert only what it checked**
+— the general form of a mistake that is easy to make in your own SHACL messages
+too.
 
 ### Metrics and expressivity, live
 

@@ -216,6 +216,15 @@ rewritten, deliberately: in a TARQL query an IRI template is built out of them �
 a literal. That is a decision about this domain, not a general rule, which is
 why the fix is not simply "substitute outside comments and strings".
 
+**The same defect existed in the editor, and neither side knew.** The
+extension's rename and find-references made the identical mistake for the
+identical reason, and both were fixed in the same week, independently, in two
+languages ([Chapter 8](08-model-and-validate.md) §8.1). The comment scanner is
+one of a handful of algorithms written twice rather than shared as data, which
+is exactly the class of thing the registry's parity test cannot see — the
+argument, and what was done about it, is in
+[Chapter 7](07-the-toolchain.md) §7.1.
+
 **The practical consequence is unchanged:** prefer the default dry-run in
 automation, review the `.patch` files, and apply. `--apply-repairs` suits a
 developer who will read the diff before committing, not an unattended job that

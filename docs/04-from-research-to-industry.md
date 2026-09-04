@@ -169,10 +169,9 @@ Industry asks: *did this stop a bad change reaching production, without costing
 the team more attention than the bad change would have?*
 
 The second question has a term the first does not: **the human cost of the
-output**. A checker with better recall that produces three hundred findings
-where 5 are yours ([Chapter 2](02-people-and-cognition.md)) scores well on the
-research metric and fails in practice, because a gate nobody triages is not a
-gate.
+output**. A checker with better recall that produces 479 findings where 23 are
+yours ([Chapter 2](02-people-and-cognition.md)) scores well on the research
+metric and fails in practice, because a gate nobody triages is not a gate.
 
 Reproducibility divides the two cultures the same way. That unscoped run used to
 drift by a few findings between identical invocations — immaterial to a recall

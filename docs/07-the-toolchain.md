@@ -23,8 +23,8 @@ Two tools, and one architectural idea that matters more than either of them.
 >
 > | | Version | From |
 > |---|---|---|
-> | Ontology Quality Suite | **0.14.0**, plus the six fixes recorded in [§14.6](14-coverage-and-gaps.md) that land in the next release | PyPI `ontology-quality-suite` |
-> | Ontology Development Suite | **0.13.4** | `.vsix` from the repository's releases |
+> | Ontology Quality Suite | **0.14.2** | PyPI `ontology-quality-suite` |
+> | Ontology Development Suite | **0.13.6** | `.vsix` from the repository's releases |
 > | SHACL Engine | **0.2.0** | PyPI `shacl`; npm `shacl-wasm`, `shacl-wasm-node` |
 >
 > These move quickly, and the counts in [Chapter 9](09-continuous-integration.md)
@@ -81,7 +81,10 @@ The consequence is the thing to hold on to:
 > **The rule that fails your build is the same rule that underlined the problem
 > in your editor twenty minutes earlier.**
 
-That property is worth more than any individual feature in either tool. A team
+That property is worth more than any individual feature in either tool — and it
+holds for forty-seven of the sixty-one checks, with the fourteen exceptions
+named further down rather than left for you to discover. Read the claim as the
+default and the exceptions as the specification. A team
 whose local linting disagrees with its CI develops a learned distrust of both —
 green locally, red in CI, and the gate becomes something to be worked around
 rather than something that helps. Sharing the rules as data rather than
@@ -99,13 +102,94 @@ the right way round — advice belongs where the author is, and a build gate
 should not fail on a matter of modelling taste — but it is worth knowing before
 someone asks why a warning they saw while typing never appears in the pipeline.
 
-**The boundary moves, and in the useful direction.** `VOC-001`, the closed-world
-vocabulary check in [Chapter 8](08-model-and-validate.md), began as one of those
-editor-only extras and is now in the shared registry, so CI runs it too. Expect
-that pattern: a check earns its way from advice into enforcement once it has
-proved it does not produce false positives. Worth remembering when deciding
-where to put a house rule of your own — the editor is a reasonable place to
-start.
+**And being in the registry is not the same as being runnable.** This is the
+distinction that matters most for reading `registry.json`, and an earlier
+edition of this manual got it wrong. `VOC-001`, the closed-world vocabulary
+check in [Chapter 8](08-model-and-validate.md), moved out of the extension's
+private extras *into the shared registry* — and this manual reported that as
+"so CI runs it too". It does not. Verified directly: a graph asserting
+`acme:bob a acme:Empolyee` against a CLI run produces eleven findings and
+`VOC-001` is not among them, because nothing in the Python package implements
+it. Only `registry.json` mentions the id.
+
+What moving into the registry actually bought is worth understanding, because
+it is a real gain and a smaller one than "both sides run it". The registry is
+the **shared vocabulary of findings**: id, title, severity, category,
+remediation text. The extension can be pointed at a checkout of the CLI's
+registry, so an id it emits must be declared there too, or the finding arrives
+with no title and no severity but whatever the emitting code hardcoded. Being
+declared makes a finding *nameable by both sides*. Being implemented makes it
+*producible by one*.
+
+Neither side runs all sixty-one. Three are the extension's alone — `VOC-001`,
+`REA-005` and `REA-006`, on top of the three `MDL` checks that are not in the
+registry at all — and eleven are the CLI's: `REA-020`/`021`/`022` need a full
+DL reasoner, `REA-010`/`011`/`012` are OWL2 profile membership the extension
+computes but does not report as findings, `CNF-001`/`002`/`005` need a
+two-graph split the editor does not have, and `TQL-004`/`005` read a graph only
+the CLI builds.
+
+**Both repositories pin their own exception list, and each names the other's.**
+That is the part to copy. A shared registry with no such list is a promise the
+UI does not keep: a reader opening `registry.json` has no way to tell which
+entries can ever fire, and a check that cannot fire is indistinguishable from a
+check that found nothing. Publishing the rules is the easy half; publishing
+**what your implementation actually does with them** is the half that makes the
+rules trustworthy across an organisational boundary
+([Chapter 3](03-across-the-boundary.md)).
+
+**Shared *data* is not shared *behaviour*, and only one of them is cheap to
+pin.** The registry travels as data, so a test can compare the two copies
+character for character — and one does. But not everything the two tools have
+in common is data. A handful of algorithms are written twice, once in Python
+and once in TypeScript, and those are invisible to a test that compares files.
+
+The one that proved it decides which text a tool is allowed to rewrite:
+`strip_comments` in the CLI, behind `--apply-repairs`; `stripComments` in the
+extension, behind rename, find-references and go-to-definition. Both shipped
+the same defect for the same reason — a scan that skipped a line *beginning*
+with `#` but read a trailing comment in full — so this line
+
+```turtle
+ex:Dog a owl:Class .  # was ex:Dgo, renamed 2026-09-04
+```
+
+recorded an occurrence of `ex:Dgo` **inside the remark**. Rename it and the
+note explaining the rename was itself rewritten, turning a true comment into a
+false one, and find-references counted every prose mention of a term as a use
+of it. Both sides were fixed in the same week, independently, in two languages,
+and nothing noticed they had been wrong together. That coincidence is the
+clearest evidence available that nothing was comparing them.
+
+The existing parity test could never have caught it, and the reason is worth
+sitting with: it compares the registry, the shapes, the queries and the repair
+templates — shared **data**. Two hand-written ports of one algorithm are shared
+**behaviour**, and the property that matters is the one nothing checked: *given
+the same text, both must blank the same characters.* A rename that is safe
+through one tool would be unsafe through the other, silently.
+
+The fix is a fixture of sixteen cases that **both repositories carry**. Each
+side runs its own port against its own copy, so the suite still works on a
+machine with one checkout, and a final test compares the two copies for whoever
+has both — precisely the person who is in a position to make them disagree. The
+cases are hand-written rather than generated from either implementation, which
+is the detail that makes it work: **a fixture derived from the code only
+restates what the code already does, and would have agreed with both ports on
+the day they were both wrong.**
+
+Verified here with both checkouts present: the two copies are identical as
+parsed JSON, the Python port passes all sixteen, and every expected output is
+the same length as its input — because comments are blanked to spaces rather
+than removed, so an offset found in the mask still indexes the real document.
+
+The generalisation is not about these two tools. **Wherever one rule has two
+runtimes — and that is the normal condition for anything shared across a
+supply chain ([Chapter 3](03-across-the-boundary.md)) — sort what you share
+into data and behaviour.** The data is easy: publish it, and compare copies.
+The behaviour is the part that drifts, and the only defence is a fixture
+written from the intent rather than from either implementation. A conformance
+suite that a vendor generates from their own product tells you nothing about
+whether they agree with anyone else.
 
 ---
 
@@ -302,10 +386,17 @@ check it demonstrates:
 | `acme:hasSkill` | no `rdfs:label`, and no `skos:prefLabel` either | `QUA-001`, `QUA-004` |
 | `acme:reports_to` | local name is not lowerCamelCase; no domain or range | `STY-002`, `STR-003` |
 
-That is **five findings**, and five is exactly what the scoped run in
-[Chapter 9](09-continuous-integration.md) reports — the fixture's flaws and the
-gate's output account for each other completely, which is the property that
-makes it usable as a teaching example.
+Each deliberate flaw produces **exactly one finding**, which is the property
+that makes the fixture usable as a teaching example: every finding traces to a
+line someone wrote on purpose.
+
+The scoped run in [Chapter 9](09-continuous-integration.md) reports **23**, and
+the gap is instructive rather than a discrepancy. Eighteen of those 23 are
+`QUA-009` and `QUA-010`, nine each — a documentation policy the registry asks
+for (a `skos:prefLabel` per language, a `skos:definition`) that this fixture
+does not follow. **That is one decision you have not taken, reported nine times,
+not nine mistakes** — and telling those two things apart is the whole subject of
+[Chapter 9](09-continuous-integration.md) §9.4.
 
 `acme-org-v2.ttl` is a plausible next release: it renames `acme:Engineer` to
 `acme:SoftwareEngineer` — a breaking change, *with* a migration annotation — and
