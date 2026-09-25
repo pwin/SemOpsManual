@@ -24,6 +24,25 @@ gh release create vX.Y.Z build/SemOps-Manual-vX.Y.Z-A4.pdf \
 Version the asset filename. A downloaded `SemOps-Manual-A4.pdf` is ambiguous
 once a reader has two of them.
 
+## Web edition
+
+```bash
+node build-site.mjs                      # renders diagrams, writes build/site/
+node build-site.mjs --skip-diagrams      # reuse build/diagrams/ from a previous run
+node build-site.mjs --out ../../semantechs/SemOps_Manual
+```
+
+One static HTML page per chapter, served at
+<https://www.semantechs.co.uk/SemOps_Manual/>. To publish, build into the
+website repository's `SemOps_Manual/` directory (the `--out` form above) and
+deploy the site. The pages link back to the site home page and have no
+third-party requests; styling is `site.css`, copied in as `manual.css`.
+
+Diagrams are the same PNGs the PDF uses, shown at their natural CSS size.
+Links between chapters become links between pages; links into `notebooks/`,
+`tools/`, `assets/` and `LICENSE` go to GitHub. Needs pandoc and Chromium, as
+below.
+
 ## What it does
 
 | Stage | Script | What happens |
@@ -52,6 +71,8 @@ typst does both, from a single ~25 MB binary.
 |---|---|
 | `build-pdf.mjs` | The build |
 | `render-diagrams.mjs` | Stage 1, also runnable alone |
+| `build-site.mjs` | The web edition |
+| `site.css` | Web edition stylesheet |
 | `typst-template.typ` | pandoc's default typst template, plus a `logo` variable |
 | `template.typst` | pandoc's `conf` partial, patched — see below |
 
