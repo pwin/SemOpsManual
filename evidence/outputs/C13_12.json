@@ -7,43 +7,43 @@
   {
    "cmd": "ontology-quality-suite docgen --ontology fixtures/acme_robotics/acme-org-v1.ttl --ref fixtures/acme_robotics/reference_vocab/org.ttl --ref fixtures/acme_robotics/reference_vocab/foaf.rdf --out-dir work/C13_12/run1",
    "rc": 0,
-   "seconds": 1.8,
+   "seconds": 1.7,
    "stdout": "Wrote work/C13_12/run1/ontology_doc_data.json: prefix='acme', 4 classes, 2 object properties, 3 datatype properties, 1 sections, 5 external terms (3 resolved).\nWrote work/C13_12/run1/ontology-documentation.html (4 classes, 2 object properties, 3 datatype properties, 5 external terms).\nReference documentation written to: work/C13_12/run1/ontology-documentation.html\n4 class diagram(s) written to: work/C13_12/run1/class-diagrams\n",
    "stderr": "NOTE: 2 external term(s) referenced with no --ref file resolving a definition:\n  - skos:ConceptScheme\n  - skos:inScheme\n"
   },
   {
    "cmd": "ontology-quality-suite docgen --ontology fixtures/acme_robotics/acme-org-v1.ttl --ref fixtures/acme_robotics/reference_vocab/org.ttl --ref fixtures/acme_robotics/reference_vocab/foaf.rdf --out-dir work/C13_12/run2",
    "rc": 0,
-   "seconds": 1.9,
+   "seconds": 1.8,
    "stdout": "Wrote work/C13_12/run2/ontology_doc_data.json: prefix='acme', 4 classes, 2 object properties, 3 datatype properties, 1 sections, 5 external terms (3 resolved).\nWrote work/C13_12/run2/ontology-documentation.html (4 classes, 2 object properties, 3 datatype properties, 5 external terms).\nReference documentation written to: work/C13_12/run2/ontology-documentation.html\n4 class diagram(s) written to: work/C13_12/run2/class-diagrams\n",
    "stderr": "NOTE: 2 external term(s) referenced with no --ref file resolving a definition:\n  - skos:ConceptScheme\n  - skos:inScheme\n"
   },
   {
    "cmd": "ontology-quality-suite docgen --ontology fixtures/acme_robotics/acme-org-v1.ttl --ref fixtures/acme_robotics/reference_vocab/org.ttl --ref fixtures/acme_robotics/reference_vocab/foaf.rdf --out-dir work/C13_12/run3",
    "rc": 0,
-   "seconds": 2.3,
+   "seconds": 2.1,
    "stdout": "Wrote work/C13_12/run3/ontology_doc_data.json: prefix='acme', 4 classes, 2 object properties, 3 datatype properties, 1 sections, 5 external terms (3 resolved).\nWrote work/C13_12/run3/ontology-documentation.html (4 classes, 2 object properties, 3 datatype properties, 5 external terms).\nReference documentation written to: work/C13_12/run3/ontology-documentation.html\n4 class diagram(s) written to: work/C13_12/run3/class-diagrams\n",
    "stderr": "NOTE: 2 external term(s) referenced with no --ref file resolving a definition:\n  - skos:ConceptScheme\n  - skos:inScheme\n"
   },
   {
    "cmd": "ontology-quality-suite docgen --ontology fixtures/acme_robotics/acme-org-v1.ttl --ref fixtures/acme_robotics/reference_vocab/org.ttl --ref fixtures/acme_robotics/reference_vocab/foaf.rdf --out-dir work/C13_12/seed0-a",
    "rc": 0,
-   "seconds": 2.4,
+   "seconds": 2.3,
    "stdout": "Wrote work/C13_12/seed0-a/ontology_doc_data.json: prefix='acme', 4 classes, 2 object properties, 3 datatype properties, 1 sections, 5 external terms (3 resolved).\nWrote work/C13_12/seed0-a/ontology-documentation.html (4 classes, 2 object properties, 3 datatype properties, 5 external terms).\nReference documentation written to: work/C13_12/seed0-a/ontology-documentation.html\n4 class diagram(s) written to: work/C13_12/seed0-a/class-diagrams\n",
    "stderr": "NOTE: 2 external term(s) referenced with no --ref file resolving a definition:\n  - skos:ConceptScheme\n  - skos:inScheme\n"
   },
   {
    "cmd": "ontology-quality-suite docgen --ontology fixtures/acme_robotics/acme-org-v1.ttl --ref fixtures/acme_robotics/reference_vocab/org.ttl --ref fixtures/acme_robotics/reference_vocab/foaf.rdf --out-dir work/C13_12/seed0-b",
    "rc": 0,
-   "seconds": 2.5,
+   "seconds": 2.3,
    "stdout": "Wrote work/C13_12/seed0-b/ontology_doc_data.json: prefix='acme', 4 classes, 2 object properties, 3 datatype properties, 1 sections, 5 external terms (3 resolved).\nWrote work/C13_12/seed0-b/ontology-documentation.html (4 classes, 2 object properties, 3 datatype properties, 5 external terms).\nReference documentation written to: work/C13_12/seed0-b/ontology-documentation.html\n4 class diagram(s) written to: work/C13_12/seed0-b/class-diagrams\n",
    "stderr": "NOTE: 2 external term(s) referenced with no --ref file resolving a definition:\n  - skos:ConceptScheme\n  - skos:inScheme\n"
   },
   {
    "cmd": "python scripts/sha256.py work/C13_12/run1/ontology-documentation.html work/C13_12/run2/ontology-documentation.html work/C13_12/run3/ontology-documentation.html work/C13_12/seed0-a/ontology-documentation.html work/C13_12/seed0-b/ontology-documentation.html",
    "rc": 0,
-   "seconds": 0.9,
-   "stdout": "3d5979295ad3f8b0 work/C13_12/run1/ontology-documentation.html\n803b598ac74fad98 work/C13_12/run2/ontology-documentation.html\nda8ba502a42293fa work/C13_12/run3/ontology-documentation.html\n4b065806e5fca839 work/C13_12/seed0-a/ontology-documentation.html\n4b065806e5fca839 work/C13_12/seed0-b/ontology-documentation.html\n",
+   "seconds": 0.8,
+   "stdout": "f09e766654a60869 work/C13_12/run1/ontology-documentation.html\n6daa687a6249b77c work/C13_12/run2/ontology-documentation.html\nb5ed7a8682e6e620 work/C13_12/run3/ontology-documentation.html\n4b065806e5fca839 work/C13_12/seed0-a/ontology-documentation.html\n4b065806e5fca839 work/C13_12/seed0-b/ontology-documentation.html\n",
    "stderr": ""
   }
  ]

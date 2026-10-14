@@ -620,12 +620,17 @@ graph data and put on the same plane as everything else.
 > two files written against the ontology's own namespace were reported as
 > building undeclared terms (`CNF-001`, `CNF-002`) in the hash namespace, and
 > `acme:Employee`, which both of them build, as never populated (`CNF-005`).
-> Take the odd file out and the same two files are clean. The per-file dataset
-> reads all three correctly. Until the merged sketch does too, treat that
-> warning as an error: a prefix bound two ways is CT-37's question, and a
-> `GROUP BY` over the `tq:PrefixBinding` facts answers it.
+> Take the odd file out and the same two files are clean.
+>
+> It cuts the other way too, which is worse. Rename the older file so that it
+> sorts last, and the run is clean: the one file that *is* wrong is read with
+> the right namespace, and the warning is the only trace. Whether the mistake
+> is reported at all depends on file names. The per-file dataset reads all
+> three correctly whatever they are called. Until the merged sketch does too,
+> treat that warning as an error: a prefix bound two ways is CT-37's question,
+> and a `GROUP BY` over the `tq:PrefixBinding` facts answers it.
 
-<a id="ev-c10-29"></a>*Evidence:* [C10.29 — The merged sketch reads every file with the first file's prefixes](../../EVIDENCE.md#c10-29) (reproduced: PASS)
+<a id="ev-c10-29"></a><a id="ev-c10-30"></a>*Evidence:* [C10.29 — The merged sketch reads every file with the first file's prefixes](../../EVIDENCE.md#c10-29) (reproduced: PASS) · [C10.30 — Sorted last, the wrong file is not reported at all](../../EVIDENCE.md#c10-30) (reproduced: PASS)
 
 ---
 

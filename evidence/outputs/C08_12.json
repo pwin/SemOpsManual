@@ -7,21 +7,21 @@
   {
    "cmd": "node -p \"require('./node_modules/ontology-suite/package.json').version\"",
    "rc": 0,
-   "seconds": 0.0,
+   "seconds": 0.1,
    "stdout": "0.15.0\n",
    "stderr": ""
   },
   {
    "cmd": "node node_modules/typescript/bin/tsc --noEmit --strict --module nodenext --moduleResolution nodenext --target es2022 --skipLibCheck scripts/dsl/acme.ontology.ts",
    "rc": 0,
-   "seconds": 0.2,
+   "seconds": 0.5,
    "stdout": "",
    "stderr": ""
   },
   {
    "cmd": "node node_modules/tsx/dist/cli.mjs scripts/dsl/acme.ontology.ts work/C08_12/acme.ttl",
    "rc": 0,
-   "seconds": 0.4,
+   "seconds": 2.1,
    "stdout": "",
    "stderr": ""
   },

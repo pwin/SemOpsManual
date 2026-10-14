@@ -14,7 +14,7 @@
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --data data/house-rule/missing-id.ttl --registry work/C08_25/merged-registry.json --sparql fixtures/acme_robotics/custom_checks/sparql --sparql @builtin --engine sparql --out-dir work/C08_25/out --reports minimal --fail-on never",
    "rc": 0,
-   "seconds": 2.0,
+   "seconds": 2.4,
    "stdout": "Findings: 482 total (56 Violation, 342 Warning, 84 Info)\nReports written to: ./work/C08_25/out\n  - work/C08_25/out/findings.txt (start here -- what, where, and the source line)\n  - work/C08_25/out/full_results.csv\n",
    "stderr": ""
   },

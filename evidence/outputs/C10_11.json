@@ -14,7 +14,7 @@
   {
    "cmd": "python scripts/compare_ntriples.py work/C10_11/none.nt work/C10_11/none.nt",
    "rc": 0,
-   "seconds": 0.3,
+   "seconds": 0.2,
    "stdout": "work/C10_11/none.nt: 0 triples\nwork/C10_11/none.nt: 0 triples\nisomorphic: True\n",
    "stderr": ""
   },

@@ -28,7 +28,7 @@
   {
    "cmd": "python scripts/compare_ntriples.py work/C10_10/ottr.nt work/C10_10/tarql.nt",
    "rc": 0,
-   "seconds": 0.3,
+   "seconds": 0.2,
    "stdout": "work/C10_10/ottr.nt: 40 triples\nwork/C10_10/tarql.nt: 40 triples\nisomorphic: True\n",
    "stderr": ""
   }

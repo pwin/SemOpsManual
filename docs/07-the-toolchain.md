@@ -40,7 +40,7 @@ read, because it is how the rest are kept honest.
 > | Ontology Quality Suite | **0.22.0** | PyPI `ontology-quality-suite` |
 > | Ontology Development Suite | **0.15.0** | `ontology-dev-suite-0.15.0.vsix` from the v0.15.0 release; DSL as npm `ontology-suite` 0.15.0 |
 > | SHACL Engine | **0.3.2** | PyPI `shacl`; npm `shacl-wasm`, `shacl-wasm-node`; the `shacl` command from the v0.3.2 release |
-> | HOLOS | **0.21.0** | PyPI `holosdb`; npm `holos-wasm`, `holos-wasm-node`; the `holos` command from the v0.21.0 release. 0.21.1, cut as this edition closed, fixes one defect it found (§13.2 of [Chapter 13](13-operate-and-consume.md)) and was checked from source |
+> | HOLOS | **0.21.1** | PyPI `holosdb`; npm `holos-wasm`, `holos-wasm-node`; the `holos` command from the v0.21.1 release. 0.21.1 was cut while this edition was being checked, to fix a defect the checking found ([Chapter 13](13-operate-and-consume.md) §13.2) |
 > | tarka | **0.1.1** | PyPI `tarka-rdf`; the `tarka` command from the v0.1.1 release |
 > | Testing repository | `6d078a1` | `main`, 8 October 2026 |
 >
@@ -89,8 +89,10 @@ In the first edition, that sentence meant "the same *data*". By the last
 edition the SHACL half also ran on one engine, the Rust validator, compiled
 natively for the CLI and to WebAssembly for the editor. Now the SPARQL half
 does too: the 44 portable checks run on **holosdb** in Python and on
-**holos-wasm-node** in the editor, both at 0.21.0. The rule, the engine and the
-version are the same on both sides.
+**holos-wasm-node** in the editor. The rule and the engine are the same on both
+sides, and so, near enough, is the version: the 0.15.0 extension bundles
+holos-wasm-node 0.21.0, and 0.21.1 differs from it only in a validation fix the
+editor does not use.
 
 Why does that matter so much? Because a team whose local linting disagrees with
 its CI learns to distrust both. Green locally, red in CI, and the gate becomes

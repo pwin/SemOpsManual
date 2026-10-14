@@ -7,7 +7,7 @@
   {
    "cmd": "python scripts/without_java.py ontology-quality-suite ontology --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --out-dir work/C08_17/ontology",
    "rc": 1,
-   "seconds": 3.4,
+   "seconds": 3.7,
    "stdout": "without_java: java on PATH now: none\nFindings: 2 total (1 Violation, 0 Warning, 1 Info)\nReports written to: ./work/C08_17/ontology\n  - work/C08_17/ontology/findings.txt (start here -- what, where, and the source line)\n  - work/C08_17/ontology/report.html\n  - work/C08_17/ontology/full_results.csv\n",
    "stderr": ""
   }

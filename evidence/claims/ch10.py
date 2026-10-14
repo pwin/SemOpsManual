@@ -250,7 +250,8 @@ CLAIMS = [
 
     Claim("C10.17", "The suite's triplify still needs oxi-gen, and says so", "10",
           (F, "If you have no `oxi-gen` build, `triplify` says so in a warning and"), "run",
-          steps=[Step(f"{SUITE} triplify --csv-dir {ACME} --queries {ACME} --out-dir {{work}}/out")],
+          steps=[Step(f"{SUITE} triplify --csv-dir {ACME} --queries {ACME} --out-dir {{work}}/out",
+                      env={"ONTOLOGY_SUITE_OXI_GEN_BIN": ""}, note="with no oxi-gen configured")],
           check=checks(has(0, "WARNING: oxi-gen binary not found", "Triplified 0 file(s)")),
           checks="a warning that oxi-gen was not found, and nothing triplified"),
 
@@ -373,4 +374,24 @@ CLAIMS = [
           checks="with legacy.rq first, the merged sketch reports acme:Employee, hasSkill and hasEmployeeId as "
                  "undeclared in the hash namespace and acme:Employee as never populated; the same two correct files "
                  "on their own report neither"),
+    Claim("C10.30", "Sorted last, the wrong file is not reported at all", "10",
+          (F, "It cuts the other way too, which is worse."), "run",
+          data=["data/mapping-set/people.rq", "data/mapping-set/payroll.rq", "data/mapping-set/legacy.rq"],
+          steps=[Step("python scripts/copy_tree.py data/mapping-set/people.rq {work}/last/people.rq"),
+                 Step("python scripts/copy_tree.py data/mapping-set/payroll.rq {work}/last/payroll.rq"),
+                 Step("python scripts/copy_tree.py data/mapping-set/legacy.rq {work}/last/zz-legacy.rq",
+                      note="the same older mapping, renamed so that it sorts last"),
+                 Step(f"{SUITE} sketch --queries {{work}}/last --ontology {V1} --import-dir {ACME} "
+                      f"--out-dir {{work}}/out --reports minimal --fail-on never"),
+                 Step("python scripts/summarise_findings.py {work}/out/full_results.csv")],
+          check=checks(lambda r: ok("redefined in" in r[3].stderr and "zz-legacy.rq" in r[3].stderr
+                                    and "keeping first definition" in r[3].stderr,
+                                    "the warning names zz-legacy.rq, on stderr", "no warning about zz-legacy.rq"),
+                       counts("out/full_results.csv", {"CNF-001": None, "CNF-002": None}, exact=False),
+                       lambda r: ok("<https://acme.example.org/ns/> ." in r.file("out/sketch.ttl").read_text(encoding="utf-8")
+                                    and "ns#" not in r.file("out/sketch.ttl").read_text(encoding="utf-8").split("# source")[1],
+                                    "sketch.ttl reads zz-legacy.rq's acme:Department in the ontology's namespace",
+                                    "sketch.ttl does not show the misreading")),
+          checks="with the hash-namespace file sorting last, the run reports no CNF-001 or CNF-002 at all: its "
+                 "acme:Department is read in the ontology's own namespace, and the stderr warning is the only trace"),
 ]

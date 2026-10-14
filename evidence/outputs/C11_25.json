@@ -7,7 +7,7 @@
   {
    "cmd": "node scripts/wasm_conforms.mjs data/shacl",
    "rc": 0,
-   "seconds": 0.3,
+   "seconds": 0.2,
    "stdout": "shacl-wasm-node 0.3.2  shapes-warning.ttl     conforms=false  results=1  severities=http://www.w3.org/ns/shacl#Warning\nshacl-wasm-node 0.3.2  shapes-violation.ttl   conforms=false  results=1  severities=http://www.w3.org/ns/shacl#Violation\ninference=none   conforms=true  results=0\ninference=rules  conforms=false  results=1\ninference=bogus  ERROR: unknown inference \"bogus\": expected \"none\", \"rdfs\", \"rules\" or \"rules-iterated\"\n",
    "stderr": ""
   }

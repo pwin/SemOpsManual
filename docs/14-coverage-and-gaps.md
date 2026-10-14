@@ -272,7 +272,7 @@ unknown role.
 | The suite's `triplify` and the extension's *Run Full Triplify* drive `oxi-gen` only; neither knows tarka | [Ch. 10](10-ingest-and-transform.md) §10.3 |
 | `consistency` and `pattern-consistency` exit 0 whatever they find unless given `--fail-on-misalignment` or `--fail-on-mismatch`, two names for one idea, neither of them `--fail-on` | [Ch. 12](12-release-and-change.md) §12.6 |
 | The `holos validate` command defaults to the `native` engine and `holosdb`'s `Store.validate()` to `adapted`, so the same words run different validators | [Ch. 13](13-operate-and-consume.md) §13.2 |
-| When two query files bind one prefix differently, `sketch` reads every file with the first file's binding and reports the others' terms as undeclared; only a warning on stderr says so | [Ch. 10](10-ingest-and-transform.md) §10.6 |
+| When two query files bind one prefix differently, `sketch` reads every file with the first file's binding: the others' terms are reported as undeclared, or, if the odd file sorts last, its mistake is not reported at all. Only a warning on stderr says so | [Ch. 10](10-ingest-and-transform.md) §10.6 |
 
 ### Documentation drift, upstream
 

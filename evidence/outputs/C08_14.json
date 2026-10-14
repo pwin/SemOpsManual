@@ -7,16 +7,16 @@
   {
    "cmd": "node node_modules/tsx/dist/cli.mjs scripts/dsl/acme.ontology.ts work/C08_14/acme.ttl",
    "rc": 0,
-   "seconds": 0.3,
+   "seconds": 0.4,
    "stdout": "",
    "stderr": ""
   },
   {
    "cmd": "ontology-quality-suite ontology --ontology work/C08_14/acme.ttl --out-dir work/C08_14/gate --fail-on Violation --reports minimal",
    "rc": 1,
-   "seconds": 1.9,
+   "seconds": 2.6,
    "stdout": "Findings: 3 total (3 Violation, 0 Warning, 0 Info)\nReports written to: ./work/C08_14/gate\n  - work/C08_14/gate/findings.txt (start here -- what, where, and the source line)\n  - work/C08_14/gate/full_results.csv\n",
-   "stderr": "* Owlready2 * Running HermiT...\n    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp_toz2hot -Y\n* Owlready2 * HermiT took 0.5513122081756592 seconds\n* Owlready * (NB: only changes on entities loaded in Python are shown, other changes are done but not listed)\n"
+   "stderr": "* Owlready2 * Running HermiT...\n    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpk7cqsl3e -Y\n* Owlready2 * HermiT took 1.0980870723724365 seconds\n* Owlready * (NB: only changes on entities loaded in Python are shown, other changes are done but not listed)\n"
   }
  ]
 }

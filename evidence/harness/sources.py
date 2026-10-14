@@ -27,8 +27,10 @@ LOCAL = {
     "triplestore": ("new_triplestore_sparql_engine", "EVIDENCE_HOLOS_REPO"),
     "tarka": ("tarka", "EVIDENCE_TARKA_REPO"),
     "SemOpsManual": ("SemOps_Manual", "EVIDENCE_MANUAL_REPO"),
+    # Not EVIDENCE_TESTING_REPO: that names a clone for running the tests in, which
+    # those tests write into; the citations want the repository's history.
     "consolidated-ontology-quality-suite-python-testing": ("consolidated-ontology-suite-python-testing",
-                                                           "EVIDENCE_TESTING_REPO"),
+                                                           "EVIDENCE_TESTING_SOURCES"),
 }
 
 URL = re.compile(r"https://github\.com/pwin/([^/]+)/(commit|blob)/([0-9a-f]{7,40})(?:/([^#]+))?(?:#L(\d+)(?:-L(\d+))?)?$")

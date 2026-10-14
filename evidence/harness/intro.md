@@ -74,10 +74,12 @@ free on 127.0.0.1, where the live-store claims start `holos-server`.
   repository installs the suite from a sibling checkout,
   `../consolidated_ontology_suite_python` (at `v0.22.0` for the recorded run), and
   its competency tests triplify with oxi-gen, which the suite finds through
-  `ONTOLOGY_SUITE_OXI_GEN_BIN`.
+  `ONTOLOGY_SUITE_OXI_GEN_BIN`. If the clone lives in a temporary folder, make it
+  with `git clone --no-local`: a local clone hardlinks the object files, which
+  keep their old dates, and a temp-folder cleaner will take them.
 - `EVIDENCE_REPOS`, the folder holding local clones of the six repositories
   (default: the folder above the manual), lets `verify.py` check the quoted
-  sources. `verify.py --sources` checks them without running anything else.
+  sources. These are read for their history only, and never written to. `verify.py --sources` checks them without running anything else.
 
 ## What building this changed in the manual
 

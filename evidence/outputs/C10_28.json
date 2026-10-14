@@ -7,7 +7,7 @@
   {
    "cmd": "ontology-quality-suite sketch --queries data/mapping-set --out-dir work/C10_28/ms --reports minimal --fail-on never",
    "rc": 0,
-   "seconds": 1.5,
+   "seconds": 1.4,
    "stdout": "Findings: 1 total (0 Violation, 0 Warning, 1 Info)\nReports written to: ./work/C10_28/ms\n  - work/C10_28/ms/findings.txt (start here -- what, where, and the source line)\n  - work/C10_28/ms/full_results.csv\nSketch used 3 query file(s); 4 triples, 4 entities.\n",
    "stderr": "warning: prefix 'acme:' redefined in data/mapping-set/payroll.rq (https://acme.example.org/ns# -> https://acme.example.org/ns/); keeping first definition\nwarning: prefix 'acme:' redefined in data/mapping-set/people.rq (https://acme.example.org/ns# -> https://acme.example.org/ns/); keeping first definition\n"
   },

@@ -14,14 +14,14 @@
   {
    "cmd": "python scripts/without_java.py ontology-quality-suite data work/C09_09/employees.ttl --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --engine sparql --out-dir work/C09_09/unscoped --fail-on never --reports minimal",
    "rc": 0,
-   "seconds": 3.4,
+   "seconds": 4.5,
    "stdout": "without_java: java on PATH now: none\nFindings: 549 total (66 Violation, 363 Warning, 120 Info)\nReports written to: ./work/C09_09/unscoped\n  - work/C09_09/unscoped/findings.txt (start here -- what, where, and the source line)\n  - work/C09_09/unscoped/full_results.csv\n",
    "stderr": ""
   },
   {
    "cmd": "python scripts/without_java.py ontology-quality-suite data work/C09_09/employees.ttl --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --engine sparql --own-namespace https://acme.example.org/ --out-dir work/C09_09/scoped --fail-on never --reports minimal",
    "rc": 0,
-   "seconds": 3.1,
+   "seconds": 3.2,
    "stdout": "without_java: java on PATH now: none\nFindings: 54 total (12 Violation, 40 Warning, 2 Info)\nReports written to: ./work/C09_09/scoped\n  - work/C09_09/scoped/findings.txt (start here -- what, where, and the source line)\n  - work/C09_09/scoped/full_results.csv\n",
    "stderr": ""
   }

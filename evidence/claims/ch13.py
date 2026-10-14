@@ -141,7 +141,7 @@ CLAIMS = [
           checks="the same five answers as the Python API", needs=["holos-cli"]),
 
     Claim("C13.09", "8 ns per quad, by HOLOS's own measurement", "13",
-          (F, "All verified at 0.21.0. HOLOS measures the cost at 8 ns per quad, about 1% of"), "source",
+          (F, "All verified at 0.21.1. HOLOS measures the cost at 8 ns per quad, about 1% of"), "source",
           sources=[src("HOLOS ACCESS-CONTROL.md", file("holos", "ACCESS-CONTROL.md", "44"),
                        "It costs **8 ns per quad** — measured, and about 1% of what decoding the quad costs.")]),
 
@@ -174,16 +174,12 @@ CLAIMS = [
                        "Engine::with_transient_graph loads input inside a commit scope that is always rolled back"),
                    src("HOLOS commit 82e4d66, 'Cut 0.21.1'", commit("holos", "82e4d6686b3563db502ea68098a6f3fc9ce75d6b"),
                        "validation leaves nothing in the store it validates")],
-          notes="The recorded run uses the published 0.21.0, so it shows the defect. Against 0.21.1 built from "
-                "82e4d66 the same steps gave: `violations [2, 2, 2]` for both engines; no named graphs after a call, "
-                "or after reopening a persistent store; for a planted leftover, Python's `UserWarning: "
-                "<urn:holos:python:shapes> holds 1 quads that an earlier Store.validate left in this store; they are "
-                "not read, and store.update(\"DROP GRAPH <urn:holos:python:shapes>\") removes them`; and from the CLI "
-                "`results 2` twice, then `note: <urn:holos:shapes> holds 1 quads that an earlier holos validate "
-                "--shapes left in this store; they are not read, and DROP GRAPH <urn:holos:shapes> removes them`. "
+          notes="The recorded run uses 0.21.1, so it shows the fix. The same steps against the published 0.21.0 "
+                "gave: `violations [2, 4, 6]` for both engines; a 5-quad `urn:holos:python:shapes` graph after one "
+                "call, still there after reopening a persistent store; no warning for a planted leftover; and from "
+                "the CLI `results 2`, then `results 4`, with a `urn:holos:shapes` graph left behind. "
                 "The Python method's default engine, adapted, is in its signature: "
-                + "[holos-python lib.rs](https://github.com/pwin/triplestore/blob/b31c008083198d4c75ee66bc06696bb195844415/"
-                  "crates/holos-python/src/lib.rs#L647-L657)."),
+                + f"[holos-python lib.rs]({file('holos', 'crates/holos-python/src/lib.rs', '647-674')})."),
 
     Claim("C13.11", "docgen: 4 classes, 5 external terms, 3 resolved", "13",
           (F, "2 object properties, 3 datatype properties, 1 sections,"), "run",

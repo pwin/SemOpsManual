@@ -14,7 +14,7 @@
   {
    "cmd": "python scripts/endpoint_stats.py http://127.0.0.1:7899/query",
    "rc": 0,
-   "seconds": 0.2,
+   "seconds": 0.1,
    "stdout": "g,triples\nhttps://acme.example.org/graph/triplified/employees,40\n",
    "stderr": ""
   }

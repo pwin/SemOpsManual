@@ -7,7 +7,7 @@
   {
    "cmd": "ontology-quality-suite ontology --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --out-dir work/C09_01/gate --reports minimal --fail-on Violation",
    "rc": 1,
-   "seconds": 2.8,
+   "seconds": 3.1,
    "stdout": "Findings: 2 total (1 Violation, 0 Warning, 1 Info)\nReports written to: ./work/C09_01/gate\n  - work/C09_01/gate/findings.txt (start here -- what, where, and the source line)\n  - work/C09_01/gate/full_results.csv\n",
    "stderr": ""
   }

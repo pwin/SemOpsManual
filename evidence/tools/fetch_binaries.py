@@ -3,14 +3,15 @@
     python tools/fetch_binaries.py
 
 For this machine's platform, fetches `shacl` (SHACL Engine 0.3.2), `tarka`
-(0.1.1) and `holos` + `holos-server` (HOLOS 0.21.0) from their GitHub releases,
+(0.1.1) and `holos` + `holos-server` (HOLOS 0.21.1) from their GitHub releases,
 verifies each archive against the release's SHA256SUMS, and unpacks it under
 evidence/bin/. Nothing is installed anywhere else. If a binary is already
-there, it is left alone.
+there, it is left alone; a superseded version of it is removed.
 """
 import hashlib
 import io
 import platform
+import shutil
 import sys
 import tarfile
 import time
@@ -22,7 +23,7 @@ BIN = Path(__file__).resolve().parent.parent / "bin"
 RELEASES = {
     "shacl": ("pwin/SHACL_Engine", "v0.3.2", "shacl-0.3.2-{target}"),
     "tarka": ("pwin/tarka", "v0.1.1", "tarka-0.1.1-{target}"),
-    "holos": ("pwin/triplestore", "v0.21.0", "holos-0.21.0-{target}"),
+    "holos": ("pwin/triplestore", "v0.21.1", "holos-0.21.1-{target}"),
 }
 
 
@@ -54,8 +55,9 @@ def main() -> int:
     ext = ".zip" if "windows" in t else ".tar.gz"
     for tool, (repo, tag, stem) in RELEASES.items():
         dest = BIN / tool
-        if dest.exists() and any(dest.rglob(tool + (".exe" if "windows" in t else ""))):
-            print(f"{tool}: already present under {dest}")
+        folder = dest / stem.format(target=t)
+        if folder.is_dir() and any(folder.rglob(tool + (".exe" if "windows" in t else ""))):
+            print(f"{tool}: {tag} already present under {folder}")
             continue
         asset = stem.format(target=t) + ext
         base = f"https://github.com/{repo}/releases/download/{tag}/"
@@ -79,6 +81,12 @@ def main() -> int:
             for p in dest.rglob("*"):
                 if p.is_file() and p.name.startswith(tool):
                     p.chmod(0o755)
+        # Only the pinned version stays: the harness takes the first binary it
+        # finds, so a superseded one left beside it could be the one that runs.
+        for old in dest.iterdir():
+            if old.is_dir() and old != folder:
+                shutil.rmtree(old)
+                print(f"    removed the superseded {old.name}")
     return 0
 
 

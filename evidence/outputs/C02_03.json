@@ -7,7 +7,7 @@
   {
    "cmd": "python scripts/gist_properties.py 14.1.0 13.0.0",
    "rc": 0,
-   "seconds": 0.3,
+   "seconds": 0.6,
    "stdout": "gist 14.1.0: 66 object properties, 50 data properties; domain only 3, range only 14, both 7, neither 42\ngist 13.0.0: 63 object properties, 50 data properties; domain only 3, range only 14, both 6, neither 40\n",
    "stderr": ""
   }

@@ -14,28 +14,28 @@
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --own-namespace https://acme.example.org/ns/ --engine shacl --out-dir work/C07_22/shacl --fail-on never --reports minimal",
    "rc": 0,
-   "seconds": 1.3,
+   "seconds": 1.4,
    "stdout": "Findings: 22 total (1 Violation, 21 Warning, 0 Info)\nReports written to: ./work/C07_22/shacl\n  - work/C07_22/shacl/findings.txt (start here -- what, where, and the source line)\n  - work/C07_22/shacl/full_results.csv\n",
    "stderr": ""
   },
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --own-namespace https://acme.example.org/ns/ --engine sparql --out-dir work/C07_22/sparql --fail-on never --reports minimal",
    "rc": 0,
-   "seconds": 1.5,
+   "seconds": 1.7,
    "stdout": "Findings: 23 total (1 Violation, 22 Warning, 0 Info)\nReports written to: ./work/C07_22/sparql\n  - work/C07_22/sparql/findings.txt (start here -- what, where, and the source line)\n  - work/C07_22/sparql/full_results.csv\n",
    "stderr": ""
   },
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --own-namespace https://acme.example.org/ns/ --engine native+sparql --out-dir work/C07_22/nativesparql --fail-on never --reports minimal",
    "rc": 0,
-   "seconds": 1.8,
+   "seconds": 1.9,
    "stdout": "Findings: 23 total (1 Violation, 22 Warning, 0 Info)\nReports written to: ./work/C07_22/nativesparql\n  - work/C07_22/nativesparql/findings.txt (start here -- what, where, and the source line)\n  - work/C07_22/nativesparql/full_results.csv\n",
    "stderr": ""
   },
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --own-namespace https://acme.example.org/ns/ --engine both --out-dir work/C07_22/both --fail-on never --reports minimal",
    "rc": 0,
-   "seconds": 1.7,
+   "seconds": 2.0,
    "stdout": "Findings: 23 total (1 Violation, 22 Warning, 0 Info)\nReports written to: ./work/C07_22/both\n  - work/C07_22/both/findings.txt (start here -- what, where, and the source line)\n  - work/C07_22/both/full_results.csv\n",
    "stderr": ""
   }

@@ -7,14 +7,14 @@
   {
    "cmd": "python scripts/build_manifest.py work/C13_02/graphs.json",
    "rc": 0,
-   "seconds": 0.3,
+   "seconds": 0.4,
    "stdout": "{\n  \"graphs\": [\n    {\n      \"graph_uri\": \"https://acme.example.org/graph/ontology/2.0.0\",\n      \"role\": \"ontology\",\n      \"source_tarql\": null,\n      \"ontology_graph_uri\": null,\n      \"notes\": null\n    },\n    {\n      \"graph_uri\": \"https://acme.example.org/graph/triplified/employees\",\n      \"role\": \"triplified_data\",\n      \"source_tarql\": \"queries/employees.rq\",\n      \"ontology_graph_uri\": \"https://acme.example.org/graph/ontology/2.0.0\",\n      \"notes\": null\n    }\n  ]\n}\n",
    "stderr": ""
   },
   {
    "cmd": "ontology-quality-suite consistency-remote --help",
    "rc": 0,
-   "seconds": 1.4,
+   "seconds": 1.3,
    "stdout": "usage: ontology-quality-suite consistency-remote [-h] --query-endpoint\n                                                 QUERY_ENDPOINT\n                                                 [--update-endpoint UPDATE_ENDPOINT]\n                                                 [--auth-user AUTH_USER]\n                                                 [--auth-password AUTH_PASSWORD]\n                                                 --manifest MANIFEST\n                                                 [--sample-limit SAMPLE_LIMIT]\n                                                 [--out-dir OUT_DIR]\n                                                 [--fail-on-misalignment]\n\noptions:\n  -h, --help            show this help message and exit\n  --query-endpoint QUERY_ENDPOINT\n                        the dataset's SPARQL query service URL\n  --update-endpoint UPDATE_ENDPOINT\n                        the dataset's SPARQL update service URL (only needed\n                        to apply repairs remotely)\n  --auth-user AUTH_USER\n  --auth-password AUTH_PASSWORD\n  --manifest MANIFEST   a remote.manifest.GraphManifest JSON file binding\n                        named graphs to their role/tarql source/ontology graph\n  --sample-limit SAMPLE_LIMIT\n                        cap how many triples are pulled per named graph (see\n                        remote.fuseki.load_named_graph)\n  --out-dir OUT_DIR\n  --fail-on-misalignment\n",
    "stderr": ""
   }

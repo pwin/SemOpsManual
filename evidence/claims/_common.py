@@ -22,7 +22,7 @@ REPOS = {
     "suite": (f"{_GH}/consolidated-ontology-quality-suite-python", "749af3e1be749ace3aab3ea4b492d72b3b21dbde"),
     "webapp": (f"{_GH}/consolidated-ontology-quality-suite-webapp", "704d4ef80fdbcbf614782fa9bf42dfa79962b18f"),
     "shacl": (f"{_GH}/SHACL_Engine", "7982c9e45c06d9308d041a78cd105e22b11eba70"),
-    "holos": (f"{_GH}/triplestore", "b31c008083198d4c75ee66bc06696bb195844415"),
+    "holos": (f"{_GH}/triplestore", "82e4d6686b3563db502ea68098a6f3fc9ce75d6b"),   # v0.21.1
     "tarka": (f"{_GH}/tarka", "88fe6184ffc77ee2a46b676cbcb1190620b52c49"),
     "testing": (f"{_GH}/consolidated-ontology-quality-suite-python-testing", "6d078a118959760409e13076650c2d62a4f6dc90"),
     "manual": (f"{_GH}/SemOpsManual", ""),

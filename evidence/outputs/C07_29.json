@@ -7,7 +7,7 @@
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --own-namespace https://acme.example.org/ns/ --engine sparql --out-dir work/C07_29/own --fail-on never --reports minimal",
    "rc": 0,
-   "seconds": 1.7,
+   "seconds": 2.8,
    "stdout": "Findings: 23 total (1 Violation, 22 Warning, 0 Info)\nReports written to: ./work/C07_29/own\n  - work/C07_29/own/findings.txt (start here -- what, where, and the source line)\n  - work/C07_29/own/full_results.csv\n",
    "stderr": ""
   },

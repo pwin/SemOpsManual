@@ -7,7 +7,7 @@
   {
    "cmd": "ontology-quality-suite sketch --queries data/mapping-set --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --out-dir work/C10_29/three --reports minimal --fail-on never",
    "rc": 0,
-   "seconds": 1.7,
+   "seconds": 1.6,
    "stdout": "Findings: 42 total (0 Violation, 4 Warning, 38 Info)\nReports written to: ./work/C10_29/three\n  - work/C10_29/three/findings.txt (start here -- what, where, and the source line)\n  - work/C10_29/three/full_results.csv\nSketch used 3 query file(s); 4 triples, 4 entities.\n",
    "stderr": "warning: prefix 'acme:' redefined in data/mapping-set/payroll.rq (https://acme.example.org/ns# -> https://acme.example.org/ns/); keeping first definition\nwarning: prefix 'acme:' redefined in data/mapping-set/people.rq (https://acme.example.org/ns# -> https://acme.example.org/ns/); keeping first definition\n"
   },
@@ -28,7 +28,7 @@
   {
    "cmd": "ontology-quality-suite sketch --queries data/mapping-set --query-pattern people.rq,payroll.rq --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --out-dir work/C10_29/two --reports minimal --fail-on never",
    "rc": 0,
-   "seconds": 2.1,
+   "seconds": 1.6,
    "stdout": "Findings: 37 total (0 Violation, 0 Warning, 37 Info)\nReports written to: ./work/C10_29/two\n  - work/C10_29/two/findings.txt (start here -- what, where, and the source line)\n  - work/C10_29/two/full_results.csv\nSketch used 2 query file(s); 3 triples, 3 entities.\n",
    "stderr": ""
   }
