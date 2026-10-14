@@ -271,15 +271,18 @@ for instance) with a `HolosError` naming the construct, rather than dropping the
 constraint and answering *conforms*. That refusal is the right one
 ([Chapter 11](11-rules-and-inference.md)).
 
-Two things to know before you validate a store you care about. **Validation
-writes the shapes into the store** and leaves them there, in a named graph of
-their own (`urn:holos:python:shapes` from Python, `urn:holos:shapes` from the
-command line with `--store`). On a persistent store they survive a restart, and
-they turn up in your own queries over named graphs. Each further call adds another
-copy, because a shape's blank nodes are fresh every time, so two people missing a
-required name give 2 violations, then 4, then 6. Both engines count correctly on
-a fresh store; it is the store that has changed. Until that is fixed, validate a
-copy, or an in-memory store loaded for the purpose.
+Two things to know before you validate a store you care about. **Up to 0.21.0,
+validation wrote the shapes into the store** and left them there, in a named
+graph of their own (`urn:holos:python:shapes` from Python, `urn:holos:shapes` from
+the command line with `--store`). Each further call added another copy, because a
+shape's blank nodes are fresh every time, so two people missing a required name
+gave 2 violations, then 4, then 6. On a persistent store the copies survived a
+restart. Building this edition's evidence found it, and **0.21.1 fixed it the
+same day**: the shapes are now read in a scope that is always rolled back, so the
+store is exactly as it was afterwards. A shapes graph an earlier version left
+behind is reported, with the `DROP GRAPH` that removes it, rather than read or
+dropped on your behalf. If you validated a persistent store with 0.21.0, validate
+it once with 0.21.1 and read the note.
 
 The other is smaller: the `holos validate` command defaults to the `native`
 engine and the Python method to `adapted`, so the same words can run different

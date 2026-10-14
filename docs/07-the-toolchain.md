@@ -40,7 +40,7 @@ read, because it is how the rest are kept honest.
 > | Ontology Quality Suite | **0.22.0** | PyPI `ontology-quality-suite` |
 > | Ontology Development Suite | **0.15.0** | `ontology-dev-suite-0.15.0.vsix` from the v0.15.0 release; DSL as npm `ontology-suite` 0.15.0 |
 > | SHACL Engine | **0.3.2** | PyPI `shacl`; npm `shacl-wasm`, `shacl-wasm-node`; the `shacl` command from the v0.3.2 release |
-> | HOLOS | **0.21.0** | PyPI `holosdb`; npm `holos-wasm`, `holos-wasm-node`; the `holos` command from the v0.21.0 release |
+> | HOLOS | **0.21.0** | PyPI `holosdb`; npm `holos-wasm`, `holos-wasm-node`; the `holos` command from the v0.21.0 release. 0.21.1, cut as this edition closed, fixes one defect it found (§13.2 of [Chapter 13](13-operate-and-consume.md)) and was checked from source |
 > | tarka | **0.1.1** | PyPI `tarka-rdf`; the `tarka` command from the v0.1.1 release |
 > | Testing repository | `6d078a1` | `main`, 8 October 2026 |
 >

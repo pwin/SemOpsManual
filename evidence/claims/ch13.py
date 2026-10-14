@@ -1,4 +1,6 @@
 """Chapter 13 — Operate and consume."""
+import re
+
 from ._common import (ACME, HOLOS_URL, SUITE, V1, V2, Claim, Service, Step, all_of, checks, commit, exit_code,
                       file, has, lacks, nonzero, ok, src)
 
@@ -143,7 +145,7 @@ CLAIMS = [
           sources=[src("HOLOS ACCESS-CONTROL.md", file("holos", "ACCESS-CONTROL.md", "44"),
                        "It costs **8 ns per quad** — measured, and about 1% of what decoding the quad costs.")]),
 
-    Claim("C13.10", "Validation writes the shapes into the store, and repeated calls multiply", "13",
+    Claim("C13.10", "Validation and the store: written into it up to 0.21.0, untouched from 0.21.1", "13",
           (F, "Two things to know before you validate a store you care about."), "run",
           data=["data/shacl/two-unnamed.ttl", "data/shacl/shapes-violation.ttl", "data/shacl/shapes-sparql.ttl"],
           scripts=["scripts/holosdb_validate_repeat.py", "scripts/holosdb_validate.py"],
@@ -151,28 +153,35 @@ CLAIMS = [
                       "data/shacl/shapes-sparql.ttl"),
                  Step("python scripts/holosdb_validate_repeat.py data/shacl/two-unnamed.ttl "
                       "data/shacl/shapes-violation.ttl {work}/store"),
+                 Step("holos --version"),
                  Step("holos stats --data data/shacl/two-unnamed.ttl --store {work}/cli-store"),
                  Step("holos validate --store {work}/cli-store --shapes data/shacl/shapes-violation.ttl"),
                  Step("holos validate --store {work}/cli-store --shapes data/shacl/shapes-violation.ttl"),
                  Step('holos query --store {work}/cli-store --query "SELECT ?g (COUNT(*) AS ?n) WHERE '
                       '{ GRAPH ?g { ?s ?p ?o } } GROUP BY ?g"'),
+                 Step('holos update --store {work}/cli-store --update "INSERT DATA { GRAPH <urn:holos:shapes> '
+                      '{ <urn:x:s> <urn:x:p> <urn:x:o> } }"', note="plant what an earlier version would have left"),
+                 Step("holos validate --store {work}/cli-store --shapes data/shacl/shapes-violation.ttl"),
                  Step("holos --help")],
-          check=checks(has(0, "adapted: {'conforms': False, 'violations': 2, 'engine': 'adapted'}",
-                           "native:  {'conforms': False, 'violations': 2, 'engine': 'native'}",
-                           "HolosError: unsupported: sh:sparql is not implemented"),
-                       has(1, "adapted, three calls on one store: violations [2, 4, 6]",
-                           "native, three calls on one store: violations [2, 4, 6]",
-                           "named graphs after one validate(): [('urn:holos:python:shapes', 5)]",
-                           "named graphs in the persistent store after reopening: [('urn:holos:python:shapes', 5)]"),
-                       has(3, "results           2"), has(4, "results           4"),
-                       has(5, "urn:holos:shapes"),
-                       has(6, "--engine <NAME>          native (default) or adapted")),
-          checks="on a fresh store both engines report the 2 true violations, and native refuses sh:sparql; three "
-                 "calls on one store report 2, 4 and 6 with either engine; one validate() leaves a 5-quad shapes "
-                 "graph in the store, which survives reopening a persistent store; the CLI with --store does the "
-                 "same (2, then 4, and a urn:holos:shapes graph left behind); the CLI's default engine is native",
+          check=lambda r: _validation_and_the_store(r),
+          checks="on a fresh store both engines report the 2 true violations, and native refuses sh:sparql; the CLI's "
+                 "default engine is native. Then, by version. At 0.21.0: three calls on one store report 2, 4 and 6; "
+                 "one validate() leaves a 5-quad shapes graph, which survives reopening a persistent store; the CLI "
+                 "with --store does the same. From 0.21.1: 2, 2 and 2; no graph left, on disk or in memory; a "
+                 "leftover shapes graph is reported with the DROP GRAPH that removes it, by Python and by the CLI",
           needs=["holos-cli"],
-          notes="The Python method's default engine, adapted, is in its signature: "
+          sources=[src("HOLOS commit cd5af4b", commit("holos", "cd5af4b32082458ee087d92948020a1b77cd3e9d"),
+                       "Engine::with_transient_graph loads input inside a commit scope that is always rolled back"),
+                   src("HOLOS commit 82e4d66, 'Cut 0.21.1'", commit("holos", "82e4d6686b3563db502ea68098a6f3fc9ce75d6b"),
+                       "validation leaves nothing in the store it validates")],
+          notes="The recorded run uses the published 0.21.0, so it shows the defect. Against 0.21.1 built from "
+                "82e4d66 the same steps gave: `violations [2, 2, 2]` for both engines; no named graphs after a call, "
+                "or after reopening a persistent store; for a planted leftover, Python's `UserWarning: "
+                "<urn:holos:python:shapes> holds 1 quads that an earlier Store.validate left in this store; they are "
+                "not read, and store.update(\"DROP GRAPH <urn:holos:python:shapes>\") removes them`; and from the CLI "
+                "`results 2` twice, then `note: <urn:holos:shapes> holds 1 quads that an earlier holos validate "
+                "--shapes left in this store; they are not read, and DROP GRAPH <urn:holos:shapes> removes them`. "
+                "The Python method's default engine, adapted, is in its signature: "
                 + "[holos-python lib.rs](https://github.com/pwin/triplestore/blob/b31c008083198d4c75ee66bc06696bb195844415/"
                   "crates/holos-python/src/lib.rs#L647-L657)."),
 
@@ -219,3 +228,36 @@ CLAIMS = [
                 "other releases, exports metrics or serves an API other than the SPARQL and Graph Store protocols "
                 "of holos-server (C10.15, C13.01)."),
 ]
+
+
+def _version(text, prefix):
+    m = re.search(rf"{prefix} (\d+)\.(\d+)\.(\d+)", text)
+    return tuple(int(x) for x in m.groups()) if m else None
+
+
+def _validation_and_the_store(r):
+    common = [has(0, "adapted: {'conforms': False, 'violations': 2, 'engine': 'adapted'}",
+                  "native:  {'conforms': False, 'violations': 2, 'engine': 'native'}",
+                  "HolosError: unsupported: sh:sparql is not implemented")(r),
+              has(9, "--engine <NAME>          native (default) or adapted")(r)]
+    py, cli = _version(r[1].stdout, "holosdb"), _version(r[2].out, "holos")
+    if py is None or cli is None:
+        return False, "could not read the holosdb or holos version"
+    if py >= (0, 21, 1):
+        common.append(has(1, "adapted, three calls on one store: violations [2, 2, 2]",
+                          "native, three calls on one store: violations [2, 2, 2]",
+                          "named graphs after one validate(): []",
+                          "named graphs in the persistent store after reopening: []",
+                          'store.update("DROP GRAPH <urn:holos:python:shapes>") removes them')(r))
+    else:
+        common.append(has(1, "adapted, three calls on one store: violations [2, 4, 6]",
+                          "native, three calls on one store: violations [2, 4, 6]",
+                          "named graphs after one validate(): [('urn:holos:python:shapes', 5)]",
+                          "named graphs in the persistent store after reopening: [('urn:holos:python:shapes', 5)]")(r))
+    if cli >= (0, 21, 1):
+        common += [has(4, "results           2")(r), has(5, "results           2")(r), lacks(6, "urn:holos:shapes")(r),
+                   has(8, "note: <urn:holos:shapes> holds 1 quads", "DROP GRAPH <urn:holos:shapes>")(r)]
+    else:
+        common += [has(4, "results           2")(r), has(5, "results           4")(r), has(6, "urn:holos:shapes")(r)]
+    passed, detail = all_of(*common)
+    return passed, f"holosdb {'.'.join(map(str, py))}, holos {'.'.join(map(str, cli))}: {detail}"

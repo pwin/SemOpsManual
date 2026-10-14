@@ -125,7 +125,8 @@ unless an explicit flag allows an empty shapes graph.
 ### `holos validate` exits 0 on a non-conforming graph
 
 Both of its validators print `conforms false` and return exit status 0; a
-non-zero status is reserved for "could not validate". Verified at 0.21.0.
+non-zero status is reserved for "could not validate". Verified at 0.21.0, and
+still so at 0.21.1.
 
 <a id="ev-c14-03"></a>*Evidence:* [C14.03 — holos validate exits 0 on a non-conforming graph](../../EVIDENCE.md#c14-03) (reproduced: PASS)
 
@@ -292,10 +293,10 @@ unknown role.
 | The DSL gives unchecked code an internal `TypeError`; its bundled `Quad` type is not assignable to `@types/n3`'s | [Ch. 8](08-model-and-validate.md) §8.2 |
 | The suite's `triplify` and the extension's *Run Full Triplify* drive `oxi-gen` only; neither knows tarka | [Ch. 10](10-ingest-and-transform.md) §10.3 |
 | `consistency` and `pattern-consistency` exit 0 whatever they find unless given `--fail-on-misalignment` or `--fail-on-mismatch`, two names for one idea, neither of them `--fail-on` | [Ch. 12](12-release-and-change.md) §12.6 |
-| HOLOS validation (`Store.validate()`, or `holos validate --store`) writes the shapes into the store and leaves them, persistently; each further call adds a copy and the result count grows with it. The CLI and the Python method also default to different engines | [Ch. 13](13-operate-and-consume.md) §13.2 |
+| The `holos validate` command defaults to the `native` engine and `holosdb`'s `Store.validate()` to `adapted`, so the same words run different validators | [Ch. 13](13-operate-and-consume.md) §13.2 |
 | When two query files bind one prefix differently, `sketch` reads every file with the first file's binding and reports the others' terms as undeclared; only a warning on stderr says so | [Ch. 10](10-ingest-and-transform.md) §10.6 |
 
-<a id="ev-c14-11"></a><a id="ev-c14-12"></a><a id="ev-c14-13"></a><a id="ev-c14-14"></a><a id="ev-c14-15"></a><a id="ev-c14-16"></a><a id="ev-c14-17"></a><a id="ev-c14-18"></a><a id="ev-c14-19"></a><a id="ev-c14-20"></a>*Evidence:* [C14.11 — --help offers owlrl; asking for it gives a traceback](../../EVIDENCE.md#c14-11) (reproduced: PASS) · [C14.12 — --inference is ignored under --engine sparql](../../EVIDENCE.md#c14-12) (reproduced: PASS) · [C14.13 — The near-miss warning lists blank-node identifiers](../../EVIDENCE.md#c14-13) (reproduced: PASS) · [C14.14 — --registry replaces, so @builtin with a house registry is UNMAPPED](../../EVIDENCE.md#c14-14) (reproduced: PASS) · [C14.15 — One contradiction, two LOG-001s](../../EVIDENCE.md#c14-15) (reproduced: PASS) · [C14.16 — The DSL's TypeError and Quad type](../../EVIDENCE.md#c14-16) (reproduced: PASS) · [C14.17 — triplify drives oxi-gen only](../../EVIDENCE.md#c14-17) (reproduced: PASS) · [C14.18 — consistency and pattern-consistency are report-only by default](../../EVIDENCE.md#c14-18) (reproduced: PASS) · [C14.19 — HOLOS validation leaves the shapes in the store](../../EVIDENCE.md#c14-19) (reproduced: PASS) · [C14.20 — sketch reads every file with the first file's prefixes](../../EVIDENCE.md#c14-20) (reproduced: PASS)
+<a id="ev-c14-11"></a><a id="ev-c14-12"></a><a id="ev-c14-13"></a><a id="ev-c14-14"></a><a id="ev-c14-15"></a><a id="ev-c14-16"></a><a id="ev-c14-17"></a><a id="ev-c14-18"></a><a id="ev-c14-19"></a><a id="ev-c14-20"></a>*Evidence:* [C14.11 — --help offers owlrl; asking for it gives a traceback](../../EVIDENCE.md#c14-11) (reproduced: PASS) · [C14.12 — --inference is ignored under --engine sparql](../../EVIDENCE.md#c14-12) (reproduced: PASS) · [C14.13 — The near-miss warning lists blank-node identifiers](../../EVIDENCE.md#c14-13) (reproduced: PASS) · [C14.14 — --registry replaces, so @builtin with a house registry is UNMAPPED](../../EVIDENCE.md#c14-14) (reproduced: PASS) · [C14.15 — One contradiction, two LOG-001s](../../EVIDENCE.md#c14-15) (reproduced: PASS) · [C14.16 — The DSL's TypeError and Quad type](../../EVIDENCE.md#c14-16) (reproduced: PASS) · [C14.17 — triplify drives oxi-gen only](../../EVIDENCE.md#c14-17) (reproduced: PASS) · [C14.18 — consistency and pattern-consistency are report-only by default](../../EVIDENCE.md#c14-18) (reproduced: PASS) · [C14.19 — The holos CLI and holosdb default to different validators](../../EVIDENCE.md#c14-19) (reproduced: PASS) · [C14.20 — sketch reads every file with the first file's prefixes](../../EVIDENCE.md#c14-20) (reproduced: PASS)
 
 ### Documentation drift, upstream
 
@@ -398,6 +399,14 @@ namespace, an ontology's own default namespace reported as undeclared, and
 WebAssembly build agrees from 0.3.2 ([Ch. 11](11-rules-and-inference.md) §11.1).
 
 <a id="ev-c14-28"></a>*Evidence:* [C14.28 — Closed: sh:conforms follows the specification](../../EVIDENCE.md#c14-28) (reproduced: PASS)
+
+**HOLOS validation leaves the store as it found it**, from 0.21.1. Up to 0.21.0 it
+wrote the shapes into the store it validated, a copy per call, and on disk for
+good. This edition's evidence found it and the fix was cut the same day, with a
+note naming the `DROP GRAPH` for anything an earlier version left
+([Ch. 13](13-operate-and-consume.md) §13.2).
+
+<a id="ev-c14-40"></a>*Evidence:* [C14.40 — Closed: HOLOS validation leaves the store as it found it, from 0.21.1](../../EVIDENCE.md#c14-40) (reproduced: PASS)
 
 **The repair engine** keeps blank nodes and base directions intact when it writes
 back into your file ([Ch. 8](08-model-and-validate.md) §8.1).

@@ -7,21 +7,21 @@
   {
    "cmd": "tarka run -q fixtures/acme_robotics/employees.rq -i fixtures/acme_robotics/employees.csv --ntriples -o work/C11_09/employees.nt",
    "rc": 0,
-   "seconds": 0.0,
+   "seconds": 0.6,
    "stdout": "",
    "stderr": ""
   },
   {
    "cmd": "holos stats --data work/C11_09/employees.nt --store work/C11_09/store",
    "rc": 0,
-   "seconds": 0.4,
-   "stdout": "quads            40\ndictionary terms 31\nnamed graphs     0\non disk          150.2 KiB\nfree here        32.5 GiB\nroom to compact  yes (needs up to 150.2 KiB)\n\npredicates by frequency\n          10  <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\n           5  <http://xmlns.com/foaf/0.1/mbox>\n           5  <https://acme.example.org/ns/hasSkill>\n           5  <https://acme.example.org/ns/hasEmployeeId>\n           5  <https://acme.example.org/ns/hasRole>\n           5  <http://xmlns.com/foaf/0.1/name>\n           5  <https://acme.example.org/ns/worksIn>\n",
-   "stderr": "loaded 40 quads in 0.25s (160 quads/s)\n"
+   "seconds": 1.0,
+   "stdout": "quads            40\ndictionary terms 31\nnamed graphs     0\non disk          150.2 KiB\nfree here        11.2 GiB\nroom to compact  yes (needs up to 150.2 KiB)\n\npredicates by frequency\n          10  <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\n           5  <https://acme.example.org/ns/hasRole>\n           5  <https://acme.example.org/ns/worksIn>\n           5  <https://acme.example.org/ns/hasSkill>\n           5  <http://xmlns.com/foaf/0.1/mbox>\n           5  <https://acme.example.org/ns/hasEmployeeId>\n           5  <http://xmlns.com/foaf/0.1/name>\n",
+   "stderr": "loaded 40 quads in 0.19s (205 quads/s)\n"
   },
   {
    "cmd": "holos rules --store work/C11_09/store --rules data/holos/rules.rq",
    "rc": 0,
-   "seconds": 0.4,
+   "seconds": 0.3,
    "stdout": "1 rule(s) from data/holos/rules.rq:\n  rule 1\n\nderived 5 fact(s) into <https://holos.dev/ns#derived>\n  rounds  2\n  store   40 -> 45 quads\n",
    "stderr": ""
   },

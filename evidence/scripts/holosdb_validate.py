@@ -6,8 +6,9 @@ Store.validate() returns a dictionary, so a caller has a `conforms` key to test
 rather than an exit code. Its native engine refuses a shapes graph that uses
 anything beyond SHACL Core, rather than skipping the constraint.
 
-Each validation here runs on a freshly loaded store, because validate() writes
-the shapes into the store it validates (see holosdb_validate_repeat.py).
+Each validation here runs on a freshly loaded store, because up to 0.21.0
+validate() wrote the shapes into the store it validated, so a second call on the
+same store counted them twice (see holosdb_validate_repeat.py; fixed in 0.21.1).
 """
 import sys
 

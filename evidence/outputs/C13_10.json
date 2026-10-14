@@ -1,7 +1,7 @@
 {
  "id": "C13.10",
  "status": "PASS",
- "detail": "step 1 output contains \"adapted: {'conforms': False, 'violations': 2, 'engine': 'adapted'}\", \"native:  {'conforms': False, 'violations': 2, 'engine': 'native'}\", 'HolosError: unsupported: sh:sparql is not implemented'; step 2 output contains 'adapted, three calls on one store: violations [2, 4, 6]', 'native, three calls on one store: violations [2, 4, 6]', \"named graphs after one validate(): [('urn:holos:python:shapes', 5)]\", \"named graphs in the persistent store after reopening: [('urn:holos:python:shapes', 5)]\"; step 4 output contains 'results           2'; step 5 output contains 'results           4'; step 6 output contains 'urn:holos:shapes'; step 7 output contains '--engine <NAME>          native (default) or adapted'",
+ "detail": "holosdb 0.21.0, holos 0.21.0: step 1 output contains \"adapted: {'conforms': False, 'violations': 2, 'engine': 'adapted'}\", \"native:  {'conforms': False, 'violations': 2, 'engine': 'native'}\", 'HolosError: unsupported: sh:sparql is not implemented'; step 10 output contains '--engine <NAME>          native (default) or adapted'; step 2 output contains 'adapted, three calls on one store: violations [2, 4, 6]', 'native, three calls on one store: violations [2, 4, 6]', \"named graphs after one validate(): [('urn:holos:python:shapes', 5)]\", \"named graphs in the persistent store after reopening: [('urn:holos:python:shapes', 5)]\"; step 5 output contains 'results           2'; step 6 output contains 'results           4'; step 7 output contains 'urn:holos:shapes'",
  "ran": "2026-10-14",
  "steps": [
   {
@@ -14,37 +14,58 @@
   {
    "cmd": "python scripts/holosdb_validate_repeat.py data/shacl/two-unnamed.ttl data/shacl/shapes-violation.ttl work/C13_10/store",
    "rc": 0,
-   "seconds": 0.6,
-   "stdout": "1. adapted, three calls on one store: violations [2, 4, 6]\n1. native, three calls on one store: violations [2, 4, 6]\n2. named graphs after one validate(): [('urn:holos:python:shapes', 5)]\n3. named graphs in the persistent store after reopening: [('urn:holos:python:shapes', 5)]\n",
+   "seconds": 0.5,
+   "stdout": "holosdb 0.21.0\n1. adapted, three calls on one store: violations [2, 4, 6]\n1. native, three calls on one store: violations [2, 4, 6]\n2. named graphs after one validate(): [('urn:holos:python:shapes', 5)]\n3. named graphs in the persistent store after reopening: [('urn:holos:python:shapes', 5)]\n4. with a leftover urn:holos:python:shapes graph: violations 2; no warning\n   named graphs afterwards: [('urn:holos:python:shapes', 6)]\n",
+   "stderr": ""
+  },
+  {
+   "cmd": "holos --version",
+   "rc": 0,
+   "seconds": 0.0,
+   "stdout": "holos 0.21.0 (b31c008)\n",
    "stderr": ""
   },
   {
    "cmd": "holos stats --data data/shacl/two-unnamed.ttl --store work/C13_10/cli-store",
    "rc": 0,
-   "seconds": 0.4,
-   "stdout": "quads            4\ndictionary terms 5\nnamed graphs     0\non disk          140.9 KiB\nfree here        32.0 GiB\nroom to compact  yes (needs up to 140.9 KiB)\n\npredicates by frequency\n           3  <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\n           1  <http://example.org/name>\n",
-   "stderr": "loaded 4 quads in 0.27s (14 quads/s)\n"
+   "seconds": 0.3,
+   "stdout": "quads            4\ndictionary terms 5\nnamed graphs     0\non disk          140.9 KiB\nfree here        11.2 GiB\nroom to compact  yes (needs up to 140.9 KiB)\n\npredicates by frequency\n           3  <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\n           1  <http://example.org/name>\n",
+   "stderr": "loaded 4 quads in 0.21s (19 quads/s)\n"
   },
   {
    "cmd": "holos validate --store work/C13_10/cli-store --shapes data/shacl/shapes-violation.ttl",
    "rc": 0,
-   "seconds": 0.3,
-   "stdout": "shapes compiled   2 shapes in 0.001s\nvalidated         0.000s\nconforms          false\nresults           2\n",
+   "seconds": 0.2,
+   "stdout": "shapes compiled   2 shapes in 0.000s\nvalidated         0.000s\nconforms          false\nresults           2\n",
    "stderr": "loaded 5 shape quads from data/shacl/shapes-violation.ttl\n"
   },
   {
    "cmd": "holos validate --store work/C13_10/cli-store --shapes data/shacl/shapes-violation.ttl",
    "rc": 0,
-   "seconds": 0.3,
+   "seconds": 0.2,
    "stdout": "shapes compiled   3 shapes in 0.001s\nvalidated         0.000s\nconforms          false\nresults           4\n",
    "stderr": "loaded 3 shape quads from data/shacl/shapes-violation.ttl\n"
   },
   {
    "cmd": "holos query --store work/C13_10/cli-store --query \"SELECT ?g (COUNT(*) AS ?n) WHERE { GRAPH ?g { ?s ?p ?o } } GROUP BY ?g\"",
    "rc": 0,
-   "seconds": 0.3,
+   "seconds": 0.2,
    "stdout": "{\"head\":{\"vars\":[\"g\",\"n\"]},\"results\":{\"bindings\":[{\"g\":{\"type\":\"uri\",\"value\":\"urn:holos:shapes\"},\"n\":{\"type\":\"literal\",\"value\":\"8\",\"datatype\":\"http://www.w3.org/2001/XMLSchema#integer\"}}]}}\n",
    "stderr": ""
+  },
+  {
+   "cmd": "holos update --store work/C13_10/cli-store --update \"INSERT DATA { GRAPH <urn:holos:shapes> { <urn:x:s> <urn:x:p> <urn:x:o> } }\"",
+   "rc": 0,
+   "seconds": 0.3,
+   "stdout": "",
+   "stderr": "inserted 1 deleted 0 graphs +0 -0 in 0.190s\n"
+  },
+  {
+   "cmd": "holos validate --store work/C13_10/cli-store --shapes data/shacl/shapes-violation.ttl",
+   "rc": 0,
+   "seconds": 0.1,
+   "stdout": "shapes compiled   4 shapes in 0.001s\nvalidated         0.000s\nconforms          false\nresults           6\n",
+   "stderr": "loaded 3 shape quads from data/shacl/shapes-violation.ttl\n"
   },
   {
    "cmd": "holos --help",

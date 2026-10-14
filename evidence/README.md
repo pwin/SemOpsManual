@@ -19,6 +19,7 @@ that links to it.
 | [`outputs/`](outputs/) | The recorded runs, one JSON file per claim, with machine-specific paths normalised |
 | [`harness/`](harness/) | The runner and the renderer |
 | [`tools/fetch_binaries.py`](tools/fetch_binaries.py) | Downloads and checksum-verifies the release binaries |
+| [`tools/check_links.py`](tools/check_links.py) | Checks every relative link and anchor in EVIDENCE.md and the annotated manual |
 
 ## Setting up
 

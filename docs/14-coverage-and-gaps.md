@@ -119,7 +119,8 @@ unless an explicit flag allows an empty shapes graph.
 ### `holos validate` exits 0 on a non-conforming graph
 
 Both of its validators print `conforms false` and return exit status 0; a
-non-zero status is reserved for "could not validate". Verified at 0.21.0.
+non-zero status is reserved for "could not validate". Verified at 0.21.0, and
+still so at 0.21.1.
 
 *Mitigation:* gate with the `shacl` CLI, or use `holosdb`'s `Store.validate()`
 from Python, which returns a dictionary with a `conforms` key. *Suggested
@@ -270,7 +271,7 @@ unknown role.
 | The DSL gives unchecked code an internal `TypeError`; its bundled `Quad` type is not assignable to `@types/n3`'s | [Ch. 8](08-model-and-validate.md) §8.2 |
 | The suite's `triplify` and the extension's *Run Full Triplify* drive `oxi-gen` only; neither knows tarka | [Ch. 10](10-ingest-and-transform.md) §10.3 |
 | `consistency` and `pattern-consistency` exit 0 whatever they find unless given `--fail-on-misalignment` or `--fail-on-mismatch`, two names for one idea, neither of them `--fail-on` | [Ch. 12](12-release-and-change.md) §12.6 |
-| HOLOS validation (`Store.validate()`, or `holos validate --store`) writes the shapes into the store and leaves them, persistently; each further call adds a copy and the result count grows with it. The CLI and the Python method also default to different engines | [Ch. 13](13-operate-and-consume.md) §13.2 |
+| The `holos validate` command defaults to the `native` engine and `holosdb`'s `Store.validate()` to `adapted`, so the same words run different validators | [Ch. 13](13-operate-and-consume.md) §13.2 |
 | When two query files bind one prefix differently, `sketch` reads every file with the first file's binding and reports the others' terms as undeclared; only a warning on stderr says so | [Ch. 10](10-ingest-and-transform.md) §10.6 |
 
 ### Documentation drift, upstream
@@ -358,6 +359,12 @@ namespace, an ontology's own default namespace reported as undeclared, and
 
 **`sh:conforms` means what the specification says**, from engine 0.3.0, and the
 WebAssembly build agrees from 0.3.2 ([Ch. 11](11-rules-and-inference.md) §11.1).
+
+**HOLOS validation leaves the store as it found it**, from 0.21.1. Up to 0.21.0 it
+wrote the shapes into the store it validated, a copy per call, and on disk for
+good. This edition's evidence found it and the fix was cut the same day, with a
+note naming the `DROP GRAPH` for anything an earlier version left
+([Ch. 13](13-operate-and-consume.md) §13.2).
 
 **The repair engine** keeps blank nodes and base directions intact when it writes
 back into your file ([Ch. 8](08-model-and-validate.md) §8.1).

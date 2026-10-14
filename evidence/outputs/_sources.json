@@ -562,5 +562,17 @@
   "claim": "C04.05",
   "detail": "README.md L155",
   "ok": true
+ },
+ "https://github.com/pwin/triplestore/commit/82e4d6686b3563db502ea68098a6f3fc9ce75d6b": {
+  "checked": "2026-10-14",
+  "claim": "C13.10",
+  "detail": "commit 82e4d66",
+  "ok": true
+ },
+ "https://github.com/pwin/triplestore/commit/cd5af4b32082458ee087d92948020a1b77cd3e9d": {
+  "checked": "2026-10-14",
+  "claim": "C13.10",
+  "detail": "commit cd5af4b",
+  "ok": true
  }
 }
