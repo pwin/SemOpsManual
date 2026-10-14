@@ -230,9 +230,9 @@ The testing repository has a fixture for exactly this case,
 `03b-unsatisfiable-class`. It expects `REA-021` and forbids three other ids, but
 not `REA-020`, so the false finding passes the test written for it.
 
-*Mitigation:* read `REA-020` as real only when it arrives alone. A genuine
-inconsistency raises in owlready2, and the bridge then reports `REA-020` and
-nothing else. *Suggested improvements:* report inconsistency only when
+*Mitigation:* read `REA-020` as real only when it arrives without `REA-021`. A
+genuine inconsistency raises in owlready2, and the bridge then reports `REA-020`
+and no `REA-021`. *Suggested improvements:* report inconsistency only when
 `owl:Thing` is unsatisfiable, which is what inconsistency means; and add
 `REA-020` to that fixture's forbidden list.
 
