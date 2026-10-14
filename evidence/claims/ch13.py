@@ -143,26 +143,38 @@ CLAIMS = [
           sources=[src("HOLOS ACCESS-CONTROL.md", file("holos", "ACCESS-CONTROL.md", "44"),
                        "It costs **8 ns per quad** — measured, and about 1% of what decoding the quad costs.")]),
 
-    Claim("C13.10", "holosdb validates; native refuses sh:sparql; the count is doubled", "13",
-          (F, "Two things to know before you trust the count."), "run",
-          data=["data/shacl/data.ttl", "data/shacl/two-unnamed.ttl", "data/shacl/shapes-violation.ttl",
-                "data/shacl/shapes-sparql.ttl"],
-          scripts=["scripts/holosdb_validate.py"],
+    Claim("C13.10", "Validation writes the shapes into the store, and repeated calls multiply", "13",
+          (F, "Two things to know before you validate a store you care about."), "run",
+          data=["data/shacl/two-unnamed.ttl", "data/shacl/shapes-violation.ttl", "data/shacl/shapes-sparql.ttl"],
+          scripts=["scripts/holosdb_validate_repeat.py", "scripts/holosdb_validate.py"],
           steps=[Step("python scripts/holosdb_validate.py data/shacl/two-unnamed.ttl data/shacl/shapes-violation.ttl "
                       "data/shacl/shapes-sparql.ttl"),
-                 Step("holos validate --data data/shacl/two-unnamed.ttl --shapes data/shacl/shapes-violation.ttl"),
-                 Step("holos validate --data data/shacl/two-unnamed.ttl --shapes data/shacl/shapes-violation.ttl "
-                      "--engine adapted"),
+                 Step("python scripts/holosdb_validate_repeat.py data/shacl/two-unnamed.ttl "
+                      "data/shacl/shapes-violation.ttl {work}/store"),
+                 Step("holos stats --data data/shacl/two-unnamed.ttl --store {work}/cli-store"),
+                 Step("holos validate --store {work}/cli-store --shapes data/shacl/shapes-violation.ttl"),
+                 Step("holos validate --store {work}/cli-store --shapes data/shacl/shapes-violation.ttl"),
+                 Step('holos query --store {work}/cli-store --query "SELECT ?g (COUNT(*) AS ?n) WHERE '
+                      '{ GRAPH ?g { ?s ?p ?o } } GROUP BY ?g"'),
                  Step("holos --help")],
           check=checks(has(0, "adapted: {'conforms': False, 'violations': 2, 'engine': 'adapted'}",
-                           "native:  {'conforms': False, 'violations': 4, 'engine': 'native'}",
+                           "native:  {'conforms': False, 'violations': 2, 'engine': 'native'}",
                            "HolosError: unsupported: sh:sparql is not implemented"),
-                       has(1, "results           2"), has(2, "results           2"),
-                       has(3, "--engine <NAME>          native (default) or adapted")),
-          checks="two people without a name: holosdb reports 2 violations under adapted and 4 under native; the "
-                 "CLI reports 2 results under either; native refuses sh:sparql; the CLI's default engine is native "
-                 "(the Python method's is adapted)",
-          needs=["holos-cli"]),
+                       has(1, "adapted, three calls on one store: violations [2, 4, 6]",
+                           "native, three calls on one store: violations [2, 4, 6]",
+                           "named graphs after one validate(): [('urn:holos:python:shapes', 5)]",
+                           "named graphs in the persistent store after reopening: [('urn:holos:python:shapes', 5)]"),
+                       has(3, "results           2"), has(4, "results           4"),
+                       has(5, "urn:holos:shapes"),
+                       has(6, "--engine <NAME>          native (default) or adapted")),
+          checks="on a fresh store both engines report the 2 true violations, and native refuses sh:sparql; three "
+                 "calls on one store report 2, 4 and 6 with either engine; one validate() leaves a 5-quad shapes "
+                 "graph in the store, which survives reopening a persistent store; the CLI with --store does the "
+                 "same (2, then 4, and a urn:holos:shapes graph left behind); the CLI's default engine is native",
+          needs=["holos-cli"],
+          notes="The Python method's default engine, adapted, is in its signature: "
+                + "[holos-python lib.rs](https://github.com/pwin/triplestore/blob/b31c008083198d4c75ee66bc06696bb195844415/"
+                  "crates/holos-python/src/lib.rs#L647-L657)."),
 
     Claim("C13.11", "docgen: 4 classes, 5 external terms, 3 resolved", "13",
           (F, "2 object properties, 3 datatype properties, 1 sections,"), "run",

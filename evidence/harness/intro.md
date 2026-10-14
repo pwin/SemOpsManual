@@ -99,7 +99,7 @@ has its own entry:
 
 And it found things the manual had not said at all, now in Chapter 14's ledger:
 the merged sketch reading every mapping with the first file's prefixes
-([C10.29](#c10-29)), `holosdb`'s native validator doubling its count
-([C13.10](#c13-10)), `consistency` and `pattern-consistency` exiting 0 on what
+([C10.29](#c10-29)), HOLOS validation writing the shapes into the store it
+validates and leaving them there ([C13.10](#c13-10)), `consistency` and `pattern-consistency` exiting 0 on what
 they find ([C12.14](#c12-14)), and tarka's two OTTR modes disagreeing about a
 `mailto:` cell ([C10.11](#c10-11)).

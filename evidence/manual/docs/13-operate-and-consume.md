@@ -289,14 +289,21 @@ for instance) with a `HolosError` naming the construct, rather than dropping the
 constraint and answering *conforms*. That refusal is the right one
 ([Chapter 11](11-rules-and-inference.md)).
 
-Two things to know before you trust the count. The `holos validate` command
-defaults to the `native` engine and the Python method to `adapted`, so the same
-words can run different validators. And through Python, `native` reports twice
-the true number: two people missing a required name give `'violations': 4`,
-where `adapted`, and the command line with either engine, give 2. `conforms`
-agrees everywhere. Gate on that, not on the count.
+Two things to know before you validate a store you care about. **Validation
+writes the shapes into the store** and leaves them there, in a named graph of
+their own (`urn:holos:python:shapes` from Python, `urn:holos:shapes` from the
+command line with `--store`). On a persistent store they survive a restart, and
+they turn up in your own queries over named graphs. Each further call adds another
+copy, because a shape's blank nodes are fresh every time, so two people missing a
+required name give 2 violations, then 4, then 6. Both engines count correctly on
+a fresh store; it is the store that has changed. Until that is fixed, validate a
+copy, or an in-memory store loaded for the purpose.
 
-<a id="ev-c13-10"></a>*Evidence:* [C13.10 — holosdb validates; native refuses sh:sparql; the count is doubled](../../EVIDENCE.md#c13-10) (reproduced: PASS)
+<a id="ev-c13-10"></a>*Evidence:* [C13.10 — Validation writes the shapes into the store, and repeated calls multiply](../../EVIDENCE.md#c13-10) (reproduced: PASS)
+
+The other is smaller: the `holos validate` command defaults to the `native`
+engine and the Python method to `adapted`, so the same words can run different
+validators.
 
 ---
 

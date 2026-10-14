@@ -99,8 +99,8 @@ has its own entry:
 
 And it found things the manual had not said at all, now in Chapter 14's ledger:
 the merged sketch reading every mapping with the first file's prefixes
-([C10.29](#c10-29)), `holosdb`'s native validator doubling its count
-([C13.10](#c13-10)), `consistency` and `pattern-consistency` exiting 0 on what
+([C10.29](#c10-29)), HOLOS validation writing the shapes into the store it
+validates and leaving them there ([C13.10](#c13-10)), `consistency` and `pattern-consistency` exiting 0 on what
 they find ([C12.14](#c12-14)), and tarka's two OTTR modes disagreeing about a
 `mailto:` cell ([C10.11](#c10-11)).
 
@@ -126,7 +126,6 @@ they find ([C12.14](#c12-14)), and tarka's two OTTR modes disagreeing about a
 | npm holos-wasm-node | 0.21.0 |
 | npm typescript | 7.0.2 |
 | java (for HermiT) | openjdk version "25.0.3" 2026-04-21 LTS |
-| oxi-gen (testing repo only) | oxi_gen 0.5.1 |
 
 ## Summary
 
@@ -400,7 +399,7 @@ they find ([C12.14](#c12-14)), and tarka's two OTTR modes disagreeing about a
 | [C13.07 — The fluent API mistake](#c13-07) | Reproduced here | PASS (2026-10-14) |
 | [C13.08 — The holos command gives the same answers](#c13-08) | Reproduced here | PASS (2026-10-14) |
 | [C13.09 — 8 ns per quad, by HOLOS's own measurement](#c13-09) | Cited from upstream | Cited from upstream |
-| [C13.10 — holosdb validates; native refuses sh:sparql; the count is doubled](#c13-10) | Reproduced here | PASS (2026-10-14) |
+| [C13.10 — Validation writes the shapes into the store, and repeated calls multiply](#c13-10) | Reproduced here | PASS (2026-10-14) |
 | [C13.11 — docgen: 4 classes, 5 external terms, 3 resolved](#c13-11) | Reproduced here | PASS (2026-10-14) |
 | [C13.12 — Three runs, three pages; pinned, one](#c13-12) | Reproduced here | PASS (2026-10-14) |
 | [C13.13 — Every row carries source_file and line](#c13-13) | Reproduced here | PASS (2026-10-14) |
@@ -431,7 +430,7 @@ they find ([C12.14](#c12-14)), and tarka's two OTTR modes disagreeing about a
 | [C14.16 — The DSL's TypeError and Quad type](#c14-16) | Reproduced here | PASS (2026-10-14) |
 | [C14.17 — triplify drives oxi-gen only](#c14-17) | Reproduced here | PASS (2026-10-14) |
 | [C14.18 — consistency and pattern-consistency are report-only by default](#c14-18) | Reproduced here | PASS (2026-10-14) |
-| [C14.19 — holosdb's native validator doubles the count](#c14-19) | Reproduced here | PASS (2026-10-14) |
+| [C14.19 — HOLOS validation leaves the shapes in the store](#c14-19) | Reproduced here | PASS (2026-10-14) |
 | [C14.20 — sketch reads every file with the first file's prefixes](#c14-20) | Reproduced here | PASS (2026-10-14) |
 | [C14.21 — Documentation drift, upstream](#c14-21) | Reproduced here | PASS (2026-10-14) |
 | [C14.22 — The registry grew from 50 checks to 61](#c14-22) | Cited from upstream | Cited from upstream |
@@ -7350,21 +7349,30 @@ python scripts/holosdb_validate.py data/shacl/data.ttl data/shacl/shapes-violati
 Store.validate() returns a dictionary, so a caller has a `conforms` key to test
 rather than an exit code. Its native engine refuses a shapes graph that uses
 anything beyond SHACL Core, rather than skipping the constraint.
+
+Each validation here runs on a freshly loaded store, because validate() writes
+the shapes into the store it validates (see holosdb_validate_repeat.py).
 """
 import sys
 
 from holosdb import HolosError, Store
 
 sys.stdout.reconfigure(encoding="utf-8")
-store = Store()
-store.load(sys.argv[1])
-print("adapted:", store.validate(sys.argv[2]))
-print("native: ", store.validate(sys.argv[2], engine="native"))
+
+
+def fresh() -> Store:
+    store = Store()
+    store.load(sys.argv[1])
+    return store
+
+
+print("adapted:", fresh().validate(sys.argv[2]))
+print("native: ", fresh().validate(sys.argv[2], engine="native"))
 if len(sys.argv) > 3:
     try:
-        print("native, sh:sparql shapes:", store.validate(sys.argv[3], engine="native"))
+        print("native, sh:sparql shapes:", fresh().validate(sys.argv[3], engine="native"))
     except HolosError as exc:
-        print("native, sh:sparql shapes: HolosError:", " ".join(str(exc).split()))
+        print(f"native, sh:sparql shapes: HolosError: {exc}")
 ```
 
 </details>
@@ -7381,38 +7389,38 @@ shapes compiled   2 shapes in 0.000s
 validated         0.000s
 conforms          false
 results           1
-loaded 3 quads in 0.00s (4039 quads/s)
+loaded 3 quads in 0.02s (173 quads/s)
 loaded 5 shape quads from data/shacl/shapes-violation.ttl
 [exit 0]
 
 $ holos validate --data data/shacl/data.ttl --shapes data/shacl/shapes-violation.ttl --engine adapted
-bridged+compiled  3 triples, 2 shapes in 0.000s
-validated         0.000s
+bridged+compiled  3 triples, 2 shapes in 0.003s
+validated         0.001s
 conforms          false
 results           1
-loaded 3 quads in 0.00s (4740 quads/s)
+loaded 3 quads in 0.00s (5976 quads/s)
 loaded 5 shape quads from data/shacl/shapes-violation.ttl
 [exit 0]
 
 $ holos validate --data data/shacl/data.ttl --shapes data/shacl/shapes-sparql.ttl
-loaded 3 quads in 0.00s (4221 quads/s)
+loaded 3 quads in 0.00s (4437 quads/s)
 loaded 6 shape quads from data/shacl/shapes-sparql.ttl
 Error: unsupported: sh:sparql is not implemented by the incremental evaluator; validate                      through holos_shacl::engine::EngineRun instead
 [exit 1]
 
 $ holos validate --data data/shacl/data.ttl --shapes data/shacl/shapes-sparql.ttl --engine adapted
-bridged+compiled  3 triples, 1 shapes in 0.000s
-validated         0.000s
+bridged+compiled  3 triples, 1 shapes in 0.001s
+validated         0.002s
 conforms          false
 results           1
-loaded 3 quads in 0.00s (4268 quads/s)
+loaded 3 quads in 0.00s (5588 quads/s)
 loaded 6 shape quads from data/shacl/shapes-sparql.ttl
 [exit 0]
 
 $ python scripts/holosdb_validate.py data/shacl/data.ttl data/shacl/shapes-violation.ttl data/shacl/shapes-sparql.ttl
 adapted: {'conforms': False, 'violations': 1, 'engine': 'adapted'}
-native:  {'conforms': False, 'violations': 2, 'engine': 'native'}
-native, sh:sparql shapes: HolosError: unsupported: sh:sparql is not implemented by the incremental evaluator; validate through holos_shacl::engine::EngineRun instead
+native:  {'conforms': False, 'violations': 1, 'engine': 'native'}
+native, sh:sparql shapes: HolosError: unsupported: sh:sparql is not implemented by the incremental evaluator; validate                      through holos_shacl::engine::EngineRun instead
 [exit 0]
 ```
 
@@ -8877,26 +8885,14 @@ loaded 21 quads in 0.00s (27818 quads/s)
 ---
 
 <a id="c13-10"></a>
-### C13.10 — holosdb validates; native refuses sh:sparql; the count is doubled
+### C13.10 — Validation writes the shapes into the store, and repeated calls multiply
 
 **In the manual:** [Chapter 13, at the claim](manual/docs/13-operate-and-consume.md#ev-c13-10) · [plain edition](../docs/13-operate-and-consume.md#132-access-policy-at-the-scan)  
 **Kind:** Reproduced here · **Result:** **PASS** (2026-10-14)
 
-> Two things to know before you trust the count.
+> Two things to know before you validate a store you care about.
 
-**Inputs:** [`data/shacl/data.ttl`](data/shacl/data.ttl), [`data/shacl/two-unnamed.ttl`](data/shacl/two-unnamed.ttl), [`data/shacl/shapes-violation.ttl`](data/shacl/shapes-violation.ttl), [`data/shacl/shapes-sparql.ttl`](data/shacl/shapes-sparql.ttl)
-
-<details><summary><code>data/shacl/data.ttl</code></summary>
-
-```turtle
-# Chapter 11: two people, one of them with no name.
-@prefix ex: <http://example.org/> .
-
-ex:alice a ex:Person ; ex:name "Alice" .
-ex:bob   a ex:Person .
-```
-
-</details>
+**Inputs:** [`data/shacl/two-unnamed.ttl`](data/shacl/two-unnamed.ttl), [`data/shacl/shapes-violation.ttl`](data/shacl/shapes-violation.ttl), [`data/shacl/shapes-sparql.ttl`](data/shacl/shapes-sparql.ttl)
 
 <details><summary><code>data/shacl/two-unnamed.ttl</code></summary>
 
@@ -8947,10 +8943,60 @@ ex:NamedShape a sh:NodeShape ; sh:targetClass ex:Person ;
 
 ```bash
 python scripts/holosdb_validate.py data/shacl/two-unnamed.ttl data/shacl/shapes-violation.ttl data/shacl/shapes-sparql.ttl
-holos validate --data data/shacl/two-unnamed.ttl --shapes data/shacl/shapes-violation.ttl
-holos validate --data data/shacl/two-unnamed.ttl --shapes data/shacl/shapes-violation.ttl --engine adapted
+python scripts/holosdb_validate_repeat.py data/shacl/two-unnamed.ttl data/shacl/shapes-violation.ttl work/C13_10/store
+holos stats --data data/shacl/two-unnamed.ttl --store work/C13_10/cli-store
+holos validate --store work/C13_10/cli-store --shapes data/shacl/shapes-violation.ttl
+holos validate --store work/C13_10/cli-store --shapes data/shacl/shapes-violation.ttl
+holos query --store work/C13_10/cli-store --query "SELECT ?g (COUNT(*) AS ?n) WHERE { GRAPH ?g { ?s ?p ?o } } GROUP BY ?g"
 holos --help
 ```
+
+<details><summary><code>scripts/holosdb_validate_repeat.py</code></summary>
+
+```python
+"""Chapter 13 §13.2: validation writes the shapes into the store, and leaves them.
+
+    python scripts/holosdb_validate_repeat.py DATA SHAPES work/C13_10/store
+
+1. On one in-memory store, validates three times with each engine and prints
+   the violation counts. They grow, because each call loads another copy of
+   the shapes: a shape's blank nodes are fresh every time.
+2. Prints the named graphs the store holds after one validation.
+3. On a persistent store at the given path, validates once, reopens the store
+   and prints its named graphs again.
+"""
+import sys
+
+from holosdb import Store
+
+sys.stdout.reconfigure(encoding="utf-8")
+data, shapes, path = sys.argv[1:4]
+GRAPHS = "SELECT ?g (COUNT(*) AS ?n) WHERE { GRAPH ?g { ?s ?p ?o } } GROUP BY ?g ORDER BY ?g"
+
+
+def graphs(store):
+    return [(r.to_dict()["g"], int(r.to_dict()["n"])) for r in store.query(GRAPHS)]
+
+
+for engine in ("adapted", "native"):
+    store = Store()
+    store.load(data)
+    counts = [store.validate(shapes, engine=engine)["violations"] for _ in range(3)]
+    print(f"1. {engine}, three calls on one store: violations {counts}")
+
+store = Store()
+store.load(data)
+store.validate(shapes)
+print(f"2. named graphs after one validate(): {graphs(store)}")
+
+disk = Store(path=path)
+disk.load(data)
+disk.validate(shapes)
+del disk
+print(f"3. named graphs in the persistent store after reopening: {graphs(Store(path=path))}")
+```
+
+</details>
 
 <details><summary><code>scripts/holosdb_validate.py</code></summary>
 
@@ -8962,54 +9008,85 @@ holos --help
 Store.validate() returns a dictionary, so a caller has a `conforms` key to test
 rather than an exit code. Its native engine refuses a shapes graph that uses
 anything beyond SHACL Core, rather than skipping the constraint.
+
+Each validation here runs on a freshly loaded store, because validate() writes
+the shapes into the store it validates (see holosdb_validate_repeat.py).
 """
 import sys
 
 from holosdb import HolosError, Store
 
 sys.stdout.reconfigure(encoding="utf-8")
-store = Store()
-store.load(sys.argv[1])
-print("adapted:", store.validate(sys.argv[2]))
-print("native: ", store.validate(sys.argv[2], engine="native"))
+
+
+def fresh() -> Store:
+    store = Store()
+    store.load(sys.argv[1])
+    return store
+
+
+print("adapted:", fresh().validate(sys.argv[2]))
+print("native: ", fresh().validate(sys.argv[2], engine="native"))
 if len(sys.argv) > 3:
     try:
-        print("native, sh:sparql shapes:", store.validate(sys.argv[3], engine="native"))
+        print("native, sh:sparql shapes:", fresh().validate(sys.argv[3], engine="native"))
     except HolosError as exc:
-        print("native, sh:sparql shapes: HolosError:", " ".join(str(exc).split()))
+        print(f"native, sh:sparql shapes: HolosError: {exc}")
 ```
 
 </details>
 
-**What is checked:** two people without a name: holosdb reports 2 violations under adapted and 4 under native; the CLI reports 2 results under either; native refuses sh:sparql; the CLI's default engine is native (the Python method's is adapted)
+**What is checked:** on a fresh store both engines report the 2 true violations, and native refuses sh:sparql; three calls on one store report 2, 4 and 6 with either engine; one validate() leaves a 5-quad shapes graph in the store, which survives reopening a persistent store; the CLI with --store does the same (2, then 4, and a urn:holos:shapes graph left behind); the CLI's default engine is native
 
-**Recorded result:** PASS — step 1 output contains "adapted: {'conforms': False, 'violations': 2, 'engine': 'adapted'}", "native:  {'conforms': False, 'violations': 4, 'engine': 'native'}", 'HolosError: unsupported: sh:sparql is not implemented'; step 2 output contains 'results           2'; step 3 output contains 'results           2'; step 4 output contains '--engine <NAME>          native (default) or adapted'
+**Recorded result:** PASS — step 1 output contains "adapted: {'conforms': False, 'violations': 2, 'engine': 'adapted'}", "native:  {'conforms': False, 'violations': 2, 'engine': 'native'}", 'HolosError: unsupported: sh:sparql is not implemented'; step 2 output contains 'adapted, three calls on one store: violations [2, 4, 6]', 'native, three calls on one store: violations [2, 4, 6]', "named graphs after one validate(): [('urn:holos:python:shapes', 5)]", "named graphs in the persistent store after reopening: [('urn:holos:python:shapes', 5)]"; step 4 output contains 'results           2'; step 5 output contains 'results           4'; step 6 output contains 'urn:holos:shapes'; step 7 output contains '--engine <NAME>          native (default) or adapted'
 
 <details><summary>Output, as recorded</summary>
 
 ```text
 $ python scripts/holosdb_validate.py data/shacl/two-unnamed.ttl data/shacl/shapes-violation.ttl data/shacl/shapes-sparql.ttl
 adapted: {'conforms': False, 'violations': 2, 'engine': 'adapted'}
-native:  {'conforms': False, 'violations': 4, 'engine': 'native'}
-native, sh:sparql shapes: HolosError: unsupported: sh:sparql is not implemented by the incremental evaluator; validate through holos_shacl::engine::EngineRun instead
+native:  {'conforms': False, 'violations': 2, 'engine': 'native'}
+native, sh:sparql shapes: HolosError: unsupported: sh:sparql is not implemented by the incremental evaluator; validate                      through holos_shacl::engine::EngineRun instead
 [exit 0]
 
-$ holos validate --data data/shacl/two-unnamed.ttl --shapes data/shacl/shapes-violation.ttl
-shapes compiled   2 shapes in 0.000s
+$ python scripts/holosdb_validate_repeat.py data/shacl/two-unnamed.ttl data/shacl/shapes-violation.ttl work/C13_10/store
+1. adapted, three calls on one store: violations [2, 4, 6]
+1. native, three calls on one store: violations [2, 4, 6]
+2. named graphs after one validate(): [('urn:holos:python:shapes', 5)]
+3. named graphs in the persistent store after reopening: [('urn:holos:python:shapes', 5)]
+[exit 0]
+
+$ holos stats --data data/shacl/two-unnamed.ttl --store work/C13_10/cli-store
+quads            4
+dictionary terms 5
+named graphs     0
+on disk          140.9 KiB
+free here        32.0 GiB
+room to compact  yes (needs up to 140.9 KiB)
+predicates by frequency
+           3  <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
+           1  <http://example.org/name>
+loaded 4 quads in 0.27s (14 quads/s)
+[exit 0]
+
+$ holos validate --store work/C13_10/cli-store --shapes data/shacl/shapes-violation.ttl
+shapes compiled   2 shapes in 0.001s
 validated         0.000s
 conforms          false
 results           2
-loaded 4 quads in 0.00s (7513 quads/s)
 loaded 5 shape quads from data/shacl/shapes-violation.ttl
 [exit 0]
 
-$ holos validate --data data/shacl/two-unnamed.ttl --shapes data/shacl/shapes-violation.ttl --engine adapted
-bridged+compiled  4 triples, 2 shapes in 0.000s
+$ holos validate --store work/C13_10/cli-store --shapes data/shacl/shapes-violation.ttl
+shapes compiled   3 shapes in 0.001s
 validated         0.000s
 conforms          false
-results           2
-loaded 4 quads in 0.00s (7169 quads/s)
-loaded 5 shape quads from data/shacl/shapes-violation.ttl
+results           4
+loaded 3 shape quads from data/shacl/shapes-violation.ttl
+[exit 0]
+
+$ holos query --store work/C13_10/cli-store --query "SELECT ?g (COUNT(*) AS ?n) WHERE { GRAPH ?g { ?s ?p ?o } } GROUP BY ?g"
+{"head":{"vars":["g","n"]},"results":{"bindings":[{"g":{"type":"uri","value":"urn:holos:shapes"},"n":{"type":"literal","value":"8","datatype":"http://www.w3.org/2001/XMLSchema#integer"}}]}}
 [exit 0]
 
 $ holos --help
@@ -9056,6 +9133,8 @@ OPTIONS
 ```
 
 </details>
+
+The Python method's default engine, adapted, is in its signature: [holos-python lib.rs](https://github.com/pwin/triplestore/blob/b31c008083198d4c75ee66bc06696bb195844415/crates/holos-python/src/lib.rs#L647-L657).
 
 ---
 
@@ -10135,14 +10214,14 @@ Needs Java, and a hash seed under which owlready2 loads (5 here; see C14.06).
 ---
 
 <a id="c14-19"></a>
-### C14.19 — holosdb's native validator doubles the count
+### C14.19 — HOLOS validation leaves the shapes in the store
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-19) · [plain edition](../docs/14-coverage-and-gaps.md#smaller-ones-all-worth-a-line)  
 **Kind:** Reproduced here · **Result:** **PASS** (2026-10-14)
 
-> | `holosdb`'s `Store.validate(…, engine="native")` reports twice the violations
+> | HOLOS validation (`Store.validate()`, or `holos validate --store`) writes the shapes into the store
 
-**Evidence:** the same as [C13.10 — holosdb validates; native refuses sh:sparql; the count is doubled](#c13-10), which reproduces it: step 1 output contains "adapted: {'conforms': False, 'violations': 2, 'engine': 'adapted'}", "native:  {'conforms': False, 'violations': 4, 'engine': 'native'}", 'HolosError: unsupported: sh:sparql is not implemented'; step 2 output contains 'results           2'; step 3 output contains 'results           2'; step 4 output contains '--engine <NAME>          native (default) or adapted'
+**Evidence:** the same as [C13.10 — Validation writes the shapes into the store, and repeated calls multiply](#c13-10), which reproduces it: step 1 output contains "adapted: {'conforms': False, 'violations': 2, 'engine': 'adapted'}", "native:  {'conforms': False, 'violations': 2, 'engine': 'native'}", 'HolosError: unsupported: sh:sparql is not implemented'; step 2 output contains 'adapted, three calls on one store: violations [2, 4, 6]', 'native, three calls on one store: violations [2, 4, 6]', "named graphs after one validate(): [('urn:holos:python:shapes', 5)]", "named graphs in the persistent store after reopening: [('urn:holos:python:shapes', 5)]"; step 4 output contains 'results           2'; step 5 output contains 'results           4'; step 6 output contains 'urn:holos:shapes'; step 7 output contains '--engine <NAME>          native (default) or adapted'
 
 ---
 

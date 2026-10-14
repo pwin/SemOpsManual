@@ -270,7 +270,7 @@ unknown role.
 | The DSL gives unchecked code an internal `TypeError`; its bundled `Quad` type is not assignable to `@types/n3`'s | [Ch. 8](08-model-and-validate.md) §8.2 |
 | The suite's `triplify` and the extension's *Run Full Triplify* drive `oxi-gen` only; neither knows tarka | [Ch. 10](10-ingest-and-transform.md) §10.3 |
 | `consistency` and `pattern-consistency` exit 0 whatever they find unless given `--fail-on-misalignment` or `--fail-on-mismatch`, two names for one idea, neither of them `--fail-on` | [Ch. 12](12-release-and-change.md) §12.6 |
-| `holosdb`'s `Store.validate(…, engine="native")` reports twice the violations that `adapted`, and the `holos` CLI with either engine, report; and the CLI and the Python method default to different engines | [Ch. 13](13-operate-and-consume.md) §13.2 |
+| HOLOS validation (`Store.validate()`, or `holos validate --store`) writes the shapes into the store and leaves them, persistently; each further call adds a copy and the result count grows with it. The CLI and the Python method also default to different engines | [Ch. 13](13-operate-and-consume.md) §13.2 |
 | When two query files bind one prefix differently, `sketch` reads every file with the first file's binding and reports the others' terms as undeclared; only a warning on stderr says so | [Ch. 10](10-ingest-and-transform.md) §10.6 |
 
 ### Documentation drift, upstream
