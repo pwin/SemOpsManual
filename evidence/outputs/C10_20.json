@@ -1,0 +1,36 @@
+{
+ "id": "C10.20",
+ "status": "PASS",
+ "detail": "STR-006: 10, five departments and five mailboxes; DAT-002: 10, five departments and five mailboxes; CNF-005 on https://acme.example.org/ns/Contractor, https://acme.example.org/ns/Department; QUA-001 on https://acme.example.org/ns/hasSkill; STY-002 on https://acme.example.org/ns/reports_to; STR-003 on https://acme.example.org/ns/reports_to; REA-021's message reads as quoted",
+ "ran": "2026-10-14",
+ "steps": [
+  {
+   "cmd": "tarka run -q fixtures/acme_robotics/employees.rq -i fixtures/acme_robotics/employees.csv -o work/C10_20/employees.ttl",
+   "rc": 0,
+   "seconds": 0.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  {
+   "cmd": "ontology-quality-suite data work/C10_20/employees.ttl --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --engine sparql --own-namespace https://acme.example.org/ --out-dir work/C10_20/own --fail-on never --reports minimal",
+   "rc": 0,
+   "seconds": 4.4,
+   "stdout": "Findings: 55 total (13 Violation, 40 Warning, 2 Info)\nReports written to: ./work/C10_20/own\n  - work/C10_20/own/findings.txt (start here -- what, where, and the source line)\n  - work/C10_20/own/full_results.csv\n",
+   "stderr": "* Owlready2 * WARNING: DataProperty http://xmlns.com/foaf/0.1/name belongs to more than one entity types: [owl.DatatypeProperty, rdf-schema.label]; I'm trying to fix it...\n* Owlready2 * Running HermiT...\n    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpuu3qnqg_ -Y\n* Owlready2 * HermiT took 0.8489112854003906 seconds\n* Owlready * Reparenting org.hasRegisteredSite: {owl.ObjectProperty, org.hasPrimarySite} => {org.hasPrimarySite}\n* Owlready * Reparenting org.originalOrganization: {owl.ObjectProperty, prov.used} => {prov.used}\n* Owlready * Reparenting <tmp>/tmp17yhnl1u/ontology.aimChatID: {owl.InverseFunctionalProperty, <tmp>/tmp17yhnl1u/ontology.nick, owl.DatatypeProperty} => {<tmp>/tmp17yhnl1u/ontology.nick, owl.InverseFunctionalProperty}\n* Owlready * Reparenting <tmp>/tmp17yhnl1u/ontology.icqChatID: {owl.InverseFunctionalProperty, <tmp>/tmp17yhnl1u/ontology.nick, owl.DatatypeProperty} => {<tmp>/tmp17yhnl1u/ontology.nick, owl.InverseFunctionalProperty}\n* Owlready * Reparenting <tmp>/tmp17yhnl1u/ontology.yahooChatID: {owl.InverseFunctionalProperty, <tmp>/tmp17yhnl1u/ontology.nick, owl.DatatypeProperty} => {<tmp>/tmp17yhnl1u/ontology.nick, owl.InverseFunctionalProperty}\n* Owlready * Reparenting <tmp>/tmp17yhnl1u/ontology.skypeID: {<tmp>/tmp17yhnl1u/ontology.nick, owl.DatatypeProperty} => {<tmp>/tmp17yhnl1u/ontology.nick}\n* Owlready * Reparenting <tmp>/tmp17yhnl1u/ontology.msnChatID: {owl.InverseFunctionalProperty, <tmp>/tmp17yhnl1u/ontology.nick, owl.DatatypeProperty} => {<tmp>/tmp17yhnl1u/ontology.nick, owl.InverseFunctionalProperty}\n* Owlready * Reparenting org.headOf: {org.memberOf, owl.ObjectProperty} => {org.memberOf}\n* Owlready * Reparenting <tmp>/tmp17yhnl1u/ontology.img: {owl.ObjectProperty, <tmp>/tmp17yhnl1u/ontology.depiction} => {<tmp>/tmp17yhnl1u/ontology.depiction}\n* Owlready * Reparenting <tmp>/tmp17yhnl1u/ontology.openid: {owl.InverseFunctionalProperty, owl.ObjectProperty, <tmp>/tmp17yhnl1u/ontology.isPrimaryTopicOf} => {<tmp>/tmp17yhnl1u/ontology.isPrimaryTopicOf}\n* Owlready * Reparenting <tmp>/tmp17yhnl1u/ontology.homepage: {owl.InverseFunctionalProperty, owl.ObjectProperty, <tmp>/tmp17yhnl1u/ontology.page, <tmp>/tmp17yhnl1u/ontology.isPrimaryTopicOf} => {<tmp>/tmp17yhnl1u/ontology.isPrimaryTopicOf}\n* Owlready * Reparenting <tmp>/tmp17yhnl1u/ontology.weblog: {owl.ObjectProperty, owl.InverseFunctionalProperty, <tmp>/tmp17yhnl1u/ontology.page} => {owl.InverseFunctionalProperty, <tmp>/tmp17yhnl1u/ontology.page}\n* Owlready * Reparenting <tmp>/tmp17yhnl1u/ontology.tipjar: {owl.ObjectProperty, <tmp>/tmp17yhnl1u/ontology.page} => {<tmp>/tmp17yhnl1u/ontology.page}\n* Owlready * Reparenting org.hasPrimarySite: {owl.ObjectProperty, org.hasSite} => {org.hasSite}\n* Owlready * Reparenting org.identifier: {core.notation, owl.DatatypeProperty} => {core.notation}\n* Owlready * (NB: only changes on entities loaded in Python are shown, other changes are done but not listed)\n"
+  },
+  {
+   "cmd": "python scripts/summarise_findings.py work/C10_20/own/full_results.csv --by focus --check STR-006",
+   "rc": 0,
+   "seconds": 0.1,
+   "stdout": "STR-006  focus=https://acme.example.org/data/employee/E001  path=http://xmlns.com/foaf/0.1/mbox  value=mailto:grace.hopper@acme.example.org\nSTR-006  focus=https://acme.example.org/data/employee/E001  path=https://acme.example.org/ns/worksIn  value=https://acme.example.org/data/department/ENG\nSTR-006  focus=https://acme.example.org/data/employee/E002  path=http://xmlns.com/foaf/0.1/mbox  value=mailto:ada.lovelace@acme.example.org\nSTR-006  focus=https://acme.example.org/data/employee/E002  path=https://acme.example.org/ns/worksIn  value=https://acme.example.org/data/department/ENG\nSTR-006  focus=https://acme.example.org/data/employee/E003  path=https://acme.example.org/ns/worksIn  value=https://acme.example.org/data/department/ENG\nSTR-006  focus=https://acme.example.org/data/employee/E003  path=http://xmlns.com/foaf/0.1/mbox  value=mailto:alan.turing@acme.example.org\nSTR-006  focus=https://acme.example.org/data/employee/E004  path=http://xmlns.com/foaf/0.1/mbox  value=mailto:margaret.hamilton@acme.example.org\nSTR-006  focus=https://acme.example.org/data/employee/E004  path=https://acme.example.org/ns/worksIn  value=https://acme.example.org/data/department/QA\nSTR-006  focus=https://acme.example.org/data/employee/E005  path=https://acme.example.org/ns/worksIn  value=https://acme.example.org/data/department/MKT\nSTR-006  focus=https://acme.example.org/data/employee/E005  path=http://xmlns.com/foaf/0.1/mbox  value=mailto:katherine.johnson@acme.example.org\ntotal 10: 10 Violation, 0 Warning, 0 Info\n",
+   "stderr": ""
+  },
+  {
+   "cmd": "python scripts/summarise_findings.py work/C10_20/own/full_results.csv --by focus --check CNF-005",
+   "rc": 0,
+   "seconds": 0.1,
+   "stdout": "CNF-005  focus=https://acme.example.org/ns/Contractor  path=-  value=-\nCNF-005  focus=https://acme.example.org/ns/Department  path=-  value=-\ntotal 2: 0 Violation, 0 Warning, 2 Info\n",
+   "stderr": ""
+  }
+ ]
+}

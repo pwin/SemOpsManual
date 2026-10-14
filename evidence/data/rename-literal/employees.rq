@@ -1,0 +1,12 @@
+PREFIX acme: <https://acme.example.org/ns/>
+
+# Every row is typed acme:Engineer, the term v2 renames. (A comment: a repair
+# must leave this line alone.)
+CONSTRUCT {
+  ?employee a acme:Employee, acme:Engineer ;
+    acme:hasRole ?role .
+}
+WHERE {
+  BIND(IRI(CONCAT("https://acme.example.org/data/employee/", ?id)) AS ?employee)
+  BIND("acme:Engineer" AS ?role)
+}

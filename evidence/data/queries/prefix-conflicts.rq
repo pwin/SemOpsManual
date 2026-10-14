@@ -1,0 +1,7 @@
+# One prefix bound to two namespaces by two files: a GROUP BY over the
+# tq:PrefixBinding facts that `sketch` writes to bind-facts.ttl.
+PREFIX tq: <https://semantechs.co.uk/ontology-quality/tarql/>
+SELECT ?prefix (COUNT(DISTINCT ?ns) AS ?namespaces) (GROUP_CONCAT(DISTINCT ?file; separator=", ") AS ?files)
+WHERE { ?b a tq:PrefixBinding ; tq:prefix ?prefix ; tq:namespace ?ns ; tq:source ?file }
+GROUP BY ?prefix
+HAVING (COUNT(DISTINCT ?ns) > 1)

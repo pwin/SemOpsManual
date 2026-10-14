@@ -1,0 +1,10 @@
+# Chapter 10 §10.6: a second mapping, written later by someone else, using
+# the same namespace, building the same class with a different property.
+PREFIX acme: <https://acme.example.org/ns/>
+CONSTRUCT {
+  ?employee_IRI a acme:Employee ;
+    acme:hasEmployeeId ?id .
+}
+WHERE {
+  BIND(IRI(CONCAT("https://acme.example.org/data/employee/", ?id)) AS ?employee_IRI)
+}

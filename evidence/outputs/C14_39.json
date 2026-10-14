@@ -1,0 +1,50 @@
+{
+ "id": "C14.39",
+ "status": "PASS",
+ "detail": "step 1 output contains 'HermiT: consistent', 'owl:Nothing among them: True', 'https://acme.example.org/ns/Contractor'; step 3 output contains 'REA-020', 'REA-021'; step 4 output contains 'HermiT: consistent', 'unsatisfiable classes: none'; step 6 output has none of 'REA-020', 'REA-021', 'REA-022'",
+ "ran": "2026-10-14",
+ "steps": [
+  {
+   "cmd": "python scripts/hermit_verdict.py fixtures/acme_robotics/acme-org-v1.ttl fixtures/acme_robotics/reference_vocab/org.ttl fixtures/acme_robotics/reference_vocab/foaf.rdf",
+   "rc": 0,
+   "seconds": 1.3,
+   "stdout": "HermiT: consistent (no OwlReadyInconsistentOntologyError)\nunsatisfiable classes: ['http://www.w3.org/2002/07/owl#Nothing', 'https://acme.example.org/ns/Contractor']\nowl:Nothing among them: True\n",
+   "stderr": "* Owlready2 * WARNING: DataProperty http://xmlns.com/foaf/0.1/name belongs to more than one entity types: [owl.DatatypeProperty, rdf-schema.label]; I'm trying to fix it...\n* Owlready2 * Running HermiT...\n    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp5adi5sih -Y\n* Owlready2 * HermiT took 0.829216480255127 seconds\n* Owlready * Reparenting <tmp>/tmp1t42do62/ontology.icqChatID: {owl.DatatypeProperty, <tmp>/tmp1t42do62/ontology.nick, owl.InverseFunctionalProperty} => {<tmp>/tmp1t42do62/ontology.nick, owl.InverseFunctionalProperty}\n* Owlready * Reparenting <tmp>/tmp1t42do62/ontology.skypeID: {owl.DatatypeProperty, <tmp>/tmp1t42do62/ontology.nick} => {<tmp>/tmp1t42do62/ontology.nick}\n* Owlready * Reparenting <tmp>/tmp1t42do62/ontology.msnChatID: {owl.DatatypeProperty, <tmp>/tmp1t42do62/ontology.nick, owl.InverseFunctionalProperty} => {<tmp>/tmp1t42do62/ontology.nick, owl.InverseFunctionalProperty}\n* Owlready * Reparenting <tmp>/tmp1t42do62/ontology.yahooChatID: {owl.DatatypeProperty, <tmp>/tmp1t42do62/ontology.nick, owl.InverseFunctionalProperty} => {<tmp>/tmp1t42do62/ontology.nick, owl.InverseFunctionalProperty}\n* Owlready * Reparenting <tmp>/tmp1t42do62/ontology.aimChatID: {owl.DatatypeProperty, <tmp>/tmp1t42do62/ontology.nick, owl.InverseFunctionalProperty} => {<tmp>/tmp1t42do62/ontology.nick, owl.InverseFunctionalProperty}\n* Owlready * Reparenting org.headOf: {org.memberOf, owl.ObjectProperty} => {org.memberOf}\n* Owlready * Reparenting org.hasPrimarySite: {org.hasSite, owl.ObjectProperty} => {org.hasSite}\n* Owlready * Reparenting org.hasRegisteredSite: {owl.ObjectProperty, org.hasPrimarySite} => {org.hasPrimarySite}\n* Owlready * Reparenting <tmp>/tmp1t42do62/ontology.openid: {owl.InverseFunctionalProperty, owl.ObjectProperty, <tmp>/tmp1t42do62/ontology.isPrimaryTopicOf} => {<tmp>/tmp1t42do62/ontology.isPrimaryTopicOf}\n* Owlready * Reparenting <tmp>/tmp1t42do62/ontology.homepage: {owl.InverseFunctionalProperty, <tmp>/tmp1t42do62/ontology.page, owl.ObjectProperty, <tmp>/tmp1t42do62/ontology.isPrimaryTopicOf} => {<tmp>/tmp1t42do62/ontology.isPrimaryTopicOf}\n* Owlready * Reparenting <tmp>/tmp1t42do62/ontology.tipjar: {<tmp>/tmp1t42do62/ontology.page, owl.ObjectProperty} => {<tmp>/tmp1t42do62/ontology.page}\n* Owlready * Reparenting <tmp>/tmp1t42do62/ontology.weblog: {owl.InverseFunctionalProperty, <tmp>/tmp1t42do62/ontology.page, owl.ObjectProperty} => {<tmp>/tmp1t42do62/ontology.page, owl.InverseFunctionalProperty}\n* Owlready * Reparenting org.originalOrganization: {owl.ObjectProperty, prov.used} => {prov.used}\n* Owlready * Reparenting <tmp>/tmp1t42do62/ontology.primaryTopic: {owl.FunctionalProperty, owl.ObjectProperty} => {owl.FunctionalProperty, <tmp>/tmp1t42do62/ontology.topic}\n* Owlready * Reparenting org.subOrganizationOf: {org.transitiveSubOrganizationOf, owl.ObjectProperty} => {org.transitiveSubOrganizationOf}\n* Owlready * Reparenting <tmp>/tmp1t42do62/ontology.img: {owl.ObjectProperty, <tmp>/tmp1t42do62/ontology.depiction} => {<tmp>/tmp1t42do62/ontology.depiction}\n* Owlready * Reparenting org.identifier: {owl.DatatypeProperty, core.notation} => {core.notation}\n* Owlready * (NB: only changes on entities loaded in Python are shown, other changes are done but not listed)\n"
+  },
+  {
+   "cmd": "ontology-quality-suite ontology --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --out-dir work/C14_39/acme --reports minimal",
+   "rc": 1,
+   "seconds": 4.0,
+   "stdout": "Findings: 3 total (3 Violation, 0 Warning, 0 Info)\nReports written to: ./work/C14_39/acme\n  - work/C14_39/acme/findings.txt (start here -- what, where, and the source line)\n  - work/C14_39/acme/full_results.csv\n",
+   "stderr": "* Owlready2 * WARNING: DataProperty http://xmlns.com/foaf/0.1/name belongs to more than one entity types: [owl.DatatypeProperty, rdf-schema.label]; I'm trying to fix it...\n* Owlready2 * Running HermiT...\n    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp7dh_yn65 -Y\n* Owlready2 * HermiT took 0.8427619934082031 seconds\n* Owlready * Reparenting org.hasPrimarySite: {owl.ObjectProperty, org.hasSite} => {org.hasSite}\n* Owlready * Reparenting <tmp>/tmp4dhvs8po/ontology.msnChatID: {owl.DatatypeProperty, owl.InverseFunctionalProperty, <tmp>/tmp4dhvs8po/ontology.nick} => {owl.InverseFunctionalProperty, <tmp>/tmp4dhvs8po/ontology.nick}\n* Owlready * Reparenting <tmp>/tmp4dhvs8po/ontology.aimChatID: {owl.DatatypeProperty, owl.InverseFunctionalProperty, <tmp>/tmp4dhvs8po/ontology.nick} => {owl.InverseFunctionalProperty, <tmp>/tmp4dhvs8po/ontology.nick}\n* Owlready * Reparenting <tmp>/tmp4dhvs8po/ontology.skypeID: {owl.DatatypeProperty, <tmp>/tmp4dhvs8po/ontology.nick} => {<tmp>/tmp4dhvs8po/ontology.nick}\n* Owlready * Reparenting <tmp>/tmp4dhvs8po/ontology.yahooChatID: {owl.DatatypeProperty, owl.InverseFunctionalProperty, <tmp>/tmp4dhvs8po/ontology.nick} => {owl.InverseFunctionalProperty, <tmp>/tmp4dhvs8po/ontology.nick}\n* Owlready * Reparenting <tmp>/tmp4dhvs8po/ontology.icqChatID: {owl.DatatypeProperty, owl.InverseFunctionalProperty, <tmp>/tmp4dhvs8po/ontology.nick} => {owl.InverseFunctionalProperty, <tmp>/tmp4dhvs8po/ontology.nick}\n* Owlready * Reparenting <tmp>/tmp4dhvs8po/ontology.openid: {owl.ObjectProperty, owl.InverseFunctionalProperty, <tmp>/tmp4dhvs8po/ontology.isPrimaryTopicOf} => {<tmp>/tmp4dhvs8po/ontology.isPrimaryTopicOf}\n* Owlready * Reparenting <tmp>/tmp4dhvs8po/ontology.homepage: {owl.ObjectProperty, owl.InverseFunctionalProperty, <tmp>/tmp4dhvs8po/ontology.page, <tmp>/tmp4dhvs8po/ontology.isPrimaryTopicOf} => {<tmp>/tmp4dhvs8po/ontology.isPrimaryTopicOf}\n* Owlready * Reparenting org.headOf: {owl.ObjectProperty, org.memberOf} => {org.memberOf}\n* Owlready * Reparenting <tmp>/tmp4dhvs8po/ontology.img: {owl.ObjectProperty, <tmp>/tmp4dhvs8po/ontology.depiction} => {<tmp>/tmp4dhvs8po/ontology.depiction}\n* Owlready * Reparenting org.subOrganizationOf: {owl.ObjectProperty, org.transitiveSubOrganizationOf} => {org.transitiveSubOrganizationOf}\n* Owlready * Reparenting org.hasRegisteredSite: {owl.ObjectProperty, org.hasPrimarySite} => {org.hasPrimarySite}\n* Owlready * Reparenting <tmp>/tmp4dhvs8po/ontology.tipjar: {owl.ObjectProperty, <tmp>/tmp4dhvs8po/ontology.page} => {<tmp>/tmp4dhvs8po/ontology.page}\n* Owlready * Reparenting <tmp>/tmp4dhvs8po/ontology.weblog: {owl.ObjectProperty, owl.InverseFunctionalProperty, <tmp>/tmp4dhvs8po/ontology.page} => {owl.InverseFunctionalProperty, <tmp>/tmp4dhvs8po/ontology.page}\n* Owlready * Reparenting org.hasUnit: {owl.ObjectProperty, org.hasSubOrganization} => {org.hasSubOrganization}\n* Owlready * Reparenting org.unitOf: {owl.ObjectProperty, org.subOrganizationOf} => {org.subOrganizationOf}\n* Owlready * (NB: only changes on entities loaded in Python are shown, other changes are done but not listed)\n"
+  },
+  {
+   "cmd": "python scripts/summarise_findings.py work/C14_39/acme/full_results.csv",
+   "rc": 0,
+   "seconds": 0.1,
+   "stdout": "  1 x LOG-001  Violation Class disjoint with its own ancestor\n  1 x REA-020  Violation Ontology found inconsistent by an external DL reasoner\n  1 x REA-021  Violation Class found unsatisfiable by an external DL reasoner\ntotal 3: 3 Violation, 0 Warning, 0 Info\n",
+   "stderr": ""
+  },
+  {
+   "cmd": "python scripts/hermit_verdict.py data/reasoner/clean.ttl",
+   "rc": 0,
+   "seconds": 0.7,
+   "stdout": "HermiT: consistent (no OwlReadyInconsistentOntologyError)\nunsatisfiable classes: none\nowl:Nothing among them: False\n",
+   "stderr": "* Owlready2 * Running HermiT...\n    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpvpeqjwsi -Y\n* Owlready2 * HermiT took 0.44397473335266113 seconds\n* Owlready * (NB: only changes on entities loaded in Python are shown, other changes are done but not listed)\n"
+  },
+  {
+   "cmd": "ontology-quality-suite ontology --ontology data/reasoner/clean.ttl --out-dir work/C14_39/clean --reports minimal",
+   "rc": 0,
+   "seconds": 1.9,
+   "stdout": "Findings: 0 total (0 Violation, 0 Warning, 0 Info)\nReports written to: ./work/C14_39/clean\n  - work/C14_39/clean/findings.txt (start here -- what, where, and the source line)\n  - work/C14_39/clean/full_results.csv\n",
+   "stderr": "* Owlready2 * Running HermiT...\n    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpwtp_fr7g -Y\n* Owlready2 * HermiT took 0.41665124893188477 seconds\n* Owlready * (NB: only changes on entities loaded in Python are shown, other changes are done but not listed)\n"
+  },
+  {
+   "cmd": "python scripts/summarise_findings.py work/C14_39/clean/full_results.csv",
+   "rc": 0,
+   "seconds": 0.1,
+   "stdout": "total 0: 0 Violation, 0 Warning, 0 Info\n",
+   "stderr": ""
+  }
+ ]
+}

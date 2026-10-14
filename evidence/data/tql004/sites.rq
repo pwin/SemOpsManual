@@ -1,0 +1,11 @@
+PREFIX acme: <https://acme.example.org/ns/>
+
+# Chapter 10: a defective mapping. ?site_IRI is built with CONCAT, which returns
+# a string, and nothing turns it into an IRI. TQL-004 should report it, with the
+# file and the line of the BIND as fields of the finding.
+CONSTRUCT {
+  ?site_IRI a acme:Department .
+}
+WHERE {
+  BIND(CONCAT("https://acme.example.org/data/department/", ?department) AS ?site_IRI)
+}

@@ -1,0 +1,15 @@
+{
+ "id": "C07.03",
+ "status": "PASS",
+ "detail": "step 1 output contains 'registry entries: 61 in 10 categories', 'portable .rq checks: 44; SHACL shape files: 6'",
+ "ran": "2026-10-14",
+ "steps": [
+  {
+   "cmd": "python scripts/inspect_packages.py",
+   "rc": 0,
+   "seconds": 0.2,
+   "stdout": "ontology-quality-suite 0.22.0\n    commands installed: ontology-quality-suite\n    runtime dependencies: holosdb>=0.15, matplotlib>=3.7.0, owlready2>=0.51, owlrl>=6.0.2, pandas>=2.0.0, rdflib>=7.6.0, shacl<0.4,>=0.3.0, tabulate>=0.9.0\nshacl 0.3.2\n    commands installed: none (library only)\n    runtime dependencies: none\ntarka-rdf 0.1.1\n    commands installed: none (library only)\n    runtime dependencies: polars>=1.30\nholosdb 0.21.0\n    commands installed: none (library only)\n    runtime dependencies: none\nregistry entries: 61 in 10 categories (conformance, data, efficiency, logical, quality, reasoning, structural, style, tarql, vocabulary)\nportable .rq checks: 44; SHACL shape files: 6\n.rq checks guarding a message with IF(isBlank(...)): 7\n.rq checks building a message with STR(?...) and no isBlank guard: 34\n",
+   "stderr": ""
+  }
+ ]
+}

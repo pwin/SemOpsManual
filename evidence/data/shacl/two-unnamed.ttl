@@ -1,0 +1,7 @@
+# Chapter 13 §13.2: two people with no name and one with. Two violations,
+# whichever validator counts them.
+@prefix ex: <http://example.org/> .
+
+ex:a a ex:Person .
+ex:b a ex:Person .
+ex:c a ex:Person ; ex:name "C" .

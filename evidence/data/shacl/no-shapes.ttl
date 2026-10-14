@@ -1,0 +1,3 @@
+# A "shapes graph" that declares no shapes at all.
+@prefix ex: <http://example.org/> .
+ex:x ex:y ex:z .

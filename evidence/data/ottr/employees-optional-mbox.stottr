@@ -1,0 +1,19 @@
+# Chapter 10 §10.3: the no-prefix template again, with ?mbox made optional (?).
+# Now only the mailbox triple goes missing for each row, just as quietly.
+@prefix acme: <https://acme.example.org/ns/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ottr: <http://ns.ottr.xyz/0.4/> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+acme:Employee [ ottr:IRI ?employee, xsd:string ?name, ? ottr:IRI ?mbox, xsd:string ?id,
+                ottr:IRI ?dept, xsd:string ?role, xsd:string ?skill ] :: {
+    ottr:Triple(?employee, rdf:type, acme:Employee),
+    ottr:Triple(?employee, rdf:type, acme:Engineer),
+    ottr:Triple(?employee, foaf:name, ?name),
+    ottr:Triple(?employee, foaf:mbox, ?mbox),
+    ottr:Triple(?employee, acme:hasEmployeeId, ?id),
+    ottr:Triple(?employee, acme:worksIn, ?dept),
+    ottr:Triple(?employee, acme:hasRole, ?role),
+    ottr:Triple(?employee, acme:hasSkill, ?skill)
+} .

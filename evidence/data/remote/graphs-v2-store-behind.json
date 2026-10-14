@@ -1,0 +1,15 @@
+{
+  "graphs": [
+    {
+      "graph_uri": "https://acme.example.org/graph/ontology/2.0.0",
+      "role": "ontology"
+    },
+    {
+      "graph_uri": "https://acme.example.org/graph/triplified/employees",
+      "role": "triplified_data",
+      "source_tarql": "work/C13_03/repaired/employees.rq",
+      "ontology_graph_uri": "https://acme.example.org/graph/ontology/2.0.0",
+      "notes": "the query was repaired for v2; the store still holds the v1-era data"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+# Chapter 10 §10.6: one of two mappings, each correct on its own. This one
+# binds acme: to the ontology's namespace and builds employees with a skill.
+PREFIX acme: <https://acme.example.org/ns/>
+CONSTRUCT {
+  ?employee_IRI a acme:Employee ;
+    acme:hasSkill ?skill .
+}
+WHERE {
+  BIND(IRI(CONCAT("https://acme.example.org/data/employee/", ?id)) AS ?employee_IRI)
+}

@@ -1,0 +1,7 @@
+# Every Person needs a name. No severity is declared, so a missing name is a
+# sh:Violation, the SHACL default.
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix ex: <http://example.org/> .
+
+ex:PersonShape a sh:NodeShape ; sh:targetClass ex:Person ;
+  sh:property [ sh:path ex:name ; sh:minCount 1 ] .

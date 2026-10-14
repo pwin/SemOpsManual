@@ -1,0 +1,22 @@
+{
+ "id": "C13.11",
+ "status": "PASS",
+ "detail": "step 1 output contains \"prefix='acme', 4 classes, 2 object properties, 3 datatype properties, 1 sections, 5 external terms (3 resolved).\"; step 2 output contains 'ontology-documentation.html', 'ontology_doc_data.json', 'class-diagrams/'",
+ "ran": "2026-10-14",
+ "steps": [
+  {
+   "cmd": "ontology-quality-suite docgen --ontology fixtures/acme_robotics/acme-org-v1.ttl --ref fixtures/acme_robotics/reference_vocab/org.ttl --ref fixtures/acme_robotics/reference_vocab/foaf.rdf --out-dir work/C13_11/docs",
+   "rc": 0,
+   "seconds": 1.9,
+   "stdout": "Wrote work/C13_11/docs/ontology_doc_data.json: prefix='acme', 4 classes, 2 object properties, 3 datatype properties, 1 sections, 5 external terms (3 resolved).\nWrote work/C13_11/docs/ontology-documentation.html (4 classes, 2 object properties, 3 datatype properties, 5 external terms).\nReference documentation written to: work/C13_11/docs/ontology-documentation.html\n4 class diagram(s) written to: work/C13_11/docs/class-diagrams\n",
+   "stderr": "NOTE: 2 external term(s) referenced with no --ref file resolving a definition:\n  - skos:ConceptScheme\n  - skos:inScheme\n"
+  },
+  {
+   "cmd": "python scripts/list_files.py work/C13_11/docs",
+   "rc": 0,
+   "seconds": 0.1,
+   "stdout": "    1,262  class-diagrams/Contractor.dot\n   15,826  class-diagrams/Contractor.png\n    4,741  class-diagrams/Contractor.svg\n      384  class-diagrams/Contractor.ttl\n    1,126  class-diagrams/Department.dot\n   13,233  class-diagrams/Department.png\n    4,101  class-diagrams/Department.svg\n      396  class-diagrams/Department.ttl\n      978  class-diagrams/Employee.dot\n   11,778  class-diagrams/Employee.png\n    3,694  class-diagrams/Employee.svg\n      351  class-diagrams/Employee.ttl\n    1,155  class-diagrams/Engineer.dot\n   13,781  class-diagrams/Engineer.png\n    4,197  class-diagrams/Engineer.svg\n      363  class-diagrams/Engineer.ttl\n   61,359  ontology-documentation.html\n    5,923  ontology_doc_data.json\n18 files, 144,648 bytes\n",
+   "stderr": ""
+  }
+ ]
+}

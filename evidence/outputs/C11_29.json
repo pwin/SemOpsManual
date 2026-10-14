@@ -1,0 +1,43 @@
+{
+ "id": "C11.29",
+ "status": "PASS",
+ "detail": "step 1 output contains 'conforms          false'; step 1 exits 0; step 2 output contains 'conforms          false'; step 2 exits 0; step 3 exits non-zero (1); step 3 output contains 'sh:sparql'; step 4 exits 0; step 5 output contains \"'conforms': False\", 'HolosError: unsupported: sh:sparql is not implemented'",
+ "ran": "2026-10-14",
+ "steps": [
+  {
+   "cmd": "holos validate --data data/shacl/data.ttl --shapes data/shacl/shapes-violation.ttl",
+   "rc": 0,
+   "seconds": 0.0,
+   "stdout": "shapes compiled   2 shapes in 0.000s\nvalidated         0.000s\nconforms          false\nresults           1\n",
+   "stderr": "loaded 3 quads in 0.00s (4039 quads/s)\nloaded 5 shape quads from data/shacl/shapes-violation.ttl\n"
+  },
+  {
+   "cmd": "holos validate --data data/shacl/data.ttl --shapes data/shacl/shapes-violation.ttl --engine adapted",
+   "rc": 0,
+   "seconds": 0.0,
+   "stdout": "bridged+compiled  3 triples, 2 shapes in 0.000s\nvalidated         0.000s\nconforms          false\nresults           1\n",
+   "stderr": "loaded 3 quads in 0.00s (4740 quads/s)\nloaded 5 shape quads from data/shacl/shapes-violation.ttl\n"
+  },
+  {
+   "cmd": "holos validate --data data/shacl/data.ttl --shapes data/shacl/shapes-sparql.ttl",
+   "rc": 1,
+   "seconds": 0.0,
+   "stdout": "",
+   "stderr": "loaded 3 quads in 0.00s (4221 quads/s)\nloaded 6 shape quads from data/shacl/shapes-sparql.ttl\nError: unsupported: sh:sparql is not implemented by the incremental evaluator; validate                      through holos_shacl::engine::EngineRun instead\n"
+  },
+  {
+   "cmd": "holos validate --data data/shacl/data.ttl --shapes data/shacl/shapes-sparql.ttl --engine adapted",
+   "rc": 0,
+   "seconds": 0.0,
+   "stdout": "bridged+compiled  3 triples, 1 shapes in 0.000s\nvalidated         0.000s\nconforms          false\nresults           1\n",
+   "stderr": "loaded 3 quads in 0.00s (4268 quads/s)\nloaded 6 shape quads from data/shacl/shapes-sparql.ttl\n"
+  },
+  {
+   "cmd": "python scripts/holosdb_validate.py data/shacl/data.ttl data/shacl/shapes-violation.ttl data/shacl/shapes-sparql.ttl",
+   "rc": 0,
+   "seconds": 0.1,
+   "stdout": "adapted: {'conforms': False, 'violations': 1, 'engine': 'adapted'}\nnative:  {'conforms': False, 'violations': 2, 'engine': 'native'}\nnative, sh:sparql shapes: HolosError: unsupported: sh:sparql is not implemented by the incremental evaluator; validate through holos_shacl::engine::EngineRun instead\n",
+   "stderr": ""
+  }
+ ]
+}

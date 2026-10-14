@@ -1,0 +1,26 @@
+@prefix ex:   <http://example.com/> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# The default graph: nothing sensitive.
+ex:acme a ex:Company ; ex:name "Acme Ltd" .
+
+ex:public {
+    ex:alice a ex:Employee ; ex:name "Alice" ; ex:department "engineering" ; ex:salary 95000 .
+    ex:bob   a ex:Employee ; ex:name "Bob"   ; ex:department "engineering" ; ex:salary 88000 .
+    ex:carol a ex:Employee ; ex:name "Carol" ; ex:department "finance"     ; ex:salary 102000 .
+    ex:alice ex:manages ex:bob .
+}
+
+# Classified: performance review notes.
+ex:reviews {
+    ex:alice ex:rating "exceeds" ; ex:reviewNote "Ready for promotion." .
+    ex:bob   ex:rating "meets" .
+}
+
+# RDF 1.2: who asserted what, and when.
+ex:provenance {
+    ex:claim1 rdf:reifies <<( ex:carol ex:salary 102000 )>> ;
+              ex:statedBy ex:payroll ;
+              ex:statedOn "2026-08-01T09:00:00Z"^^xsd:dateTime .
+}

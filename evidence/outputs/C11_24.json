@@ -1,0 +1,15 @@
+{
+ "id": "C11.24",
+ "status": "PASS",
+ "detail": "step 1 exits 2; step 1 output contains 'unsupported node expression'",
+ "ran": "2026-10-14",
+ "steps": [
+  {
+   "cmd": "shacl -d data/rules/function-data.ttl -s data/rules/function.ttl -a",
+   "rc": 2,
+   "seconds": 0.0,
+   "stdout": "",
+   "stderr": "error: applying SHACL-AF rules: invalid shapes graph: unsupported node expression\n"
+  }
+ ]
+}

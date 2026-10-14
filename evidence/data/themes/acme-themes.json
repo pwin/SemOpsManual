@@ -1,0 +1,5 @@
+{
+  "Can a domain expert read what each term means?": ["QUA-001", "QUA-004", "QUA-009", "QUA-010"],
+  "Is the model logically coherent?": ["LOG-001", "REA-021"],
+  "Will our naming survive a code review?": ["STY-002"]
+}

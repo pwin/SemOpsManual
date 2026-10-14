@@ -1,0 +1,22 @@
+{
+ "id": "C11.17",
+ "status": "PASS",
+ "detail": "step 1: conforms: false; step 1 output contains 'focus <http://example.org/a>'; step 2: conforms: true",
+ "ran": "2026-10-14",
+ "steps": [
+  {
+   "cmd": "shacl -d data/rules/chain.ttl -s data/rules/transitive.ttl -a",
+   "rc": 1,
+   "seconds": 0.0,
+   "stdout": "conforms: false\n  QualifiedMinCountConstraintComponent | focus <http://example.org/a> | value - | path <http://example.org/sub>\n",
+   "stderr": ""
+  },
+  {
+   "cmd": "shacl -d data/rules/chain.ttl -s data/rules/transitive.ttl -a --iterate-rules 10",
+   "rc": 0,
+   "seconds": 0.0,
+   "stdout": "conforms: true\n",
+   "stderr": ""
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+{
+ "id": "C08.16",
+ "status": "PASS",
+ "detail": "step 1 exits non-zero (1); step 1 output contains 'error TS2345'; step 1 output contains 'termType'",
+ "ran": "2026-10-14",
+ "steps": [
+  {
+   "cmd": "node node_modules/typescript/bin/tsc --noEmit --strict --module nodenext --moduleResolution nodenext --target es2022 --skipLibCheck scripts/dsl/writer-types.ts",
+   "rc": 1,
+   "seconds": 0.1,
+   "stdout": "scripts/dsl/writer-types.ts(10,35): error TS2345: Argument of type 'import(\"./node_modules/ontology-suite/dsl/types/n3\").Quad[]' is not assignable to parameter of type 'import(\"./node_modules/@rdfjs/types/data-model\").Quad[]'.\n  Type 'import(\"./node_modules/ontology-suite/dsl/types/n3\").Quad' is missing the following properties from type 'import(\"./node_modules/@rdfjs/types/data-model\").Quad': termType, value\n",
+   "stderr": ""
+  }
+ ]
+}

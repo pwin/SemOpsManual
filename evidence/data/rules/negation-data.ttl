@@ -1,0 +1,4 @@
+@prefix ex: <http://example.org/> .
+
+# One Person, with no name to begin with.
+ex:a a ex:Person .

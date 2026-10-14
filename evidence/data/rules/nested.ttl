@@ -1,0 +1,12 @@
+# Hazard 1: a rule on a nested property shape, which has no target, never fires.
+@prefix sh:  <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ex:  <http://example.org/> .
+
+ex:S a sh:NodeShape ; sh:targetClass ex:Person ;
+    sh:property [ sh:path ex:name ;
+        sh:rule [ a sh:TripleRule ;
+            sh:subject sh:this ; sh:predicate rdf:type ; sh:object ex:Tagged ] ] .
+
+ex:Check a sh:NodeShape ; sh:targetClass ex:Tagged ;
+    sh:property [ sh:path ex:nope ; sh:minCount 1 ] .

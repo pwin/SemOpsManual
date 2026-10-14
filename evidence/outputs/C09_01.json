@@ -1,0 +1,15 @@
+{
+ "id": "C09.01",
+ "status": "PASS",
+ "detail": "step 1 exits non-zero (1); step 1 output contains '1 Violation'",
+ "ran": "2026-10-14",
+ "steps": [
+  {
+   "cmd": "ontology-quality-suite ontology --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --out-dir work/C09_01/gate --reports minimal --fail-on Violation",
+   "rc": 1,
+   "seconds": 2.8,
+   "stdout": "Findings: 2 total (1 Violation, 0 Warning, 1 Info)\nReports written to: ./work/C09_01/gate\n  - work/C09_01/gate/findings.txt (start here -- what, where, and the source line)\n  - work/C09_01/gate/full_results.csv\n",
+   "stderr": ""
+  }
+ ]
+}

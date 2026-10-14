@@ -1,0 +1,6 @@
+# Anyone who is somebody's child (has an ex:parent) must have a name.
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix ex: <http://example.org/> .
+
+ex:ChildShape a sh:NodeShape ; sh:targetSubjectsOf ex:parent ;
+  sh:property [ sh:path ex:name ; sh:minCount 1 ] .

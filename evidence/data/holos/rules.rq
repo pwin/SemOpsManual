@@ -1,0 +1,5 @@
+# Chapter 11: one materialising rule for `holos rules`. Plain CONSTRUCT, not SHACL-AF.
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX acme: <https://acme.example.org/ns/>
+CONSTRUCT { ?e rdf:type foaf:Agent } WHERE { ?e rdf:type acme:Employee }

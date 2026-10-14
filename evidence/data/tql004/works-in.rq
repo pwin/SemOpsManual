@@ -1,0 +1,11 @@
+PREFIX acme: <https://acme.example.org/ns/>
+
+# Chapter 10: the same defect with the CONCAT result as an object. Here it is
+# not dropped but written as a string literal where an IRI was meant.
+CONSTRUCT {
+  ?employee_IRI acme:worksIn ?dept_IRI .
+}
+WHERE {
+  BIND(IRI(CONCAT("https://acme.example.org/data/employee/", ?department)) AS ?employee_IRI)
+  BIND(CONCAT("https://acme.example.org/data/department/", ?department) AS ?dept_IRI)
+}

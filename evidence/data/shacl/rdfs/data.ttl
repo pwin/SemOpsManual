@@ -1,0 +1,6 @@
+# ex:father is a sub-property of ex:parent; Bob has a father and no name.
+@prefix ex:   <http://example.org/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+ex:father rdfs:subPropertyOf ex:parent .
+ex:bob ex:father ex:carl .

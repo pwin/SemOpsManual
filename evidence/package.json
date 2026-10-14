@@ -1,0 +1,15 @@
+{
+  "name": "semops-manual-evidence",
+  "private": true,
+  "description": "Node packages the SemOps Manual's evidence runs: the DSL, the WebAssembly engines, and TypeScript to check and run DSL scripts",
+  "license": "MIT",
+  "dependencies": {
+    "ontology-suite": "0.15.0",
+    "shacl-wasm-node": "0.3.2",
+    "holos-wasm-node": "0.21.0",
+    "n3": "2.13.12",
+    "@types/n3": "1.26.4",
+    "typescript": "7.0.2",
+    "tsx": "4.23.15"
+  }
+}

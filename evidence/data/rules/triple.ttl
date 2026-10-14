@@ -1,0 +1,17 @@
+# Two triple rules on Person, and a shape that only exists to see what they made.
+@prefix sh:  <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ex:  <http://example.org/> .
+
+ex:PersonShape a sh:NodeShape ;
+    sh:targetClass ex:Person ;
+    sh:rule [ a sh:TripleRule ;
+        sh:subject sh:this ; sh:predicate rdf:type ; sh:object ex:Agent ] ;
+    sh:rule [ a sh:TripleRule ;
+        sh:subject sh:this ; sh:predicate ex:contact ;
+        sh:object [ sh:path ex:knows ] ] .
+
+ex:AgentShape a sh:NodeShape ;
+    sh:targetClass ex:Agent ;
+    sh:property [ sh:path ex:contact ; sh:minCount 1 ;
+                  sh:message "Agent has no contact" ] .

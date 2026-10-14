@@ -1,0 +1,11 @@
+# Chapter 10 §10.3: the same rows and template as `tarka run -l`, as a bOTTR
+# instance map, with no `mailto:` prefix declared anywhere. Here a cell typed
+# ottr:IRI is read as a full IRI, and mailto:… is one, so every row comes out.
+@prefix ottr: <http://ns.ottr.xyz/0.4/> .
+@prefix acme: <https://acme.example.org/ns/> .
+
+[] a ottr:InstanceMap ;
+   ottr:template acme:Employee ;
+   ottr:source [ a ottr:H2Source ] ;
+   ottr:query """SELECT employee, name, mbox, id, dept, role, skill FROM CSVREAD('@@THIS_DIR@@/employees-iri.csv')""" ;
+   ottr:argumentMaps ( [ ottr:type ottr:IRI ] [ ] [ ottr:type ottr:IRI ] [ ] [ ottr:type ottr:IRI ] [ ] [ ] ) .

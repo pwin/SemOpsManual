@@ -1,0 +1,9 @@
+# Chapter 14 §14.4: a clean ontology. HermiT finds nothing unsatisfiable, and
+# the suite reports neither REA-020 nor REA-021.
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ex:   <http://example.org/> .
+
+ex:o a owl:Ontology .
+ex:A a owl:Class .
+ex:B a owl:Class ; rdfs:subClassOf ex:A .

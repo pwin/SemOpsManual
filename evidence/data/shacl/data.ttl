@@ -1,0 +1,5 @@
+# Chapter 11: two people, one of them with no name.
+@prefix ex: <http://example.org/> .
+
+ex:alice a ex:Person ; ex:name "Alice" .
+ex:bob   a ex:Person .

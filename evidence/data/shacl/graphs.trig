@@ -1,0 +1,7 @@
+# Chapter 14 §14.4: three nameless people, one in each of two named graphs and
+# one in the default graph. SHACL validates the union.
+@prefix ex: <http://example.org/> .
+
+ex:bob a ex:Person .
+ex:supplierA { ex:carol a ex:Person . }
+ex:supplierB { ex:dave a ex:Person . }

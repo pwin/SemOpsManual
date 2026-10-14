@@ -1,0 +1,7 @@
+# The same constraint, declared a Warning on the property shape that produces
+# the result. Since engine 0.3.0 a Warning still breaks conformance.
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix ex: <http://example.org/> .
+
+ex:PersonShape a sh:NodeShape ; sh:targetClass ex:Person ;
+  sh:property [ sh:path ex:name ; sh:minCount 1 ; sh:severity sh:Warning ] .

@@ -1,0 +1,13 @@
+# The PyPI packages the evidence runs, at the versions this edition was measured
+# against. Install into a fresh environment:
+#
+#   python -m venv .venv            (or: uv venv .venv)
+#   .venv/bin/pip install -r requirements.txt      (Windows: .venv\Scripts\pip)
+#
+ontology-quality-suite==0.22.0
+shacl==0.3.2
+holosdb==0.21.0
+tarka-rdf==0.1.1
+# A second, independent SPARQL engine, used only as a witness in claim C07.03
+# (it is not part of the toolchain).
+pyoxigraph==0.5.11

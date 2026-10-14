@@ -7,3 +7,13 @@ SemOps-Manual*.pdf
 # Toolchain
 tools/node_modules/
 node_modules/
+
+# Evidence: environments, downloaded binaries and scratch output, all recreatable
+# (see evidence/README.md). outputs/, manual/ and EVIDENCE.md are committed.
+evidence/.venv/
+evidence/bin/
+evidence/node_modules/
+evidence/work/
+
+# Python bytecode
+__pycache__/

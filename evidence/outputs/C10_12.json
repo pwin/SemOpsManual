@@ -1,0 +1,29 @@
+{
+ "id": "C10.12",
+ "status": "PASS",
+ "detail": "step 1 output contains '4. Polars frame of 5 rows -> 40 triples', '\"42\"^^<http://www.w3.org/2001/XMLSchema#integer>', '2. OTTR templates: 40 triples; identical to the TARQL output: True', '3. OTTR without the mailto: prefix: returned None, raised nothing, wrote 0 triples'; step 3 output contains 'isomorphic: True'",
+ "ran": "2026-10-14",
+ "steps": [
+  {
+   "cmd": "python scripts/tarka_python.py fixtures/acme_robotics data/ottr work/C10_12",
+   "rc": 0,
+   "seconds": 0.6,
+   "stdout": "1. TARQL mapping: 40 triples\n2. OTTR templates: 40 triples; identical to the TARQL output: True\n3. OTTR without the mailto: prefix: returned None, raised nothing, wrote 0 triples\n4. Polars frame of 5 rows -> 40 triples; Parquet written to work/C10_12/employees.parquet\n5. shapes derived from the mapping:\n   shape:EmployeeShape a sh:NodeShape ;\n           [ sh:path foaf:mbox ; sh:nodeKind sh:IRI ] ,\n           [ sh:path foaf:name ; sh:datatype xsd:string ] ,\n           [ sh:path acme:hasEmployeeId ; sh:datatype xsd:string ] ,\n           [ sh:path acme:hasRole ; sh:datatype xsd:string ] ,\n           [ sh:path acme:hasSkill ; sh:datatype xsd:string ] ,\n           [ sh:path acme:worksIn ; sh:nodeKind sh:IRI ] .\n   shape:EngineerShape a sh:NodeShape ;\n           [ sh:path foaf:mbox ; sh:nodeKind sh:IRI ] ,\n           [ sh:path foaf:name ; sh:datatype xsd:string ] ,\n           [ sh:path acme:hasEmployeeId ; sh:datatype xsd:string ] ,\n           [ sh:path acme:hasRole ; sh:datatype xsd:string ] ,\n           [ sh:path acme:hasSkill ; sh:datatype xsd:string ] ,\n           [ sh:path acme:worksIn ; sh:nodeKind sh:IRI ] .\n6. a Int64 column through an xsd:integer parameter:\n   <https://acme.example.org/data/department/ENG> <https://acme.example.org/ns/headcount> \"42\"^^<http://www.w3.org/2001/XMLSchema#integer>\n   <https://acme.example.org/data/department/QA> <https://acme.example.org/ns/headcount> \"7\"^^<http://www.w3.org/2001/XMLSchema#integer>\n",
+   "stderr": ""
+  },
+  {
+   "cmd": "tarka run -q fixtures/acme_robotics/employees.rq -i work/C10_12/employees.parquet --ntriples -o work/C10_12/parquet.nt",
+   "rc": 0,
+   "seconds": 0.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  {
+   "cmd": "python scripts/compare_ntriples.py work/C10_12/parquet.nt work/C10_12/tarql.nt",
+   "rc": 0,
+   "seconds": 0.3,
+   "stdout": "work/C10_12/parquet.nt: 40 triples\nwork/C10_12/tarql.nt: 40 triples\nisomorphic: True\n",
+   "stderr": ""
+  }
+ ]
+}

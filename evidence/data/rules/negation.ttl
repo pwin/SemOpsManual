@@ -1,0 +1,17 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix ex: <http://example.org/> .
+
+# Hazard 4: negation is not monotonic. The first rule marks a Person with no
+# name as Unnamed; the second, at a later sh:order, gives every Person a name.
+# Rules only add triples, so the mark stays after the name arrives.
+ex:R a sh:NodeShape ; sh:targetClass ex:Person ;
+    sh:rule [ a sh:SPARQLRule ; sh:order 0 ; sh:construct """
+        PREFIX ex: <http://example.org/>
+        CONSTRUCT { $this a ex:Unnamed } WHERE { FILTER NOT EXISTS { $this ex:name ?n } }""" ] ;
+    sh:rule [ a sh:TripleRule ; sh:order 1 ;
+        sh:subject sh:this ; sh:predicate ex:name ; sh:object "assigned later" ] .
+
+# Anything still marked Unnamed must have no name. This is what fails.
+ex:Check a sh:NodeShape ; sh:targetClass ex:Unnamed ;
+    sh:property [ sh:path ex:name ; sh:maxCount 0 ;
+                  sh:message "marked Unnamed, yet it has a name" ] .

@@ -1,0 +1,8 @@
+# The trap: sh:severity on the node shape does not reach the nested property
+# shape, which still produces its result at the default severity, Violation.
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix ex: <http://example.org/> .
+
+ex:PersonShape a sh:NodeShape ; sh:targetClass ex:Person ;
+  sh:severity sh:Warning ;
+  sh:property [ sh:path ex:name ; sh:minCount 1 ] .

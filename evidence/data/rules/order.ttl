@@ -1,0 +1,13 @@
+# Hazard 3: rules at the same sh:order cannot see each other's inferences.
+@prefix sh:  <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix ex:  <http://example.org/> .
+
+ex:A a sh:NodeShape ; sh:targetClass ex:Person ;
+    sh:rule [ a sh:TripleRule ; sh:subject sh:this ;
+              sh:predicate rdf:type ; sh:object ex:Step1 ] .
+ex:B a sh:NodeShape ; sh:targetClass ex:Step1 ;
+    sh:rule [ a sh:TripleRule ; sh:subject sh:this ;
+              sh:predicate rdf:type ; sh:object ex:Step2 ] .
+ex:C a sh:NodeShape ; sh:targetClass ex:Step2 ;
+    sh:property [ sh:path ex:nope ; sh:minCount 1 ; sh:message "reached Step2" ] .

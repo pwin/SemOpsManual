@@ -1,0 +1,11 @@
+# A SPARQL rule computing an area; the shape asserts the result is 12.
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix ex: <http://example.org/> .
+
+ex:BoxShape a sh:NodeShape ; sh:targetClass ex:Box ;
+    sh:rule [ a sh:SPARQLRule ; sh:construct """
+        PREFIX ex: <http://example.org/>
+        CONSTRUCT { $this ex:area ?a }
+        WHERE { $this ex:width ?w ; ex:height ?h . BIND(?w * ?h AS ?a) }""" ] ;
+    sh:property [ sh:path ex:area ; sh:minCount 1 ; sh:hasValue 12 ;
+                  sh:message "area must be 12" ] .

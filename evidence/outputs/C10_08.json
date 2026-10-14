@@ -1,0 +1,29 @@
+{
+ "id": "C10.08",
+ "status": "PASS",
+ "detail": "step 1 output contains '--ntriples', '--split', '--dedup', '--test', '--bind-empty-strings', '--gzip', '--no-header-row', '--delimiter', '--tab', '--header'; step 3 output contains '16 triples'",
+ "ran": "2026-10-14",
+ "steps": [
+  {
+   "cmd": "tarka run --help",
+   "rc": 0,
+   "seconds": 0.0,
+   "stdout": "Map a CSV file to RDF with a TARQL query (-q) or an OTTR template (-l … -T …)\n\nUsage: tarka.exe run [OPTIONS]\n\nOptions:\n  -q, --query <QUERY>\n          A TARQL query (SPARQL CONSTRUCT)\n  -l, --library <LIBRARY>\n          An OTTR template file or directory (repeat for more)\n  -T, --template <TEMPLATE>\n          A root template, by IRI or prefixed name; its parameters are CSV columns. Repeat it to instantiate several templates for every row\n      --list <COLUMN> <SEPARATOR>\n          The cells of a list-typed parameter are split on SEPARATOR\n  -i, --input <INPUT>\n          The input: a CSV file, or a Parquet or Arrow IPC file (default: the file the query names with FROM, else standard input)\n  -d, --delimiter <DELIMITER>\n          The field delimiter [default: ,]\n  -t, --tab\n          Fields are tab-separated\n  -p, --escape-char <ESCAPE_CHAR>\n          The escape character inside quoted fields [default: \\]\n      --quote-char <QUOTE_CHAR>\n          The quote character [default: \"]\n  -n, --normalize\n          Upper-case the column names\n  -H, --no-header-row\n          The file has no header row: columns are a…z, A…Z\n      --split <ORIGINAL> <SPLIT> <DELIMITER>\n          Repeat each row once per part of column ORIGINAL split on DELIMITER, with the part in column SPLIT\n      --bind-empty-strings\n          Bind empty cells as empty strings instead of leaving them unbound\n      --test [<TEST>]\n          Read only the first N rows\n  -o, --output <OUTPUT>\n          The output file (default: standard output)\n      --format <FORMAT>\n          The output format [possible values: turtle, ntriples, nquads]\n      --ntriples\n          Write N-Triples (the same as --format ntriples)\n      --graph <GRAPH>\n          Put every triple in this named graph (N-Quads output; with --post, the graph to load into)\n  -g, --gzip\n          Compress the output file with gzip\n      --dedup [<DEDUP>]\n          Remove duplicates within a window of N triples (default: within each row)\n      --post <ENDPOINT>\n          Load the output into a store: POST it to this Graph Store Protocol endpoint (HOLOS: http://127.0.0.1:7878/graph). --graph names the graph, else the default graph\n      --replace\n          Replace the graph (PUT) instead of adding to it (POST)\n      --header <HEADER>\n          Send this HTTP header with the request, as \"Name: value\" (repeat for more)\n      --validate\n          Validate the output against the shapes made from the mapping (as `tarka shapes` writes them)\n      --shapes <FILE>\n          Validate the output against the SHACL shapes in FILE (repeat for more; with --validate, as well)\n      --report <FILE>\n          Write the SHACL validation report to FILE, in Turtle\n      --batch-size <BATCH_SIZE>\n          Records to evaluate together [default: 512]\n      --jobs <JOBS>\n          Batches to work on at once (0: one per CPU) [default: 0]\n      --stats\n          Print what was read and made to standard error\n  -h, --help\n          Print help\n",
+   "stderr": ""
+  },
+  {
+   "cmd": "tarka run -q fixtures/acme_robotics/employees.rq -i fixtures/acme_robotics/employees.csv --ntriples --test 2 -o work/C10_08/two.nt",
+   "rc": 0,
+   "seconds": 0.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  {
+   "cmd": "python scripts/compare_ntriples.py work/C10_08/two.nt work/C10_08/two.nt",
+   "rc": 0,
+   "seconds": 0.3,
+   "stdout": "work/C10_08/two.nt: 16 triples\nwork/C10_08/two.nt: 16 triples\nisomorphic: True\n",
+   "stderr": ""
+  }
+ ]
+}

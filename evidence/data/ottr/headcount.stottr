@@ -1,0 +1,9 @@
+# Chapter 10 §10.3: a template with a typed parameter. Fed from a Polars
+# integer column, ?n arrives as an xsd:integer literal, with no STRDT anywhere.
+@prefix ottr: <http://ns.ottr.xyz/0.4/> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix acme: <https://acme.example.org/ns/> .
+
+acme:Headcount [ ottr:IRI ?dept, xsd:integer ?n ] :: {
+    ottr:Triple(?dept, acme:headcount, ?n)
+} .

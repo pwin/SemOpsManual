@@ -1,0 +1,6 @@
+# The same three people, flattened into one graph.
+@prefix ex: <http://example.org/> .
+
+ex:bob a ex:Person .
+ex:carol a ex:Person .
+ex:dave a ex:Person .

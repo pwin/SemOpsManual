@@ -1,0 +1,7 @@
+# Chapter 8 §8.5: one employee with an ID and one without. ACM-001 must fire on
+# the second and stay quiet on the first (the fault and its control).
+@prefix acme: <https://acme.example.org/ns/> .
+@prefix ex:   <https://acme.example.org/data/employee/> .
+
+ex:E100 a acme:Employee ; acme:hasEmployeeId "E100" .
+ex:E101 a acme:Employee .

@@ -1,0 +1,6 @@
+# Chapter 8: a data graph with one transposed class name.
+# acme:Empolyee is not declared anywhere; acme:Employee is.
+@prefix acme: <https://acme.example.org/ns/> .
+@prefix ex:   <https://acme.example.org/data/> .
+
+ex:bob a acme:Empolyee .

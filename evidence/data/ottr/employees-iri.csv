@@ -1,0 +1,6 @@
+employee,name,mbox,id,dept,role,skill
+https://acme.example.org/data/employee/E001,Grace Hopper,mailto:grace.hopper@acme.example.org,E001,https://acme.example.org/data/department/ENG,Software Engineer,Rust
+https://acme.example.org/data/employee/E002,Ada Lovelace,mailto:ada.lovelace@acme.example.org,E002,https://acme.example.org/data/department/ENG,Software Engineer,SPARQL
+https://acme.example.org/data/employee/E003,Alan Turing,mailto:alan.turing@acme.example.org,E003,https://acme.example.org/data/department/ENG,Software Engineer,SHACL
+https://acme.example.org/data/employee/E004,Margaret Hamilton,mailto:margaret.hamilton@acme.example.org,E004,https://acme.example.org/data/department/QA,Test Engineer,Automation
+https://acme.example.org/data/employee/E005,Katherine Johnson,mailto:katherine.johnson@acme.example.org,E005,https://acme.example.org/data/department/MKT,Analyst,Forecasting

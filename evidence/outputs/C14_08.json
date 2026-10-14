@@ -1,0 +1,15 @@
+{
+ "id": "C14.08",
+ "status": "PASS",
+ "detail": "line 2. failed 14 times (at least 9); line 3. loaded 15 times (at least 13); every failure was owlready2 building foaf:primaryTopic",
+ "ran": "2026-10-14",
+ "steps": [
+  {
+   "cmd": "python scripts/load_repeat.py work/C14_08 15",
+   "rc": 0,
+   "seconds": 17.9,
+   "stdout": "1. PYTHONHASHSEED=0, fresh temporary directory: loaded 3 of 15, failed 12 of 15\n2. PYTHONHASHSEED=0, fixed path and blank-node labels: loaded 1 of 15, failed 14 of 15\n3. PYTHONHASHSEED=5, fixed path and blank-node labels: loaded 15 of 15, failed 0 of 15\nfailures were while building: <http://xmlns.com/foaf/0.1/primaryTopic> (26)\n",
+   "stderr": ""
+  }
+ ]
+}

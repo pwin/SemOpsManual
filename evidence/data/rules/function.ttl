@@ -1,0 +1,13 @@
+# Not implemented: a SHACL function used in a rule. Must be "could not validate".
+@prefix sh:  <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex:  <http://example.org/> .
+
+ex:double a sh:SPARQLFunction ;
+    sh:parameter [ sh:path ex:n ; sh:datatype xsd:integer ] ;
+    sh:returnType xsd:integer ;
+    sh:select "SELECT ($n * 2 AS ?result) WHERE {}" .
+
+ex:S a sh:NodeShape ; sh:targetClass ex:Thing ;
+    sh:rule [ a sh:TripleRule ; sh:subject sh:this ;
+        sh:predicate ex:twice ; sh:object [ ex:double ( 21 ) ] ] .

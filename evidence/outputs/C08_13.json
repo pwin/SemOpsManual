@@ -1,0 +1,15 @@
+{
+ "id": "C08.13",
+ "status": "PASS",
+ "detail": "step 1 exits non-zero (1); step 1 output contains \"error TS2322: Type 'string' is not assignable to type 'DatatypeRef'.\"",
+ "ran": "2026-10-14",
+ "steps": [
+  {
+   "cmd": "node node_modules/typescript/bin/tsc --noEmit --strict --module nodenext --moduleResolution nodenext --target es2022 --skipLibCheck scripts/dsl/bad-range.ontology.ts",
+   "rc": 1,
+   "seconds": 0.1,
+   "stdout": "scripts/dsl/bad-range.ontology.ts(8,58): error TS2322: Type 'string' is not assignable to type 'DatatypeRef'.\n",
+   "stderr": ""
+  }
+ ]
+}

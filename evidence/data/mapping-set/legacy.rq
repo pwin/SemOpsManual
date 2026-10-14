@@ -1,0 +1,9 @@
+# Chapter 10 §10.6: a third, older mapping. Internally consistent, but it binds
+# acme: to a hash namespace, so its terms are not the ontology's.
+PREFIX acme: <https://acme.example.org/ns#>
+CONSTRUCT {
+  ?unit_IRI a acme:Department .
+}
+WHERE {
+  BIND(IRI(CONCAT("https://acme.example.org/data/department/", ?dept)) AS ?unit_IRI)
+}

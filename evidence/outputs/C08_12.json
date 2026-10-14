@@ -1,0 +1,36 @@
+{
+ "id": "C08.12",
+ "status": "PASS",
+ "detail": "step 1 output contains '0.15.0'; step 2 exits 0; step 3 exits 0; step 4 exits 0",
+ "ran": "2026-10-14",
+ "steps": [
+  {
+   "cmd": "node -p \"require('./node_modules/ontology-suite/package.json').version\"",
+   "rc": 0,
+   "seconds": 0.0,
+   "stdout": "0.15.0\n",
+   "stderr": ""
+  },
+  {
+   "cmd": "node node_modules/typescript/bin/tsc --noEmit --strict --module nodenext --moduleResolution nodenext --target es2022 --skipLibCheck scripts/dsl/acme.ontology.ts",
+   "rc": 0,
+   "seconds": 0.2,
+   "stdout": "",
+   "stderr": ""
+  },
+  {
+   "cmd": "node node_modules/tsx/dist/cli.mjs scripts/dsl/acme.ontology.ts work/C08_12/acme.ttl",
+   "rc": 0,
+   "seconds": 0.4,
+   "stdout": "",
+   "stderr": ""
+  },
+  {
+   "cmd": "python scripts/query_file.py work/C08_12/acme.ttl \"SELECT (COUNT(*) AS ?triples) WHERE { ?s ?p ?o }\"",
+   "rc": 0,
+   "seconds": 0.4,
+   "stdout": "triples\n17\n",
+   "stderr": ""
+  }
+ ]
+}

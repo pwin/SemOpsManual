@@ -1,0 +1,12 @@
+# Hazard 2: one pass. Deriving ex:sub from two hops of ex:sub reaches two hops.
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix ex: <http://example.org/> .
+
+ex:S a sh:NodeShape ; sh:targetClass ex:T ;
+    sh:rule [ a sh:SPARQLRule ; sh:construct """
+        PREFIX ex: <http://example.org/>
+        CONSTRUCT { $this ex:sub ?z }
+        WHERE { $this ex:sub ?y . ?y ex:sub ?z }""" ] ;
+    sh:property [ sh:path ex:sub ;
+        sh:qualifiedValueShape [ sh:hasValue ex:d ] ; sh:qualifiedMinCount 1 ;
+        sh:message "should reach ex:d transitively" ] .

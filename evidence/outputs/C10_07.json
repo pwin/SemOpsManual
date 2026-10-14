@@ -1,0 +1,15 @@
+{
+ "id": "C10.07",
+ "status": "PASS",
+ "detail": "step 1 exits 0; employees.ttl contains '<https://acme.example.org/data/employee/E004> a acme:Employe'",
+ "ran": "2026-10-14",
+ "steps": [
+  {
+   "cmd": "tarka run -q fixtures/acme_robotics/employees.rq -i fixtures/acme_robotics/employees.csv -o work/C10_07/employees.ttl",
+   "rc": 0,
+   "seconds": 0.0,
+   "stdout": "",
+   "stderr": ""
+  }
+ ]
+}

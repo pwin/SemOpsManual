@@ -1,0 +1,14 @@
+# Chapter 10 §10.3: a bOTTR map that cannot build any instance. The id column
+# is mapped as xsd:integer, and 'E001' is not one. bOTTR leaves each instance
+# out, names the row and the argument, and exits 1: the report `tarka run`
+# does not give.
+@prefix ottr: <http://ns.ottr.xyz/0.4/> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix acme: <https://acme.example.org/ns/> .
+
+[] a ottr:InstanceMap ;
+   ottr:template acme:Employee ;
+   ottr:source [ a ottr:H2Source ] ;
+   ottr:query """SELECT employee, name, mbox, id, dept, role, skill FROM CSVREAD('@@THIS_DIR@@/employees-iri.csv')""" ;
+   ottr:argumentMaps ( [ ottr:type ottr:IRI ] [ ] [ ottr:type ottr:IRI ] [ ottr:type xsd:integer ]
+                       [ ottr:type ottr:IRI ] [ ] [ ] ) .

@@ -46,6 +46,10 @@ lead you to expect, the manual reports what actually happened and explains why.
 [Chapter 9](docs/09-continuous-integration.md) has the sharpest example, where the
 obvious flag is the wrong one.
 
+You don't have to take any of it on trust. [evidence/](evidence/README.md) holds the
+commands, input data and recorded output behind every checkable claim, and an
+annotated copy of the manual with a link from each claim to its evidence and back.
+
 Where the toolchain has no answer for a SemOps concept, this manual says so plainly
 and marks it grey. [Chapter 14](docs/14-coverage-and-gaps.md) is the honest ledger,
 and this edition's copy includes a list of things earlier editions had wrong.

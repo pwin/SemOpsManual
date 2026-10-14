@@ -1,0 +1,10 @@
+# A SPARQL-based constraint: beyond SHACL Core. HOLOS's native validator must
+# refuse it rather than skip it and answer "conforms".
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix ex: <http://example.org/> .
+
+ex:NamedShape a sh:NodeShape ; sh:targetClass ex:Person ;
+  sh:sparql [ a sh:SPARQLConstraint ;
+    sh:message "Person has no name" ;
+    sh:select """PREFIX ex: <http://example.org/>
+                 SELECT $this WHERE { FILTER NOT EXISTS { $this ex:name ?n } }""" ] .
