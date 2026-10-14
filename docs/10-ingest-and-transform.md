@@ -12,13 +12,22 @@
 > *As a data steward, I want to know whether a finding is our problem or an
 > upstream vocabulary's.*
 
+Every CSV anyone has ever emailed you is a table of strings. `ENG`, `QA`,
+`E004`, `Margaret Hamilton`. Triplification is the moment those strings become
+*things*: an employee with an identity, a department you can point at, a
+relationship with a name. People in our field like to call that move "strings to
+things", and it is a good phrase, because it puts the weight in the right place.
+The interesting work is not producing triples. It is deciding which strings
+deserve to become which things, and checking that they did.
+
 SemOps layer 4 asks for ETL orchestration, incremental ingestion, data-quality
 checks, error handling and provenance capture. This toolchain covers the
-**quality and correctness** half thoroughly and the **orchestration** half not
-at all — there is no scheduler here, and Airflow, Argo or Prefect remain the
-right answers for that ([Chapter 14](14-coverage-and-gaps.md)).
+**quality and correctness** half thoroughly, now includes a fast triplifier of
+its own, and covers the **orchestration** half not at all. There is no scheduler
+here, and Airflow, Argo or Prefect remain the right answers for that
+([Chapter 14](14-coverage-and-gaps.md)).
 
-What it does provide is a three-stage pipeline arranged on one principle:
+What it provides is a three-stage pipeline arranged on one principle:
 **cheapest check first**.
 
 ```mermaid
@@ -28,7 +37,7 @@ What it does provide is a three-stage pipeline arranged on one principle:
   'edgeLabelBackground':'#FFFFFF'}}}%%
 flowchart TD
     S1["<b>1 · sketch</b><br/>static analysis of the query<br/><i>no CSV · seconds</i>"]
-    S2["<b>2 · triplify</b><br/>run the CSV through oxi-gen<br/><i>real RDF out</i>"]
+    S2["<b>2 · tarka run</b><br/>CSV or Parquet → RDF<br/><i>TARQL or OTTR</i>"]
     S3["<b>3 · data</b><br/>assess what was produced<br/><i>conformance + reasoning</i>"]
 
     S1 -->|"query references<br/>real vocabulary"| S2
@@ -48,27 +57,27 @@ flowchart TD
 Most real ingestion starts with a CSV somebody emailed you, and the first
 question is what the ontology should even look like.
 
-The extension's *Infer Ontology + Query from CSV* profiles a raw CSV — sniffing
-types and cardinality — and drafts **both** a starter ontology fragment and a
-CONSTRUCT query wired to it. It is a starting point, not an answer: an inferred
+The extension's *Infer Ontology + Query from CSV* profiles a raw CSV, sniffing
+types and cardinality, and drafts **both** a starter ontology fragment and a
+CONSTRUCT query wired to it. It is a starting point, not an answer. An inferred
 model reflects the shape of one extract, not the shape of the domain, and
 [Chapter 2](02-people-and-cognition.md)'s exemplar-driven expert will find its
 boundary cases in minutes.
 
 The *Query Workbench* is the more durable tool. It gives a live, debounced
-preview of the transformation's real triplified output against sample rows —
-using Oxigraph, with TARQL semantics reproduced via a standard SPARQL `VALUES`
-injection — alongside a static sketch of the CONSTRUCT template and conformance
-warnings against the ontology.
+preview of the transformation's real output against sample rows, now evaluated
+on holos-wasm-node, alongside a static sketch of the CONSTRUCT template and
+conformance warnings against the ontology.
 
 The point is the loop length. Discovering a wrong `BIND` after a full pipeline
 run is a twenty-minute round trip; discovering it in a live preview is
 immediate, and immediate feedback is what makes people willing to iterate on a
-transformation rather than accepting the first one that runs without erroring.
+transformation rather than settling for the first one that runs without
+erroring.
 
 ---
 
-## 10.2 Stage 1: `sketch` — before any CSV is read
+## 10.2 Stage 1: `sketch`, before any CSV is read
 
 `sketch` is pure static analysis of the query text against the ontology. It
 answers *"does this transformation even reference vocabulary the ontology
@@ -87,32 +96,35 @@ Findings: 38 total (0 Violation, 0 Warning, 38 Info)
 Sketch used 1 query file(s); 8 triples, 7 entities.
 ```
 
-The summary line is the useful part: **8 triples, 7 entities from 1 query file**.
-That is the shape the transformation will produce, derived from the query alone.
-A reviewer who expected fifteen predicates and sees eight has found a bug before
-any data moved.
+The summary line is the useful part: **8 triples, 7 entities from 1 query
+file**. That is the shape the transformation will produce, derived from the
+query alone. A reviewer who expected fifteen predicates and sees eight has found
+a bug before any data moved.
 
-`--queries` takes either a file or a directory. It used to insist on a
-directory, failing on a file path with `No files matching '*.sparql,*.rq,…'` —
-if you meet that, you are on an older build
-([Chapter 14](14-coverage-and-gaps.md) §14.6). Use `--file-pattern` to narrow
-or widen the glob when pointing at a directory.
+The 38 Infos are 35 × `CNF-005` (imported classes the sketch never populates,
+which is expected) and 3 × `TQL-003`, one each for `?name`, `?role` and
+`?skill`. Those three are CONSTRUCT variables bound nowhere in the query, which
+in TARQL is ordinarily correct: each CSV header binds a variable of the same
+name. The message says exactly that, and asks a reviewer to confirm them against
+the header. That is a good model for an Info: a fact, the reason it is usually
+fine, and the one thing a person should glance at.
+
+`--queries` takes a file or a directory. Use `--query-pattern` to narrow or widen
+the glob. That is the canonical name in every subcommand since 0.15.0, and
+`--file-pattern` still works as an alias. (It used to mean the *query* glob in
+some commands and the *data* glob in `data`, which was nobody's idea of fun.)
 
 Four extensions are recognised as transformation queries: **`.sparql`, `.rq`,
-`.tarql` and `.tq`**. The pairing with a CSV is by filename convention, which is
-the point worth drawing out — **the mapping is a query in source control**,
+`.tarql` and `.tq`**. The pairing with a CSV is by filename convention, and the
+point worth drawing out is that **the mapping is a query in source control**,
 diffable in a pull request and testable on its own, rather than transformation
 code buried in a script. That is what makes the ingest layer reviewable by
 someone who did not write it.
 
-> `.tq` and `.tarql` are the more recently added of the four and are lightly
-> exercised. If a query is not being picked up, check the extension before
-> anything else, and `--file-pattern` will narrow or widen the glob.
-
-### The query itself is now checked
+### The query itself is checked
 
 Five checks in the registry look at the transformation rather than the graph it
-produces, and they run in this stage:
+produces:
 
 | Check | What it catches |
 |---|---|
@@ -122,52 +134,60 @@ produces, and they run in this stage:
 | `TQL-004` | A `?x_IRI` bound to `CONCAT` with nothing turning the result into an IRI |
 | `TQL-005` | A `?x_DT` variable never given a datatype with `STRDT()` |
 
-`TQL-004` is the one that repays reading twice. SPARQL's `CONCAT` returns a
-**string**, and TARQL does not coerce it, so a variable named `?person_IRI` that
-is built by `CONCAT` and never wrapped in `IRI()` silently produces string
-literals where the model says there should be IRIs. The data loads, the counts
-look right, and every join against those subjects finds nothing.
+`TQL-004` repays reading twice. SPARQL's `CONCAT` returns a **string**, and TARQL
+does not coerce it, so a variable named `?person_IRI` that is built by `CONCAT`
+and never wrapped in `IRI()` fails in one of two quiet ways, depending on where
+it sits. As a subject it produces nothing at all, because a string cannot be a
+subject and every triple built on it is dropped. As an object it produces a
+string literal where the model says there should be an IRI, so the data loads,
+the counts look right, and every join through it finds nothing. Either way the
+run exits 0. It's the strings-to-things move quietly not happening. (The
+check's own message says only the first, *"Every triple using it is
+dropped"*; tarka shows both.)
 
-Two of these rest on a naming convention — `?x_IRI` for a constructed IRI,
-`?x_DT` for a value given an explicit datatype. That is worth adopting even if
-you never run the checks: it puts the intent in the variable name, where a
-reviewer sees it.
+Two of these rest on a naming convention: `?x_IRI` for a constructed IRI, `?x_DT`
+for a value given an explicit datatype. Adopt it even if you never run the
+checks. It puts the intent in the variable name, where a reviewer sees it.
 
-The stage also writes **`bind-facts.ttl`** beside the report — a node per `BIND`
-carrying its target, expression, skeleton, file and line, plus one per
-`CONSTRUCT` variable recording whether it is bound. The bound ones are included
-deliberately, so *"what does this query actually bind?"* is answerable rather
-than only *"where are the gaps?"* It is a small instance of a good habit: the
-transformation's own structure has been turned into a graph, so it can be
-queried with the same tools as everything else.
+Since 0.17.0 the TARQL checks carry their position as **fields**
+(`oq:sourceFile`, `oq:sourceLine`) rather than as `"(draft_alarms.rq:20)"` tacked
+onto the message. A finding then lands in `findings.txt` under the file and line
+it is about, and a script can sort and filter on it.
 
-Because `sketch` needs no CSV, no `oxi-gen` binary and no data access, it is the
-right gate for a pull request that changes a transformation query — it runs in
-seconds and needs no production data in CI.
+The stage also writes **`bind-facts.ttl`**, a node per `BIND` carrying its
+target, expression, skeleton, file and line, plus one per `CONSTRUCT` variable
+recording whether it is bound, and a plain-text **`bind-review.txt`** that
+answers the three questions a reviewer asks of a set of `BIND`s. It is a small
+instance of a habit I like a great deal: the transformation's own structure has
+been turned into a graph, so it can be queried with the same tools as
+everything else. Metadata about the mapping and the data it makes sit on the
+same plane. You don't have to lift the pen and go somewhere else to ask about
+either.
+
+Because `sketch` needs no CSV, no triplifier and no data access, it is the right
+gate for a pull request that changes a transformation query. It runs in seconds
+and needs no production data in CI.
 
 ---
 
-## 10.3 Stage 2: `triplify` — produce real RDF
+## 10.3 Stage 2: produce real RDF with `tarka`
+
+The previous editions used `oxi-gen`, Semantic Arts' TARQL engine, which the
+suite's `triplify` command drives. That still works. But the toolchain now has a
+triplifier of its own, **tarka**, and it is the one I would reach for first.
 
 ```bash
-python -m ontology_suite triplify \
-  --csv-dir examples/acme_robotics \
-  --queries examples/acme_robotics \
-  --out-dir out/triplify
+tarka run -q examples/acme_robotics/employees.rq \
+          -i examples/acme_robotics/employees.csv \
+          -o out/triplify/employees.ttl
 ```
 
-```
-Triplified 1 file(s) into out/triplify
-  - out/triplify/employees.ttl
-```
-
-This shells out to the real `oxi-gen` binary (auto-discovered, or passed with
-`--oxi-gen-bin`). The output is genuine RDF:
+The output is genuine RDF, and for this fixture it is the same, term for term
+and line for line, as the `oxi-gen` output quoted in earlier editions:
 
 ```turtle
 @prefix acme: <https://acme.example.org/ns/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
-
 <https://acme.example.org/data/employee/E004> a acme:Employee , acme:Engineer ;
 	foaf:mbox <mailto:margaret.hamilton@acme.example.org> ;
 	foaf:name "Margaret Hamilton" ;
@@ -177,18 +197,148 @@ This shells out to the real `oxi-gen` binary (auto-discovered, or passed with
 	acme:worksIn <https://acme.example.org/data/department/QA> .
 ```
 
-Useful flags in practice: `--test N` triplifies only the first *N* rows (fast
-iteration on a large file), `--delimiter`/`--tab` for non-comma input,
-`--no-header-row`, `--dedup N`, and `--ntriples` for line-oriented output that
-diffs and streams well.
+tarka takes `oxi-gen`'s options (`-q -i -o --ntriples -d -t -p -H -n --split
+--dedup --test --bind-empty-strings --gzip`) and evaluates the `WHERE` clause on
+spareval, the same evaluator `oxi-gen` and HOLOS use. Its own measurement, on a
+200,000-row retail file across 8 cores, has it running the TARQL query 1.7
+times as fast as `oxi-gen`, and the equivalent OTTR templates 2.6 times as
+fast. `--test N` triplifies only the first *N* rows. Make that a habit before
+every full run: it costs seconds and catches the transformation that is
+syntactically fine and semantically wrong.
 
-`--test` deserves a habit: run it before every full run. It costs seconds and it
-catches the class of error where a transformation is syntactically fine and
-semantically wrong.
+### TARQL or OTTR: two ways to say the same mapping
+
+tarka also reads **OTTR templates**, in the stOTTR syntax, and compiles both to
+one plan. To check the claim, I wrote the acme mapping as a template:
+
+```stottr
+@prefix mailto: <mailto:> .
+
+acme:Employee [ ottr:IRI ?employee, xsd:string ?name, ottr:IRI ?mbox, xsd:string ?id,
+                ottr:IRI ?dept, xsd:string ?role, xsd:string ?skill ] :: {
+    ottr:Triple(?employee, rdf:type, acme:Employee),
+    ottr:Triple(?employee, rdf:type, acme:Engineer),
+    ottr:Triple(?employee, foaf:name, ?name),
+    ottr:Triple(?employee, foaf:mbox, ?mbox),
+    ottr:Triple(?employee, acme:hasEmployeeId, ?id),
+    ottr:Triple(?employee, acme:worksIn, ?dept),
+    ottr:Triple(?employee, acme:hasRole, ?role),
+    ottr:Triple(?employee, acme:hasSkill, ?skill)
+} .
+```
+
+```bash
+tarka lint -l employees.stottr
+# 1 template: 0 errors, 0 warnings
+tarka run -l employees.stottr -T acme:Employee -i employees.csv --ntriples
+```
+
+Sorted, the 40 triples are identical to the TARQL query's. Verified.
+
+Which should you use? They put the work in different places. A TARQL query
+*builds* IRIs in its `WHERE` clause, which is exactly what `sketch` and the `TQL`
+checks can inspect. An OTTR template *receives* IRIs and typed values through
+parameters, and its library is type-checked by `tarka lint` against OTTR's own
+type system. Templates are also modules. You can load a published library and
+your own on top of it, use any template as the root, and give several roots per
+row. In a piece I wrote for Semantic Arts about moving from labels to verbs, I
+described information "bricks" that can be assembled, like Lego, into a house
+or a boat or a space rocket. OTTR templates are about as close to that as our
+field has come.
+
+> **One silent failure, found while checking this.** My first version of the
+> template had no `@prefix mailto:` line. tarka did not accept the `mailto:…`
+> cells as IRIs (each looks exactly like a prefixed name with an undeclared
+> prefix, and declaring `mailto:` fixed it), and, because `?mbox` is mandatory,
+> dropped **every row**. Exit 0, no message, zero
+> triples. Making the parameter optional instead dropped just the mailbox triple,
+> equally quietly. In bOTTR mode tarka reports every instance it leaves out and
+> exits 1. The `run` path does not, yet ([Chapter 14](14-coverage-and-gaps.md)
+> §14.4). (The two modes also disagree about the cell itself. The same rows
+> through a bOTTR map come out whole, because bOTTR reads a cell typed
+> `ottr:IRI` as a full IRI, and `mailto:…` is one.) Until it does, **count what came out**: an empty output from a
+> non-empty input should fail your pipeline.
+
+### Data frames, not just CSV
+
+`-i` takes Parquet and Arrow IPC files as well as CSV, read with Polars, and the
+Python module (`pip install tarka-rdf`, imported as `tarka_rdf`) maps a
+`polars.DataFrame` straight to a frame of triples. Typed columns become typed
+literals, so an integer column feeding an `xsd:integer` OTTR parameter gives
+`"42"^^xsd:integer` without anyone writing `STRDT`. TARQL still binds every cell
+as a plain string, as it does for CSV. For a data team that already lives in
+data frames, this is the shortest path from where their data is to a graph.
+
+### Shapes from the mapping, and what they cannot tell you
+
+```bash
+tarka shapes -q examples/acme_robotics/employees.rq -o employees.shapes.ttl
+```
+
+writes SHACL shapes for what the mapping *makes*:
+
+```turtle
+shape:EmployeeShape a sh:NodeShape ;
+    sh:targetClass acme:Employee ;
+    sh:property
+        [ sh:path foaf:mbox ; sh:nodeKind sh:IRI ] ,
+        [ sh:path foaf:name ; sh:datatype xsd:string ] ,
+        [ sh:path acme:hasEmployeeId ; sh:datatype xsd:string ] ,
+        ...
+        [ sh:path acme:worksIn ; sh:nodeKind sh:IRI ] .
+```
+
+and `tarka run … --validate` checks the output against them. On the acme data
+they conform.
+
+That is useful, and it is worth being exact about why. These shapes are a
+**regression guard**: if a later edit to the mapping starts producing a literal
+where it used to produce an IRI, they will catch it. What they cannot do is tell
+you the mapping is *right*, because they were derived from the mapping. They
+restate what it does. In a moment, `data` will find that every employee
+`worksIn` a department nobody created. The generated shapes are perfectly
+content with that, because `sh:nodeKind sh:IRI` is exactly what the mapping
+makes. It's the same principle as the hand-written fixture in
+[Chapter 7](07-the-toolchain.md) §7.1: **a check derived from the
+implementation agrees with the implementation, including on the day it is
+wrong.** Use generated shapes alongside model-derived ones, never instead of
+them.
+
+### Straight into a store
+
+```bash
+tarka run -q employees.rq -i employees.csv \
+  --post http://127.0.0.1:7878/graph \
+  --graph https://acme.example.org/graph/triplified/employees
+```
+
+streams the output as N-Triples into a SPARQL Graph Store Protocol endpoint as it
+is made, in one request and therefore one transaction: here HOLOS's
+`holos-server`, which serves the protocol at `/graph`, and equally Oxigraph,
+Fuseki or GraphDB. A run that fails part-way ends the request with an error, so
+the store takes nothing. Verified for this edition against `holos-server`: the
+graph arrived whole, 40 triples. Note the `--graph`: per-source
+named graphs are nearly free here and nearly impossible to add later
+([Chapter 13](13-operate-and-consume.md) §13.1).
+
+tarka speaks the protocol rather than linking any particular store in, and its
+own reasoning is worth quoting for anyone designing across an organisational boundary: the
+protocol reaches every store alike. tarka works in RDF 1.1 and SPARQL 1.1, and
+builds the SHACL engine without its RDF 1.2 feature so that nothing in its build
+starts parsing RDF 1.2 by accident.
+
+### The suite's `triplify`, for now
+
+`python -m ontology_suite triplify` still shells out to the `oxi-gen` binary
+(`--oxi-gen-bin`, or `ONTOLOGY_SUITE_OXI_GEN_BIN`), as does the extension's *Run
+Full Triplify*. Neither knows about tarka yet. Point `data` at tarka's output,
+as the rest of this chapter does, and nothing downstream notices the
+difference. If you have no `oxi-gen` build, `triplify` says so in a warning and
+produces nothing ([Chapter 14](14-coverage-and-gaps.md) §14.7).
 
 ---
 
-## 10.4 Stage 3: `data` — assess what was actually produced
+## 10.4 Stage 3: `data`, assess what was actually produced
 
 ```bash
 python -m ontology_suite data out/triplify/employees.ttl \
@@ -201,8 +351,8 @@ python -m ontology_suite data out/triplify/employees.ttl \
 Findings: 550 total (68 Violation, 363 Warning, 119 Info)
 ```
 
-Five hundred and fifty, and the same lesson as
-[Chapter 9](09-continuous-integration.md) applies identically. Scope it:
+Five hundred and fifty, and [Chapter 9](09-continuous-integration.md)'s lesson
+applies identically. Scope it:
 
 ```bash
 python -m ontology_suite data out/triplify/employees.ttl \
@@ -214,29 +364,49 @@ python -m ontology_suite data out/triplify/employees.ttl \
 ```
 
 ```
-Findings: 54 total (12 Violation, 40 Warning, 2 Info)
+Findings: 55 total (13 Violation, 40 Warning, 2 Info)
 ```
 
-> **54 or 55, depending on one thing.** The scoped data run returns 54 findings
-> when the external DL reasoner fails to start and 55 when it succeeds — the
-> extra one is `REA-021`, HermiT's unsatisfiability finding on `acme:Contractor`,
-> discussed below. Everything else is identical. This is the *only* variation in
-> the scoped figures anywhere in the manual, it has a known cause, and the
-> difference is visible in the report: if `REA-021` is present you got the
-> reasoner, and if `REA-022` is present you did not.
-
-Note the namespace here is `https://acme.example.org/` — one level up from the
-ontology's `https://acme.example.org/ns/` — because the data individuals live
-under `https://acme.example.org/data/`. The filter is a literal IRI-prefix match,
-so it must cover **both** the schema terms and the instance IRIs. Choosing that
+Note the namespace here is `https://acme.example.org/`, one level up from the
+ontology's `https://acme.example.org/ns/`, because the data individuals live
+under `https://acme.example.org/data/`. The filter is a literal prefix match, so
+it must cover **both** the schema terms and the instance IRIs. Choosing that
 prefix deliberately is part of designing your IRI scheme, and it is much easier
 to get right at the start than to retrofit.
+
+### 54 or 55, and why the report cannot tell you which
+
+That run gave 55 three times running. The fourth time it gave 54. The missing
+finding is `REA-021`, HermiT's verdict that `acme:Contractor` is unsatisfiable,
+and it is missing because HermiT did not start.
+
+Earlier editions said you could tell which had happened from the report: *"if
+`REA-021` is present you got the reasoner, and if `REA-022` is present you did
+not."* The first half is true. The second half is not, and I should have caught
+it sooner. `REA-022`'s focus node is `oq:Graph`, a finding about the run rather
+than about any term, so a scoped run filters it out with everything else that
+isn't yours. I checked three 54-finding runs: none contains `REA-021` and none
+contains `REA-022`. **A scoped `data` gate cannot tell "HermiT checked and found
+nothing" from "HermiT never ran".**
+
+That is [Chapter 4](04-from-research-to-industry.md)'s distinction, between *we
+checked* and *we could not check*, being erased by the very filter
+[Chapter 9](09-continuous-integration.md) recommends. What to do about it:
+
+- **Run the reasoner's verdict unscoped.** `ontology --ontology … --fail-on
+  never` in the same job, asserting no `REA-022` in its `full_results.csv`, puts
+  the "did it run?" question somewhere the filter cannot reach.
+- **Or assert the positive.** If your ontology has a known contradiction you
+  keep as a canary, as the fixture does, assert that `REA-021` is present.
+- **And ask for the fix.** Findings about the run itself should survive the
+  filter. That is the improvement [Chapter 14](14-coverage-and-gaps.md) §14.4
+  suggests.
 
 ### What those findings actually say
 
 Scoped, the findings become readable, and they fall into three genuinely
-different kinds — a distinction worth teaching a team explicitly, because
-treating them identically is what makes people ignore all three:
+different kinds. Teach the distinction explicitly: treating them alike is what
+makes people ignore all three.
 
 **Real data defects.** The largest group:
 
@@ -249,15 +419,21 @@ DAT-002 [Warning]  Dangling IRI reference
    Reference target .../data/department/ENG is never used as a subject
 ```
 
-Both are correct and both point at the same real gap: the transformation
+Both are correct, and both point at the same real gap. The transformation
 produces employees who `worksIn` a department IRI, but **nothing in the pipeline
-ever produces the departments themselves**. Every employee references a resource
-that does not exist in the graph. That is exactly the class of defect this stage
-exists to catch, and it is invisible in the CSV, invisible in the query text, and
-obvious the moment you assess the output.
+ever produces the departments themselves**. Every employee references something
+that does not exist in the graph. This is exactly the defect this stage exists
+to catch. It is invisible in the CSV, invisible in the query text, invisible to
+the shapes tarka generated, and obvious the moment you assess the output.
 
-**Inherited schema problems.** `LOG-001`, `QUA-001` on `acme:hasSkill`,
-`STR-003` and `STY-002` on `acme:reports_to` — the same ontology findings from
+Read the list to the end, though. Of the ten of each, five are the departments.
+The other five are the `mailto:` mailboxes, which are IRIs nobody intends to
+describe. Same check, same severity, and not the same kind of finding at all.
+Deciding that, once, and writing it down as a house rule or an exemption, is
+what stops the real five being lost among the other five.
+
+**Inherited schema problems.** `LOG-001`, `QUA-001` on `acme:hasSkill`, `STR-003`
+and `STY-002` on `acme:reports_to`: the same ontology findings as
 [Chapter 8](08-model-and-validate.md), reappearing because `data` evaluates the
 ontology alongside the data. Not new information; not noise either. If the
 schema is broken, the data built on it inherits the problem.
@@ -270,15 +446,15 @@ CNF-005 [Info]  Ontology class never populated
    never uses it as an rdf:type
 ```
 
-Nothing is wrong. `acme:Contractor` is declared and this extract contains no
-contractors. As an `Info` this is right, and it is genuinely useful: a class
-that is *never* populated across any extract is either dead vocabulary or a
-transformation that quietly stopped emitting it. Worth reviewing periodically;
-never worth failing a build on.
+Nothing is wrong. `acme:Contractor` is declared and this extract has no
+contractors. As an Info that is right, and genuinely useful: a class that is
+*never* populated across any extract is either dead vocabulary or a
+transformation that quietly stopped emitting it. Review it periodically; never
+fail a build on it.
 
 ### The reasoner, when it turns up
 
-When the DL reasoner starts, the scoped run carries one extra finding:
+When HermiT starts, the scoped run carries one extra finding:
 
 ```
 REA-021 [Violation]  Class found unsatisfiable by an external DL reasoner
@@ -287,35 +463,25 @@ REA-021 [Violation]  Class found unsatisfiable by an external DL reasoner
 ```
 
 HermiT has independently confirmed what the pattern-based `LOG-001` found by a
-completely different route — a rule-based closure and a real description-logic
+completely different route: a rule-based closure and a real description-logic
 reasoner agreeing on the same contradiction. Two independent confirmations of
-one deliberate flaw is the ideal outcome, and it is the reason the suite runs
-both rather than choosing.
+one deliberate flaw is the ideal outcome, and it is why the suite runs both
+rather than choosing.
 
-**When it does not start, you get `REA-022` instead**, and the run reports 36
-rather than 37. This is not a difference between the `ontology` and `data`
-commands, though an earlier draft of this manual presented it that way on the
-strength of two runs. Running the `ontology` command three times in one session
-settles it: the first invocation produced `LOG-001` + `REA-020` + `REA-021` with
-HermiT working, and the second and third produced `LOG-001` + `REA-022` with it
-failing. **Same command, same fixture, same session, different outcomes.**
-
-The suite's own `ACME_ROBOTICS_WALKTHROUGH.md` names this directly — HermiT is
-*"occasionally environment-flaky in ways unrelated to this fixture (a transient
-internal error rather than a real unsatisfiability finding)"* — so it is known
-instability in the owlready2/HermiT bridge that can hit any invocation, not a
-mystery about code paths.
-
-That is exactly [Chapter 4](04-from-research-to-industry.md)'s point, and the
-correction is part of it: a research-lineage component's failure modes are yours
-to discover, two data points are not a pattern, and what makes the dependency
-safe to hold is that the wrapper says clearly which checks did not run instead
-of reporting success.
+Whether it turns up is decided by Python's hash seed. Earlier editions called it
+per-invocation flakiness, and so did the suite's own walkthrough (*"occasionally
+environment-flaky"*). Across this edition's unpinned runs it did look like a coin
+toss: five in eight for scoped `data`. Pin `PYTHONHASHSEED` and it very nearly
+stops. On this fixture seed 5 gave 55 in every run, and seed 0 gave 54 in nine runs
+out of ten, because owlready2 fails to load FOAF's `foaf:primaryTopic` in some
+orders, before HermiT is ever called ([Chapter 14](14-coverage-and-gaps.md) §14.4,
+which also says what is known about the tenth). Set the seed for the whole CI job, and have the job
+record which verdict it got rather than assume one.
 
 ### Large graphs
 
 For a data graph too large to reason over in full, `--sample N` caps the
-*reasoning* pass to a bounded-description sample of *N* named subjects while
+*reasoning* pass to a bounded-description sample of *N* named subjects, while
 still running the full (cheap) registry over everything:
 
 ```bash
@@ -332,8 +498,8 @@ sampling it is what keeps a nightly job inside its window.
 
 ## 10.5 Whose problem is it?
 
-This is the question a data steward asks most often, and the three-way split
-above is the answer in general form:
+This is the question a data steward asks most often, and the split above answers
+it in general form:
 
 | Finding is about | Owner | Action |
 |---|---|---|
@@ -341,27 +507,85 @@ above is the answer in general form:
 | Your ontology | Ontology owner | Fix the schema; it will recur on every extract |
 | An upstream vocabulary | Nobody here | Filter it out of the gate; audit periodically |
 | Coverage (`CNF-005`) | Data steward | Review, do not gate |
+| The run itself (`REA-022`) | Whoever owns the pipeline | Never filter it away; assert on it unscoped |
 
-The most expensive mistake is treating row 3 as row 1 — engineers spending days
+The most expensive mistake is treating row 3 as row 1: engineers spending days
 proving that a finding against someone else's vocabulary is not their fault.
-`--own-namespace` exists to make that impossible.
+`--own-namespace` exists to make that impossible. The newest row is the
+reminder that a filter which removes everything that isn't yours can also remove
+the one finding that is about *you*.
 
 ---
 
-## 10.6 What is not here
+## 10.6 When every file is right and the set is wrong
+
+Real projects do not have one mapping. They have a folder of them, written by
+different people at different times against different versions of the model. The
+failures that follow are the ones nobody sees, because **every file is
+individually correct and the set disagrees with itself**.
+
+The testing repository's competency questions 32 to 38 are about exactly this:
+
+| Question | What goes wrong |
+|---|---|
+| CT-32 | A template hangs a property off a class outside its `rdfs:domain` |
+| CT-33 | A mapping still builds a term the model has deprecated |
+| CT-34 | One class is built with different property sets by different files |
+| CT-35 | One predicate is typed in one mapping and a plain string in another |
+| CT-36 | A term resolves only because every file was named on the command line, not through `owl:imports` |
+| CT-37 | Two mappings disagree about what a prefix means |
+| CT-38 | The output moves where no move was intended, against a golden copy |
+
+CT-32 taught me something. Its fixture includes a mapping that is wired to no CSV
+at all, so it is never triplified, and `CNF-003`, the data-side check for a
+property used outside its domain, can never see it. A mapping that has not run
+cannot be checked by anything that waits for its output. **Check mappings as
+mappings, before data exists**, as well as checking what they make.
+
+The suite now publishes two facts that make set-level questions a query rather
+than a script:
+
+- **`tq:PrefixBinding`**: one node per `PREFIX` declaration, with the prefix, the
+  namespace and the file. "One prefix bound to two namespaces by two files" is
+  then a `GROUP BY`. Nothing else can see it, because each file is internally
+  consistent.
+- **A per-file sketch dataset**: the same sketch with each query file's triples
+  in a named graph named after the file, so `GRAPH ?g { … }` asks per-file
+  questions. The default graph still holds the union, so a check written for the
+  merged sketch keeps working.
+
+You will notice that both are, again, the mapping's own structure turned into
+graph data and put on the same plane as everything else.
+
+> **And one thing the merged sketch gets wrong.** I checked this with a
+> three-file set of my own, in which one older mapping bound `acme:` to a hash
+> namespace. `sketch` printed *"prefix 'acme:' redefined … keeping first
+> definition"* and then read **every** file with the first file's binding. The
+> two files written against the ontology's own namespace were reported as
+> building undeclared terms (`CNF-001`, `CNF-002`) in the hash namespace, and
+> `acme:Employee`, which both of them build, as never populated (`CNF-005`).
+> Take the odd file out and the same two files are clean. The per-file dataset
+> reads all three correctly. Until the merged sketch does too, treat that
+> warning as an error: a prefix bound two ways is CT-37's question, and a
+> `GROUP BY` over the `tq:PrefixBinding` facts answers it.
+
+---
+
+## 10.7 What is not here
 
 Stated plainly, because SemOps layer 4 asks for it and this toolchain does not
 provide it:
 
 - **Orchestration and scheduling.** No DAG, no retry logic, no backfill. Airflow,
   Argo Workflows or Prefect, calling these commands as steps.
-- **Incremental ingestion.** Every run is a full pass. Incrementality is your
-  pipeline's job.
-- **Streaming.** This is batch. Kafka-shaped ingestion is out of scope.
-- **Provenance capture.** The tooling does not stamp provenance onto the output.
-  Named graphs at load time are the practical answer
-  ([Chapter 13](13-operate-and-consume.md)), and it is far easier to do at ingest
-  than to retrofit.
+- **Incremental ingestion.** Every `data` run is a full pass. Incrementality is
+  your pipeline's job.
+- **Streaming.** This is batch. tarka streams its *output* into a store, but
+  Kafka-shaped ingestion is out of scope.
+- **Provenance capture, mostly.** tarka's `--graph` puts each load in its own
+  named graph, which is the practical minimum and costs nothing. The tooling does
+  not stamp per-statement provenance onto the output;
+  [Chapter 3](03-across-the-boundary.md) §3.4 discusses the options.
 
 That last one is worth planning before your first production load, not after.
 [Chapter 3](03-across-the-boundary.md) explains why it becomes urgent the moment
@@ -369,14 +593,15 @@ data crosses an organisational boundary.
 
 ---
 
-## 10.7 Maturity checkpoint
+## 10.8 Maturity checkpoint
 
-Running `sketch` as a query-PR gate, `triplify` with `--test` before full runs,
-and `data --own-namespace` on the output gives you **Level 3's data-quality
-dimension**: quality checks automated, regressions caught early.
+Running `sketch` as a query-PR gate, triplifying with `--test` before full runs,
+and `data --own-namespace` on the output (with the reasoner's verdict asserted
+unscoped) gives you **Level 3's data-quality dimension**: quality checks
+automated, regressions caught early.
 
 Level 3 also expects orchestrated ETL and ingestion monitoring, which are not
-here. Level 4 expects continuous ingestion with error handling and retry logic —
+here. Level 4 expects continuous ingestion with error handling and retry logic,
 also not here. Those are real gaps, not omissions from this chapter; see
 [Chapter 14](14-coverage-and-gaps.md).
 

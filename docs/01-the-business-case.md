@@ -6,11 +6,20 @@
 
 > *Part I — Why this is hard*
 
+Effective communication is something almost every executive says they want for
+their organisation. But what does it mean in practice? At one level it is about
+aspirations: what clients expect, what investors hope for. Deeper in the workings
+of the enterprise it is about plainer things. It is about effort not being
+duplicated because two teams misunderstood each other. It is about reusing an
+information asset in a second line of business without rebuilding it. It is about
+two analyses of the same data reaching the same conclusion, and nobody being able
+to contest it on the grounds that the other side used the wrong definition.
+
 The SemOps strategy material opens with capability: knowledge lifecycle
 management, CI/CD, observability, governance. All correct, and all of it answers
-the question *"what would good look like?"* — which is not the question anyone
-gets asked when they request budget. The question they get asked is *"what is
-broken today, what does it cost, and how will I know this fixed it?"*
+the question *"what would good look like?"*, which is not the question anyone is
+asked when they request a budget. The question they get asked is *"what is broken
+today, what does it cost, and how will I know this fixed it?"*
 
 This chapter is about answering **that** question, because semantic programmes
 fail at the funding stage far more often than at the modelling stage.
@@ -29,32 +38,32 @@ Four patterns cover most of the real cases.
 ### Reconciliation tax
 
 Two departments report a number. The numbers differ. Nobody can say which is
-wrong, because "active customer" means *billed in the last 90 days* in finance
-and *logged in within 90 days* in product. Neither is wrong; they are answers to
+wrong, because "active customer" means *billed in the last 90 days* in finance and
+*logged in within 90 days* in product. Neither is wrong; they are answers to
 different questions wearing the same label.
 
-The cost is not the discrepancy. It is the **standing army of reconciliation** —
+The cost is not the discrepancy. It is the **standing army of reconciliation**:
 the recurring analyst hours spent explaining the difference, the meeting that
 happens every month, the fortnight before every board pack. This cost is
-measurable, and almost nobody measures it, because it is distributed across
-dozens of people's calendars in slices too small to appear in any budget line.
+measurable, and almost nobody measures it, because it is spread across dozens of
+people's calendars in slices too small to appear in any budget line.
 
-> **Instrument it first.** Before proposing an ontology, count the hours. Ask
-> four analysts to tag a fortnight of calendar time as "reconciling definitions."
-> The resulting number is usually large enough to fund the programme on its own,
-> and — critically — it is a number that already exists in the business's own
-> terms, rather than one you have to teach them to care about.
+> **Instrument it first.** Before proposing an ontology, count the hours. Ask four
+> analysts to tag a fortnight of calendar time as "reconciling definitions". The
+> resulting number is usually large enough to fund the programme on its own, and
+> (this is the important part) it is a number that already exists in the
+> business's own terms, rather than one you have to teach people to care about.
 
 ### Integration cost that scales quadratically
 
 Every new system integrated point-to-point with *n* existing systems costs *n*
 mappings. Ten systems is forty-five potential pairings; twenty is a hundred and
-ninety. Teams feel this as "integrations take longer every year" and diagnose it
-as a staffing problem.
+ninety. Teams feel this as "integrations take longer every year" and diagnose it as
+a staffing problem.
 
 A shared model changes the exponent, not the constant. Each system maps once, to
-the model. The pitch is not "we will make this integration cheaper" — it will
-not, the first one is *more* expensive — it is **"we will stop the curve
+the model. The pitch is not "we will make this integration cheaper". It will not
+be; the first one is *more* expensive. The pitch is **"we will stop the curve
 bending."**
 
 ```mermaid
@@ -89,23 +98,23 @@ flowchart TD
 ```
 
 The honest caveat, which you should say out loud before someone else does: the
-shared model is itself an asset that must be maintained, and an unmaintained
-shared model is worse than point-to-point mappings because it carries authority
-it no longer deserves. That maintenance burden is precisely what the rest of
-this manual automates — it is the reason SemOps exists as a discipline rather
-than as a modelling exercise.
+shared model is itself an asset that must be maintained, and an unmaintained shared
+model is worse than point-to-point mappings, because it carries authority it no
+longer deserves. That maintenance burden is precisely what the rest of this manual
+automates. It is the reason SemOps exists as a discipline rather than as a
+modelling exercise.
 
 ### Provenance you cannot reconstruct
 
-A regulator, an auditor, or a customer asks *"where did this figure come from?"*
+A regulator, an auditor or a customer asks *"where did this figure come from?"*
 and the answer takes three weeks and two people who happen to remember. In
-regulated sectors this is not an efficiency problem, it is an existential one:
-the inability to evidence lineage can invalidate the figure regardless of
-whether it was correct.
+regulated sectors this is not an efficiency problem, it is an existential one: the
+inability to evidence lineage can invalidate the figure regardless of whether it
+was correct.
 
-This is the pattern with the clearest financial framing, because the downside is
-a number someone has already written down — the fine, the qualification, the
-remediation programme.
+This pattern has the clearest financial framing, because the downside is a number
+someone has already written down: the fine, the qualification, the remediation
+programme.
 
 ### Knowledge that leaves with the person
 
@@ -113,41 +122,40 @@ The system works because Margaret knows that the `STATUS` field means something
 different for records created before the 2019 migration. Margaret retires in
 March. Nothing in any system records what Margaret knows.
 
-The failure mode is delayed and therefore rarely attributed to its cause: the
-programme that breaks in eighteen months' time is not connected, in anyone's
-mind, to the retirement that caused it.
+The failure is delayed, and therefore rarely attributed to its cause. The
+programme that breaks in eighteen months' time is not connected, in anyone's mind,
+to the retirement that caused it.
 
 ---
 
 ## 1.2 Why the payoff is invisible
 
-Semantic work has an awkward economic shape. Done well, its payoff is **a cost
-that does not arrive** — the outage that did not happen, the reconciliation
-meeting that got cancelled, the integration that took two weeks rather than two
-months.
+Semantic work has an awkward economic shape. Done well, its payoff is **a cost that
+does not arrive**: the outage that did not happen, the reconciliation meeting that
+got cancelled, the integration that took two weeks rather than two months.
 
 Organisations are structurally poor at valuing avoided costs. The team that
-prevents ten incidents is less visible than the team that heroically resolves
-one. This is not irrationality; it is a measurement problem, and it has three
-practical consequences worth planning around.
+prevents ten incidents is less visible than the team that heroically resolves one.
+This is not irrationality; it is a measurement problem, and it has three practical
+consequences worth planning around.
 
 **Baseline before you build.** Once the ontology is in place you can no longer
 measure what it saved, because the counterfactual is gone. The reconciliation
-hours, the mean integration lead time, the mean time to answer a lineage
-question — capture them *before* anything changes, or you will spend the rest of
-the programme asserting benefits you cannot evidence.
+hours, the mean integration lead time, the mean time to answer a lineage question:
+capture them *before* anything changes, or you will spend the rest of the programme
+asserting benefits you cannot evidence.
 
 **Pick a first use case with a visible failure.** Not the most valuable one; the
-most *legible* one. A use case whose current failure mode is embarrassing and
-specific — a regulator's question that took three weeks — produces a before/after
-story an executive can retell. A use case whose failure mode is diffuse
-inefficiency produces a slide nobody remembers.
+most *legible* one. A use case whose current failure is embarrassing and specific,
+a regulator's question that took three weeks, produces a before-and-after story an
+executive can retell. A use case whose failure is diffuse inefficiency produces a
+slide nobody remembers.
 
 **Expect the trough.** The first delivery is slower than the point-to-point
-alternative, because you are building the shared asset and the first consumer of
-it simultaneously. Say so at the start. A programme that promised acceleration
-and delivered a trough loses its sponsor in month four; one that predicted the
-trough and hit it on schedule gains credibility.
+alternative, because you are building the shared asset and its first consumer at
+the same time. Say so at the start. A programme that promised acceleration and
+delivered a trough loses its sponsor in month four; one that predicted the trough
+and hit it on schedule gains credibility.
 
 ```mermaid
 %%{init: {'theme':'base','themeVariables':{
@@ -171,8 +179,8 @@ flowchart LR
 
 ## 1.3 The decay problem, which is the SemOps problem
 
-There is one failure mode that dwarfs the others, and it is the reason this
-manual exists.
+There is one failure mode that dwarfs the others, and it is the reason this manual
+exists.
 
 > **An ontology is most accurate the day it ships. Every day after that, without
 > deliberate maintenance, it decays.**
@@ -182,10 +190,10 @@ all of them are variations on decay:
 
 | Failure mode | What it looks like eighteen months in |
 |---|---|
-| **Business-model drift** | Definitions that were precise last year are now misleading — the product line changed, the model did not |
+| **Business-model drift** | Definitions that were precise last year are now misleading: the product line changed, the model did not |
 | **Unknown unknowns** | Expert interviews captured what experts knew; what nobody thought to mention is now baked into the structure |
 | **Maintenance fatigue** | Domain experts stop accepting refinement-workshop invitations. Calendar declines end the programme, not a decision |
-| **Cross-domain collision** | Two separately-built ontologies must reconcile; the integration costs more than either original |
+| **Cross-domain collision** | Two separately built ontologies must reconcile; the integration costs more than either original |
 | **Governance abandonment** | The project ends, the owner moves on, no feedback loop remains, drift is now silent |
 
 Read that table as a specification. Each row is a requirement:
@@ -199,28 +207,36 @@ Read that table as a specification. Each row is a requirement:
 - Ownership must be **named and enforced by the pipeline**, not by goodwill →
   [Chapter 6](06-stages-and-stories.md), roles.
 
-This is the actual argument for SemOps, and it is worth stating baldly to a
-sponsor: **the risk is not that you build the wrong ontology. It is that you
-build the right one and then let it rot**, at which point it is worse than
-nothing, because systems and people now trust it.
+This is the actual argument for SemOps, and it is worth stating plainly to a
+sponsor: **the risk is not that you build the wrong ontology. It is that you build
+the right one and then let it rot**, at which point it is worse than nothing,
+because systems and people now trust it.
 
 ---
 
 ## 1.4 What to write on the slide
 
-Three sentences, in this order, is usually enough:
+Three sentences, in this order, are usually enough:
 
-1. *"Today, [specific, instrumented cost] — N analyst-hours a month, or a
-   three-week lineage question, or an integration curve that has bent 40% in two
-   years."*
+1. *"Today, [specific, instrumented cost]: N analyst-hours a month, or a three-week
+   lineage question, or an integration curve that has bent 40% in two years."*
 2. *"We will fix it for one legible use case, and we expect to be slower for the
    first quarter."*
-3. *"The ongoing cost is automated maintenance, not a standing modelling team —
+3. *"The ongoing cost is automated maintenance, not a standing modelling team, and
    here is the pipeline that does it."*
 
 Sentence 3 is the one this manual equips you to make truthfully. Without it,
-sentence 1 has been pitched — and declined — in most large organisations
-already.
+sentence 1 has been pitched, and declined, in most large organisations already.
+
+There is a fourth benefit I would not put on the slide, because it does not survive
+being turned into a number, but you should know it is there. Building a shared
+vocabulary is a team-building exercise. People have to sit together and agree what
+kinds of thing the business has, which words everyone uses for them, and how to
+define them without going round in circles. When it goes well, people come out of
+it on the same wavelength. They can anticipate each other, and clients get the same
+answer whoever they ask. When it goes badly, it shows you the fracture lines that
+were already there, which is also worth knowing.
+[Chapter 2](02-people-and-cognition.md) is about telling those two apart.
 
 ---
 
@@ -229,6 +245,7 @@ already.
 - [How Enterprise Ontologies Fail, And How to Stop It — Modern Data 101](https://www.moderndata101.com/blogs/how-enterprise-ontologies-fail-and-how-to-stop-it)
 - [Enterprise Knowledge Graph Use Cases & Adoption Strategies 2026](https://www.aisearchrankings.com/content/knowledge-graph-for-2026/enterprise-knowledge-graph-use-cases-adoption-strategies-2026.php)
 - [Semantic Web and Knowledge Graphs for Industry 4.0 — MDPI](https://www.mdpi.com/2076-3417/11/11/5110)
+- [Team Building — The Importance of an Ontology — Semantic Arts](https://www.semanticarts.com/team-building-the-importance-of-an-ontology/)
 
 ---
 

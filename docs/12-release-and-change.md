@@ -12,11 +12,18 @@
 > *As the person who has to fix the fallout, I want the mechanical part of the
 > migration done for me.*
 
+Gone are the days, or they should be, when a release meeting was decided by
+whoever argued longest. "Is this a breaking change?" is a question that sounds as
+if it needs judgement, and in most rooms it gets settled by confidence. The most
+certain voice wins, the decision goes into nobody's notes, and six months later
+the same argument happens again with different people.
+
 The SemOps overview puts Knowledge Lifecycle Management first and calls it *"the
-backbone of semantic governance"* — versioning, schema evolution, change-impact
-analysis, approval workflows. This chapter is the most directly governance-facing
-in the manual, and it is where the toolchain does something genuinely unusual:
-it turns *"is this a breaking change?"* from an opinion into a command.
+backbone of semantic governance"*: versioning, schema evolution, change-impact
+analysis, approval workflows. This chapter is the most governance-facing in the
+manual, and it is where the toolchain does something genuinely useful for the
+people in that room. It turns *"is this breaking?"* from an opinion into a
+command.
 
 ---
 
@@ -29,7 +36,7 @@ python -m ontology_suite version-diff \
   --exclude-imports --out-dir out/version-diff --json
 ```
 
-Real output:
+Real output (IRIs shortened to `acme:` here for width):
 
 ```
 Removed classes [MAJOR]:
@@ -59,23 +66,23 @@ Note the argument order: **old first, then new**. Reversed, you get a diff
 describing the inverse release.
 
 **Note also `--exclude-imports` here, where §12.2 uses `--import-dir`.** That is
-deliberate, not a slip. `version-diff` is comparing Acme's own axioms against
-Acme's own axioms, and merging two identical copies of `org:` and FOAF into both
-sides adds nothing but time. `consistency` needs the opposite, because its
-TARQL-alignment check reads the transformation's vocabulary: without FOAF
-resolved, `foaf:name` and `foaf:mbox` are reported as undeclared properties that
-the ontology set does not contain. **Resolve imports when a check reasons about
-terms you did not define; exclude them when it only compares terms you did.**
+deliberate. `version-diff` compares Acme's own axioms against Acme's own axioms,
+and merging two identical copies of `org:` and FOAF into both sides adds nothing
+but time. `consistency` needs the opposite, because its TARQL-alignment check
+reads the transformation's vocabulary: without FOAF resolved, `foaf:name` and
+`foaf:mbox` are reported as undeclared properties. **Resolve imports when a check
+reasons about terms you did not define; exclude them when it only compares terms
+you did.** You will meet the same rule again inside a live store
+([Chapter 13](13-operate-and-consume.md) §13.1).
 
-The verdict is derived from what happened to the axioms, not from what the
-author believed they were doing. One removed class makes it MAJOR regardless of
-the seven additive changes surrounding it, and regardless of anyone's view that
-"nobody was using `Engineer` anyway."
+The verdict comes from what happened to the axioms, not from what the author
+believed they were doing. One removed class makes it MAJOR regardless of the
+seven additive changes around it, and regardless of anyone's view that "nobody
+was using `Engineer` anyway".
 
-That property is what makes it useful as a governance instrument. The release
-conversation stops being *"do you think this is breaking?"* — a question where
-the most confident person in the meeting tends to win — and becomes *"the diff
-says MAJOR; who signs off?"*
+That is what makes it useful as a governance instrument. The conversation stops
+being *"do you think this is breaking?"* and becomes *"the diff says MAJOR; who
+signs off?"* Nobody has to win.
 
 **`--fail-on major`** makes it enforceable, and **`--json`** writes `diff.json`
 alongside the human-readable `diff.txt`, which is what
@@ -89,7 +96,7 @@ change notice so downstream tooling can act on it without parsing prose.
 Knowing a release is breaking is half the answer. *What* breaks is the other
 half.
 
-The fixture's transformation query types every employee `acme:Engineer` — the
+The fixture's transformation query types every employee `acme:Engineer`, the
 exact term v2 renames.
 
 ```bash
@@ -120,15 +127,15 @@ Wrote 1/1 suggested repair(s) as .patch files under out/consistency/repairs
 
 This is SemOps' "change-impact analysis" and "approval workflows for model
 changes" made concrete. The steward approving this release is not being asked to
-imagine consequences; they are looking at the affected file, the affected term,
+imagine consequences. They are looking at the affected file, the affected term,
 and a proposed fix with a confidence score.
 
-By default nothing is modified — repairs are written as reviewable `.patch`
-files under `--out-dir/repairs`.
+By default nothing is modified: repairs are written as reviewable `.patch` files
+under `--out-dir/repairs`.
 
 ---
 
-## 12.3 The migration annotation, and its direction
+## 12.3 The migration annotation, and a correction about its direction
 
 The 100% confidence above is not pattern-matching on names. It comes from an
 explicit migration annotation in v2:
@@ -137,23 +144,58 @@ explicit migration annotation in v2:
 acme:Engineer owl:equivalentClass acme:SoftwareEngineer .
 ```
 
-> **The gotcha that costs an afternoon:** rename detection recognises this
-> annotation in **one direction only** — asserted *from* the old, retiring IRI
-> *to* the new one. `owl:equivalentClass` is logically symmetric, and any
-> reasoner treats both directions identically, but writing it the other way
-> round — `acme:SoftwareEngineer owl:equivalentClass acme:Engineer`, arguably
-> the more natural way to write "here is the new term and what it replaces" —
-> silently drops confidence to name-similarity guessing.
+That one triple is a tombstone: it tells every tool that reads the new version
+where the old term went. Without it, the tooling falls back to guessing from the
+similarity of the local names, which works for a typo fix and fails for a genuine
+rename such as `ex:Widget` → `ex:Product`.
 
-The failure is silent, which is what makes it expensive: you get a lower
-confidence score and a repair that may fall below your threshold, with nothing
-saying why.
+Now the correction, and I'd like to make it plainly, because it has been in
+every edition of this manual until this one. I told you, in a box headed *"the
+gotcha that costs an afternoon"*, that rename detection reads
+`owl:equivalentClass` **in one direction only**, from the retiring IRI to its
+replacement, and that writing it the other way round silently drops confidence
+to name-similarity guessing. I repeated it in
+[Chapter 3](03-across-the-boundary.md) and in the roadmap's shortest version,
+and built a notebook cell to demonstrate it.
 
-**Always assert the migration annotation from the retiring IRI.** Make it a
-review checklist item. Across an organisational boundary
-([Chapter 3](03-across-the-boundary.md)) it is the difference between a partner's
-tooling identifying the replacement automatically and a human reading your
-release notes.
+**It is not true, and has not been since suite 0.3.5, released on 12 August
+2026**: the day before this manual's first commit. The suite reads
+`owl:equivalentClass` and `owl:equivalentProperty` as what they are, symmetric,
+and recognises the tombstone at full confidence whichever side you assert it
+from. Verified again for this edition on the acme fixture, with the triple
+reversed:
+
+```
+acme:SoftwareEngineer owl:equivalentClass acme:Engineer .
+...
+  [rename_iri] employees.rq (confidence 100%)
+```
+
+The notebook cell I wrote to show the drop has shown 100% both ways, every time
+anyone ran it, and nobody, me included, read the number it printed. If you want
+a single sentence to take from this whole manual, you could do worse than that
+one. **A demonstration you never read is not a test.**
+
+The direction does still matter in one place, and it is the place where it
+should. **`dcterms:isReplacedBy` is directional by definition**: the subject is
+replaced by the object. Asserted the right way round it is a 100% tombstone.
+Reversed, it says the *new* term was replaced by the *old* one, so the suite
+quite properly declines to read it as this rename and falls back to name
+similarity:
+
+| Annotation in v2 | Rename confidence |
+|---|---|
+| `acme:Engineer owl:equivalentClass acme:SoftwareEngineer` | **100%** |
+| `acme:SoftwareEngineer owl:equivalentClass acme:Engineer` | **100%** |
+| `acme:Engineer dcterms:isReplacedBy acme:SoftwareEngineer` | **100%** |
+| `acme:SoftwareEngineer dcterms:isReplacedBy acme:Engineer` | **57%**, below a 0.7 apply threshold |
+
+So the practical advice changes shape rather than disappearing. **Assert the
+tombstone from the retiring IRI anyway.** It reads naturally as "this term went
+there", it is the conventional direction, and it is the only one that works if
+you, or a partner's tooling, use `dcterms:isReplacedBy`. But you no longer need a
+review-checklist item warning that `owl:equivalentClass` will silently betray
+you. It won't.
 
 ---
 
@@ -183,8 +225,8 @@ After:
 ?employee a acme:Employee, acme:SoftwareEngineer ;
 ```
 
-The confidence gate is the safety mechanism: a 100%-confidence rename backed by
-an explicit annotation applies at a 0.7 threshold; a name-similarity guess does
+The confidence gate is the safety mechanism. A 100%-confidence rename backed by an
+explicit annotation applies at a 0.7 threshold; a 57% name-similarity guess does
 not. Automate what is evidenced; escalate what is inferred.
 
 ### It used to mangle comments, and the fix is instructive
@@ -197,35 +239,33 @@ included. The fixture's query carries an explanatory comment:
 #     acme:SoftwareEngineer (with a migration annotation) -- this query is
 ```
 
-After `--apply-repairs`, that comment reads:
+and after `--apply-repairs` on an old build it read:
 
 ```sparql
 #   - every row is typed acme:SoftwareEngineer, which v2.0.0 renames to
 #     acme:SoftwareEngineer (with a migration annotation) -- this query is
 ```
 
-— nonsense, and worse than leaving it alone. Comments do not execute, so nothing
-broke; the next reader was simply told something false.
-
-**It now substitutes outside comments only**, so that line survives intact while
-the code on line 14 is rewritten. Verified both parts.
+Nonsense, and worse than leaving it alone. Comments do not execute, so nothing
+broke; the next reader was simply told something false. **It now substitutes
+outside comments only**: re-verified for this edition, the diff of the repaired
+file is the one code line on line 14 and nothing else.
 
 The judgement underneath is worth borrowing. String **literals** are still
-rewritten, deliberately: in a TARQL query an IRI template is built out of them —
-`CONCAT("acme:_Engineer_", ?id)` — so a term rename usually *must* reach inside
-a literal. That is a decision about this domain, not a general rule, which is
-why the fix is not simply "substitute outside comments and strings".
+rewritten, deliberately: in a TARQL query an IRI template is built out of them,
+`CONCAT("acme:_Engineer_", ?id)`, so a term rename usually *must* reach inside a
+literal. That is a decision about this domain, not a general rule, which is why
+the fix is not simply "substitute outside comments and strings".
 
-**The same defect existed in the editor, and neither side knew.** The
-extension's rename and find-references made the identical mistake for the
-identical reason, and both were fixed in the same week, independently, in two
-languages ([Chapter 8](08-model-and-validate.md) §8.1). The comment scanner is
-one of a handful of algorithms written twice rather than shared as data, which
-is exactly the class of thing the registry's parity test cannot see — the
-argument, and what was done about it, is in
-[Chapter 7](07-the-toolchain.md) §7.1.
+**The same defect existed in the editor, and neither side knew.** The extension's
+rename and find-references made the identical mistake for the identical reason,
+and both were fixed in the same week, independently, in two languages
+([Chapter 8](08-model-and-validate.md) §8.1). The comment scanner is one of a
+handful of algorithms written twice rather than shared as data, the class of
+thing the registry's parity test cannot see; [Chapter 7](07-the-toolchain.md)
+§7.1 has the argument and what was done about it.
 
-**The practical consequence is unchanged:** prefer the default dry-run in
+**The practical consequence is unchanged:** prefer the default dry run in
 automation, review the `.patch` files, and apply. `--apply-repairs` suits a
 developer who will read the diff before committing, not an unattended job that
 commits its own output.
@@ -258,10 +298,16 @@ flowchart TD
 
 ## 12.5 The taxonomy layer: `pattern-consistency`
 
-`consistency` has a documented blind spot: it has no notion of a **taxonomy** —
-a controlled vocabulary of permitted values sitting on top of the ontology.
-`pattern-consistency` checks that boundary and the three around it together:
-ontology ↔ taxonomy ↔ transformation ↔ output data.
+Many organisations start their semantic journey the way a child starts language:
+with labels. A controlled list of departments, a taxonomy of product types, a
+picklist somebody maintains in a spreadsheet. Only later do the verbs arrive, the
+properties of an ontology that relate one thing to another. Most real systems
+carry both layers at once, and the boundary between them is where things drift.
+
+`consistency` has a documented blind spot here: it has no notion of a
+**taxonomy**, a controlled vocabulary of permitted values sitting on top of the
+ontology. `pattern-consistency` checks that boundary and the three around it
+together: ontology ↔ taxonomy ↔ transformation ↔ output data.
 
 The fixture is built to exercise exactly this. `taxonomy.ttl` declares three
 valid departments as SKOS concepts:
@@ -292,75 +338,88 @@ python -m ontology_suite pattern-consistency \
   individual anywhere in the given taxonomy set.
 ```
 
-**Caught.** And the mechanism matters, because it is not the obvious one.
+**Caught**, from tarka's output just as from `oxi-gen`'s. And the mechanism
+matters, because it is not the obvious one.
 
-The transformation does not hard-code `MKT` anywhere. The department IRI is
-built dynamically, per CSV row:
+The transformation does not hard-code `MKT` anywhere. The department IRI is built
+per CSV row:
 
 ```sparql
 BIND(IRI(CONCAT(..., ?department)) AS ?dept)
 ```
 
 There is no fixed literal in the query text for a text-level check to flag. The
-taxonomy↔transformation check — which looks for values hard-coded in the query
-template — cannot see this, and correctly reports nothing. It is the
+taxonomy↔transformation check, which looks for values hard-coded in the query
+template, cannot see this, and correctly reports nothing. It is the
 **`--output-data` layer** that catches it, by comparing the values that actually
 appeared in the produced graph against the declared taxonomy.
-
-This is worth dwelling on as a general principle:
 
 > **A value that varies per data row cannot be validated by reading the
 > transformation. It can only be validated by inspecting the output.** Any
 > pipeline whose controlled values come from data rather than from the query
 > text needs the output-data layer in its gate, not just the static checks.
 
-Omit `--output-data` and this run reports clean — correctly, and uselessly.
+Omit `--output-data` and this run reports clean: correctly, and uselessly.
 
-> Note the two `--ontology` arguments. `foaf.rdf` is passed explicitly because
-> the transformation uses `foaf:name` and `foaf:mbox`; without it, both are
-> reported as undeclared properties. `--ontology` is repeatable, and
-> `pattern-consistency` requires `--queries`, `--ontology` and `--taxonomy` —
-> `--output-data` is the optional one, and the one that does the most work.
+> Note the two `--ontology` arguments. `foaf.rdf` is passed explicitly because the
+> transformation uses `foaf:name` and `foaf:mbox`; without it, both are reported
+> as undeclared properties. `--ontology` is repeatable, and `pattern-consistency`
+> requires `--queries`, `--ontology` and `--taxonomy`. `--output-data` is the
+> optional one, and the one that does the most work.
 
 ---
 
 ## 12.6 Governance: what the tooling does and does not do
 
 SemOps layer 1 wants approval workflows, stewardship roles and audit trails.
-**None of that is implemented here, and no tool should claim otherwise.** What
-the toolchain provides is the *evidence an approval decision needs*:
+**The approval workflow is not implemented here, and no tool should claim
+otherwise.** What the toolchain provides is the *evidence an approval decision
+needs*:
 
 | Governance question | Command | Evidence produced |
 |---|---|---|
 | Does this PR introduce a new problem in code we own? | `checks --own-namespace --fail-on Violation` | Pass/fail + findings scoped to your terms |
 | Is this breaking, and does it need sign-off? | `version-diff --fail-on major` | MAJOR/minor/patch + the axioms behind it |
-| What exactly breaks downstream? | `consistency` | Affected files, terms, and proposed repairs |
+| What exactly breaks downstream? | `consistency --fail-on-misalignment` | Affected files, terms, and proposed repairs |
 | Can any of it fix itself? | `consistency --apply-repairs --min-confidence` | Confidence-gated patches |
-| Do controlled values still hold? | `pattern-consistency --output-data` | Values in data absent from the taxonomy |
+| Do controlled values still hold? | `pattern-consistency --output-data --fail-on-mismatch` | Values in data absent from the taxonomy |
 
-The approval *workflow* — a branch protection rule requiring a named reviewer
-when `version-diff` reports MAJOR — is a policy layered on top. That is the
-correct division: the tool establishes facts, the organisation decides what to do
-about them. A tool that tried to encode the decision would be wrong about it
+Look at the flags before you copy the commands into a pipeline. `consistency` and
+`pattern-consistency` are report-only by default: the run above that found `MKT`
+exited 0. Each has its own switch to make it a gate, spelt differently from the
+other and from everybody else's `--fail-on`. Without the switch, the job is
+green whatever it found.
+
+The approval *workflow*, a branch protection rule requiring a named reviewer when
+`version-diff` reports MAJOR, is a policy layered on top. That is the right
+division of labour. The tool establishes facts; the organisation decides what to
+do about them. A tool that tried to encode the decision would be wrong about it
 within a quarter, because [Chapter 2](02-people-and-cognition.md)'s territorial
 dynamics change faster than any configuration file.
 
-For sequencing and rollback across an ontology/taxonomy/data rollout, the suite's
-own `UPDATING.md` is the closest existing document to a governance playbook.
+One related control has moved closer to the data since the last edition: **who may
+see what**. An embeddable store can now enforce read policy at the index scan, so
+a definitions graph can be shared with a partner minus the predicates they should
+not see ([Chapter 13](13-operate-and-consume.md) §13.2). It is not an approval
+workflow either, but it is one fewer thing left to convention.
+
+For sequencing and rollback across an ontology/taxonomy/data rollout, the
+suite's own `UPDATING.md` is the closest existing document to a governance
+playbook.
 
 ---
 
 > **Run it:** [notebook 3 — Release and change](../notebooks/03-release-and-change.ipynb)
-> takes an ontology through a breaking release and applies the repair, including
-> the comment it mangles on the way.
+> takes an ontology through a breaking release, shows which annotations are read
+> in both directions and which are not, and applies the repair.
 
 ## 12.7 Maturity checkpoint
 
 `version-diff` on every release, `consistency` before merging a breaking change,
 and `pattern-consistency --output-data` where controlled vocabularies exist,
 covers Level 3's change-management dimension and reaches into **Level 5's
-"continuous semantic improvement loops"** — the diff → impact → repair cycle,
-run routinely, is the closest this toolchain gets to Level 5.
+"continuous semantic improvement loops"**. The diff → impact → repair cycle, run
+routinely, is the closest this toolchain gets to Level 5.
 
 The rest of Level 5 is organisational, and no command produces it.
 

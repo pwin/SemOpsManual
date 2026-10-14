@@ -10,10 +10,13 @@ A manual that only describes what works is marketing. This chapter is the
 counterweight: **what SemOps asks for, what the toolchain actually delivers, and
 what it does not.**
 
-Two kinds of entry appear below. *Gaps* are things SemOps requires that these
-tools do not do at all — usually because they are somebody else's job. *Rough
+Three kinds of entry appear below. *Gaps* are things SemOps requires that these
+tools do not do at all, usually because they are somebody else's job. *Rough
 edges* are things the tools do, with behaviour worth knowing before it costs you
-an afternoon; every one of them was hit while writing this manual.
+an afternoon; every one was hit while preparing this edition. And, new this time,
+*early* capabilities: things that exist, run and were verified, but that the
+component providing them calls early and lists gaps for, openly. I would rather
+you knew which is which.
 
 ---
 
@@ -21,19 +24,21 @@ an afternoon; every one of them was hit while writing this manual.
 
 | Stage | SemOps wants | Covered? | By what |
 |---|---|---|---|
-| **1 · Source control** | Artefacts as code, semantic versioning | **Partial** | `version-diff` supplies the semver evidence; Git is Git |
-| **2 · Modelling & local validation** | Model and validate before CI | **Yes** | VS Code extension; `ontology`, `checks` |
-| **3 · CI checks** | Reject bad semantic changes automatically | **Yes** | `--fail-on`, `--own-namespace`, `sketch` |
-| **4 · Build & packaging** | Containers, Helm charts, RDF bundles | **No** | Docker, Helm — not semantic work |
+| **1 · Source control** | Artefacts as code, semantic versioning | **Partial** | `version-diff` supplies the semver evidence; the DSL makes an ontology literally source code; Git is Git |
+| **2 · Modelling & local validation** | Model and validate before CI | **Yes** | VS Code extension and its DSL; `ontology`, `checks` |
+| **3 · CI checks** | Reject bad semantic changes automatically | **Yes** | `--fail-on`, `--own-namespace`, `sketch`, `--themes` |
+| **4 · Build & packaging** | Containers, Helm charts, RDF bundles | **No** | Docker, Helm: not semantic work |
 | **5 · CD to environments** | GitOps, environment promotion, IaC | **No** | Argo CD, Flux, Terraform |
-| **6 · Ingestion & ETL** | Orchestration, incremental load, provenance | **Partial** | `sketch`/`triplify`/`data` do transformation and quality; **no orchestration** |
+| **6 · Ingestion & ETL** | Orchestration, incremental load, provenance | **Partial** | `sketch`/`tarka`/`data` for transformation and quality, `--graph` for per-source graphs; **no orchestration** |
 | **7 · Runtime validation** | Enforce constraints against the live store | **Yes** | `consistency-remote` |
 | **8 · Observability** | Metrics, dashboards, log analysis, anomaly detection | **No** | Prometheus, Grafana, Loki |
-| **9 · Consumption** | APIs, search, data products | **Partial** | `docgen` produces documentation; **no API layer** |
+| **9 · Consumption** | APIs, search, data products | **Partial** | `docgen`; an embeddable store that answers each caller per policy (**early**); **no API layer** |
 
-Five of nine substantially covered, two partially, two not at all. The two not
-covered — packaging/deployment and observability — are the two that are *least*
-semantic, and have mature general-purpose answers.
+Three of nine covered, three partially, three not at all. The last edition's
+sentence said "five of nine substantially covered" while its own table said three;
+this one matches its table. The three not covered (packaging, deployment and
+observability) are still the *least* semantic, and have mature general-purpose
+answers.
 
 ---
 
@@ -41,17 +46,18 @@ semantic, and have mature general-purpose answers.
 
 | Layer | Covered? | What is real | What is missing |
 |---|---|---|---|
-| **1 · Strategy & Governance** | **Partial** | Evidence for decisions: breaking-change detection, scoped findings, impact analysis | Approval workflows, RBAC, audit trails, stewardship registry |
-| **2 · Semantic Development** | **Yes** | Authoring, validation, SHACL, custom checks, docs, versioning | Nothing significant |
+| **1 · Strategy & Governance** | **Partial** | Evidence for decisions; read access policy and classification enforced by an embeddable store (**early**) | Approval workflows, stewardship registry, audit trails |
+| **2 · Semantic Development** | **Yes** | Authoring (Turtle or script), validation, SHACL, custom checks, docs, versioning | Nothing significant |
 | **3 · Semantic CI/CD** | **Partial** | Validation is comprehensive | Packaging and deployment entirely absent |
-| **4 · Data Integration** | **Partial** | Transformation, quality checks, conformance | Scheduling, incremental load, retry, streaming, provenance stamping |
-| **5 · Platform & Infrastructure** | **No** | — | All of it: K8s, triple-store ops, backup, search index, security |
-| **6 · Knowledge Consumption** | **Partial** | Live-store checking, reference documentation | APIs, search, dashboards, self-service |
+| **4 · Data Integration** | **Partial** | Transformation (TARQL and OTTR), quality checks, conformance, per-load named graphs | Scheduling, incremental load, retry, streaming, provenance stamping |
+| **5 · Platform & Infrastructure** | **No** | Only the access policy an embedded store enforces | Triple-store operations, Kubernetes, backup, search index |
+| **6 · Knowledge Consumption** | **Partial** | Live-store checking, reference documentation, an embeddable store with per-caller answers | APIs, search, dashboards, self-service |
 
-**Layer 1 deserves its caveat repeated.** No tool approves a change. What this
-one does is ensure the approver is looking at evidence — *this removes a class,
-therefore MAJOR; this query breaks; this repair is 100% confident* — rather than
-at an assertion. The decision stays human, and should.
+**Layer 1's caveat stands, with one addition.** No tool approves a change. What
+the suite does is make sure the approver is looking at evidence: *this removes a
+class, therefore MAJOR; this query breaks; this repair is 100% confident.* What
+an embeddable store with policy adds is enforcement of *who may see what*, for
+every query anyone could write. The decision stays human, and should.
 
 ---
 
@@ -61,133 +67,231 @@ at an assertion. The decision stays human, and should.
 |---|---|---|---|
 | 1 | Knowledge Lifecycle Management | **Yes** | [Ch. 12](12-release-and-change.md) |
 | 2 | Automated Deployment & Packaging | **No** | — |
-| 3 | Data Integration & ETL Orchestration | **Partial** | [Ch. 10](10-ingest-and-transform.md) — no orchestration |
-| 4 | Reasoning & Inference Operations | **Partial** | [Ch. 11](11-rules-and-inference.md) — SHACL-AF rules, RDFS closure, rule versioning and regression tests yes; **incremental** reasoning and performance monitoring no |
+| 3 | Data Integration & ETL Orchestration | **Partial** | [Ch. 10](10-ingest-and-transform.md): no orchestration |
+| 4 | Reasoning & Inference Operations | **Partial** | [Ch. 11](11-rules-and-inference.md): rules, RDFS closure, rule versioning and tests, materialisation into a droppable graph (`holos rules`); **incremental** reasoning and performance monitoring no |
 | 5 | Knowledge Graph Observability | **No** | See [§14.5](#145-the-cheapest-thing-you-are-not-doing) |
-| 6 | Semantic Governance & Access Control | **Partial** | Evidence yes; RBAC and workflow no |
+| 6 | Semantic Governance & Access Control | **Partial** | Evidence yes; read policy at the scan and classification (**early**, [Ch. 13](13-operate-and-consume.md)); workflow no |
 | 7 | Semantic CI/CD Pipelines | **Partial** | Linting, SHACL, docs yes; packaging and deployment no |
-| 8 | Tooling Integration | **Partial** | Validator, reasoner, CI yes; triple store, K8s, monitoring no |
-| 9 | Knowledge Products & APIs | **No** | [Ch. 13](13-operate-and-consume.md) |
+| 8 | Tooling Integration | **Partial** | Validator, reasoner, CI, triplifier, embeddable store (**early**) yes; triple-store operations, Kubernetes and monitoring no |
+| 9 | Knowledge Products & APIs | **No** | No API layer; `holosdb` is an engine to build one with ([Ch. 13](13-operate-and-consume.md)) |
 | 10 | Documentation & Semantic Literacy | **Yes** | `docgen`, generated docs, this manual |
+
+Two partials grew since the last edition: access control (6), which now has an
+enforcement mechanism as well as evidence, and reasoning operations (4), which
+gained materialisation. Both rest on HOLOS, the youngest component here. Read them
+as "possible now, and worth piloting", not "solved".
 
 ---
 
-## 14.4 Rough edges, all encountered while writing this manual
+## 14.4 Rough edges, all met while preparing this edition
 
-Each of these is real, reproducible, and cost time. None is a reason not to use
-the tools; all are reasons to read this section first.
+Each of these is real and reproducible at the versions in
+[Chapter 7](07-the-toolchain.md), and none is a reason not to use the tools. All
+are reasons to read this section first. The first four are new, and they share a
+shape I have come to look for everywhere: **a run that checked nothing, or lost
+the evidence that it could not check, reporting success.**
+
+### A scoped run cannot see that the reasoner did not run
+
+`--own-namespace` keeps findings whose focus node starts with your prefix.
+`REA-022`, "the DL reasoner could not run", is about `oq:Graph`, so a scoped
+`data` or `run` silently drops it. Three scoped `data` runs on the fixture
+reported 54 findings with neither `REA-021` nor `REA-022` present: the report
+cannot distinguish *"HermiT found nothing"* from *"HermiT never started"*. Earlier
+editions told you `REA-022`'s presence would tell you; in a scoped run it never
+can.
+
+*Mitigation:* assert on the reasoner's verdict in an unscoped run
+([Chapter 10](10-ingest-and-transform.md) §10.4). *Suggested improvement:*
+findings about the run itself (`oq:Graph`) should survive the filter.
+
+### The `shacl` CLI reports conformance when it checked nothing
+
+The one-shot Python and JavaScript calls refuse a shapes graph that declares no
+shapes. The CLI does not: it prints `conforms: true` and exits 0. And because
+`-s` defaults to the data graph, `shacl -d data.ttl` with the `-s` forgotten does
+the same. Verified at 0.3.2.
+
+*Mitigation:* always pass `-s` in automation, and keep a failing case in the job
+([Chapter 11](11-rules-and-inference.md) §11.1). *Suggested improvement:* refuse
+unless an explicit flag allows an empty shapes graph.
+
+### `holos validate` exits 0 on a non-conforming graph
+
+Both of its validators print `conforms false` and return exit status 0; a
+non-zero status is reserved for "could not validate". Verified at 0.21.0.
+
+*Mitigation:* gate with the `shacl` CLI, or use `holosdb`'s `Store.validate()`
+from Python, which returns a dictionary with a `conforms` key. *Suggested
+improvement:* exit 1 on non-conformance, as the engine it adapts does.
+
+### tarka drops instances it cannot build, silently
+
+An OTTR template whose `ottr:IRI` parameter receives a cell tarka does not accept
+as an IRI (a `mailto:…` value, with no `mailto:` prefix declared) drops the
+instance if the parameter is mandatory, or the triple if it is optional. No
+message, exit 0. On the acme mapping, that was every row. It happens the same way
+through the Python package: `Mapping.ottr(...).run_csv(...)` writes 0 triples and
+raises nothing (verified with `tarka-rdf` 0.1.1). The bOTTR path reports every
+instance it leaves out and exits 1; `run` does not.
+
+*Mitigation:* fail the pipeline on an empty output from a non-empty input
+([Chapter 10](10-ingest-and-transform.md) §10.3). *Suggested improvement:* report
+dropped instances on `run` as bOTTR does.
 
 ### `docgen` reshuffles the page on every run
 
-Three identical runs produce three different files. The *content* is canonical —
-hashing the JSON with every collection sorted gives one value across all three —
-but the **order** of every top-level list varies per run: classes, properties,
-imports, and the sections they are grouped under.
+Still open at 0.22.0, re-checked rather than carried forward: three identical runs
+produce three different files. The *content* is canonical; the **order** of every
+top-level list varies per run.
 
-**The cause is one level below `docgen`, which is why sorting the inner
-collections did not fix it.** The parser is an adapter over rdflib; rdflib's
-in-memory store holds triples in a **`set`**, and `Memory.triples()` yields them
-by iterating it. Set iteration order follows element hashes, rdflib's terms
-subclass `str`, and Python randomises string hashing per process. Everything
-downstream then faithfully preserves that arbitrary order — the extractor's
-subject index is a plain dict, so it records the order it was given, and the
-output lists are built by walking it.
+**The cause is one level below `docgen`.** The parser is an adapter over rdflib;
+rdflib's in-memory store holds triples in a **`set`**, set iteration follows
+element hashes, rdflib's terms subclass `str`, and Python randomises string
+hashing per process. Everything downstream faithfully preserves that arbitrary
+order. The suite's move to holosdb changed who *evaluates* and left rdflib
+*parsing*, so it did not touch this.
 
-*The proof, and the workaround:* with `PYTHONHASHSEED=0` set in the
-environment, three runs produce one identical hash. Unpinned, three different
-ones. Nothing else changes.
-
-**It reaches the rendered page, not just the JSON.** On a fixture with three
-`# Section:` headers, five identical runs put the sections in three different
-orders, and `ontology-documentation.html` lists classes in a different reading
-order each time — interleaved across sections rather than grouped by them. The
-variable that feeds this is named `sections_in_order`, and the name is the only
-thing asserting an order.
-
-So the cost is not only that the page is undiffable — though it is, and
-*"what changed in the reference page this release?"* is the question a reference
-page most needs to answer. It is that **two readers of the same ontology, on the
-same commit, are handed the terms in a different sequence.** For the artefact
-[Chapter 2](02-people-and-cognition.md) nominates as the answer to the
+It reaches the rendered page, not just the JSON, so **two readers of the same
+ontology on the same commit are handed the terms in a different sequence.** For
+the artefact [Chapter 2](02-people-and-cognition.md) nominates as the answer to the
 priesthood problem, a random reading order is a poor property.
 
-*Suggested improvement:* sort the three lists on the way out — and there is a
-better key than alphabetical available for free. The extractor already computes
-each subject's offset in the source text in order to assign its section, so
-sorting on that yields **document order**: what the author intended, and the
-only order under which the sections stay coherent.
+*Workaround:* `PYTHONHASHSEED=0`, re-verified: two runs, one hash. *Suggested
+improvement:* sort on the way out, by each subject's offset in the source, which
+the extractor already computes, giving **document order**. Reported upstream as
+[issue #3](https://github.com/pwin/consolidated-ontology-quality-suite-python/issues/3),
+still open, with no comments yet ([Ch. 13](13-operate-and-consume.md)).
 
-*Still open at 0.14.2*, re-checked for this edition rather than carried forward,
-and reported upstream as
-[issue #3](https://github.com/pwin/consolidated-ontology-quality-suite-python/issues/3).
-([Ch. 13](13-operate-and-consume.md))
+### The DL reasoner fails on some hash seeds, not at random
 
-### The DL reasoner starts, or does not, at random
+Every edition of this manual, this one included until the last week of writing it,
+said the DL reasoner "starts, or does not, at random". On the fixture it did seem
+to: across this edition's runs HermiT ran five times in ten from `ontology`. When it
+failed, the suite emitted `REA-022` carrying an internal error, *cannot access local
+variable 'entity'*; when it worked, `REA-020` and `REA-021`.
 
-The reasoner sometimes emits `REA-022` — *external DL reasoner unavailable*,
-with an internal `UnboundLocalError` from the bridge — and sometimes runs
-normally and emits `REA-021`, correctly finding `acme:Contractor` unsatisfiable.
+It is not random, and it is not HermiT. Building the evidence for this edition, I
+replayed the suite's reasoner bridge on its own and read the traceback. The failure
+happens in **owlready2's loader**, before HermiT or Java is ever called. Loading the
+merged ontology, owlready2 0.51 builds a Python class for FOAF's
+`foaf:primaryTopic`, which is typed both functional and object property and is a
+sub-property of `foaf:topic`. In some orders those types give Python an inconsistent
+class hierarchy. owlready2 catches the resulting `TypeError`, handles it only if its
+message starts with "metaclass conflict", and otherwise drops it, leaving a variable
+unassigned. Hence `'entity'`.
 
-An earlier draft of this manual reported this as a difference between the
-`ontology` and `data` commands, on the strength of one run of each. That was
-wrong, and running the same command repeatedly shows why: three consecutive
-`ontology` runs gave `REA-021` (reasoner working) once and `REA-022` twice. It
-is per-invocation flakiness, not a code path. The suite's own
-`ACME_ROBOTICS_WALKTHROUGH.md` says so directly — HermiT is *"occasionally
-environment-flaky in ways unrelated to this fixture (a transient internal error
-rather than a real unsatisfiability finding)"*.
+The order comes from iterating a `set`, which follows Python's per-process string
+hashing: the same cause as `docgen`'s reshuffled pages, one entry down. So the
+outcome is set, almost entirely, by `PYTHONHASHSEED`. On this fixture seed 5 ran
+HermiT in ten runs out of ten, and seed 0 failed in eighteen of twenty.
 
-*Consequence for your gate:* a scoped `data` run reports 36 findings or 37
-depending on whether the reasoner started. Check which of `REA-021`/`REA-022` is
-present before investigating a changed count.
+*Almost*, because I had first written "every time", and the evidence for this
+edition caught me out twice. Loaded straight into owlready2 under seed 0, the
+merged file fails about seven times in eight, every failure on
+`foaf:primaryTopic`, and under seed 5 it loads every time I have tried. So the
+seed decides most of it, and something else decides the rest. My first
+explanation was the random name of the temporary directory the bridge loads from;
+my second was rdflib's blank-node labels, which are random in every process. Fixing
+both left the odd load still going the other way. I have not found the remaining
+cause, and I would rather say so than offer a third guess. With Java hidden as
+well, the message changes to the operating system's "cannot find the file
+specified", so a genuinely missing Java *is* distinguishable from this.
 
-What makes this safe to depend on is that the failing path says so loudly
-instead of reporting success — the pattern
-[Chapter 4](04-from-research-to-industry.md) recommends for every
-research-lineage dependency.
+*Mitigation:* set `PYTHONHASHSEED` for the whole CI job. That doesn't make HermiT
+work, but it turns a coin someone tosses for you on every push into one that lands
+the same way nine times in ten, and it pins `docgen` completely. Have the job
+record which verdict it got, `REA-021` or `REA-022`, rather than assume one.
+*Suggested improvements:* in owlready2, handle or re-raise the `TypeError` rather
+than drop it, which is the real fix, since a load that cannot fail cannot fail at
+random either; and in the suite's bridge, name the entity that failed to load, so
+`REA-022` says something a reader can act on.
 
-### SHACL validation cannot be scoped to a named graph
+What made it safe to depend on throughout is that the failing path said so loudly
+instead of reporting success. Combine that with the first entry above, though:
+loud only helps if the filter lets you hear it. And the episode is a lesson I
+should have learned from the first: **"random" is usually a cause nobody has found
+yet.**
+
+### `REA-020` says "inconsistent" when one class is unsatisfiable
+
+When HermiT does run on the fixture, the suite reports `REA-020`, *"the ontology
+… is logically inconsistent … no model satisfies every axiom simultaneously"*,
+beside `REA-021` for `acme:Contractor`. The ontology is not inconsistent. Nothing
+is asserted to be a Contractor, so a model exists, and HermiT agrees: run through
+owlready2 directly, it raises no inconsistency. What it reports is two
+unsatisfiable classes, `acme:Contractor` and `owl:Nothing`, which is unsatisfiable
+by definition. The suite's bridge has a belt-and-braces rule that reads
+`owl:Nothing` in that list as an inconsistent ontology, and owlready2 lists it
+whenever any class is unsatisfiable. A clean ontology gives an empty list and no
+`REA-020`; one unsatisfiable class gives both findings.
+
+The testing repository has a fixture for exactly this case,
+`03b-unsatisfiable-class`. It expects `REA-021` and forbids three other ids, but
+not `REA-020`, so the false finding passes the test written for it.
+
+*Mitigation:* read `REA-020` as real only when it arrives alone. A genuine
+inconsistency raises in owlready2, and the bridge then reports `REA-020` and
+nothing else. *Suggested improvements:* report inconsistency only when
+`owl:Thing` is unsatisfiable, which is what inconsistency means; and add
+`REA-020` to that fixture's forbidden list.
+
+### The SHACL engine cannot scope validation to a named graph
 
 Quad syntaxes parse, and then every named graph and the default graph are merged
-into one before validation — SHACL is defined over a single data graph. Verified:
-a TriG file with subjects spread across two named graphs and the default graph
-gives a report identical to the same triples flattened into one Turtle file.
-There is no graph-selection option and no per-graph reporting.
+into one before validation, because SHACL is defined over a single data graph.
+There is no graph-selection option and no per-graph report.
 
 *Mitigation:* named graphs remain the right call for provenance and lifecycle
-([Ch. 3](03-across-the-boundary.md)); for per-graph validation, extract the
-graph and validate it as its own document, which is what the
-`consistency-remote` manifest model does ([Ch. 13](13-operate-and-consume.md)).
+([Ch. 3](03-across-the-boundary.md)). For per-graph validation, extract the graph
+and validate it on its own, as `consistency-remote`'s manifest model does
+([Ch. 13](13-operate-and-consume.md) §13.1).
 
-### `sh:severity` must sit on the shape, not inside `sh:sparql`
+### A mistyped manifest `role` compares nothing, successfully
 
-SHACL defines `sh:severity` as a property of the **shape**. Declared inside a
-nested `sh:sparql [ … ]` constraint block it is in the wrong place: pyshacl
-ignores it there and falls back to the spec default of `sh:Violation`, while the
-native engine reads it anyway. Two engines, two answers, same file.
+`consistency-remote` accepts any string as a graph's `role` and ignores all but
+`"ontology"` and `"triplified_data"`. A hyphen for an underscore yields a run that
+compares nothing and exits 0, even with `--fail-on-misalignment`. Re-verified at
+0.22.0.
 
-The suite's own shapes were authored that way, and the effect was not subtle —
-`--engine both` reported 5 Violations where `native+sparql` reported 2, so with
-`--fail-on Violation` a class named `person_record` failed CI exactly as hard as
-a logical contradiction. Fixed by moving the declaration onto the enclosing
-shape; both engines now match `registry.json`.
+*Mitigation:* point it at a graph you know is wrong, once, and watch it complain
+([Ch. 13](13-operate-and-consume.md) §13.1). *Suggested improvement:* reject an
+unknown role.
 
-*Mitigation for your own shapes:* put `sh:severity` on the shape. If a gate is
-failing on something you declared `Warning`, check the placement before blaming
-the engine. ([Ch. 7](07-the-toolchain.md) §7.4)
+### Smaller ones, all worth a line
 
-### `STR-002` and `STR-007` disagreed about external vocabularies
+| What | Where you meet it |
+|---|---|
+| `--help` still offers `--inference owlrl` and `both`; asking for one gives a Python traceback rather than a one-line error | [Ch. 7](07-the-toolchain.md) §7.4 |
+| Under `--engine sparql`, `--inference` is accepted and ignored: `owlrl`, `rdfs` and `none` give the same findings | [Ch. 7](07-the-toolchain.md) §7.4 |
+| The `--own-namespace` near-miss warning lists two blank-node identifiers among the "namespaces actually seen" | [Ch. 9](09-continuous-integration.md) §9.4 |
+| `--sparql` composes but `--registry` replaces, so adding `@builtin` with a house registry turns every built-in finding `UNMAPPED`; and the warning recommends an absolute path rather than `@builtin` | [Ch. 8](08-model-and-validate.md) §8.5 |
+| `data` and `run` report one contradiction as two `LOG-001`s, one from the registry pass and one from the `owlrl` closure | [Ch. 9](09-continuous-integration.md) §9.6 |
+| The DSL gives unchecked code an internal `TypeError`; its bundled `Quad` type is not assignable to `@types/n3`'s | [Ch. 8](08-model-and-validate.md) §8.2 |
+| The suite's `triplify` and the extension's *Run Full Triplify* drive `oxi-gen` only; neither knows tarka | [Ch. 10](10-ingest-and-transform.md) §10.3 |
+| `consistency` and `pattern-consistency` exit 0 whatever they find unless given `--fail-on-misalignment` or `--fail-on-mismatch`, two names for one idea, neither of them `--fail-on` | [Ch. 12](12-release-and-change.md) §12.6 |
+| `holosdb`'s `Store.validate(…, engine="native")` reports twice the violations that `adapted`, and the `holos` CLI with either engine, report; and the CLI and the Python method default to different engines | [Ch. 13](13-operate-and-consume.md) §13.2 |
+| When two query files bind one prefix differently, `sketch` reads every file with the first file's binding and reports the others' terms as undeclared; only a warning on stderr says so | [Ch. 10](10-ingest-and-transform.md) §10.6 |
 
-`STR-002` exempted only `rdf:`, `rdfs:` and `owl:` by their individual namespace
-IRIs, while seven sibling checks exempt `http://www.w3.org/` wholesale — so using
-`skos:prefLabel` without redeclaring SKOS locally produced a Violation-severity
-"undefined property", while `STR-007`, the strictly broader check, stayed quiet
-about the same predicate on the same graph. Now consistent.
+### Documentation drift, upstream
 
-*The general lesson:* two checks in the same registry that disagree with each
-other are worse than either rule alone, because the reader cannot tell which is
-intended. Whichever policy you pick — "declare every external term you use" is
-defensible — apply it uniformly.
+None of these changes what a tool does. All of them change what a careful reader
+believes, which is how I came to carry one false claim for two months
+(§14.6).
+
+- The suite's `REPORTS.md` dates the report-set change to 0.15.0; it shipped in
+  0.17.0.
+- The suite's `--engine` help still describes pyshacl: `both` "runs pyshacl",
+  and `native` is "not a default dependency". Neither has been true since
+  0.22.0.
+- The suite's `REASONING.md` calls `owlready2` the `reasoner` extra; it has been a
+  base dependency since the first commit. What is optional is Java.
+- The extension's `README.md` still names Oxigraph among its engines; it went in
+  0.13.11.
+- The testing repository's README says sixteen fixtures and "18 Turtle files in 10
+  folders"; there are seventeen fixtures in fourteen folders.
+- The suite's `main` branch stopped at 0.18.0; releases since are tagged on
+  `develop`, now the default branch. This manual links `develop`.
 
 ---
 
@@ -198,142 +302,122 @@ Worth isolating because it is nearly free and almost universally skipped:
 > **Every check run writes `full_results.csv`. Keep them, timestamped.**
 
 That is a time series of semantic quality, produced by CI runs you are already
-paying for. Findings by severity and by check ID over time is a real data-quality
-KPI — the closest thing to observability available without a Prometheus stack.
+paying for. Findings by severity and by check id over time is a real data-quality
+KPI, the closest thing to observability available without a Prometheus stack.
+Since 0.17.0 each row carries `source_file` and `line`, so you can also see
+*where* the findings are accumulating.
 
 Watch the **Warning trend** specifically. Violations get fixed because they break
-the build; Warnings accumulate silently, and an accumulating Warning count is the
+the build; Warnings accumulate quietly, and an accumulating Warning count is the
 observable signature of decay, visible in your own artefacts a year before anyone
 notices the model has drifted.
 
-**Trend the scoped runs, not the unscoped ones.** Per §14.4, the unscoped total
-drifts by a few findings between identical invocations, which would put noise
-into the series at roughly the magnitude of a year's real drift. The scoped runs
-are exactly reproducible, so any movement in them is signal. Conveniently, the
-Warning counts are the stable part even in the unscoped run — it is Violations
-that wander — so a Warning trend survives either choice.
+**Trend the scoped runs, and note your suite version beside each point.** The
+unscoped total is now reproducible run to run, but it still moves when the
+registry grows, as it did from 50 checks to 61, and the scoped run is the one whose
+movement is about *your* model. A jump that coincides with an upgrade is the rules
+moving, not the model decaying.
 
 ---
 
-## 14.6 Gaps that have closed
+## 14.6 What has changed since the last edition
 
-Worth recording, because the picture is not static. Seven limitations documented in
-earlier drafts of this material no longer hold:
+The picture is not static, and this edition has two lists to give you: what got
+better, and what I had wrong.
 
-**Filtering findings to your own namespace.** Previously there was no way to say
-"only show findings in my own terms" on an import-inclusive run; the
-recommendation was `--exclude-imports`, which — as
-[Chapter 9](09-continuous-integration.md) demonstrates with real output — trades
-291 irrelevant findings for 4 false ones. `--own-namespace` now does it properly:
-5 findings, all genuine, imports still resolved.
+### Gaps and rough edges that have closed
 
-**Per-row taxonomy values.** Previously, a controlled value that varied per data
-row rather than being hard-coded in the query text was genuinely uncatchable —
-`pattern-consistency` inspected the query template, and there was no literal to
-find. Passing `--output-data` now catches it, by comparing values that actually
-appeared in the produced graph against the declared taxonomy. Verified: the
-fixture's `MKT` department, absent from a taxonomy declaring only `ENG`/`QA`/
-`SALES`, is correctly reported ([Ch. 12](12-release-and-change.md)).
+**The engines are the toolchain's own.** The suite's 44 portable checks run on
+holosdb and its shapes on the native SHACL engine; the extension runs the same two
+engines compiled to WebAssembly. On the suite's stress fixture every engine mode
+reports the same findings as the old rdflib-and-pyshacl baseline, and on this
+manual's fixture every count in [Chapter 9](09-continuous-integration.md) came out
+unchanged. Third-party engines stay as test-time witnesses
+([Ch. 7](07-the-toolchain.md) §7.1).
 
-**Rules in the WebAssembly build.** The previous edition of this manual said
-flatly that the WASM build could not run SHACL-AF rules, and that on one shapes
-graph it reported `conforms = true` where the native CLI errored — *"this is
-fine"* against *"I could not check this"*. Both are fixed. Every binding now
-takes `inference: "rules"`/`"rules-iterated"`, and the engine's differential
-harness reports **0 disagreements across all 473 documents** of the W3C corpus,
-where it previously reported one. What remains is a *choice* rather than a
-limitation: the editor asks for `"none"` ([§14.4](#144-rough-edges-all-encountered-while-writing-this-manual)).
+**Messages on blank nodes.** `STY-003` and `EFF-001` built messages out of blank-node
+labels, which rdflib rendered as gibberish and conformant engines dropped
+altogether. Both are fixed, in both repositories, along with the cross-engine dedup
+of anonymous findings.
 
-**`sh:declare` without `sh:prefixes`.** A SPARQL rule relying on a
-shapes-graph-level prefix declaration used to be rejected at compile time, taking
-the whole shapes graph with it — including for callers who never asked for rules.
-Rule compile errors are now held on the rule and raised only if it would have
-fired.
+**Findings say where they are.** `findings.txt` quotes the source line;
+`full_results.csv` carries `source_file` and `line`; the TARQL checks carry their
+position as fields rather than prose; and six report files that restated each
+other are gone.
 
-**The unscoped run is reproducible.** Five identical invocations now return 479
-findings every time. The drift documented at length in earlier editions — 289 to
-298, traced to `STR-007` — was never in the check: several registry `CONSTRUCT`s
-bind two values per result, and the merge step read an arbitrary one of them and
-deduplicated on it. Values are sorted and joined now, and the report shows both
-instead of half the finding ([Ch. 9](09-continuous-integration.md) §9.2).
+**House rules compose with the built-ins.** `--sparql` is repeatable, `@builtin`
+names the suite's own tree on any install, and a run that leaves the built-ins out
+says so. `--reports minimal` and `--themes` are new. Query and data globs have one
+name everywhere.
 
-**The engine modes agree.** `sparql`, `native+sparql` and `both` now return the
-same 5 scoped findings at the same severities; `LOG-001` is no longer reported
-twice. Only `--engine native` still differs, and for a stated reason — it runs
-the SHACL shapes only, and `QUA-004` exists solely as a SPARQL check.
+**Five suite defects found by the testing repository**: a crash on
+language-tagged literals against an `xsd:` range, per-row entities misreported as
+taxonomy references, the tool's own namespace legend landing in the project's
+namespace, an ontology's own default namespace reported as undeclared, and
+`--sparql` silently replacing the built-in tree.
 
-**`DAT-001` can detect an invalid `xsd:boolean`.** It could not: the check tests
-the stored lexical form with a regex, and rdflib rewrites the lexical form of an
-ill-typed boolean, so `"yes"^^xsd:boolean` is stored as `'false'` and matches.
-The branch was unreachable. A Python-side pass over `Literal.ill_typed` now
-supplements the two portable formulations, which also catches value-space
-violations no lexical regex can express, such as `"2021-02-30"^^xsd:date`.
+**`sh:conforms` means what the specification says**, from engine 0.3.0, and the
+WebAssembly build agrees from 0.3.2 ([Ch. 11](11-rules-and-inference.md) §11.1).
 
-**Six rough edges at once, in 0.14.1.** Every entry §14.4 carried in the
-previous edition has since been fixed — verified here, each in both directions:
+**The repair engine** keeps blank nodes and base directions intact when it writes
+back into your file ([Ch. 8](08-model-and-validate.md) §8.1).
 
-| Was | Now |
-|---|---|
-| `--own-namespace` near-miss returned a silent `0 total` | Warns that the filter matched none of the findings, and **names the namespaces actually present** |
-| `sketch --queries` rejected a file path | Accepts a file or a directory |
-| `sketch` crashed on a `CONSTRUCT` with no trailing `.` | Terminates each block on the way out; three failure shapes, one cause |
-| `--apply-repairs` rewrote comments as well as code | Substitutes outside comments — while still rewriting string literals, because a TARQL IRI template is built from them |
-| `docgen --ref` crashed on RDF/XML | Resolves the serialisation from content as well as extension |
-| `docgen` reported *"5 external terms (0 resolved)"* | *"(3 resolved)"* — the `--ref` vocabularies are read |
+**Early, but real:** read access policy at the index scan, with classification,
+in an embeddable store (`holosdb`); rule materialisation into a droppable graph
+(`holos rules`); and a triplifier of the toolchain's own, with OTTR and data
+frames (`tarka-rdf`).
 
-A seventh was fixed that this manual never caught: `docgen` chose an annotation
-language by whichever literal the parser happened to yield first, so a `--ref`
-at a multilingual vocabulary — W3C's `org.ttl` carries `rdfs:comment` in four
-languages — produced definitions in a different language on different runs. It
-now prefers the document language, then an untagged literal, then the first in
-sorted order. Content is stable as a result; ordering is not, which is what
-§14.4 still records.
+### Things this manual had wrong
 
-Two details worth keeping, because they are the shape of a good fix rather than
-just its existence. The `sketch` crash **never produced wrong triples** — Turtle
-rejected the malformed output rather than splicing it into something plausible —
-so it was always a crash and never bad data, which is the first question to ask
-of any bug in a writer. And the `--own-namespace` warning fires *only when there
-were findings to lose*: a filter matching nothing on a genuinely clean run is
-not an error, and warning there would train people to ignore the message.
+**The migration annotation's direction.** Every earlier edition said rename
+detection reads `owl:equivalentClass` in one direction only, and that writing it the
+other way silently drops confidence. It has read both directions at full confidence
+since suite 0.3.5, released the day before this manual's first commit. Only
+`dcterms:isReplacedBy` is directional, as its meaning requires
+([Ch. 12](12-release-and-change.md) §12.3). The notebook cell I wrote to demonstrate
+the drop printed 100% both ways every time it ran.
 
-> **Version note.** All six landed in **0.14.1**, published a day after 0.14.0.
-> On 0.14.0 you will still meet every one of them, so check which version you
-> have before concluding the manual is wrong about your copy — and upgrade,
-> since this is six fixes in one release. (0.14.2 adds tests only; nothing an
-> installed CLI does changes between the two.)
+**`REA-022` as the reasoner's tell in a scoped run.** It is filtered out of scoped
+runs (§14.4), so its absence there says nothing.
 
-**Two more in the editor, in 0.13.5 — one of them a twin of a CLI fix above.**
-The same questions asked of the extension found the same comment-scanning defect
-behind rename, find-references, go-to-definition and the undeclared-prefix
-warning: a trailing comment was read as code, so renaming a term rewrote the
-comment explaining the rename. Separately, the unresolved-import warning claimed
-*"no workspace file declares this identity"* when resolution never searches the
-workspace — it walks the document's own directory tree — and now names the
-directory it searched and the candidate count. Both are in
-[Chapter 8](08-model-and-validate.md) §8.1.
+**The reasoner as "flaky".** Every edition called HermiT's failures random and blamed
+the bridge to it. They are deterministic for a given `PYTHONHASHSEED`, and they
+happen in owlready2's loader before HermiT runs (§14.4).
 
-The twin is the interesting one. Two hand-written ports of one algorithm carried
-one defect and were fixed independently, days apart, with nothing comparing
-them; 0.13.6 and 0.14.2 add a shared sixteen-case fixture that both repositories
-carry, which is the subject of [Chapter 7](07-the-toolchain.md) §7.1 and the
-most transferable thing in this section. **A parity test over shared data cannot
-see behaviour that was written twice** — and the gap is invisible precisely
-while both copies agree about being wrong.
+**The reasoner as an "optional extra".** `owlready2` installs with the suite. What
+is optional, and what the graceful fallback covers, is the Java runtime HermiT
+needs ([Ch. 4](04-from-research-to-industry.md)).
 
-The lesson generalises, and this edition is its own evidence: **re-verify the
-gaps list against the tools you actually have.** Six were corrected within a day
-of being written down. A limitation copied forward from an old document is
-indistinguishable from a current one, right up until someone wastes a week
-working around something that was fixed.
+**Stale numbers in my own pages.** The last edition's [Chapter 8](08-model-and-validate.md),
+this chapter and the roadmap still said the unscoped run gave "close to 300
+findings, of which 5 are yours", and that it drifted between runs; and §7.4's engine
+table showed 4 and 5 findings. All four had been true at some point and none was
+true when published. The figures throughout are now 479, 23, and 22 or 23, and the
+unscoped run does not drift.
 
-The obligation runs both ways, which this edition also demonstrates. Re-checking
-turned up a claim in [Chapter 7](07-the-toolchain.md) §7.1 that had gone the
-*other* way: a check reported as having earned its way into CI had only been
-declared there, and the CLI still cannot run it. **Verify the capabilities you
-credit a tool with as carefully as the limitations** — an overstatement is the
-harder error to catch, because nobody goes looking for a feature they have been
-told they already have.
+**`REA-020` as a third confirmation.** Every edition counted it, with `LOG-001`
+and `REA-021`, as one more witness to the fixture's contradiction. The ontology is
+consistent; `REA-020` is an artefact of how the bridge reads owlready2 (§14.4).
+
+**Where a `CONCAT`-built IRI goes.** Earlier editions said it becomes a string
+literal while "the counts look right". That is true only where it is an object. As
+a subject it produces nothing at all, because every triple built on it is dropped
+([Ch. 10](10-ingest-and-transform.md) §10.2).
+
+**When rules arrived in the SHACL engine.** The last edition's version history
+described builds from source rather than releases. Rules first shipped in 0.1.8,
+and the `$this` fix I credited to 0.1.9 came with them, before any release had
+rules at all ([Ch. 11](11-rules-and-inference.md) §11.1).
+
+**The pass rate of the SHACL engine**, which I would have written as 426 of 426.
+It is 425, deliberately ([Ch. 11](11-rules-and-inference.md) §11.1).
+
+The lesson of the last edition still holds and has teeth: **re-verify the gaps list
+against the tools you actually have.** This edition adds its mirror image, which is
+harder: **re-verify the warnings you give, not only the capabilities and the
+limitations.** A warning that has stopped being true costs readers effort they did
+not need to spend, and nobody goes looking to disprove a warning they have been
+given.
 
 ---
 
@@ -343,15 +427,19 @@ told they already have.
 |---|---|
 | Packaging and deployment | Standard container and Helm tooling. A triple store deploys like any stateful service |
 | Orchestration | Airflow, Argo Workflows or Prefect, calling these commands as steps |
-| Observability | Prometheus and Grafana — plus retained `full_results.csv` as the semantic-quality series |
-| APIs and knowledge products | Application development. Embed the SPARQL engine in the service ([Ch. 13](13-operate-and-consume.md)) |
-| Approval workflows, RBAC | Branch protection rules and your existing identity platform. The tools supply the evidence; the platform enforces the policy |
+| Observability | Prometheus and Grafana, plus retained `full_results.csv` as the semantic-quality series |
+| APIs and knowledge products | Application development. Embed the engine in the service; `holosdb` brings access policy with it ([Ch. 13](13-operate-and-consume.md)) |
+| Approval workflows, RBAC | Branch protection rules and your existing identity platform; read policy in the store where you embed one. The tools supply the evidence; the platform enforces the policy |
 | Incremental and streaming ingestion | Your pipeline's responsibility. These commands are batch |
-| Provenance capture | Named graphs at load time. Decide before your first production load |
+| Provenance capture | Named graphs at load time (`tarka --graph`). Decide before your first production load |
+| The suite's `triplify` needs `oxi-gen` | Triplify with tarka and point `data` at its output |
 
-None of these needs a semantic-specific product. That is the useful conclusion:
-**the parts of SemOps that need specialist tooling are covered, and the parts
-that are not covered do not need specialist tooling.**
+Earlier editions ended this chapter with a tidy sentence: **the parts of SemOps that
+need specialist tooling are covered, and the parts that are not covered do not need
+specialist tooling.** It is still mostly true. The honest amendment is that the
+toolchain now includes a specialist store, and specialist stores are exactly where
+a young component needs the most patience. Pilot it where its guarantee matters to
+you, answers that respect who is asking, and keep a mature store where it doesn't.
 
 ---
 

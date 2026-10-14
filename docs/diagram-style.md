@@ -101,6 +101,12 @@ Grey is reserved. It means "SemOps asks for this and the toolchain in this
 manual does not provide it" — the visual counterpart of
 [Chapter 14](14-coverage-and-gaps.md). Never use grey decoratively.
 
+A capability that exists and runs, but that its own component calls early, is
+**not** grey. It keeps its ordinary colour and carries the word *early* in the
+label or the surrounding text, as [Chapter 14](14-coverage-and-gaps.md)'s tables
+do. Grey means nothing exists; *early* means something does, with gaps its authors
+list openly. Readers deserve to be able to tell those apart at a glance.
+
 ### The standard preamble
 
 Copy this block verbatim into new diagrams:
@@ -172,9 +178,10 @@ been a worse diagram.
 
 The Semantechs mark — turtle, owl, hook, `XML` — reads as a summary of the stack
 this manual operates: **Turtle** the serialisation, **OWL** the ontology
-language, the hook for **SPARQL**, and `XML` for the RDF/XML lineage that most
-real-world vocabularies (FOAF among them, as
-[Chapter 8](08-model-and-validate.md) shows) are still published in.
+language, the hook for **SPARQL**, and `XML` for the RDF/XML lineage that many
+real-world vocabularies (FOAF among them, as Chapters
+[12](12-release-and-change.md) and [13](13-operate-and-consume.md) show) are
+still published in.
 
 Full-resolution original: [`assets/semantechs-logo.png`](../assets/semantechs-logo.png)
 (1024×1024). Use [`assets/semantechs-logo-320.png`](../assets/semantechs-logo-320.png)

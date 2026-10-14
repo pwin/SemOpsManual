@@ -14,34 +14,41 @@
 ## What this is
 
 **SemOps** is the operational discipline required to build, deploy, govern and
-evolve semantic knowledge systems continuously — what DevOps did for software,
+evolve semantic knowledge systems continuously: what DevOps did for software,
 applied to ontologies, mappings, rules and knowledge graphs.
 
 There is a lot of SemOps *strategy* about: maturity models, operating models,
-nine-stage pipeline blueprints, polyglot technology menus. Strategy is cheap.
-The reason semantic programmes stall is almost never that nobody drew the
-diagram — it is that the diagram had no commands under it, no named owner, and
-no answer for the person who has to justify the spend in October.
+nine-stage pipeline blueprints, polyglot technology menus. Strategy is cheap. Why
+do semantic programmes stall, then? Almost never because nobody drew the diagram.
+It is because the diagram had no commands under it, no named owner, and no answer
+for the person who has to justify the spend in October.
 
-This manual is the missing middle. It takes the SemOps strategy material as
-given and connects it, stage by stage, to **two toolchains that are built,
-tested and runnable today**:
+This manual is the missing middle. It takes the SemOps strategy material as given
+and connects it, stage by stage, to **a toolchain that is built, tested and
+runnable today**:
 
-| Toolchain | What it is | Where it fits |
+| Tool | What it is | Get it |
 |---|---|---|
-| **Ontology Quality Suite**<br/>[GitHub](https://github.com/pwin/consolidated-ontology-quality-suite-python) · [PyPI](https://pypi.org/project/ontology-quality-suite/) | A Python CLI and library — 61-check registry, OWL2 reasoning, version diffing, CSV→RDF triplification, auto-repair, live-triplestore checks. `pip install ontology-quality-suite` | Automation: CI gates, release control, pipelines |
-| **Ontology Development Suite**<br/>[GitHub](https://github.com/pwin/consolidated-ontology-quality-suite-webapp) | A VS Code extension — in-process SPARQL/SHACL/OWL2-RL engines via WASM, live diagnostics, graph view, query workbench | The author's desk: the loop before CI |
+| **Ontology Development Suite** | The desk: a VS Code extension with live diagnostics, outline, graph view, query workbench, and a TypeScript DSL for writing ontologies as code | [`.vsix` from the v0.15.0 release](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/releases/tag/v0.15.0) · npm [`ontology-suite`](https://www.npmjs.com/package/ontology-suite) |
+| **Ontology Quality Suite** | The gate: a Python CLI and library with the 61-check registry, OWL2 reasoning, version diffing, change impact and repair, live-store checks | PyPI [`ontology-quality-suite`](https://pypi.org/project/ontology-quality-suite/) |
+| **SHACL Engine** | The validator underneath both: SHACL and SHACL-AF rules in Rust | PyPI [`shacl`](https://pypi.org/project/shacl/) · npm [`shacl-wasm`](https://www.npmjs.com/package/shacl-wasm), [`shacl-wasm-node`](https://www.npmjs.com/package/shacl-wasm-node) · CLI from the [releases](https://github.com/pwin/SHACL_Engine/releases) |
+| **HOLOS** | The store: RDF 1.2 and SPARQL 1.2, with access policy enforced at the index scan; the SPARQL engine underneath both suites | PyPI [`holosdb`](https://pypi.org/project/holosdb/) · npm [`holos-wasm`](https://www.npmjs.com/package/holos-wasm), [`holos-wasm-node`](https://www.npmjs.com/package/holos-wasm-node) · CLI from the [releases](https://github.com/pwin/triplestore/releases) |
+| **tarka** | The triplifier: CSV, Parquet and Polars data frames to RDF, through TARQL queries or OTTR templates | PyPI [`tarka-rdf`](https://pypi.org/project/tarka-rdf/) · CLI from the [releases](https://github.com/pwin/tarka/releases) |
 
-Every command shown in Part III was **executed for real** while writing this
-manual, against the ontology suite's own bundled `examples/acme_robotics/`
-fixture. Where the output in this manual differs from what a strategy document
-would lead you to expect, the manual reports what actually happened and explains
-why — see [Chapter 9](docs/09-continuous-integration.md) for the sharpest
-example, where the obvious flag is the wrong one.
+[Chapter 7](docs/07-the-toolchain.md) introduces them, says which versions this
+edition was measured against, and explains the one idea that matters more than
+any of them.
 
-Where the toolchain has no answer for a SemOps concept, this manual says so
-plainly and marks it grey. [Chapter 14](docs/14-coverage-and-gaps.md) is the
-honest ledger.
+Every command shown in Part III was **executed for real**, against the ontology
+suite's own bundled `examples/acme_robotics/` fixture, and re-run for this edition
+on 13 October 2026. Where the output differs from what a strategy document would
+lead you to expect, the manual reports what actually happened and explains why.
+[Chapter 9](docs/09-continuous-integration.md) has the sharpest example, where the
+obvious flag is the wrong one.
+
+Where the toolchain has no answer for a SemOps concept, this manual says so plainly
+and marks it grey. [Chapter 14](docs/14-coverage-and-gaps.md) is the honest ledger,
+and this edition's copy includes a list of things earlier editions had wrong.
 
 ---
 
@@ -55,7 +62,7 @@ honest ledger.
 flowchart TD
     P1["<b>I — Why it is hard</b><br/>business, people, partners,<br/>provenance, machines"]
     P2["<b>II — The frame</b><br/>stages, roles, maturity"]
-    P3["<b>III — The practice</b><br/>real commands,<br/>both toolchains"]
+    P3["<b>III — The practice</b><br/>real commands,<br/>the whole toolchain"]
     P4["<b>IV — The ledger</b><br/>coverage, gaps, roadmap"]
 
     P1 --> P2 --> P3 --> P4
@@ -68,25 +75,28 @@ flowchart TD
     class P1 human; class P2 govern; class P3 ci; class P4 ops;
 ```
 
-Part I is unusual in a technical manual, and it is first on purpose. The
-failure modes that kill semantic programmes are overwhelmingly organisational,
-cognitive and commercial rather than technical. A team that can run every
-command in Part III and has not read Part I will build something correct that
-nobody adopts.
+Part I is unusual in a technical manual, and it is first on purpose. The failure
+modes that kill semantic programmes are overwhelmingly organisational, cognitive
+and commercial rather than technical. Building an ontology is a social process
+with a technical output: done well, it brings a team onto the same wavelength;
+done badly, it shows you the fracture lines that were already there. A team that
+can run every command in Part III and has not read Part I will build something
+correct that nobody adopts.
 
 ---
 
 ## Read it on paper
 
-**[Download the A4 PDF](https://github.com/pwin/SemOpsManual/releases/latest)** —
-the whole manual as a single A4 document: title page, contents with page
-numbers, all nineteen diagrams rendered, and an index of commands, flags and
-check identifiers.
+**[Download the A4 PDF](https://github.com/pwin/SemOpsManual/releases/latest)**:
+the whole manual as a single A4 document, with a title page, contents with page
+numbers, all nineteen diagrams rendered, and an index of commands, flags and check
+identifiers.
 
 The PDF is published as a release asset rather than committed, so the repository
-does not carry a fresh multi-megabyte binary for every revision. Build it
-yourself with `cd tools && npm install && node build-pdf.mjs` — see
-[tools/](tools/).
+does not carry a fresh multi-megabyte binary for every revision. Build it yourself
+with `cd tools && npm install && node build-pdf.mjs`; see [tools/](tools/). The
+same build also produces the
+[web edition](https://www.semantechs.co.uk/SemOps_Manual/).
 
 ---
 
@@ -100,13 +110,16 @@ temporary directory, so nothing needs to exist on disk first.
 |---|---|---|
 | [1 — Validation and the gate](notebooks/01-validation-and-the-gate.ipynb) | 8, 9 | An unscoped gate drowning in other people's findings, the flag that fixes it, and the near-miss filter that returns a confidently empty report |
 | [2 — Rules and inference](notebooks/02-rules-and-inference.ipynb) | 11 | SHACL-AF rules deriving triples, and all four ways a rule silently does nothing |
-| [3 — Release and change](notebooks/03-release-and-change.ipynb) | 12 | Evidence-based semver, change impact, and a repair applying itself — including the comment it mangles |
+| [3 — Release and change](notebooks/03-release-and-change.ipynb) | 12 | Evidence-based semver, change impact, which migration tombstones are read in both directions, and a repair that leaves your comments alone |
 
 ```bash
 pip install ontology-quality-suite shacl jupyterlab && jupyter lab
 ```
 
-See [notebooks/](notebooks/) for prerequisites and how they are generated.
+Notebook 2 also wants the `shacl` command on your `PATH`, from the engine's
+[releases](https://github.com/pwin/SHACL_Engine/releases); `pip install shacl`
+gives you the Python library only. See [notebooks/](notebooks/) for the details
+and how they are generated.
 
 ---
 
@@ -117,34 +130,34 @@ See [notebooks/](notebooks/) for prerequisites and how they are generated.
 | # | Chapter | What it covers |
 |---|---|---|
 | 1 | [The business case](docs/01-the-business-case.md) | The problems semantics actually solves, why they are invisible on a balance sheet, and how to fund work whose payoff is a cost that never arrives |
-| 2 | [People and cognition](docs/02-people-and-cognition.md) | Social challenges inside the enterprise; cognitive styles and cognitive capacity as first-class design constraints, not soft-skill garnish |
-| 3 | [Across the boundary](docs/03-across-the-boundary.md) | Working with peers, consortia and supply chains — where the incentives, not the RDF, are the hard part |
-| 4 | [From research to industry](docs/04-from-research-to-industry.md) | What university projects produce, what industry needs, and the specific gap between them |
+| 2 | [People and cognition](docs/02-people-and-cognition.md) | Definitions as territory, strings to things, the priesthood, cognitive styles and capacity, and how organisations move from labels to verbs |
+| 3 | [Across the boundary](docs/03-across-the-boundary.md) | Working with peers, consortia and supply chains, where the incentives, not the RDF, are the hard part |
+| 4 | [From research to industry](docs/04-from-research-to-industry.md) | What university projects produce, what industry needs, and how to read a conformance score |
 | 5 | [GenAI and agents](docs/05-genai-and-agents.md) | What large models change, what they emphatically do not, and why agents raise the value of exactly the discipline SemOps describes |
 
 ### Part II — The SemOps frame
 
 | # | Chapter | What it covers |
 |---|---|---|
-| 6 | [Stages and stories](docs/06-stages-and-stories.md) | The nine pipeline stages, the six operating-model layers, the five maturity levels, and the cast of roles — reconciled into one picture |
-| 7 | [The toolchain](docs/07-the-toolchain.md) | Both tools, what each is for, installation, and a decision table from question to command |
+| 6 | [Stages and stories](docs/06-stages-and-stories.md) | The nine pipeline stages, the six operating-model layers, the five maturity levels, and the cast of roles, reconciled into one picture |
+| 7 | [The toolchain](docs/07-the-toolchain.md) | The tools, why they now run on engines of their own, installation, and a decision table from question to command |
 
 ### Part III — The practice
 
 | # | Chapter | What it covers |
 |---|---|---|
-| 8 | [Model and validate](docs/08-model-and-validate.md) | Stage 2 — the author's loop, in the editor, before anything reaches CI |
-| 9 | [Continuous integration](docs/09-continuous-integration.md) | Stage 3 — the gate; and the verified reason the obvious flag is the wrong one |
-| 10 | [Ingest and transform](docs/10-ingest-and-transform.md) | Stage 6 — CSV→RDF, cheapest check first, and whose problem a finding is |
-| 11 | [Rules and inference](docs/11-rules-and-inference.md) | SHACL-AF rules — deriving triples, the four silent hazards, rules at scale, and why the browser build cannot run them |
-| 12 | [Release and change](docs/12-release-and-change.md) | Stages 1 and 4 — evidence-based semver, impact analysis, and repairs that apply themselves |
-| 13 | [Operate and consume](docs/13-operate-and-consume.md) | Stages 7–9 — live triplestores, documentation, and knowledge products |
+| 8 | [Model and validate](docs/08-model-and-validate.md) | Stage 2: the author's loop in the editor, ontologies as TypeScript, and house rules alongside the built-ins |
+| 9 | [Continuous integration](docs/09-continuous-integration.md) | Stage 3: the gate, why the obvious flag is the wrong one, reports for people, and how to test the gate itself |
+| 10 | [Ingest and transform](docs/10-ingest-and-transform.md) | Stage 6: `sketch`, triplifying with tarka (TARQL or OTTR), `data`, and drift across a set of mappings |
+| 11 | [Rules and inference](docs/11-rules-and-inference.md) | SHACL-AF rules, what "conforms" now means, the four silent hazards, and materialising what rules derive |
+| 12 | [Release and change](docs/12-release-and-change.md) | Stages 1 and 4: evidence-based semver, impact analysis, migration tombstones, and repairs that apply themselves |
+| 13 | [Operate and consume](docs/13-operate-and-consume.md) | Stages 7–9: live-store checks, access policy at the scan, documentation, and what consumers need |
 
 ### Part IV — The ledger
 
 | # | Chapter | What it covers |
 |---|---|---|
-| 14 | [Coverage and gaps](docs/14-coverage-and-gaps.md) | The honest matrix: SemOps concept → command, or → grey |
+| 14 | [Coverage and gaps](docs/14-coverage-and-gaps.md) | The honest matrix (SemOps concept → command, or → grey), the rough edges, and what earlier editions had wrong |
 | 15 | [Adoption roadmap](docs/15-adoption-roadmap.md) | A sequenced path from Level 1 to Level 3, with what to do on the first day of each |
 | A | [Diagram and brand conventions](docs/diagram-style.md) | The palette, and the width rules that keep every diagram readable on screen and on A4 |
 
@@ -152,17 +165,17 @@ See [notebooks/](notebooks/) for prerequisites and how they are generated.
 
 ## How to read it
 
-**If you are deciding whether to fund this** — Chapters 1, 3 and 4, then the
-coverage matrix in 13. About forty minutes.
+**If you are deciding whether to fund this**: Chapters 1, 3 and 4, then the
+coverage matrix in 14. About forty minutes.
 
-**If you have been handed a stalled semantic programme** — Chapter 2 first. The
+**If you have been handed a stalled semantic programme**: Chapter 2 first. The
 diagnosis is usually there rather than in the technology.
 
-**If you are the engineer** — skim 6 and 7, then work through Part III with a
-terminal open. Every command runs against fixtures bundled in the ontology
-suite, so nothing needs inventing to follow along.
+**If you are the engineer**: skim 6 and 7, then work through Part III with a
+terminal open. Every command runs against fixtures bundled in the ontology suite,
+so nothing needs inventing to follow along.
 
-**If you are writing the business case** — Chapters 1 and 14, and steal the
+**If you are writing the business case**: Chapters 1 and 14, and steal the
 maturity-level framing wholesale.
 
 ---
@@ -170,24 +183,27 @@ maturity-level framing wholesale.
 ## Conventions
 
 Findings, commands and outputs in Part III are real. Where a number appears
-(*"5 findings"*, *"confidence 100%"*) it is the number the tool printed on the
+(*"23 findings"*, *"confidence 100%"*) it is the number the tool printed on the
 run described, not an illustrative figure.
 
-**One number still moves, and it is labelled where it appears.** A scoped `data`
-run reports 54 or 55 depending on whether the optional DL reasoner starts —
-visible in the report itself, since `REA-021` present means it ran and `REA-022`
-means it did not. Everything else is now exactly reproducible across repeated
-runs.
+**Two outputs move unless you pin one variable, and both are labelled where they
+appear.** A scoped `data` run reports 54 or 55 findings depending on whether the
+optional DL reasoner runs, and `docgen` reorders its page. Both turn out to follow
+Python's per-process hash seed, so `PYTHONHASHSEED` makes `docgen` reproducible
+and the reasoner very nearly so: nine runs in ten
+([Chapter 14](docs/14-coverage-and-gaps.md) §14.4). In an unscoped run you can tell
+whether the reasoner ran from the report itself, since `REA-021` present means it
+did and `REA-022` means it did not. In a scoped run you cannot, because the scoping
+filter removes `REA-022` along with everything else that isn't yours
+([Chapter 10](docs/10-ingest-and-transform.md) §10.4). Everything else is exactly
+reproducible across repeated runs, and survived a change of the engine underneath.
 
-Earlier editions carried a longer caveat here, because the unscoped totals used
-to drift by a few findings between identical invocations. That was a defect in
-how findings were merged rather than anything about the ontology, and it is
-fixed ([Chapter 14](docs/14-coverage-and-gaps.md) §14.6). The episode is why
-[Chapter 9](docs/09-continuous-integration.md) §9.8 argues for asserting on
-check identifiers rather than counts.
+That last point is why [Chapter 9](docs/09-continuous-integration.md) §9.8 argues
+for asserting on check identifiers rather than counts: counts move when the rules
+move, and identifiers say what moved.
 
-Grey boxes and dashed borders in diagrams mean **not covered by this
-toolchain**. They are a deliberate, load-bearing part of the notation — see
+Grey boxes and dashed borders in diagrams mean **not covered by this toolchain**.
+They are a deliberate, load-bearing part of the notation; see
 [Appendix A](docs/diagram-style.md).
 
 Diagrams are Mermaid and render natively on GitHub. They are built to stay
@@ -200,16 +216,15 @@ Appendix A for anyone extending the manual.
 
 MIT — © 2026 Peter Winstanley. See [LICENSE](LICENSE).
 
-This covers the text, the diagrams and the build tooling: use it, adapt it, and
-put it in front of your own organisation. Attribution is required; a warranty is
-not offered.
+This covers the text, the diagrams and the build tooling: use it, adapt it, and put
+it in front of your own organisation. Attribution is required; a warranty is not
+offered.
 
 Two things the licence does not reach. The **Semantechs mark** in
-[`assets/`](assets/) is a trademark, and a copyright licence does not grant
-rights in it — reuse the manual freely, but replace the branding if you
-republish. The **third-party vocabularies** referenced throughout (the W3C
-Organization Ontology, FOAF) carry their own terms, as do the two toolchains the
-manual documents.
+[`assets/`](assets/) is a trademark, and a copyright licence does not grant rights
+in it: reuse the manual freely, but replace the branding if you republish. The
+**third-party vocabularies** referenced throughout (the W3C Organization Ontology,
+FOAF, gist) carry their own terms, as do the tools the manual documents.
 
 ---
 
