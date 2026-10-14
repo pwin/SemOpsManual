@@ -126,6 +126,7 @@ they find ([C12.14](#c12-14)), and tarka's two OTTR modes disagreeing about a
 | npm holos-wasm-node | 0.21.0 |
 | npm typescript | 7.0.2 |
 | java (for HermiT) | openjdk version "25.0.3" 2026-04-21 LTS |
+| oxi-gen (testing repo only) | oxi_gen 0.5.1 |
 
 ## Summary
 

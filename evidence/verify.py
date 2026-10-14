@@ -88,9 +88,12 @@ def main() -> int:
             print(f"{mark}  {c.id:8} {c.title}" + ("" if rec["status"] == "PASS" else f"\n      {rec['detail']}"))
             failures += rec["status"] != "PASS"
         if ran:
-            (EVIDENCE / "outputs").mkdir(exist_ok=True)
-            (EVIDENCE / "outputs" / "_environment.json").write_text(
-                json.dumps(env.versions(), indent=1), encoding="utf-8", newline="\n")
+            # Merge rather than replace: a partial run on a machine without, say,
+            # oxi-gen must not drop the row that earlier records were made with.
+            path = EVIDENCE / "outputs" / "_environment.json"
+            path.parent.mkdir(exist_ok=True)
+            old = json.loads(path.read_text(encoding="utf-8")) if path.is_file() else {}
+            path.write_text(json.dumps({**old, **env.versions()}, indent=1), encoding="utf-8", newline="\n")
 
     envfile = EVIDENCE / "outputs" / "_environment.json"
     environment = json.loads(envfile.read_text(encoding="utf-8")) if envfile.is_file() else {}
