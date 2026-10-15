@@ -7,7 +7,7 @@
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --own-namespace https://acme.example.org/ns/ --engine sparql --out-dir work/C07_28/v --fail-on never --reports minimal -v",
    "rc": 0,
-   "seconds": 1.8,
+   "seconds": 1.9,
    "stdout": "[verbose] fixtures/acme_robotics/acme-org-v1.ttl:\n  2 owl:imports resolved:\n    http://www.w3.org/ns/org#  <-  fixtures/acme_robotics/reference_vocab/org.ttl\n    http://xmlns.com/foaf/0.1/  <-  fixtures/acme_robotics/reference_vocab/foaf.rdf\n[verbose] engine: sparql\nFindings: 23 total (1 Violation, 22 Warning, 0 Info)\nReports written to: ./work/C07_28/v\n  - work/C07_28/v/findings.txt (start here -- what, where, and the source line)\n  - work/C07_28/v/full_results.csv\n",
    "stderr": ""
   }

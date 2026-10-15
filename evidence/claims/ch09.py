@@ -15,11 +15,22 @@ def _all_focus_own(csv_rel):
     return check
 
 
-def _blank_label_namespaces(r):
+def _every_namespace_has_a_scheme(r):
+    """From 0.24.0 the list offers namespaces only.
+
+    Up to 0.23.0 it led with blank-node labels and a slash --
+    `N7b108cac662043fa969705589b18d8da/`. The guard meant to stop that tested
+    for a `_:` prefix, which rdflib's labels do not carry, so it never fired.
+    Stated as the property rather than as "no N-shaped strings", because the
+    property is what the reader needs: a namespace has a scheme.
+    """
     hit = re.findall(r"Namespaces actually seen: (.*)", r[0].stderr)
-    labels = re.findall(r"N[0-9a-f]{32}/", hit[0]) if hit else []
-    return ok(bool(labels), f"the 'namespaces actually seen' list includes blank-node labels, e.g. {labels[:1]}",
-              "no blank-node-shaped entries in the namespace list")
+    if not hit:
+        return False, "no 'namespaces actually seen' list in the warning"
+    offered = [s.strip() for s in hit[0].split(",") if s.strip() and not s.strip().startswith("(+")]
+    bad = [s for s in offered if "://" not in s]
+    return ok(not bad, f"all {len(offered)} namespaces offered have a scheme",
+              f"offered without a scheme: {bad}")
 
 
 def _warning_on_stderr(r):
@@ -130,26 +141,32 @@ CLAIMS = [
           checks="findings.txt opens with a 'by question' index: 20 under the documentation question, 1 under "
                  "coherence, and STR-003 listed as not mapped rather than dropped"),
 
-    Claim("C09.07", "A near-miss namespace warns, on stderr, and lists blank-node labels", "09",
+    Claim("C09.07", "A near-miss namespace warns, on stderr, and offers only real namespaces", "09",
           (F, "**The tool now says so.** Reported from that experience"), "run",
           steps=[Step(f"{CHECKS} --own-namespace http://example.org/acme# --out-dir {{work}}/miss "
                       f"--fail-on never --reports minimal")],
-          check=checks(totals(0, 0, 0, 0, 0), _warning_on_stderr, _blank_label_namespaces),
+          check=checks(totals(0, 0, 0, 0, 0), _warning_on_stderr, _every_namespace_has_a_scheme),
           checks="0 findings; the warning 'matched none of the 479 findings' is on stderr and not stdout; and "
-                 "the 'Namespaces actually seen' list contains blank-node identifiers with a slash appended"),
+                 "from 0.24.0 every entry in the 'Namespaces actually seen' list has a scheme, where up to "
+                 "0.23.0 the list led with two blank-node identifiers with a slash appended"),
 
     Claim("C09.08", "The warning fires only when there were findings to lose", "09",
           (F, "The warning fires only when there were findings to lose."), "source",
-          sources=[src("suite cli.py, _filter_own_namespace", file("suite", "ontology_suite/cli.py", "158-200"),
-                       "kept = [r for r in rows if r.focus_node.startswith(own_namespace)]")],
+          sources=[src("suite cli.py, _filter_own_namespace", file("suite", "ontology_suite/cli.py", "158-229"),
+                       "if rows and not matched:")],
           notes="The warning is emitted only when the filter removes everything from a non-empty set of rows; "
-                "an empty run never reaches it."),
+                "an empty run never reaches it. The condition tests `matched` rather than the returned `kept`: "
+                "0.24.0 keeps run-level findings such as REA-022 through the filter, and counting those as a match "
+                "would switch this warning off on exactly the runs that most need it."),
 
-    Claim("C09.09", "A scoped run drops the 'reasoner did not run' finding", "09",
-          (F, "it means a scoped gate cannot tell"), "run",
-          claim="REA-022's focus node is oq:Graph, so --own-namespace removes it. With HermiT unable to run (Java "
-                "hidden, so that the outcome is certain), the unscoped data run reports REA-022 and the scoped one "
-                "says nothing about it.",
+    Claim("C09.09", "A scoped run keeps the 'reasoner did not run' finding, from 0.24.0", "09",
+          (F, "findings about the run survive the filter"), "run",
+          claim="REA-022's focus node is the synthetic oq:Graph, which starts with nobody's namespace, so until "
+                "0.24.0 --own-namespace removed it: the unscoped data run reported REA-022 and the scoped one said "
+                "nothing about it. From 0.24.0 both report it. With HermiT unable to run (Java hidden, so that the "
+                "outcome is certain), the scoped run's total is unchanged at 54 while its composition moves -- one "
+                "Violation fewer, because a LOG-001 contradiction counted twice is now merged, and one Info more, "
+                "because REA-022 survives. Two real changes that a gate watching only the total would miss.",
           scripts=["scripts/without_java.py"],
           steps=[Step(f"tarka run -q {ACME}/employees.rq -i {ACME}/employees.csv -o {{work}}/employees.ttl"),
                  Step(f"python scripts/without_java.py {SUITE} data {{work}}/employees.ttl --ontology {V1} "
@@ -159,8 +176,11 @@ CLAIMS = [
                       f"--import-dir {ACME} --engine sparql --own-namespace {OWN_DATA} --out-dir {{work}}/scoped "
                       f"--fail-on never --reports minimal", env={"PYTHONHASHSEED": "0"})],
           check=checks(_rea022("unscoped/full_results.csv", True), _rea022_focus("unscoped/full_results.csv"),
-                       _rea022("scoped/full_results.csv", False), totals(2, 54)),
-          checks="unscoped: REA-022 present, about oq:Graph; scoped: REA-022 absent, 54 findings",
+                       _rea022("scoped/full_results.csv", True), _rea022_focus("scoped/full_results.csv"),
+                       totals(1, 548, 65, 363, 120), totals(2, 54, 11, 40, 3)),
+          checks="REA-022 present in both runs and about oq:Graph in both; unscoped 548 (65 V, 363 W, 120 I); "
+                 "scoped 54 (11 V, 40 W, 3 I) -- the same total as 0.23.0's 54 (12 V, 40 W, 2 I), one Violation "
+                 "fewer and one Info more",
           needs=["tarka-cli"]),
 
     Claim("C09.10", "Which reports a run writes, and --reports minimal", "09",
@@ -192,17 +212,19 @@ CLAIMS = [
     Claim("C09.13", "--reports minimal writes two files", "09",
           (F, "`--reports minimal` writes only `findings.txt` and `full_results.csv`."), "run", same_as="C09.10"),
 
-    Claim("C09.14", "run reports 27 findings, one contradiction twice", "09",
-          (F, "Two of those Violations are the same `LOG-001`"), "run",
-          claim="With HermiT able to run (PYTHONHASHSEED=5, see C14.06), `run` reports 27 findings with 3 "
-                "Violations: LOG-001 twice (registry pass and owlrl-closure pass) and REA-021; it exits 1.",
+    Claim("C09.14", "run reports 26 findings, one contradiction once, from 0.24.0", "09",
+          (F, "The two Violations are `LOG-001`, the deliberate"), "run",
+          claim="With HermiT able to run (PYTHONHASHSEED=5, see C14.06), `run` reports 26 findings with 2 "
+                "Violations: LOG-001 once and REA-021; it exits 1. Up to 0.23.0 the same run reported 27 with 3, "
+                "LOG-001 arriving twice -- once from the registry pass and once from the owlrl-closure pass, "
+                "deduplicated within each but not across the join between them.",
           steps=[Step(f"{SUITE} run --ontology {V1} --import-dir {ACME} --queries {ACME} --own-namespace {OWN} "
                       f"--engine sparql --fail-on Violation --out-dir {{work}}/out --reports minimal",
                       env={"PYTHONHASHSEED": "5"}),
                  Step("python scripts/summarise_findings.py {work}/out/full_results.csv --by focus --check LOG-001")],
-          check=checks(totals(0, 27, 3, 22, 2), exit_code(0, 1),
-                       counts("out/full_results.csv", {"LOG-001": 2, "REA-021": 1}, exact=False)),
-          checks="27 total (3 V, 22 W, 2 I), exit 1, LOG-001 twice and REA-021 once"),
+          check=checks(totals(0, 26, 2, 22, 2), exit_code(0, 1),
+                       counts("out/full_results.csv", {"LOG-001": 1, "REA-021": 1}, exact=False)),
+          checks="26 total (2 V, 22 W, 2 I), exit 1, LOG-001 once and REA-021 once"),
 
     Claim("C09.15", "The testing repository: 165 passed, 10 skipped", "09",
           (F, "**165 passed, 10 skipped**, unchanged by the engine move."), "run",

@@ -63,11 +63,19 @@ def _acm001_fault_and_control(csv_rel):
     return check
 
 
-def _site_path_advice(r):
+def _builtin_advice(r):
+    """From 0.24.0 the warning names `@builtin`, not the installed tree's path.
+
+    It recommended the absolute site path up to 0.23.0 -- in the releases after
+    `@builtin` existed precisely because a committed path is wrong on every
+    other machine and wrong again after an upgrade. Checked as "names @builtin
+    and no path" rather than by equality, so a reworded warning still passes.
+    """
     hit = re.search(r"Pass --sparql (\S+) as well to run both", r[1].stderr)
-    path = hit.group(1).replace(chr(92), "/") if hit else ""
-    return ok(path.endswith("site-packages/ontology_suite/resources/sparql"),
-              f"the warning recommends the installed tree by path ({path})", "no site-path recommendation")
+    named = hit.group(1) if hit else ""
+    return ok(named == "@builtin",
+              f"the warning recommends {named}",
+              f"the warning recommends {named or 'nothing'}, not @builtin")
 
 
 CLAIMS = [
@@ -257,9 +265,10 @@ CLAIMS = [
           check=checks(totals(1, 0, 0, 0, 0),
                        has(1, "WARNING: --sparql replaced the suite's own query tree: 1 project check(s) ran "
                               "and 42 built-in check(s) did not."),
-                       _site_path_advice, lacks(1, "@builtin")),
-          checks="0 findings, and the warning names 1 project check and 42 built-in ones; it recommends the "
-                 "built-in tree by its site path, and does not mention @builtin",
+                       _builtin_advice, lacks(1, "site-packages")),
+          checks="0 findings, and the warning names 1 project check and 42 built-in ones; from 0.24.0 it "
+                 "recommends @builtin and names no filesystem path, where up to 0.23.0 it recommended the "
+                 "installed tree's absolute site path",
           needs=["tarka-cli"]),
 
     Claim("C08.23", "Until 0.18.0 that run was silent; the testing repo's gate was in that state", "08",
@@ -292,8 +301,8 @@ CLAIMS = [
           checks="the merged registry has 62 entries; ACM-001 fires on E101 and not on its control E100, with its "
                  "own title and remediation; nothing is UNMAPPED"),
 
-    Claim("C08.26", "The warning recommends the site path @builtin was made to avoid", "08",
-          (F, "warning above recommends passing the built-in tree *by its absolute site"), "run", same_as="C08.22"),
+    Claim("C08.26", "The warning named the site path @builtin was made to avoid, until 0.24.0", "08",
+          (F, "Up to 0.23.0 the warning above recommended passing the"), "run", same_as="C08.22"),
 
     Claim("C08.27", "Checks are discovered by walking the directory", "08",
           (F, "**Checks are discovered by walking the directory**"), "source",

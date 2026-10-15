@@ -1,14 +1,14 @@
 {
  "id": "C14.06",
  "status": "PASS",
- "detail": "seed 5: HermiT ran 10 of 10, did not run 0; seed 0: HermiT ran 0 of 10, did not run 10; step 1 output contains \"could not be run: cannot access local variable 'entity' where it is not associated with a value\"",
+ "detail": "seed 5: HermiT ran 10 of 10, did not run 0; seed 0: HermiT ran 1 of 10, did not run 9; step 1 output contains \"could not be run: cannot access local variable 'entity' where it is not associated with a value\"",
  "ran": "2026-10-15",
  "steps": [
   {
    "cmd": "python scripts/reasoner_seeds.py work/C14_06 10 0 5",
    "rc": 0,
-   "seconds": 75.1,
-   "stdout": "PYTHONHASHSEED=0: HermiT ran 0 of 10, did not run 10 of 10\nPYTHONHASHSEED=5: HermiT ran 10 of 10, did not run 0 of 10\nREA-022 messages seen:\n  10 x  The external DL reasoner ('hermit') could not be run: cannot access local variable 'entity' where it is not associated with a value\n",
+   "seconds": 73.3,
+   "stdout": "PYTHONHASHSEED=0: HermiT ran 1 of 10, did not run 9 of 10\nPYTHONHASHSEED=5: HermiT ran 10 of 10, did not run 0 of 10\nREA-022 messages seen:\n  9 x  The external DL reasoner ('hermit') could not be run: cannot access local variable 'entity' where it is not associated with a value\n",
    "stderr": ""
   }
  ]

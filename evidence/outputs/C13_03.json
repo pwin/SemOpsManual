@@ -1,7 +1,7 @@
 {
  "id": "C13.03",
  "status": "PASS",
- "detail": "step 5 output contains 'template vs ontology: clean', 'live data vs ontology: 1 undeclared class(es)', \"'classes_only_in_template': ['https://acme.example.org/ns/SoftwareEngineer']\", \"'classes_only_in_live_data': ['https://acme.example.org/ns/Engineer']\"; step 5 exits 1; step 6 output has none of '==='; step 6 exits 0",
+ "detail": "step 5 output contains 'template vs ontology: clean', 'live data vs ontology: 1 undeclared class(es)', \"'classes_only_in_template': ['https://acme.example.org/ns/SoftwareEngineer']\", \"'classes_only_in_live_data': ['https://acme.example.org/ns/Engineer']\"; step 5 exits 1; step 6 output has none of '==='; step 6 exits 1; step 6 output contains 'unknown graph role'",
  "ran": "2026-10-15",
  "steps": [
   {
@@ -33,18 +33,18 @@
    "stderr": ""
   },
   {
-   "cmd": "ontology-quality-suite consistency-remote --query-endpoint http://127.0.0.1:7899/query --manifest data/remote/graphs-v2-store-behind.json --out-dir work/C13_03/remote --fail-on-misalignment",
+   "cmd": "ontology-quality-suite consistency-remote --query-endpoint http://127.0.0.1:7899/query --manifest data/remote/graphs-v2-store-behind.json --out-dir work/C13_03/remote --fail-on-anything",
    "rc": 1,
    "seconds": 1.8,
    "stdout": "=== https://acme.example.org/graph/triplified/employees ===\n  source_tarql: work/C13_03/repaired/employees.rq\n  ontology_graph_uri: https://acme.example.org/graph/ontology/2.0.0\n  template vs ontology: clean\n  live data vs ontology: 1 undeclared class(es), 0 undeclared propert(y/ies)\n  template vs live data: 2 discrepanc(y/ies) {'classes_only_in_template': ['https://acme.example.org/ns/SoftwareEngineer'], 'classes_only_in_live_data': ['https://acme.example.org/ns/Engineer'], 'properties_only_in_template': [], 'properties_only_in_live_data': []}\n\nReports written to: ./work/C13_03/remote\n",
    "stderr": ""
   },
   {
-   "cmd": "ontology-quality-suite consistency-remote --query-endpoint http://127.0.0.1:7899/query --manifest data/remote/graphs-role-typo.json --out-dir work/C13_03/typo --fail-on-misalignment",
-   "rc": 0,
-   "seconds": 1.5,
-   "stdout": "\nReports written to: ./work/C13_03/typo\n",
-   "stderr": ""
+   "cmd": "ontology-quality-suite consistency-remote --query-endpoint http://127.0.0.1:7899/query --manifest data/remote/graphs-role-typo.json --out-dir work/C13_03/typo --fail-on-anything",
+   "rc": 1,
+   "seconds": 1.3,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\n  File \"<frozen runpy>\", line 88, in _run_code\n  File \"./.venv/Scripts/ontology-quality-suite.EXE/__main__.py\", line 10, in <module>\n  File \"./.venv/Lib/site-packages/ontology_suite/cli.py\", line 943, in main\n    return handlers[args.command](args)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"./.venv/Lib/site-packages/ontology_suite/cli.py\", line 765, in cmd_consistency_remote\n    manifest = graph_manifest.GraphManifest.load(args.manifest)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"./.venv/Lib/site-packages/ontology_suite/remote/manifest.py\", line 92, in load\n    raise ValueError(\nValueError: data/remote/graphs-role-typo.json: unknown graph role(s) ['triplified-data'] -- valid roles are ['ontology', 'triplified_data']. A role that matches neither is never compared, so the run would report nothing and succeed.\n"
   }
  ]
 }

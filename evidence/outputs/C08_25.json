@@ -7,7 +7,7 @@
   {
    "cmd": "python scripts/merge_registry.py fixtures/acme_robotics/custom_checks/registry.json work/C08_25/merged-registry.json",
    "rc": 0,
-   "seconds": 0.1,
+   "seconds": 0.2,
    "stdout": "61 built-in + 1 project = 62 entries -> work/C08_25/merged-registry.json\n",
    "stderr": ""
   },

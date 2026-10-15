@@ -7,14 +7,14 @@
   {
    "cmd": "node -p \"require('./node_modules/ontology-suite/package.json').version\"",
    "rc": 0,
-   "seconds": 0.0,
+   "seconds": 0.1,
    "stdout": "0.16.0\n",
    "stderr": ""
   },
   {
    "cmd": "node node_modules/typescript/bin/tsc --noEmit --strict --module nodenext --moduleResolution nodenext --target es2022 --skipLibCheck scripts/dsl/acme.ontology.ts",
    "rc": 0,
-   "seconds": 0.1,
+   "seconds": 0.2,
    "stdout": "",
    "stderr": ""
   },
@@ -28,7 +28,7 @@
   {
    "cmd": "python scripts/query_file.py work/C08_12/acme.ttl \"SELECT (COUNT(*) AS ?triples) WHERE { ?s ?p ?o }\"",
    "rc": 0,
-   "seconds": 0.5,
+   "seconds": 0.4,
    "stdout": "triples\n17\n",
    "stderr": ""
   }

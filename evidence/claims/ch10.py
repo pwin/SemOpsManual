@@ -255,30 +255,41 @@ CLAIMS = [
           check=checks(has(0, "WARNING: oxi-gen binary not found", "Triplified 0 file(s)")),
           checks="a warning that oxi-gen was not found, and nothing triplified"),
 
-    Claim("C10.18", "data: 549 unscoped (550 at 0.22.0), 55 scoped, with HermiT running", "10",
-          (F, "Findings: 549 total (67 Violation, 363 Warning, 119 Info)"), "run",
+    Claim("C10.18", "data: 548 unscoped (549 at 0.23.0, 550 at 0.22.0), 54 scoped, with HermiT running", "10",
+          (F, "Findings: 548 total (66 Violation, 363 Warning, 119 Info)"), "run",
           steps=[Step(TRIPLIFY),
                  Step(f"{DATA} --out-dir {{work}}/all --fail-on never --reports minimal", env={"PYTHONHASHSEED": "5"}),
                  Step(f'{DATA} --own-namespace {OWN_DATA} --out-dir {{work}}/own --fail-on never --reports minimal',
                       env={"PYTHONHASHSEED": "5"}),
                  Step("python scripts/summarise_findings.py {work}/own/full_results.csv")],
-          check=checks(by_version((0, 23, 0), totals(1, 549, 67, 363, 119), totals(1, 550, 68, 363, 119)),
-                       totals(2, 55, 13, 40, 2), _rea("own/full_results.csv", ["REA-021"], ["REA-022"])),
-          checks="unscoped 550 (68 V, 363 W, 119 I) at 0.22.0, and 549 (67 V) from 0.23.0, without the false REA-020; "
-                 "scoped to https://acme.example.org/ 55 (13 V, 40 W, 2 I) on both, with REA-021",
+          check=checks(by_version((0, 24, 0), totals(1, 548, 66, 363, 119),
+                                   by_version((0, 23, 0), totals(1, 549, 67, 363, 119),
+                                              totals(1, 550, 68, 363, 119))),
+                       by_version((0, 24, 0), totals(2, 54, 12, 40, 2), totals(2, 55, 13, 40, 2)),
+                       _rea("own/full_results.csv", ["REA-021"], ["REA-022"])),
+          checks="unscoped 550 (68 V, 363 W, 119 I) at 0.22.0; 549 (67 V) from 0.23.0, without the false REA-020; "
+                 "548 (66 V) from 0.24.0, which reports one contradiction once instead of twice. Scoped to "
+                 "https://acme.example.org/: 55 (13 V, 40 W, 2 I) up to 0.23.0 and 54 (12 V) from 0.24.0, with "
+                 "REA-021 throughout",
           needs=["tarka-cli"]),
 
-    Claim("C10.19", "54 when HermiT does not run, and the scoped report cannot say so", "10",
+    Claim("C10.19", "54 when HermiT does not run, and from 0.24.0 the scoped report says so", "10",
           (F, "That run gave 55 three times running. The fourth time it gave 54."), "run",
           steps=[Step(TRIPLIFY),
                  Step(f"python scripts/without_java.py {DATA} --out-dir {{work}}/all --fail-on never --reports minimal",
                       env={"PYTHONHASHSEED": "0"}),
                  Step(f"python scripts/without_java.py {DATA} --own-namespace {OWN_DATA} --out-dir {{work}}/own "
                       f"--fail-on never --reports minimal", env={"PYTHONHASHSEED": "0"})],
-          check=checks(totals(2, 54, 12, 40, 2), _rea("all/full_results.csv", ["REA-022"], ["REA-021"]),
-                       _rea("own/full_results.csv", [], ["REA-021", "REA-022"])),
-          checks="with HermiT unable to run: the unscoped run reports REA-022; the scoped run has 54 findings and "
-                 "neither REA-021 nor REA-022",
+          check=checks(by_version((0, 24, 0), totals(2, 54, 11, 40, 3), totals(2, 54, 12, 40, 2)),
+                       _rea("all/full_results.csv", ["REA-022"], ["REA-021"]),
+                       by_version((0, 24, 0), _rea("own/full_results.csv", ["REA-022"], ["REA-021"]),
+                                  _rea("own/full_results.csv", [], ["REA-021", "REA-022"]))),
+          checks="with HermiT unable to run: the unscoped run reports REA-022 on every version. The scoped run "
+                 "holds 54 findings on both sides of the fix, but differently -- up to 0.23.0 it had neither "
+                 "REA-021 nor REA-022 (54 = 12 V, 40 W, 2 I), and from 0.24.0 it reports REA-022 "
+                 "(54 = 11 V, 40 W, 3 I): one Violation fewer, because the duplicated LOG-001 is merged, and one "
+                 "Info more, because the reasoner's caveat survives the filter. The total is the same number for "
+                 "two different reasons, which is why a gate should assert on the severity split",
           scripts=["scripts/without_java.py"],
           needs=["tarka-cli"],
           notes="The manual's 'three times… the fourth time' describes unpinned runs. Java is hidden here so that "

@@ -7,7 +7,7 @@
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --exclude-imports --engine sparql --out-dir work/C09_03/excl --fail-on never --reports minimal",
    "rc": 0,
-   "seconds": 1.6,
+   "seconds": 1.5,
    "stdout": "Findings: 27 total (1 Violation, 26 Warning, 0 Info)\nReports written to: ./work/C09_03/excl\n  - work/C09_03/excl/findings.txt (start here -- what, where, and the source line)\n  - work/C09_03/excl/full_results.csv\n",
    "stderr": ""
   },

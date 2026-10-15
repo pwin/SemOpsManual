@@ -1,7 +1,7 @@
 {
  "id": "C10.30",
  "status": "PASS",
- "detail": "the warning names zz-legacy.rq, on stderr; suite 0.23.0: out/full_results.csv: CNF-001 includes https://acme.example.org/ns#Department; sketch.ttl re-declares acme: ahead of zz-legacy.rq's triples",
+ "detail": "the warning names zz-legacy.rq, on stderr; suite 0.24.0: out/full_results.csv: CNF-001 includes https://acme.example.org/ns#Department; sketch.ttl re-declares acme: ahead of zz-legacy.rq's triples",
  "ran": "2026-10-15",
  "steps": [
   {

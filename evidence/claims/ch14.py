@@ -21,8 +21,9 @@ def _tally(seed, outcome, at_least, of):
 
 
 CLAIMS = [
-    Claim("C14.01", "A scoped run cannot see that the reasoner did not run", "14",
-          (F, "### A scoped run cannot see that the reasoner did not run"), "run", same_as="C09.09"),
+    Claim("C14.01", "A scoped run could not see that the reasoner did not run (fixed in 0.24.0)", "14",
+          (F, "### A scoped run could not see that the reasoner did not run (fixed in 0.24.0)"), "run",
+          same_as="C09.09"),
 
     Claim("C14.02", "The shacl CLI reports conformance when it checked nothing", "14",
           (F, "The one-shot Python and JavaScript calls refuse a shapes graph that declares no"), "run",
@@ -81,7 +82,7 @@ CLAIMS = [
                  "building foaf:primaryTopic. The exact tallies, including any loads that go the other way, are "
                  "recorded rather than asserted",
           sources=[src("suite reasoning/backends/external_backend.py: a fresh TemporaryDirectory, loaded by path",
-                       file("suite", "ontology_suite/reasoning/backends/external_backend.py", "94-106"),
+                       file("suite", "ontology_suite/reasoning/backends/external_backend.py", "140-155"),
                        "onto = world.get_ontology(str(owl_path)).load()")],
           notes="HermiT is never called here: the failure, when it comes, is in loading."),
 
@@ -128,8 +129,8 @@ CLAIMS = [
                        "Forbid REA-020 where the class is unsatisfiable but the ontology is not")],
           notes="Needs Java, and a hash seed under which owlready2 loads (5 here; see C14.06)."),
 
-    Claim("C14.10", "A mistyped manifest role compares nothing, successfully", "14",
-          (F, "`consistency-remote` accepts any string as a graph's `role` and ignores all but"), "run",
+    Claim("C14.10", "A mistyped manifest role compared nothing, successfully (fixed in 0.24.0)", "14",
+          (F, "`consistency-remote` accepted any string as a graph's `role` and ignored all but"), "run",
           same_as="C13.03"),
 
     # The "smaller ones" table: one claim per row, each pointing at its evidence.
@@ -138,12 +139,14 @@ CLAIMS = [
           "run", same_as="C07.26"),
     Claim("C14.12", "--inference is ignored under --engine sparql", "14",
           (F, "| At 0.22.0, `--inference` reaches the shapes only"), "run", same_as="C07.27"),
-    Claim("C14.13", "The near-miss warning lists blank-node identifiers", "14",
-          (F, "| The `--own-namespace` near-miss warning lists two blank-node identifiers"), "run", same_as="C09.07"),
+    Claim("C14.13", "The near-miss warning listed blank-node identifiers, until 0.24.0", "14",
+          (F, "| Up to 0.23.0, the `--own-namespace` near-miss warning lists two blank-node identifiers"), "run",
+          same_as="C09.07"),
     Claim("C14.14", "--registry replaces, so @builtin with a house registry is UNMAPPED", "14",
           (F, "| `--sparql` composes but `--registry` replaces"), "run", same_as="C08.24"),
-    Claim("C14.15", "One contradiction, two LOG-001s", "14",
-          (F, "| `data` and `run` report one contradiction as two `LOG-001`s"), "run", same_as="C09.14"),
+    Claim("C14.15", "One contradiction, two LOG-001s, until 0.24.0", "14",
+          (F, "| Up to 0.23.0, `data` and `run` report one contradiction as two `LOG-001`s"), "run",
+          same_as="C09.14"),
     Claim("C14.16", "The DSL's TypeError and Quad type", "14",
           (F, "| The DSL gives unchecked code an internal `TypeError`"), "run", same_as="C08.15"),
     Claim("C14.17", "triplify drives oxi-gen only", "14",

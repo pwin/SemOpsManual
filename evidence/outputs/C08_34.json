@@ -7,14 +7,14 @@
   {
    "cmd": "node node_modules/typescript/bin/tsc --noEmit --strict --module nodenext --moduleResolution nodenext --target es2022 --skipLibCheck scripts/dsl/inverse.ontology.ts",
    "rc": 0,
-   "seconds": 0.1,
+   "seconds": 0.2,
    "stdout": "",
    "stderr": ""
   },
   {
    "cmd": "node node_modules/tsx/dist/cli.mjs scripts/dsl/inverse.ontology.ts work/C08_34/inverse.ttl",
    "rc": 0,
-   "seconds": 0.3,
+   "seconds": 0.4,
    "stdout": "",
    "stderr": ""
   },

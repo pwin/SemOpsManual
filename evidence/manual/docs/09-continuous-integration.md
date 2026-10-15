@@ -45,9 +45,13 @@ contradiction, is a real Violation.
 <a id="ev-c09-01"></a>*Evidence:* [C09.01 — --fail-on Violation exits non-zero on the fixture](../../EVIDENCE.md#c09-01) (reproduced: PASS)
 
 That is the whole gate. `version-diff` has its own variant (`--fail-on major`),
-`consistency` and `pattern-consistency` use `--fail-on-misalignment` and
-`--fail-on-mismatch`, and `consistency-remote` takes `--fail-on-misalignment`
-too. Nothing more exotic is needed for a green or red build.
+and `consistency`, `consistency-remote` and `pattern-consistency` take
+`--fail-on-anything`. Nothing more exotic is needed for a green or red build.
+
+> **If you are on 0.23.0 or earlier**, those three take `--fail-on-misalignment`
+> or `--fail-on-mismatch` instead -- three names for the first flag anyone
+> reaches for. 0.24.0 settled on one and kept the old two as aliases, so a
+> config written either way keeps working.
 
 ---
 
@@ -292,21 +296,32 @@ match**, not a prefix-name lookup.
 **The tool now says so.** Reported from that experience, the same command today
 prints, before the count:
 
-<a id="ev-c09-07"></a>*Evidence:* [C09.07 — A near-miss namespace warns, on stderr, and lists blank-node labels](../../EVIDENCE.md#c09-07) (reproduced: PASS)
+<a id="ev-c09-07"></a>*Evidence:* [C09.07 — A near-miss namespace warns, on stderr, and offers only real namespaces](../../EVIDENCE.md#c09-07) (reproduced: PASS)
 
 ```
 WARNING: --own-namespace http://example.org/acme# matched none of the 479
 findings, so this run reports nothing. It is a literal IRI-prefix match --
 check the scheme, host and trailing separator against the ontology's own
-@prefix line. Namespaces actually seen: N7b108cac662043fa969705589b18d8da/,
-Nff4c262cf8a849d9af5c65a5bd228a8f/, http://purl.org/dc/elements/1.1/, …
+@prefix line. Namespaces actually seen: http://purl.org/dc/elements/1.1/,
+http://purl.org/dc/terms/, http://purl.org/goodrelations/v1#,
+http://schema.org/, http://www.asahi-net.or.jp/~ax2s-kmtn/ (+9 more)
 ```
 
-Look at the first two "namespaces". They are blank-node identifiers with a slash
-on the end, which is the internal-label leak from
-[Chapter 7](07-the-toolchain.md) §7.1 turning up in a third place. It's harmless
-here, because the real namespaces follow, but it's the kind of thing a reader
-squints at, so it has a line in [Chapter 14](14-coverage-and-gaps.md) §14.4.
+Up to 0.23.0 the first two entries in that list were not namespaces at all but
+blank-node identifiers with a slash on the end --
+`N7b108cac662043fa969705589b18d8da/` -- the internal-label leak from
+[Chapter 7](07-the-toolchain.md) §7.1 turning up in a third place. Harmless,
+because the real namespaces followed, but the kind of thing a reader squints at.
+
+**Fixed in 0.24.0**, and worth a sentence on how it survived, because the lesson
+is this chapter's own. A guard existed to stop it: it tested whether the focus
+node began `_:`. But rdflib's blank-node labels carry no such prefix -- they are
+bare, like `N7b108cac...` -- so the guard never once fired on real data. It had a
+test, and the test passed, because the test fed it the string `_:0_b56`, a shape
+the suite does not produce. **A check you have never seen fail is not yet a
+check**, which is exactly what §9.4 says about the filter itself. The guard now
+asks the question that matters: a namespace has a scheme, and anything without
+one cannot be what you meant.
 
 The warning fires only when there were findings to lose. A filter matching
 nothing on a genuinely clean run is not an error, and warning there would train
@@ -320,22 +335,45 @@ captures only stdout will not show it. Two lessons survive the fix:
 2. **Verify the filter with a known-failing input once**, and keep that check.
    A gate that cannot fail is indistinguishable from a gate that passes.
 
-### What the filter cannot see
+### What the filter could not see, until 0.24.0
 
 One more thing, which I found while preparing this edition and which matters
 more than the warning. The filter keeps a finding when its focus node *starts
 with* your prefix. Most findings are about a term, so that is right. But a few
-are about **the run itself**. `REA-022`, "the DL reasoner could not run", has
-the focus node `oq:Graph`, which is in nobody's namespace. So a scoped run
-drops it.
+are about **the run itself**, and they are anchored on a synthetic node,
+`oq:Graph`, which is in nobody's namespace. So a scoped run dropped them.
 
-For `checks` this costs nothing, because `checks` does not run the reasoner. For
-`data` and `run`, which do, it means a scoped gate cannot tell *"HermiT checked
-and found nothing"* from *"HermiT never started"*.
-[Chapter 10](10-ingest-and-transform.md) §10.4 shows it happening, and what to
-do about it.
+The worst of them was `REA-022`, "the DL reasoner could not run" -- the finding
+whose whole job is to say *what follows is sound but not complete*. A scoped
+run came back looking complete **because** that caveat had been filtered out of
+it. For `checks` this cost nothing, since `checks` does not run the reasoner.
+For `data` and `run`, which do, it meant a scoped gate could not tell *"HermiT
+checked and found nothing"* from *"HermiT never started"*.
 
-<a id="ev-c09-09"></a>*Evidence:* [C09.09 — A scoped run drops the 'reasoner did not run' finding](../../EVIDENCE.md#c09-09) (reproduced: PASS)
+Four other checks were dropped the same way, all of them graph-wide statistics
+with no natural focus node: `EFF-002` (blank-node ratio), `STY-005` (mixed
+local-name separator style), `REA-020` (the ontology is inconsistent) and
+`QUA-005`. That last one is pointed twice over: `QUA-005` fires when an
+ontology has no identifying IRI at all, and an ontology with no IRI has no
+namespace of its own to match -- so scoping it dropped the finding that says
+exactly that.
+
+**Suite 0.24.0 fixes this**: findings about the run survive the filter.
+[Chapter 10](10-ingest-and-transform.md) §10.4 shows the before and after.
+Three things are worth keeping anyway:
+
+<a id="ev-c09-09"></a>*Evidence:* [C09.09 — A scoped run keeps the 'reasoner did not run' finding, from 0.24.0](../../EVIDENCE.md#c09-09) (reproduced: PASS)
+
+1. **Know which findings are about the run.** It is a real distinction, not an
+   artefact of the bug -- [Chapter 4](04-from-research-to-industry.md) is built
+   on it -- and it is the one kind of finding you must never filter away.
+2. **On 0.23.0 or earlier, assert on them unscoped.** The workaround is in
+   §10.4. Check what you have with `ontology-quality-suite --version` before
+   trusting a scoped gate to report the reasoner.
+3. **A total is not a check.** When this was fixed, the scoped run in §10.4
+   stayed at 54 findings: it lost a duplicated `LOG-001` and gained `REA-022`
+   in the same release. A gate watching only the total would have seen nothing
+   change, twice.
 
 ### When to run the wide pass anyway
 
@@ -536,18 +574,28 @@ python -m ontology_suite run \
 ```
 
 ```
-Findings: 27 total (3 Violation, 22 Warning, 2 Info)
+Findings: 26 total (2 Violation, 22 Warning, 2 Info)
 ```
 
-and it exits 1. Two of those Violations are the same `LOG-001`, once from the
-registry pass over the graph and once from the reasoning pass over its `owlrl`
-closure, which the merge keeps apart (`data` does the same). The third is
-`REA-021`, from a run where HermiT started. That's fine for a nightly job. It's less good as a PR gate, because a
-single merged pass/fail tells a reviewer less than three named steps that each
-fail for a stated reason, and one contradiction counted twice is a small tax on
-the reader's trust. Prefer the explicit steps where a human reads the result.
+and it exits 1. The two Violations are `LOG-001`, the deliberate
+`Contractor`/`Employee` contradiction, and `REA-021`, from a run where HermiT
+started.
 
-<a id="ev-c09-14"></a>*Evidence:* [C09.14 — run reports 27 findings, one contradiction twice](../../EVIDENCE.md#c09-14) (reproduced: PASS)
+<a id="ev-c09-14"></a>*Evidence:* [C09.14 — run reports 26 findings, one contradiction once, from 0.24.0](../../EVIDENCE.md#c09-14) (reproduced: PASS)
+
+Up to 0.23.0 that line read **27 total (3 Violation, …)**, because `LOG-001` was
+reported twice: once from the registry pass over the graph and once from the
+reasoning pass over its `owlrl` closure. Each pass deduplicated its own
+findings, and nothing deduplicated across the join between them, so one
+contradiction arrived as two rows differing only in which engine found it.
+**Fixed in 0.24.0**, which merges across the join and records both routes in the
+one row's `sources`. On the fixture it removed two such pairs rather than the one
+that had been noticed.
+
+That is still fine for a nightly job and still less good as a PR gate, because a
+single merged pass/fail tells a reviewer less than three named steps that each
+fail for a stated reason. Prefer the explicit steps where a human reads the
+result.
 
 ---
 

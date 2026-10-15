@@ -1,7 +1,7 @@
 {
  "id": "C09.09",
  "status": "PASS",
- "detail": "unscoped/full_results.csv: REA-022 present; REA-022's focus node is oq:Graph; scoped/full_results.csv: REA-022 absent; step 3: 54 findings (12 V, 40 W, 2 I)",
+ "detail": "unscoped/full_results.csv: REA-022 present; REA-022's focus node is oq:Graph; scoped/full_results.csv: REA-022 present; REA-022's focus node is oq:Graph; step 2: 548 findings (65 V, 363 W, 120 I); step 3: 54 findings (11 V, 40 W, 3 I)",
  "ran": "2026-10-15",
  "steps": [
   {
@@ -15,14 +15,14 @@
    "cmd": "python scripts/without_java.py ontology-quality-suite data work/C09_09/employees.ttl --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --engine sparql --out-dir work/C09_09/unscoped --fail-on never --reports minimal",
    "rc": 0,
    "seconds": 4.0,
-   "stdout": "without_java: java on PATH now: none\nFindings: 549 total (66 Violation, 363 Warning, 120 Info)\nReports written to: ./work/C09_09/unscoped\n  - work/C09_09/unscoped/findings.txt (start here -- what, where, and the source line)\n  - work/C09_09/unscoped/full_results.csv\n",
+   "stdout": "without_java: java on PATH now: none\nFindings: 548 total (65 Violation, 363 Warning, 120 Info)\nReports written to: ./work/C09_09/unscoped\n  - work/C09_09/unscoped/findings.txt (start here -- what, where, and the source line)\n  - work/C09_09/unscoped/full_results.csv\n",
    "stderr": ""
   },
   {
    "cmd": "python scripts/without_java.py ontology-quality-suite data work/C09_09/employees.ttl --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --engine sparql --own-namespace https://acme.example.org/ --out-dir work/C09_09/scoped --fail-on never --reports minimal",
    "rc": 0,
-   "seconds": 3.9,
-   "stdout": "without_java: java on PATH now: none\nFindings: 54 total (12 Violation, 40 Warning, 2 Info)\nReports written to: ./work/C09_09/scoped\n  - work/C09_09/scoped/findings.txt (start here -- what, where, and the source line)\n  - work/C09_09/scoped/full_results.csv\n",
+   "seconds": 3.4,
+   "stdout": "without_java: java on PATH now: none\nFindings: 54 total (11 Violation, 40 Warning, 3 Info)\nReports written to: ./work/C09_09/scoped\n  - work/C09_09/scoped/findings.txt (start here -- what, where, and the source line)\n  - work/C09_09/scoped/full_results.csv\n",
    "stderr": ""
   }
  ]

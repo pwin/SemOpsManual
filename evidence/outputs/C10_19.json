@@ -1,7 +1,7 @@
 {
  "id": "C10.19",
  "status": "PASS",
- "detail": "step 3: 54 findings (12 V, 40 W, 2 I); REA-022 present; REA-021 absent; nothing present; REA-021, REA-022 absent",
+ "detail": "suite 0.24.0: step 3: 54 findings (11 V, 40 W, 3 I); REA-022 present; REA-021 absent; suite 0.24.0: REA-022 present; REA-021 absent",
  "ran": "2026-10-15",
  "steps": [
   {
@@ -14,16 +14,16 @@
   {
    "cmd": "python scripts/without_java.py ontology-quality-suite data work/C10_19/employees.ttl --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --engine sparql --out-dir work/C10_19/all --fail-on never --reports minimal",
    "rc": 0,
-   "seconds": 4.2,
-   "stdout": "without_java: java on PATH now: none\nFindings: 549 total (66 Violation, 363 Warning, 120 Info)\nReports written to: ./work/C10_19/all\n  - work/C10_19/all/findings.txt (start here -- what, where, and the source line)\n  - work/C10_19/all/full_results.csv\n",
+   "seconds": 4.7,
+   "stdout": "without_java: java on PATH now: none\nFindings: 548 total (65 Violation, 363 Warning, 120 Info)\nReports written to: ./work/C10_19/all\n  - work/C10_19/all/findings.txt (start here -- what, where, and the source line)\n  - work/C10_19/all/full_results.csv\n",
    "stderr": ""
   },
   {
    "cmd": "python scripts/without_java.py ontology-quality-suite data work/C10_19/employees.ttl --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --engine sparql --own-namespace https://acme.example.org/ --out-dir work/C10_19/own --fail-on never --reports minimal",
    "rc": 0,
-   "seconds": 3.7,
-   "stdout": "without_java: java on PATH now: none\nFindings: 54 total (12 Violation, 40 Warning, 2 Info)\nReports written to: ./work/C10_19/own\n  - work/C10_19/own/findings.txt (start here -- what, where, and the source line)\n  - work/C10_19/own/full_results.csv\n",
-   "stderr": "* Owlready2 * WARNING: DataProperty http://xmlns.com/foaf/0.1/name belongs to more than one entity types: [owl.DatatypeProperty, rdf-schema.label]; I'm trying to fix it...\n* Owlready2 * Running HermiT...\n    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp6p8kuenv -Y\n"
+   "seconds": 4.7,
+   "stdout": "without_java: java on PATH now: none\nFindings: 54 total (11 Violation, 40 Warning, 3 Info)\nReports written to: ./work/C10_19/own\n  - work/C10_19/own/findings.txt (start here -- what, where, and the source line)\n  - work/C10_19/own/full_results.csv\n",
+   "stderr": ""
   }
  ]
 }

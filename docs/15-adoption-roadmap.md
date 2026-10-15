@@ -203,7 +203,7 @@ names something the team owns.
 | Change impact | `consistency --new … --old … --queries …` | Every breaking change |
 | Migration tombstones | `oldTerm owl:equivalentClass newTerm`, conventionally from the retiring IRI | Every rename |
 | Wide audit | `checks` with imports, unscoped, `--fail-on never` | Weekly, or on upstream change |
-| Live-store check | `consistency-remote --manifest graphs.json --fail-on-misalignment` | After every deployment |
+| Live-store check | `consistency-remote --manifest graphs.json --fail-on-anything` | After every deployment |
 | Gate tests | A fixture and a control per house rule; the board pattern ([Ch. 9](09-continuous-integration.md) §9.8) | Every new check |
 
 Add one governance control, which is a branch protection rule rather than a

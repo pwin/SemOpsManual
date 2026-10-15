@@ -33,22 +33,25 @@ have (tarka, for triplification). And one you never install at all, but should
 read, because it is how the rest are kept honest.
 
 > **Versions this edition was measured against.** Every number in Part III
-> comes from running these, between 13 and 15 October 2026:
+> comes from running these, between 13 and 16 October 2026:
 >
 > | | Version | From |
 > |---|---|---|
-> | Ontology Quality Suite | **0.23.0** | PyPI `ontology-quality-suite`. 0.23.0 was released while this edition was being checked, and fixes three defects the checking found (§7.4, and [Chapter 14](14-coverage-and-gaps.md) §14.4); where it changed a figure, the manual gives both |
+> | Ontology Quality Suite | **0.24.0** | PyPI `ontology-quality-suite`. Two releases were cut while this edition was being checked, for nine defects the checking found: 0.23.0 for three (§7.4, and [Chapter 14](14-coverage-and-gaps.md) §14.4) and 0.24.0 for six more, every one of them a case where a run looked cleaner than it was ([Chapter 14](14-coverage-and-gaps.md) §14.6). Where a fix changed a figure, the manual gives both |
 > | Ontology Development Suite | **0.16.0** | `ontology-dev-suite-0.16.0.vsix` from the v0.16.0 release; DSL as npm `ontology-suite` 0.16.0 |
 > | SHACL Engine | **0.3.3** | PyPI `shacl`; npm `shacl-wasm`, `shacl-wasm-node`; the `shacl` command from the v0.3.3 release. 0.3.3 adds one function, the RDFS closure handed out, which the suite needed for a fix (§7.4) |
 > | HOLOS | **0.21.1** | PyPI `holosdb`; npm `holos-wasm`, `holos-wasm-node`; the `holos` command from the v0.21.1 release. 0.21.1 was cut while this edition was being checked, to fix a defect the checking found ([Chapter 13](13-operate-and-consume.md) §13.2) |
 > | tarka | **0.1.1** | PyPI `tarka-rdf`; the `tarka` command from the v0.1.1 release |
 > | Testing repository | `6cdfb14` | `main`, 14 October 2026 |
 >
-> These move quickly. The suite went from 0.14.2 to 0.23.0 between this
+> These move quickly. The suite went from 0.14.2 to 0.24.0 between this
 > edition and the last, and the engine underneath every check changed. Yet
 > every figure in [Chapter 9](09-continuous-integration.md) came out the
-> same. That's no accident, and §7.1 says why. Pin your own versions anyway,
-> for the reasons in [Chapter 9](09-continuous-integration.md) §9.2.
+> same, with one exception, and it is the useful kind: 0.24.0 stopped
+> reporting one contradiction as two findings, so a few counts came *down*
+> by one without any check getting weaker. That is no accident, and §7.1 says
+> why. Pin your own versions anyway, for the reasons in
+> [Chapter 9](09-continuous-integration.md) §9.2.
 
 ---
 

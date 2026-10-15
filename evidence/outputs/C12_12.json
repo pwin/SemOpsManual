@@ -21,14 +21,14 @@
   {
    "cmd": "ontology-quality-suite pattern-consistency --queries fixtures/acme_robotics --ontology fixtures/acme_robotics/acme-org-v1.ttl --ontology fixtures/acme_robotics/reference_vocab/foaf.rdf --taxonomy fixtures/acme_robotics/taxonomy.ttl --out-dir work/C12_12/without",
    "rc": 0,
-   "seconds": 1.7,
+   "seconds": 1.5,
    "stdout": "No modelling-pattern inconsistencies found across ontology, taxonomy, transformation, or output data.\n\nWritten to: work/C12_12/without/pattern-consistency.txt\n",
    "stderr": ""
   },
   {
    "cmd": "ontology-quality-suite pattern-consistency --queries fixtures/acme_robotics --ontology fixtures/acme_robotics/acme-org-v1.ttl --taxonomy fixtures/acme_robotics/taxonomy.ttl --output-data work/C12_12/employees.ttl --out-dir work/C12_12/nofoaf",
    "rc": 0,
-   "seconds": 1.5,
+   "seconds": 1.4,
    "stdout": "== ontology <-> transformation ==\n2 propert(y/ies) used in TARQL but not declared in the ontology set:\n  [undeclared_property] http://xmlns.com/foaf/0.1/mbox\n  [undeclared_property] http://xmlns.com/foaf/0.1/name\n== ontology+taxonomy <-> output data ==\n  [CNF-002] Property http://xmlns.com/foaf/0.1/mbox is used in the output-data graph but is never declared as a property in the ontology.\n  [CNF-002] Property http://xmlns.com/foaf/0.1/name is used in the output-data graph but is never declared as a property in the ontology.\n== taxonomy <-> output data ==\n  [undeclared_taxonomy_reference] https://acme.example.org/data/department/MKT is used as the value of https://acme.example.org/ns/worksIn in the data graph but is not declared as an individual anywhere in the given taxonomy set.\n\nWritten to: work/C12_12/nofoaf/pattern-consistency.txt\n",
    "stderr": ""
   },

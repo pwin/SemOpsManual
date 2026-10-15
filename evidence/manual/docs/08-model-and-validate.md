@@ -607,12 +607,14 @@ practice that works is the testing repository's. Keep a **merged registry**
 
 <a id="ev-c08-24"></a><a id="ev-c08-25"></a>*Evidence:* [C08.24 — With @builtin and a one-entry registry, every built-in finding is UNMAPPED](../../EVIDENCE.md#c08-24) (reproduced: PASS) · [C08.25 — A merged registry names every finding, and ACM-001 fires on its fault only](../../EVIDENCE.md#c08-25) (reproduced: PASS)
 
-> One small irony, listed in [Chapter 14](14-coverage-and-gaps.md) §14.4. The
-> warning above recommends passing the built-in tree *by its absolute site
-> path*, which is exactly what `@builtin` was introduced to avoid. Use
-> `@builtin` regardless.
+> One small irony, listed in [Chapter 14](14-coverage-and-gaps.md) §14.4 and
+> fixed in 0.24.0. Up to 0.23.0 the warning above recommended passing the
+> built-in tree *by its absolute site path*, which is exactly what `@builtin`
+> was introduced to avoid -- a path that is wrong on every other machine and
+> wrong again after an upgrade. From 0.24.0 it names `@builtin`. On either
+> version, `@builtin` is the answer.
 
-<a id="ev-c08-26"></a>*Evidence:* [C08.26 — The warning recommends the site path @builtin was made to avoid](../../EVIDENCE.md#c08-26) (reproduced: PASS)
+<a id="ev-c08-26"></a>*Evidence:* [C08.26 — The warning named the site path @builtin was made to avoid, until 0.24.0](../../EVIDENCE.md#c08-26) (reproduced: PASS)
 
 Three more things about house rules are worth internalising.
 

@@ -14,14 +14,14 @@
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --engine sparql --out-dir work/C09_02/run2 --fail-on never --reports minimal",
    "rc": 0,
-   "seconds": 2.6,
+   "seconds": 2.4,
    "stdout": "Findings: 479 total (55 Violation, 340 Warning, 84 Info)\nReports written to: ./work/C09_02/run2\n  - work/C09_02/run2/findings.txt (start here -- what, where, and the source line)\n  - work/C09_02/run2/full_results.csv\n",
    "stderr": ""
   },
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --engine sparql --out-dir work/C09_02/run3 --fail-on never --reports minimal",
    "rc": 0,
-   "seconds": 2.5,
+   "seconds": 2.3,
    "stdout": "Findings: 479 total (55 Violation, 340 Warning, 84 Info)\nReports written to: ./work/C09_02/run3\n  - work/C09_02/run3/findings.txt (start here -- what, where, and the source line)\n  - work/C09_02/run3/full_results.csv\n",
    "stderr": ""
   }

@@ -1,7 +1,7 @@
 {
  "id": "C07.27",
  "status": "PASS",
- "detail": "suite 0.23.0: step 1 exits non-zero (2); step 2: 489 findings (57 V, 339 W, 93 I); step 3: 479 findings (55 V, 340 W, 84 I); step 4: 489 findings (57 V, 339 W, 93 I); step 5 output contains 'gained 21:', 'STR-007 9', 'STY-003 9', 'STR-009 3', 'lost 11:', 'STR-006 1', 'DAT-002 1'",
+ "detail": "suite 0.24.0: step 1 exits non-zero (2); step 2: 489 findings (57 V, 339 W, 93 I); step 3: 479 findings (55 V, 340 W, 84 I); step 4: 489 findings (57 V, 339 W, 93 I); step 5 output contains 'gained 21:', 'STR-007 9', 'STY-003 9', 'STR-009 3', 'lost 11:', 'STR-006 1', 'DAT-002 1'",
  "ran": "2026-10-15",
  "steps": [
   {
@@ -21,14 +21,14 @@
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --engine sparql --inference none --out-dir work/C07_27/none --fail-on never --reports minimal",
    "rc": 0,
-   "seconds": 2.2,
+   "seconds": 2.4,
    "stdout": "Findings: 479 total (55 Violation, 340 Warning, 84 Info)\nReports written to: ./work/C07_27/none\n  - work/C07_27/none/findings.txt (start here -- what, where, and the source line)\n  - work/C07_27/none/full_results.csv\n",
    "stderr": ""
   },
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --inference rdfs --out-dir work/C07_27/both-rdfs --fail-on never --reports minimal",
    "rc": 0,
-   "seconds": 2.5,
+   "seconds": 2.6,
    "stdout": "Findings: 489 total (57 Violation, 339 Warning, 93 Info)\nReports written to: ./work/C07_27/both-rdfs\n  - work/C07_27/both-rdfs/findings.txt (start here -- what, where, and the source line)\n  - work/C07_27/both-rdfs/full_results.csv\n",
    "stderr": ""
   },

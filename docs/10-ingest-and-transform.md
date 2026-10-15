@@ -348,13 +348,16 @@ python -m ontology_suite data out/triplify/employees.ttl \
 ```
 
 ```
-Findings: 549 total (67 Violation, 363 Warning, 119 Info)
+Findings: 548 total (66 Violation, 363 Warning, 119 Info)
 ```
 
-Five hundred and forty-nine, and [Chapter 9](09-continuous-integration.md)'s
-lesson applies identically. (With HermiT running, as here, 0.22.0 reported 550
-and 68: one Violation more, the false `REA-020` of
-[Chapter 14](14-coverage-and-gaps.md) §14.4.) Scope it:
+Five hundred and forty-eight, and [Chapter 9](09-continuous-integration.md)'s
+lesson applies identically. The Violation count has come down twice, both times
+for a reason worth knowing, and with HermiT running as it is here: 0.22.0
+reported 550 and 68, one more than 0.23.0's 549 and 67 because of the false
+`REA-020` of [Chapter 14](14-coverage-and-gaps.md) §14.4; and 0.24.0 reports
+one fewer again because it stopped counting a single contradiction as two
+`LOG-001`s. Neither drop was a check getting weaker. Scope it:
 
 ```bash
 python -m ontology_suite data out/triplify/employees.ttl \
@@ -366,8 +369,11 @@ python -m ontology_suite data out/triplify/employees.ttl \
 ```
 
 ```
-Findings: 55 total (13 Violation, 40 Warning, 2 Info)
+Findings: 54 total (12 Violation, 40 Warning, 2 Info)
 ```
+
+Fifty-five up to 0.23.0, for the same reason: the duplicated `LOG-001` was in
+the scoped report too.
 
 Note the namespace here is `https://acme.example.org/`, one level up from the
 ontology's `https://acme.example.org/ns/`, because the data individuals live
@@ -376,7 +382,7 @@ it must cover **both** the schema terms and the instance IRIs. Choosing that
 prefix deliberately is part of designing your IRI scheme, and it is much easier
 to get right at the start than to retrofit.
 
-### 54 or 55, and why the report cannot tell you which
+### 54 or 55, and how the report tells you which from 0.24.0
 
 That run gave 55 three times running. The fourth time it gave 54. The missing
 finding is `REA-021`, HermiT's verdict that `acme:Contractor` is unsatisfiable,
@@ -384,25 +390,44 @@ and it is missing because HermiT did not start.
 
 Earlier editions said you could tell which had happened from the report: *"if
 `REA-021` is present you got the reasoner, and if `REA-022` is present you did
-not."* The first half is true. The second half is not, and I should have caught
-it sooner. `REA-022`'s focus node is `oq:Graph`, a finding about the run rather
-than about any term, so a scoped run filters it out with everything else that
-isn't yours. I checked three 54-finding runs: none contains `REA-021` and none
-contains `REA-022`. **A scoped `data` gate cannot tell "HermiT checked and found
-nothing" from "HermiT never ran".**
+not."* The first half was true. The second half was not, and I should have
+caught it sooner. `REA-022`'s focus node is `oq:Graph`, a finding about the run
+rather than about any term, so a scoped run filtered it out with everything
+else that was not yours. I checked three 54-finding runs on 0.23.0: none
+contained `REA-021` and none contained `REA-022`. **A scoped `data` gate could
+not tell "HermiT checked and found nothing" from "HermiT never ran".**
 
-That is [Chapter 4](04-from-research-to-industry.md)'s distinction, between *we
-checked* and *we could not check*, being erased by the very filter
-[Chapter 9](09-continuous-integration.md) recommends. What to do about it:
+That was [Chapter 4](04-from-research-to-industry.md)'s distinction, between
+*we checked* and *we could not check*, being erased by the very filter
+[Chapter 9](09-continuous-integration.md) recommends. The last edition asked
+for the fix, and **suite 0.24.0 is it**: findings about the run now survive the
+filter. Measured here, with Java hidden so the outcome is certain:
+
+| | 0.23.0 | 0.24.0 |
+|---|---|---|
+| unscoped | 549 (66 V, 363 W, 120 I) | 548 (65 V, 363 W, 120 I) |
+| scoped | 54 (12 V, 40 W, 2 I) | 54 (11 V, 40 W, 3 I) |
+| `REA-022` scoped | absent | **present** |
+
+Read the second row twice. **The scoped total did not move.** It lost a
+Violation and gained an Info in the same release: a `LOG-001` contradiction
+that `data` had been reporting twice is now merged, and `REA-022` now survives
+the filter. Two real changes, net zero, invisible to anything watching the
+total. If you keep a recorded count as a regression check -- and you should --
+record the severity split with it, not just the total.
+
+On 0.24.0 the original advice is sound again: if `REA-021` is present you got
+the reasoner, and if `REA-022` is present you did not. On 0.23.0 or earlier it
+is not, and the workaround stands:
 
 - **Run the reasoner's verdict unscoped.** `ontology --ontology … --fail-on
   never` in the same job, asserting no `REA-022` in its `full_results.csv`, puts
   the "did it run?" question somewhere the filter cannot reach.
 - **Or assert the positive.** If your ontology has a known contradiction you
   keep as a canary, as the fixture does, assert that `REA-021` is present.
-- **And ask for the fix.** Findings about the run itself should survive the
-  filter. That is the improvement [Chapter 14](14-coverage-and-gaps.md) §14.4
-  suggests.
+
+Both are still worth doing on any version, because they assert on the thing you
+care about rather than on a count.
 
 ### What those findings actually say
 

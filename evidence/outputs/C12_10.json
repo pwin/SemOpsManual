@@ -14,7 +14,7 @@
   {
    "cmd": "ontology-quality-suite consistency --new fixtures/acme_robotics/acme-org-v2.ttl --old fixtures/acme_robotics/acme-org-v1.ttl --queries work/C12_10/q --import-dir fixtures/acme_robotics --apply-repairs --min-confidence 0.7 --out-dir work/C12_10/out",
    "rc": 0,
-   "seconds": 2.0,
+   "seconds": 1.9,
    "stdout": "Ontology version diff: fixtures/acme_robotics/acme-org-v1.ttl -> fixtures/acme_robotics/acme-org-v2.ttl\n\nRemoved classes [MAJOR]:\n  - https://acme.example.org/ns/Engineer\n\nRemoved subclass edges [MAJOR]:\n  - https://acme.example.org/ns/Engineer no longer rdfs:subClassOf https://acme.example.org/ns/Employee\n\nAdded classes [minor]:\n  - https://acme.example.org/ns/ProductManager\n  - https://acme.example.org/ns/SoftwareEngineer\n\nAdded properties [minor]:\n  - https://acme.example.org/ns/hireDate\n\nAdded subclass edges [minor]:\n  - https://acme.example.org/ns/ProductManager rdfs:subClassOf https://acme.example.org/ns/Employee\n  - https://acme.example.org/ns/SoftwareEngineer rdfs:subClassOf https://acme.example.org/ns/Employee\n\nAdded equivalentClass axioms [minor]:\n  - https://acme.example.org/ns/Engineer equivalentClass https://acme.example.org/ns/SoftwareEngineer\n\nSuggested version bump: MAJOR\n\n1 class(es) used in TARQL but not declared in the ontology set:\n  [undeclared_class] https://acme.example.org/ns/Engineer\n\n1 suggested repair(s):\n  [rename_iri] work/C12_10/q/employees.rq (confidence 100%)\n    Update to the renamed ontology term(s): https://acme.example.org/ns/Engineer -> https://acme.example.org/ns/SoftwareEngineer\n\nWritten to: work/C12_10/out/consistency.txt\n\nApplied 1/1 suggested repair(s) directly to their target files (confidence >= 70%).\n",
    "stderr": ""
   },

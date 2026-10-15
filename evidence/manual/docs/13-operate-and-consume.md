@@ -73,7 +73,7 @@ holos-server --listen 127.0.0.1:7878 --store ./var/acme
 python -m ontology_suite consistency-remote \
   --query-endpoint http://127.0.0.1:7878/query \
   --manifest graphs.json \
-  --out-dir out/consistency-remote --fail-on-misalignment
+  --out-dir out/consistency-remote --fail-on-anything
 ```
 
 The store here is the toolchain's own, `holos-server`, but the command speaks the
@@ -143,9 +143,9 @@ repository is perfectly consistent and the store is a version behind: the
 ontology renamed a class, the query was repaired, CI went green, and nobody
 reloaded the data. The data graph then still uses the old class, which the
 ontology graph no longer declares, and the template and the live data disagree
-about it. `--fail-on-misalignment` makes that a non-zero exit.
+about it. `--fail-on-anything` makes that a non-zero exit.
 
-<a id="ev-c13-03"></a>*Evidence:* [C13.03 — The store a version behind: --fail-on-misalignment exits 1](../../EVIDENCE.md#c13-03) (reproduced: PASS)
+<a id="ev-c13-03"></a>*Evidence:* [C13.03 — The store a version behind: --fail-on-anything exits 1](../../EVIDENCE.md#c13-03) (reproduced: PASS)
 
 `--sample-limit` caps how many triples are pulled per named graph, which is what
 makes this viable against a production-sized store. And remember
@@ -170,17 +170,26 @@ Run that first, every time, against a store you did not load yourself. A graph U
 that differs by a trailing slash is the commonest reason a three-way check
 reports nothing at all.
 
-> **`role` is not validated, and a typo costs you the whole check.** Re-verified at
-> 0.23.0: a manifest saying `"triplified-data"` (a hyphen instead of an underscore)
-> loads without complaint, contributes zero data bindings, and the run completes
-> successfully having compared nothing. It exits 0 even with
-> `--fail-on-misalignment`. It is the same silent-zero shape as the
-> `--own-namespace` near-miss in [Chapter 9](09-continuous-integration.md) §9.4
-> and the shapes-less `shacl` run in [Chapter 11](11-rules-and-inference.md)
-> §11.1, and the same defence applies: point it at a graph you know is wrong,
-> once, and watch it complain.
+> **`role` was not validated, and a typo cost you the whole check.** Up to
+> 0.23.0 a manifest saying `"triplified-data"` (a hyphen instead of an
+> underscore) loaded without complaint, contributed zero data bindings, and the
+> run completed successfully having compared nothing. It exited 0 even with
+> `--fail-on-anything`: a typo in a config file reading as a clean bill of
+> health. It was the same silent-zero shape as the `--own-namespace` near-miss
+> in [Chapter 9](09-continuous-integration.md) §9.4 and the shapes-less `shacl`
+> run in [Chapter 11](11-rules-and-inference.md) §11.1.
+>
+> **From 0.24.0 the manifest is refused when it loads**, naming every bad role
+> in the file at once together with the valid set. On 0.24.0 itself that refusal
+> arrives as a Python traceback rather than a one-line error -- the shape §7.4
+> complains about, listed in [Ch. 14](14-coverage-and-gaps.md) §14.4 and fixed
+> after 0.24.0. The exit is non-zero either way, which is the part a gate reads.
+>
+> The defence is still worth keeping on any version, because it is the general
+> answer to this shape and not to this one flag: point the check at a graph you
+> know is wrong, once, and watch it complain.
 
-<a id="ev-c13-04"></a>*Evidence:* [C13.04 — A mistyped role compares nothing, successfully](../../EVIDENCE.md#c13-04) (reproduced: PASS)
+<a id="ev-c13-04"></a>*Evidence:* [C13.04 — A mistyped role is refused at load, from 0.24.0](../../EVIDENCE.md#c13-04) (reproduced: PASS)
 
 ### Named graphs are a decision you make once
 

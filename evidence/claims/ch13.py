@@ -44,10 +44,10 @@ CLAIMS = [
                  Step(POST),
                  Step(f"python scripts/endpoint_stats.py {HOLOS_URL}/query"),
                  Step(f"{SUITE} consistency-remote --query-endpoint {HOLOS_URL}/query --manifest "
-                      f"data/remote/graphs-v1.json --out-dir {{work}}/own-only --fail-on-misalignment"),
+                      f"data/remote/graphs-v1.json --out-dir {{work}}/own-only --fail-on-anything"),
                  Step(f"python scripts/gsp_put.py {HOLOS_URL}/graph {G_ONT1} {V1} {FOAF} {ORG}"),
                  Step(f"{SUITE} consistency-remote --query-endpoint {HOLOS_URL}/query --manifest "
-                      f"data/remote/graphs-v1.json --out-dir {{work}}/with-imports --fail-on-misalignment")],
+                      f"data/remote/graphs-v1.json --out-dir {{work}}/with-imports --fail-on-anything")],
           check=checks(has(2, f"{G_ONT1},52", f"{G_EMP},40"),
                        has(3, "live data vs ontology: 0 undeclared class(es), 2 undeclared propert(y/ies)"),
                        exit_code(3, 1),
@@ -65,11 +65,13 @@ CLAIMS = [
                  Step(f"{SUITE} consistency-remote --help")],
           check=checks(has(0, '"role": "triplified_data"', '"source_tarql": "queries/employees.rq"',
                            f'"ontology_graph_uri": "{G_ONT2}"'),
-                       has(1, "--auth-user", "--auth-password", "--sample-limit", "--fail-on-misalignment")),
+                       has(1, "--auth-user", "--auth-password", "--sample-limit", "--fail-on-anything",
+                           "--fail-on-misalignment")),
           checks="the manual's Python snippet writes the manifest it describes; consistency-remote offers "
-                 "--auth-user, --auth-password, --sample-limit and --fail-on-misalignment"),
+                 "--auth-user, --auth-password, --sample-limit and --fail-on-anything -- and still advertises "
+                 "--fail-on-misalignment, so a CI config written against 0.23.0 keeps working"),
 
-    Claim("C13.03", "The store a version behind: --fail-on-misalignment exits 1", "13",
+    Claim("C13.03", "The store a version behind: --fail-on-anything exits 1", "13",
           (F, "That structure enables a genuine **three-way check**: the live data graph, the"), "run",
           data=["data/remote/graphs-v2-store-behind.json"],
           services=[SERVER],
@@ -81,21 +83,23 @@ CLAIMS = [
                       f"--queries {{work}}/repaired --import-dir {{work}}/repaired --apply-repairs --min-confidence 0.7 "
                       f"--out-dir {{work}}/repair"),
                  Step(f"{SUITE} consistency-remote --query-endpoint {HOLOS_URL}/query --manifest "
-                      f"data/remote/graphs-v2-store-behind.json --out-dir {{work}}/remote --fail-on-misalignment"),
+                      f"data/remote/graphs-v2-store-behind.json --out-dir {{work}}/remote --fail-on-anything"),
                  Step(f"{SUITE} consistency-remote --query-endpoint {HOLOS_URL}/query --manifest "
-                      f"data/remote/graphs-role-typo.json --out-dir {{work}}/typo --fail-on-misalignment")],
+                      f"data/remote/graphs-role-typo.json --out-dir {{work}}/typo --fail-on-anything")],
           check=checks(has(4, "template vs ontology: clean", "live data vs ontology: 1 undeclared class(es)",
                            "'classes_only_in_template': ['https://acme.example.org/ns/SoftwareEngineer']",
                            "'classes_only_in_live_data': ['https://acme.example.org/ns/Engineer']"),
                        exit_code(4, 1),
-                       lacks(5, "==="), exit_code(5, 0)),
+                       lacks(5, "==="), exit_code(5, 1),
+                       has(5, "unknown graph role")),
           checks="the repaired query agrees with the v2 ontology, the live data does not (Engineer only in the "
                  "store, SoftwareEngineer only in the template), and the run exits 1; with the role misspelt, "
-                 "the same store reports no graph at all and exits 0",
+                 "0.24.0 refuses the manifest naming the unknown role, where up to 0.23.0 the same run compared "
+                 "nothing and exited 0",
           needs=["holos-cli", "tarka-cli"]),
 
-    Claim("C13.04", "A mistyped role compares nothing, successfully", "13",
-          (F, "> **`role` is not validated, and a typo costs you the whole check.**"), "run",
+    Claim("C13.04", "A mistyped role is refused at load, from 0.24.0", "13",
+          (F, "> **`role` was not validated, and a typo cost you the whole check.**"), "run",
           data=["data/remote/graphs-role-typo.json"], same_as="C13.03"),
 
     Claim("C13.05", "SHACL validation flattens named graphs", "13",

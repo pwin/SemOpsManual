@@ -380,9 +380,9 @@ needs*:
 |---|---|---|
 | Does this PR introduce a new problem in code we own? | `checks --own-namespace --fail-on Violation` | Pass/fail + findings scoped to your terms |
 | Is this breaking, and does it need sign-off? | `version-diff --fail-on major` | MAJOR/minor/patch + the axioms behind it |
-| What exactly breaks downstream? | `consistency --fail-on-misalignment` | Affected files, terms, and proposed repairs |
+| What exactly breaks downstream? | `consistency --fail-on-anything` | Affected files, terms, and proposed repairs |
 | Can any of it fix itself? | `consistency --apply-repairs --min-confidence` | Confidence-gated patches |
-| Do controlled values still hold? | `pattern-consistency --output-data --fail-on-mismatch` | Values in data absent from the taxonomy |
+| Do controlled values still hold? | `pattern-consistency --output-data --fail-on-anything` | Values in data absent from the taxonomy |
 
 Look at the flags before you copy the commands into a pipeline. `consistency` and
 `pattern-consistency` are report-only by default: the run above that found `MKT`

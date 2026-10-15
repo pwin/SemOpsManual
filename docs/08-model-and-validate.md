@@ -559,10 +559,12 @@ practice that works is the testing repository's. Keep a **merged registry**
 (the built-in entries plus your own) as a generated file, pass that to
 `--registry`, and pass both trees to `--sparql`.
 
-> One small irony, listed in [Chapter 14](14-coverage-and-gaps.md) §14.4. The
-> warning above recommends passing the built-in tree *by its absolute site
-> path*, which is exactly what `@builtin` was introduced to avoid. Use
-> `@builtin` regardless.
+> One small irony, listed in [Chapter 14](14-coverage-and-gaps.md) §14.4 and
+> fixed in 0.24.0. Up to 0.23.0 the warning above recommended passing the
+> built-in tree *by its absolute site path*, which is exactly what `@builtin`
+> was introduced to avoid -- a path that is wrong on every other machine and
+> wrong again after an upgrade. From 0.24.0 it names `@builtin`. On either
+> version, `@builtin` is the answer.
 
 Three more things about house rules are worth internalising.
 

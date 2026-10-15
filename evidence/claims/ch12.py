@@ -157,13 +157,13 @@ CLAIMS = [
                       f"--taxonomy {ACME}/taxonomy.ttl --output-data {{work}}/employees.ttl --out-dir {{work}}/a"),
                  Step(f"{SUITE} pattern-consistency --queries {ACME} --ontology {V1} --ontology {FOAF} "
                       f"--taxonomy {ACME}/taxonomy.ttl --output-data {{work}}/employees.ttl --out-dir {{work}}/b "
-                      f"--fail-on-mismatch"),
+                      f"--fail-on-anything"),
                  Step(f"{SUITE} consistency --new {V2} --old {V1} --queries {ACME} --import-dir {ACME} --out-dir {{work}}/c"),
                  Step(f"{SUITE} consistency --new {V2} --old {V1} --queries {ACME} --import-dir {ACME} --out-dir {{work}}/d "
-                      f"--fail-on-misalignment")],
+                      f"--fail-on-anything")],
           check=checks(exit_code(1, 0), exit_code(2, 1), exit_code(3, 0), exit_code(4, 1)),
-          checks="each command exits 0 on its findings, and 1 with its own flag (--fail-on-mismatch, "
-                 "--fail-on-misalignment)",
+          checks="each command exits 0 on its findings, and 1 with --fail-on-anything (which from 0.24.0 is the "
+                 "one name on both; --fail-on-anything and --fail-on-anything remain as aliases)",
           needs=["tarka-cli"]),
 
     Claim("C12.15", "The approval workflow is not implemented here", "12",

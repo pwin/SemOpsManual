@@ -1,15 +1,15 @@
 {
  "id": "C09.07",
  "status": "PASS",
- "detail": "step 1: 0 findings (0 V, 0 W, 0 I); the warning is on stderr, not stdout; the 'namespaces actually seen' list includes blank-node labels, e.g. ['N07219d351f5744d6a08b3ff092c5ee44/']",
+ "detail": "step 1: 0 findings (0 V, 0 W, 0 I); the warning is on stderr, not stdout; all 5 namespaces offered have a scheme",
  "ran": "2026-10-15",
  "steps": [
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --engine sparql --own-namespace http://example.org/acme# --out-dir work/C09_07/miss --fail-on never --reports minimal",
    "rc": 0,
-   "seconds": 2.0,
+   "seconds": 1.9,
    "stdout": "Findings: 0 total (0 Violation, 0 Warning, 0 Info)\nReports written to: ./work/C09_07/miss\n  - work/C09_07/miss/findings.txt (start here -- what, where, and the source line)\n  - work/C09_07/miss/full_results.csv\n",
-   "stderr": "WARNING: --own-namespace http://example.org/acme# matched none of the 479 findings, so this run reports nothing. It is a literal IRI-prefix match -- check the scheme, host and trailing separator against the ontology's own @prefix line. Namespaces actually seen: N07219d351f5744d6a08b3ff092c5ee44/, N489de5b3d53a46ceb328876cc423ebef/, http://purl.org/dc/elements/1.1/, http://purl.org/dc/terms/, http://purl.org/goodrelations/v1# (+11 more)\n"
+   "stderr": "WARNING: --own-namespace http://example.org/acme# matched none of the 479 findings, so this run reports nothing. It is a literal IRI-prefix match -- check the scheme, host and trailing separator against the ontology's own @prefix line. Namespaces actually seen: http://purl.org/dc/elements/1.1/, http://purl.org/dc/terms/, http://purl.org/goodrelations/v1#, http://schema.org/, http://www.asahi-net.or.jp/~ax2s-kmtn/ (+9 more)\n"
   }
  ]
 }

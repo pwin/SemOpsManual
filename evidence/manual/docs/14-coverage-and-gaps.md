@@ -93,21 +93,30 @@ are reasons to read this section first. The first four are new, and they share a
 shape I have come to look for everywhere: **a run that checked nothing, or lost
 the evidence that it could not check, reporting success.**
 
-### A scoped run cannot see that the reasoner did not run
+### A scoped run could not see that the reasoner did not run (fixed in 0.24.0)
 
-<a id="ev-c14-01"></a>*Evidence:* [C14.01 — A scoped run cannot see that the reasoner did not run](../../EVIDENCE.md#c14-01) (reproduced: PASS)
+<a id="ev-c14-01"></a>*Evidence:* [C14.01 — A scoped run could not see that the reasoner did not run (fixed in 0.24.0)](../../EVIDENCE.md#c14-01) (reproduced: PASS)
 
 `--own-namespace` keeps findings whose focus node starts with your prefix.
-`REA-022`, "the DL reasoner could not run", is about `oq:Graph`, so a scoped
-`data` or `run` silently drops it. Three scoped `data` runs on the fixture
-reported 54 findings with neither `REA-021` nor `REA-022` present: the report
-cannot distinguish *"HermiT found nothing"* from *"HermiT never started"*. Earlier
-editions told you `REA-022`'s presence would tell you; in a scoped run it never
-can.
+`REA-022`, "the DL reasoner could not run", is about the synthetic `oq:Graph`,
+so up to 0.23.0 a scoped `data` or `run` silently dropped it. Three scoped
+`data` runs on the fixture reported 54 findings with neither `REA-021` nor
+`REA-022` present: the report could not distinguish *"HermiT found nothing"*
+from *"HermiT never started"*. Earlier editions told you `REA-022`'s presence
+would tell you; in a scoped run on those versions it never could.
 
-*Mitigation:* assert on the reasoner's verdict in an unscoped run
-([Chapter 10](10-ingest-and-transform.md) §10.4). *Suggested improvement:*
-findings about the run itself (`oq:Graph`) should survive the filter.
+It was worse than one missing finding. `oq:Graph` is the suite's anchor for any
+check with no natural focus node, so scoping also dropped `EFF-002`,
+`STY-005`, `REA-020` and `QUA-005`. `QUA-005` is the sharpest of them: it fires
+when an ontology has no identifying IRI, and an ontology with no IRI has no
+namespace of its own to match, so scoping removed the finding that says so.
+
+**Fixed in 0.24.0**, which was this edition's *suggested improvement* taken up:
+findings about the run survive the filter. They are kept without counting as
+*matches*, so the near-miss warning still fires on a run where nothing of yours
+was found. The scoped fixture run stayed at 54 findings while its composition
+changed -- see [Chapter 10](10-ingest-and-transform.md) §10.4, which is also
+where the mitigation for 0.23.0 and earlier still lives.
 
 ### The `shacl` CLI reports conformance when it checked nothing
 
@@ -275,18 +284,21 @@ There is no graph-selection option and no per-graph report.
 and validate it on its own, as `consistency-remote`'s manifest model does
 ([Ch. 13](13-operate-and-consume.md) §13.1).
 
-### A mistyped manifest `role` compares nothing, successfully
+### A mistyped manifest `role` compared nothing, successfully (fixed in 0.24.0)
 
-`consistency-remote` accepts any string as a graph's `role` and ignores all but
-`"ontology"` and `"triplified_data"`. A hyphen for an underscore yields a run that
-compares nothing and exits 0, even with `--fail-on-misalignment`. Re-verified at
-0.23.0.
+`consistency-remote` accepted any string as a graph's `role` and ignored all but
+`"ontology"` and `"triplified_data"`. A hyphen for an underscore yielded a run
+that compared nothing and exited 0, even with `--fail-on-misalignment`. The role
+is declared as a typing `Literal`, which nothing enforces at runtime, so the typo
+loaded happily and then matched neither list. Re-verified at 0.23.0.
 
-<a id="ev-c14-10"></a>*Evidence:* [C14.10 — A mistyped manifest role compares nothing, successfully](../../EVIDENCE.md#c14-10) (reproduced: PASS)
+<a id="ev-c14-10"></a>*Evidence:* [C14.10 — A mistyped manifest role compared nothing, successfully (fixed in 0.24.0)](../../EVIDENCE.md#c14-10) (reproduced: PASS)
 
-*Mitigation:* point it at a graph you know is wrong, once, and watch it complain
-([Ch. 13](13-operate-and-consume.md) §13.1). *Suggested improvement:* reject an
-unknown role.
+**Fixed in 0.24.0**: an unknown role is refused when the manifest loads, and the
+message names every bad role in the file at once together with the valid set.
+The mitigation is still worth doing on any version -- point it at a graph you
+know is wrong, once, and watch it complain
+([Ch. 13](13-operate-and-consume.md) §13.1).
 
 ### Smaller ones, all worth a line
 
@@ -294,16 +306,17 @@ unknown role.
 |---|---|
 | At 0.22.0, `--help` offers `--inference owlrl` and `both`, and asking for one gives a Python traceback rather than a one-line error. *Fixed in 0.23.0* | [Ch. 7](07-the-toolchain.md) §7.4 |
 | At 0.22.0, `--inference` reaches the shapes only: ignored under `--engine sparql`, and under the default engine the two arms check different graphs. *Fixed in 0.23.0*, with engine 0.3.3's `shacl.rdfs_closure` | [Ch. 7](07-the-toolchain.md) §7.4 |
-| The `--own-namespace` near-miss warning lists two blank-node identifiers among the "namespaces actually seen" | [Ch. 9](09-continuous-integration.md) §9.4 |
-| `--sparql` composes but `--registry` replaces, so adding `@builtin` with a house registry turns every built-in finding `UNMAPPED`; and the warning recommends an absolute path rather than `@builtin` | [Ch. 8](08-model-and-validate.md) §8.5 |
-| `data` and `run` report one contradiction as two `LOG-001`s, one from the registry pass and one from the `owlrl` closure | [Ch. 9](09-continuous-integration.md) §9.6 |
+| Up to 0.23.0, the `--own-namespace` near-miss warning lists two blank-node identifiers among the "namespaces actually seen". The guard meant to stop it tested for a `_:` prefix, which `rdflib`'s blank-node labels do not carry, so it never fired. *Fixed in 0.24.0*: every namespace offered has a scheme | [Ch. 9](09-continuous-integration.md) §9.4 |
+| `--sparql` composes but `--registry` replaces, so adding `@builtin` with a house registry turns every built-in finding `UNMAPPED`. Up to 0.23.0 the warning also recommended an absolute path rather than `@builtin`, in the release that added `@builtin` because a committed path is wrong on every other machine -- *that half fixed in 0.24.0*; the `--registry` half is open | [Ch. 8](08-model-and-validate.md) §8.5 |
+| Up to 0.23.0, `data` and `run` report one contradiction as two `LOG-001`s, one from the registry pass and one from the `owlrl` closure. *Fixed in 0.24.0* by deduplicating across the join, which merged two pairs on the fixture rather than the one reported | [Ch. 9](09-continuous-integration.md) §9.6 |
+| At 0.24.0, a manifest with an unknown graph `role` is refused -- correctly -- but as a Python traceback rather than a one-line error, the same shape `--inference owlrl` had until 0.23.0. The exit is non-zero either way. *Fixed after 0.24.0* | [Ch. 13](13-operate-and-consume.md) §13.1 |
 | The DSL gives unchecked code an internal `TypeError`; its bundled `Quad` type is not assignable to `@types/n3`'s | [Ch. 8](08-model-and-validate.md) §8.2 |
 | The suite's `triplify` and the extension's *Run Full Triplify* drive `oxi-gen` only; neither knows tarka | [Ch. 10](10-ingest-and-transform.md) §10.3 |
-| `consistency` and `pattern-consistency` exit 0 whatever they find unless given `--fail-on-misalignment` or `--fail-on-mismatch`, two names for one idea, neither of them `--fail-on` | [Ch. 12](12-release-and-change.md) §12.6 |
+| `consistency` and `pattern-consistency` exit 0 whatever they find unless told otherwise. Up to 0.23.0 that meant `--fail-on-misalignment` or `--fail-on-mismatch`, two names for one idea, neither of them the `--fail-on` every other subcommand takes. *Fixed in 0.24.0*: `--fail-on-anything` on all three, with the old names kept as aliases | [Ch. 12](12-release-and-change.md) §12.6 |
 | The `holos validate` command defaults to the `native` engine and `holosdb`'s `Store.validate()` to `adapted`, so the same words run different validators | [Ch. 13](13-operate-and-consume.md) §13.2 |
 | At 0.22.0, when two query files bind one prefix differently, `sketch` reads every file with the first file's binding: the others' terms are reported as undeclared, or, if the odd file sorts last, its mistake is not reported at all. *Fixed in 0.23.0* | [Ch. 10](10-ingest-and-transform.md) §10.6 |
 
-<a id="ev-c14-11"></a><a id="ev-c14-12"></a><a id="ev-c14-13"></a><a id="ev-c14-14"></a><a id="ev-c14-15"></a><a id="ev-c14-16"></a><a id="ev-c14-17"></a><a id="ev-c14-18"></a><a id="ev-c14-19"></a><a id="ev-c14-20"></a>*Evidence:* [C14.11 — --help offers owlrl; asking for it gives a traceback](../../EVIDENCE.md#c14-11) (reproduced: PASS) · [C14.12 — --inference is ignored under --engine sparql](../../EVIDENCE.md#c14-12) (reproduced: PASS) · [C14.13 — The near-miss warning lists blank-node identifiers](../../EVIDENCE.md#c14-13) (reproduced: PASS) · [C14.14 — --registry replaces, so @builtin with a house registry is UNMAPPED](../../EVIDENCE.md#c14-14) (reproduced: PASS) · [C14.15 — One contradiction, two LOG-001s](../../EVIDENCE.md#c14-15) (reproduced: PASS) · [C14.16 — The DSL's TypeError and Quad type](../../EVIDENCE.md#c14-16) (reproduced: PASS) · [C14.17 — triplify drives oxi-gen only](../../EVIDENCE.md#c14-17) (reproduced: PASS) · [C14.18 — consistency and pattern-consistency are report-only by default](../../EVIDENCE.md#c14-18) (reproduced: PASS) · [C14.19 — The holos CLI and holosdb default to different validators](../../EVIDENCE.md#c14-19) (reproduced: PASS) · [C14.20 — sketch reads every file with the first file's prefixes](../../EVIDENCE.md#c14-20) (reproduced: PASS)
+<a id="ev-c14-11"></a><a id="ev-c14-12"></a><a id="ev-c14-13"></a><a id="ev-c14-14"></a><a id="ev-c14-15"></a><a id="ev-c14-16"></a><a id="ev-c14-17"></a><a id="ev-c14-18"></a><a id="ev-c14-19"></a><a id="ev-c14-20"></a>*Evidence:* [C14.11 — --help offers owlrl; asking for it gives a traceback](../../EVIDENCE.md#c14-11) (reproduced: PASS) · [C14.12 — --inference is ignored under --engine sparql](../../EVIDENCE.md#c14-12) (reproduced: PASS) · [C14.13 — The near-miss warning listed blank-node identifiers, until 0.24.0](../../EVIDENCE.md#c14-13) (reproduced: PASS) · [C14.14 — --registry replaces, so @builtin with a house registry is UNMAPPED](../../EVIDENCE.md#c14-14) (reproduced: PASS) · [C14.15 — One contradiction, two LOG-001s, until 0.24.0](../../EVIDENCE.md#c14-15) (reproduced: PASS) · [C14.16 — The DSL's TypeError and Quad type](../../EVIDENCE.md#c14-16) (reproduced: PASS) · [C14.17 — triplify drives oxi-gen only](../../EVIDENCE.md#c14-17) (reproduced: PASS) · [C14.18 — consistency and pattern-consistency are report-only by default](../../EVIDENCE.md#c14-18) (reproduced: PASS) · [C14.19 — The holos CLI and holosdb default to different validators](../../EVIDENCE.md#c14-19) (reproduced: PASS) · [C14.20 — sketch reads every file with the first file's prefixes](../../EVIDENCE.md#c14-20) (reproduced: PASS)
 
 ### Documentation drift, upstream
 
@@ -416,6 +429,29 @@ cut for the second, to hand the closure out.
 
 <a id="ev-c14-41"></a>*Evidence:* [C14.41 — Closed: three suite defects this edition found, fixed in 0.23.0](../../EVIDENCE.md#c14-41) (reproduced: PASS)
 
+**Six more are fixed in 0.24.0**, and they share a shape worth naming: every one
+of them made a run look cleaner, or more complete, than it was, and none of them
+raised an error. Findings about the run survive `--own-namespace`, so a scoped
+gate can see that the reasoner did not run -- this edition's own suggested
+improvement, and four graph-wide checks besides `REA-022` were being dropped the
+same way (§14.4). `REA-022` now quotes the line of the ontology that defeated the
+loader, instead of a position in a temporary file deleted before you read the
+report. An unknown graph `role` is refused when a manifest loads, rather than
+comparing nothing and exiting 0 (§14.4). `data` and `run` report one
+contradiction once ([Ch. 9](09-continuous-integration.md) §9.6). The
+`--own-namespace` near-miss warning no longer offers blank-node labels as
+namespaces, and the `--sparql` warning names `@builtin` rather than an absolute
+path. And `--fail-on-anything` is one name on `consistency`,
+`consistency-remote` and `pattern-consistency`, with the old two kept as aliases
+([Ch. 12](12-release-and-change.md) §12.6).
+
+Two of those six were defects in 0.23.0's own fixes, found by re-reading them
+rather than by running anything: the blank-node guard tested for a `_:` prefix
+that rdflib's labels do not carry, so it never fired, and it was pinned by a test
+feeding it a string the suite never produces -- the test passed while the code
+did nothing. The lesson is the one [Chapter 9](09-continuous-integration.md) §9.4
+already draws about gates: a check you have never seen fail is not yet a check.
+
 **HOLOS validation leaves the store as it found it**, from 0.21.1. Up to 0.21.0 it
 wrote the shapes into the store it validated, a copy per call, and on disk for
 good. This edition's evidence found it and the fix was cut the same day, with a
@@ -448,8 +484,11 @@ the drop printed 100% both ways every time it ran.
 
 <a id="ev-c14-31"></a>*Evidence:* [C14.31 — Wrong: the migration annotation's direction](../../EVIDENCE.md#c14-31) (reproduced: PASS)
 
-**`REA-022` as the reasoner's tell in a scoped run.** It is filtered out of scoped
-runs (§14.4), so its absence there says nothing.
+**`REA-022` as the reasoner's tell in a scoped run.** It was filtered out of
+scoped runs up to 0.23.0 (§14.4), so its absence there said nothing. The advice
+was right in principle and wrong about the tool, which is the more awkward way
+to be wrong: 0.24.0 keeps the finding, so on that version the original advice
+holds. Check what you are running before relying on it.
 
 <a id="ev-c14-32"></a>*Evidence:* [C14.32 — Wrong: REA-022 as the tell in a scoped run](../../EVIDENCE.md#c14-32) (reproduced: PASS)
 
