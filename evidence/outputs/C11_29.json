@@ -9,28 +9,28 @@
    "rc": 0,
    "seconds": 0.0,
    "stdout": "shapes compiled   2 shapes in 0.000s\nvalidated         0.000s\nconforms          false\nresults           1\n",
-   "stderr": "loaded 3 quads in 0.00s (3710 quads/s)\nread 5 shape quads from data/shacl/shapes-violation.ttl, and kept none of them\n"
+   "stderr": "loaded 3 quads in 0.00s (5663 quads/s)\nread 5 shape quads from data/shacl/shapes-violation.ttl, and kept none of them\n"
   },
   {
    "cmd": "holos validate --data data/shacl/data.ttl --shapes data/shacl/shapes-violation.ttl --engine adapted",
    "rc": 0,
    "seconds": 0.0,
    "stdout": "bridged+compiled  3 triples, 2 shapes in 0.000s\nvalidated         0.000s\nconforms          false\nresults           1\n",
-   "stderr": "loaded 3 quads in 0.00s (5005 quads/s)\nread 5 shape quads from data/shacl/shapes-violation.ttl, and kept none of them\n"
+   "stderr": "loaded 3 quads in 0.00s (5773 quads/s)\nread 5 shape quads from data/shacl/shapes-violation.ttl, and kept none of them\n"
   },
   {
    "cmd": "holos validate --data data/shacl/data.ttl --shapes data/shacl/shapes-sparql.ttl",
    "rc": 1,
    "seconds": 0.0,
    "stdout": "",
-   "stderr": "loaded 3 quads in 0.00s (4993 quads/s)\nread 6 shape quads from data/shacl/shapes-sparql.ttl, and kept none of them\nError: unsupported: sh:sparql is not implemented by the incremental evaluator; validate                      through holos_shacl::engine::EngineRun instead\n"
+   "stderr": "loaded 3 quads in 0.00s (5802 quads/s)\nread 6 shape quads from data/shacl/shapes-sparql.ttl, and kept none of them\nError: unsupported: sh:sparql is not implemented by the incremental evaluator; validate                      through holos_shacl::engine::EngineRun instead\n"
   },
   {
    "cmd": "holos validate --data data/shacl/data.ttl --shapes data/shacl/shapes-sparql.ttl --engine adapted",
    "rc": 0,
    "seconds": 0.0,
    "stdout": "bridged+compiled  3 triples, 1 shapes in 0.000s\nvalidated         0.000s\nconforms          false\nresults           1\n",
-   "stderr": "loaded 3 quads in 0.00s (5369 quads/s)\nread 6 shape quads from data/shacl/shapes-sparql.ttl, and kept none of them\n"
+   "stderr": "loaded 3 quads in 0.00s (5398 quads/s)\nread 6 shape quads from data/shacl/shapes-sparql.ttl, and kept none of them\n"
   },
   {
    "cmd": "python scripts/holosdb_validate.py data/shacl/data.ttl data/shacl/shapes-violation.ttl data/shacl/shapes-sparql.ttl",

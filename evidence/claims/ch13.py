@@ -1,8 +1,27 @@
 """Chapter 13 — Operate and consume."""
 import re
 
-from ._common import (ACME, HOLOS_URL, SUITE, V1, V2, Claim, Service, Step, all_of, checks, commit, exit_code,
-                      file, has, lacks, nonzero, ok, src)
+from ._common import (ACME, HOLOS_URL, SUITE, V1, V2, Claim, Service, Step, all_of, by_version, checks, commit,
+                      exit_code, file, has, lacks, nonzero, ok, src)
+
+
+def _refusal_is_a_usage_error(step: int):
+    """The refusal reads as one line, not a stack trace.
+
+    0.24.0 refused a mistyped graph `role` -- the fix -- but by raising, so the
+    message arrived as a ValueError traceback ending in suite internals. That is
+    the shape the manual's own §7.4 complains about. 0.24.1 prints one line with
+    the `error:` prefix the rest of the CLI uses, and exits 2 as a usage error
+    rather than 1 as an uncaught exception.
+    """
+    def check(r):
+        err = r[step].stderr or ""
+        traced = "Traceback" in err
+        return ok(not traced and err.strip().startswith("error: "),
+                  "the refusal is one line on stderr, with no traceback",
+                  "the refusal arrives as a traceback" if traced
+                  else f"unexpected stderr: {err.strip()[:120]}")
+    return check
 
 F = "docs/13-operate-and-consume.md"
 FOAF = f"{ACME}/reference_vocab/foaf.rdf"
@@ -90,12 +109,17 @@ CLAIMS = [
                            "'classes_only_in_template': ['https://acme.example.org/ns/SoftwareEngineer']",
                            "'classes_only_in_live_data': ['https://acme.example.org/ns/Engineer']"),
                        exit_code(4, 1),
-                       lacks(5, "==="), exit_code(5, 1),
-                       has(5, "unknown graph role")),
+                       lacks(5, "==="),
+                       has(5, "unknown graph role"),
+                       by_version((0, 24, 1), exit_code(5, 2), exit_code(5, 1)),
+                       by_version((0, 24, 1), _refusal_is_a_usage_error(5),
+                                  lambda r: ok("Traceback" in (r[5].stderr or ""),
+                                               "0.24.0 refuses, as a traceback",
+                                               "0.24.0 should still refuse by raising"))),
           checks="the repaired query agrees with the v2 ontology, the live data does not (Engineer only in the "
-                 "store, SoftwareEngineer only in the template), and the run exits 1; with the role misspelt, "
-                 "0.24.0 refuses the manifest naming the unknown role, where up to 0.23.0 the same run compared "
-                 "nothing and exited 0",
+                 "store, SoftwareEngineer only in the template), and the run exits 1. With the role misspelt: up "
+                 "to 0.23.0 the same run compared nothing and exited 0; 0.24.0 refuses it, naming the unknown "
+                 "role, but as a traceback and exit 1; from 0.24.1 as one line with no traceback and exit 2",
           needs=["holos-cli", "tarka-cli"]),
 
     Claim("C13.04", "A mistyped role is refused at load, from 0.24.0", "13",

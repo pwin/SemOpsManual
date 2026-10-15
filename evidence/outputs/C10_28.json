@@ -7,14 +7,14 @@
   {
    "cmd": "ontology-quality-suite sketch --queries data/mapping-set --out-dir work/C10_28/ms --reports minimal --fail-on never",
    "rc": 0,
-   "seconds": 2.1,
+   "seconds": 1.5,
    "stdout": "Findings: 1 total (0 Violation, 0 Warning, 1 Info)\nReports written to: ./work/C10_28/ms\n  - work/C10_28/ms/findings.txt (start here -- what, where, and the source line)\n  - work/C10_28/ms/full_results.csv\nSketch used 3 query file(s); 4 triples, 4 entities.\n",
    "stderr": "warning: prefix 'acme:' means <https://acme.example.org/ns#> in an earlier file and <https://acme.example.org/ns/> in payroll.rq; each file is read with its own definition, and the legend below shows the first\nwarning: prefix 'acme:' means <https://acme.example.org/ns#> in an earlier file and <https://acme.example.org/ns/> in people.rq; each file is read with its own definition, and the legend below shows the first\n"
   },
   {
    "cmd": "python scripts/query_file.py work/C10_28/ms/bind-facts.ttl @data/queries/prefix-conflicts.rq",
    "rc": 0,
-   "seconds": 0.6,
+   "seconds": 0.4,
    "stdout": "prefix,namespaces,files\nacme,2,legacy.rq, payroll.rq, people.rq\n",
    "stderr": ""
   },

@@ -35,7 +35,7 @@
   {
    "cmd": "python scripts/query_file.py fixtures/acme_robotics/taxonomy.ttl \"PREFIX skos: <http://www.w3.org/2004/02/skos/core#> SELECT ?c WHERE { ?c a skos:Concept } ORDER BY ?c\"",
    "rc": 0,
-   "seconds": 0.5,
+   "seconds": 0.4,
    "stdout": "c\nhttps://acme.example.org/data/department/ENG\nhttps://acme.example.org/data/department/QA\nhttps://acme.example.org/data/department/SALES\n",
    "stderr": ""
   }

@@ -7,7 +7,7 @@
   {
    "cmd": "python scripts/gsp_put.py http://127.0.0.1:7899/graph https://acme.example.org/graph/ontology/1.0.0 fixtures/acme_robotics/acme-org-v1.ttl",
    "rc": 0,
-   "seconds": 0.1,
+   "seconds": 0.2,
    "stdout": "PUT acme-org-v1.ttl -> <https://acme.example.org/graph/ontology/1.0.0>: HTTP 201\n",
    "stderr": ""
   },
@@ -21,14 +21,14 @@
   {
    "cmd": "python scripts/endpoint_stats.py http://127.0.0.1:7899/query",
    "rc": 0,
-   "seconds": 0.1,
+   "seconds": 0.2,
    "stdout": "g,triples\nhttps://acme.example.org/graph/ontology/1.0.0,52\nhttps://acme.example.org/graph/triplified/employees,40\n",
    "stderr": ""
   },
   {
    "cmd": "ontology-quality-suite consistency-remote --query-endpoint http://127.0.0.1:7899/query --manifest data/remote/graphs-v1.json --out-dir work/C13_01/own-only --fail-on-anything",
    "rc": 1,
-   "seconds": 1.5,
+   "seconds": 1.6,
    "stdout": "=== https://acme.example.org/graph/triplified/employees ===\n  source_tarql: fixtures/acme_robotics/employees.rq\n  ontology_graph_uri: https://acme.example.org/graph/ontology/1.0.0\n  template vs ontology: 2 undeclared term(s)\n  live data vs ontology: 0 undeclared class(es), 2 undeclared propert(y/ies)\n  template vs live data: 0 discrepanc(y/ies) {'classes_only_in_template': [], 'classes_only_in_live_data': [], 'properties_only_in_template': [], 'properties_only_in_live_data': []}\n\nReports written to: ./work/C13_01/own-only\n",
    "stderr": ""
   },

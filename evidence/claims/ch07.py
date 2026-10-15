@@ -36,7 +36,7 @@ CLAIMS = [
           (F, "> **Versions this edition was measured against.**"), "run",
           scripts=["scripts/versions.py"],
           steps=[Step("python scripts/versions.py")],
-          check=has(0, "PyPI ontology-quality-suite  0.24.0", "PyPI shacl                   0.3.3",
+          check=has(0, "PyPI ontology-quality-suite  0.24.1", "PyPI shacl                   0.3.3",
                     "PyPI holosdb                 0.21.1", "PyPI tarka-rdf               0.1.1",
                     "release shacl                shacl 0.3.3", "release tarka                tarka 0.1.1",
                     "release holos                holos 0.21.1", "npm ontology-suite           0.16.0",

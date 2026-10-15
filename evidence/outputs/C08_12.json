@@ -7,7 +7,7 @@
   {
    "cmd": "node -p \"require('./node_modules/ontology-suite/package.json').version\"",
    "rc": 0,
-   "seconds": 0.1,
+   "seconds": 0.0,
    "stdout": "0.16.0\n",
    "stderr": ""
   },

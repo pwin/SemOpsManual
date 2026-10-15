@@ -1,7 +1,7 @@
 {
  "python": "3.12.13",
  "platform": "Windows 11 (AMD64)",
- "PyPI ontology-quality-suite": "0.24.0",
+ "PyPI ontology-quality-suite": "0.24.1",
  "PyPI shacl": "0.3.3",
  "PyPI holosdb": "0.21.1",
  "PyPI tarka-rdf": "0.1.1",

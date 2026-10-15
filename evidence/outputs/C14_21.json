@@ -1,7 +1,7 @@
 {
  "id": "C14.21",
  "status": "PASS",
- "detail": "suite 0.24.0: step 1 output has none of 'runs pyshacl', 'not a default dependency'",
+ "detail": "suite 0.24.1: step 1 output has none of 'runs pyshacl', 'not a default dependency'",
  "ran": "2026-10-15",
  "steps": [
   {

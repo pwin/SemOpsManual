@@ -123,7 +123,7 @@ for the validation defect, and suite 0.23.0, with engine 0.3.3, for `REA-020`,
 |---|---|
 | python | 3.12.13 |
 | platform | Windows 11 (AMD64) |
-| PyPI ontology-quality-suite | 0.24.0 |
+| PyPI ontology-quality-suite | 0.24.1 |
 | PyPI shacl | 0.3.3 |
 | PyPI holosdb | 0.21.1 |
 | PyPI tarka-rdf | 0.1.1 |
@@ -591,7 +591,7 @@ $ python scripts/count_mermaid.py ..
 
 > `pip install shacl`
 
-**Evidence:** the same as [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05), which reproduces it: step 1 output contains 'commands installed: ontology-quality-suite', 'holosdb>=0.15', 'owlready2>=0.51', 'shacl 0.3.3/n    commands installed: none (library only)', 'tarka-rdf 0.1.1/n    commands installed: none (library only)', 'holosdb 0.21.1/n    commands installed: none (library only)'; suite 0.24.0: step 1 output contains 'shacl<0.4,>=0.3.3'
+**Evidence:** the same as [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05), which reproduces it: step 1 output contains 'commands installed: ontology-quality-suite', 'holosdb>=0.15', 'owlready2>=0.51', 'shacl 0.3.3/n    commands installed: none (library only)', 'tarka-rdf 0.1.1/n    commands installed: none (library only)', 'holosdb 0.21.1/n    commands installed: none (library only)'; suite 0.24.1: step 1 output contains 'shacl<0.4,>=0.3.3'
 
 ---
 
@@ -603,7 +603,7 @@ $ python scripts/count_mermaid.py ..
 
 > **Two outputs move unless you pin one variable, and both are labelled where they
 
-**Evidence:** the same as [C10.18 — data: 548 unscoped (549 at 0.23.0, 550 at 0.22.0), 54 scoped, with HermiT running](#c10-18), which reproduces it: suite 0.24.0: step 2: 548 findings (66 V, 363 W, 119 I); suite 0.24.0: step 3: 54 findings (12 V, 40 W, 2 I); REA-021 present; REA-022 absent
+**Evidence:** the same as [C10.18 — data: 548 unscoped (549 at 0.23.0, 550 at 0.22.0), 54 scoped, with HermiT running](#c10-18), which reproduces it: suite 0.24.1: step 2: 548 findings (66 V, 363 W, 119 I); suite 0.24.1: step 3: 54 findings (12 V, 40 W, 2 I); REA-021 present; REA-022 absent
 
 The 54 is C10.19; the hash seed's part, and the residual it does not control, are C14.06 and C14.08; docgen's reshuffling is C13.12.
 
@@ -932,7 +932,7 @@ Annotated chapter: [manual/docs/04-from-research-to-industry.md](manual/docs/04-
 
 > > The external DL reasoner ('hermit') could not be run: `cannot access local
 
-**Evidence:** the same as [C14.06 — The reasoner's outcome follows the hash seed](#c14-06), which reproduces it: seed 5: HermiT ran 10 of 10, did not run 0; seed 0: HermiT ran 1 of 10, did not run 9; step 1 output contains "could not be run: cannot access local variable 'entity' where it is not associated with a value"
+**Evidence:** the same as [C14.06 — The reasoner's outcome follows the hash seed](#c14-06), which reproduces it: seed 5: HermiT ran 10 of 10, did not run 0; seed 0: HermiT ran 0 of 10, did not run 10; step 1 output contains "could not be run: cannot access local variable 'entity' where it is not associated with a value"
 
 C14.06's record lists the REA-022 messages its seed-0 runs produced. 'Five runs of ten' describes this edition's unpinned runs.
 
@@ -946,7 +946,7 @@ C14.06's record lists the REA-022 messages its seed-0 runs produced. 'Five runs 
 
 > Reading the traceback for this edition showed something else: owlready2's *loader*
 
-**Evidence:** the same as [C14.08 — Almost: the seed decides most of owlready2's load, and not all of it](#c14-08), which reproduces it: line 2. failed 13 times (at least 9); line 3. loaded 15 times (at least 13); every failure was owlready2 building foaf:primaryTopic
+**Evidence:** the same as [C14.08 — Almost: the seed decides most of owlready2's load, and not all of it](#c14-08), which reproduces it: line 2. failed 14 times (at least 9); line 3. loaded 15 times (at least 13); every failure was owlready2 building foaf:primaryTopic
 
 ---
 
@@ -1031,7 +1031,7 @@ Reported results from the literature in the chapter's references; not reproduced
 
 **Sources:**
 
-- [suite docs/REPORTS.md](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/c5bec71decfbbbed6d6ba734d6f29d6edbde8ecf/docs/REPORTS.md#L8): “a person at a terminal, or an agent” (quote found, checked 2026-10-15)
+- [suite docs/REPORTS.md](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a24d3456c3329fe93b31cadefdfdf05329e82442/docs/REPORTS.md#L8): “a person at a terminal, or an agent” (quote found, checked 2026-10-15)
 
 The '[a blank node]' fix it mentions is C07.07 and C07.09.
 
@@ -1122,7 +1122,7 @@ for k, v in versions().items():
 
 **What is checked:** the installed packages, release binaries and npm packages are the versions in the table
 
-**Recorded result:** PASS — step 1 output contains 'PyPI ontology-quality-suite  0.24.0', 'PyPI shacl                   0.3.3', 'PyPI holosdb                 0.21.1', 'PyPI tarka-rdf               0.1.1', 'release shacl                shacl 0.3.3', 'release tarka                tarka 0.1.1', 'release holos                holos 0.21.1', 'npm ontology-suite           0.16.0', 'npm shacl-wasm-node          0.3.3', 'npm holos-wasm-node          0.21.1'
+**Recorded result:** PASS — step 1 output contains 'PyPI ontology-quality-suite  0.24.1', 'PyPI shacl                   0.3.3', 'PyPI holosdb                 0.21.1', 'PyPI tarka-rdf               0.1.1', 'release shacl                shacl 0.3.3', 'release tarka                tarka 0.1.1', 'release holos                holos 0.21.1', 'npm ontology-suite           0.16.0', 'npm shacl-wasm-node          0.3.3', 'npm holos-wasm-node          0.21.1'
 
 <details><summary>Output, as recorded</summary>
 
@@ -1130,7 +1130,7 @@ for k, v in versions().items():
 $ python scripts/versions.py
 python                       3.12.13
 platform                     Windows 11 (AMD64)
-PyPI ontology-quality-suite  0.24.0
+PyPI ontology-quality-suite  0.24.1
 PyPI shacl                   0.3.3
 PyPI holosdb                 0.21.1
 PyPI tarka-rdf               0.1.1
@@ -1239,7 +1239,7 @@ print(f".rq checks building a message with STR(?...) and no isBlank guard: {len(
 
 ```text
 $ python scripts/inspect_packages.py
-ontology-quality-suite 0.24.0
+ontology-quality-suite 0.24.1
     commands installed: ontology-quality-suite
     runtime dependencies: holosdb>=0.15, matplotlib>=3.7.0, owlready2>=0.51, owlrl>=6.0.2, pandas>=2.0.0, rdflib>=7.6.0, shacl<0.4,>=0.3.3, tabulate>=0.9.0
 shacl 0.3.3
@@ -1340,13 +1340,13 @@ print(f".rq checks building a message with STR(?...) and no isBlank guard: {len(
 
 **What is checked:** ontology-quality-suite declares holosdb, shacl (below 0.4; from 0.3.3 since suite 0.23.0, which needs shacl.rdfs_closure) and owlready2 as runtime dependencies and installs the only command; shacl, tarka-rdf and holosdb install none
 
-**Recorded result:** PASS — step 1 output contains 'commands installed: ontology-quality-suite', 'holosdb>=0.15', 'owlready2>=0.51', 'shacl 0.3.3/n    commands installed: none (library only)', 'tarka-rdf 0.1.1/n    commands installed: none (library only)', 'holosdb 0.21.1/n    commands installed: none (library only)'; suite 0.24.0: step 1 output contains 'shacl<0.4,>=0.3.3'
+**Recorded result:** PASS — step 1 output contains 'commands installed: ontology-quality-suite', 'holosdb>=0.15', 'owlready2>=0.51', 'shacl 0.3.3/n    commands installed: none (library only)', 'tarka-rdf 0.1.1/n    commands installed: none (library only)', 'holosdb 0.21.1/n    commands installed: none (library only)'; suite 0.24.1: step 1 output contains 'shacl<0.4,>=0.3.3'
 
 <details><summary>Output, as recorded</summary>
 
 ```text
 $ python scripts/inspect_packages.py
-ontology-quality-suite 0.24.0
+ontology-quality-suite 0.24.1
     commands installed: ontology-quality-suite
     runtime dependencies: holosdb>=0.15, matplotlib>=3.7.0, owlready2>=0.51, owlrl>=6.0.2, pandas>=2.0.0, rdflib>=7.6.0, shacl<0.4,>=0.3.3, tabulate>=0.9.0
 shacl 0.3.3
@@ -1488,11 +1488,11 @@ for label, q in (("unguarded STR(?e)", UNGUARDED), ("COALESCE(STR(?e), ...)", CO
 ```text
 $ python scripts/engine_leniency.py
 == unguarded STR(?e)
-   rdflib      ['A label on nff09bf1fcfe74afa99d426524e4fdc97b1 has no language tag.']
+   rdflib      ['A label on nde033ab9f23c4f92a8a6006784268222b1 has no language tag.']
    holosdb     ['(unbound)']
    pyoxigraph  ['(unbound)']
 == COALESCE(STR(?e), ...)
-   rdflib      ['A label on n5e825aa393464ef59275a6e76d2d6402b1 has no language tag.']
+   rdflib      ['A label on nab146015f58a434fbe1003d5662b8b23b1 has no language tag.']
    holosdb     ['A label on [a blank node] has no language tag.']
    pyoxigraph  ['A label on [a blank node] has no language tag.']
 == guarded IF(isBlank(?e), ...)
@@ -1671,7 +1671,7 @@ _:r1 a sh:ValidationResult ;
 
 **Sources:**
 
-- [suite docs/EXTENDING.md](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/c5bec71decfbbbed6d6ba734d6f29d6edbde8ecf/docs/EXTENDING.md#L29): “The registry declares; the directories decide.” (quote found, checked 2026-10-15)
+- [suite docs/EXTENDING.md](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a24d3456c3329fe93b31cadefdfdf05329e82442/docs/EXTENDING.md#L29): “The registry declares; the directories decide.” (quote found, checked 2026-10-15)
 
 C08.24 shows a query with no registry entry running and reporting as UNMAPPED.
 
@@ -1714,7 +1714,7 @@ C08.24 shows a query with no registry entry running and reporting as UNMAPPED.
 
 **Sources:**
 
-- [suite pyproject.toml (0.22.0)](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/c5bec71decfbbbed6d6ba734d6f29d6edbde8ecf/pyproject.toml#L53-L58): “It installs nothing: `shacl` is a runtime dependency now, not an opt-in.” (quote found, checked 2026-10-15)
+- [suite pyproject.toml (0.22.0)](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a24d3456c3329fe93b31cadefdfdf05329e82442/pyproject.toml#L53-L58): “It installs nothing: `shacl` is a runtime dependency now, not an opt-in.” (quote found, checked 2026-10-15)
 
 ---
 
@@ -1770,7 +1770,7 @@ C08.24 shows a query with no registry entry running and reporting as UNMAPPED.
 
 > **The wheels are libraries only.**
 
-**Evidence:** the same as [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05), which reproduces it: step 1 output contains 'commands installed: ontology-quality-suite', 'holosdb>=0.15', 'owlready2>=0.51', 'shacl 0.3.3/n    commands installed: none (library only)', 'tarka-rdf 0.1.1/n    commands installed: none (library only)', 'holosdb 0.21.1/n    commands installed: none (library only)'; suite 0.24.0: step 1 output contains 'shacl<0.4,>=0.3.3'
+**Evidence:** the same as [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05), which reproduces it: step 1 output contains 'commands installed: ontology-quality-suite', 'holosdb>=0.15', 'owlready2>=0.51', 'shacl 0.3.3/n    commands installed: none (library only)', 'tarka-rdf 0.1.1/n    commands installed: none (library only)', 'holosdb 0.21.1/n    commands installed: none (library only)'; suite 0.24.1: step 1 output contains 'shacl<0.4,>=0.3.3'
 
 ---
 
@@ -1976,7 +1976,7 @@ ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl 
 
 **What is checked:** nothing is asserted about the times; they are recorded. Each run must succeed
 
-**Recorded result:** PASS — whole-process times: native 2.1 s, native+sparql 2.6 s, sparql 2.3 s
+**Recorded result:** PASS — whole-process times: native 1.7 s, native+sparql 2.2 s, sparql 2.1 s
 
 <details><summary>Output, as recorded</summary>
 
@@ -2055,7 +2055,7 @@ ontology-quality-suite checks --help
 
 **What is checked:** --inference owlrl exits non-zero. At 0.22.0, with a Python traceback ending in the ValueError, and --help lists owlrl and both; from 0.23.0, with a one-line usage error, and --help offers none and rdfs only
 
-**Recorded result:** PASS — step 1 exits non-zero (2); suite 0.24.0: step 1 output contains "argument --inference: invalid choice: 'owlrl'"; step 1 output has none of 'Traceback'; step 2 output contains '--inference {none,rdfs}'
+**Recorded result:** PASS — step 1 exits non-zero (2); suite 0.24.1: step 1 output contains "argument --inference: invalid choice: 'owlrl'"; step 1 output has none of 'Traceback'; step 2 output contains '--inference {none,rdfs}'
 
 <details><summary>Output, as recorded</summary>
 
@@ -2142,7 +2142,7 @@ python scripts/diff_findings.py work/C07_27/none/full_results.csv work/C07_27/rd
 
 **What is checked:** at 0.22.0: under --engine sparql, owlrl, rdfs and none give 479 each, exit 0, and the default engine with rdfs gives 497. From 0.23.0: owlrl is refused; rdfs gives 489 under sparql and under the default engine alike, against 479 without it; the closure gains 21 findings (STR-007 9, STY-003 9, STR-009 3) and loses 11 (STR-007 9, STR-006, DAT-002)
 
-**Recorded result:** PASS — suite 0.24.0: step 1 exits non-zero (2); step 2: 489 findings (57 V, 339 W, 93 I); step 3: 479 findings (55 V, 340 W, 84 I); step 4: 489 findings (57 V, 339 W, 93 I); step 5 output contains 'gained 21:', 'STR-007 9', 'STY-003 9', 'STR-009 3', 'lost 11:', 'STR-006 1', 'DAT-002 1'
+**Recorded result:** PASS — suite 0.24.1: step 1 exits non-zero (2); step 2: 489 findings (57 V, 339 W, 93 I); step 3: 479 findings (55 V, 340 W, 84 I); step 4: 489 findings (57 V, 339 W, 93 I); step 5 output contains 'gained 21:', 'STR-007 9', 'STY-003 9', 'STR-009 3', 'lost 11:', 'STR-006 1', 'DAT-002 1'
 
 <details><summary>Output, as recorded</summary>
 
@@ -2223,8 +2223,8 @@ ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl 
 $ ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --own-namespace https://acme.example.org/ns/ --engine sparql --out-dir work/C07_28/v --fail-on never --reports minimal -v
 [verbose] fixtures/acme_robotics/acme-org-v1.ttl:
   2 owl:imports resolved:
-    http://www.w3.org/ns/org#  <-  fixtures/acme_robotics/reference_vocab/org.ttl
     http://xmlns.com/foaf/0.1/  <-  fixtures/acme_robotics/reference_vocab/foaf.rdf
+    http://www.w3.org/ns/org#  <-  fixtures/acme_robotics/reference_vocab/org.ttl
 [verbose] engine: sparql
 Findings: 23 total (1 Violation, 22 Warning, 0 Info)
 Reports written to: ./work/C07_28/v
@@ -2381,7 +2381,7 @@ Neither family is in the shared registry.json, which is why the CLI cannot produ
 
 **Sources:**
 
-- [suite tests/test_check_coverage.py, EXTENSION_ONLY_IDS](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/c5bec71decfbbbed6d6ba734d6f29d6edbde8ecf/tests/test_check_coverage.py#L94-L97): “checks/vocabularyChecks.ts -- a closed-world scan of the axiom positions” (quote found, checked 2026-10-15)
+- [suite tests/test_check_coverage.py, EXTENSION_ONLY_IDS](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a24d3456c3329fe93b31cadefdfdf05329e82442/tests/test_check_coverage.py#L94-L97): “checks/vocabularyChecks.ts -- a closed-world scan of the axiom positions” (quote found, checked 2026-10-15)
 - [extension src/checks/registryCoverage.test.ts](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/src/checks/registryCoverage.test.ts#L25-L27): “the three checks only *this* extension can produce, VOC-001/REA-005/REA-006” (quote found, checked 2026-10-15)
 
 C08.06 shows the consequence: the CLI reports the typo as STR-001, never as VOC-001.
@@ -2695,7 +2695,7 @@ Findings: 2 total (2 Violation, 0 Warning, 0 Info)
 Reports written to: ./work/C08_14/gate
   - work/C08_14/gate/findings.txt (start here -- what, where, and the source line)
   - work/C08_14/gate/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp92eqxa62 -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpe8j8fceu -Y
 [exit 1]
 ```
 
@@ -2893,7 +2893,7 @@ python scripts/summarise_findings.py work/C08_19/seed5/full_results.csv
 
 **What is checked:** with HermiT running, at 0.22.0: 3 Violations, LOG-001, REA-020 and REA-021; from 0.23.0: 2, LOG-001 and REA-021. No REA-022 either way
 
-**Recorded result:** PASS — suite 0.24.0: step 1: 2 findings (2 V, 0 W, 0 I); seed5/full_results.csv: {'LOG-001': 1, 'REA-021': 1}
+**Recorded result:** PASS — suite 0.24.1: step 1: 2 findings (2 V, 0 W, 0 I); seed5/full_results.csv: {'LOG-001': 1, 'REA-021': 1}
 
 <details><summary>Output, as recorded</summary>
 
@@ -2903,7 +2903,7 @@ Findings: 2 total (2 Violation, 0 Warning, 0 Info)
 Reports written to: ./work/C08_19/seed5
   - work/C08_19/seed5/findings.txt (start here -- what, where, and the source line)
   - work/C08_19/seed5/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpaghx0v5k -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp42htyig8 -Y
 [exit 1]
 
 $ python scripts/summarise_findings.py work/C08_19/seed5/full_results.csv
@@ -3679,7 +3679,7 @@ WARNING: --own-namespace http://example.org/acme# matched none of the 479 findin
 
 **Sources:**
 
-- [suite cli.py, _filter_own_namespace](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/c5bec71decfbbbed6d6ba734d6f29d6edbde8ecf/ontology_suite/cli.py#L158-L229): “if rows and not matched:” (quote found, checked 2026-10-15)
+- [suite cli.py, _filter_own_namespace](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a24d3456c3329fe93b31cadefdfdf05329e82442/ontology_suite/cli.py#L158-L229): “if rows and not matched:” (quote found, checked 2026-10-15)
 
 The warning is emitted only when the filter removes everything from a non-empty set of rows; an empty run never reaches it. The condition tests `matched` rather than the returned `kept`: 0.24.0 keeps run-level findings such as REA-022 through the filter, and counting those as a match would switch this warning off on exactly the runs that most need it.
 
@@ -3848,7 +3848,7 @@ $ python scripts/list_files.py work/C09_10/minimal
 
 - [suite commit f6ee897, 'Say where the finding is, and say each thing once'](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/f6ee897c7065569805c27cc7c8af0c2ff0738a8b): “Six files stopped being written: summary_by_category, summary_by_check and top_offenders” (quote found, checked 2026-10-15)
 - [suite commit 1af2a2d, 'Bump to 0.17.0' (the first tag containing f6ee897)](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/1af2a2d5a77eaa7cb07b03ee75bf1ec282c35bfe): “Minor rather than patch: six report files are no longer written” (quote found, checked 2026-10-15)
-- [suite docs/REPORTS.md](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/c5bec71decfbbbed6d6ba734d6f29d6edbde8ecf/docs/REPORTS.md#L18): “## What changed in 0.15.0” (quote found, checked 2026-10-15)
+- [suite docs/REPORTS.md](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a24d3456c3329fe93b31cadefdfdf05329e82442/docs/REPORTS.md#L18): “## What changed in 0.15.0” (quote found, checked 2026-10-15)
 
 ---
 
@@ -3860,9 +3860,9 @@ $ python scripts/list_files.py work/C09_10/minimal
 
 > The suite responded by pinning `shacl>=0.3.0,<0.4`
 
-**Evidence:** the same as [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05), which reproduces it: step 1 output contains 'commands installed: ontology-quality-suite', 'holosdb>=0.15', 'owlready2>=0.51', 'shacl 0.3.3/n    commands installed: none (library only)', 'tarka-rdf 0.1.1/n    commands installed: none (library only)', 'holosdb 0.21.1/n    commands installed: none (library only)'; suite 0.24.0: step 1 output contains 'shacl<0.4,>=0.3.3'
+**Evidence:** the same as [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05), which reproduces it: step 1 output contains 'commands installed: ontology-quality-suite', 'holosdb>=0.15', 'owlready2>=0.51', 'shacl 0.3.3/n    commands installed: none (library only)', 'tarka-rdf 0.1.1/n    commands installed: none (library only)', 'holosdb 0.21.1/n    commands installed: none (library only)'; suite 0.24.1: step 1 output contains 'shacl<0.4,>=0.3.3'
 
-The installed package's declared dependencies include `shacl<0.4,>=0.3.0`; the reason is in the [pyproject comment](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/c5bec71decfbbbed6d6ba734d6f29d6edbde8ecf/pyproject.toml#L33-L37).
+The installed package's declared dependencies include `shacl<0.4,>=0.3.0`; the reason is in the [pyproject comment](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a24d3456c3329fe93b31cadefdfdf05329e82442/pyproject.toml#L33-L37).
 
 ---
 
@@ -3907,7 +3907,7 @@ Findings: 26 total (2 Violation, 22 Warning, 2 Info)
 Reports written to: ./work/C09_14/out
   - work/C09_14/out/findings.txt (start here -- what, where, and the source line)
   - work/C09_14/out/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpgwv6_p6w -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpk1mjmy83 -Y
 [exit 1]
 
 $ python scripts/summarise_findings.py work/C09_14/out/full_results.csv --by focus --check LOG-001
@@ -3956,7 +3956,11 @@ tests/test_detection.py::test_every_finding_carries_a_message[06-datatype-confor
   C:\repos/consolidated-ontology-suite-python-testing/.venv/Lib/site-packages/rdflib/term.py:1862: UserWarning: Parsing weird boolean, 'yes' does not map to True or False
     warnings.warn(
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-165 passed, 10 skipped, 5 warnings in 26.74s
+165 passed, 10 skipped, 5 warnings in 21.99s
+   Building ontology-quality-suite @ file:///C:/repos/consolidated_ontology_suite_python
+      Built ontology-quality-suite @ file:///C:/repos/consolidated_ontology_suite_python
+Uninstalled 1 package in 3ms
+Installed 1 package in 86ms
 [exit 0]
 ```
 
@@ -5115,7 +5119,7 @@ python scripts/summarise_findings.py work/C10_18/own/full_results.csv
 
 **What is checked:** unscoped 550 (68 V, 363 W, 119 I) at 0.22.0; 549 (67 V) from 0.23.0, without the false REA-020; 548 (66 V) from 0.24.0, which reports one contradiction once instead of twice. Scoped to https://acme.example.org/: 55 (13 V, 40 W, 2 I) up to 0.23.0 and 54 (12 V) from 0.24.0, with REA-021 throughout
 
-**Recorded result:** PASS — suite 0.24.0: step 2: 548 findings (66 V, 363 W, 119 I); suite 0.24.0: step 3: 54 findings (12 V, 40 W, 2 I); REA-021 present; REA-022 absent
+**Recorded result:** PASS — suite 0.24.1: step 2: 548 findings (66 V, 363 W, 119 I); suite 0.24.1: step 3: 54 findings (12 V, 40 W, 2 I); REA-021 present; REA-022 absent
 
 <details><summary>Output, as recorded</summary>
 
@@ -5129,7 +5133,7 @@ Findings: 548 total (66 Violation, 363 Warning, 119 Info)
 Reports written to: ./work/C10_18/all
   - work/C10_18/all/findings.txt (start here -- what, where, and the source line)
   - work/C10_18/all/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpaj468zwy -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpa1iiwczu -Y
 [exit 0]
 
 $ ontology-quality-suite data work/C10_18/employees.ttl --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --engine sparql --own-namespace https://acme.example.org/ --out-dir work/C10_18/own --fail-on never --reports minimal
@@ -5137,7 +5141,7 @@ Findings: 54 total (12 Violation, 40 Warning, 2 Info)
 Reports written to: ./work/C10_18/own
   - work/C10_18/own/findings.txt (start here -- what, where, and the source line)
   - work/C10_18/own/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpj6_j0axz -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp0n9gepho -Y
 [exit 0]
 
 $ python scripts/summarise_findings.py work/C10_18/own/full_results.csv
@@ -5208,7 +5212,7 @@ sys.exit(subprocess.run(cmd, env=env).returncode)
 
 **What is checked:** with HermiT unable to run: the unscoped run reports REA-022 on every version. The scoped run holds 54 findings on both sides of the fix, but differently -- up to 0.23.0 it had neither REA-021 nor REA-022 (54 = 12 V, 40 W, 2 I), and from 0.24.0 it reports REA-022 (54 = 11 V, 40 W, 3 I): one Violation fewer, because the duplicated LOG-001 is merged, and one Info more, because the reasoner's caveat survives the filter. The total is the same number for two different reasons, which is why a gate should assert on the severity split
 
-**Recorded result:** PASS — suite 0.24.0: step 3: 54 findings (11 V, 40 W, 3 I); REA-022 present; REA-021 absent; suite 0.24.0: REA-022 present; REA-021 absent
+**Recorded result:** PASS — suite 0.24.1: step 3: 54 findings (11 V, 40 W, 3 I); REA-022 present; REA-021 absent; suite 0.24.1: REA-022 present; REA-021 absent
 
 <details><summary>Output, as recorded</summary>
 
@@ -5273,18 +5277,18 @@ Findings: 54 total (12 Violation, 40 Warning, 2 Info)
 Reports written to: ./work/C10_20/own
   - work/C10_20/own/findings.txt (start here -- what, where, and the source line)
   - work/C10_20/own/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpquo838vf -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpbamdz052 -Y
 [exit 0]
 
 $ python scripts/summarise_findings.py work/C10_20/own/full_results.csv --by focus --check STR-006
-STR-006  focus=https://acme.example.org/data/employee/E001  path=http://xmlns.com/foaf/0.1/mbox  value=mailto:grace.hopper@acme.example.org
 STR-006  focus=https://acme.example.org/data/employee/E001  path=https://acme.example.org/ns/worksIn  value=https://acme.example.org/data/department/ENG
+STR-006  focus=https://acme.example.org/data/employee/E001  path=http://xmlns.com/foaf/0.1/mbox  value=mailto:grace.hopper@acme.example.org
 STR-006  focus=https://acme.example.org/data/employee/E002  path=https://acme.example.org/ns/worksIn  value=https://acme.example.org/data/department/ENG
 STR-006  focus=https://acme.example.org/data/employee/E002  path=http://xmlns.com/foaf/0.1/mbox  value=mailto:ada.lovelace@acme.example.org
-STR-006  focus=https://acme.example.org/data/employee/E003  path=https://acme.example.org/ns/worksIn  value=https://acme.example.org/data/department/ENG
 STR-006  focus=https://acme.example.org/data/employee/E003  path=http://xmlns.com/foaf/0.1/mbox  value=mailto:alan.turing@acme.example.org
-STR-006  focus=https://acme.example.org/data/employee/E004  path=https://acme.example.org/ns/worksIn  value=https://acme.example.org/data/department/QA
+STR-006  focus=https://acme.example.org/data/employee/E003  path=https://acme.example.org/ns/worksIn  value=https://acme.example.org/data/department/ENG
 STR-006  focus=https://acme.example.org/data/employee/E004  path=http://xmlns.com/foaf/0.1/mbox  value=mailto:margaret.hamilton@acme.example.org
+STR-006  focus=https://acme.example.org/data/employee/E004  path=https://acme.example.org/ns/worksIn  value=https://acme.example.org/data/department/QA
 STR-006  focus=https://acme.example.org/data/employee/E005  path=https://acme.example.org/ns/worksIn  value=https://acme.example.org/data/department/MKT
 STR-006  focus=https://acme.example.org/data/employee/E005  path=http://xmlns.com/foaf/0.1/mbox  value=mailto:katherine.johnson@acme.example.org
 total 10: 10 Violation, 0 Warning, 0 Info
@@ -5347,7 +5351,7 @@ total 2: 0 Violation, 0 Warning, 2 Info
 
 **Sources:**
 
-- [suite docs/ACME_ROBOTICS_WALKTHROUGH.md](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/c5bec71decfbbbed6d6ba734d6f29d6edbde8ecf/docs/ACME_ROBOTICS_WALKTHROUGH.md#L73): “occasionally environment-flaky” (quote found, checked 2026-10-15)
+- [suite docs/ACME_ROBOTICS_WALKTHROUGH.md](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a24d3456c3329fe93b31cadefdfdf05329e82442/docs/ACME_ROBOTICS_WALKTHROUGH.md#L73): “occasionally environment-flaky” (quote found, checked 2026-10-15)
 
 The seed mechanism is reproduced in C14.06.
 
@@ -5669,7 +5673,7 @@ ontology-quality-suite sketch --queries data/mapping-set --query-pattern people.
 
 **What is checked:** with legacy.rq sorting first. At 0.22.0 the merged sketch reports acme:Employee, hasSkill and hasEmployeeId as undeclared in the hash namespace and acme:Employee as never populated. From 0.23.0 it reports only legacy.rq's own acme:Department, in the hash namespace where it was written, and acme:Employee is populated. The two correct files on their own are clean on both
 
-**Recorded result:** PASS — suite 0.24.0: the warning says each file is read with its own definition; step 2 output contains 'focus=https://acme.example.org/ns#Department'; step 2 output has none of 'ns#Employee'; step 3 output has none of 'ns#hasSkill', 'ns#hasEmployeeId'; three/full_results.csv: CNF-005 excludes https://acme.example.org/ns/Employee; two/full_results.csv: {'CNF-005': 36, 'TQL-003': 1}; two/full_results.csv: CNF-005 excludes https://acme.example.org/ns/Employee
+**Recorded result:** PASS — suite 0.24.1: the warning says each file is read with its own definition; step 2 output contains 'focus=https://acme.example.org/ns#Department'; step 2 output has none of 'ns#Employee'; step 3 output has none of 'ns#hasSkill', 'ns#hasEmployeeId'; three/full_results.csv: CNF-005 excludes https://acme.example.org/ns/Employee; two/full_results.csv: {'CNF-005': 36, 'TQL-003': 1}; two/full_results.csv: CNF-005 excludes https://acme.example.org/ns/Employee
 
 <details><summary>Output, as recorded</summary>
 
@@ -5779,7 +5783,7 @@ python scripts/summarise_findings.py work/C10_30/out/full_results.csv --by focus
 
 **What is checked:** with the hash-namespace file sorting last. At 0.22.0 the run reports no CNF-001 or CNF-002 at all: its acme:Department is read in the ontology's own namespace, and a warning on stderr is the only trace. From 0.23.0 its acme:Department is reported in the hash namespace, in this order as in the other, because the sketch re-declares each file's prefixes ahead of its triples
 
-**Recorded result:** PASS — the warning names zz-legacy.rq, on stderr; suite 0.24.0: out/full_results.csv: CNF-001 includes https://acme.example.org/ns#Department; sketch.ttl re-declares acme: ahead of zz-legacy.rq's triples
+**Recorded result:** PASS — the warning names zz-legacy.rq, on stderr; suite 0.24.1: out/full_results.csv: CNF-001 includes https://acme.example.org/ns#Department; sketch.ttl re-declares acme: ahead of zz-legacy.rq's triples
 
 <details><summary>Output, as recorded</summary>
 
@@ -6587,13 +6591,13 @@ free here        4.5 GiB
 room to compact  yes (needs up to 150.2 KiB)
 predicates by frequency
           10  <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
-           5  <http://xmlns.com/foaf/0.1/mbox>
-           5  <https://acme.example.org/ns/hasSkill>
-           5  <https://acme.example.org/ns/hasRole>
-           5  <http://xmlns.com/foaf/0.1/name>
-           5  <https://acme.example.org/ns/hasEmployeeId>
            5  <https://acme.example.org/ns/worksIn>
-loaded 40 quads in 0.26s (153 quads/s)
+           5  <https://acme.example.org/ns/hasRole>
+           5  <http://xmlns.com/foaf/0.1/mbox>
+           5  <http://xmlns.com/foaf/0.1/name>
+           5  <https://acme.example.org/ns/hasSkill>
+           5  <https://acme.example.org/ns/hasEmployeeId>
+loaded 40 quads in 0.27s (147 quads/s)
 [exit 0]
 
 $ holos rules --store work/C11_09/store --rules data/holos/rules.rq
@@ -6921,8 +6925,8 @@ with tempfile.TemporaryDirectory() as tmp:
 
 ```text
 $ python scripts/rule_scale.py 1000 100000
-N=  1,000  with rules:   1,000 results on   1,000 distinct focus nodes (0.12 s)  without rules: 0 results
-N=100,000  with rules: 100,000 results on 100,000 distinct focus nodes (3.07 s)  without rules: 0 results
+N=  1,000  with rules:   1,000 results on   1,000 distinct focus nodes (0.08 s)  without rules: 0 results
+N=100,000  with rules: 100,000 results on 100,000 distinct focus nodes (3.02 s)  without rules: 0 results
 [exit 0]
 ```
 
@@ -7706,7 +7710,7 @@ shapes compiled   2 shapes in 0.000s
 validated         0.000s
 conforms          false
 results           1
-loaded 3 quads in 0.00s (3710 quads/s)
+loaded 3 quads in 0.00s (5663 quads/s)
 read 5 shape quads from data/shacl/shapes-violation.ttl, and kept none of them
 [exit 0]
 
@@ -7715,12 +7719,12 @@ bridged+compiled  3 triples, 2 shapes in 0.000s
 validated         0.000s
 conforms          false
 results           1
-loaded 3 quads in 0.00s (5005 quads/s)
+loaded 3 quads in 0.00s (5773 quads/s)
 read 5 shape quads from data/shacl/shapes-violation.ttl, and kept none of them
 [exit 0]
 
 $ holos validate --data data/shacl/data.ttl --shapes data/shacl/shapes-sparql.ttl
-loaded 3 quads in 0.00s (4993 quads/s)
+loaded 3 quads in 0.00s (5802 quads/s)
 read 6 shape quads from data/shacl/shapes-sparql.ttl, and kept none of them
 Error: unsupported: sh:sparql is not implemented by the incremental evaluator; validate                      through holos_shacl::engine::EngineRun instead
 [exit 1]
@@ -7730,7 +7734,7 @@ bridged+compiled  3 triples, 1 shapes in 0.000s
 validated         0.000s
 conforms          false
 results           1
-loaded 3 quads in 0.00s (5369 quads/s)
+loaded 3 quads in 0.00s (5398 quads/s)
 read 6 shape quads from data/shacl/shapes-sparql.ttl, and kept none of them
 [exit 0]
 
@@ -8168,7 +8172,7 @@ Wrote 1/1 suggested repair(s) as .patch files under work/C12_05/replaced-by-reve
 **Sources:**
 
 - [suite commit 67513c4, 12 August 2026](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/67513c4ebd1cba9d2a67d204b363606bbb942650): “symmetric-direction rename-migration annotations” (quote found, checked 2026-10-15)
-- [suite versioning/rename_detection.py](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/c5bec71decfbbbed6d6ba734d6f29d6edbde8ecf/ontology_suite/versioning/rename_detection.py#L25-L30): “``dcterms:isReplacedBy`` is directional by definition and only recognized old -> new” (quote found, checked 2026-10-15)
+- [suite versioning/rename_detection.py](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a24d3456c3329fe93b31cadefdfdf05329e82442/ontology_suite/versioning/rename_detection.py#L25-L30): “``dcterms:isReplacedBy`` is directional by definition and only recognized old -> new” (quote found, checked 2026-10-15)
 
 ---
 
@@ -8567,7 +8571,7 @@ A statement about scope. The evidence the table lists is reproduced in C09.04, C
 
 **Sources:**
 
-- [suite docs/UPDATING.md](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/c5bec71decfbbbed6d6ba734d6f29d6edbde8ecf/docs/UPDATING.md#L1): “Updating the semantic specification ecosystem: a playbook” (quote found, checked 2026-10-15)
+- [suite docs/UPDATING.md](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a24d3456c3329fe93b31cadefdfdf05329e82442/docs/UPDATING.md#L1): “Updating the semantic specification ecosystem: a playbook” (quote found, checked 2026-10-15)
 
 ---
 
@@ -8840,9 +8844,9 @@ ontology-quality-suite consistency-remote --query-endpoint http://127.0.0.1:7899
 ontology-quality-suite consistency-remote --query-endpoint http://127.0.0.1:7899/query --manifest data/remote/graphs-role-typo.json --out-dir work/C13_03/typo --fail-on-anything
 ```
 
-**What is checked:** the repaired query agrees with the v2 ontology, the live data does not (Engineer only in the store, SoftwareEngineer only in the template), and the run exits 1; with the role misspelt, 0.24.0 refuses the manifest naming the unknown role, where up to 0.23.0 the same run compared nothing and exited 0
+**What is checked:** the repaired query agrees with the v2 ontology, the live data does not (Engineer only in the store, SoftwareEngineer only in the template), and the run exits 1. With the role misspelt: up to 0.23.0 the same run compared nothing and exited 0; 0.24.0 refuses it, naming the unknown role, but as a traceback and exit 1; from 0.24.1 as one line with no traceback and exit 2
 
-**Recorded result:** PASS — step 5 output contains 'template vs ontology: clean', 'live data vs ontology: 1 undeclared class(es)', "'classes_only_in_template': ['https://acme.example.org/ns/SoftwareEngineer']", "'classes_only_in_live_data': ['https://acme.example.org/ns/Engineer']"; step 5 exits 1; step 6 output has none of '==='; step 6 exits 1; step 6 output contains 'unknown graph role'
+**Recorded result:** PASS — step 5 output contains 'template vs ontology: clean', 'live data vs ontology: 1 undeclared class(es)', "'classes_only_in_template': ['https://acme.example.org/ns/SoftwareEngineer']", "'classes_only_in_live_data': ['https://acme.example.org/ns/Engineer']"; step 5 exits 1; step 6 output has none of '==='; step 6 output contains 'unknown graph role'; suite 0.24.1: step 6 exits 2; suite 0.24.1: the refusal is one line on stderr, with no traceback
 
 <details><summary>Output, as recorded</summary>
 
@@ -8898,20 +8902,8 @@ Reports written to: ./work/C13_03/remote
 [exit 1]
 
 $ ontology-quality-suite consistency-remote --query-endpoint http://127.0.0.1:7899/query --manifest data/remote/graphs-role-typo.json --out-dir work/C13_03/typo --fail-on-anything
-Traceback (most recent call last):
-  File "<frozen runpy>", line 198, in _run_module_as_main
-  File "<frozen runpy>", line 88, in _run_code
-  File "./.venv/Scripts/ontology-quality-suite.EXE/__main__.py", line 10, in <module>
-  File "./.venv/Lib/site-packages/ontology_suite/cli.py", line 943, in main
-    return handlers[args.command](args)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "./.venv/Lib/site-packages/ontology_suite/cli.py", line 765, in cmd_consistency_remote
-    manifest = graph_manifest.GraphManifest.load(args.manifest)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "./.venv/Lib/site-packages/ontology_suite/remote/manifest.py", line 92, in load
-    raise ValueError(
-ValueError: data/remote/graphs-role-typo.json: unknown graph role(s) ['triplified-data'] -- valid roles are ['ontology', 'triplified_data']. A role that matches neither is never compared, so the run would report nothing and succeed.
-[exit 1]
+error: data/remote/graphs-role-typo.json: unknown graph role(s) ['triplified-data'] -- valid roles are ['ontology', 'triplified_data']. A role that matches neither is never compared, so the run would report nothing and succeed.
+[exit 2]
 ```
 
 </details>
@@ -8926,7 +8918,7 @@ ValueError: data/remote/graphs-role-typo.json: unknown graph role(s) ['triplifie
 
 > > **`role` was not validated, and a typo cost you the whole check.**
 
-**Evidence:** the same as [C13.03 — The store a version behind: --fail-on-anything exits 1](#c13-03), which reproduces it: step 5 output contains 'template vs ontology: clean', 'live data vs ontology: 1 undeclared class(es)', "'classes_only_in_template': ['https://acme.example.org/ns/SoftwareEngineer']", "'classes_only_in_live_data': ['https://acme.example.org/ns/Engineer']"; step 5 exits 1; step 6 output has none of '==='; step 6 exits 1; step 6 output contains 'unknown graph role'
+**Evidence:** the same as [C13.03 — The store a version behind: --fail-on-anything exits 1](#c13-03), which reproduces it: step 5 output contains 'template vs ontology: clean', 'live data vs ontology: 1 undeclared class(es)', "'classes_only_in_template': ['https://acme.example.org/ns/SoftwareEngineer']", "'classes_only_in_live_data': ['https://acme.example.org/ns/Engineer']"; step 5 exits 1; step 6 output has none of '==='; step 6 output contains 'unknown graph role'; suite 0.24.1: step 6 exits 2; suite 0.24.1: the refusal is one line on stderr, with no traceback
 
 ---
 
@@ -9169,17 +9161,17 @@ holos query --data data/policy/hr.trig --query "SELECT DISTINCT ?g WHERE { GRAPH
 ```text
 $ holos query --data data/policy/hr.trig --query "PREFIX ex: <http://example.com/> SELECT ?name ?salary WHERE { GRAPH ?g { ?e ex:name ?name OPTIONAL { ?e ex:salary ?salary } } } ORDER BY ?name" --deny-predicate http://example.com/salary --except-role hr
 {"head":{"vars":["name","salary"]},"results":{"bindings":[{"name":{"type":"literal","value":"Alice"}},{"name":{"type":"literal","value":"Bob"}},{"name":{"type":"literal","value":"Carol"}}]}}
-loaded 21 quads in 0.00s (35983 quads/s)
+loaded 21 quads in 0.00s (34482 quads/s)
 note: 3 quads withheld by policy
 [exit 0]
 
 $ holos query --data data/policy/hr.trig --query "PREFIX ex: <http://example.com/> SELECT ?name ?salary WHERE { GRAPH ?g { ?e ex:name ?name OPTIONAL { ?e ex:salary ?salary } } } ORDER BY ?name" --deny-predicate http://example.com/salary --except-role hr --role hr
 {"head":{"vars":["name","salary"]},"results":{"bindings":[{"name":{"type":"literal","value":"Alice"},"salary":{"type":"literal","value":"95000","datatype":"http://www.w3.org/2001/XMLSchema#integer"}},{"name":{"type":"literal","value":"Bob"},"salary":{"type":"literal","value":"88000","datatype":"http://www.w3.org/2001/XMLSchema#integer"}},{"name":{"type":"literal","value":"Carol"},"salary":{"type":"literal","value":"102000","datatype":"http://www.w3.org/2001/XMLSchema#integer"}}]}}
-loaded 21 quads in 0.00s (35323 quads/s)
+loaded 21 quads in 0.00s (30814 quads/s)
 [exit 0]
 
 $ holos query --data data/policy/hr.trig --query "PREFIX ex: <http://example.com/> SELECT ?name ?salary WHERE { GRAPH ?g { ?e ex:name ?name OPTIONAL { ?e ex:salary ?salary } } } ORDER BY ?name" --deny-predicate http://example.com/salary --fail-closed
-loaded 21 quads in 0.00s (30474 quads/s)
+loaded 21 quads in 0.00s (34381 quads/s)
 Error: query evaluation failed: access denied by policy
 Caused by:
     access denied by policy
@@ -9187,13 +9179,13 @@ Caused by:
 
 $ holos query --data data/policy/hr.trig --query "SELECT DISTINCT ?g WHERE { GRAPH ?g { ?s ?p ?o } } ORDER BY ?g" --label-graph http://example.com/reviews=3
 {"head":{"vars":["g"]},"results":{"bindings":[{"g":{"type":"uri","value":"http://example.com/provenance"}},{"g":{"type":"uri","value":"http://example.com/public"}}]}}
-loaded 21 quads in 0.00s (27336 quads/s)
+loaded 21 quads in 0.00s (31919 quads/s)
 note: 3 quads withheld by policy
 [exit 0]
 
 $ holos query --data data/policy/hr.trig --query "SELECT DISTINCT ?g WHERE { GRAPH ?g { ?s ?p ?o } } ORDER BY ?g" --label-graph http://example.com/reviews=3 --clearance 3
 {"head":{"vars":["g"]},"results":{"bindings":[{"g":{"type":"uri","value":"http://example.com/provenance"}},{"g":{"type":"uri","value":"http://example.com/public"}},{"g":{"type":"uri","value":"http://example.com/reviews"}}]}}
-loaded 21 quads in 0.00s (19096 quads/s)
+loaded 21 quads in 0.00s (35490 quads/s)
 [exit 0]
 ```
 
@@ -9429,19 +9421,19 @@ room to compact  yes (needs up to 140.9 KiB)
 predicates by frequency
            3  <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
            1  <http://example.org/name>
-loaded 4 quads in 0.26s (15 quads/s)
+loaded 4 quads in 0.24s (16 quads/s)
 [exit 0]
 
 $ holos validate --store work/C13_10/cli-store --shapes data/shacl/shapes-violation.ttl
 shapes compiled   2 shapes in 0.000s
-validated         0.001s
+validated         0.000s
 conforms          false
 results           2
 read 5 shape quads from data/shacl/shapes-violation.ttl, and kept none of them
 [exit 0]
 
 $ holos validate --store work/C13_10/cli-store --shapes data/shacl/shapes-violation.ttl
-shapes compiled   2 shapes in 0.000s
+shapes compiled   2 shapes in 0.001s
 validated         0.000s
 conforms          false
 results           2
@@ -9453,7 +9445,7 @@ $ holos query --store work/C13_10/cli-store --query "SELECT ?g (COUNT(*) AS ?n) 
 [exit 0]
 
 $ holos update --store work/C13_10/cli-store --update "INSERT DATA { GRAPH <urn:holos:shapes> { <urn:x:s> <urn:x:p> <urn:x:o> } }"
-inserted 1 deleted 0 graphs +0 -0 in 0.193s
+inserted 1 deleted 0 graphs +0 -0 in 0.214s
 [exit 0]
 
 $ holos validate --store work/C13_10/cli-store --shapes data/shacl/shapes-violation.ttl
@@ -9655,9 +9647,9 @@ NOTE: 2 external term(s) referenced with no --ref file resolving a definition:
 [exit 0]
 
 $ python scripts/sha256.py work/C13_12/run1/ontology-documentation.html work/C13_12/run2/ontology-documentation.html work/C13_12/run3/ontology-documentation.html work/C13_12/seed0-a/ontology-documentation.html work/C13_12/seed0-b/ontology-documentation.html
-0893596a6c7b2954 work/C13_12/run1/ontology-documentation.html
-a776e9615f6f810b work/C13_12/run2/ontology-documentation.html
-369b00f7c752f04c work/C13_12/run3/ontology-documentation.html
+0e0219ccc113c2ef work/C13_12/run1/ontology-documentation.html
+c7813ae8148a8562 work/C13_12/run2/ontology-documentation.html
+ea754b690a29dec9 work/C13_12/run3/ontology-documentation.html
 4b065806e5fca839 work/C13_12/seed0-a/ontology-documentation.html
 4b065806e5fca839 work/C13_12/seed0-b/ontology-documentation.html
 [exit 0]
@@ -9971,16 +9963,16 @@ with tempfile.TemporaryDirectory() as tmp:
 
 **What is checked:** ten runs per seed through the suite: seed 5 runs HermiT in at least 9, seed 0 fails in at least 7. The thresholds sit below the recorded tallies on purpose: C14.08 shows the one thing the seed does not control, and where the failure happens
 
-**Recorded result:** PASS — seed 5: HermiT ran 10 of 10, did not run 0; seed 0: HermiT ran 1 of 10, did not run 9; step 1 output contains "could not be run: cannot access local variable 'entity' where it is not associated with a value"
+**Recorded result:** PASS — seed 5: HermiT ran 10 of 10, did not run 0; seed 0: HermiT ran 0 of 10, did not run 10; step 1 output contains "could not be run: cannot access local variable 'entity' where it is not associated with a value"
 
 <details><summary>Output, as recorded</summary>
 
 ```text
 $ python scripts/reasoner_seeds.py work/C14_06 10 0 5
-PYTHONHASHSEED=0: HermiT ran 1 of 10, did not run 9 of 10
+PYTHONHASHSEED=0: HermiT ran 0 of 10, did not run 10 of 10
 PYTHONHASHSEED=5: HermiT ran 10 of 10, did not run 0 of 10
 REA-022 messages seen:
-  9 x  The external DL reasoner ('hermit') could not be run: cannot access local variable 'entity' where it is not associated with a value
+  10 x  The external DL reasoner ('hermit') could not be run: cannot access local variable 'entity' where it is not associated with a value
 [exit 0]
 ```
 
@@ -10253,16 +10245,16 @@ with tempfile.TemporaryDirectory() as tmp:
 
 **What is checked:** loading the merged ontology straight into owlready2, with the load path and blank-node labels fixed: seed 0 fails in at least 9 of 15 and seed 5 loads in at least 13 of 15; every failure is while building foaf:primaryTopic. The exact tallies, including any loads that go the other way, are recorded rather than asserted
 
-**Recorded result:** PASS — line 2. failed 13 times (at least 9); line 3. loaded 15 times (at least 13); every failure was owlready2 building foaf:primaryTopic
+**Recorded result:** PASS — line 2. failed 14 times (at least 9); line 3. loaded 15 times (at least 13); every failure was owlready2 building foaf:primaryTopic
 
 <details><summary>Output, as recorded</summary>
 
 ```text
 $ python scripts/load_repeat.py work/C14_08 15
-1. PYTHONHASHSEED=0, fresh temporary directory: loaded 1 of 15, failed 14 of 15
-2. PYTHONHASHSEED=0, fixed path and blank-node labels: loaded 2 of 15, failed 13 of 15
+1. PYTHONHASHSEED=0, fresh temporary directory: loaded 0 of 15, failed 15 of 15
+2. PYTHONHASHSEED=0, fixed path and blank-node labels: loaded 1 of 15, failed 14 of 15
 3. PYTHONHASHSEED=5, fixed path and blank-node labels: loaded 15 of 15, failed 0 of 15
-failures were while building: <http://xmlns.com/foaf/0.1/primaryTopic> (27)
+failures were while building: <http://xmlns.com/foaf/0.1/primaryTopic> (29)
 [exit 0]
 ```
 
@@ -10270,7 +10262,7 @@ failures were while building: <http://xmlns.com/foaf/0.1/primaryTopic> (27)
 
 **Sources:**
 
-- [suite reasoning/backends/external_backend.py: a fresh TemporaryDirectory, loaded by path](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/c5bec71decfbbbed6d6ba734d6f29d6edbde8ecf/ontology_suite/reasoning/backends/external_backend.py#L140-L155): “onto = world.get_ontology(str(owl_path)).load()” (quote found, checked 2026-10-15)
+- [suite reasoning/backends/external_backend.py: a fresh TemporaryDirectory, loaded by path](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a24d3456c3329fe93b31cadefdfdf05329e82442/ontology_suite/reasoning/backends/external_backend.py#L140-L155): “onto = world.get_ontology(str(owl_path)).load()” (quote found, checked 2026-10-15)
 
 HermiT is never called here: the failure, when it comes, is in loading.
 
@@ -10334,7 +10326,7 @@ Findings: 2 total (1 Violation, 0 Warning, 1 Info)
 Reports written to: ./work/C14_09/out
   - work/C14_09/out/findings.txt (start here -- what, where, and the source line)
   - work/C14_09/out/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp7v688f0t -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpvx75t7y4 -Y
 [exit 1]
 
 $ python scripts/summarise_findings.py work/C14_09/out/full_results.csv --by focus --check REA-022
@@ -10428,7 +10420,7 @@ with tempfile.TemporaryDirectory() as tmp:
 
 **What is checked:** on the fixture HermiT finds the ontology consistent, with Contractor and owl:Nothing unsatisfiable; suite 0.22.0 reports REA-020 as well as REA-021, and 0.23.0 REA-021 alone. On a clean ontology HermiT finds nothing and the suite reports neither
 
-**Recorded result:** PASS — step 1 output contains 'HermiT: consistent', 'owl:Nothing among them: True', 'https://acme.example.org/ns/Contractor'; suite 0.24.0: step 3 output contains 'REA-021'; step 3 output has none of 'REA-020'; step 4 output contains 'HermiT: consistent', 'unsatisfiable classes: none'; step 6 output has none of 'REA-020', 'REA-021', 'REA-022'
+**Recorded result:** PASS — step 1 output contains 'HermiT: consistent', 'owl:Nothing among them: True', 'https://acme.example.org/ns/Contractor'; suite 0.24.1: step 3 output contains 'REA-021'; step 3 output has none of 'REA-020'; step 4 output contains 'HermiT: consistent', 'unsatisfiable classes: none'; step 6 output has none of 'REA-020', 'REA-021', 'REA-022'
 
 <details><summary>Output, as recorded</summary>
 
@@ -10437,7 +10429,7 @@ $ python scripts/hermit_verdict.py fixtures/acme_robotics/acme-org-v1.ttl fixtur
 HermiT: consistent (no OwlReadyInconsistentOntologyError)
 unsatisfiable classes: ['http://www.w3.org/2002/07/owl#Nothing', 'https://acme.example.org/ns/Contractor']
 owl:Nothing among them: True
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpfvb9olqy -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpwz1quzj0 -Y
 [exit 0]
 
 $ ontology-quality-suite ontology --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --out-dir work/C14_39/acme --reports minimal
@@ -10445,7 +10437,7 @@ Findings: 2 total (2 Violation, 0 Warning, 0 Info)
 Reports written to: ./work/C14_39/acme
   - work/C14_39/acme/findings.txt (start here -- what, where, and the source line)
   - work/C14_39/acme/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp7tnjyv3g -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmph5cy9gtb -Y
 [exit 1]
 
 $ python scripts/summarise_findings.py work/C14_39/acme/full_results.csv
@@ -10458,7 +10450,7 @@ $ python scripts/hermit_verdict.py data/reasoner/clean.ttl
 HermiT: consistent (no OwlReadyInconsistentOntologyError)
 unsatisfiable classes: none
 owl:Nothing among them: False
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpa6ly992p -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmprrja74vl -Y
 [exit 0]
 
 $ ontology-quality-suite ontology --ontology data/reasoner/clean.ttl --out-dir work/C14_39/clean --reports minimal
@@ -10466,7 +10458,7 @@ Findings: 0 total (0 Violation, 0 Warning, 0 Info)
 Reports written to: ./work/C14_39/clean
   - work/C14_39/clean/findings.txt (start here -- what, where, and the source line)
   - work/C14_39/clean/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp664bbc5a -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpl0jru8hm -Y
 [exit 0]
 
 $ python scripts/summarise_findings.py work/C14_39/clean/full_results.csv
@@ -10495,7 +10487,7 @@ Needs Java, and a hash seed under which owlready2 loads (5 here; see C14.06).
 
 > `consistency-remote` accepted any string as a graph's `role` and ignored all but
 
-**Evidence:** the same as [C13.03 — The store a version behind: --fail-on-anything exits 1](#c13-03), which reproduces it: step 5 output contains 'template vs ontology: clean', 'live data vs ontology: 1 undeclared class(es)', "'classes_only_in_template': ['https://acme.example.org/ns/SoftwareEngineer']", "'classes_only_in_live_data': ['https://acme.example.org/ns/Engineer']"; step 5 exits 1; step 6 output has none of '==='; step 6 exits 1; step 6 output contains 'unknown graph role'
+**Evidence:** the same as [C13.03 — The store a version behind: --fail-on-anything exits 1](#c13-03), which reproduces it: step 5 output contains 'template vs ontology: clean', 'live data vs ontology: 1 undeclared class(es)', "'classes_only_in_template': ['https://acme.example.org/ns/SoftwareEngineer']", "'classes_only_in_live_data': ['https://acme.example.org/ns/Engineer']"; step 5 exits 1; step 6 output has none of '==='; step 6 output contains 'unknown graph role'; suite 0.24.1: step 6 exits 2; suite 0.24.1: the refusal is one line on stderr, with no traceback
 
 ---
 
@@ -10507,7 +10499,7 @@ Needs Java, and a hash seed under which owlready2 loads (5 here; see C14.06).
 
 > | At 0.22.0, `--help` offers `--inference owlrl` and `both`, and asking for one gives a Python traceback
 
-**Evidence:** the same as [C07.26 — --inference owlrl is refused: a traceback at 0.22.0, a usage error from 0.23.0](#c07-26), which reproduces it: step 1 exits non-zero (2); suite 0.24.0: step 1 output contains "argument --inference: invalid choice: 'owlrl'"; step 1 output has none of 'Traceback'; step 2 output contains '--inference {none,rdfs}'
+**Evidence:** the same as [C07.26 — --inference owlrl is refused: a traceback at 0.22.0, a usage error from 0.23.0](#c07-26), which reproduces it: step 1 exits non-zero (2); suite 0.24.1: step 1 output contains "argument --inference: invalid choice: 'owlrl'"; step 1 output has none of 'Traceback'; step 2 output contains '--inference {none,rdfs}'
 
 ---
 
@@ -10519,7 +10511,7 @@ Needs Java, and a hash seed under which owlready2 loads (5 here; see C14.06).
 
 > | At 0.22.0, `--inference` reaches the shapes only
 
-**Evidence:** the same as [C07.27 — --inference rdfs: half the suite at 0.22.0, every engine from 0.23.0](#c07-27), which reproduces it: suite 0.24.0: step 1 exits non-zero (2); step 2: 489 findings (57 V, 339 W, 93 I); step 3: 479 findings (55 V, 340 W, 84 I); step 4: 489 findings (57 V, 339 W, 93 I); step 5 output contains 'gained 21:', 'STR-007 9', 'STY-003 9', 'STR-009 3', 'lost 11:', 'STR-006 1', 'DAT-002 1'
+**Evidence:** the same as [C07.27 — --inference rdfs: half the suite at 0.22.0, every engine from 0.23.0](#c07-27), which reproduces it: suite 0.24.1: step 1 exits non-zero (2); step 2: 489 findings (57 V, 339 W, 93 I); step 3: 479 findings (55 V, 340 W, 84 I); step 4: 489 findings (57 V, 339 W, 93 I); step 5 output contains 'gained 21:', 'STR-007 9', 'STY-003 9', 'STR-009 3', 'lost 11:', 'STR-006 1', 'DAT-002 1'
 
 ---
 
@@ -10615,7 +10607,7 @@ Needs Java, and a hash seed under which owlready2 loads (5 here; see C14.06).
 
 > | At 0.22.0, when two query files bind one prefix differently, `sketch` reads every file
 
-**Evidence:** the same as [C10.29 — The merged sketch and one prefix bound two ways: odd file first](#c10-29), which reproduces it: suite 0.24.0: the warning says each file is read with its own definition; step 2 output contains 'focus=https://acme.example.org/ns#Department'; step 2 output has none of 'ns#Employee'; step 3 output has none of 'ns#hasSkill', 'ns#hasEmployeeId'; three/full_results.csv: CNF-005 excludes https://acme.example.org/ns/Employee; two/full_results.csv: {'CNF-005': 36, 'TQL-003': 1}; two/full_results.csv: CNF-005 excludes https://acme.example.org/ns/Employee
+**Evidence:** the same as [C10.29 — The merged sketch and one prefix bound two ways: odd file first](#c10-29), which reproduces it: suite 0.24.1: the warning says each file is read with its own definition; step 2 output contains 'focus=https://acme.example.org/ns#Department'; step 2 output has none of 'ns#Employee'; step 3 output has none of 'ns#hasSkill', 'ns#hasEmployeeId'; three/full_results.csv: CNF-005 excludes https://acme.example.org/ns/Employee; two/full_results.csv: {'CNF-005': 36, 'TQL-003': 1}; two/full_results.csv: CNF-005 excludes https://acme.example.org/ns/Employee
 
 ---
 
@@ -10635,7 +10627,7 @@ ontology-quality-suite checks --help
 
 **What is checked:** at 0.22.0 the suite's --engine help still says 'both' runs pyshacl and 'native' is not a default dependency; from 0.23.0 it says neither
 
-**Recorded result:** PASS — suite 0.24.0: step 1 output has none of 'runs pyshacl', 'not a default dependency'
+**Recorded result:** PASS — suite 0.24.1: step 1 output has none of 'runs pyshacl', 'not a default dependency'
 
 <details><summary>Output, as recorded</summary>
 
@@ -10687,8 +10679,8 @@ options:
 
 **Sources:**
 
-- [suite docs/REPORTS.md says 0.15.0 (see C09.11 for 0.17.0)](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/c5bec71decfbbbed6d6ba734d6f29d6edbde8ecf/docs/REPORTS.md#L18): “## What changed in 0.15.0” (quote found, checked 2026-10-15)
-- [suite docs/REASONING.md](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/c5bec71decfbbbed6d6ba734d6f29d6edbde8ecf/docs/REASONING.md#L107): “Uses `owlready2` (the `reasoner` extra: `uv sync --extra reasoner`)” (quote found, checked 2026-10-15)
+- [suite docs/REPORTS.md says 0.15.0 (see C09.11 for 0.17.0)](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a24d3456c3329fe93b31cadefdfdf05329e82442/docs/REPORTS.md#L18): “## What changed in 0.15.0” (quote found, checked 2026-10-15)
+- [suite docs/REASONING.md](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a24d3456c3329fe93b31cadefdfdf05329e82442/docs/REASONING.md#L107): “Uses `owlready2` (the `reasoner` extra: `uv sync --extra reasoner`)” (quote found, checked 2026-10-15)
 - [suite pyproject.toml at its first commit: owlready2 a base dependency](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/d0ba3679644360c31118295f9ba8738c85111e95/pyproject.toml#L14): “"owlready2>=0.51",” (quote found, checked 2026-10-15)
 - [extension README (0.15.0) names Oxigraph](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/README.md#L86): “Oxigraph, `shacl-wasm`, and `eyereasoner` are all” (quote found, checked 2026-10-15)
 - [testing repo README](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/6cdfb14a3c2857b61dcb32f49f56a4829b0d0664/README.md#L22): “18 Turtle files in 10 folders” (quote found, checked 2026-10-15)
@@ -10826,7 +10818,7 @@ Counted from the tagged files: 50 entries at v0.5.0 and v0.8.0, 56 at v0.10.0, 6
 
 > **Three suite defects this edition found are fixed in 0.23.0**
 
-**Evidence:** the same as [C07.27 — --inference rdfs: half the suite at 0.22.0, every engine from 0.23.0](#c07-27), which reproduces it: suite 0.24.0: step 1 exits non-zero (2); step 2: 489 findings (57 V, 339 W, 93 I); step 3: 479 findings (55 V, 340 W, 84 I); step 4: 489 findings (57 V, 339 W, 93 I); step 5 output contains 'gained 21:', 'STR-007 9', 'STY-003 9', 'STR-009 3', 'lost 11:', 'STR-006 1', 'DAT-002 1'
+**Evidence:** the same as [C07.27 — --inference rdfs: half the suite at 0.22.0, every engine from 0.23.0](#c07-27), which reproduces it: suite 0.24.1: step 1 exits non-zero (2); step 2: 489 findings (57 V, 339 W, 93 I); step 3: 479 findings (55 V, 340 W, 84 I); step 4: 489 findings (57 V, 339 W, 93 I); step 5 output contains 'gained 21:', 'STR-007 9', 'STY-003 9', 'STR-009 3', 'lost 11:', 'STR-006 1', 'DAT-002 1'
 
 The other two are C14.39 (REA-020) and C10.29 and C10.30 (sketch).
 
@@ -10876,7 +10868,7 @@ The other two are C14.39 (REA-020) and C10.29 and C10.30 (sketch).
 
 > **The reasoner as "flaky".**
 
-**Evidence:** the same as [C14.06 — The reasoner's outcome follows the hash seed](#c14-06), which reproduces it: seed 5: HermiT ran 10 of 10, did not run 0; seed 0: HermiT ran 1 of 10, did not run 9; step 1 output contains "could not be run: cannot access local variable 'entity' where it is not associated with a value"
+**Evidence:** the same as [C14.06 — The reasoner's outcome follows the hash seed](#c14-06), which reproduces it: seed 5: HermiT ran 10 of 10, did not run 0; seed 0: HermiT ran 0 of 10, did not run 10; step 1 output contains "could not be run: cannot access local variable 'entity' where it is not associated with a value"
 
 ---
 
@@ -10888,7 +10880,7 @@ The other two are C14.39 (REA-020) and C10.29 and C10.30 (sketch).
 
 > **The reasoner as an "optional extra".**
 
-**Evidence:** the same as [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05), which reproduces it: step 1 output contains 'commands installed: ontology-quality-suite', 'holosdb>=0.15', 'owlready2>=0.51', 'shacl 0.3.3/n    commands installed: none (library only)', 'tarka-rdf 0.1.1/n    commands installed: none (library only)', 'holosdb 0.21.1/n    commands installed: none (library only)'; suite 0.24.0: step 1 output contains 'shacl<0.4,>=0.3.3'
+**Evidence:** the same as [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05), which reproduces it: step 1 output contains 'commands installed: ontology-quality-suite', 'holosdb>=0.15', 'owlready2>=0.51', 'shacl 0.3.3/n    commands installed: none (library only)', 'tarka-rdf 0.1.1/n    commands installed: none (library only)', 'holosdb 0.21.1/n    commands installed: none (library only)'; suite 0.24.1: step 1 output contains 'shacl<0.4,>=0.3.3'
 
 ---
 

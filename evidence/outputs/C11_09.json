@@ -15,8 +15,8 @@
    "cmd": "holos stats --data work/C11_09/employees.nt --store work/C11_09/store",
    "rc": 0,
    "seconds": 0.4,
-   "stdout": "quads            40\ndictionary terms 31\nnamed graphs     0\non disk          150.2 KiB\nfree here        4.5 GiB\nroom to compact  yes (needs up to 150.2 KiB)\n\npredicates by frequency\n          10  <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\n           5  <http://xmlns.com/foaf/0.1/mbox>\n           5  <https://acme.example.org/ns/hasSkill>\n           5  <https://acme.example.org/ns/hasRole>\n           5  <http://xmlns.com/foaf/0.1/name>\n           5  <https://acme.example.org/ns/hasEmployeeId>\n           5  <https://acme.example.org/ns/worksIn>\n",
-   "stderr": "loaded 40 quads in 0.26s (153 quads/s)\n"
+   "stdout": "quads            40\ndictionary terms 31\nnamed graphs     0\non disk          150.2 KiB\nfree here        4.5 GiB\nroom to compact  yes (needs up to 150.2 KiB)\n\npredicates by frequency\n          10  <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\n           5  <https://acme.example.org/ns/worksIn>\n           5  <https://acme.example.org/ns/hasRole>\n           5  <http://xmlns.com/foaf/0.1/mbox>\n           5  <http://xmlns.com/foaf/0.1/name>\n           5  <https://acme.example.org/ns/hasSkill>\n           5  <https://acme.example.org/ns/hasEmployeeId>\n",
+   "stderr": "loaded 40 quads in 0.27s (147 quads/s)\n"
   },
   {
    "cmd": "holos rules --store work/C11_09/store --rules data/holos/rules.rq",

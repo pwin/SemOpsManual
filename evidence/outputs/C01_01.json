@@ -7,7 +7,7 @@
   {
    "cmd": "python scripts/pairings.py 10 20",
    "rc": 0,
-   "seconds": 0.0,
+   "seconds": 0.1,
    "stdout": "10 systems: 45 potential point-to-point pairings; 10 mappings to a shared model\n20 systems: 190 potential point-to-point pairings; 20 mappings to a shared model\n",
    "stderr": ""
   }

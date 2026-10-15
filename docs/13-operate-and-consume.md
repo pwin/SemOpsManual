@@ -173,9 +173,10 @@ reports nothing at all.
 >
 > **From 0.24.0 the manifest is refused when it loads**, naming every bad role
 > in the file at once together with the valid set. On 0.24.0 itself that refusal
-> arrives as a Python traceback rather than a one-line error -- the shape §7.4
-> complains about, listed in [Ch. 14](14-coverage-and-gaps.md) §14.4 and fixed
-> after 0.24.0. The exit is non-zero either way, which is the part a gate reads.
+> arrived as a Python traceback rather than a one-line error -- the shape §7.4
+> complains about -- and **0.24.1 reports it as one line on stderr**, exiting 2
+> as a usage error rather than 1 as an uncaught exception. The exit is non-zero
+> on both, which is the part a gate reads.
 >
 > The defence is still worth keeping on any version, because it is the general
 > answer to this shape and not to this one flag: point the check at a graph you
