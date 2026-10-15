@@ -39,7 +39,7 @@ CLAIMS = [
           check=has(0, "PyPI ontology-quality-suite  0.23.0", "PyPI shacl                   0.3.3",
                     "PyPI holosdb                 0.21.1", "PyPI tarka-rdf               0.1.1",
                     "release shacl                shacl 0.3.3", "release tarka                tarka 0.1.1",
-                    "release holos                holos 0.21.1", "npm ontology-suite           0.15.0",
+                    "release holos                holos 0.21.1", "npm ontology-suite           0.16.0",
                     "npm shacl-wasm-node          0.3.3", "npm holos-wasm-node          0.21.1"),
           checks="the installed packages, release binaries and npm packages are the versions in the table",
           needs=["node"],
@@ -112,8 +112,8 @@ CLAIMS = [
                    src("extension commit 7198f91", commit("webapp", "7198f91e256b613503ad385f666460006c4631fe"),
                        'The text "[a blank node]" is deliberately identical to the queries\'')]),
 
-    Claim("C07.10", "The extension adds three MDL checks", "07",
-          (F, "Then it adds three of its own with no CLI"), "source", same_as="C08.03"),
+    Claim("C07.10", "The extension adds six checks of its own: three MDL, three MAL", "07",
+          (F, "Then it adds six of its own with no CLI"), "source", same_as="C08.03"),
 
     Claim("C07.11", "VOC-001 is declared, not runnable, by the CLI", "07",
           (F, "Nothing in the Python package implements it; only `registry.json` mentions the id."), "source",

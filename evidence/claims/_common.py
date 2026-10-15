@@ -20,7 +20,7 @@ HOLOS_URL = f"http://127.0.0.1:{HOLOS_PORT}"
 _GH = "https://github.com/pwin"
 REPOS = {
     "suite": (f"{_GH}/consolidated-ontology-quality-suite-python", "1118f57f72c6d24ce8d49e5a6d0d68928e0eef9a"),   # v0.23.0
-    "webapp": (f"{_GH}/consolidated-ontology-quality-suite-webapp", "704d4ef80fdbcbf614782fa9bf42dfa79962b18f"),
+    "webapp": (f"{_GH}/consolidated-ontology-quality-suite-webapp", "02ffaf6c35dae3e2b47fff9f723e501d24dc26cf"),   # v0.16.0
     "shacl": (f"{_GH}/SHACL_Engine", "1fdd526734a29219cfb689ce1cb59006beeae811"),   # v0.3.3
     "holos": (f"{_GH}/triplestore", "82e4d6686b3563db502ea68098a6f3fc9ce75d6b"),   # v0.21.1
     "tarka": (f"{_GH}/tarka", "88fe6184ffc77ee2a46b676cbcb1190620b52c49"),

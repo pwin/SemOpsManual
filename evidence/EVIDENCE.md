@@ -134,7 +134,7 @@ for the validation defect, and suite 0.23.0, with engine 0.3.3, for `REA-020`,
 | release tarka | tarka 0.1.1 |
 | release holos | holos 0.21.1 (82e4d66) |
 | node | v20.19.5 |
-| npm ontology-suite | 0.15.0 |
+| npm ontology-suite | 0.16.0 |
 | npm shacl-wasm-node | 0.3.3 |
 | npm holos-wasm-node | 0.21.1 |
 | npm typescript | 7.0.2 |
@@ -143,7 +143,7 @@ for the validation defect, and suite 0.23.0, with engine 0.3.3, for `REA-020`,
 
 ## Summary
 
-254 claims: 177 reproduced here, by 104 distinct runs (177 pass, 0 fail, 0 not yet run), 65 cited from upstream, 12 arguments. 118 source citations, 112 of them checked against the cited commit (the quoted words found in the commit message or in the file at the cited lines).
+255 claims: 178 reproduced here, by 105 distinct runs (178 pass, 0 fail, 0 not yet run), 65 cited from upstream, 12 arguments. 122 source citations, 116 of them checked against the cited commit (the quoted words found in the commit message or in the file at the cited lines).
 
 ### Introduction (README)
 
@@ -222,7 +222,7 @@ for the validation defect, and suite 0.23.0, with engine 0.3.3, for `REA-020`,
 | [C07.07 — STR() of a blank node: lenient, conformant, and the guard](#c07-07) | Reproduced here | PASS (2026-10-15) |
 | [C07.08 — pyshacl stays as a witness because it caught a real regression](#c07-08) | Cited from upstream | Cited from upstream |
 | [C07.09 — Positional dedup, '[a blank node]' in both repositories, owlrl leaves the checks path](#c07-09) | Cited from upstream | Cited from upstream |
-| [C07.10 — The extension adds three MDL checks](#c07-10) | Cited from upstream | Cited from upstream |
+| [C07.10 — The extension adds six checks of its own: three MDL, three MAL](#c07-10) | Cited from upstream | Cited from upstream |
 | [C07.11 — VOC-001 is declared, not runnable, by the CLI](#c07-11) | Cited from upstream | Cited from upstream |
 | [C07.12 — Severity belongs to the shape that produces the result](#c07-12) | Reproduced here | PASS (2026-10-15) |
 | [C07.13 — The registry declares; the directories decide](#c07-13) | Cited from upstream | Cited from upstream |
@@ -252,7 +252,7 @@ for the validation defect, and suite 0.23.0, with engine 0.3.3, for `REA-020`,
 |---|---|---|
 | [C08.01 — Outline prompts resolve restriction names since 0.14.0](#c08-01) | Cited from upstream | Cited from upstream |
 | [C08.02 — Run Local Checks reads 44 SPARQL and 6 SHACL files from the 61-check registry](#c08-02) | Reproduced here | PASS (2026-10-15) |
-| [C08.03 — Three modelling-guidance checks only the editor has](#c08-03) | Cited from upstream | Cited from upstream |
+| [C08.03 — Six checks only the editor has: three MDL, and since 0.16.0 three MAL](#c08-03) | Cited from upstream | Cited from upstream |
 | [C08.04 — VOC-001 is declared in the registry but only the extension runs it](#c08-04) | Cited from upstream | Cited from upstream |
 | [C08.05 — Eleven checks the editor cannot produce, two held back explicitly](#c08-05) | Cited from upstream | Cited from upstream |
 | [C08.06 — The CLI catches the typo as STR-001, not VOC-001](#c08-06) | Reproduced here | PASS (2026-10-15) |
@@ -282,6 +282,7 @@ for the validation defect, and suite 0.23.0, with engine 0.3.3, for `REA-020`,
 | [C08.30 — CT-39 asserts that a finding names something findable](#c08-30) | Cited from upstream | Cited from upstream |
 | [C08.31 — sh:severity on a node shape does not reach its property shapes](#c08-31) | Reproduced here | PASS (2026-10-15) |
 | [C08.32 — Four checks shipped that matched nothing](#c08-32) | Cited from upstream | Cited from upstream |
+| [C08.34 — inverse(p): the inline inverse, new in the DSL at 0.16.0](#c08-34) | Reproduced here | PASS (2026-10-15) |
 | [C08.33 — How the editor behaviour was established](#c08-33) | Argument | Argument |
 
 ### 9. Continuous integration
@@ -1122,7 +1123,7 @@ for k, v in versions().items():
 
 **What is checked:** the installed packages, release binaries and npm packages are the versions in the table
 
-**Recorded result:** PASS — step 1 output contains 'PyPI ontology-quality-suite  0.23.0', 'PyPI shacl                   0.3.3', 'PyPI holosdb                 0.21.1', 'PyPI tarka-rdf               0.1.1', 'release shacl                shacl 0.3.3', 'release tarka                tarka 0.1.1', 'release holos                holos 0.21.1', 'npm ontology-suite           0.15.0', 'npm shacl-wasm-node          0.3.3', 'npm holos-wasm-node          0.21.1'
+**Recorded result:** PASS — step 1 output contains 'PyPI ontology-quality-suite  0.23.0', 'PyPI shacl                   0.3.3', 'PyPI holosdb                 0.21.1', 'PyPI tarka-rdf               0.1.1', 'release shacl                shacl 0.3.3', 'release tarka                tarka 0.1.1', 'release holos                holos 0.21.1', 'npm ontology-suite           0.16.0', 'npm shacl-wasm-node          0.3.3', 'npm holos-wasm-node          0.21.1'
 
 <details><summary>Output, as recorded</summary>
 
@@ -1141,12 +1142,11 @@ release shacl                shacl 0.3.3
 release tarka                tarka 0.1.1
 release holos                holos 0.21.1 (82e4d66)
 node                         v20.19.5
-npm ontology-suite           0.15.0
+npm ontology-suite           0.16.0
 npm shacl-wasm-node          0.3.3
 npm holos-wasm-node          0.21.1
 npm typescript               7.0.2
 java (for HermiT)            openjdk version "25.0.3" 2026-04-21 LTS
-oxi-gen (testing repo only)  oxi_gen 0.5.1
 [exit 0]
 ```
 
@@ -1272,8 +1272,8 @@ portable .rq checks: 44; SHACL shape files: 6
 
 **Sources:**
 
-- [extension package.json (0.15.0)](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/704d4ef80fdbcbf614782fa9bf42dfa79962b18f/package.json#L489-L493): “"holos-wasm-node": "^0.21.0",” (quote found, checked 2026-10-15)
-- [extension package-lock.json (0.15.0): the holos-wasm-node it bundles](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/704d4ef80fdbcbf614782fa9bf42dfa79962b18f/package-lock.json): “"node_modules/holos-wasm-node"” (quote found, checked 2026-10-15)
+- [extension package.json (0.15.0)](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/package.json#L489-L493): “"holos-wasm-node": "^0.21.0",” (quote found, checked 2026-10-15)
+- [extension package-lock.json (0.15.0): the holos-wasm-node it bundles](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/package-lock.json): “"node_modules/holos-wasm-node"” (quote found, checked 2026-10-15)
 
 Below 1.0 a caret admits patch releases only, so `^0.21.0` means 0.21.x. The 0.15.0 release's lock file resolves it to 0.21.0; C07.01 shows holosdb 0.21.1 under the CLI. 0.21.1's one change, the validation fix in C13.10, is in a part of HOLOS the extension does not call: it validates with shacl-wasm-node.
 
@@ -1536,14 +1536,14 @@ $ python scripts/engine_leniency.py
 ---
 
 <a id="c07-10"></a>
-### C07.10 — The extension adds three MDL checks
+### C07.10 — The extension adds six checks of its own: three MDL, three MAL
 
 **In the manual:** [Chapter 7, at the claim](manual/docs/07-the-toolchain.md#ev-c07-10) · [plain edition](../docs/07-the-toolchain.md#shared-does-not-mean-identical)  
 **Kind:** Cited from upstream · **Result:** Cited from upstream
 
-> Then it adds three of its own with no CLI
+> Then it adds six of its own with no CLI
 
-**Evidence:** the same as [C08.03 — Three modelling-guidance checks only the editor has](#c08-03) (cited from upstream).
+**Evidence:** the same as [C08.03 — Six checks only the editor has: three MDL, and since 0.16.0 three MAL](#c08-03) (cited from upstream).
 
 ---
 
@@ -2333,7 +2333,8 @@ Annotated chapter: [manual/docs/08-model-and-validate.md](manual/docs/08-model-a
 
 **Sources:**
 
-- [extension CHANGELOG, 0.14.0](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/704d4ef80fdbcbf614782fa9bf42dfa79962b18f/CHANGELOG.md#L90-L99): “search it for the regular expression `<[^:>]+>`” (quote found, checked 2026-10-15)
+- [extension CHANGELOG, 0.16.0: MAL-003, and Local Checks no longer fails on one](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/CHANGELOG.md#L5-L13): “The statements that use a relative IRI are now reported” (quote found, checked 2026-10-15)
+- [extension CHANGELOG, 0.14.0](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/CHANGELOG.md#L140-L149): “search it for the regular expression `<[^:>]+>`” (quote found, checked 2026-10-15)
 - [extension commit d480ace (first released in v0.14.0)](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/d480ace5adc99616ca36ca563af8feb3cb2fb99d) (exists, checked 2026-10-15)
 
 ---
@@ -2353,16 +2354,20 @@ The editor and the CLI read the same registry; C07.03 counts it in the installed
 ---
 
 <a id="c08-03"></a>
-### C08.03 — Three modelling-guidance checks only the editor has
+### C08.03 — Six checks only the editor has: three MDL, and since 0.16.0 three MAL
 
 **In the manual:** [Chapter 8, at the claim](manual/docs/08-model-and-validate.md#ev-c08-03) · [plain edition](../docs/08-model-and-validate.md#live-diagnostics-including-one-shacl-cannot-give-you)  
 **Kind:** Cited from upstream · **Result:** Cited from upstream
 
-> It also runs **three checks the CLI does not have**
+> It also runs **six checks the CLI does not have**.
 
 **Sources:**
 
-- [extension src/checks/modellingGuidance.test.ts](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/704d4ef80fdbcbf614782fa9bf42dfa79962b18f/src/checks/modellingGuidance.test.ts#L20-L24): “MDL-002: ex:Veterinarian owl:equivalentClass ex:AnimalDoctor” (quote found, checked 2026-10-15)
+- [extension src/checks/modellingGuidance.test.ts](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/src/checks/modellingGuidance.test.ts#L20-L24): “MDL-002: ex:Veterinarian owl:equivalentClass ex:AnimalDoctor” (quote found, checked 2026-10-15)
+- [extension src/checks/malformed.ts (0.16.0)](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/src/checks/malformed.ts#L10-L15): “MAL-001: a qualified cardinality written with owl:cardinality (or min/max) beside owl:onClass.” (quote found, checked 2026-10-15)
+- [extension CHANGELOG, 0.16.0](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/CHANGELOG.md#L15-L20): “this extension's own rather than the registry's” (quote found, checked 2026-10-15)
+
+Neither family is in the shared registry.json, which is why the CLI cannot produce them.
 
 ---
 
@@ -2377,7 +2382,7 @@ The editor and the CLI read the same registry; C07.03 counts it in the installed
 **Sources:**
 
 - [suite tests/test_check_coverage.py, EXTENSION_ONLY_IDS](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/1118f57f72c6d24ce8d49e5a6d0d68928e0eef9a/tests/test_check_coverage.py#L94-L97): “checks/vocabularyChecks.ts -- a closed-world scan of the axiom positions” (quote found, checked 2026-10-15)
-- [extension src/checks/registryCoverage.test.ts](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/704d4ef80fdbcbf614782fa9bf42dfa79962b18f/src/checks/registryCoverage.test.ts#L25-L27): “the three checks only *this* extension can produce, VOC-001/REA-005/REA-006” (quote found, checked 2026-10-15)
+- [extension src/checks/registryCoverage.test.ts](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/src/checks/registryCoverage.test.ts#L25-L27): “the three checks only *this* extension can produce, VOC-001/REA-005/REA-006” (quote found, checked 2026-10-15)
 
 C08.06 shows the consequence: the CLI reports the typo as STR-001, never as VOC-001.
 
@@ -2393,8 +2398,8 @@ C08.06 shows the consequence: the CLI reports the typo as STR-001, never as VOC-
 
 **Sources:**
 
-- [extension registryCoverage.test.ts, CLI_ONLY](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/704d4ef80fdbcbf614782fa9bf42dfa79962b18f/src/checks/registryCoverage.test.ts#L33-L61): “'TQL-004', 'TQL-005',” (quote found, checked 2026-10-15)
-- [the same test: a query it cannot run is not counted](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/704d4ef80fdbcbf614782fa9bf42dfa79962b18f/src/checks/registryCoverage.test.ts#L99-L107): “make the CLI_ONLY list above assert something false while still passing” (quote found, checked 2026-10-15)
+- [extension registryCoverage.test.ts, CLI_ONLY](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/src/checks/registryCoverage.test.ts#L33-L61): “'TQL-004', 'TQL-005',” (quote found, checked 2026-10-15)
+- [the same test: a query it cannot run is not counted](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/src/checks/registryCoverage.test.ts#L99-L107): “make the CLI_ONLY list above assert something false while still passing” (quote found, checked 2026-10-15)
 
 CLI_ONLY lists REA-020, REA-021, REA-022, REA-010, REA-011, REA-012, CNF-001, CNF-002, CNF-005, TQL-004 and TQL-005: eleven.
 
@@ -2464,7 +2469,7 @@ total 1: 1 Violation, 0 Warning, 0 Info
 
 **Sources:**
 
-- [extension resources/checks-registry/repairs/manifest.json](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/704d4ef80fdbcbf614782fa9bf42dfa79962b18f/resources/checks-registry/repairs/manifest.json): “PRJ-REQUIRED” (quote found, checked 2026-10-15)
+- [extension resources/checks-registry/repairs/manifest.json](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/resources/checks-registry/repairs/manifest.json): “PRJ-REQUIRED” (quote found, checked 2026-10-15)
 
 The manifest's `checks` object has 16 keys: LOG-003, MDL-001, MDL-002, MDL-003, PRJ-REQUIRED, QUA-001, QUA-002, QUA-004, QUA-005, QUA-007, STR-001, STR-002, STR-005, STR-007, STR-008, STY-003.
 
@@ -2480,7 +2485,7 @@ The manifest's `checks` object has 16 keys: LOG-003, MDL-001, MDL-002, MDL-003, 
 
 **Sources:**
 
-- [extension CHANGELOG, 0.13.11](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/704d4ef80fdbcbf614782fa9bf42dfa79962b18f/CHANGELOG.md#L220-L230): “Blank nodes now cross the boundary as IRIs and come back as blank nodes” (quote found, checked 2026-10-15)
+- [extension CHANGELOG, 0.13.11](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/CHANGELOG.md#L270-L280): “Blank nodes now cross the boundary as IRIs and come back as blank nodes” (quote found, checked 2026-10-15)
 - [extension commit e4583b9](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/e4583b9a9d47f678bba2e5efaba7b7d0b21ca504) (exists, checked 2026-10-15)
 
 ---
@@ -2495,7 +2500,7 @@ The manifest's `checks` object has 16 keys: LOG-003, MDL-001, MDL-002, MDL-003, 
 
 **Sources:**
 
-- [extension CHANGELOG, 0.13.12](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/704d4ef80fdbcbf614782fa9bf42dfa79962b18f/CHANGELOG.md#L179-L184): “datatype from `rdf:dirLangString` to `rdf:langString` in the user's own file” (quote found, checked 2026-10-15)
+- [extension CHANGELOG, 0.13.12](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/CHANGELOG.md#L229-L234): “datatype from `rdf:dirLangString` to `rdf:langString` in the user's own file” (quote found, checked 2026-10-15)
 - [extension commit e3364fc (first released in v0.13.12)](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/e3364fc5bf6b7a7c5028d5e868b5b3c12164ae2c) (exists, checked 2026-10-15)
 
 ---
@@ -2511,7 +2516,7 @@ The manifest's `checks` object has 16 keys: LOG-003, MDL-001, MDL-002, MDL-003, 
 **Sources:**
 
 - [extension commit 71981b4 (first released in v0.13.5)](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/71981b41283528abbd6fa509a2ffa8c3bd231270): “Stop reading CURIEs out of comments” (quote found, checked 2026-10-15)
-- [extension CHANGELOG, 0.13.5](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/704d4ef80fdbcbf614782fa9bf42dfa79962b18f/CHANGELOG.md#L351): “a line whose *first* non-space character was `#`” (quote found, checked 2026-10-15)
+- [extension CHANGELOG, 0.13.5](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/CHANGELOG.md#L401): “a line whose *first* non-space character was `#`” (quote found, checked 2026-10-15)
 
 ---
 
@@ -2525,7 +2530,7 @@ The manifest's `checks` object has 16 keys: LOG-003, MDL-001, MDL-002, MDL-003, 
 
 **Sources:**
 
-- [extension CHANGELOG, 0.13.5](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/704d4ef80fdbcbf614782fa9bf42dfa79962b18f/CHANGELOG.md#L401): “It now names the directory it searched and how many ontology files it found” (quote found, checked 2026-10-15)
+- [extension CHANGELOG, 0.13.5](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/CHANGELOG.md#L451): “It now names the directory it searched and how many ontology files it found” (quote found, checked 2026-10-15)
 
 ---
 
@@ -2535,7 +2540,7 @@ The manifest's `checks` object has 16 keys: LOG-003, MDL-001, MDL-002, MDL-003, 
 **In the manual:** [Chapter 8, at the claim](manual/docs/08-model-and-validate.md#ev-c08-12) · [plain edition](../docs/08-model-and-validate.md#82-ontologies-as-code-literally)  
 **Kind:** Reproduced here · **Result:** **PASS** (2026-10-15)
 
-> Verified against the published 0.15.0 package.
+> Verified against the published 0.16.0 package.
 
 **Commands** (from the `evidence/` folder):
 
@@ -2581,15 +2586,15 @@ w.end((_e: unknown, ttl: string) => writeFileSync(process.argv[2], ttl));
 
 </details>
 
-**What is checked:** the installed package is 0.15.0; tsc reports no errors; the script runs and writes Turtle
+**What is checked:** the installed package is 0.16.0; tsc reports no errors; the script runs and writes Turtle
 
-**Recorded result:** PASS — step 1 output contains '0.15.0'; step 2 exits 0; step 3 exits 0; step 4 exits 0
+**Recorded result:** PASS — step 1 output contains '0.16.0'; step 2 exits 0; step 3 exits 0; step 4 exits 0
 
 <details><summary>Output, as recorded</summary>
 
 ```text
 $ node -p "require('./node_modules/ontology-suite/package.json').version"
-0.15.0
+0.16.0
 [exit 0]
 
 $ node node_modules/typescript/bin/tsc --noEmit --strict --module nodenext --moduleResolution nodenext --target es2022 --skipLibCheck scripts/dsl/acme.ontology.ts
@@ -2690,7 +2695,7 @@ Findings: 2 total (2 Violation, 0 Warning, 0 Info)
 Reports written to: ./work/C08_14/gate
   - work/C08_14/gate/findings.txt (start here -- what, where, and the source line)
   - work/C08_14/gate/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmplf6nzuzv -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmplz9j51eu -Y
 [exit 1]
 ```
 
@@ -2720,13 +2725,13 @@ node node_modules/tsx/dist/cli.mjs scripts/dsl/bad-range.ontology.ts
 
 ```text
 $ node node_modules/tsx/dist/cli.mjs scripts/dsl/bad-range.ontology.ts
-./node_modules/ontology-suite/dsl/index.js:933
+./node_modules/ontology-suite/dsl/index.js:952
   const facets = Object.entries(range.facets).filter(([, value]) => value !== void 0);
                         ^
 TypeError: Cannot convert undefined or null to object
     at Function.entries (<anonymous>)
-    at datatypeNode (./node_modules/ontology-suite/dsl/index.js:933:25)
-    at defdatatypeproperty (./node_modules/ontology-suite/dsl/index.js:911:71)
+    at datatypeNode (./node_modules/ontology-suite/dsl/index.js:952:25)
+    at defdatatypeproperty (./node_modules/ontology-suite/dsl/index.js:930:71)
     at <anonymous> (./scripts/dsl/bad-range.ontology.ts:8:1)
     at Object.<anonymous> (./scripts/dsl/bad-range.ontology.ts:8:79)
     at Module._compile (node:internal/modules/cjs/loader:1521:14)
@@ -3276,6 +3281,74 @@ C08.24 shows the first half: queries with no registry entry still ran, and repor
 
 ---
 
+<a id="c08-34"></a>
+### C08.34 — inverse(p): the inline inverse, new in the DSL at 0.16.0
+
+**In the manual:** [Chapter 8, at the claim](manual/docs/08-model-and-validate.md#ev-c08-34) · [plain edition](../docs/08-model-and-validate.md#82-ontologies-as-code-literally)  
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-15)
+
+> restriction builder also takes `inverse(p)`, the inline inverse that `MDL-001`
+
+**Commands** (from the `evidence/` folder):
+
+```bash
+node node_modules/typescript/bin/tsc --noEmit --strict --module nodenext --moduleResolution nodenext --target es2022 --skipLibCheck scripts/dsl/inverse.ontology.ts
+node node_modules/tsx/dist/cli.mjs scripts/dsl/inverse.ontology.ts work/C08_34/inverse.ttl
+python scripts/query_file.py work/C08_34/inverse.ttl "PREFIX owl: <http://www.w3.org/2002/07/owl#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT ?inverseOf ?filler WHERE { <https://example.org/cars/CarPart> rdfs:subClassOf ?r . ?r owl:onProperty ?p ; owl:someValuesFrom ?filler . ?p owl:inverseOf ?inverseOf }"
+```
+
+<details><summary><code>scripts/dsl/inverse.ontology.ts</code></summary>
+
+```typescript
+// Chapter 8 §8.2: the inline inverse, new in the DSL at 0.16.0. "A part of some
+// Car" written without minting a named inverse property, as MDL-001 recommends.
+// Run with tsx; writes Turtle to argv[2].
+import { ontology, defclass, defobjectproperty, some, inverse, build } from 'ontology-suite/dsl';
+import { Writer } from 'n3';
+import { writeFileSync } from 'node:fs';
+
+ontology('https://example.org/cars/', 'car');
+const Car = defclass('Car');
+const hasPart = defobjectproperty('hasPart');
+defclass('CarPart', { subClassOf: [some(inverse(hasPart), Car)] });
+
+const { quads, prefixes } = build();
+const w = new Writer({ prefixes });
+w.addQuads(quads as any);   // the bundled Quad type and @types/n3 disagree (C08.16)
+w.end((_e: unknown, ttl: string) => writeFileSync(process.argv[2], ttl));
+```
+
+</details>
+
+**What is checked:** the script type-checks and builds; CarPart's restriction is on an anonymous [ owl:inverseOf car:hasPart ], with Car as the filler, and no named inverse property is minted
+
+**Recorded result:** PASS — step 1 exits 0; step 2 exits 0; step 3 output contains 'https://example.org/cars/hasPart', 'https://example.org/cars/Car'
+
+<details><summary>Output, as recorded</summary>
+
+```text
+$ node node_modules/typescript/bin/tsc --noEmit --strict --module nodenext --moduleResolution nodenext --target es2022 --skipLibCheck scripts/dsl/inverse.ontology.ts
+
+[exit 0]
+
+$ node node_modules/tsx/dist/cli.mjs scripts/dsl/inverse.ontology.ts work/C08_34/inverse.ttl
+
+[exit 0]
+
+$ python scripts/query_file.py work/C08_34/inverse.ttl "PREFIX owl: <http://www.w3.org/2002/07/owl#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT ?inverseOf ?filler WHERE { <https://example.org/cars/CarPart> rdfs:subClassOf ?r . ?r owl:onProperty ?p ; owl:someValuesFrom ?filler . ?p owl:inverseOf ?inverseOf }"
+inverseOf,filler
+https://example.org/cars/hasPart,https://example.org/cars/Car
+[exit 0]
+```
+
+</details>
+
+**Sources:**
+
+- [extension CHANGELOG, 0.16.0](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/CHANGELOG.md#L29-L33): “Manchester's `inverse p some C`, written as OWL 2 does with `[ owl:inverseOf p ]`” (quote found, checked 2026-10-15)
+
+---
+
 <a id="c08-33"></a>
 ### C08.33 — How the editor behaviour was established
 
@@ -3284,7 +3357,7 @@ C08.24 shows the first half: queries with no registry entry still ran, and repor
 
 > **How the editor behaviour in this chapter was established.**
 
-A statement of method. The extension's tests were run on a Windows checkout of [704d4ef](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/704d4ef80fdbcbf614782fa9bf42dfa79962b18f) (the 0.15.0 release); the DSL claims (C08.12–C08.16) are reproduced here from the npm package.
+A statement of method. The extension's unit tests were run on a Windows checkout of [02ffaf6](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf) (the 0.16.0 release), with core.autocrlf on: 55 files, 466 tests, all passing, which matches the release's own count ([CHANGELOG](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/CHANGELOG.md#L51)). The DSL claims (C08.12–C08.16, C08.34) are reproduced here from the npm package.
 
 ---
 
@@ -7490,7 +7563,7 @@ inference=bogus  ERROR: unknown inference "bogus": expected "none", "rdfs", "rul
 
 **Sources:**
 
-- [extension src/checks/shaclRunner.ts](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/704d4ef80fdbcbf614782fa9bf42dfa79962b18f/src/checks/shaclRunner.ts#L25-L31): “so this deliberately stays at `"none"`” (quote found, checked 2026-10-15)
+- [extension src/checks/shaclRunner.ts](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/src/checks/shaclRunner.ts#L25-L31): “so this deliberately stays at `"none"`” (quote found, checked 2026-10-15)
 
 ---
 
@@ -10605,7 +10678,7 @@ options:
 - [suite docs/REPORTS.md says 0.15.0 (see C09.11 for 0.17.0)](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/1118f57f72c6d24ce8d49e5a6d0d68928e0eef9a/docs/REPORTS.md#L18): “## What changed in 0.15.0” (quote found, checked 2026-10-15)
 - [suite docs/REASONING.md](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/1118f57f72c6d24ce8d49e5a6d0d68928e0eef9a/docs/REASONING.md#L107): “Uses `owlready2` (the `reasoner` extra: `uv sync --extra reasoner`)” (quote found, checked 2026-10-15)
 - [suite pyproject.toml at its first commit: owlready2 a base dependency](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/d0ba3679644360c31118295f9ba8738c85111e95/pyproject.toml#L14): “"owlready2>=0.51",” (quote found, checked 2026-10-15)
-- [extension README (0.15.0) names Oxigraph](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/704d4ef80fdbcbf614782fa9bf42dfa79962b18f/README.md#L86): “Oxigraph, `shacl-wasm`, and `eyereasoner` are all” (quote found, checked 2026-10-15)
+- [extension README (0.15.0) names Oxigraph](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/README.md#L86): “Oxigraph, `shacl-wasm`, and `eyereasoner` are all” (quote found, checked 2026-10-15)
 - [testing repo README](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/6cdfb14a3c2857b61dcb32f49f56a4829b0d0664/README.md#L22): “18 Turtle files in 10 folders” (quote found, checked 2026-10-15)
 - [testing repo README](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/6cdfb14a3c2857b61dcb32f49f56a4829b0d0664/README.md#L31): “All 16 fixtures pass” (quote found, checked 2026-10-15)
 - [suite commit 5d59713, 'Bump to 0.18.0': main's head until it was fast-forwarded to 0.23.0, as recorded while drafting](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/5d597132779a19dbfb7ccf8891723ca19d49ced3): “Bump to 0.18.0” (quote found, checked 2026-10-15)

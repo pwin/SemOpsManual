@@ -76,7 +76,10 @@ says so.
 > properly. Before that, a bare name such as `hasChild some Person`, the
 > prompt's own example, was written as a relative IRI, `<hasChild>`. The
 > extension's CHANGELOG gives a regular expression for finding any relative IRIs
-> an earlier version left in your files. Run it once if you used the prompt.
+> an earlier version left in your files. From 0.16.0 you no longer need it: Local
+> Checks reports each one as `MAL-003`, and checks the rest of the file. Until
+> then, a single relative IRI made holosdb refuse the whole graph, and Local
+> Checks failed with no findings at all.
 
 <a id="ev-c08-01"></a>*Evidence:* [C08.01 — Outline prompts resolve restriction names since 0.14.0](../../EVIDENCE.md#c08-01) (cited)
 
@@ -91,12 +94,14 @@ engines, at the same versions, as the CLI ([Chapter 7](07-the-toolchain.md)
 
 <a id="ev-c08-02"></a>*Evidence:* [C08.02 — Run Local Checks reads 44 SPARQL and 6 SHACL files from the 61-check registry](../../EVIDENCE.md#c08-02) (reproduced: PASS)
 
-It also runs **three checks the CLI does not have**, `MDL-001`/`002`/`003`,
+It also runs **six checks the CLI does not have**. `MDL-001`/`002`/`003` are
 modelling-guidance checks informed by gist. Advice belongs where the author is,
 so seeing something here that never appears in CI is the design rather than a
-discrepancy.
+discrepancy. `MAL-001`/`002`/`003`, new in 0.16.0, are Violations: malformed OWL
+that earlier versions of the extension's own authoring commands could write, such
+as a qualified cardinality written so that OWL 2 reads it as unqualified.
 
-<a id="ev-c08-03"></a>*Evidence:* [C08.03 — Three modelling-guidance checks only the editor has](../../EVIDENCE.md#c08-03) (cited)
+<a id="ev-c08-03"></a>*Evidence:* [C08.03 — Six checks only the editor has: three MDL, and since 0.16.0 three MAL](../../EVIDENCE.md#c08-03) (cited)
 
 `VOC-001` below is a fourth of a different kind, and a correction I owe from
 an earlier edition, where I said it had moved into the shared registry "so CI
@@ -299,7 +304,11 @@ reasons, and the third is the one that surprised me.
    completes. Those are the verbs and adjectives of the model, and a DSL that
    puts them in the signature of `defobjectproperty` nudges people past the
    labels-only stage that so many enterprises get stuck in
-   ([Chapter 2](02-people-and-cognition.md) §2.3).
+   ([Chapter 2](02-people-and-cognition.md) §2.3). Since 0.16.0 every
+   restriction builder also takes `inverse(p)`, the inline inverse that `MDL-001`
+   recommends over minting a named inverse property.
+
+<a id="ev-c08-34"></a>*Evidence:* [C08.34 — inverse(p): the inline inverse, new in the DSL at 0.16.0](../../EVIDENCE.md#c08-34) (reproduced: PASS)
 
 Here is the Acme fixture's core, deliberate contradiction included, as a script:
 
@@ -321,7 +330,7 @@ defobjectproperty('worksIn', { domain: Employee, range: Department });
 defdatatypeproperty('hasEmployeeId', { domain: Employee, range: datatype('xsd:string') });
 ```
 
-Verified against the published 0.15.0 package. The interesting part is what
+Verified against the published 0.16.0 package. The interesting part is what
 catches which mistake.
 
 <a id="ev-c08-12"></a>*Evidence:* [C08.12 — The DSL script type-checks and builds against the npm package](../../EVIDENCE.md#c08-12) (reproduced: PASS)
@@ -754,10 +763,9 @@ process diagram.
 ---
 
 > **How the editor behaviour in this chapter was established.** By reading the
-> extension's source and CHANGELOG; by running its own test suite (437 tests:
-> 433 pass on this Windows checkout, and the four that fail do so because a
-> test's regular expression expects `\n` where `core.autocrlf` has written
-> `\r\n`, not because of anything the extension does); and by installing the
+> extension's source and CHANGELOG; by running its own unit tests (all 466 pass
+> at 0.16.0 on this Windows checkout; at 0.15.0 four failed here, on line
+> endings, which 0.16.0 fixed); and by installing the
 > published DSL package from npm and running it, as in §8.2. I did **not** drive
 > a live GUI session for this edition. The commands, checks and engines named
 > here are verified to exist and to run; the feel of using them is something

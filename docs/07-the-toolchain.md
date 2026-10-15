@@ -19,7 +19,7 @@ specification says, and that someone in the room can fix.
 
 | | Role | What it is | Where |
 |---|---|---|---|
-| **Ontology Development Suite** | The desk | VS Code extension: live diagnostics, outline, graph view, query workbench, and a TypeScript DSL for writing ontologies as code | [`.vsix` from the release](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/releases/tag/v0.15.0) · DSL on npm as [`ontology-suite`](https://www.npmjs.com/package/ontology-suite) · [GitHub](https://github.com/pwin/consolidated-ontology-quality-suite-webapp) |
+| **Ontology Development Suite** | The desk | VS Code extension: live diagnostics, outline, graph view, query workbench, and a TypeScript DSL for writing ontologies as code | [`.vsix` from the release](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/releases/tag/v0.16.0) · DSL on npm as [`ontology-suite`](https://www.npmjs.com/package/ontology-suite) · [GitHub](https://github.com/pwin/consolidated-ontology-quality-suite-webapp) |
 | **Ontology Quality Suite** | The gate | Python CLI and library: the 61-check registry, OWL2 reasoning, version diffing, change impact and repair, live-store checks, reference docs | PyPI [`ontology-quality-suite`](https://pypi.org/project/ontology-quality-suite/) · [GitHub](https://github.com/pwin/consolidated-ontology-quality-suite-python) |
 | **SHACL Engine** | The validator | SHACL in Rust: Python bindings, WebAssembly and a CLI; SHACL-AF rules; 425 of the 426 W3C tests, the exception named | PyPI [`shacl`](https://pypi.org/project/shacl/) · npm [`shacl-wasm`](https://www.npmjs.com/package/shacl-wasm), [`shacl-wasm-node`](https://www.npmjs.com/package/shacl-wasm-node) · CLI from the [releases](https://github.com/pwin/SHACL_Engine/releases) |
 | **HOLOS** | The store | An RDF 1.2 store with SPARQL 1.2 and access policy enforced at the index scan | PyPI [`holosdb`](https://pypi.org/project/holosdb/) · npm [`holos-wasm`](https://www.npmjs.com/package/holos-wasm), [`holos-wasm-node`](https://www.npmjs.com/package/holos-wasm-node) · CLI from the [releases](https://github.com/pwin/triplestore/releases) |
@@ -38,7 +38,7 @@ read, because it is how the rest are kept honest.
 > | | Version | From |
 > |---|---|---|
 > | Ontology Quality Suite | **0.23.0** | PyPI `ontology-quality-suite`. 0.23.0 was released while this edition was being checked, and fixes three defects the checking found (§7.4, and [Chapter 14](14-coverage-and-gaps.md) §14.4); where it changed a figure, the manual gives both |
-> | Ontology Development Suite | **0.15.0** | `ontology-dev-suite-0.15.0.vsix` from the v0.15.0 release; DSL as npm `ontology-suite` 0.15.0 |
+> | Ontology Development Suite | **0.16.0** | `ontology-dev-suite-0.16.0.vsix` from the v0.16.0 release; DSL as npm `ontology-suite` 0.16.0 |
 > | SHACL Engine | **0.3.3** | PyPI `shacl`; npm `shacl-wasm`, `shacl-wasm-node`; the `shacl` command from the v0.3.3 release. 0.3.3 adds one function, the RDFS closure handed out, which the suite needed for a fix (§7.4) |
 > | HOLOS | **0.21.1** | PyPI `holosdb`; npm `holos-wasm`, `holos-wasm-node`; the `holos` command from the v0.21.1 release. 0.21.1 was cut while this edition was being checked, to fix a defect the checking found ([Chapter 13](13-operate-and-consume.md) §13.2) |
 > | tarka | **0.1.1** | PyPI `tarka-rdf`; the `tarka` command from the v0.1.1 release |
@@ -90,7 +90,7 @@ edition the SHACL half also ran on one engine, the Rust validator, compiled
 natively for the CLI and to WebAssembly for the editor. Now the SPARQL half
 does too: the 44 portable checks run on **holosdb** in Python and on
 **holos-wasm-node** in the editor. The rule and the engine are the same on both
-sides, and so, near enough, is the version: the 0.15.0 extension bundles
+sides, and so, near enough, is the version: the 0.16.0 extension bundles
 holos-wasm-node 0.21.0, and 0.21.1 differs from it only in a validation fix the
 editor does not use.
 
@@ -152,9 +152,11 @@ pyshacl was what served it (§7.4).
 ### Shared does not mean identical
 
 The extension carries an exact copy of the 61-check registry, with the same
-ids and the same ten categories. Then it adds three of its own with no CLI
-equivalent: `MDL-001`/`002`/`003`, modelling-guidance checks informed by gist.
-So the editor can flag something CI never will. That is the right way round.
+ids and the same ten categories. Then it adds six of its own with no CLI
+equivalent: `MDL-001`/`002`/`003`, modelling-guidance checks informed by gist,
+and since 0.16.0 `MAL-001`/`002`/`003`, which find malformed OWL that earlier
+versions of the extension itself wrote. So the editor can flag something CI
+never will. That is the right way round.
 Advice belongs where the author is, and a build gate should not fail on a
 matter of modelling taste. Still, it's worth knowing before someone asks why a
 warning they saw while typing never appears in the pipeline.
@@ -175,7 +177,7 @@ directories decide.** A query with no registry entry still runs and reports as
 `UNMAPPED`. An entry with no file never fires.
 
 Neither side runs all sixty-one. Three are the extension's alone (`VOC-001`,
-`REA-005`, `REA-006`), on top of the three `MDL` checks outside the registry.
+`REA-005`, `REA-006`), on top of the six `MDL` and `MAL` checks outside the registry.
 Eleven are the CLI's alone: `REA-020`/`021`/`022` need a full DL reasoner;
 `REA-010`/`011`/`012` are OWL2 profile membership, which the extension computes
 but does not report as findings; `CNF-001`/`002`/`005` need a two-graph split

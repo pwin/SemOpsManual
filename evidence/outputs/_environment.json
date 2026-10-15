@@ -12,7 +12,7 @@
  "release tarka": "tarka 0.1.1",
  "release holos": "holos 0.21.1 (82e4d66)",
  "node": "v20.19.5",
- "npm ontology-suite": "0.15.0",
+ "npm ontology-suite": "0.16.0",
  "npm shacl-wasm-node": "0.3.3",
  "npm holos-wasm-node": "0.21.1",
  "npm typescript": "7.0.2",

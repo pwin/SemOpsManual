@@ -73,7 +73,9 @@ def _site_path_advice(r):
 CLAIMS = [
     Claim("C08.01", "Outline prompts resolve restriction names since 0.14.0", "08",
           (F, "Since 0.14.0 a restriction typed into those prompts resolves its names"), "source",
-          sources=[src("extension CHANGELOG, 0.14.0", file("webapp", "CHANGELOG.md", "90-99"),
+          sources=[src("extension CHANGELOG, 0.16.0: MAL-003, and Local Checks no longer fails on one",
+                       file("webapp", "CHANGELOG.md", "5-13"), "The statements that use a relative IRI are now reported"),
+                   src("extension CHANGELOG, 0.14.0", file("webapp", "CHANGELOG.md", "140-149"),
                        "search it for the regular expression `<[^:>]+>`"),
                    src("extension commit d480ace (first released in v0.14.0)",
                        commit("webapp", "d480ace5adc99616ca36ca563af8feb3cb2fb99d"))]),
@@ -82,10 +84,15 @@ CLAIMS = [
           (F, "*Run Local Checks* evaluates the 44 SPARQL and 6 SHACL check files"), "run", same_as="C07.03",
           notes="The editor and the CLI read the same registry; C07.03 counts it in the installed suite package."),
 
-    Claim("C08.03", "Three modelling-guidance checks only the editor has", "08",
-          (F, "It also runs **three checks the CLI does not have**"), "source",
+    Claim("C08.03", "Six checks only the editor has: three MDL, and since 0.16.0 three MAL", "08",
+          (F, "It also runs **six checks the CLI does not have**."), "source",
           sources=[src("extension src/checks/modellingGuidance.test.ts", file("webapp", "src/checks/modellingGuidance.test.ts", "20-24"),
-                       "MDL-002: ex:Veterinarian owl:equivalentClass ex:AnimalDoctor")]),
+                       "MDL-002: ex:Veterinarian owl:equivalentClass ex:AnimalDoctor"),
+                   src("extension src/checks/malformed.ts (0.16.0)", file("webapp", "src/checks/malformed.ts", "10-15"),
+                       "MAL-001: a qualified cardinality written with owl:cardinality (or min/max) beside owl:onClass."),
+                   src("extension CHANGELOG, 0.16.0", file("webapp", "CHANGELOG.md", "15-20"),
+                       "this extension's own rather than the registry's")],
+          notes="Neither family is in the shared registry.json, which is why the CLI cannot produce them."),
 
     Claim("C08.04", "VOC-001 is declared in the registry but only the extension runs it", "08",
           (F, "It is in the registry; the CLI still cannot produce it."), "source",
@@ -127,13 +134,13 @@ CLAIMS = [
 
     Claim("C08.08", "Blank nodes cross the repair boundary as skolem IRIs", "08",
           (F, "**It nearly renamed every blank node in the file.**"), "source",
-          sources=[src("extension CHANGELOG, 0.13.11", file("webapp", "CHANGELOG.md", "220-230"),
+          sources=[src("extension CHANGELOG, 0.13.11", file("webapp", "CHANGELOG.md", "270-280"),
                        "Blank nodes now cross the boundary as IRIs and come back as blank nodes"),
                    src("extension commit e4583b9", commit("webapp", "e4583b9a9d47f678bba2e5efaba7b7d0b21ca504"))]),
 
     Claim("C08.09", "A literal's base direction survives a repair since 0.13.12", "08",
           (F, "**It dropped a literal's base direction.**"), "source",
-          sources=[src("extension CHANGELOG, 0.13.12", file("webapp", "CHANGELOG.md", "179-184"),
+          sources=[src("extension CHANGELOG, 0.13.12", file("webapp", "CHANGELOG.md", "229-234"),
                        "datatype from `rdf:dirLangString` to `rdf:langString` in the user's own file"),
                    src("extension commit e3364fc (first released in v0.13.12)",
                        commit("webapp", "e3364fc5bf6b7a7c5028d5e868b5b3c12164ae2c"))]),
@@ -143,22 +150,22 @@ CLAIMS = [
           sources=[src("extension commit 71981b4 (first released in v0.13.5)",
                        commit("webapp", "71981b41283528abbd6fa509a2ffa8c3bd231270"),
                        "Stop reading CURIEs out of comments"),
-                   src("extension CHANGELOG, 0.13.5", file("webapp", "CHANGELOG.md", "351"), "a line whose *first* non-space character was `#`")]),
+                   src("extension CHANGELOG, 0.13.5", file("webapp", "CHANGELOG.md", "401"), "a line whose *first* non-space character was `#`")]),
 
     Claim("C08.11", "The unresolved-import warning names where it looked", "08",
           (F, "It now names the directory it searched and how"), "source",
-          sources=[src("extension CHANGELOG, 0.13.5", file("webapp", "CHANGELOG.md", "401"),
+          sources=[src("extension CHANGELOG, 0.13.5", file("webapp", "CHANGELOG.md", "451"),
                        "It now names the directory it searched and how many ontology files it found")]),
 
     Claim("C08.12", "The DSL script type-checks and builds against the npm package", "08",
-          (F, "Verified against the published 0.15.0 package."), "run",
+          (F, "Verified against the published 0.16.0 package."), "run",
           scripts=["scripts/dsl/acme.ontology.ts"],
           steps=[Step("node -p \"require('./node_modules/ontology-suite/package.json').version\""),
                  Step(f"{TSC} scripts/dsl/acme.ontology.ts"),
                  Step(f"{TSX} scripts/dsl/acme.ontology.ts {{work}}/acme.ttl"),
                  Step('python scripts/query_file.py {work}/acme.ttl "SELECT (COUNT(*) AS ?triples) WHERE { ?s ?p ?o }"')],
-          check=checks(has(0, "0.15.0"), exit_code(1, 0), exit_code(2, 0), exit_code(3, 0)),
-          checks="the installed package is 0.15.0; tsc reports no errors; the script runs and writes Turtle",
+          check=checks(has(0, "0.16.0"), exit_code(1, 0), exit_code(2, 0), exit_code(3, 0)),
+          checks="the installed package is 0.16.0; tsc reports no errors; the script runs and writes Turtle",
           needs=["node"],
           notes="The script is the manual's listing plus four lines that write the Turtle to a file, and one "
                 "`as any` explained in C08.16."),
@@ -316,9 +323,28 @@ CLAIMS = [
                        "matched nothing (REA-001's symmetry assumption, DAT-001's UNION of FILTER-only branches, "
                        "EFF-002's unjoined $this, and DAT-001's boolean branch above)")]),
 
+    Claim("C08.34", "inverse(p): the inline inverse, new in the DSL at 0.16.0", "08",
+          (F, "restriction builder also takes `inverse(p)`, the inline inverse that `MDL-001`"), "run",
+          scripts=["scripts/dsl/inverse.ontology.ts"],
+          steps=[Step(f"{TSC} scripts/dsl/inverse.ontology.ts"),
+                 Step(f"{TSX} scripts/dsl/inverse.ontology.ts {{work}}/inverse.ttl"),
+                 Step("python scripts/query_file.py {work}/inverse.ttl \"PREFIX owl: <http://www.w3.org/2002/07/owl#> "
+                      "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT ?inverseOf ?filler WHERE { "
+                      "<https://example.org/cars/CarPart> rdfs:subClassOf ?r . ?r owl:onProperty ?p ; owl:someValuesFrom "
+                      "?filler . ?p owl:inverseOf ?inverseOf }\"")],
+          check=checks(exit_code(0, 0), exit_code(1, 0),
+                       has(2, "https://example.org/cars/hasPart", "https://example.org/cars/Car")),
+          checks="the script type-checks and builds; CarPart's restriction is on an anonymous [ owl:inverseOf "
+                 "car:hasPart ], with Car as the filler, and no named inverse property is minted",
+          needs=["node"],
+          sources=[src("extension CHANGELOG, 0.16.0", file("webapp", "CHANGELOG.md", "29-33"),
+                       "Manchester's `inverse p some C`, written as OWL 2 does with `[ owl:inverseOf p ]`")]),
+
     Claim("C08.33", "How the editor behaviour was established", "08",
           (F, "**How the editor behaviour in this chapter was established.**"), "argument",
-          notes="A statement of method. The extension's tests were run on a Windows checkout of "
-                f"[704d4ef]({commit('webapp', '704d4ef80fdbcbf614782fa9bf42dfa79962b18f')}) (the 0.15.0 release); "
-                "the DSL claims (C08.12–C08.16) are reproduced here from the npm package."),
+          notes="A statement of method. The extension's unit tests were run on a Windows checkout of "
+                f"[02ffaf6]({commit('webapp', '02ffaf6c35dae3e2b47fff9f723e501d24dc26cf')}) (the 0.16.0 release), "
+                "with core.autocrlf on: 55 files, 466 tests, all passing, which matches the release's own count "
+                f"([CHANGELOG]({file('webapp', 'CHANGELOG.md', '51')})). The DSL claims (C08.12–C08.16, C08.34) are "
+                "reproduced here from the npm package."),
 ]

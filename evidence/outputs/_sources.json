@@ -425,85 +425,109 @@
   "detail": "commit f6ee897",
   "ok": true
  },
- "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/704d4ef80fdbcbf614782fa9bf42dfa79962b18f/CHANGELOG.md#L179-L184": {
+ "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/CHANGELOG.md#L140-L149": {
+  "checked": "2026-10-15",
+  "claim": "C08.01",
+  "detail": "CHANGELOG.md L140-L149",
+  "ok": true
+ },
+ "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/CHANGELOG.md#L15-L20": {
+  "checked": "2026-10-15",
+  "claim": "C08.03",
+  "detail": "CHANGELOG.md L15-L20",
+  "ok": true
+ },
+ "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/CHANGELOG.md#L229-L234": {
   "checked": "2026-10-15",
   "claim": "C08.09",
-  "detail": "CHANGELOG.md L179-L184",
+  "detail": "CHANGELOG.md L229-L234",
   "ok": true
  },
- "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/704d4ef80fdbcbf614782fa9bf42dfa79962b18f/CHANGELOG.md#L220-L230": {
+ "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/CHANGELOG.md#L270-L280": {
   "checked": "2026-10-15",
   "claim": "C08.08",
-  "detail": "CHANGELOG.md L220-L230",
+  "detail": "CHANGELOG.md L270-L280",
   "ok": true
  },
- "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/704d4ef80fdbcbf614782fa9bf42dfa79962b18f/CHANGELOG.md#L351": {
+ "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/CHANGELOG.md#L29-L33": {
+  "checked": "2026-10-15",
+  "claim": "C08.34",
+  "detail": "CHANGELOG.md L29-L33",
+  "ok": true
+ },
+ "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/CHANGELOG.md#L401": {
   "checked": "2026-10-15",
   "claim": "C08.10",
-  "detail": "CHANGELOG.md L351",
-  "ok": true
- },
- "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/704d4ef80fdbcbf614782fa9bf42dfa79962b18f/CHANGELOG.md#L401": {
-  "checked": "2026-10-15",
-  "claim": "C08.11",
   "detail": "CHANGELOG.md L401",
   "ok": true
  },
- "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/704d4ef80fdbcbf614782fa9bf42dfa79962b18f/CHANGELOG.md#L90-L99": {
+ "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/CHANGELOG.md#L451": {
   "checked": "2026-10-15",
-  "claim": "C08.01",
-  "detail": "CHANGELOG.md L90-L99",
+  "claim": "C08.11",
+  "detail": "CHANGELOG.md L451",
   "ok": true
  },
- "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/704d4ef80fdbcbf614782fa9bf42dfa79962b18f/README.md#L86": {
+ "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/CHANGELOG.md#L5-L13": {
+  "checked": "2026-10-15",
+  "claim": "C08.01",
+  "detail": "CHANGELOG.md L5-L13",
+  "ok": true
+ },
+ "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/README.md#L86": {
   "checked": "2026-10-15",
   "claim": "C14.21",
   "detail": "README.md L86",
   "ok": true
  },
- "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/704d4ef80fdbcbf614782fa9bf42dfa79962b18f/package-lock.json": {
+ "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/package-lock.json": {
   "checked": "2026-10-15",
   "claim": "C07.04",
   "detail": "package-lock.json",
   "ok": true
  },
- "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/704d4ef80fdbcbf614782fa9bf42dfa79962b18f/package.json#L489-L493": {
+ "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/package.json#L489-L493": {
   "checked": "2026-10-15",
   "claim": "C07.04",
   "detail": "package.json L489-L493",
   "ok": true
  },
- "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/704d4ef80fdbcbf614782fa9bf42dfa79962b18f/resources/checks-registry/repairs/manifest.json": {
+ "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/resources/checks-registry/repairs/manifest.json": {
   "checked": "2026-10-15",
   "claim": "C08.07",
   "detail": "resources/checks-registry/repairs/manifest.json",
   "ok": true
  },
- "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/704d4ef80fdbcbf614782fa9bf42dfa79962b18f/src/checks/modellingGuidance.test.ts#L20-L24": {
+ "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/src/checks/malformed.ts#L10-L15": {
+  "checked": "2026-10-15",
+  "claim": "C08.03",
+  "detail": "src/checks/malformed.ts L10-L15",
+  "ok": true
+ },
+ "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/src/checks/modellingGuidance.test.ts#L20-L24": {
   "checked": "2026-10-15",
   "claim": "C08.03",
   "detail": "src/checks/modellingGuidance.test.ts L20-L24",
   "ok": true
  },
- "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/704d4ef80fdbcbf614782fa9bf42dfa79962b18f/src/checks/registryCoverage.test.ts#L25-L27": {
+ "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/src/checks/registryCoverage.test.ts#L25-L27": {
   "checked": "2026-10-15",
   "claim": "C08.04",
   "detail": "src/checks/registryCoverage.test.ts L25-L27",
   "ok": true
  },
- "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/704d4ef80fdbcbf614782fa9bf42dfa79962b18f/src/checks/registryCoverage.test.ts#L33-L61": {
+ "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/src/checks/registryCoverage.test.ts#L33-L61": {
   "checked": "2026-10-15",
   "claim": "C08.05",
   "detail": "src/checks/registryCoverage.test.ts L33-L61",
   "ok": true
  },
- "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/704d4ef80fdbcbf614782fa9bf42dfa79962b18f/src/checks/registryCoverage.test.ts#L99-L107": {
+ "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/src/checks/registryCoverage.test.ts#L99-L107": {
   "checked": "2026-10-15",
   "claim": "C08.05",
   "detail": "src/checks/registryCoverage.test.ts L99-L107",
   "ok": true
  },
- "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/704d4ef80fdbcbf614782fa9bf42dfa79962b18f/src/checks/shaclRunner.ts#L25-L31": {
+ "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf/src/checks/shaclRunner.ts#L25-L31": {
   "checked": "2026-10-15",
   "claim": "C11.26",
   "detail": "src/checks/shaclRunner.ts L25-L31",
