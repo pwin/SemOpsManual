@@ -584,7 +584,7 @@ it in general form:
 | Your ontology | Ontology owner | Fix the schema; it will recur on every extract |
 | An upstream vocabulary | Nobody here | Filter it out of the gate; audit periodically |
 | Coverage (`CNF-005`) | Data steward | Review, do not gate |
-| The run itself (`REA-022`) | Whoever owns the pipeline | Never filter it away; assert on it unscoped |
+| The run itself (`REA-022`) | Whoever owns the pipeline | Never filter it away. From 0.24.0 the filter keeps it for you; up to 0.23.0, assert on it unscoped |
 
 The most expensive mistake is treating row 3 as row 1: engineers spending days
 proving that a finding against someone else's vocabulary is not their fault.
