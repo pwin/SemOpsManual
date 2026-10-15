@@ -7,14 +7,14 @@
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --own-namespace https://acme.example.org/ns/ --engine sparql --out-dir work/C07_29/own --fail-on never --reports minimal",
    "rc": 0,
-   "seconds": 2.5,
+   "seconds": 2.0,
    "stdout": "Findings: 23 total (1 Violation, 22 Warning, 0 Info)\nReports written to: ./work/C07_29/own\n  - work/C07_29/own/findings.txt (start here -- what, where, and the source line)\n  - work/C07_29/own/full_results.csv\n",
    "stderr": ""
   },
   {
    "cmd": "python scripts/summarise_findings.py work/C07_29/own/full_results.csv",
    "rc": 0,
-   "seconds": 0.2,
+   "seconds": 0.1,
    "stdout": "  1 x LOG-001  Violation Class disjoint with its own ancestor\n  1 x QUA-001  Warning   Class or property missing rdfs:label\n  1 x QUA-004  Warning   Resource missing skos:prefLabel\n  9 x QUA-009  Warning   Class or property without one skos:prefLabel per language\n  9 x QUA-010  Warning   Class or property without a skos:definition\n  1 x STR-003  Warning   Property missing both domain and range\n  1 x STY-002  Warning   Property name not lowerCamelCase\ntotal 23: 1 Violation, 22 Warning, 0 Info\n",
    "stderr": ""
   }

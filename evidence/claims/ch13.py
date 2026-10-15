@@ -191,7 +191,7 @@ CLAIMS = [
           checks="the summary line as quoted; the HTML page, the JSON and the per-class diagrams are written"),
 
     Claim("C13.12", "Three runs, three pages; pinned, one", "13",
-          (F, "Re-checked at 0.22.0: three identical runs, three different files."), "run",
+          (F, "Re-checked at 0.23.0: three identical runs, three different files."), "run",
           steps=[Step(f"{DOCGEN} --out-dir {{work}}/run1"),
                  Step(f"{DOCGEN} --out-dir {{work}}/run2"),
                  Step(f"{DOCGEN} --out-dir {{work}}/run3"),

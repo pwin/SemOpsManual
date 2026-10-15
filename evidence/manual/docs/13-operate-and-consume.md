@@ -171,7 +171,7 @@ that differs by a trailing slash is the commonest reason a three-way check
 reports nothing at all.
 
 > **`role` is not validated, and a typo costs you the whole check.** Re-verified at
-> 0.22.0: a manifest saying `"triplified-data"` (a hyphen instead of an underscore)
+> 0.23.0: a manifest saying `"triplified-data"` (a hyphen instead of an underscore)
 > loads without complaint, contributes zero data bindings, and the run completes
 > successfully having compared nothing. It exits 0 even with
 > `--fail-on-misalignment`. It is the same silent-zero shape as the
@@ -345,7 +345,7 @@ the honest outcome.
 
 ### Still open: the page is reshuffled on every run
 
-Re-checked at 0.22.0: three identical runs, three different files. The *content*
+Re-checked at 0.23.0: three identical runs, three different files. The *content*
 is canonical; the **order** of the class, property, import and section lists is
 not. The cause is below `docgen`. rdflib holds triples in a `set`, and Python
 randomises string hashing per process, so the parser hands the extractor its

@@ -36,7 +36,7 @@ CLAIMS = [
           (F, "> **Versions this edition was measured against.**"), "run",
           scripts=["scripts/versions.py"],
           steps=[Step("python scripts/versions.py")],
-          check=has(0, "PyPI ontology-quality-suite  0.22.0", "PyPI shacl                   0.3.3",
+          check=has(0, "PyPI ontology-quality-suite  0.23.0", "PyPI shacl                   0.3.3",
                     "PyPI holosdb                 0.21.1", "PyPI tarka-rdf               0.1.1",
                     "release shacl                shacl 0.3.3", "release tarka                tarka 0.1.1",
                     "release holos                holos 0.21.1", "npm ontology-suite           0.15.0",
@@ -44,7 +44,7 @@ CLAIMS = [
           checks="the installed packages, release binaries and npm packages are the versions in the table",
           needs=["node"],
           notes="The testing repository was used at "
-                f"[6d078a1]({commit('testing', '6d078a118959760409e13076650c2d62a4f6dc90')}); see C09.15."),
+                f"[6cdfb14]({commit('testing', '6cdfb14a3c2857b61dcb32f49f56a4829b0d0664')}); see C09.15."),
 
     Claim("C07.02", "The engine changed and Chapter 9's figures did not", "07",
           (F, "every figure in [Chapter 9](09-continuous-integration.md) came out the"), "source",
@@ -158,7 +158,7 @@ CLAIMS = [
                        "--upgrade-package is the step."),
                    src("suite commit 091e0e4", commit("suite", "091e0e4effe1a9cbaddccc63436851decac09035"),
                        "The committed uv.lock had gone stale at 0.14.3"),
-                   src("suite uv.lock at the 0.22.0 release", file("suite", "uv.lock", "167-168"), 'version = "0.15.0"')]),
+                   src("suite uv.lock at the 0.22.0 release", file("suite", "uv.lock", "167-168", ref="749af3e1be749ace3aab3ea4b492d72b3b21dbde"), 'version = "0.15.0"')]),
 
     Claim("C07.18", "Oxigraph went in 0.13.11; the .vsix shrank from 20.2 to 17.5 MB", "07",
           (F, "went in 0.13.11, and the `.vsix` dropped from 20.2 MB to 17.5 MB with it."), "source",
@@ -249,7 +249,7 @@ CLAIMS = [
                  "the default engine alike, against 479 without it; the closure gains 21 findings (STR-007 9, "
                  "STY-003 9, STR-009 3) and loses 11 (STR-007 9, STR-006, DAT-002)",
           sources=[src("suite pipeline.py at 0.22.0: inference applied inside `if uses_shacl:`",
-                       file("suite", "ontology_suite/pipeline.py", "141-168"), "if inference not in (\"none\", \"rdfs\"):"),
+                       file("suite", "ontology_suite/pipeline.py", "141-168", ref="749af3e1be749ace3aab3ea4b492d72b3b21dbde"), "if inference not in (\"none\", \"rdfs\"):"),
                    src("suite commit d7d7a98, the fix", commit("suite", "d7d7a987cb754221b6c57a5997445628e219851b"),
                        "The closure is now materialised once, centrally, and both arms read the result.")]),
 

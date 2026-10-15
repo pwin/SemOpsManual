@@ -7,7 +7,7 @@
   {
    "cmd": "ontology-quality-suite triplify --csv-dir fixtures/acme_robotics --queries fixtures/acme_robotics --out-dir work/C10_17/out",
    "rc": 1,
-   "seconds": 1.6,
+   "seconds": 1.4,
    "stdout": "Triplified 0 file(s) into ./work/C10_17/out\n",
    "stderr": "WARNING: oxi-gen binary not found. Build it with `cargo build --release` in the sibling ./.venv/Lib/oxi-gen checkout, or pass --oxi-gen-bin.\n"
   }

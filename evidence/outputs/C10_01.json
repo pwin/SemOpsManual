@@ -7,7 +7,7 @@
   {
    "cmd": "ontology-quality-suite sketch --queries fixtures/acme_robotics --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --out-dir work/C10_01/sketch",
    "rc": 0,
-   "seconds": 3.4,
+   "seconds": 2.2,
    "stdout": "Findings: 38 total (0 Violation, 0 Warning, 38 Info)\nReports written to: ./work/C10_01/sketch\n  - work/C10_01/sketch/findings.txt (start here -- what, where, and the source line)\n  - work/C10_01/sketch/report.html\n  - work/C10_01/sketch/full_results.csv\nSketch used 1 query file(s); 8 triples, 7 entities.\n",
    "stderr": ""
   },

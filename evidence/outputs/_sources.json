@@ -143,70 +143,70 @@
   "detail": "docs/11-rules-and-inference.md L371",
   "ok": true
  },
- "https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/6d078a118959760409e13076650c2d62a4f6dc90/README.md#L22": {
+ "https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/6cdfb14a3c2857b61dcb32f49f56a4829b0d0664/README.md#L22": {
   "checked": "2026-10-15",
   "claim": "C14.21",
   "detail": "README.md L22",
   "ok": true
  },
- "https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/6d078a118959760409e13076650c2d62a4f6dc90/README.md#L31": {
+ "https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/6cdfb14a3c2857b61dcb32f49f56a4829b0d0664/README.md#L31": {
   "checked": "2026-10-15",
   "claim": "C14.21",
   "detail": "README.md L31",
   "ok": true
  },
- "https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/6d078a118959760409e13076650c2d62a4f6dc90/README.md#L35-L37": {
+ "https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/6cdfb14a3c2857b61dcb32f49f56a4829b0d0664/README.md#L35-L37": {
   "checked": "2026-10-15",
   "claim": "C09.19",
   "detail": "README.md L35-L37",
   "ok": true
  },
- "https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/6d078a118959760409e13076650c2d62a4f6dc90/detect.py": {
+ "https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/6cdfb14a3c2857b61dcb32f49f56a4829b0d0664/detect.py": {
   "checked": "2026-10-15",
   "claim": "C09.19",
   "detail": "detect.py",
+  "ok": true
+ },
+ "https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/6cdfb14a3c2857b61dcb32f49f56a4829b0d0664/experiments/SpecificTests/AGGREGATE-mapping-drift/drift.py#L1-L9": {
+  "checked": "2026-10-15",
+  "claim": "C10.26",
+  "detail": "experiments/SpecificTests/AGGREGATE-mapping-drift/drift.py L1-L9",
+  "ok": true
+ },
+ "https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/6cdfb14a3c2857b61dcb32f49f56a4829b0d0664/experiments/SpecificTests/CT-01-iri-template-drift/README.md#L50-L52": {
+  "checked": "2026-10-15",
+  "claim": "C14.27",
+  "detail": "experiments/SpecificTests/CT-01-iri-template-drift/README.md L50-L52",
+  "ok": true
+ },
+ "https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/6cdfb14a3c2857b61dcb32f49f56a4829b0d0664/experiments/SpecificTests/CT-32-property-outside-its-domain/README.md": {
+  "checked": "2026-10-15",
+  "claim": "C10.27",
+  "detail": "experiments/SpecificTests/CT-32-property-outside-its-domain/README.md",
+  "ok": true
+ },
+ "https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/6cdfb14a3c2857b61dcb32f49f56a4829b0d0664/experiments/SpecificTests/CT-39-finding-names-something-findable/README.md#L1": {
+  "checked": "2026-10-15",
+  "claim": "C08.30",
+  "detail": "experiments/SpecificTests/CT-39-finding-names-something-findable/README.md L1",
+  "ok": true
+ },
+ "https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/6cdfb14a3c2857b61dcb32f49f56a4829b0d0664/experiments/SpecificTests/REVIEW.md#L32-L41": {
+  "checked": "2026-10-15",
+  "claim": "C09.17",
+  "detail": "experiments/SpecificTests/REVIEW.md L32-L41",
+  "ok": true
+ },
+ "https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/6cdfb14a3c2857b61dcb32f49f56a4829b0d0664/ontology-suite.yml": {
+  "checked": "2026-10-15",
+  "claim": "C09.21",
+  "detail": "ontology-suite.yml",
   "ok": true
  },
  "https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/6d078a118959760409e13076650c2d62a4f6dc90/detect.py#L115-L128": {
   "checked": "2026-10-15",
   "claim": "C14.39",
   "detail": "detect.py L115-L128",
-  "ok": true
- },
- "https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/6d078a118959760409e13076650c2d62a4f6dc90/experiments/SpecificTests/AGGREGATE-mapping-drift/drift.py#L1-L9": {
-  "checked": "2026-10-15",
-  "claim": "C10.26",
-  "detail": "experiments/SpecificTests/AGGREGATE-mapping-drift/drift.py L1-L9",
-  "ok": true
- },
- "https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/6d078a118959760409e13076650c2d62a4f6dc90/experiments/SpecificTests/CT-01-iri-template-drift/README.md#L50-L52": {
-  "checked": "2026-10-15",
-  "claim": "C14.27",
-  "detail": "experiments/SpecificTests/CT-01-iri-template-drift/README.md L50-L52",
-  "ok": true
- },
- "https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/6d078a118959760409e13076650c2d62a4f6dc90/experiments/SpecificTests/CT-32-property-outside-its-domain/README.md": {
-  "checked": "2026-10-15",
-  "claim": "C10.27",
-  "detail": "experiments/SpecificTests/CT-32-property-outside-its-domain/README.md",
-  "ok": true
- },
- "https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/6d078a118959760409e13076650c2d62a4f6dc90/experiments/SpecificTests/CT-39-finding-names-something-findable/README.md#L1": {
-  "checked": "2026-10-15",
-  "claim": "C08.30",
-  "detail": "experiments/SpecificTests/CT-39-finding-names-something-findable/README.md L1",
-  "ok": true
- },
- "https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/6d078a118959760409e13076650c2d62a4f6dc90/experiments/SpecificTests/REVIEW.md#L32-L41": {
-  "checked": "2026-10-15",
-  "claim": "C09.17",
-  "detail": "experiments/SpecificTests/REVIEW.md L32-L41",
-  "ok": true
- },
- "https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/6d078a118959760409e13076650c2d62a4f6dc90/ontology-suite.yml": {
-  "checked": "2026-10-15",
-  "claim": "C09.21",
-  "detail": "ontology-suite.yml",
   "ok": true
  },
  "https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/commit/1370f6c5362501c91a584bb1f3fe022720ed4357": {
@@ -239,46 +239,70 @@
   "detail": "commit fb24a3d",
   "ok": true
  },
- "https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/749af3e1be749ace3aab3ea4b492d72b3b21dbde/docs/ACME_ROBOTICS_WALKTHROUGH.md#L73": {
+ "https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/1118f57f72c6d24ce8d49e5a6d0d68928e0eef9a/docs/ACME_ROBOTICS_WALKTHROUGH.md#L73": {
   "checked": "2026-10-15",
   "claim": "C10.24",
   "detail": "docs/ACME_ROBOTICS_WALKTHROUGH.md L73",
   "ok": true
  },
- "https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/749af3e1be749ace3aab3ea4b492d72b3b21dbde/docs/EXTENDING.md#L29": {
+ "https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/1118f57f72c6d24ce8d49e5a6d0d68928e0eef9a/docs/EXTENDING.md#L29": {
   "checked": "2026-10-15",
   "claim": "C07.13",
   "detail": "docs/EXTENDING.md L29",
   "ok": true
  },
- "https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/749af3e1be749ace3aab3ea4b492d72b3b21dbde/docs/REASONING.md#L107": {
+ "https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/1118f57f72c6d24ce8d49e5a6d0d68928e0eef9a/docs/REASONING.md#L107": {
   "checked": "2026-10-15",
   "claim": "C14.21",
   "detail": "docs/REASONING.md L107",
   "ok": true
  },
- "https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/749af3e1be749ace3aab3ea4b492d72b3b21dbde/docs/REPORTS.md#L18": {
+ "https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/1118f57f72c6d24ce8d49e5a6d0d68928e0eef9a/docs/REPORTS.md#L18": {
   "checked": "2026-10-15",
   "claim": "C14.21",
   "detail": "docs/REPORTS.md L18",
   "ok": true
  },
- "https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/749af3e1be749ace3aab3ea4b492d72b3b21dbde/docs/REPORTS.md#L8": {
+ "https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/1118f57f72c6d24ce8d49e5a6d0d68928e0eef9a/docs/REPORTS.md#L8": {
   "checked": "2026-10-15",
   "claim": "C05.02",
   "detail": "docs/REPORTS.md L8",
   "ok": true
  },
- "https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/749af3e1be749ace3aab3ea4b492d72b3b21dbde/docs/UPDATING.md#L1": {
+ "https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/1118f57f72c6d24ce8d49e5a6d0d68928e0eef9a/docs/UPDATING.md#L1": {
   "checked": "2026-10-15",
   "claim": "C12.16",
   "detail": "docs/UPDATING.md L1",
   "ok": true
  },
- "https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/749af3e1be749ace3aab3ea4b492d72b3b21dbde/ontology_suite/cli.py#L158-L200": {
+ "https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/1118f57f72c6d24ce8d49e5a6d0d68928e0eef9a/ontology_suite/cli.py#L158-L200": {
   "checked": "2026-10-15",
   "claim": "C09.08",
   "detail": "ontology_suite/cli.py L158-L200",
+  "ok": true
+ },
+ "https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/1118f57f72c6d24ce8d49e5a6d0d68928e0eef9a/ontology_suite/reasoning/backends/external_backend.py#L94-L106": {
+  "checked": "2026-10-15",
+  "claim": "C14.08",
+  "detail": "ontology_suite/reasoning/backends/external_backend.py L94-L106",
+  "ok": true
+ },
+ "https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/1118f57f72c6d24ce8d49e5a6d0d68928e0eef9a/ontology_suite/versioning/rename_detection.py#L25-L30": {
+  "checked": "2026-10-15",
+  "claim": "C12.06",
+  "detail": "ontology_suite/versioning/rename_detection.py L25-L30",
+  "ok": true
+ },
+ "https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/1118f57f72c6d24ce8d49e5a6d0d68928e0eef9a/pyproject.toml#L53-L58": {
+  "checked": "2026-10-15",
+  "claim": "C07.16",
+  "detail": "pyproject.toml L53-L58",
+  "ok": true
+ },
+ "https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/1118f57f72c6d24ce8d49e5a6d0d68928e0eef9a/tests/test_check_coverage.py#L94-L97": {
+  "checked": "2026-10-15",
+  "claim": "C08.04",
+  "detail": "tests/test_check_coverage.py L94-L97",
   "ok": true
  },
  "https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/749af3e1be749ace3aab3ea4b492d72b3b21dbde/ontology_suite/pipeline.py#L141-L168": {
@@ -291,30 +315,6 @@
   "checked": "2026-10-15",
   "claim": "C14.39",
   "detail": "ontology_suite/reasoning/backends/external_backend.py L128-L133",
-  "ok": true
- },
- "https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/749af3e1be749ace3aab3ea4b492d72b3b21dbde/ontology_suite/reasoning/backends/external_backend.py#L94-L106": {
-  "checked": "2026-10-15",
-  "claim": "C14.08",
-  "detail": "ontology_suite/reasoning/backends/external_backend.py L94-L106",
-  "ok": true
- },
- "https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/749af3e1be749ace3aab3ea4b492d72b3b21dbde/ontology_suite/versioning/rename_detection.py#L25-L30": {
-  "checked": "2026-10-15",
-  "claim": "C12.06",
-  "detail": "ontology_suite/versioning/rename_detection.py L25-L30",
-  "ok": true
- },
- "https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/749af3e1be749ace3aab3ea4b492d72b3b21dbde/pyproject.toml#L53-L58": {
-  "checked": "2026-10-15",
-  "claim": "C07.16",
-  "detail": "pyproject.toml L53-L58",
-  "ok": true
- },
- "https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/749af3e1be749ace3aab3ea4b492d72b3b21dbde/tests/test_check_coverage.py#L94-L97": {
-  "checked": "2026-10-15",
-  "claim": "C08.04",
-  "detail": "tests/test_check_coverage.py L94-L97",
   "ok": true
  },
  "https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/749af3e1be749ace3aab3ea4b492d72b3b21dbde/uv.lock#L167-L168": {
@@ -357,6 +357,12 @@
   "checked": "2026-10-15",
   "claim": "C09.20",
   "detail": "commit 5360394",
+  "ok": true
+ },
+ "https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/5d597132779a19dbfb7ccf8891723ca19d49ced3": {
+  "checked": "2026-10-15",
+  "claim": "C14.21",
+  "detail": "commit 5d59713",
   "ok": true
  },
  "https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/629558887b2d7fd378229e736be841de8e68ae28": {

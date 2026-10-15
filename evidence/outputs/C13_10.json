@@ -7,58 +7,58 @@
   {
    "cmd": "python scripts/holosdb_validate.py data/shacl/two-unnamed.ttl data/shacl/shapes-violation.ttl data/shacl/shapes-sparql.ttl",
    "rc": 0,
-   "seconds": 0.9,
+   "seconds": 0.1,
    "stdout": "adapted: {'conforms': False, 'violations': 2, 'engine': 'adapted'}\nnative:  {'conforms': False, 'violations': 2, 'engine': 'native'}\nnative, sh:sparql shapes: HolosError: unsupported: sh:sparql is not implemented by the incremental evaluator; validate                      through holos_shacl::engine::EngineRun instead\n",
    "stderr": ""
   },
   {
    "cmd": "python scripts/holosdb_validate_repeat.py data/shacl/two-unnamed.ttl data/shacl/shapes-violation.ttl work/C13_10/store",
    "rc": 0,
-   "seconds": 3.1,
+   "seconds": 0.8,
    "stdout": "holosdb 0.21.1\n1. adapted, three calls on one store: violations [2, 2, 2]\n1. native, three calls on one store: violations [2, 2, 2]\n2. named graphs after one validate(): []\n3. named graphs in the persistent store after reopening: []\n4. with a leftover urn:holos:python:shapes graph: violations 2; UserWarning: <urn:holos:python:shapes> holds 1 quads that an earlier Store.validate left in this store; they are not read, and store.update(\"DROP GRAPH <urn:holos:python:shapes>\") removes them\n   named graphs afterwards: [('urn:holos:python:shapes', 1)]\n",
    "stderr": ""
   },
   {
    "cmd": "holos --version",
    "rc": 0,
-   "seconds": 0.1,
+   "seconds": 0.0,
    "stdout": "holos 0.21.1 (82e4d66)\n",
    "stderr": ""
   },
   {
    "cmd": "holos stats --data data/shacl/two-unnamed.ttl --store work/C13_10/cli-store",
    "rc": 0,
-   "seconds": 1.1,
-   "stdout": "quads            4\ndictionary terms 5\nnamed graphs     0\non disk          333.1 KiB\nfree here        5.0 GiB\nroom to compact  yes (needs up to 333.1 KiB)\n\npredicates by frequency\n           3  <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\n           1  <http://example.org/name>\n",
-   "stderr": "loaded 4 quads in 0.80s (4 quads/s)\n"
-  },
-  {
-   "cmd": "holos validate --store work/C13_10/cli-store --shapes data/shacl/shapes-violation.ttl",
-   "rc": 0,
-   "seconds": 0.8,
-   "stdout": "shapes compiled   2 shapes in 0.002s\nvalidated         0.000s\nconforms          false\nresults           2\n",
-   "stderr": "read 5 shape quads from data/shacl/shapes-violation.ttl, and kept none of them\n"
+   "seconds": 0.4,
+   "stdout": "quads            4\ndictionary terms 5\nnamed graphs     0\non disk          140.9 KiB\nfree here        4.7 GiB\nroom to compact  yes (needs up to 140.9 KiB)\n\npredicates by frequency\n           3  <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>\n           1  <http://example.org/name>\n",
+   "stderr": "loaded 4 quads in 0.26s (15 quads/s)\n"
   },
   {
    "cmd": "holos validate --store work/C13_10/cli-store --shapes data/shacl/shapes-violation.ttl",
    "rc": 0,
    "seconds": 0.2,
-   "stdout": "shapes compiled   2 shapes in 0.001s\nvalidated         0.000s\nconforms          false\nresults           2\n",
+   "stdout": "shapes compiled   2 shapes in 0.000s\nvalidated         0.000s\nconforms          false\nresults           2\n",
+   "stderr": "read 5 shape quads from data/shacl/shapes-violation.ttl, and kept none of them\n"
+  },
+  {
+   "cmd": "holos validate --store work/C13_10/cli-store --shapes data/shacl/shapes-violation.ttl",
+   "rc": 0,
+   "seconds": 0.1,
+   "stdout": "shapes compiled   2 shapes in 0.000s\nvalidated         0.001s\nconforms          false\nresults           2\n",
    "stderr": "read 5 shape quads from data/shacl/shapes-violation.ttl, and kept none of them\n"
   },
   {
    "cmd": "holos query --store work/C13_10/cli-store --query \"SELECT ?g (COUNT(*) AS ?n) WHERE { GRAPH ?g { ?s ?p ?o } } GROUP BY ?g\"",
    "rc": 0,
-   "seconds": 0.2,
+   "seconds": 0.1,
    "stdout": "{\"head\":{\"vars\":[\"g\",\"n\"]},\"results\":{\"bindings\":[]}}\n",
    "stderr": ""
   },
   {
    "cmd": "holos update --store work/C13_10/cli-store --update \"INSERT DATA { GRAPH <urn:holos:shapes> { <urn:x:s> <urn:x:p> <urn:x:o> } }\"",
    "rc": 0,
-   "seconds": 0.4,
+   "seconds": 0.3,
    "stdout": "",
-   "stderr": "inserted 1 deleted 0 graphs +0 -0 in 0.228s\n"
+   "stderr": "inserted 1 deleted 0 graphs +0 -0 in 0.189s\n"
   },
   {
    "cmd": "holos validate --store work/C13_10/cli-store --shapes data/shacl/shapes-violation.ttl",

@@ -7,8 +7,8 @@
   {
    "cmd": "python scripts/engine_leniency.py",
    "rc": 0,
-   "seconds": 0.8,
-   "stdout": "== unguarded STR(?e)\n   rdflib      ['A label on nfa777a2f015041309ab6af38cdb48747b1 has no language tag.']\n   holosdb     ['(unbound)']\n   pyoxigraph  ['(unbound)']\n== COALESCE(STR(?e), ...)\n   rdflib      ['A label on ne29e75f4f2e84b40bac36a24f439ff29b1 has no language tag.']\n   holosdb     ['A label on [a blank node] has no language tag.']\n   pyoxigraph  ['A label on [a blank node] has no language tag.']\n== guarded IF(isBlank(?e), ...)\n   rdflib      ['A label on [a blank node] has no language tag.']\n   holosdb     ['A label on [a blank node] has no language tag.']\n   pyoxigraph  ['A label on [a blank node] has no language tag.']\n",
+   "seconds": 0.5,
+   "stdout": "== unguarded STR(?e)\n   rdflib      ['A label on n52b67be8d32b461da75d0543ec5c9bdeb1 has no language tag.']\n   holosdb     ['(unbound)']\n   pyoxigraph  ['(unbound)']\n== COALESCE(STR(?e), ...)\n   rdflib      ['A label on n9ea4da2240864d7cbea84cc934aca17fb1 has no language tag.']\n   holosdb     ['A label on [a blank node] has no language tag.']\n   pyoxigraph  ['A label on [a blank node] has no language tag.']\n== guarded IF(isBlank(?e), ...)\n   rdflib      ['A label on [a blank node] has no language tag.']\n   holosdb     ['A label on [a blank node] has no language tag.']\n   pyoxigraph  ['A label on [a blank node] has no language tag.']\n",
    "stderr": ""
   }
  ]

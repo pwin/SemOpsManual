@@ -7,21 +7,21 @@
   {
    "cmd": "python scripts/merge_registry.py fixtures/acme_robotics/custom_checks/registry.json work/C08_25/merged-registry.json",
    "rc": 0,
-   "seconds": 0.3,
+   "seconds": 0.1,
    "stdout": "61 built-in + 1 project = 62 entries -> work/C08_25/merged-registry.json\n",
    "stderr": ""
   },
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --data data/house-rule/missing-id.ttl --registry work/C08_25/merged-registry.json --sparql fixtures/acme_robotics/custom_checks/sparql --sparql @builtin --engine sparql --out-dir work/C08_25/out --reports minimal --fail-on never",
    "rc": 0,
-   "seconds": 7.5,
+   "seconds": 2.6,
    "stdout": "Findings: 482 total (56 Violation, 342 Warning, 84 Info)\nReports written to: ./work/C08_25/out\n  - work/C08_25/out/findings.txt (start here -- what, where, and the source line)\n  - work/C08_25/out/full_results.csv\n",
    "stderr": ""
   },
   {
    "cmd": "python scripts/summarise_findings.py work/C08_25/out/full_results.csv --by focus --check ACM-001",
    "rc": 0,
-   "seconds": 0.2,
+   "seconds": 0.1,
    "stdout": "ACM-001  focus=https://acme.example.org/data/employee/E101  path=-  value=https://acme.example.org/data/employee/E101\ntotal 1: 1 Violation, 0 Warning, 0 Info\n",
    "stderr": ""
   }

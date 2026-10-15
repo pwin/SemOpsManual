@@ -1,34 +1,34 @@
 {
  "id": "C10.29",
  "status": "PASS",
- "detail": "suite 0.22.0: the warning is on stderr; step 2 output contains 'focus=https://acme.example.org/ns#Employee'; step 3 output contains 'focus=https://acme.example.org/ns#hasSkill', 'focus=https://acme.example.org/ns#hasEmployeeId'; three/full_results.csv: CNF-005 includes https://acme.example.org/ns/Employee; two/full_results.csv: {'CNF-005': 36, 'TQL-003': 1}; two/full_results.csv: CNF-005 excludes https://acme.example.org/ns/Employee",
+ "detail": "suite 0.23.0: the warning says each file is read with its own definition; step 2 output contains 'focus=https://acme.example.org/ns#Department'; step 2 output has none of 'ns#Employee'; step 3 output has none of 'ns#hasSkill', 'ns#hasEmployeeId'; three/full_results.csv: CNF-005 excludes https://acme.example.org/ns/Employee; two/full_results.csv: {'CNF-005': 36, 'TQL-003': 1}; two/full_results.csv: CNF-005 excludes https://acme.example.org/ns/Employee",
  "ran": "2026-10-15",
  "steps": [
   {
    "cmd": "ontology-quality-suite sketch --queries data/mapping-set --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --out-dir work/C10_29/three --reports minimal --fail-on never",
    "rc": 0,
-   "seconds": 2.6,
-   "stdout": "Findings: 42 total (0 Violation, 4 Warning, 38 Info)\nReports written to: ./work/C10_29/three\n  - work/C10_29/three/findings.txt (start here -- what, where, and the source line)\n  - work/C10_29/three/full_results.csv\nSketch used 3 query file(s); 4 triples, 4 entities.\n",
-   "stderr": "warning: prefix 'acme:' redefined in data/mapping-set/payroll.rq (https://acme.example.org/ns# -> https://acme.example.org/ns/); keeping first definition\nwarning: prefix 'acme:' redefined in data/mapping-set/people.rq (https://acme.example.org/ns# -> https://acme.example.org/ns/); keeping first definition\n"
+   "seconds": 1.7,
+   "stdout": "Findings: 38 total (0 Violation, 1 Warning, 37 Info)\nReports written to: ./work/C10_29/three\n  - work/C10_29/three/findings.txt (start here -- what, where, and the source line)\n  - work/C10_29/three/full_results.csv\nSketch used 3 query file(s); 4 triples, 4 entities.\n",
+   "stderr": "warning: prefix 'acme:' means <https://acme.example.org/ns#> in an earlier file and <https://acme.example.org/ns/> in payroll.rq; each file is read with its own definition, and the legend below shows the first\nwarning: prefix 'acme:' means <https://acme.example.org/ns#> in an earlier file and <https://acme.example.org/ns/> in people.rq; each file is read with its own definition, and the legend below shows the first\n"
   },
   {
    "cmd": "python scripts/summarise_findings.py work/C10_29/three/full_results.csv --by focus --check CNF-001",
    "rc": 0,
-   "seconds": 0.2,
-   "stdout": "CNF-001  focus=https://acme.example.org/ns#Department  path=-  value=-\nCNF-001  focus=https://acme.example.org/ns#Employee  path=-  value=-\ntotal 2: 0 Violation, 2 Warning, 0 Info\n",
+   "seconds": 0.1,
+   "stdout": "CNF-001  focus=https://acme.example.org/ns#Department  path=-  value=-\ntotal 1: 0 Violation, 1 Warning, 0 Info\n",
    "stderr": ""
   },
   {
    "cmd": "python scripts/summarise_findings.py work/C10_29/three/full_results.csv --by focus --check CNF-002",
    "rc": 0,
    "seconds": 0.1,
-   "stdout": "CNF-002  focus=https://acme.example.org/ns#hasEmployeeId  path=-  value=-\nCNF-002  focus=https://acme.example.org/ns#hasSkill  path=-  value=-\ntotal 2: 0 Violation, 2 Warning, 0 Info\n",
+   "stdout": "total 0: 0 Violation, 0 Warning, 0 Info\n",
    "stderr": ""
   },
   {
    "cmd": "ontology-quality-suite sketch --queries data/mapping-set --query-pattern people.rq,payroll.rq --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --out-dir work/C10_29/two --reports minimal --fail-on never",
    "rc": 0,
-   "seconds": 2.3,
+   "seconds": 1.8,
    "stdout": "Findings: 37 total (0 Violation, 0 Warning, 37 Info)\nReports written to: ./work/C10_29/two\n  - work/C10_29/two/findings.txt (start here -- what, where, and the source line)\n  - work/C10_29/two/full_results.csv\nSketch used 2 query file(s); 3 triples, 3 entities.\n",
    "stderr": ""
   }

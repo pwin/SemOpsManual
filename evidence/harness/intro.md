@@ -76,10 +76,10 @@ free on 127.0.0.1, where the live-store claims start `holos-server`.
   seed 5, which ran in every recorded attempt.
 - `EVIDENCE_TESTING_REPO`, set to a checkout of the
   [testing repository](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing)
-  at `6d078a1`, lets C09.15 and C09.16 run its test suite and competency board.
+  at `6cdfb14`, lets C09.15 and C09.16 run its test suite and competency board.
   Use a clone you do not mind it writing into: both rewrite generated files. That
   repository installs the suite from a sibling checkout,
-  `../consolidated_ontology_suite_python` (at `v0.22.0` for the recorded run), and
+  `../consolidated_ontology_suite_python` (at `v0.23.0` for the recorded run), and
   its competency tests triplify with oxi-gen, which the suite finds through
   `ONTOLOGY_SUITE_OXI_GEN_BIN`. If the clone lives in a temporary folder, make it
   with `git clone --no-local`: a local clone hardlinks the object files, which

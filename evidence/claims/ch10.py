@@ -255,8 +255,8 @@ CLAIMS = [
           check=checks(has(0, "WARNING: oxi-gen binary not found", "Triplified 0 file(s)")),
           checks="a warning that oxi-gen was not found, and nothing triplified"),
 
-    Claim("C10.18", "data: 550 unscoped, 55 scoped (with HermiT running)", "10",
-          (F, "Findings: 550 total (68 Violation, 363 Warning, 119 Info)"), "run",
+    Claim("C10.18", "data: 549 unscoped (550 at 0.22.0), 55 scoped, with HermiT running", "10",
+          (F, "Findings: 549 total (67 Violation, 363 Warning, 119 Info)"), "run",
           steps=[Step(TRIPLIFY),
                  Step(f"{DATA} --out-dir {{work}}/all --fail-on never --reports minimal", env={"PYTHONHASHSEED": "5"}),
                  Step(f'{DATA} --own-namespace {OWN_DATA} --out-dir {{work}}/own --fail-on never --reports minimal',

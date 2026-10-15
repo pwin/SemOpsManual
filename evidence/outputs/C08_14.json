@@ -1,22 +1,22 @@
 {
  "id": "C08.14",
  "status": "PASS",
- "detail": "step 2 exits 1; gate/full_results.csv: {'LOG-001': 1, 'REA-020': 1, 'REA-021': 1}; gate/findings.txt contains 'LOG-001   Violation Class https://acme.example.org/ns/Contractor'",
+ "detail": "step 2 exits 1; gate/full_results.csv: {'LOG-001': 1, 'REA-021': 1}; gate/findings.txt contains 'LOG-001   Violation Class https://acme.example.org/ns/Contractor'",
  "ran": "2026-10-15",
  "steps": [
   {
    "cmd": "node node_modules/tsx/dist/cli.mjs scripts/dsl/acme.ontology.ts work/C08_14/acme.ttl",
    "rc": 0,
-   "seconds": 0.8,
+   "seconds": 0.5,
    "stdout": "",
    "stderr": ""
   },
   {
    "cmd": "ontology-quality-suite ontology --ontology work/C08_14/acme.ttl --out-dir work/C08_14/gate --fail-on Violation --reports minimal",
    "rc": 1,
-   "seconds": 4.1,
-   "stdout": "Findings: 3 total (3 Violation, 0 Warning, 0 Info)\nReports written to: ./work/C08_14/gate\n  - work/C08_14/gate/findings.txt (start here -- what, where, and the source line)\n  - work/C08_14/gate/full_results.csv\n",
-   "stderr": "* Owlready2 * Running HermiT...\n    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmppgftmh8l -Y\n* Owlready2 * HermiT took 1.2127037048339844 seconds\n* Owlready * (NB: only changes on entities loaded in Python are shown, other changes are done but not listed)\n"
+   "seconds": 2.7,
+   "stdout": "Findings: 2 total (2 Violation, 0 Warning, 0 Info)\nReports written to: ./work/C08_14/gate\n  - work/C08_14/gate/findings.txt (start here -- what, where, and the source line)\n  - work/C08_14/gate/full_results.csv\n",
+   "stderr": "* Owlready2 * Running HermiT...\n    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmplf6nzuzv -Y\n* Owlready2 * HermiT took 0.614727258682251 seconds\n* Owlready * (NB: only changes on entities loaded in Python are shown, other changes are done but not listed)\n"
   }
  ]
 }

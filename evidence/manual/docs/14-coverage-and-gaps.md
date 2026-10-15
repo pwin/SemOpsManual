@@ -152,7 +152,7 @@ dropped instances on `run` as bOTTR does.
 
 ### `docgen` reshuffles the page on every run
 
-Still open at 0.22.0, re-checked rather than carried forward: three identical runs
+Still open at 0.23.0, re-checked rather than carried forward: three identical runs
 produce three different files. The *content* is canonical; the **order** of every
 top-level list varies per run.
 
@@ -280,7 +280,7 @@ and validate it on its own, as `consistency-remote`'s manifest model does
 `consistency-remote` accepts any string as a graph's `role` and ignores all but
 `"ontology"` and `"triplified_data"`. A hyphen for an underscore yields a run that
 compares nothing and exits 0, even with `--fail-on-misalignment`. Re-verified at
-0.22.0.
+0.23.0.
 
 <a id="ev-c14-10"></a>*Evidence:* [C14.10 — A mistyped manifest role compares nothing, successfully](../../EVIDENCE.md#c14-10) (reproduced: PASS)
 
@@ -323,8 +323,9 @@ believes, which is how I came to carry one false claim for two months
   0.13.11.
 - The testing repository's README says sixteen fixtures and "18 Turtle files in 10
   folders"; there are seventeen fixtures in fourteen folders.
-- The suite's `main` branch stopped at 0.18.0; releases since are tagged on
-  `develop`, now the default branch. This manual links `develop`.
+- The suite's `main` branch stopped at 0.18.0 while releases were tagged on
+  `develop`, now the default branch, until it caught up with 0.23.0. This manual
+  links `develop`.
 
 ---
 

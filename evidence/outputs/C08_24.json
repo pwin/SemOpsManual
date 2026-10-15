@@ -14,7 +14,7 @@
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --data work/C08_24/employees.ttl --registry fixtures/acme_robotics/custom_checks/registry.json --sparql fixtures/acme_robotics/custom_checks/sparql --sparql @builtin --engine sparql --out-dir work/C08_24/out --reports minimal --fail-on never",
    "rc": 0,
-   "seconds": 5.8,
+   "seconds": 2.6,
    "stdout": "Findings: 491 total (54 Violation, 356 Warning, 81 Info)\nReports written to: ./work/C08_24/out\n  - work/C08_24/out/findings.txt (start here -- what, where, and the source line)\n  - work/C08_24/out/full_results.csv\n",
    "stderr": ""
   }

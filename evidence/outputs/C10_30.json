@@ -1,7 +1,7 @@
 {
  "id": "C10.30",
  "status": "PASS",
- "detail": "the warning names zz-legacy.rq, on stderr; suite 0.22.0: out/full_results.csv: {'CNF-005': 35, 'TQL-003': 1}; sketch.ttl reads zz-legacy.rq's acme:Department in the ontology's namespace",
+ "detail": "the warning names zz-legacy.rq, on stderr; suite 0.23.0: out/full_results.csv: CNF-001 includes https://acme.example.org/ns#Department; sketch.ttl re-declares acme: ahead of zz-legacy.rq's triples",
  "ran": "2026-10-15",
  "steps": [
   {
@@ -14,29 +14,29 @@
   {
    "cmd": "python scripts/copy_tree.py data/mapping-set/payroll.rq work/C10_30/last/payroll.rq",
    "rc": 0,
-   "seconds": 0.2,
+   "seconds": 0.1,
    "stdout": "copied data/mapping-set/payroll.rq -> work/C10_30/last/payroll.rq\n",
    "stderr": ""
   },
   {
    "cmd": "python scripts/copy_tree.py data/mapping-set/legacy.rq work/C10_30/last/zz-legacy.rq",
    "rc": 0,
-   "seconds": 0.3,
+   "seconds": 0.1,
    "stdout": "copied data/mapping-set/legacy.rq -> work/C10_30/last/zz-legacy.rq\n",
    "stderr": ""
   },
   {
    "cmd": "ontology-quality-suite sketch --queries work/C10_30/last --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --out-dir work/C10_30/out --reports minimal --fail-on never",
    "rc": 0,
-   "seconds": 2.1,
-   "stdout": "Findings: 36 total (0 Violation, 0 Warning, 36 Info)\nReports written to: ./work/C10_30/out\n  - work/C10_30/out/findings.txt (start here -- what, where, and the source line)\n  - work/C10_30/out/full_results.csv\nSketch used 3 query file(s); 4 triples, 4 entities.\n",
-   "stderr": "warning: prefix 'acme:' redefined in work/C10_30/last/zz-legacy.rq (https://acme.example.org/ns/ -> https://acme.example.org/ns#); keeping first definition\n"
+   "seconds": 1.7,
+   "stdout": "Findings: 38 total (0 Violation, 1 Warning, 37 Info)\nReports written to: ./work/C10_30/out\n  - work/C10_30/out/findings.txt (start here -- what, where, and the source line)\n  - work/C10_30/out/full_results.csv\nSketch used 3 query file(s); 4 triples, 4 entities.\n",
+   "stderr": "warning: prefix 'acme:' means <https://acme.example.org/ns/> in an earlier file and <https://acme.example.org/ns#> in zz-legacy.rq; each file is read with its own definition, and the legend below shows the first\n"
   },
   {
    "cmd": "python scripts/summarise_findings.py work/C10_30/out/full_results.csv --by focus --check CNF-001",
    "rc": 0,
    "seconds": 0.1,
-   "stdout": "total 0: 0 Violation, 0 Warning, 0 Info\n",
+   "stdout": "CNF-001  focus=https://acme.example.org/ns#Department  path=-  value=-\ntotal 1: 0 Violation, 1 Warning, 0 Info\n",
    "stderr": ""
   }
  ]

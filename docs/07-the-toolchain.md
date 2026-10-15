@@ -33,18 +33,18 @@ have (tarka, for triplification). And one you never install at all, but should
 read, because it is how the rest are kept honest.
 
 > **Versions this edition was measured against.** Every number in Part III
-> comes from running these, on 13 October 2026:
+> comes from running these, between 13 and 15 October 2026:
 >
 > | | Version | From |
 > |---|---|---|
-> | Ontology Quality Suite | **0.22.0** | PyPI `ontology-quality-suite`. 0.23.0, which fixes three defects this edition found (§7.4, and [Chapter 14](14-coverage-and-gaps.md) §14.4), was pushed but not yet released as the edition closed; the evidence checks both |
+> | Ontology Quality Suite | **0.23.0** | PyPI `ontology-quality-suite`. 0.23.0 was released while this edition was being checked, and fixes three defects the checking found (§7.4, and [Chapter 14](14-coverage-and-gaps.md) §14.4); where it changed a figure, the manual gives both |
 > | Ontology Development Suite | **0.15.0** | `ontology-dev-suite-0.15.0.vsix` from the v0.15.0 release; DSL as npm `ontology-suite` 0.15.0 |
 > | SHACL Engine | **0.3.3** | PyPI `shacl`; npm `shacl-wasm`, `shacl-wasm-node`; the `shacl` command from the v0.3.3 release. 0.3.3 adds one function, the RDFS closure handed out, which the suite needed for a fix (§7.4) |
 > | HOLOS | **0.21.1** | PyPI `holosdb`; npm `holos-wasm`, `holos-wasm-node`; the `holos` command from the v0.21.1 release. 0.21.1 was cut while this edition was being checked, to fix a defect the checking found ([Chapter 13](13-operate-and-consume.md) §13.2) |
 > | tarka | **0.1.1** | PyPI `tarka-rdf`; the `tarka` command from the v0.1.1 release |
-> | Testing repository | `6d078a1` | `main`, 8 October 2026 |
+> | Testing repository | `6cdfb14` | `main`, 14 October 2026 |
 >
-> These move quickly. The suite went from 0.14.2 to 0.22.0 between this
+> These move quickly. The suite went from 0.14.2 to 0.23.0 between this
 > edition and the last, and the engine underneath every check changed. Yet
 > every figure in [Chapter 9](09-continuous-integration.md) came out the
 > same. That's no accident, and §7.1 says why. Pin your own versions anyway,

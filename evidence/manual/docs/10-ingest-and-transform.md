@@ -382,15 +382,15 @@ python -m ontology_suite data out/triplify/employees.ttl \
 ```
 
 ```
-Findings: 550 total (68 Violation, 363 Warning, 119 Info)
+Findings: 549 total (67 Violation, 363 Warning, 119 Info)
 ```
 
-<a id="ev-c10-18"></a>*Evidence:* [C10.18 — data: 550 unscoped, 55 scoped (with HermiT running)](../../EVIDENCE.md#c10-18) (reproduced: PASS)
+<a id="ev-c10-18"></a>*Evidence:* [C10.18 — data: 549 unscoped (550 at 0.22.0), 55 scoped, with HermiT running](../../EVIDENCE.md#c10-18) (reproduced: PASS)
 
-Five hundred and fifty, and [Chapter 9](09-continuous-integration.md)'s lesson
-applies identically. (With HermiT running, as here, 0.23.0 reports 549 and 67:
-one Violation fewer, the false `REA-020` of [Chapter 14](14-coverage-and-gaps.md)
-§14.4.) Scope it:
+Five hundred and forty-nine, and [Chapter 9](09-continuous-integration.md)'s
+lesson applies identically. (With HermiT running, as here, 0.22.0 reported 550
+and 68: one Violation more, the false `REA-020` of
+[Chapter 14](14-coverage-and-gaps.md) §14.4.) Scope it:
 
 ```bash
 python -m ontology_suite data out/triplify/employees.ttl \

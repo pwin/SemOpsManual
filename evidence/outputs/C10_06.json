@@ -15,7 +15,7 @@
    "cmd": "python scripts/list_files.py work/C10_06/sketch",
    "rc": 0,
    "seconds": 0.1,
-   "stdout": "    3,841  bind-facts.ttl\n      684  bind-review.txt\n    4,448  findings.txt\n   13,787  full_results.csv\n      576  sketch.ttl\n5 files, 23,336 bytes\n",
+   "stdout": "    3,841  bind-facts.ttl\n      684  bind-review.txt\n    4,448  findings.txt\n   13,787  full_results.csv\n      707  sketch.ttl\n5 files, 23,467 bytes\n",
    "stderr": ""
   }
  ]

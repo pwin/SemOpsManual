@@ -38,7 +38,7 @@ CLAIMS = [
                 "writes 0 triples."),
 
     Claim("C14.05", "docgen reshuffles the page on every run", "14",
-          (F, "Still open at 0.22.0, re-checked rather than carried forward: three identical runs"), "run",
+          (F, "Still open at 0.23.0, re-checked rather than carried forward: three identical runs"), "run",
           same_as="C13.12"),
 
     Claim("C14.06", "The reasoner's outcome follows the hash seed", "14",
@@ -116,10 +116,10 @@ CLAIMS = [
           checks="on the fixture HermiT finds the ontology consistent, with Contractor and owl:Nothing unsatisfiable; "
                  "suite 0.22.0 reports REA-020 as well as REA-021, and 0.23.0 REA-021 alone. On a clean ontology HermiT "
                  "finds nothing and the suite reports neither",
-          sources=[src("suite external_backend.py, the belt-and-braces rule",
-                       file("suite", "ontology_suite/reasoning/backends/external_backend.py", "128-133"),
+          sources=[src("suite external_backend.py at 0.22.0, the belt-and-braces rule",
+                       file("suite", "ontology_suite/reasoning/backends/external_backend.py", "128-133", ref="749af3e1be749ace3aab3ea4b492d72b3b21dbde"),
                        "thing_or_nothing = {owlready2.Thing, owlready2.owl.Nothing}"),
-                   src("testing repo detect.py, 03b-unsatisfiable-class, at 6d078a1", file("testing", "detect.py", "115-128"),
+                   src("testing repo detect.py, 03b-unsatisfiable-class, at 6d078a1", file("testing", "detect.py", "115-128", ref="6d078a118959760409e13076650c2d62a4f6dc90"),
                        'forbidden=("REA-001", "CNF-001", "CNF-002"),'),
                    src("suite commit d7d7a98, the fix", commit("suite", "d7d7a987cb754221b6c57a5997445628e219851b"),
                        "REA-020 said \"inconsistent\" for a merely unsatisfiable class"),
@@ -176,9 +176,9 @@ CLAIMS = [
                        "Oxigraph, `shacl-wasm`, and `eyereasoner` are all"),
                    src("testing repo README", file("testing", "README.md", "22"), "18 Turtle files in 10 folders"),
                    src("testing repo README", file("testing", "README.md", "31"), "All 16 fixtures pass"),
-                   src("suite main branch, stopped at 0.18.0", file("suite", "pyproject.toml", "3", ref="main"),
-                       'version = "0.18.0"')],
-          notes="The testing repository's `ontologies/` holds 14 folders and 25 Turtle files at 6d078a1; its "
+                   src("suite commit 5d59713, 'Bump to 0.18.0': main's head until it was fast-forwarded to 0.23.0, as recorded while drafting",
+                       commit("suite", "5d597132779a19dbfb7ccf8891723ca19d49ced3"), "Bump to 0.18.0")],
+          notes="The testing repository's `ontologies/` holds 14 folders and 25 Turtle files at 6cdfb14; its "
                 "detect.py declares 17 fixtures (C09.19). The suite's default branch on GitHub is `develop`."),
 
     Claim("C14.22", "The registry grew from 50 checks to 61", "14",

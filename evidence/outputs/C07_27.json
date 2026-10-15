@@ -1,42 +1,42 @@
 {
  "id": "C07.27",
  "status": "PASS",
- "detail": "suite 0.22.0: step 1 exits 0; step 1: 479 findings (55 V, 340 W, 84 I); step 2: 479 findings (55 V, 340 W, 84 I); step 3: 479 findings (55 V, 340 W, 84 I); step 4: 497 findings (64 V, 340 W, 93 I)",
+ "detail": "suite 0.23.0: step 1 exits non-zero (2); step 2: 489 findings (57 V, 339 W, 93 I); step 3: 479 findings (55 V, 340 W, 84 I); step 4: 489 findings (57 V, 339 W, 93 I); step 5 output contains 'gained 21:', 'STR-007 9', 'STY-003 9', 'STR-009 3', 'lost 11:', 'STR-006 1', 'DAT-002 1'",
  "ran": "2026-10-15",
  "steps": [
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --engine sparql --inference owlrl --out-dir work/C07_27/owlrl --fail-on never --reports minimal",
-   "rc": 0,
-   "seconds": 2.6,
-   "stdout": "Findings: 479 total (55 Violation, 340 Warning, 84 Info)\nReports written to: ./work/C07_27/owlrl\n  - work/C07_27/owlrl/findings.txt (start here -- what, where, and the source line)\n  - work/C07_27/owlrl/full_results.csv\n",
-   "stderr": ""
+   "rc": 2,
+   "seconds": 1.4,
+   "stdout": "",
+   "stderr": "usage: ontology-quality-suite checks [-h] [--ontology ONTOLOGY] [--data DATA]\n                                     [--import-dir IMPORT_DIR]\n                                     [--exclude-imports] [--allow-network]\n                                     [--shapes SHAPES] [--sparql SPARQL]\n                                     [--registry REGISTRY] [--themes THEMES]\n                                     [--inference {none,rdfs}]\n                                     [--engine {both,sparql,shacl,native,native+sparql}]\n                                     [--out-dir OUT_DIR]\n                                     [--reports {all,minimal}]\n                                     [--fail-on {Violation,Warning,Info,never}]\n                                     [--own-namespace OWN_NAMESPACE] [-v]\nontology-quality-suite checks: error: argument --inference: invalid choice: 'owlrl' (choose from none, rdfs)\n"
   },
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --engine sparql --inference rdfs --out-dir work/C07_27/rdfs --fail-on never --reports minimal",
    "rc": 0,
-   "seconds": 3.7,
-   "stdout": "Findings: 479 total (55 Violation, 340 Warning, 84 Info)\nReports written to: ./work/C07_27/rdfs\n  - work/C07_27/rdfs/findings.txt (start here -- what, where, and the source line)\n  - work/C07_27/rdfs/full_results.csv\n",
+   "seconds": 2.4,
+   "stdout": "Findings: 489 total (57 Violation, 339 Warning, 93 Info)\nReports written to: ./work/C07_27/rdfs\n  - work/C07_27/rdfs/findings.txt (start here -- what, where, and the source line)\n  - work/C07_27/rdfs/full_results.csv\n",
    "stderr": ""
   },
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --engine sparql --inference none --out-dir work/C07_27/none --fail-on never --reports minimal",
    "rc": 0,
-   "seconds": 3.2,
+   "seconds": 2.2,
    "stdout": "Findings: 479 total (55 Violation, 340 Warning, 84 Info)\nReports written to: ./work/C07_27/none\n  - work/C07_27/none/findings.txt (start here -- what, where, and the source line)\n  - work/C07_27/none/full_results.csv\n",
    "stderr": ""
   },
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --inference rdfs --out-dir work/C07_27/both-rdfs --fail-on never --reports minimal",
    "rc": 0,
-   "seconds": 4.7,
-   "stdout": "Findings: 497 total (64 Violation, 340 Warning, 93 Info)\nReports written to: ./work/C07_27/both-rdfs\n  - work/C07_27/both-rdfs/findings.txt (start here -- what, where, and the source line)\n  - work/C07_27/both-rdfs/full_results.csv\n",
+   "seconds": 2.5,
+   "stdout": "Findings: 489 total (57 Violation, 339 Warning, 93 Info)\nReports written to: ./work/C07_27/both-rdfs\n  - work/C07_27/both-rdfs/findings.txt (start here -- what, where, and the source line)\n  - work/C07_27/both-rdfs/full_results.csv\n",
    "stderr": ""
   },
   {
    "cmd": "python scripts/diff_findings.py work/C07_27/none/full_results.csv work/C07_27/rdfs/full_results.csv",
    "rc": 0,
-   "seconds": 0.2,
-   "stdout": "gained 11: STR-007 9, DAT-002 1, STR-006 1\nlost 11: STR-007 9, DAT-002 1, STR-006 1\nbefore 479, after 479\n",
+   "seconds": 0.1,
+   "stdout": "gained 21: STR-007 9, STY-003 9, STR-009 3\nlost 11: STR-007 9, DAT-002 1, STR-006 1\nbefore 479, after 489\n",
    "stderr": ""
   }
  ]

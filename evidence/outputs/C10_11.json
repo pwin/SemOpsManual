@@ -35,7 +35,7 @@
   {
    "cmd": "tarka bottr -l data/ottr/employees.stottr data/ottr/employees-bad-id.bottr.ttl --ntriples -o work/C10_11/bad-id.nt",
    "rc": 1,
-   "seconds": 0.1,
+   "seconds": 0.0,
    "stdout": "",
    "stderr": "tarka: left out: data/ottr/employees-bad-id.bottr.ttl: instance map 1 (acme:Employee), row 1: argument 4 (id): the value 'E001' is not in the lexical space of its datatype http://www.w3.org/2001/XMLSchema#integer\ntarka: left out: data/ottr/employees-bad-id.bottr.ttl: instance map 1 (acme:Employee), row 2: argument 4 (id): the value 'E002' is not in the lexical space of its datatype http://www.w3.org/2001/XMLSchema#integer\ntarka: left out: data/ottr/employees-bad-id.bottr.ttl: instance map 1 (acme:Employee), row 3: argument 4 (id): the value 'E003' is not in the lexical space of its datatype http://www.w3.org/2001/XMLSchema#integer\ntarka: left out: data/ottr/employees-bad-id.bottr.ttl: instance map 1 (acme:Employee), row 4: argument 4 (id): the value 'E004' is not in the lexical space of its datatype http://www.w3.org/2001/XMLSchema#integer\ntarka: left out: data/ottr/employees-bad-id.bottr.ttl: instance map 1 (acme:Employee), row 5: argument 4 (id): the value 'E005' is not in the lexical space of its datatype http://www.w3.org/2001/XMLSchema#integer\ntarka: 5 instances left out; the other 0 were made\n"
   },

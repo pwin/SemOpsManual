@@ -210,10 +210,11 @@ CLAIMS = [
           check=has(0, "165 passed, 10 skipped"), checks="pytest reports 165 passed, 10 skipped",
           needs=["testing-repo", "oxi-gen"],
           notes="Set EVIDENCE_TESTING_REPO to a clone of the testing repository at "
-                f"[6d078a1]({commit('testing', '6d078a118959760409e13076650c2d62a4f6dc90')}). It installs the suite "
-                "from a sibling checkout, `../consolidated_ontology_suite_python` (v0.22.0 here), and its competency "
-                "tests triplify with oxi-gen, found through ONTOLOGY_SUITE_OXI_GEN_BIN (0.5.1 here). Without oxi-gen "
-                "40 of those tests error at setup, saying so."),
+                f"[6cdfb14]({commit('testing', '6cdfb14a3c2857b61dcb32f49f56a4829b0d0664')}). It installs the suite "
+                "from a sibling checkout, `../consolidated_ontology_suite_python` (v0.23.0 here), and its competency "
+                "tests triplify with oxi-gen, found through ONTOLOGY_SUITE_OXI_GEN_BIN (0.5.1 here). The run resolved "
+                "holosdb 0.21.0 and shacl 0.3.3 from the testing repository's own lock. Without oxi-gen 40 of those "
+                "tests error at setup, saying so."),
 
     Claim("C09.16", "The competency board: 27 green, 0 red", "09",
           (F, "Re-run for this edition: **27 green, 0 red**, in two minutes."), "run",
