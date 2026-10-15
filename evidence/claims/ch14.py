@@ -1,7 +1,7 @@
 """Chapter 14 — Coverage and gaps."""
 import re
 
-from ._common import (ACME, SUITE, V1, Claim, Step, all_of, checks, commit, file, has, lacks, ok, src)
+from ._common import (ACME, SUITE, V1, Claim, Step, all_of, by_version, checks, commit, file, has, lacks, ok, src)
 
 F = "docs/14-coverage-and-gaps.md"
 PREV = "fc6de6da90d54a57bbbd2163ebc5b5dfe246ec40"
@@ -96,8 +96,8 @@ CLAIMS = [
           checks="with Java hidden and seed 5 (so owlready2 loads), REA-022's message names the missing file and "
                  "not 'entity'"),
 
-    Claim("C14.39", "REA-020 says inconsistent when only a class is unsatisfiable", "14",
-          (F, "When HermiT does run on the fixture, the suite reports `REA-020`, *\"the ontology"), "run",
+    Claim("C14.39", "REA-020 said inconsistent when only a class was unsatisfiable; fixed in 0.23.0", "14",
+          (F, "When HermiT does run on the fixture, suite 0.22.0 reports `REA-020`"), "run",
           data=["data/reasoner/clean.ttl"],
           scripts=["scripts/hermit_verdict.py"],
           steps=[Step(f"python scripts/hermit_verdict.py {FILES}", env={"PYTHONHASHSEED": "5"}),
@@ -109,17 +109,23 @@ CLAIMS = [
                  Step("python scripts/summarise_findings.py {work}/clean/full_results.csv")],
           check=checks(has(0, "HermiT: consistent", "owl:Nothing among them: True",
                            "https://acme.example.org/ns/Contractor"),
-                       has(2, "REA-020", "REA-021"),
+                       by_version((0, 23, 0), checks(has(2, "REA-021"), lacks(2, "REA-020")),
+                                  has(2, "REA-020", "REA-021")),
                        has(3, "HermiT: consistent", "unsatisfiable classes: none"),
                        lacks(5, "REA-020", "REA-021", "REA-022")),
-          checks="on the fixture HermiT finds the ontology consistent, with Contractor and owl:Nothing unsatisfiable, "
-                 "and the suite reports REA-020 as well as REA-021; on a clean ontology HermiT finds nothing and the "
-                 "suite reports neither",
+          checks="on the fixture HermiT finds the ontology consistent, with Contractor and owl:Nothing unsatisfiable; "
+                 "suite 0.22.0 reports REA-020 as well as REA-021, and 0.23.0 REA-021 alone. On a clean ontology HermiT "
+                 "finds nothing and the suite reports neither",
           sources=[src("suite external_backend.py, the belt-and-braces rule",
                        file("suite", "ontology_suite/reasoning/backends/external_backend.py", "128-133"),
                        "thing_or_nothing = {owlready2.Thing, owlready2.owl.Nothing}"),
-                   src("testing repo detect.py, 03b-unsatisfiable-class", file("testing", "detect.py", "115-128"),
-                       'forbidden=("REA-001", "CNF-001", "CNF-002"),')],
+                   src("testing repo detect.py, 03b-unsatisfiable-class, at 6d078a1", file("testing", "detect.py", "115-128"),
+                       'forbidden=("REA-001", "CNF-001", "CNF-002"),'),
+                   src("suite commit d7d7a98, the fix", commit("suite", "d7d7a987cb754221b6c57a5997445628e219851b"),
+                       "REA-020 said \"inconsistent\" for a merely unsatisfiable class"),
+                   src("testing repo commit 6cdfb14: 03b now forbids REA-020",
+                       commit("testing", "6cdfb14a3c2857b61dcb32f49f56a4829b0d0664"),
+                       "Forbid REA-020 where the class is unsatisfiable but the ontology is not")],
           notes="Needs Java, and a hash seed under which owlready2 loads (5 here; see C14.06)."),
 
     Claim("C14.10", "A mistyped manifest role compares nothing, successfully", "14",
@@ -128,10 +134,10 @@ CLAIMS = [
 
     # The "smaller ones" table: one claim per row, each pointing at its evidence.
     Claim("C14.11", "--help offers owlrl; asking for it gives a traceback", "14",
-          (F, "| `--help` still offers `--inference owlrl` and `both`; asking for one gives a Python traceback"),
+          (F, "| At 0.22.0, `--help` offers `--inference owlrl` and `both`, and asking for one gives a Python traceback"),
           "run", same_as="C07.26"),
     Claim("C14.12", "--inference is ignored under --engine sparql", "14",
-          (F, "| Under `--engine sparql`, `--inference` is accepted and ignored"), "run", same_as="C07.27"),
+          (F, "| At 0.22.0, `--inference` reaches the shapes only"), "run", same_as="C07.27"),
     Claim("C14.13", "The near-miss warning lists blank-node identifiers", "14",
           (F, "| The `--own-namespace` near-miss warning lists two blank-node identifiers"), "run", same_as="C09.07"),
     Claim("C14.14", "--registry replaces, so @builtin with a house registry is UNMAPPED", "14",
@@ -149,14 +155,16 @@ CLAIMS = [
           (F, "| The `holos validate` command defaults to the `native` engine and `holosdb`'s `Store.validate()` to"),
           "run", same_as="C13.10"),
     Claim("C14.20", "sketch reads every file with the first file's prefixes", "14",
-          (F, "| When two query files bind one prefix differently, `sketch` reads every file"), "run",
+          (F, "| At 0.22.0, when two query files bind one prefix differently, `sketch` reads every file"), "run",
           same_as="C10.29"),
 
     Claim("C14.21", "Documentation drift, upstream", "14",
           (F, "None of these changes what a tool does. All of them change what a careful reader"), "run",
           steps=[Step(f"{SUITE} checks --help")],
-          check=has(0, "'both' runs pyshacl", "not a default dependency"),
-          checks="the suite's --engine help still says 'both' runs pyshacl and 'native' is not a default dependency",
+          check=by_version((0, 23, 0), lacks(0, "runs pyshacl", "not a default dependency"),
+                           has(0, "'both' runs pyshacl", "not a default dependency")),
+          checks="at 0.22.0 the suite's --engine help still says 'both' runs pyshacl and 'native' is not a default "
+                 "dependency; from 0.23.0 it says neither",
           sources=[src("suite docs/REPORTS.md says 0.15.0 (see C09.11 for 0.17.0)", file("suite", "docs/REPORTS.md", "18"),
                        "## What changed in 0.15.0"),
                    src("suite docs/REASONING.md", file("suite", "docs/REASONING.md", "107"),
@@ -210,6 +218,9 @@ CLAIMS = [
           same_as="C08.08"),
     Claim("C14.40", "Closed: HOLOS validation leaves the store as it found it, from 0.21.1", "14",
           (F, "**HOLOS validation leaves the store as it found it**, from 0.21.1."), "run", same_as="C13.10"),
+    Claim("C14.41", "Closed: three suite defects this edition found, fixed in 0.23.0", "14",
+          (F, "**Three suite defects this edition found are fixed in 0.23.0**"), "run", same_as="C07.27",
+          notes="The other two are C14.39 (REA-020) and C10.29 and C10.30 (sketch)."),
     Claim("C14.30", "Early, but real: policy, rules, a triplifier", "14",
           (F, "**Early, but real:** read access policy at the index scan, with classification,"), "run",
           same_as="C13.06"),

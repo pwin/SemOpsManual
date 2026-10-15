@@ -52,6 +52,13 @@ Paths in the recorded outputs are rewritten (`.` for this folder, `<tmp>` for th
 temporary directory, `~` for your home) so they compare across machines. Timings
 are recorded but never asserted.
 
+**Which versions.** The packages are installed as a reader would install them,
+from PyPI and npm, not from any repository's lock file. So holosdb resolves to
+0.21.1 here although the suite's own `uv.lock` holds 0.21.0. Where a release
+changed what a claim should see, the claim checks the installed version and
+says which side of the change it ran on: suite 0.23.0 (C07.26, C07.27, C08.19,
+C10.18, C10.29, C10.30, C14.21, C14.39) and HOLOS 0.21.1 (C13.10).
+
 **What the machine needs.** Python 3.11 or later and Node 20 or later; the binaries
 come from `tools/fetch_binaries.py`. A Java runtime, for the claims in which HermiT
 runs (C08.19, C09.14, C10.18, C14.06, C14.39); without one they fail, which is
@@ -105,3 +112,7 @@ the merged sketch reading every mapping with the first file's prefixes
 validates and leaving them there, fixed in HOLOS 0.21.1 the same day ([C13.10](#c13-10)), `consistency` and `pattern-consistency` exiting 0 on what
 they find ([C12.14](#c12-14)), and tarka's two OTTR modes disagreeing about a
 `mailto:` cell ([C10.11](#c10-11)).
+
+Several were fixed upstream while this edition was being checked: HOLOS 0.21.1
+for the validation defect, and suite 0.23.0, with engine 0.3.3, for `REA-020`,
+`--inference` and the merged sketch. The manual describes both sides of each fix.

@@ -2,7 +2,7 @@
  "id": "C11.16",
  "status": "PASS",
  "detail": "step 1: conforms: true; step 1 exits 0; and nothing on stderr",
- "ran": "2026-10-14",
+ "ran": "2026-10-15",
  "steps": [
   {
    "cmd": "shacl -d data/rules/nested-data.ttl -s data/rules/nested.ttl -a",

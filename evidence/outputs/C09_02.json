@@ -2,26 +2,26 @@
  "id": "C09.02",
  "status": "PASS",
  "detail": "step 1: 479 findings (55 V, 340 W, 84 I); step 2: 479 findings (55 V, 340 W, 84 I); step 3: 479 findings (55 V, 340 W, 84 I)",
- "ran": "2026-10-14",
+ "ran": "2026-10-15",
  "steps": [
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --engine sparql --out-dir work/C09_02/run1 --fail-on never --reports minimal",
    "rc": 0,
-   "seconds": 2.4,
+   "seconds": 2.6,
    "stdout": "Findings: 479 total (55 Violation, 340 Warning, 84 Info)\nReports written to: ./work/C09_02/run1\n  - work/C09_02/run1/findings.txt (start here -- what, where, and the source line)\n  - work/C09_02/run1/full_results.csv\n",
    "stderr": ""
   },
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --engine sparql --out-dir work/C09_02/run2 --fail-on never --reports minimal",
    "rc": 0,
-   "seconds": 2.4,
+   "seconds": 3.5,
    "stdout": "Findings: 479 total (55 Violation, 340 Warning, 84 Info)\nReports written to: ./work/C09_02/run2\n  - work/C09_02/run2/findings.txt (start here -- what, where, and the source line)\n  - work/C09_02/run2/full_results.csv\n",
    "stderr": ""
   },
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --engine sparql --out-dir work/C09_02/run3 --fail-on never --reports minimal",
    "rc": 0,
-   "seconds": 3.2,
+   "seconds": 4.9,
    "stdout": "Findings: 479 total (55 Violation, 340 Warning, 84 Info)\nReports written to: ./work/C09_02/run3\n  - work/C09_02/run3/findings.txt (start here -- what, where, and the source line)\n  - work/C09_02/run3/full_results.csv\n",
    "stderr": ""
   }

@@ -2,7 +2,7 @@
  "id": "C11.11",
  "status": "PASS",
  "detail": "step 1: conforms: true; step 2: conforms: false; step 2 output contains 'focus <http://example.org/dave>'; step 2 output has none of 'focus <http://example.org/alice>'",
- "ran": "2026-10-14",
+ "ran": "2026-10-15",
  "steps": [
   {
    "cmd": "shacl -d data/rules/people.ttl -s data/rules/triple.ttl",

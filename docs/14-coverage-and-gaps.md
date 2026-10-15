@@ -110,7 +110,7 @@ findings about the run itself (`oq:Graph`) should survive the filter.
 The one-shot Python and JavaScript calls refuse a shapes graph that declares no
 shapes. The CLI does not: it prints `conforms: true` and exits 0. And because
 `-s` defaults to the data graph, `shacl -d data.ttl` with the `-s` forgotten does
-the same. Verified at 0.3.2.
+the same. Verified at 0.3.3.
 
 *Mitigation:* always pass `-s` in automation, and keep a failing case in the job
 ([Chapter 11](11-rules-and-inference.md) §11.1). *Suggested improvement:* refuse
@@ -170,7 +170,8 @@ Every edition of this manual, this one included until the last week of writing i
 said the DL reasoner "starts, or does not, at random". On the fixture it did seem
 to: across this edition's runs HermiT ran five times in ten from `ontology`. When it
 failed, the suite emitted `REA-022` carrying an internal error, *cannot access local
-variable 'entity'*; when it worked, `REA-020` and `REA-021`.
+variable 'entity'*; when it worked, `REA-020` and `REA-021` (only `REA-021` from
+0.23.0, below).
 
 It is not random, and it is not HermiT. Building the evidence for this edition, I
 replayed the suite's reasoner bridge on its own and read the traceback. The failure
@@ -214,28 +215,34 @@ loud only helps if the filter lets you hear it. And the episode is a lesson I
 should have learned from the first: **"random" is usually a cause nobody has found
 yet.**
 
-### `REA-020` says "inconsistent" when one class is unsatisfiable
+### `REA-020` said "inconsistent" when one class was unsatisfiable (fixed in 0.23.0)
 
-When HermiT does run on the fixture, the suite reports `REA-020`, *"the ontology
-… is logically inconsistent … no model satisfies every axiom simultaneously"*,
-beside `REA-021` for `acme:Contractor`. The ontology is not inconsistent. Nothing
-is asserted to be a Contractor, so a model exists, and HermiT agrees: run through
-owlready2 directly, it raises no inconsistency. What it reports is two
-unsatisfiable classes, `acme:Contractor` and `owl:Nothing`, which is unsatisfiable
-by definition. The suite's bridge has a belt-and-braces rule that reads
-`owl:Nothing` in that list as an inconsistent ontology, and owlready2 lists it
+When HermiT does run on the fixture, suite 0.22.0 reports `REA-020`, *"the
+ontology … is logically inconsistent … no model satisfies every axiom
+simultaneously"*, beside `REA-021` for `acme:Contractor`. The ontology is not
+inconsistent. Nothing is asserted to be a Contractor, so a model exists, and
+HermiT agrees: run through owlready2 directly, it raises no inconsistency. What it
+reports is two unsatisfiable classes, `acme:Contractor` and `owl:Nothing`, which
+is unsatisfiable by definition. The suite's bridge had a belt-and-braces rule that
+read `owl:Nothing` in that list as an inconsistent ontology, and owlready2 lists it
 whenever any class is unsatisfiable. A clean ontology gives an empty list and no
-`REA-020`; one unsatisfiable class gives both findings.
+`REA-020`; one unsatisfiable class gave both findings.
 
-The testing repository has a fixture for exactly this case,
-`03b-unsatisfiable-class`. It expects `REA-021` and forbids three other ids, but
-not `REA-020`, so the false finding passes the test written for it.
+The exit status never changed, since `REA-021` is a Violation too. What changed was
+where the finding sent a reader: inconsistency means hunting for the individual
+that asserts the contradiction, unsatisfiability means reading one class's own
+axioms. Two different searches, and it named the wrong one.
 
-*Mitigation:* read `REA-020` as real only when it arrives without `REA-021`. A
-genuine inconsistency raises in owlready2, and the bridge then reports `REA-020`
-and no `REA-021`. *Suggested improvements:* report inconsistency only when
-`owl:Thing` is unsatisfiable, which is what inconsistency means; and add
-`REA-020` to that fixture's forbidden list.
+*Fixed in suite 0.23.0*, which reports inconsistency only when `owl:Thing` is
+unsatisfiable. That narrowing is safe because a genuinely inconsistent ontology
+never reaches the rule: owlready2 raises, and the bridge reports `REA-020` on its
+own. The testing repository's fixture for the case, `03b-unsatisfiable-class`,
+expected `REA-021` and forbade three other ids but not `REA-020`, so the false
+finding passed the test written for it; it now forbids `REA-020` too
+([6cdfb14](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/commit/6cdfb14a3c2857b61dcb32f49f56a4829b0d0664)),
+with fixture `13`, which does assert an individual into an impossible class, as the
+contrast. *On 0.22.0:* read `REA-020` as real only when it arrives without
+`REA-021`.
 
 ### The SHACL engine cannot scope validation to a named graph
 
@@ -263,8 +270,8 @@ unknown role.
 
 | What | Where you meet it |
 |---|---|
-| `--help` still offers `--inference owlrl` and `both`; asking for one gives a Python traceback rather than a one-line error | [Ch. 7](07-the-toolchain.md) §7.4 |
-| Under `--engine sparql`, `--inference` is accepted and ignored: `owlrl`, `rdfs` and `none` give the same findings | [Ch. 7](07-the-toolchain.md) §7.4 |
+| At 0.22.0, `--help` offers `--inference owlrl` and `both`, and asking for one gives a Python traceback rather than a one-line error. *Fixed in 0.23.0* | [Ch. 7](07-the-toolchain.md) §7.4 |
+| At 0.22.0, `--inference` reaches the shapes only: ignored under `--engine sparql`, and under the default engine the two arms check different graphs. *Fixed in 0.23.0*, with engine 0.3.3's `shacl.rdfs_closure` | [Ch. 7](07-the-toolchain.md) §7.4 |
 | The `--own-namespace` near-miss warning lists two blank-node identifiers among the "namespaces actually seen" | [Ch. 9](09-continuous-integration.md) §9.4 |
 | `--sparql` composes but `--registry` replaces, so adding `@builtin` with a house registry turns every built-in finding `UNMAPPED`; and the warning recommends an absolute path rather than `@builtin` | [Ch. 8](08-model-and-validate.md) §8.5 |
 | `data` and `run` report one contradiction as two `LOG-001`s, one from the registry pass and one from the `owlrl` closure | [Ch. 9](09-continuous-integration.md) §9.6 |
@@ -272,7 +279,7 @@ unknown role.
 | The suite's `triplify` and the extension's *Run Full Triplify* drive `oxi-gen` only; neither knows tarka | [Ch. 10](10-ingest-and-transform.md) §10.3 |
 | `consistency` and `pattern-consistency` exit 0 whatever they find unless given `--fail-on-misalignment` or `--fail-on-mismatch`, two names for one idea, neither of them `--fail-on` | [Ch. 12](12-release-and-change.md) §12.6 |
 | The `holos validate` command defaults to the `native` engine and `holosdb`'s `Store.validate()` to `adapted`, so the same words run different validators | [Ch. 13](13-operate-and-consume.md) §13.2 |
-| When two query files bind one prefix differently, `sketch` reads every file with the first file's binding: the others' terms are reported as undeclared, or, if the odd file sorts last, its mistake is not reported at all. Only a warning on stderr says so | [Ch. 10](10-ingest-and-transform.md) §10.6 |
+| At 0.22.0, when two query files bind one prefix differently, `sketch` reads every file with the first file's binding: the others' terms are reported as undeclared, or, if the odd file sorts last, its mistake is not reported at all. *Fixed in 0.23.0* | [Ch. 10](10-ingest-and-transform.md) §10.6 |
 
 ### Documentation drift, upstream
 
@@ -282,9 +289,8 @@ believes, which is how I came to carry one false claim for two months
 
 - The suite's `REPORTS.md` dates the report-set change to 0.15.0; it shipped in
   0.17.0.
-- The suite's `--engine` help still describes pyshacl: `both` "runs pyshacl",
-  and `native` is "not a default dependency". Neither has been true since
-  0.22.0.
+- At 0.22.0 the suite's `--engine` help still describes pyshacl: `both` "runs
+  pyshacl", and `native` is "not a default dependency". Rewritten in 0.23.0.
 - The suite's `REASONING.md` calls `owlready2` the `reasoner` extra; it has been a
   base dependency since the first commit. What is optional is Java.
 - The extension's `README.md` still names Oxigraph among its engines; it went in
@@ -359,6 +365,13 @@ namespace, an ontology's own default namespace reported as undeclared, and
 
 **`sh:conforms` means what the specification says**, from engine 0.3.0, and the
 WebAssembly build agrees from 0.3.2 ([Ch. 11](11-rules-and-inference.md) §11.1).
+
+**Three suite defects this edition found are fixed in 0.23.0**: `REA-020` no
+longer reports an inconsistent ontology for an unsatisfiable class (§14.4);
+`--inference rdfs` reaches every engine, through one closure made by the SHACL
+engine ([Ch. 7](07-the-toolchain.md) §7.4); and `sketch` reads each mapping with
+its own prefixes ([Ch. 10](10-ingest-and-transform.md) §10.6). Engine 0.3.3 was
+cut for the second, to hand the closure out.
 
 **HOLOS validation leaves the store as it found it**, from 0.21.1. Up to 0.21.0 it
 wrote the shapes into the store it validated, a copy per call, and on disk for

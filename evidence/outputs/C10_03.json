@@ -2,7 +2,7 @@
  "id": "C10.03",
  "status": "PASS",
  "detail": "step 1 output contains '--query-pattern QUERY_PATTERN, --file-pattern QUERY_PATTERN', '*.sparql,*.rq,*.tarql,*.tq'",
- "ran": "2026-10-14",
+ "ran": "2026-10-15",
  "steps": [
   {
    "cmd": "ontology-quality-suite sketch --help",

@@ -2,7 +2,7 @@
  "id": "C10.15",
  "status": "PASS",
  "detail": "step 1 exits 0; step 2 output contains 'https://acme.example.org/graph/triplified/employees', '40'",
- "ran": "2026-10-14",
+ "ran": "2026-10-15",
  "steps": [
   {
    "cmd": "tarka run -q fixtures/acme_robotics/employees.rq -i fixtures/acme_robotics/employees.csv --post http://127.0.0.1:7899/graph --graph https://acme.example.org/graph/triplified/employees",
@@ -14,7 +14,7 @@
   {
    "cmd": "python scripts/endpoint_stats.py http://127.0.0.1:7899/query",
    "rc": 0,
-   "seconds": 0.1,
+   "seconds": 0.2,
    "stdout": "g,triples\nhttps://acme.example.org/graph/triplified/employees,40\n",
    "stderr": ""
   }

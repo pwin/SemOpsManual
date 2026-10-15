@@ -67,7 +67,7 @@ print(report.conforms, len(report.results))
 > defect, in which `$this` was not substituted into a CONSTRUCT-based rule, so a
 > SPARQL rule ran for **every node in the graph**. No release carried it, but if
 > you built from source in mid-August 2026, re-run your SPARQL rules. This
-> edition was measured at **0.3.2**. An unrecognised `inference` value has been
+> edition was measured at **0.3.3**. An unrecognised `inference` value has been
 > an error naming what is accepted throughout, never a silent fallback to
 > validating without the rules. Check with `shacl --version`.
 
@@ -85,7 +85,7 @@ recomputing the expected reports' conformance under the engine's rule instead
 of reading what the tests wrote, so it agreed with itself. Comparing reports as
 the W3C suite compares them, as whole graphs, is what found it.
 
-Verified on 0.3.2, with a shape whose only result is a Warning:
+Verified on 0.3.3, with a shape whose only result is a Warning:
 
 ```
 shacl -d data.ttl -s shapes-warn.ttl                    conforms false   exit 1
@@ -124,7 +124,7 @@ shapes conforms**. The caller was told their graph was valid when not one
 constraint had been evaluated.
 
 So the one-shots now refuse a shapes graph that declares nothing. Still true at
-0.3.2, verified through the Python binding:
+0.3.3, verified through the Python binding:
 
 ```
 validate(data, shapes)     conforms = False | results = 1
@@ -263,6 +263,16 @@ term, which no shape is improved by. It is off by default because it changes the
 report; a `sh:closed` shape in particular starts seeing inferred predicates and
 failing on them.
 
+Since 0.3.3 the engine also hands the closure out: `shacl.rdfs_closure` in Python,
+`rdfsClosure` in WebAssembly, Turtle in and Turtle out. A caller that reads one graph
+more than once can close it once and give every reader the same result, and the
+quality suite does exactly that from 0.23.0, which is how its SPARQL checks came to
+see the entailments its shapes always had ([Chapter 7](07-the-toolchain.md) §7.4).
+One edge is worth knowing. `rdfs3` types the *object* of a triple, so a property
+with a declared range and a literal value entails that the literal is an instance
+of the range: true in RDFS, and unwritable in RDF, where a literal cannot be a
+subject. The closure drops such triples, which is what makes it shareable at all.
+
 ---
 
 ## 11.3 Triple rules
@@ -326,7 +336,7 @@ acme:BoxRules a sh:NodeShape ;
         WHERE { $this acme:width ?w ; acme:height ?h . BIND(?w * ?h AS ?a) }""" ] .
 ```
 
-Verified at 0.3.2: with `width 3` and `height 4`, a shape asserting
+Verified at 0.3.3: with `width 3` and `height 4`, a shape asserting
 `sh:path acme:area ; sh:hasValue 12` conforms. The arithmetic runs and the
 derived value is what validation sees.
 
@@ -349,7 +359,7 @@ fallback took every `sh:declare` in the graph and could pick up a decoy.
 ## 11.5 Four ways to get a wrong answer
 
 These produce silence, not errors. Every one reproduces exactly as described, at
-0.3.2, in [notebook 2](../notebooks/02-rules-and-inference.ipynb).
+0.3.3, in [notebook 2](../notebooks/02-rules-and-inference.ipynb).
 
 **A rule fires on its shape's targets, so a shape with no target does nothing.**
 This is the commonest mistake, because attaching a rule to a nested property
@@ -478,7 +488,7 @@ live.
 
 | Not implemented | Consequence |
 |---|---|
-| **SHACL functions** (`sh:SPARQLFunction`) | A rule calling one errors (exit 2) rather than returning empty. Verified at 0.3.2 |
+| **SHACL functions** (`sh:SPARQLFunction`) | A rule calling one errors (exit 2) rather than returning empty. Verified at 0.3.3 |
 | **Result annotations** (`sh:resultAnnotation`) | Extra properties from a SPARQL constraint's solution are not copied onto results |
 | **SHACL 1.2 Rules** (`RULE { } WHERE { }`) | A different design from SHACL-AF; its test corpus ships with the engine but is not wired into the conformance harness. (HOLOS's `holos rules` takes plain `CONSTRUCT` files, which is a third format again) |
 | **OWL-RL pre-inference** | RDFS is available and opt-in; nothing beyond it. This is why the suite's `--inference owlrl` went when pyshacl did ([Chapter 7](07-the-toolchain.md) §7.4) |
@@ -547,7 +557,7 @@ Four practices:
 2   could not validate (bad input, unsupported feature, compile error)
 ```
 
-Verified across all three at 0.3.2. That separation is what lets a CI job tell
+Verified across all three at 0.3.3. That separation is what lets a CI job tell
 *"the data is wrong"* from *"the rules did not compile"*, and a job that treats
 them alike will eventually go green on a rule set that never ran.
 

@@ -2,7 +2,7 @@
  "id": "C11.07",
  "status": "PASS",
  "detail": "step 1: conforms: true; step 1 exits 0; step 2: conforms: true; step 2 exits 0",
- "ran": "2026-10-14",
+ "ran": "2026-10-15",
  "steps": [
   {
    "cmd": "shacl -d data/shacl/data.ttl -s data/shacl/no-shapes.ttl",

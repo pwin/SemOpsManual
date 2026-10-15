@@ -1,6 +1,6 @@
 """Chapter 7 — The toolchain."""
 from ._common import (ACME, OWN, SUITE, V1, Claim, Step, all_of, by_check, checks, commit, counts, exit_code,
-                      file, has, lacks, nonzero, ok, rows, src, totals)
+                      file, has, lacks, nonzero, ok, rows, src, totals, by_version)
 
 F = "docs/07-the-toolchain.md"
 SCOPED = f"{SUITE} checks --ontology {V1} --import-dir {ACME} --own-namespace {OWN}"
@@ -36,11 +36,11 @@ CLAIMS = [
           (F, "> **Versions this edition was measured against.**"), "run",
           scripts=["scripts/versions.py"],
           steps=[Step("python scripts/versions.py")],
-          check=has(0, "PyPI ontology-quality-suite  0.22.0", "PyPI shacl                   0.3.2",
+          check=has(0, "PyPI ontology-quality-suite  0.22.0", "PyPI shacl                   0.3.3",
                     "PyPI holosdb                 0.21.1", "PyPI tarka-rdf               0.1.1",
-                    "release shacl                shacl 0.3.2", "release tarka                tarka 0.1.1",
+                    "release shacl                shacl 0.3.3", "release tarka                tarka 0.1.1",
                     "release holos                holos 0.21.1", "npm ontology-suite           0.15.0",
-                    "npm shacl-wasm-node          0.3.2", "npm holos-wasm-node          0.21.1"),
+                    "npm shacl-wasm-node          0.3.3", "npm holos-wasm-node          0.21.1"),
           checks="the installed packages, release binaries and npm packages are the versions in the table",
           needs=["node"],
           notes="The testing repository was used at "
@@ -76,12 +76,14 @@ CLAIMS = [
           (F, "That one line now brings both engines: `holosdb` and `shacl` are runtime"), "run",
           scripts=["scripts/inspect_packages.py"],
           steps=[Step("python scripts/inspect_packages.py")],
-          check=has(0, "commands installed: ontology-quality-suite", "holosdb>=0.15", "owlready2>=0.51",
-                    "shacl<0.4,>=0.3.0", "shacl 0.3.2\n    commands installed: none (library only)",
-                    "tarka-rdf 0.1.1\n    commands installed: none (library only)",
-                    "holosdb 0.21.1\n    commands installed: none (library only)"),
-          checks="ontology-quality-suite declares holosdb, shacl (<0.4) and owlready2 as runtime dependencies and "
-                 "installs the only command; shacl, tarka-rdf and holosdb install none"),
+          check=checks(has(0, "commands installed: ontology-quality-suite", "holosdb>=0.15", "owlready2>=0.51",
+                           "shacl 0.3.3\n    commands installed: none (library only)",
+                           "tarka-rdf 0.1.1\n    commands installed: none (library only)",
+                           "holosdb 0.21.1\n    commands installed: none (library only)"),
+                       by_version((0, 23, 0), has(0, "shacl<0.4,>=0.3.3"), has(0, "shacl<0.4,>=0.3.0"))),
+          checks="ontology-quality-suite declares holosdb, shacl (below 0.4; from 0.3.3 since suite 0.23.0, which "
+                 "needs shacl.rdfs_closure) and owlready2 as runtime dependencies and installs the only command; "
+                 "shacl, tarka-rdf and holosdb install none"),
 
     Claim("C07.06", "STY-003's message vanished on 60 of 65 findings", "07",
           (F, "On the suite's stress fixture, 60 of 65 findings had no message at"), "source",
@@ -173,7 +175,7 @@ CLAIMS = [
 
     Claim("C07.21", "Each release carries SHA256SUMS", "07",
           (F, "Windows, each release with a `SHA256SUMS` file. Check it."), "source",
-          sources=[src("SHACL Engine v0.3.2 release", "https://github.com/pwin/SHACL_Engine/releases/tag/v0.3.2"),
+          sources=[src("SHACL Engine v0.3.3 release", "https://github.com/pwin/SHACL_Engine/releases/tag/v0.3.3"),
                    src("HOLOS v0.21.1 release", "https://github.com/pwin/triplestore/releases/tag/v0.21.1"),
                    src("tarka v0.1.1 release", "https://github.com/pwin/tarka/releases/tag/v0.1.1")],
           scripts=["tools/fetch_binaries.py"],
@@ -215,27 +217,41 @@ CLAIMS = [
     Claim("C07.25", "My own node-shape severity mistake", "07",
           (F, "I tripped over the same thing myself while testing the engine for this"), "run", same_as="C07.12"),
 
-    Claim("C07.26", "--inference owlrl is refused, with a traceback; --help still offers it", "07",
+    Claim("C07.26", "--inference owlrl is refused: a traceback at 0.22.0, a usage error from 0.23.0", "07",
           (F, "> **`--inference owlrl` and `both` are gone from the checks path.**"), "run",
           steps=[Step(f"{UNSCOPED} --inference owlrl --out-dir {{work}}/owlrl --fail-on never --reports minimal"),
                  Step(f"{SUITE} checks --help")],
-          check=checks(nonzero(0), has(0, "Traceback (most recent call last)",
-                                       "ValueError: --inference 'owlrl' is not available (none/rdfs are)"),
-                       has(1, "--inference {none,rdfs,owlrl,both}")),
-          checks="under the default engine, --inference owlrl exits non-zero with a Python traceback ending in "
-                 "the ValueError; --help lists owlrl and both among the choices"),
+          check=checks(nonzero(0), by_version(
+              (0, 23, 0),
+              checks(has(0, "argument --inference: invalid choice: 'owlrl'"), lacks(0, "Traceback"),
+                     has(1, "--inference {none,rdfs}")),
+              checks(has(0, "Traceback (most recent call last)",
+                         "ValueError: --inference 'owlrl' is not available (none/rdfs are)"),
+                     has(1, "--inference {none,rdfs,owlrl,both}")))),
+          checks="--inference owlrl exits non-zero. At 0.22.0, with a Python traceback ending in the ValueError, and "
+                 "--help lists owlrl and both; from 0.23.0, with a one-line usage error, and --help offers none and "
+                 "rdfs only"),
 
-    Claim("C07.27", "Under --engine sparql, --inference is accepted and ignored", "07",
-          (F, "**And under `--engine sparql` it is not loud at all.**"), "run",
+    Claim("C07.27", "--inference rdfs: half the suite at 0.22.0, every engine from 0.23.0", "07",
+          (F, "**And `--inference rdfs` reached only half the suite until 0.23.0.**"), "run",
           steps=[Step(f"{UNSCOPED} --engine sparql --inference {i} --out-dir {{work}}/{i} --fail-on never "
                       f"--reports minimal") for i in ("owlrl", "rdfs", "none")]
-                + [Step(f"{UNSCOPED} --inference rdfs --out-dir {{work}}/both-rdfs --fail-on never --reports minimal")],
-          check=checks(exit_code(0, 0), totals(0, 479, 55, 340, 84), totals(1, 479, 55, 340, 84),
-                       totals(2, 479, 55, 340, 84), totals(3, 497)),
-          checks="--engine sparql with owlrl, rdfs and none: 479 each, exit 0. Under the default engine, rdfs "
-                 "gives 497: the 18 extra findings come from the shapes, which see the inferred triples",
-          sources=[src("suite ontology_suite/pipeline.py: inference is checked and applied inside `if uses_shacl:`",
-                       file("suite", "ontology_suite/pipeline.py", "141-168"), "if inference not in (\"none\", \"rdfs\"):")]),
+                + [Step(f"{UNSCOPED} --inference rdfs --out-dir {{work}}/both-rdfs --fail-on never --reports minimal"),
+                   Step("python scripts/diff_findings.py {work}/none/full_results.csv {work}/rdfs/full_results.csv")],
+          check=by_version(
+              (0, 23, 0),
+              checks(nonzero(0), totals(1, 489, 57, 339, 93), totals(2, 479, 55, 340, 84), totals(3, 489, 57, 339, 93),
+                     has(4, "gained 21:", "STR-007 9", "STY-003 9", "STR-009 3", "lost 11:", "STR-006 1", "DAT-002 1")),
+              checks(exit_code(0, 0), totals(0, 479, 55, 340, 84), totals(1, 479, 55, 340, 84),
+                     totals(2, 479, 55, 340, 84), totals(3, 497))),
+          checks="at 0.22.0: under --engine sparql, owlrl, rdfs and none give 479 each, exit 0, and the default "
+                 "engine with rdfs gives 497. From 0.23.0: owlrl is refused; rdfs gives 489 under sparql and under "
+                 "the default engine alike, against 479 without it; the closure gains 21 findings (STR-007 9, "
+                 "STY-003 9, STR-009 3) and loses 11 (STR-007 9, STR-006, DAT-002)",
+          sources=[src("suite pipeline.py at 0.22.0: inference applied inside `if uses_shacl:`",
+                       file("suite", "ontology_suite/pipeline.py", "141-168"), "if inference not in (\"none\", \"rdfs\"):"),
+                   src("suite commit d7d7a98, the fix", commit("suite", "d7d7a987cb754221b6c57a5997445628e219851b"),
+                       "The closure is now materialised once, centrally, and both arms read the result.")]),
 
     Claim("C07.28", "--verbose shows what each input resolved to", "07",
           (F, "Every subcommand takes `-v`/`--verbose`, which prints what each input option"), "run",

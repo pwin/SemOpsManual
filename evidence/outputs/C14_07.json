@@ -2,7 +2,7 @@
  "id": "C14.07",
  "status": "PASS",
  "detail": "step 1 output contains 'focus <http://example.org/bob>', 'focus <http://example.org/carol>', 'focus <http://example.org/dave>'; the TriG and the flattened file give identical reports; step 3 output has none of '--graph'",
- "ran": "2026-10-14",
+ "ran": "2026-10-15",
  "steps": [
   {
    "cmd": "shacl -d data/shacl/graphs.trig -s data/shacl/shapes-violation.ttl",

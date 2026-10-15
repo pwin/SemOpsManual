@@ -2,13 +2,13 @@
  "id": "C11.02",
  "status": "PASS",
  "detail": "step 1 output contains 'inference=none             conforms=True results=0', 'inference=rules            conforms=False results=1', 'inference=rules-iterated   conforms=False results=1', 'inference=bogus            ERROR: unknown inference \"bogus\"'",
- "ran": "2026-10-14",
+ "ran": "2026-10-15",
  "steps": [
   {
    "cmd": "python scripts/shacl_python.py data/shacl data/rules",
    "rc": 0,
-   "seconds": 0.1,
-   "stdout": "shacl 0.3.2\nvalidate(data, shapes)                       conforms=False results=1\nvalidate(shapes, data)  [swapped]            REFUSED: ValueError: the shapes graph declares no shapes, so this would report that the data conforms without having checked anything. Note the argument order is validate(data, shapes). To validate against an empty shapes graph deliberately, use Shapes.from_file and check len() yourself.\nvalidate(data, no-shapes)                    REFUSED: ValueError: the shapes graph declares no shapes, so this would report that the data conforms without having checked anything. Note the argument order is validate(data, shapes). To validate against an empty shapes graph deliberately, use Shapes.from_file and check len() yourself.\nShapes.from_file(no-shapes).validate_file    conforms=True results=0\nwarnings only                                conforms=False results=1\nwarnings only, allow_warnings=True           conforms=True results=1\nseverity on the node shape (the trap)        conforms=False results=1\ninference=none             conforms=True results=0\ninference=rdfs             conforms=True results=0\ninference=rules            conforms=False results=1\ninference=rules-iterated   conforms=False results=1\ninference=bogus            ERROR: unknown inference \"bogus\"; use \"none\", \"rdfs\", \"rules\" or \"rules-iterated\"\n",
+   "seconds": 0.2,
+   "stdout": "shacl 0.3.3\nvalidate(data, shapes)                       conforms=False results=1\nvalidate(shapes, data)  [swapped]            REFUSED: ValueError: the shapes graph declares no shapes, so this would report that the data conforms without having checked anything. Note the argument order is validate(data, shapes). To validate against an empty shapes graph deliberately, use Shapes.from_file and check len() yourself.\nvalidate(data, no-shapes)                    REFUSED: ValueError: the shapes graph declares no shapes, so this would report that the data conforms without having checked anything. Note the argument order is validate(data, shapes). To validate against an empty shapes graph deliberately, use Shapes.from_file and check len() yourself.\nShapes.from_file(no-shapes).validate_file    conforms=True results=0\nwarnings only                                conforms=False results=1\nwarnings only, allow_warnings=True           conforms=True results=1\nseverity on the node shape (the trap)        conforms=False results=1\ninference=none             conforms=True results=0\ninference=rdfs             conforms=True results=0\ninference=rules            conforms=False results=1\ninference=rules-iterated   conforms=False results=1\ninference=bogus            ERROR: unknown inference \"bogus\"; use \"none\", \"rdfs\", \"rules\" or \"rules-iterated\"\n",
    "stderr": ""
   }
  ]

@@ -41,9 +41,9 @@ read, because it is how the rest are kept honest.
 >
 > | | Version | From |
 > |---|---|---|
-> | Ontology Quality Suite | **0.22.0** | PyPI `ontology-quality-suite` |
+> | Ontology Quality Suite | **0.22.0** | PyPI `ontology-quality-suite`. 0.23.0, which fixes three defects this edition found (§7.4, and [Chapter 14](14-coverage-and-gaps.md) §14.4), was pushed but not yet released as the edition closed; the evidence checks both |
 > | Ontology Development Suite | **0.15.0** | `ontology-dev-suite-0.15.0.vsix` from the v0.15.0 release; DSL as npm `ontology-suite` 0.15.0 |
-> | SHACL Engine | **0.3.2** | PyPI `shacl`; npm `shacl-wasm`, `shacl-wasm-node`; the `shacl` command from the v0.3.2 release |
+> | SHACL Engine | **0.3.3** | PyPI `shacl`; npm `shacl-wasm`, `shacl-wasm-node`; the `shacl` command from the v0.3.3 release. 0.3.3 adds one function, the RDFS closure handed out, which the suite needed for a fix (§7.4) |
 > | HOLOS | **0.21.1** | PyPI `holosdb`; npm `holos-wasm`, `holos-wasm-node`; the `holos` command from the v0.21.1 release. 0.21.1 was cut while this edition was being checked, to fix a defect the checking found ([Chapter 13](13-operate-and-consume.md) §13.2) |
 > | tarka | **0.1.1** | PyPI `tarka-rdf`; the `tarka` command from the v0.1.1 release |
 > | Testing repository | `6d078a1` | `main`, 8 October 2026 |
@@ -483,20 +483,31 @@ declaration sits before you blame the engine.
 > served them, and the native engine has no OWL2-RL reasoner. Downgrading
 > silently to RDFS would have dropped findings that depend on OWL2-RL rules, so
 > the suite refuses and points you at the reasoning stage, which still builds
-> an `owlrl` closure. Two small rough edges remain: `--help` still offers
-> `owlrl` and `both` as choices, and asking for one produces a Python
-> traceback rather than a one-line diagnostic. Loud is right; a stack trace is
-> not quite the way to be loud ([Chapter 14](14-coverage-and-gaps.md) §14.4).
+> an `owlrl` closure. At 0.22.0 the refusal came as a Python traceback while
+> `--help` still offered both choices. From 0.23.0 they are not offered, and
+> asking for one is a one-line usage error.
 >
-> **And under `--engine sparql` it is not loud at all.** Only the SHACL arm
-> applies `--inference`, so with no SHACL arm the flag is accepted and ignored.
-> `--inference owlrl`, `--inference rdfs` and no flag all return the same 479
-> findings. A pipeline that asks for `sparql` with `owlrl` passes, having
-> inferred nothing. Even under the default engine, `rdfs` reaches only the
-> shapes; the `.rq` checks never see the inferred triples. If a check depends on
-> inference, run the reasoning stage.
+> **And `--inference rdfs` reached only half the suite until 0.23.0.** It was a
+> parameter of the SHACL arm alone. Under `--engine sparql` the flag was
+> accepted and ignored, so a pipeline asking for it passed having inferred
+> nothing. Under the default engine the two arms checked different graphs, and
+> their findings were then merged as though they were one run. On the fixture:
+>
+> | `--engine` | no inference | `rdfs` at 0.22.0 | `rdfs` from 0.23.0 |
+> |---|---|---|---|
+> | `sparql` | 479 | 479 | 489 |
+> | `both` | 479 | 497 | 489 |
+>
+> I first read the 497 as eighteen extra findings. It was not: closing the graph
+> properly gains 21 findings (`STY-003`, `STR-007` and `STR-009` on entailed
+> types) and loses 11, because an entailed type also *resolves* a check about an
+> untyped resource. 497 described a graph that never existed. From 0.23.0 the
+> closure is made once, by the SHACL engine itself (`shacl.rdfs_closure`, new in
+> engine 0.3.3, so it cannot disagree with the closure the shapes would have
+> made), and every engine reads the result. Expect findings to move in both
+> directions when you turn it on; that is the closure working.
 
-<a id="ev-c07-26"></a><a id="ev-c07-27"></a>*Evidence:* [C07.26 — --inference owlrl is refused, with a traceback; --help still offers it](../../EVIDENCE.md#c07-26) (reproduced: PASS) · [C07.27 — Under --engine sparql, --inference is accepted and ignored](../../EVIDENCE.md#c07-27) (reproduced: PASS)
+<a id="ev-c07-26"></a><a id="ev-c07-27"></a>*Evidence:* [C07.26 — --inference owlrl is refused: a traceback at 0.22.0, a usage error from 0.23.0](../../EVIDENCE.md#c07-26) (reproduced: PASS) · [C07.27 — --inference rdfs: half the suite at 0.22.0, every engine from 0.23.0](../../EVIDENCE.md#c07-27) (reproduced: PASS)
 
 ### `--verbose`
 

@@ -2,12 +2,12 @@
  "id": "C08.15",
  "status": "PASS",
  "detail": "step 1 exits non-zero (1); step 1 output contains 'TypeError: Cannot convert undefined or null to object'",
- "ran": "2026-10-14",
+ "ran": "2026-10-15",
  "steps": [
   {
    "cmd": "node node_modules/tsx/dist/cli.mjs scripts/dsl/bad-range.ontology.ts",
    "rc": 1,
-   "seconds": 0.6,
+   "seconds": 0.7,
    "stdout": "",
    "stderr": "./node_modules/ontology-suite/dsl/index.js:933\n  const facets = Object.entries(range.facets).filter(([, value]) => value !== void 0);\n                        ^\n\nTypeError: Cannot convert undefined or null to object\n    at Function.entries (<anonymous>)\n    at datatypeNode (./node_modules/ontology-suite/dsl/index.js:933:25)\n    at defdatatypeproperty (./node_modules/ontology-suite/dsl/index.js:911:71)\n    at <anonymous> (./scripts/dsl/bad-range.ontology.ts:8:1)\n    at Object.<anonymous> (./scripts/dsl/bad-range.ontology.ts:8:79)\n    at Module._compile (node:internal/modules/cjs/loader:1521:14)\n    at Object.transformer (./node_modules/tsx/dist/register-B1c7OH6V.cjs:22:2188)\n    at Module.load (node:internal/modules/cjs/loader:1266:32)\n    at Module._load (node:internal/modules/cjs/loader:1091:12)\n    at cjsLoader (node:internal/modules/esm/translators:298:15)\n\nNode.js v20.19.5\n"
   }

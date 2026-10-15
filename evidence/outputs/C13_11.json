@@ -2,12 +2,12 @@
  "id": "C13.11",
  "status": "PASS",
  "detail": "step 1 output contains \"prefix='acme', 4 classes, 2 object properties, 3 datatype properties, 1 sections, 5 external terms (3 resolved).\"; step 2 output contains 'ontology-documentation.html', 'ontology_doc_data.json', 'class-diagrams/'",
- "ran": "2026-10-14",
+ "ran": "2026-10-15",
  "steps": [
   {
    "cmd": "ontology-quality-suite docgen --ontology fixtures/acme_robotics/acme-org-v1.ttl --ref fixtures/acme_robotics/reference_vocab/org.ttl --ref fixtures/acme_robotics/reference_vocab/foaf.rdf --out-dir work/C13_11/docs",
    "rc": 0,
-   "seconds": 2.7,
+   "seconds": 7.1,
    "stdout": "Wrote work/C13_11/docs/ontology_doc_data.json: prefix='acme', 4 classes, 2 object properties, 3 datatype properties, 1 sections, 5 external terms (3 resolved).\nWrote work/C13_11/docs/ontology-documentation.html (4 classes, 2 object properties, 3 datatype properties, 5 external terms).\nReference documentation written to: work/C13_11/docs/ontology-documentation.html\n4 class diagram(s) written to: work/C13_11/docs/class-diagrams\n",
    "stderr": "NOTE: 2 external term(s) referenced with no --ref file resolving a definition:\n  - skos:ConceptScheme\n  - skos:inScheme\n"
   },

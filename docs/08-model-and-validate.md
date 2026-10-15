@@ -419,16 +419,16 @@ your file declares it, because it is a finding about the run, not about a term.
 The locator declines rather than guessing. Hold on to that; it matters again in
 [Chapter 10](10-ingest-and-transform.md) §10.4.
 
-> **You may see 3 findings here, not 2.** When HermiT runs, `REA-022` is replaced
-> by `REA-021` (`acme:Contractor` is unsatisfiable), a second and independent
-> confirmation of the deliberate contradiction, and by `REA-020`, which says the
-> whole ontology is inconsistent. That one is wrong. Nothing is asserted to be a
-> Contractor, so the ontology is consistent, and HermiT says so when asked
-> directly; `REA-020` comes from how the suite reads owlready2's answer
-> ([Chapter 14](14-coverage-and-gaps.md) §14.4). Earlier editions counted it as a
-> third confirmation. Which you get depends, of all things, on Python's hash seed. On
-> this fixture `PYTHONHASHSEED=5` gave three findings in every run I made, and
-> seed 0 gave two in nine runs out of ten, because owlready2 fails to load one
+> **You may see a different second finding.** When HermiT runs, `REA-022` is
+> replaced by `REA-021` (`acme:Contractor` is unsatisfiable), a second and
+> independent confirmation of the deliberate contradiction. Up to 0.22.0 a third
+> finding came with it, `REA-020`, saying the whole ontology is inconsistent.
+> That one was wrong. Nothing is asserted to be a Contractor, so the ontology is
+> consistent, and HermiT says so when asked directly. 0.23.0 stops reporting it
+> ([Chapter 14](14-coverage-and-gaps.md) §14.4); earlier editions counted it as a
+> third confirmation. Which you get depends, of all things, on Python's hash
+> seed. On this fixture `PYTHONHASHSEED=5` ran HermiT in every run I made, and
+> seed 0 failed in nine runs out of ten, because owlready2 fails to load one
 > FOAF property in some orders ([Chapter 14](14-coverage-and-gaps.md) §14.4 has
 > the mechanism, and what is known about the tenth). Unpinned, each run draws a seed,
 > which is why it looked random for so long.

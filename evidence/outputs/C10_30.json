@@ -1,8 +1,8 @@
 {
  "id": "C10.30",
  "status": "PASS",
- "detail": "the warning names zz-legacy.rq, on stderr; out/full_results.csv: {'CNF-005': 35, 'TQL-003': 1}; sketch.ttl reads zz-legacy.rq's acme:Department in the ontology's namespace",
- "ran": "2026-10-14",
+ "detail": "the warning names zz-legacy.rq, on stderr; suite 0.22.0: out/full_results.csv: {'CNF-005': 35, 'TQL-003': 1}; sketch.ttl reads zz-legacy.rq's acme:Department in the ontology's namespace",
+ "ran": "2026-10-15",
  "steps": [
   {
    "cmd": "python scripts/copy_tree.py data/mapping-set/people.rq work/C10_30/last/people.rq",
@@ -14,29 +14,29 @@
   {
    "cmd": "python scripts/copy_tree.py data/mapping-set/payroll.rq work/C10_30/last/payroll.rq",
    "rc": 0,
-   "seconds": 0.1,
+   "seconds": 0.2,
    "stdout": "copied data/mapping-set/payroll.rq -> work/C10_30/last/payroll.rq\n",
    "stderr": ""
   },
   {
    "cmd": "python scripts/copy_tree.py data/mapping-set/legacy.rq work/C10_30/last/zz-legacy.rq",
    "rc": 0,
-   "seconds": 0.1,
+   "seconds": 0.3,
    "stdout": "copied data/mapping-set/legacy.rq -> work/C10_30/last/zz-legacy.rq\n",
    "stderr": ""
   },
   {
    "cmd": "ontology-quality-suite sketch --queries work/C10_30/last --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --out-dir work/C10_30/out --reports minimal --fail-on never",
    "rc": 0,
-   "seconds": 1.6,
+   "seconds": 2.1,
    "stdout": "Findings: 36 total (0 Violation, 0 Warning, 36 Info)\nReports written to: ./work/C10_30/out\n  - work/C10_30/out/findings.txt (start here -- what, where, and the source line)\n  - work/C10_30/out/full_results.csv\nSketch used 3 query file(s); 4 triples, 4 entities.\n",
    "stderr": "warning: prefix 'acme:' redefined in work/C10_30/last/zz-legacy.rq (https://acme.example.org/ns/ -> https://acme.example.org/ns#); keeping first definition\n"
   },
   {
-   "cmd": "python scripts/summarise_findings.py work/C10_30/out/full_results.csv",
+   "cmd": "python scripts/summarise_findings.py work/C10_30/out/full_results.csv --by focus --check CNF-001",
    "rc": 0,
    "seconds": 0.1,
-   "stdout": " 35 x CNF-005  Info      Ontology class never populated\n  1 x TQL-003  Info      CONSTRUCT variable not bound in the query\ntotal 36: 0 Violation, 0 Warning, 36 Info\n",
+   "stdout": "total 0: 0 Violation, 0 Warning, 0 Info\n",
    "stderr": ""
   }
  ]

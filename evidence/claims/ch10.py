@@ -1,6 +1,6 @@
 """Chapter 10 — Ingest and transform."""
 from ._common import (ACME, HOLOS_URL, OWN, OWN_DATA, SUITE, V1, Claim, Service, Step, all_of, by_check, checks,
-                      commit, counts, exit_code, file, has, lacks, nonzero, ok, rows, src, totals)
+                      commit, counts, exit_code, file, has, lacks, nonzero, ok, rows, src, totals, by_version)
 
 F = "docs/10-ingest-and-transform.md"
 TRIPLIFY = f"tarka run -q {ACME}/employees.rq -i {ACME}/employees.csv -o {{work}}/employees.ttl"
@@ -262,10 +262,10 @@ CLAIMS = [
                  Step(f'{DATA} --own-namespace {OWN_DATA} --out-dir {{work}}/own --fail-on never --reports minimal',
                       env={"PYTHONHASHSEED": "5"}),
                  Step("python scripts/summarise_findings.py {work}/own/full_results.csv")],
-          check=checks(totals(1, 550, 68, 363, 119), totals(2, 55, 13, 40, 2),
-                       _rea("own/full_results.csv", ["REA-021"], ["REA-022"])),
-          checks="unscoped 550 (68 V, 363 W, 119 I); scoped to https://acme.example.org/ 55 (13 V, 40 W, 2 I), "
-                 "with REA-021",
+          check=checks(by_version((0, 23, 0), totals(1, 549, 67, 363, 119), totals(1, 550, 68, 363, 119)),
+                       totals(2, 55, 13, 40, 2), _rea("own/full_results.csv", ["REA-021"], ["REA-022"])),
+          checks="unscoped 550 (68 V, 363 W, 119 I) at 0.22.0, and 549 (67 V) from 0.23.0, without the false REA-020; "
+                 "scoped to https://acme.example.org/ 55 (13 V, 40 W, 2 I) on both, with REA-021",
           needs=["tarka-cli"]),
 
     Claim("C10.19", "54 when HermiT does not run, and the scoped report cannot say so", "10",
@@ -355,8 +355,8 @@ CLAIMS = [
                  "files; the per-file dataset shows acme:Employee built with hasEmployeeId by one file and hasSkill "
                  "by another"),
 
-    Claim("C10.29", "The merged sketch reads every file with the first file's prefixes", "10",
-          (F, "> **And one thing the merged sketch gets wrong.**"), "run",
+    Claim("C10.29", "The merged sketch and one prefix bound two ways: odd file first", "10",
+          (F, "> **And one thing the merged sketch got wrong, until 0.23.0.**"), "run",
           data=["data/mapping-set/people.rq", "data/mapping-set/payroll.rq", "data/mapping-set/legacy.rq"],
           steps=[Step(f"{SUITE} sketch --queries data/mapping-set --ontology {V1} --import-dir {ACME} "
                       f"--out-dir {{work}}/three --reports minimal --fail-on never"),
@@ -364,17 +364,27 @@ CLAIMS = [
                  Step("python scripts/summarise_findings.py {work}/three/full_results.csv --by focus --check CNF-002"),
                  Step(f"{SUITE} sketch --queries data/mapping-set --query-pattern people.rq,payroll.rq "
                       f"--ontology {V1} --import-dir {ACME} --out-dir {{work}}/two --reports minimal --fail-on never")],
-          check=checks(lambda r: ok("prefix 'acme:' redefined" in r[0].stderr and "keeping first definition" in r[0].stderr,
-                                    "the warning is on stderr", "no redefinition warning on stderr"),
-                       has(1, "focus=https://acme.example.org/ns#Employee"),
-                       has(2, "focus=https://acme.example.org/ns#hasSkill", "focus=https://acme.example.org/ns#hasEmployeeId"),
-                       _focus_includes("three/full_results.csv", "CNF-005", OWN + "Employee", True),
-                       counts("two/full_results.csv", {"CNF-001": None, "CNF-002": None}, exact=False),
-                       _focus_includes("two/full_results.csv", "CNF-005", OWN + "Employee", False)),
-          checks="with legacy.rq first, the merged sketch reports acme:Employee, hasSkill and hasEmployeeId as "
-                 "undeclared in the hash namespace and acme:Employee as never populated; the same two correct files "
-                 "on their own report neither"),
-    Claim("C10.30", "Sorted last, the wrong file is not reported at all", "10",
+          check=checks(
+              by_version(
+                  (0, 23, 0),
+                  checks(lambda r: ok("each file is read with its own definition" in r[0].stderr,
+                                      "the warning says each file is read with its own definition",
+                                      "no such warning on stderr"),
+                         has(1, "focus=https://acme.example.org/ns#Department"), lacks(1, "ns#Employee"),
+                         lacks(2, "ns#hasSkill", "ns#hasEmployeeId"),
+                         _focus_includes("three/full_results.csv", "CNF-005", OWN + "Employee", False)),
+                  checks(lambda r: ok("prefix 'acme:' redefined" in r[0].stderr and "keeping first definition" in r[0].stderr,
+                                      "the warning is on stderr", "no redefinition warning on stderr"),
+                         has(1, "focus=https://acme.example.org/ns#Employee"),
+                         has(2, "focus=https://acme.example.org/ns#hasSkill", "focus=https://acme.example.org/ns#hasEmployeeId"),
+                         _focus_includes("three/full_results.csv", "CNF-005", OWN + "Employee", True))),
+              counts("two/full_results.csv", {"CNF-001": None, "CNF-002": None}, exact=False),
+              _focus_includes("two/full_results.csv", "CNF-005", OWN + "Employee", False)),
+          checks="with legacy.rq sorting first. At 0.22.0 the merged sketch reports acme:Employee, hasSkill and "
+                 "hasEmployeeId as undeclared in the hash namespace and acme:Employee as never populated. From 0.23.0 "
+                 "it reports only legacy.rq's own acme:Department, in the hash namespace where it was written, and "
+                 "acme:Employee is populated. The two correct files on their own are clean on both"),
+    Claim("C10.30", "The merged sketch and one prefix bound two ways: odd file last", "10",
           (F, "It cuts the other way too, which is worse."), "run",
           data=["data/mapping-set/people.rq", "data/mapping-set/payroll.rq", "data/mapping-set/legacy.rq"],
           steps=[Step("python scripts/copy_tree.py data/mapping-set/people.rq {work}/last/people.rq"),
@@ -383,15 +393,23 @@ CLAIMS = [
                       note="the same older mapping, renamed so that it sorts last"),
                  Step(f"{SUITE} sketch --queries {{work}}/last --ontology {V1} --import-dir {ACME} "
                       f"--out-dir {{work}}/out --reports minimal --fail-on never"),
-                 Step("python scripts/summarise_findings.py {work}/out/full_results.csv")],
-          check=checks(lambda r: ok("redefined in" in r[3].stderr and "zz-legacy.rq" in r[3].stderr
-                                    and "keeping first definition" in r[3].stderr,
-                                    "the warning names zz-legacy.rq, on stderr", "no warning about zz-legacy.rq"),
-                       counts("out/full_results.csv", {"CNF-001": None, "CNF-002": None}, exact=False),
-                       lambda r: ok("<https://acme.example.org/ns/> ." in r.file("out/sketch.ttl").read_text(encoding="utf-8")
-                                    and "ns#" not in r.file("out/sketch.ttl").read_text(encoding="utf-8").split("# source")[1],
-                                    "sketch.ttl reads zz-legacy.rq's acme:Department in the ontology's namespace",
-                                    "sketch.ttl does not show the misreading")),
-          checks="with the hash-namespace file sorting last, the run reports no CNF-001 or CNF-002 at all: its "
-                 "acme:Department is read in the ontology's own namespace, and the stderr warning is the only trace"),
+                 Step("python scripts/summarise_findings.py {work}/out/full_results.csv --by focus --check CNF-001")],
+          check=checks(
+              lambda r: ok("zz-legacy.rq" in r[3].stderr, "the warning names zz-legacy.rq, on stderr",
+                           "no warning about zz-legacy.rq"),
+              by_version(
+                  (0, 23, 0),
+                  checks(_focus_includes("out/full_results.csv", "CNF-001", "https://acme.example.org/ns#Department", True),
+                         lambda r: ok("@prefix acme: <https://acme.example.org/ns#> ." in
+                                      r.file("out/sketch.ttl").read_text(encoding="utf-8").split("# source: zz-legacy.rq")[1],
+                                      "sketch.ttl re-declares acme: ahead of zz-legacy.rq's triples",
+                                      "no re-declaration ahead of zz-legacy.rq")),
+                  checks(counts("out/full_results.csv", {"CNF-001": None, "CNF-002": None}, exact=False),
+                         lambda r: ok("ns#" not in r.file("out/sketch.ttl").read_text(encoding="utf-8").split("# source")[1],
+                                      "sketch.ttl reads zz-legacy.rq's acme:Department in the ontology's namespace",
+                                      "sketch.ttl does not show the misreading")))),
+          checks="with the hash-namespace file sorting last. At 0.22.0 the run reports no CNF-001 or CNF-002 at all: "
+                 "its acme:Department is read in the ontology's own namespace, and a warning on stderr is the only "
+                 "trace. From 0.23.0 its acme:Department is reported in the hash namespace, in this order as in the "
+                 "other, because the sketch re-declares each file's prefixes ahead of its triples"),
 ]

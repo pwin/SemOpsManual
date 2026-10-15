@@ -49,7 +49,7 @@ CLAIMS = [
                 "the CLI; the commit that adds it still declares version 0.1.7 in Cargo.toml."),
 
     Claim("C11.04", "Warnings break conformance; --allow-warnings records the choice", "11",
-          (F, "Verified on 0.3.2, with a shape whose only result is a Warning:"), "run",
+          (F, "Verified on 0.3.3, with a shape whose only result is a Warning:"), "run",
           data=[f"{S}/data.ttl", f"{S}/shapes-warning.ttl"],
           steps=[Step(f"shacl -d {S}/data.ttl -s {S}/shapes-warning.ttl"),
                  Step(f"shacl -d {S}/data.ttl -s {S}/shapes-warning.ttl --allow-warnings -f turtle"),
@@ -68,8 +68,8 @@ CLAIMS = [
           (F, "**The surfaces disagreed for two releases.**"), "run",
           scripts=["scripts/wasm_conforms.mjs"],
           steps=[Step(f"node scripts/wasm_conforms.mjs {S}")],
-          check=has(0, "shacl-wasm-node 0.3.2  shapes-warning.ttl     conforms=false"),
-          checks="shacl-wasm-node 0.3.2 calls a warnings-only graph non-conforming",
+          check=has(0, "shacl-wasm-node 0.3.3  shapes-warning.ttl     conforms=false"),
+          checks="shacl-wasm-node 0.3.3 calls a warnings-only graph non-conforming (0.3.0 and 0.3.1 did not)",
           needs=["node"],
           sources=[src("engine commit 2eea15d", commit("shacl", "2eea15d58b6a9bf277c13a9dfbef93d47f1d5aa3"))]),
 
@@ -127,6 +127,19 @@ CLAIMS = [
                  "bob's missing name is reported",
           needs=["shacl-cli"]),
 
+    Claim("C11.30", "Since 0.3.3 the closure is handed out, minus what RDF cannot write", "11",
+          (F, "Since 0.3.3 the engine also hands the closure out: `shacl.rdfs_closure` in Python,"), "run",
+          data=[f"{S}/rdfs/data.ttl"],
+          scripts=["scripts/rdfs_closure.py"],
+          steps=[Step(f"python scripts/rdfs_closure.py {S}/rdfs/data.ttl")],
+          check=has(0, "2 triples, 3 after the closure",
+                    "<http://example.org/bob> <http://example.org/parent> <http://example.org/carl>",
+                    "literal typed as the range: False", "triples typing something rdfs:Resource: 0"),
+          checks="shacl.rdfs_closure adds the sub-property entailment (bob's parent); drops the rdfs3 entailment "
+                 "that would type a literal; and types nothing as rdfs:Resource",
+          sources=[src("engine commit 66eb9f9", commit("shacl", "66eb9f9e065615ea338723ef16e095aa7bd3cd79"),
+                       "Entailments RDF cannot express are dropped rather than refused.")]),
+
     Claim("C11.11", "Triple rules are off by default and fire with -a", "11",
           (F, "Rules are **off by default** and enabled with `-a`:"), "run",
           data=[f"{R}/triple.ttl", f"{R}/people.ttl"],
@@ -148,7 +161,7 @@ CLAIMS = [
           checks="1,000 results on 1,000 distinct focus nodes, and 100,000 on 100,000; none without rules"),
 
     Claim("C11.13", "A SPARQL rule computes the area, and validation sees it", "11",
-          (F, "Verified at 0.3.2: with `width 3` and `height 4`, a shape asserting"), "run",
+          (F, "Verified at 0.3.3: with `width 3` and `height 4`, a shape asserting"), "run",
           data=[f"{R}/sparql-rule.ttl", f"{R}/box.ttl"],
           steps=[Step(f"shacl -d {R}/box.ttl -s {R}/sparql-rule.ttl -a"),
                  Step(f"shacl -d {R}/box.ttl -s {R}/sparql-rule.ttl")],
@@ -269,7 +282,7 @@ CLAIMS = [
           same_as="C14.07"),
 
     Claim("C11.28", "Exit codes 0, 1 and 2", "11",
-          (F, "Verified across all three at 0.3.2."), "run",
+          (F, "Verified across all three at 0.3.3."), "run",
           steps=[Step(f"shacl -d {R}/box.ttl -s {R}/sparql-rule.ttl -a"),
                  Step(f"shacl -d {S}/data.ttl -s {S}/shapes-violation.ttl"),
                  Step(f"shacl -d {R}/function-data.ttl -s {R}/function.ttl -a")],

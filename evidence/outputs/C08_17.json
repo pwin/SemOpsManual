@@ -2,12 +2,12 @@
  "id": "C08.17",
  "status": "PASS",
  "detail": "step 1: 2 findings (1 V, 0 W, 1 I); step 1 output contains 'findings.txt (start here -- what, where, and the source line)'; ontology/findings.txt contains '2 finding(s): 1 Violation, 1 Info', '> 47 | acme:Contractor a owl:Class ;', '48 |     rdfs:subClassOf acme:Employee ;', '-- not located: 1 finding(s)', 'REA-022  Info  External DL reasoner unavailable'; LOG-001's message reads as quoted; and its remediation too",
- "ran": "2026-10-14",
+ "ran": "2026-10-15",
  "steps": [
   {
    "cmd": "python scripts/without_java.py ontology-quality-suite ontology --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --out-dir work/C08_17/ontology",
    "rc": 1,
-   "seconds": 3.7,
+   "seconds": 7.2,
    "stdout": "without_java: java on PATH now: none\nFindings: 2 total (1 Violation, 0 Warning, 1 Info)\nReports written to: ./work/C08_17/ontology\n  - work/C08_17/ontology/findings.txt (start here -- what, where, and the source line)\n  - work/C08_17/ontology/report.html\n  - work/C08_17/ontology/full_results.csv\n",
    "stderr": ""
   }

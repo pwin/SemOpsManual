@@ -2,7 +2,7 @@
  "id": "C13.14",
  "status": "PASS",
  "detail": "step 1 output contains 'GeoSPARQL functions registered: 49', 'includes geof:buffer and geof:boundary: True / True'",
- "ran": "2026-10-14",
+ "ran": "2026-10-15",
  "steps": [
   {
    "cmd": "python scripts/holos_facts.py",

@@ -2,7 +2,7 @@
  "id": "C11.23",
  "status": "PASS",
  "detail": "step 1 output contains '--build-index', 'Cache the parsed data graph beside it as `<file>.shix`'",
- "ran": "2026-10-14",
+ "ran": "2026-10-15",
  "steps": [
   {
    "cmd": "shacl --help",

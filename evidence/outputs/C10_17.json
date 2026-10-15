@@ -2,12 +2,12 @@
  "id": "C10.17",
  "status": "PASS",
  "detail": "step 1 output contains 'WARNING: oxi-gen binary not found', 'Triplified 0 file(s)'",
- "ran": "2026-10-14",
+ "ran": "2026-10-15",
  "steps": [
   {
    "cmd": "ontology-quality-suite triplify --csv-dir fixtures/acme_robotics --queries fixtures/acme_robotics --out-dir work/C10_17/out",
    "rc": 1,
-   "seconds": 1.4,
+   "seconds": 1.6,
    "stdout": "Triplified 0 file(s) into ./work/C10_17/out\n",
    "stderr": "WARNING: oxi-gen binary not found. Build it with `cargo build --release` in the sibling ./.venv/Lib/oxi-gen checkout, or pass --oxi-gen-bin.\n"
   }

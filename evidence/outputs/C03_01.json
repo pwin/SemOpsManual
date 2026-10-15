@@ -2,12 +2,12 @@
  "id": "C03.01",
  "status": "PASS",
  "detail": "step 1 output contains 'http://www.w3.org/2002/07/owl#Thing'; no conformance finding concerns foaf:name",
- "ran": "2026-10-14",
+ "ran": "2026-10-15",
  "steps": [
   {
    "cmd": "python scripts/query_file.py fixtures/acme_robotics/reference_vocab/foaf.rdf \"SELECT ?domain WHERE { <http://xmlns.com/foaf/0.1/name> <http://www.w3.org/2000/01/rdf-schema#domain> ?domain }\"",
    "rc": 0,
-   "seconds": 0.5,
+   "seconds": 0.6,
    "stdout": "domain\nhttp://www.w3.org/2002/07/owl#Thing\n",
    "stderr": ""
   },
@@ -21,9 +21,9 @@
   {
    "cmd": "python scripts/without_java.py ontology-quality-suite data work/C03_01/employees.ttl --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --engine sparql --out-dir work/C03_01/data --fail-on never --reports minimal",
    "rc": 0,
-   "seconds": 8.6,
+   "seconds": 16.3,
    "stdout": "without_java: java on PATH now: none\nFindings: 549 total (66 Violation, 363 Warning, 120 Info)\nReports written to: ./work/C03_01/data\n  - work/C03_01/data/findings.txt (start here -- what, where, and the source line)\n  - work/C03_01/data/full_results.csv\n",
-   "stderr": "* Owlready2 * WARNING: DataProperty http://xmlns.com/foaf/0.1/name belongs to more than one entity types: [owl.DatatypeProperty, rdf-schema.label]; I'm trying to fix it...\n* Owlready2 * Running HermiT...\n    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp98898try -Y\n"
+   "stderr": ""
   }
  ]
 }

@@ -2,19 +2,19 @@
  "id": "C12.08",
  "status": "PASS",
  "detail": "step 2 output contains 'Applied 1/1 suggested repair(s) directly to their target files (confidence >= 70%).'; step 3 output contains '@@ -14 +14 @@', '-  ?employee a acme:Employee, acme:Engineer ;', '+  ?employee a acme:Employee, acme:SoftwareEngineer ;'; and that is the only hunk",
- "ran": "2026-10-14",
+ "ran": "2026-10-15",
  "steps": [
   {
    "cmd": "python scripts/copy_tree.py fixtures/acme_robotics work/C12_08/acme",
    "rc": 0,
-   "seconds": 0.1,
+   "seconds": 0.2,
    "stdout": "copied fixtures/acme_robotics -> work/C12_08/acme\n",
    "stderr": ""
   },
   {
    "cmd": "ontology-quality-suite consistency --new work/C12_08/acme/acme-org-v2.ttl --old work/C12_08/acme/acme-org-v1.ttl --queries work/C12_08/acme --import-dir work/C12_08/acme --apply-repairs --min-confidence 0.7 --out-dir work/C12_08/out",
    "rc": 0,
-   "seconds": 1.8,
+   "seconds": 2.7,
    "stdout": "Ontology version diff: work/C12_08/acme/acme-org-v1.ttl -> work/C12_08/acme/acme-org-v2.ttl\n\nRemoved classes [MAJOR]:\n  - https://acme.example.org/ns/Engineer\n\nRemoved subclass edges [MAJOR]:\n  - https://acme.example.org/ns/Engineer no longer rdfs:subClassOf https://acme.example.org/ns/Employee\n\nAdded classes [minor]:\n  - https://acme.example.org/ns/ProductManager\n  - https://acme.example.org/ns/SoftwareEngineer\n\nAdded properties [minor]:\n  - https://acme.example.org/ns/hireDate\n\nAdded subclass edges [minor]:\n  - https://acme.example.org/ns/ProductManager rdfs:subClassOf https://acme.example.org/ns/Employee\n  - https://acme.example.org/ns/SoftwareEngineer rdfs:subClassOf https://acme.example.org/ns/Employee\n\nAdded equivalentClass axioms [minor]:\n  - https://acme.example.org/ns/Engineer equivalentClass https://acme.example.org/ns/SoftwareEngineer\n\nSuggested version bump: MAJOR\n\n1 class(es) used in TARQL but not declared in the ontology set:\n  [undeclared_class] https://acme.example.org/ns/Engineer\n\n1 suggested repair(s):\n  [rename_iri] work/C12_08/acme/employees.rq (confidence 100%)\n    Update to the renamed ontology term(s): https://acme.example.org/ns/Engineer -> https://acme.example.org/ns/SoftwareEngineer\n\nWritten to: work/C12_08/out/consistency.txt\n\nApplied 1/1 suggested repair(s) directly to their target files (confidence >= 70%).\n",
    "stderr": ""
   },

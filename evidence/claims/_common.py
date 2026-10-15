@@ -21,7 +21,7 @@ _GH = "https://github.com/pwin"
 REPOS = {
     "suite": (f"{_GH}/consolidated-ontology-quality-suite-python", "749af3e1be749ace3aab3ea4b492d72b3b21dbde"),
     "webapp": (f"{_GH}/consolidated-ontology-quality-suite-webapp", "704d4ef80fdbcbf614782fa9bf42dfa79962b18f"),
-    "shacl": (f"{_GH}/SHACL_Engine", "7982c9e45c06d9308d041a78cd105e22b11eba70"),
+    "shacl": (f"{_GH}/SHACL_Engine", "1fdd526734a29219cfb689ce1cb59006beeae811"),   # v0.3.3
     "holos": (f"{_GH}/triplestore", "82e4d6686b3563db502ea68098a6f3fc9ce75d6b"),   # v0.21.1
     "tarka": (f"{_GH}/tarka", "88fe6184ffc77ee2a46b676cbcb1190620b52c49"),
     "testing": (f"{_GH}/consolidated-ontology-quality-suite-python-testing", "6d078a118959760409e13076650c2d62a4f6dc90"),
@@ -102,6 +102,27 @@ def counts(csv_rel: str, expected: dict, exact: bool = True):
             good = all(got.get(k) == v for k, v in expected.items())
         return ok(good, f"{csv_rel}: {dict(sorted(got.items()))}",
                   f"{csv_rel}: got {dict(sorted(got.items()))}, expected {expected}")
+    return check
+
+
+def suite_at_least(*version: int) -> bool:
+    """Whether the installed ontology-quality-suite is at least this version.
+
+    Checks run in the same environment as the steps, so this is the suite the
+    commands just used. Claims whose expected output changed in a release test
+    for it, so that the evidence passes on either side of the change and says
+    which side it was run on."""
+    from importlib import metadata
+    installed = tuple(int(x) for x in metadata.version("ontology-quality-suite").split(".")[:3])
+    return installed >= version
+
+
+def by_version(newer: tuple, if_newer, otherwise):
+    """A check that applies `if_newer` from suite version `newer`, else `otherwise`."""
+    def check(r):
+        passed, detail = (if_newer if suite_at_least(*newer) else otherwise)(r)
+        from importlib import metadata
+        return passed, f"suite {metadata.version('ontology-quality-suite')}: {detail}"
     return check
 
 

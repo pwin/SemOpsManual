@@ -1,7 +1,7 @@
 """Chapter 8 — Model and validate."""
 import re
 
-from ._common import (ACME, OWN, SUITE, TSC, TSX, V1, Claim, Step, all_of, by_check, checks, commit, counts,
+from ._common import (ACME, OWN, SUITE, TSC, TSX, V1, Claim, Step, all_of, by_check, by_version, checks, commit, counts,
                       exit_code, file, has, lacks, nonzero, ok, rows, src, totals)
 
 F = "docs/08-model-and-validate.md"
@@ -220,15 +220,19 @@ CLAIMS = [
     Claim("C08.18", "LOG-001's message is a model of what a message should be", "08",
           (F, "No description-logic background is needed to act on that."), "run", same_as="C08.17"),
 
-    Claim("C08.19", "With HermiT running, three findings", "08",
-          (F, "**You may see 3 findings here, not 2.**"), "run",
+    Claim("C08.19", "With HermiT running: REA-021, and up to 0.22.0 a false REA-020", "08",
+          (F, "**You may see a different second finding.**"), "run",
           steps=[Step(f"{SUITE} ontology --ontology {V1} --import-dir {ACME} --out-dir {{work}}/seed5 "
                       f"--reports minimal", env={"PYTHONHASHSEED": "5"}),
                  Step("python scripts/summarise_findings.py {work}/seed5/full_results.csv")],
-          check=checks(totals(0, 3, 3, 0, 0),
-                       counts("seed5/full_results.csv", {"LOG-001": 1, "REA-020": 1, "REA-021": 1})),
-          checks="3 findings, all Violations: LOG-001, REA-020 and REA-021, and no REA-022",
-          notes="C14.06 shows seeds 0–4 give two findings and 5 gives three, and why."),
+          check=by_version((0, 23, 0),
+                           checks(totals(0, 2, 2, 0, 0),
+                                  counts("seed5/full_results.csv", {"LOG-001": 1, "REA-021": 1})),
+                           checks(totals(0, 3, 3, 0, 0),
+                                  counts("seed5/full_results.csv", {"LOG-001": 1, "REA-020": 1, "REA-021": 1}))),
+          checks="with HermiT running, at 0.22.0: 3 Violations, LOG-001, REA-020 and REA-021; from 0.23.0: 2, LOG-001 "
+                 "and REA-021. No REA-022 either way",
+          notes="C14.06 shows how the hash seed decides whether HermiT runs; C14.39 why REA-020 was wrong."),
 
     Claim("C08.20", "--profile is off by default and repeatable", "08",
           (F, "**Want a specific OWL2 profile checked?**"), "run",

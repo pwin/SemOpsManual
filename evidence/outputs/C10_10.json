@@ -2,7 +2,7 @@
  "id": "C10.10",
  "status": "PASS",
  "detail": "step 1 output contains '1 template: 0 errors, 0 warnings'; step 4 output contains '40 triples', 'isomorphic: True'",
- "ran": "2026-10-14",
+ "ran": "2026-10-15",
  "steps": [
   {
    "cmd": "tarka lint -l data/ottr/employees.stottr",
@@ -28,7 +28,7 @@
   {
    "cmd": "python scripts/compare_ntriples.py work/C10_10/ottr.nt work/C10_10/tarql.nt",
    "rc": 0,
-   "seconds": 0.2,
+   "seconds": 0.3,
    "stdout": "work/C10_10/ottr.nt: 40 triples\nwork/C10_10/tarql.nt: 40 triples\nisomorphic: True\n",
    "stderr": ""
   }

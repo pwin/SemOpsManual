@@ -2,7 +2,7 @@
  "id": "C02.03",
  "status": "PASS",
  "detail": "step 1 output contains 'gist 14.1.0: 66 object properties', 'neither 42', 'gist 13.0.0: 63 object properties', 'neither 40'",
- "ran": "2026-10-14",
+ "ran": "2026-10-15",
  "steps": [
   {
    "cmd": "python scripts/gist_properties.py 14.1.0 13.0.0",

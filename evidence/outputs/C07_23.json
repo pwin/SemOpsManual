@@ -1,27 +1,27 @@
 {
  "id": "C07.23",
  "status": "PASS",
- "detail": "whole-process times: native 1.9 s, native+sparql 2.4 s, sparql 2.0 s",
- "ran": "2026-10-14",
+ "detail": "whole-process times: native 5.5 s, native+sparql 3.4 s, sparql 4.2 s",
+ "ran": "2026-10-15",
  "steps": [
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --engine native --out-dir work/C07_23/native --fail-on never --reports minimal",
    "rc": 0,
-   "seconds": 1.9,
+   "seconds": 5.5,
    "stdout": "Findings: 286 total (6 Violation, 198 Warning, 82 Info)\nReports written to: ./work/C07_23/native\n  - work/C07_23/native/findings.txt (start here -- what, where, and the source line)\n  - work/C07_23/native/full_results.csv\n",
    "stderr": ""
   },
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --engine native+sparql --out-dir work/C07_23/both --fail-on never --reports minimal",
    "rc": 0,
-   "seconds": 2.4,
+   "seconds": 3.4,
    "stdout": "Findings: 479 total (55 Violation, 340 Warning, 84 Info)\nReports written to: ./work/C07_23/both\n  - work/C07_23/both/findings.txt (start here -- what, where, and the source line)\n  - work/C07_23/both/full_results.csv\n",
    "stderr": ""
   },
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --engine sparql --out-dir work/C07_23/sparql --fail-on never --reports minimal",
    "rc": 0,
-   "seconds": 2.0,
+   "seconds": 4.2,
    "stdout": "Findings: 479 total (55 Violation, 340 Warning, 84 Info)\nReports written to: ./work/C07_23/sparql\n  - work/C07_23/sparql/findings.txt (start here -- what, where, and the source line)\n  - work/C07_23/sparql/full_results.csv\n",
    "stderr": ""
   }

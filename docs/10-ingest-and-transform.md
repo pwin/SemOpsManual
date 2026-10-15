@@ -352,7 +352,9 @@ Findings: 550 total (68 Violation, 363 Warning, 119 Info)
 ```
 
 Five hundred and fifty, and [Chapter 9](09-continuous-integration.md)'s lesson
-applies identically. Scope it:
+applies identically. (With HermiT running, as here, 0.23.0 reports 549 and 67:
+one Violation fewer, the false `REA-020` of [Chapter 14](14-coverage-and-gaps.md)
+§14.4.) Scope it:
 
 ```bash
 python -m ontology_suite data out/triplify/employees.ttl \
@@ -557,10 +559,10 @@ than a script:
 You will notice that both are, again, the mapping's own structure turned into
 graph data and put on the same plane as everything else.
 
-> **And one thing the merged sketch gets wrong.** I checked this with a
-> three-file set of my own, in which one older mapping bound `acme:` to a hash
-> namespace. `sketch` printed *"prefix 'acme:' redefined … keeping first
-> definition"* and then read **every** file with the first file's binding. The
+> **And one thing the merged sketch got wrong, until 0.23.0.** I checked this
+> with a three-file set of my own, in which one older mapping bound `acme:` to a
+> hash namespace. At 0.22.0 `sketch` printed *"prefix 'acme:' redefined …
+> keeping first definition"* and then read **every** file with the first file's binding. The
 > two files written against the ontology's own namespace were reported as
 > building undeclared terms (`CNF-001`, `CNF-002`) in the hash namespace, and
 > `acme:Employee`, which both of them build, as never populated (`CNF-005`).
@@ -569,10 +571,18 @@ graph data and put on the same plane as everything else.
 > It cuts the other way too, which is worse. Rename the older file so that it
 > sorts last, and the run is clean: the one file that *is* wrong is read with
 > the right namespace, and the warning is the only trace. Whether the mistake
-> is reported at all depends on file names. The per-file dataset reads all
-> three correctly whatever they are called. Until the merged sketch does too,
-> treat that warning as an error: a prefix bound two ways is CT-37's question,
-> and a `GROUP BY` over the `tq:PrefixBinding` facts answers it.
+> is reported at all depends on file names. And it is not only the findings:
+> the sketch's triples themselves change, so renaming a file changed what the
+> mapping set meant.
+>
+> 0.23.0 reads each file with its own prefixes, by re-declaring them ahead of
+> that file's triples, which Turtle allows. Both orders now give the same
+> triples, the older file's `acme:Department` is reported in the hash namespace
+> where it was written, and the warning says that one prefix means two things
+> rather than that one of them won. The per-file dataset always read all three
+> correctly. Whatever your version, treat that warning as worth a look: a prefix
+> bound two ways is CT-37's question, and a `GROUP BY` over the
+> `tq:PrefixBinding` facts answers it.
 
 ---
 

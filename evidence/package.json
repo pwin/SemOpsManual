@@ -5,7 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "ontology-suite": "0.15.0",
-    "shacl-wasm-node": "0.3.2",
+    "shacl-wasm-node": "0.3.3",
     "holos-wasm-node": "0.21.1",
     "n3": "2.13.12",
     "@types/n3": "1.26.4",
