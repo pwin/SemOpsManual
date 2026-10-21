@@ -2,7 +2,7 @@
  "id": "C07.12",
  "status": "PASS",
  "detail": "step 1 output contains 'sh:resultSeverity sh:Warning'; step 2 output contains 'sh:resultSeverity sh:Violation'; step 2 output has none of 'sh:resultSeverity sh:Warning'",
- "ran": "2026-10-15",
+ "ran": "2026-10-21",
  "steps": [
   {
    "cmd": "shacl -d data/shacl/data.ttl -s data/shacl/shapes-warning.ttl -f turtle",

@@ -20,9 +20,9 @@ HOLOS_URL = f"http://127.0.0.1:{HOLOS_PORT}"
 _GH = "https://github.com/pwin"
 REPOS = {
     "suite": (f"{_GH}/consolidated-ontology-quality-suite-python", "a24d3456c3329fe93b31cadefdfdf05329e82442"),   # v0.24.1
-    "webapp": (f"{_GH}/consolidated-ontology-quality-suite-webapp", "02ffaf6c35dae3e2b47fff9f723e501d24dc26cf"),   # v0.16.0
-    "shacl": (f"{_GH}/SHACL_Engine", "1fdd526734a29219cfb689ce1cb59006beeae811"),   # v0.3.3
-    "holos": (f"{_GH}/triplestore", "82e4d6686b3563db502ea68098a6f3fc9ce75d6b"),   # v0.21.1
+    "webapp": (f"{_GH}/consolidated-ontology-quality-suite-webapp", "534ce517f9aabc0c27d33f1af5eb85f88296a16f"),   # v0.16.1
+    "shacl": (f"{_GH}/SHACL_Engine", "986c31ba4e071560d51fed36e99abd8cb3747a87"),   # v0.3.4
+    "holos": (f"{_GH}/triplestore", "4d1ad30da6848feaea6e28713b99a2defd69d859"),   # v0.22.0
     "tarka": (f"{_GH}/tarka", "88fe6184ffc77ee2a46b676cbcb1190620b52c49"),
     "testing": (f"{_GH}/consolidated-ontology-quality-suite-python-testing", "6cdfb14a3c2857b61dcb32f49f56a4829b0d0664"),
     "manual": (f"{_GH}/SemOpsManual", ""),
@@ -123,6 +123,36 @@ def by_version(newer: tuple, if_newer, otherwise):
         passed, detail = (if_newer if suite_at_least(*newer) else otherwise)(r)
         from importlib import metadata
         return passed, f"suite {metadata.version('ontology-quality-suite')}: {detail}"
+    return check
+
+
+def _parse(text: str, name: str):
+    import re
+    m = re.search(rf"\b{re.escape(name)} (\d+)\.(\d+)\.(\d+)", text)
+    return tuple(int(x) for x in m.groups()) if m else None
+
+
+def by_tool(step: int, name: str, newer: tuple, if_newer, otherwise):
+    """Like by_version, for a release binary: step `step` printed '<name> X.Y.Z'
+    (its --version), and `if_newer` applies from version `newer`."""
+    def check(r):
+        found = _parse(r[step].out, name)
+        if found is None:
+            return False, f"step {step + 1}: no '{name} X.Y.Z' version line"
+        passed, detail = (if_newer if found >= newer else otherwise)(r)
+        return passed, f"{name} {'.'.join(map(str, found))}: {detail}"
+    return check
+
+
+def by_npm(package: str, newer: tuple, if_newer, otherwise):
+    """Like by_version, for an npm package installed under node_modules/."""
+    def check(r):
+        import json
+        from harness.model import EVIDENCE
+        pj = EVIDENCE / "node_modules" / package / "package.json"
+        found = tuple(int(x) for x in json.loads(pj.read_text(encoding="utf-8"))["version"].split(".")[:3])
+        passed, detail = (if_newer if found >= newer else otherwise)(r)
+        return passed, f"npm {package} {'.'.join(map(str, found))}: {detail}"
     return check
 
 

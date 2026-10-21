@@ -22,7 +22,7 @@ defdatatypeproperty('hasEmployeeId', { domain: Employee, range: datatype('xsd:st
 
 const { quads, prefixes } = build();
 const w = new Writer({ prefixes });
-// `as any`: the package's bundled Quad type is not assignable to @types/n3's
-// (Chapter 14 §14.4). It runs; only the types disagree.
-w.addQuads(quads as any);
+// No cast: from 0.16.1 the bundled Quad type is n3's (C08.16). Up to 0.16.0
+// this line needed `quads as any` to compile, though it ran.
+w.addQuads(quads);
 w.end((_e: unknown, ttl: string) => writeFileSync(process.argv[2], ttl));

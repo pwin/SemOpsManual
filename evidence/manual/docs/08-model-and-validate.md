@@ -330,7 +330,7 @@ defobjectproperty('worksIn', { domain: Employee, range: Department });
 defdatatypeproperty('hasEmployeeId', { domain: Employee, range: datatype('xsd:string') });
 ```
 
-Verified against the published 0.16.0 package. The interesting part is what
+Verified against the published 0.16.1 package. The interesting part is what
 catches which mistake.
 
 <a id="ev-c08-12"></a>*Evidence:* [C08.12 — The DSL script type-checks and builds against the npm package](../../EVIDENCE.md#c08-12) (reproduced: PASS)
@@ -366,17 +366,20 @@ Three things to know before you adopt it:
 - **Keep the npm package and the extension at the same version.** When a script
   runs in VS Code, the extension runs it with its own copy of the DSL, whatever
   `node_modules` holds.
-- **Code the checker did not see gets a blunter error.** Run the same bad range
-  with `tsx` (no type check) and it fails inside the DSL with
-  `TypeError: Cannot convert undefined or null to object`, which names nothing
-  you wrote. Type-check first.
-- **One type-level rough edge.** The package's README suggests handing
-  `build().quads` to n3's `Writer`. That runs, but under strict TypeScript with
-  `@types/n3` installed the package's bundled `Quad` type is not assignable to
-  n3's (it lacks `termType` and `value`). A cast is the workaround for now
-  ([Chapter 14](14-coverage-and-gaps.md) §14.4).
+- **Code the checker did not see still gets an error, and since 0.16.1 a useful
+  one.** Run the same bad range with `tsx` (no type check) and 0.16.1 stops
+  before writing anything: *"defdatatypeproperty('hasEmployeeId'): range takes a
+  datatype, made with datatype('xsd:string') say, and was given the string
+  "xsd:string"."* Up to 0.16.0 it failed inside the DSL with `TypeError: Cannot
+  convert undefined or null to object`, which named nothing you wrote, and a
+  domain given by name wrote an IRI made of `undefined` without failing at all.
+  Type-check first all the same: the compiler finds it before anything runs.
+- **`build().quads` goes straight to n3's `Writer` from 0.16.1**, as the
+  package's README suggests. Up to 0.16.0 the bundled `Quad` type lacked
+  `termType` and `value`, so under strict TypeScript with `@types/n3` that line
+  failed to compile (TS2345) though it ran, and a cast was the workaround.
 
-<a id="ev-c08-15"></a><a id="ev-c08-16"></a>*Evidence:* [C08.15 — Without the type check, the DSL fails with an internal TypeError](../../EVIDENCE.md#c08-15) (reproduced: PASS) · [C08.16 — build().quads is not assignable to n3's Writer under strict types](../../EVIDENCE.md#c08-16) (reproduced: PASS)
+<a id="ev-c08-15"></a><a id="ev-c08-16"></a>*Evidence:* [C08.15 — Unchecked code: an internal TypeError up to 0.16.0, an error naming the mistake from 0.16.1](../../EVIDENCE.md#c08-15) (reproduced: PASS) · [C08.16 — build().quads and n3's Writer: TS2345 up to 0.16.0, no cast needed from 0.16.1](../../EVIDENCE.md#c08-16) (reproduced: PASS)
 
 The script is the source; the Turtle is a build product. Commit the script,
 regenerate the Turtle in CI, and gate on the Turtle. That way the review
@@ -765,8 +768,8 @@ process diagram.
 ---
 
 > **How the editor behaviour in this chapter was established.** By reading the
-> extension's source and CHANGELOG; by running its own unit tests (all 466 pass
-> at 0.16.0 on this Windows checkout; at 0.15.0 four failed here, on line
+> extension's source and CHANGELOG; by running its own unit tests (all 509 pass
+> at 0.16.1 on this Windows checkout; at 0.15.0 four failed here, on line
 > endings, which 0.16.0 fixed); and by installing the
 > published DSL package from npm and running it, as in §8.2. I did **not** drive
 > a live GUI session for this edition. The commands, checks and engines named

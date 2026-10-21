@@ -2,7 +2,7 @@
  "id": "CA.01",
  "status": "PASS",
  "detail": "step 1 output contains 'lowest 13.09:1'",
- "ran": "2026-10-15",
+ "ran": "2026-10-21",
  "steps": [
   {
    "cmd": "python scripts/contrast.py",

@@ -2,12 +2,12 @@
  "id": "C12.02",
  "status": "PASS",
  "detail": "step 1 output contains 'Removed classes [MAJOR]:\\n  - https://acme.example.org/ns/ProductManager/n  - https://acme.example.org/ns/SoftwareEngineer', 'Removed properties [MAJOR]:\\n  - https://acme.example.org/ns/hireDate'",
- "ran": "2026-10-15",
+ "ran": "2026-10-21",
  "steps": [
   {
    "cmd": "ontology-quality-suite version-diff fixtures/acme_robotics/acme-org-v2.ttl fixtures/acme_robotics/acme-org-v1.ttl --exclude-imports --out-dir work/C12_02/rev",
    "rc": 0,
-   "seconds": 1.3,
+   "seconds": 1.9,
    "stdout": "Ontology version diff: fixtures/acme_robotics/acme-org-v2.ttl -> fixtures/acme_robotics/acme-org-v1.ttl\n\nRemoved classes [MAJOR]:\n  - https://acme.example.org/ns/ProductManager\n  - https://acme.example.org/ns/SoftwareEngineer\n\nRemoved properties [MAJOR]:\n  - https://acme.example.org/ns/hireDate\n\nRemoved subclass edges [MAJOR]:\n  - https://acme.example.org/ns/ProductManager no longer rdfs:subClassOf https://acme.example.org/ns/Employee\n  - https://acme.example.org/ns/SoftwareEngineer no longer rdfs:subClassOf https://acme.example.org/ns/Employee\n\nRemoved equivalentClass axioms [MAJOR]:\n  - https://acme.example.org/ns/Engineer equivalentClass https://acme.example.org/ns/SoftwareEngineer\n\nAdded classes [minor]:\n  - https://acme.example.org/ns/Engineer\n\nAdded subclass edges [minor]:\n  - https://acme.example.org/ns/Engineer rdfs:subClassOf https://acme.example.org/ns/Employee\n\nSuggested version bump: MAJOR\n\nWritten to: work/C12_02/rev/diff.txt\n",
    "stderr": ""
   }

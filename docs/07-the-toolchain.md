@@ -19,7 +19,7 @@ specification says, and that someone in the room can fix.
 
 | | Role | What it is | Where |
 |---|---|---|---|
-| **Ontology Development Suite** | The desk | VS Code extension: live diagnostics, outline, graph view, query workbench, and a TypeScript DSL for writing ontologies as code | [`.vsix` from the release](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/releases/tag/v0.16.0) · DSL on npm as [`ontology-suite`](https://www.npmjs.com/package/ontology-suite) · [GitHub](https://github.com/pwin/consolidated-ontology-quality-suite-webapp) |
+| **Ontology Development Suite** | The desk | VS Code extension: live diagnostics, outline, graph view, query workbench, and a TypeScript DSL for writing ontologies as code | [`.vsix` from the release](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/releases/tag/v0.16.1) · DSL on npm as [`ontology-suite`](https://www.npmjs.com/package/ontology-suite) · [GitHub](https://github.com/pwin/consolidated-ontology-quality-suite-webapp) |
 | **Ontology Quality Suite** | The gate | Python CLI and library: the 61-check registry, OWL2 reasoning, version diffing, change impact and repair, live-store checks, reference docs | PyPI [`ontology-quality-suite`](https://pypi.org/project/ontology-quality-suite/) · [GitHub](https://github.com/pwin/consolidated-ontology-quality-suite-python) |
 | **SHACL Engine** | The validator | SHACL in Rust: Python bindings, WebAssembly and a CLI; SHACL-AF rules; 425 of the 426 W3C tests, the exception named | PyPI [`shacl`](https://pypi.org/project/shacl/) · npm [`shacl-wasm`](https://www.npmjs.com/package/shacl-wasm), [`shacl-wasm-node`](https://www.npmjs.com/package/shacl-wasm-node) · CLI from the [releases](https://github.com/pwin/SHACL_Engine/releases) |
 | **HOLOS** | The store | An RDF 1.2 store with SPARQL 1.2 and access policy enforced at the index scan | PyPI [`holosdb`](https://pypi.org/project/holosdb/) · npm [`holos-wasm`](https://www.npmjs.com/package/holos-wasm), [`holos-wasm-node`](https://www.npmjs.com/package/holos-wasm-node) · CLI from the [releases](https://github.com/pwin/triplestore/releases) |
@@ -33,14 +33,14 @@ have (tarka, for triplification). And one you never install at all, but should
 read, because it is how the rest are kept honest.
 
 > **Versions this edition was measured against.** Every number in Part III
-> comes from running these, between 13 and 16 October 2026 (the suite at 0.24.1):
+> comes from running these, between 13 and 21 October 2026:
 >
 > | | Version | From |
 > |---|---|---|
 > | Ontology Quality Suite | **0.24.1** | PyPI `ontology-quality-suite`. Three releases were cut while this edition was being checked, for ten defects the checking found: 0.23.0 for three (§7.4, and [Chapter 14](14-coverage-and-gaps.md) §14.4), 0.24.0 for six more, every one of them a case where a run looked cleaner than it was ([Chapter 14](14-coverage-and-gaps.md) §14.6), and 0.24.1 for one that 0.24.0 itself introduced ([Chapter 13](13-operate-and-consume.md) §13.1). Where a fix changed a figure, the manual gives both |
-> | Ontology Development Suite | **0.16.0** | `ontology-dev-suite-0.16.0.vsix` from the v0.16.0 release; DSL as npm `ontology-suite` 0.16.0 |
-> | SHACL Engine | **0.3.3** | PyPI `shacl`; npm `shacl-wasm`, `shacl-wasm-node`; the `shacl` command from the v0.3.3 release. 0.3.3 adds one function, the RDFS closure handed out, which the suite needed for a fix (§7.4) |
-> | HOLOS | **0.21.1** | PyPI `holosdb`; npm `holos-wasm`, `holos-wasm-node`; the `holos` command from the v0.21.1 release. 0.21.1 was cut while this edition was being checked, to fix a defect the checking found ([Chapter 13](13-operate-and-consume.md) §13.2) |
+> | Ontology Development Suite | **0.16.1** | `ontology-dev-suite-0.16.1.vsix` from the v0.16.1 release; DSL as npm `ontology-suite` 0.16.1. 0.16.1 fixes two DSL defects this edition found ([Chapter 8](08-model-and-validate.md) §8.2) |
+> | SHACL Engine | **0.3.4** | PyPI `shacl`; npm `shacl-wasm`, `shacl-wasm-node`; the `shacl` command from the v0.3.4 release. 0.3.3 handed the RDFS closure out, which the suite needed for a fix (§7.4); 0.3.4 makes the command line refuse to validate against no shapes ([Chapter 11](11-rules-and-inference.md) §11.1) |
+> | HOLOS | **0.22.0** | PyPI `holosdb`; npm `holos-wasm`, `holos-wasm-node`; the `holos` command from the v0.22.0 release. Two releases were cut while this edition was being checked, for defects the checking found: 0.21.1 stopped validation writing into the store ([Chapter 13](13-operate-and-consume.md) §13.2), and 0.22.0 made `holos validate` a gate ([Chapter 11](11-rules-and-inference.md) §11.8) |
 > | tarka | **0.1.1** | PyPI `tarka-rdf`; the `tarka` command from the v0.1.1 release |
 > | Testing repository | `6cdfb14` | `main`, 14 October 2026 |
 >
@@ -93,9 +93,9 @@ edition the SHACL half also ran on one engine, the Rust validator, compiled
 natively for the CLI and to WebAssembly for the editor. Now the SPARQL half
 does too: the 44 portable checks run on **holosdb** in Python and on
 **holos-wasm-node** in the editor. The rule and the engine are the same on both
-sides, and so, near enough, is the version: the 0.16.0 extension bundles
-holos-wasm-node 0.21.0, and 0.21.1 differs from it only in a validation fix the
-editor does not use.
+sides, and so, near enough, is the version: the 0.16.1 extension bundles
+holos-wasm-node 0.21.0, and 0.21.1 and 0.22.0 differ from it only in
+validation, which the editor does with shacl-wasm-node instead.
 
 Why does that matter so much? Because a team whose local linting disagrees with
 its CI learns to distrust both. Green locally, red in CI, and the gate becomes

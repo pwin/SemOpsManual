@@ -2,7 +2,7 @@
  "id": "C10.05",
  "status": "PASS",
  "detail": "step 1 exits 0; as a subject: no triples at all; step 2 exits 0; step 2 output contains '<https://acme.example.org/ns/worksIn> \"https://acme.example.org/data/department/ENG\" .'",
- "ran": "2026-10-15",
+ "ran": "2026-10-21",
  "steps": [
   {
    "cmd": "tarka run -q data/tql004/sites.rq -i data/tql004/depts.csv --ntriples",

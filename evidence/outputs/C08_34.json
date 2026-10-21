@@ -2,26 +2,26 @@
  "id": "C08.34",
  "status": "PASS",
  "detail": "step 1 exits 0; step 2 exits 0; step 3 output contains 'https://example.org/cars/hasPart', 'https://example.org/cars/Car'",
- "ran": "2026-10-15",
+ "ran": "2026-10-21",
  "steps": [
   {
    "cmd": "node node_modules/typescript/bin/tsc --noEmit --strict --module nodenext --moduleResolution nodenext --target es2022 --skipLibCheck scripts/dsl/inverse.ontology.ts",
    "rc": 0,
-   "seconds": 0.1,
+   "seconds": 0.2,
    "stdout": "",
    "stderr": ""
   },
   {
    "cmd": "node node_modules/tsx/dist/cli.mjs scripts/dsl/inverse.ontology.ts work/C08_34/inverse.ttl",
    "rc": 0,
-   "seconds": 0.4,
+   "seconds": 0.6,
    "stdout": "",
    "stderr": ""
   },
   {
    "cmd": "python scripts/query_file.py work/C08_34/inverse.ttl \"PREFIX owl: <http://www.w3.org/2002/07/owl#> PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> SELECT ?inverseOf ?filler WHERE { <https://example.org/cars/CarPart> rdfs:subClassOf ?r . ?r owl:onProperty ?p ; owl:someValuesFrom ?filler . ?p owl:inverseOf ?inverseOf }\"",
    "rc": 0,
-   "seconds": 0.4,
+   "seconds": 0.5,
    "stdout": "inverseOf,filler\nhttps://example.org/cars/hasPart,https://example.org/cars/Car\n",
    "stderr": ""
   }

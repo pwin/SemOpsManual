@@ -2,21 +2,21 @@
  "id": "C08.14",
  "status": "PASS",
  "detail": "step 2 exits 1; gate/full_results.csv: {'LOG-001': 1, 'REA-021': 1}; gate/findings.txt contains 'LOG-001   Violation Class https://acme.example.org/ns/Contractor'",
- "ran": "2026-10-15",
+ "ran": "2026-10-21",
  "steps": [
   {
    "cmd": "node node_modules/tsx/dist/cli.mjs scripts/dsl/acme.ontology.ts work/C08_14/acme.ttl",
    "rc": 0,
-   "seconds": 0.4,
+   "seconds": 0.5,
    "stdout": "",
    "stderr": ""
   },
   {
    "cmd": "ontology-quality-suite ontology --ontology work/C08_14/acme.ttl --out-dir work/C08_14/gate --fail-on Violation --reports minimal",
    "rc": 1,
-   "seconds": 2.0,
+   "seconds": 2.6,
    "stdout": "Findings: 2 total (2 Violation, 0 Warning, 0 Info)\nReports written to: ./work/C08_14/gate\n  - work/C08_14/gate/findings.txt (start here -- what, where, and the source line)\n  - work/C08_14/gate/full_results.csv\n",
-   "stderr": "* Owlready2 * Running HermiT...\n    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpe8j8fceu -Y\n* Owlready2 * HermiT took 0.5064702033996582 seconds\n* Owlready * (NB: only changes on entities loaded in Python are shown, other changes are done but not listed)\n"
+   "stderr": "* Owlready2 * Running HermiT...\n    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp0k6ebg1p -Y\n* Owlready2 * HermiT took 0.5991015434265137 seconds\n* Owlready * (NB: only changes on entities loaded in Python are shown, other changes are done but not listed)\n"
   }
  ]
 }

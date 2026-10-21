@@ -1,5 +1,6 @@
 """Chapter 11 — Rules and inference."""
-from ._common import (ACME, Claim, Step, all_of, checks, commit, exit_code, file, has, lacks, nonzero, ok, src)
+from ._common import (ACME, Claim, Step, all_of, by_tool, checks, commit, exit_code, file, has, lacks, nonzero,
+                      ok, src)
 
 F = "docs/11-rules-and-inference.md"
 S = "data/shacl"
@@ -49,7 +50,7 @@ CLAIMS = [
                 "the CLI; the commit that adds it still declares version 0.1.7 in Cargo.toml."),
 
     Claim("C11.04", "Warnings break conformance; --allow-warnings records the choice", "11",
-          (F, "Verified on 0.3.3, with a shape whose only result is a Warning:"), "run",
+          (F, "Verified on 0.3.4, with a shape whose only result is a Warning:"), "run",
           data=[f"{S}/data.ttl", f"{S}/shapes-warning.ttl"],
           steps=[Step(f"shacl -d {S}/data.ttl -s {S}/shapes-warning.ttl"),
                  Step(f"shacl -d {S}/data.ttl -s {S}/shapes-warning.ttl --allow-warnings -f turtle"),
@@ -68,8 +69,8 @@ CLAIMS = [
           (F, "**The surfaces disagreed for two releases.**"), "run",
           scripts=["scripts/wasm_conforms.mjs"],
           steps=[Step(f"node scripts/wasm_conforms.mjs {S}")],
-          check=has(0, "shacl-wasm-node 0.3.3  shapes-warning.ttl     conforms=false"),
-          checks="shacl-wasm-node 0.3.3 calls a warnings-only graph non-conforming (0.3.0 and 0.3.1 did not)",
+          check=has(0, "shacl-wasm-node 0.3.4  shapes-warning.ttl     conforms=false"),
+          checks="shacl-wasm-node 0.3.4 calls a warnings-only graph non-conforming (0.3.0 and 0.3.1 did not)",
           needs=["node"],
           sources=[src("engine commit 2eea15d", commit("shacl", "2eea15d58b6a9bf277c13a9dfbef93d47f1d5aa3"))]),
 
@@ -84,22 +85,34 @@ CLAIMS = [
           sources=[src("engine commit a567c2e (0.2.0)", commit("shacl", "a567c2edfb93e8053058c8976eef8fd95388a292"),
                        "validating against no shapes conforms")]),
 
-    Claim("C11.07", "The CLI does not refuse: no shapes, or no -s, conforms", "11",
-          (F, "**The command line does not refuse.**"), "run",
+    Claim("C11.07", "The CLI and an empty shapes graph: conforms up to 0.3.3, refused from 0.3.4", "11",
+          (F, "**Until 0.3.4 the command line did not refuse.**"), "run",
           data=[f"{S}/no-shapes.ttl"],
           steps=[Step(f"shacl -d {S}/data.ttl -s {S}/no-shapes.ttl"),
-                 Step(f"shacl -d {S}/data.ttl")],
-          check=checks(_conforms(0, True), exit_code(0, 0), _conforms(1, True), exit_code(1, 0)),
-          checks="both runs: conforms true, exit 0",
-          needs=["shacl-cli"]),
+                 Step(f"shacl -d {S}/data.ttl"),
+                 Step(f"shacl -d {S}/data.ttl -s {S}/no-shapes.ttl --allow-no-shapes"),
+                 Step("shacl --version")],
+          check=by_tool(3, "shacl", (0, 3, 4),
+                        checks(exit_code(0, 2), has(0, "the shapes graph declares no shapes"),
+                               exit_code(1, 2), has(1, "no --shapes was given"),
+                               _conforms(2, True), exit_code(2, 0)),
+                        checks(_conforms(0, True), exit_code(0, 0), _conforms(1, True), exit_code(1, 0))),
+          checks="up to 0.3.3: both runs say conforms true and exit 0. From 0.3.4: both exit 2, one saying the "
+                 "shapes graph declares no shapes and the other that no --shapes was given, and --allow-no-shapes "
+                 "restores the old answer",
+          needs=["shacl-cli"],
+          sources=[src("engine commit 986c31b (0.3.4)", commit("shacl", "986c31ba4e071560d51fed36e99abd8cb3747a87"),
+                       "Refuse to validate against no shapes on the command line"),
+                   src("engine README, coming from pySHACL", file("shacl", "README.md", "279-282"),
+                       "reports `Conforms: True` and exits 0; this exits 2 unless you pass")]),
 
     Claim("C11.08", "425 of 426 W3C tests, the exception named", "11",
           (F, "The engine passes **425 of the 426** W3C SHACL 1.0 and 1.2 tests"), "source",
-          sources=[src("engine README", file("shacl", "README.md", "289"), "425 of 426"),
+          sources=[src("engine README", file("shacl", "README.md", "292"), "425 of 426"),
                    src("engine README, the subquery rule", file("shacl", "README.md", "316-323"),
                        "0.3.0 briefly enforced the letter of the rule and passed all 426."),
                    src("engine commit 1944802 (0.3.1)", commit("shacl", "1944802e9a33b0116d6b660045c9d2813f9ef2d5")),
-                   src("engine README, the EARL report", file("shacl", "README.md", "364-367"),
+                   src("engine README, the EARL report", file("shacl", "README.md", "366-369"),
                        "The W3C compiles a specification's implementation report from EARL files")]),
 
     Claim("C11.09", "holos rules materialises into a graph of its own", "11",
@@ -161,7 +174,7 @@ CLAIMS = [
           checks="1,000 results on 1,000 distinct focus nodes, and 100,000 on 100,000; none without rules"),
 
     Claim("C11.13", "A SPARQL rule computes the area, and validation sees it", "11",
-          (F, "Verified at 0.3.3: with `width 3` and `height 4`, a shape asserting"), "run",
+          (F, "Verified at 0.3.4: with `width 3` and `height 4`, a shape asserting"), "run",
           data=[f"{R}/sparql-rule.ttl", f"{R}/box.ttl"],
           steps=[Step(f"shacl -d {R}/box.ttl -s {R}/sparql-rule.ttl -a"),
                  Step(f"shacl -d {R}/box.ttl -s {R}/sparql-rule.ttl")],
@@ -260,7 +273,7 @@ CLAIMS = [
           steps=[Step(f"shacl -d {R}/function-data.ttl -s {R}/function.ttl -a")],
           check=checks(exit_code(0, 2), has(0, "unsupported node expression")),
           checks="exit 2, 'unsupported node expression'", needs=["shacl-cli"],
-          sources=[src("engine README, what does not work", file("shacl", "README.md", "457-466"),
+          sources=[src("engine README, what does not work", file("shacl", "README.md", "460-469"),
                        "is vendored under `testsuite/shacl12/tests/rules/` but is not wired into the")]),
 
     Claim("C11.25", "Rules in WebAssembly, and an unknown mode is an error there too", "11",
@@ -282,27 +295,38 @@ CLAIMS = [
           same_as="C14.07"),
 
     Claim("C11.28", "Exit codes 0, 1 and 2", "11",
-          (F, "Verified across all three at 0.3.3."), "run",
+          (F, "Verified across all three at 0.3.4."), "run",
           steps=[Step(f"shacl -d {R}/box.ttl -s {R}/sparql-rule.ttl -a"),
                  Step(f"shacl -d {S}/data.ttl -s {S}/shapes-violation.ttl"),
                  Step(f"shacl -d {R}/function-data.ttl -s {R}/function.ttl -a")],
           check=checks(exit_code(0, 0), exit_code(1, 1), exit_code(2, 2)),
           checks="conforming: 0; not conforming: 1; could not validate: 2", needs=["shacl-cli"]),
 
-    Claim("C11.29", "holos validate exits 0 on a non-conforming graph", "11",
-          (F, "> **Do not gate on `holos validate`'s exit code.**"), "run",
-          data=[f"{S}/shapes-sparql.ttl"],
+    Claim("C11.29", "holos validate: exit 0 whatever it found up to 0.21.1, a gate from 0.22.0", "11",
+          (F, "> **`holos validate` became a gate in HOLOS 0.22.0.**"), "run",
+          data=[f"{S}/shapes-sparql.ttl", f"{R}/nested-data.ttl"],
           scripts=["scripts/holosdb_validate.py"],
           steps=[Step(f"holos validate --data {S}/data.ttl --shapes {S}/shapes-violation.ttl"),
                  Step(f"holos validate --data {S}/data.ttl --shapes {S}/shapes-violation.ttl --engine adapted"),
                  Step(f"holos validate --data {S}/data.ttl --shapes {S}/shapes-sparql.ttl"),
                  Step(f"holos validate --data {S}/data.ttl --shapes {S}/shapes-sparql.ttl --engine adapted"),
-                 Step(f"python scripts/holosdb_validate.py {S}/data.ttl {S}/shapes-violation.ttl {S}/shapes-sparql.ttl")],
-          check=checks(has(0, "conforms          false"), exit_code(0, 0), has(1, "conforms          false"),
-                       exit_code(1, 0), nonzero(2), has(2, "sh:sparql"), exit_code(3, 0),
-                       has(4, "'conforms': False", "HolosError: unsupported: sh:sparql is not implemented")),
-          checks="both engines print conforms false and exit 0; the native engine refuses sh:sparql with a "
-                 "non-zero exit, the adapted one validates it; holosdb returns a dictionary with conforms False and "
-                 "raises HolosError for sh:sparql under native",
-          needs=["holos-cli"]),
+                 Step(f"python scripts/holosdb_validate.py {S}/data.ttl {S}/shapes-violation.ttl {S}/shapes-sparql.ttl"),
+                 Step(f"holos validate --data {S}/data.ttl --shapes {S}/shapes-sparql.ttl --engine native"),
+                 Step(f"holos validate --data {R}/nested-data.ttl --shapes {S}/shapes-violation.ttl",
+                      note="one Person, with a name, which conforms"),
+                 Step("holos --version")],
+          check=checks(
+              has(0, "conforms          false"), has(1, "conforms          false"),
+              has(4, "'conforms': False", "HolosError: unsupported: sh:sparql is not implemented"),
+              by_tool(7, "holos", (0, 22, 0),
+                      checks(exit_code(0, 1), exit_code(1, 1), exit_code(2, 1), has(2, "conforms          false"),
+                             exit_code(3, 1), exit_code(5, 2), has(5, "sh:sparql"), exit_code(6, 0)),
+                      checks(exit_code(0, 0), exit_code(1, 0), nonzero(2), has(2, "sh:sparql"), exit_code(3, 0)))),
+          checks="both engines print conforms false. Up to 0.21.1 they exit 0 doing so, and the default (native) "
+                 "engine refuses sh:sparql. From 0.22.0 a non-conforming graph exits 1 and a conforming one 0, the "
+                 "default is adapted, which validates sh:sparql, and only --engine native refuses it, with exit 2. "
+                 "holosdb's Store.validate() returns a dictionary with conforms False either way",
+          needs=["holos-cli"],
+          sources=[src("HOLOS commit 462bb56 (0.22.0)", commit("holos", "462bb56e66db312f7b49c29d6af2ef91c905c61c"),
+                       "Make holos validate a gate: exit 1 on violations, and default to adapted")]),
 ]

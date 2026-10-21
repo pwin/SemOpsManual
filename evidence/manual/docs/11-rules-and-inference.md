@@ -73,7 +73,7 @@ print(report.conforms, len(report.results))
 > defect, in which `$this` was not substituted into a CONSTRUCT-based rule, so a
 > SPARQL rule ran for **every node in the graph**. No release carried it, but if
 > you built from source in mid-August 2026, re-run your SPARQL rules. This
-> edition was measured at **0.3.3**. An unrecognised `inference` value has been
+> edition was measured at **0.3.4**. An unrecognised `inference` value has been
 > an error naming what is accepted throughout, never a silent fallback to
 > validating without the rules. Check with `shacl --version`.
 
@@ -93,7 +93,7 @@ recomputing the expected reports' conformance under the engine's rule instead
 of reading what the tests wrote, so it agreed with itself. Comparing reports as
 the W3C suite compares them, as whole graphs, is what found it.
 
-Verified on 0.3.3, with a shape whose only result is a Warning:
+Verified on 0.3.4, with a shape whose only result is a Warning:
 
 <a id="ev-c11-04"></a>*Evidence:* [C11.04 — Warnings break conformance; --allow-warnings records the choice](../../EVIDENCE.md#c11-04) (reproduced: PASS)
 
@@ -136,7 +136,7 @@ shapes conforms**. The caller was told their graph was valid when not one
 constraint had been evaluated.
 
 So the one-shots now refuse a shapes graph that declares nothing. Still true at
-0.3.3, verified through the Python binding:
+0.3.4, verified through the Python binding:
 
 <a id="ev-c11-06"></a>*Evidence:* [C11.06 — The one-shots refuse an empty shapes graph](../../EVIDENCE.md#c11-06) (reproduced: PASS)
 
@@ -147,22 +147,32 @@ validate(shapes, data)     REFUSED: the shapes graph declares no shapes, so this
                            checked anything
 ```
 
-**The command line does not refuse.** Point the CLI at a shapes graph with no
-shapes in it and it says `conforms: true` and exits 0. Worse, `-s` defaults to
+**Until 0.3.4 the command line did not refuse.** Pointed at a shapes graph with
+no shapes in it, it said `conforms: true` and exited 0. Worse, `-s` defaults to
 the data graph, "matching the convention that a self-describing document carries
-its own shapes", so a CI step that simply forgets `-s` goes green:
+its own shapes", so a CI step that simply forgot `-s` went green:
 
-<a id="ev-c11-07"></a>*Evidence:* [C11.07 — The CLI does not refuse: no shapes, or no -s, conforms](../../EVIDENCE.md#c11-07) (reproduced: PASS)
+<a id="ev-c11-07"></a>*Evidence:* [C11.07 — The CLI and an empty shapes graph: conforms up to 0.3.3, refused from 0.3.4](../../EVIDENCE.md#c11-07) (reproduced: PASS)
 
 ```
-shacl -d data.ttl                 conforms: true    exit 0
+shacl -d data.ttl                 conforms: true    exit 0     (0.3.3)
 ```
 
-That is the convenience surface above all others, and it is the one that has to
-speak up; [Chapter 14](14-coverage-and-gaps.md) §14.4 suggests it refuse unless
-asked not to. Until then, **always pass `-s`
-explicitly in automation, and keep one deliberately failing case in the job**,
-so a gate that cannot fail shows up as one.
+That is the convenience surface above all others, and the one that has to speak
+up, and since 0.3.4 it does. Both cases exit 2, as "could not validate", with
+messages that tell them apart, because they send you to different places:
+
+```
+error: no --shapes was given, so data.ttl was used as its own shapes graph, and
+it declares no shapes. Nothing would be checked and the report would say the
+data conforms. Pass --shapes, or --allow-no-shapes …
+```
+
+`--allow-no-shapes` keeps the old behaviour for the caller who means it. pySHACL
+still answers `Conforms: True` here, and the engine's README names this among
+its differences from pySHACL. Whatever your version, **pass `-s` explicitly in
+automation, and keep one deliberately failing case in the job**, so a gate that
+cannot fail shows up as one.
 
 Two things generalise:
 
@@ -364,7 +374,7 @@ acme:BoxRules a sh:NodeShape ;
         WHERE { $this acme:width ?w ; acme:height ?h . BIND(?w * ?h AS ?a) }""" ] .
 ```
 
-Verified at 0.3.3: with `width 3` and `height 4`, a shape asserting
+Verified at 0.3.4: with `width 3` and `height 4`, a shape asserting
 `sh:path acme:area ; sh:hasValue 12` conforms. The arithmetic runs and the
 derived value is what validation sees.
 
@@ -393,7 +403,7 @@ fallback took every `sh:declare` in the graph and could pick up a decoy.
 ## 11.5 Four ways to get a wrong answer
 
 These produce silence, not errors. Every one reproduces exactly as described, at
-0.3.3, in [notebook 2](../../../notebooks/02-rules-and-inference.ipynb).
+0.3.4, in [notebook 2](../../../notebooks/02-rules-and-inference.ipynb).
 
 **A rule fires on its shape's targets, so a shape with no target does nothing.**
 This is the commonest mistake, because attaching a rule to a nested property
@@ -536,7 +546,7 @@ live.
 
 | Not implemented | Consequence |
 |---|---|
-| **SHACL functions** (`sh:SPARQLFunction`) | A rule calling one errors (exit 2) rather than returning empty. Verified at 0.3.3 |
+| **SHACL functions** (`sh:SPARQLFunction`) | A rule calling one errors (exit 2) rather than returning empty. Verified at 0.3.4 |
 | **Result annotations** (`sh:resultAnnotation`) | Extra properties from a SPARQL constraint's solution are not copied onto results |
 | **SHACL 1.2 Rules** (`RULE { } WHERE { }`) | A different design from SHACL-AF; its test corpus ships with the engine but is not wired into the conformance harness. (HOLOS's `holos rules` takes plain `CONSTRUCT` files, which is a third format again) |
 | **OWL-RL pre-inference** | RDFS is available and opt-in; nothing beyond it. This is why the suite's `--inference owlrl` went when pyshacl did ([Chapter 7](07-the-toolchain.md) §7.4) |
@@ -610,24 +620,28 @@ Four practices:
 0   conforms
 1   does not conform: a result at or above the threshold
     (Info by default, so Warnings and Infos count; see §11.1)
-2   could not validate (bad input, unsupported feature, compile error)
+2   could not validate (bad input, unsupported feature, compile error, and
+    since 0.3.4 no shapes to validate against)
 ```
 
-Verified across all three at 0.3.3. That separation is what lets a CI job tell
+Verified across all three at 0.3.4. That separation is what lets a CI job tell
 *"the data is wrong"* from *"the rules did not compile"*, and a job that treats
 them alike will eventually go green on a rule set that never ran.
 
 <a id="ev-c11-28"></a>*Evidence:* [C11.28 — Exit codes 0, 1 and 2](../../EVIDENCE.md#c11-28) (reproduced: PASS)
 
-> **Do not gate on `holos validate`'s exit code.** It prints `conforms false` and
-> exits 0, with either of its validators; it reserves a non-zero exit for "could
-> not validate" (for instance, its native validator refusing a `sh:sparql` shape,
-> which is the right refusal). Use the `shacl` CLI for the gate, or parse the
-> output ([Chapter 14](14-coverage-and-gaps.md) §14.4). From Python, `holosdb`'s
-> `Store.validate()` returns a dictionary with a `conforms` key, so there is
-> nothing to parse.
+> **`holos validate` became a gate in HOLOS 0.22.0.** Up to 0.21.1 it printed
+> `conforms false` and exited 0, with either of its validators, so a CI step built
+> on it passed on the violations it was there to stop. From 0.22.0 it exits as
+> the `shacl` CLI does: 0 conforms, 1 does not, 2 could not validate (a missing
+> file, an unknown `--engine`, or a shapes graph the chosen engine refuses, such as
+> `sh:sparql` under `--engine native`). It also defaults to the `adapted`
+> validator now, as `holosdb`'s `Store.validate()` always has, so the same shapes
+> no longer pass in one place and are refused in the other. On 0.21.x, gate with
+> the `shacl` CLI, or from Python, where `Store.validate()` returns a dictionary
+> with a `conforms` key.
 
-<a id="ev-c11-29"></a>*Evidence:* [C11.29 — holos validate exits 0 on a non-conforming graph](../../EVIDENCE.md#c11-29) (reproduced: PASS)
+<a id="ev-c11-29"></a>*Evidence:* [C11.29 — holos validate: exit 0 whatever it found up to 0.21.1, a gate from 0.22.0](../../EVIDENCE.md#c11-29) (reproduced: PASS)
 
 ---
 

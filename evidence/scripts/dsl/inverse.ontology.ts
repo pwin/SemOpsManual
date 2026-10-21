@@ -12,5 +12,5 @@ defclass('CarPart', { subClassOf: [some(inverse(hasPart), Car)] });
 
 const { quads, prefixes } = build();
 const w = new Writer({ prefixes });
-w.addQuads(quads as any);   // the bundled Quad type and @types/n3 disagree (C08.16)
+w.addQuads(quads);   // no cast from 0.16.1 (C08.16)
 w.end((_e: unknown, ttl: string) => writeFileSync(process.argv[2], ttl));

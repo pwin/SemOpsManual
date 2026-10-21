@@ -267,7 +267,7 @@ query-rewriting design leaks do not leak:
 | The same, with `Principal(..., clearance=3)` | All three graphs |
 | The salary query with `.fail_closed()` on the policy | `HolosError: access denied by policy`, instead of a silent filter |
 
-All verified at 0.21.1. HOLOS measures the cost at 8 ns per quad, about 1% of
+All verified at 0.22.0. HOLOS measures the cost at 8 ns per quad, about 1% of
 decoding the quad. The `holos query` command from the release takes the same
 policy as flags (`--deny-predicate … --except-role hr`, `--label-graph`,
 `--fail-closed`) and gives the same answers.
@@ -314,9 +314,9 @@ it once with 0.21.1 and read the note.
 
 <a id="ev-c13-10"></a>*Evidence:* [C13.10 — Validation and the store: written into it up to 0.21.0, untouched from 0.21.1](../../EVIDENCE.md#c13-10) (reproduced: PASS)
 
-The other is smaller: the `holos validate` command defaults to the `native`
-engine and the Python method to `adapted`, so the same words can run different
-validators.
+The other was smaller: up to 0.21.1 the `holos validate` command defaulted to the
+`native` engine and the Python method to `adapted`, so the same words could run
+different validators. From 0.22.0 both default to `adapted`.
 
 ---
 
@@ -355,7 +355,7 @@ the honest outcome.
 
 ### Still open: the page is reshuffled on every run
 
-Re-checked at 0.23.0: three identical runs, three different files. The *content*
+Re-checked at 0.24.1: three identical runs, three different files. The *content*
 is canonical; the **order** of the class, property, import and section lists is
 not. The cause is below `docgen`. rdflib holds triples in a `set`, and Python
 randomises string hashing per process, so the parser hands the extractor its

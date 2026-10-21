@@ -2,7 +2,7 @@
  "id": "C11.18",
  "status": "PASS",
  "detail": "step 1: conforms: true; step 2: conforms: false; step 2 output contains 'path <http://example.org/nope>'",
- "ran": "2026-10-15",
+ "ran": "2026-10-21",
  "steps": [
   {
    "cmd": "shacl -d data/rules/order-data.ttl -s data/rules/order.ttl -a",

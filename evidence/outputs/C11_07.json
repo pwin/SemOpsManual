@@ -1,21 +1,35 @@
 {
  "id": "C11.07",
  "status": "PASS",
- "detail": "step 1: conforms: true; step 1 exits 0; step 2: conforms: true; step 2 exits 0",
- "ran": "2026-10-15",
+ "detail": "shacl 0.3.4: step 1 exits 2; step 1 output contains 'the shapes graph declares no shapes'; step 2 exits 2; step 2 output contains 'no --shapes was given'; step 3: conforms: true; step 3 exits 0",
+ "ran": "2026-10-21",
  "steps": [
   {
    "cmd": "shacl -d data/shacl/data.ttl -s data/shacl/no-shapes.ttl",
+   "rc": 2,
+   "seconds": 0.0,
+   "stdout": "",
+   "stderr": "error: the shapes graph declares no shapes, so nothing would be checked and the report would say the data conforms. Check that data/shacl/no-shapes.ttl is the file you meant and that the engine recognises what it declares, or pass --allow-no-shapes.\n"
+  },
+  {
+   "cmd": "shacl -d data/shacl/data.ttl",
+   "rc": 2,
+   "seconds": 0.0,
+   "stdout": "",
+   "stderr": "error: no --shapes was given, so data/shacl/data.ttl was used as its own shapes graph, and it declares no shapes. Nothing would be checked and the report would say the data conforms. Pass --shapes, or --allow-no-shapes if an empty shapes graph is what you meant.\n"
+  },
+  {
+   "cmd": "shacl -d data/shacl/data.ttl -s data/shacl/no-shapes.ttl --allow-no-shapes",
    "rc": 0,
    "seconds": 0.0,
    "stdout": "conforms: true\n",
    "stderr": ""
   },
   {
-   "cmd": "shacl -d data/shacl/data.ttl",
+   "cmd": "shacl --version",
    "rc": 0,
    "seconds": 0.0,
-   "stdout": "conforms: true\n",
+   "stdout": "shacl 0.3.4\n",
    "stderr": ""
   }
  ]

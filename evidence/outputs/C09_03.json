@@ -2,19 +2,19 @@
  "id": "C09.03",
  "status": "PASS",
  "detail": "step 1: 27 findings (1 V, 26 W, 0 I); excl/full_results.csv: {'DAT-002': 2, 'LOG-001': 1, 'QUA-001': 1, 'QUA-004': 3, 'QUA-009': 9, 'QUA-010': 9, 'STR-003': 1, 'STY-002': 1}; step 3 output contains 'value=http://xmlns.com/foaf/0.1/', 'value=http://xmlns.com/foaf/0.1/Person'; step 4 output contains 'focus=http://xmlns.com/foaf/0.1/Person'",
- "ran": "2026-10-15",
+ "ran": "2026-10-21",
  "steps": [
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --exclude-imports --engine sparql --out-dir work/C09_03/excl --fail-on never --reports minimal",
    "rc": 0,
-   "seconds": 1.3,
+   "seconds": 2.5,
    "stdout": "Findings: 27 total (1 Violation, 26 Warning, 0 Info)\nReports written to: ./work/C09_03/excl\n  - work/C09_03/excl/findings.txt (start here -- what, where, and the source line)\n  - work/C09_03/excl/full_results.csv\n",
    "stderr": ""
   },
   {
    "cmd": "python scripts/summarise_findings.py work/C09_03/excl/full_results.csv",
    "rc": 0,
-   "seconds": 0.1,
+   "seconds": 0.2,
    "stdout": "  2 x DAT-002  Warning   Dangling IRI reference\n  1 x LOG-001  Violation Class disjoint with its own ancestor\n  1 x QUA-001  Warning   Class or property missing rdfs:label\n  3 x QUA-004  Warning   Resource missing skos:prefLabel\n  9 x QUA-009  Warning   Class or property without one skos:prefLabel per language\n  9 x QUA-010  Warning   Class or property without a skos:definition\n  1 x STR-003  Warning   Property missing both domain and range\n  1 x STY-002  Warning   Property name not lowerCamelCase\ntotal 27: 1 Violation, 26 Warning, 0 Info\n",
    "stderr": ""
   },

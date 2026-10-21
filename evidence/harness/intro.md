@@ -54,10 +54,13 @@ are recorded but never asserted.
 
 **Which versions.** The packages are installed as a reader would install them,
 from PyPI and npm, not from any repository's lock file. So holosdb resolves to
-0.21.1 here although the suite's own `uv.lock` holds 0.21.0. Where a release
-changed what a claim should see, the claim checks the installed version and
-says which side of the change it ran on: suite 0.23.0 (C07.26, C07.27, C08.19,
-C10.18, C10.29, C10.30, C14.21, C14.39) and HOLOS 0.21.1 (C13.10).
+0.22.0 and shacl to 0.3.4 here, although the suite's own `uv.lock` holds 0.21.0
+and 0.3.3. Where a release changed what a claim should see, the claim checks the
+installed version and says which side of the change it ran on: suite 0.23.0
+(C07.05, C07.26, C07.27, C08.19, C10.18, C10.29, C10.30, C14.21, C14.39), suite
+0.24.0 (C10.18, C10.19) and 0.24.1 (C13.03); the engine's CLI at 0.3.4 (C11.07);
+HOLOS 0.21.1 (C13.10) and 0.22.0 (C11.29, C13.10); and the DSL at 0.16.1 (C08.15,
+C08.16).
 
 **What the machine needs.** Python 3.11 or later and Node 20 or later; the binaries
 come from `tools/fetch_binaries.py`. A Java runtime, for the claims in which HermiT
@@ -79,7 +82,7 @@ free on 127.0.0.1, where the live-store claims start `holos-server`.
   at `6cdfb14`, lets C09.15 and C09.16 run its test suite and competency board.
   Use a clone you do not mind it writing into: both rewrite generated files. That
   repository installs the suite from a sibling checkout,
-  `../consolidated_ontology_suite_python` (at `v0.23.0` for the recorded run), and
+  `../consolidated_ontology_suite_python` (at `v0.24.1` for the recorded run), and
   its competency tests triplify with oxi-gen, which the suite finds through
   `ONTOLOGY_SUITE_OXI_GEN_BIN`. If the clone lives in a temporary folder, make it
   with `git clone --no-local`: a local clone hardlinks the object files, which
@@ -114,5 +117,10 @@ they find ([C12.14](#c12-14)), and tarka's two OTTR modes disagreeing about a
 `mailto:` cell ([C10.11](#c10-11)).
 
 Several were fixed upstream while this edition was being checked: HOLOS 0.21.1
-for the validation defect, and suite 0.23.0, with engine 0.3.3, for `REA-020`,
-`--inference` and the merged sketch. The manual describes both sides of each fix.
+for the validation defect, and 0.22.0 for `holos validate`'s exit status and
+default engine ([C11.29](#c11-29)); suite 0.23.0, with engine 0.3.3, for `REA-020`,
+`--inference` and the merged sketch, and suite 0.24.0 and 0.24.1 for several of
+Chapter 14's smaller rows; engine 0.3.4 for a command line that validated against
+no shapes and said the data conformed ([C11.07](#c11-07)); and the DSL at 0.16.1
+for its error on unchecked code and its `Quad` type ([C08.15](#c08-15),
+[C08.16](#c08-16)). The manual describes both sides of each fix.

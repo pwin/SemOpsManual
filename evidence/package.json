@@ -4,9 +4,9 @@
   "description": "Node packages the SemOps Manual's evidence runs: the DSL, the WebAssembly engines, and TypeScript to check and run DSL scripts",
   "license": "MIT",
   "dependencies": {
-    "ontology-suite": "0.16.0",
-    "shacl-wasm-node": "0.3.3",
-    "holos-wasm-node": "0.21.1",
+    "ontology-suite": "0.16.1",
+    "shacl-wasm-node": "0.3.4",
+    "holos-wasm-node": "0.22.0",
     "n3": "2.13.12",
     "@types/n3": "1.26.4",
     "typescript": "7.0.2",

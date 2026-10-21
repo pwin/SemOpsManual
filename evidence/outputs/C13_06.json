@@ -2,7 +2,7 @@
  "id": "C13.06",
  "status": "PASS",
  "detail": "step 1 output contains '2. salary denied except to role hr, asked by alice:\\n    name=Alice, salary=None/n    name=Bob, salary=None/n    name=Carol, salary=None', '3. the same, asked by alice with role hr:\\n    name=Alice, salary=95000/n    name=Bob, salary=88000/n    name=Carol, salary=102000', '4. COUNT of salaries without the role:\\n    n=0', '5. named graphs, reviews labelled at level 3, no clearance:\\n    g=http://example.com/provenance/n    g=http://example.com/public/n6.', '6. named graphs, with clearance 3:\\n    g=http://example.com/provenance/n    g=http://example.com/public/n    g=http://example.com/reviews', '7. salary denied with fail_closed():\\n    HolosError: access denied by policy', '8. (mistake) policy method called as a statement:\\n    n=3'",
- "ran": "2026-10-15",
+ "ran": "2026-10-21",
  "steps": [
   {
    "cmd": "python scripts/holosdb_policy.py data/policy/hr.trig",

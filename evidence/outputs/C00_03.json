@@ -2,7 +2,7 @@
  "id": "C00.03",
  "status": "PASS",
  "detail": "step 1 output contains '19 diagrams in the chapters'",
- "ran": "2026-10-15",
+ "ran": "2026-10-21",
  "steps": [
   {
    "cmd": "python scripts/count_mermaid.py ..",

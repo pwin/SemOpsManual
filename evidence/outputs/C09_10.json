@@ -2,19 +2,19 @@
  "id": "C09.10",
  "status": "PASS",
  "detail": "default run writes findings.txt, full_results.csv, cucumber.json, report.html; and features/ and plots/; and none of the six retired summary files; --reports minimal writes exactly findings.txt and full_results.csv; full_results.csv has source_file and line columns",
- "ran": "2026-10-15",
+ "ran": "2026-10-21",
  "steps": [
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --engine sparql --own-namespace https://acme.example.org/ns/ --out-dir work/C09_10/default --fail-on never",
    "rc": 0,
-   "seconds": 2.0,
+   "seconds": 4.7,
    "stdout": "Findings: 23 total (1 Violation, 22 Warning, 0 Info)\nReports written to: ./work/C09_10/default\n  - work/C09_10/default/findings.txt (start here -- what, where, and the source line)\n  - work/C09_10/default/report.html\n  - work/C09_10/default/full_results.csv\n",
    "stderr": ""
   },
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --engine sparql --own-namespace https://acme.example.org/ns/ --out-dir work/C09_10/minimal --fail-on never --reports minimal",
    "rc": 0,
-   "seconds": 1.7,
+   "seconds": 2.3,
    "stdout": "Findings: 23 total (1 Violation, 22 Warning, 0 Info)\nReports written to: ./work/C09_10/minimal\n  - work/C09_10/minimal/findings.txt (start here -- what, where, and the source line)\n  - work/C09_10/minimal/full_results.csv\n",
    "stderr": ""
   },

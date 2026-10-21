@@ -2,7 +2,7 @@
  "id": "C11.30",
  "status": "PASS",
  "detail": "step 1 output contains '2 triples, 3 after the closure', '<http://example.org/bob> <http://example.org/parent> <http://example.org/carl>', 'literal typed as the range: False', 'triples typing something rdfs:Resource: 0'",
- "ran": "2026-10-15",
+ "ran": "2026-10-21",
  "steps": [
   {
    "cmd": "python scripts/rdfs_closure.py data/shacl/rdfs/data.ttl",

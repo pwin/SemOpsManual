@@ -114,26 +114,23 @@ was found. The scoped fixture run stayed at 54 findings while its composition
 changed -- see [Chapter 10](10-ingest-and-transform.md) §10.4, which is also
 where the mitigation for 0.23.0 and earlier still lives.
 
-### The `shacl` CLI reports conformance when it checked nothing
+### The `shacl` CLI reported conformance when it checked nothing (fixed in 0.3.4)
 
-The one-shot Python and JavaScript calls refuse a shapes graph that declares no
-shapes. The CLI does not: it prints `conforms: true` and exits 0. And because
-`-s` defaults to the data graph, `shacl -d data.ttl` with the `-s` forgotten does
-the same. Verified at 0.3.3.
+The one-shot Python and JavaScript calls have refused a shapes graph that declares
+no shapes since 0.2.0. Up to 0.3.3 the CLI did not: it printed `conforms: true` and
+exited 0, and because `-s` defaults to the data graph, `shacl -d data.ttl` with the
+`-s` forgotten did the same. *Fixed in engine 0.3.4*, which refuses both with exit 2
+and a message for each, and keeps the old answer behind `--allow-no-shapes`
+([Chapter 11](11-rules-and-inference.md) §11.1). Pass `-s` in automation anyway.
 
-*Mitigation:* always pass `-s` in automation, and keep a failing case in the job
-([Chapter 11](11-rules-and-inference.md) §11.1). *Suggested improvement:* refuse
-unless an explicit flag allows an empty shapes graph.
+### `holos validate` exited 0 on a non-conforming graph (fixed in 0.22.0)
 
-### `holos validate` exits 0 on a non-conforming graph
-
-Both of its validators print `conforms false` and return exit status 0; a
-non-zero status is reserved for "could not validate". Verified at 0.21.0, and
-still so at 0.21.1.
-
-*Mitigation:* gate with the `shacl` CLI, or use `holosdb`'s `Store.validate()`
-from Python, which returns a dictionary with a `conforms` key. *Suggested
-improvement:* exit 1 on non-conformance, as the engine it adapts does.
+Up to 0.21.1 both of its validators printed `conforms false` and returned exit
+status 0, a non-zero status being reserved for "could not validate". So a CI step
+built on it passed on the violations it was there to stop. *Fixed in HOLOS 0.22.0*,
+which exits 0, 1 or 2 as the `shacl` CLI does, and defaults to the same `adapted`
+validator as `Store.validate()`. On 0.21.x, gate with the `shacl` CLI, or use
+`Store.validate()` from Python, which returns a dictionary with a `conforms` key.
 
 ### tarka drops instances it cannot build, silently
 
@@ -151,7 +148,7 @@ dropped instances on `run` as bOTTR does.
 
 ### `docgen` reshuffles the page on every run
 
-Still open at 0.23.0, re-checked rather than carried forward: three identical runs
+Still open at 0.24.1, re-checked rather than carried forward: three identical runs
 produce three different files. The *content* is canonical; the **order** of every
 top-level list varies per run.
 
@@ -288,10 +285,10 @@ know is wrong, once, and watch it complain
 | `--sparql` composes but `--registry` replaces, so adding `@builtin` with a house registry turns every built-in finding `UNMAPPED`. Up to 0.23.0 the warning also recommended an absolute path rather than `@builtin`, in the release that added `@builtin` because a committed path is wrong on every other machine -- *that half fixed in 0.24.0*; the `--registry` half is open | [Ch. 8](08-model-and-validate.md) §8.5 |
 | Up to 0.23.0, `data` and `run` report one contradiction as two `LOG-001`s, one from the registry pass and one from the `owlrl` closure. *Fixed in 0.24.0* by deduplicating across the join, which merged two pairs on the fixture rather than the one reported | [Ch. 9](09-continuous-integration.md) §9.6 |
 | At 0.24.0, a manifest with an unknown graph `role` is refused -- correctly -- but as a Python traceback rather than a one-line error, the same shape `--inference owlrl` had until 0.23.0. *Fixed in 0.24.1*, which reports it as one line and exits 2 rather than 1; the exit is non-zero on both | [Ch. 13](13-operate-and-consume.md) §13.1 |
-| The DSL gives unchecked code an internal `TypeError`; its bundled `Quad` type is not assignable to `@types/n3`'s | [Ch. 8](08-model-and-validate.md) §8.2 |
+| Up to 0.16.0, the DSL gives unchecked code an internal `TypeError`, and its bundled `Quad` type is not assignable to `@types/n3`'s. *Fixed in 0.16.1* | [Ch. 8](08-model-and-validate.md) §8.2 |
 | The suite's `triplify` and the extension's *Run Full Triplify* drive `oxi-gen` only; neither knows tarka | [Ch. 10](10-ingest-and-transform.md) §10.3 |
 | `consistency` and `pattern-consistency` exit 0 whatever they find unless told otherwise. Up to 0.23.0 that meant `--fail-on-misalignment` or `--fail-on-mismatch`, two names for one idea, neither of them the `--fail-on` every other subcommand takes. *Fixed in 0.24.0*: `--fail-on-anything` on all three, with the old names kept as aliases | [Ch. 12](12-release-and-change.md) §12.6 |
-| The `holos validate` command defaults to the `native` engine and `holosdb`'s `Store.validate()` to `adapted`, so the same words run different validators | [Ch. 13](13-operate-and-consume.md) §13.2 |
+| Up to 0.21.1, the `holos validate` command defaults to the `native` engine and `holosdb`'s `Store.validate()` to `adapted`, so the same words run different validators. *Fixed in 0.22.0* | [Ch. 13](13-operate-and-consume.md) §13.2 |
 | At 0.22.0, when two query files bind one prefix differently, `sketch` reads every file with the first file's binding: the others' terms are reported as undeclared, or, if the odd file sorts last, its mistake is not reported at all. *Fixed in 0.23.0* | [Ch. 10](10-ingest-and-transform.md) §10.6 |
 
 ### Documentation drift, upstream
@@ -409,6 +406,14 @@ that rdflib's labels do not carry, so it never fired, and it was pinned by a tes
 feeding it a string the suite never produces -- the test passed while the code
 did nothing. The lesson is the one [Chapter 9](09-continuous-integration.md) §9.4
 already draws about gates: a check you have never seen fail is not yet a check.
+
+**Gates that could not fail, now can**: the `shacl` CLI refuses to validate
+against no shapes from engine 0.3.4 ([Ch. 11](11-rules-and-inference.md) §11.1),
+and `holos validate` exits 1 on a non-conforming graph from HOLOS 0.22.0, with
+the same default validator as Python (§11.8). And the DSL's two rough edges are
+fixed in 0.16.1: unchecked code gets an error that names its mistake, and
+`build().quads` goes to n3's `Writer` without a cast
+([Ch. 8](08-model-and-validate.md) §8.2).
 
 **HOLOS validation leaves the store as it found it**, from 0.21.1. Up to 0.21.0 it
 wrote the shapes into the store it validated, a copy per call, and on disk for
