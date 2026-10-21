@@ -210,7 +210,8 @@ fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(path.join(OUT, 'diagrams'), { recursive: true });
 
 CHAPTERS.forEach((ch, i) => {
-  let md = fs.readFileSync(path.join(REPO, ch.file), 'utf8');
+  // A checkout with core.autocrlf has CRLF line endings; the patterns below expect LF.
+  let md = fs.readFileSync(path.join(REPO, ch.file), 'utf8').replace(/\r\n/g, '\n');
   if (ch.file === 'README.md') md = prepareReadme(md);
   md = stripNav(stripLogo(md));
   md = substituteDiagrams(md, ch.file, byKey);

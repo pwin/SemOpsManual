@@ -68,7 +68,8 @@ fs.mkdirSync(OUT, { recursive: true });
 
 const blocks = [];
 for (const rel of ORDER) {
-  const txt = fs.readFileSync(path.join(REPO, rel), 'utf8');
+  // A checkout with core.autocrlf has CRLF line endings; the pattern expects LF.
+  const txt = fs.readFileSync(path.join(REPO, rel), 'utf8').replace(/\r\n/g, '\n');
   const re = /```mermaid\n([\s\S]*?)```/g;
   let m, i = 0;
   while ((m = re.exec(txt))) {

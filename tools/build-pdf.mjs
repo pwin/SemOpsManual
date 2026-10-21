@@ -110,7 +110,8 @@ function assemble() {
   let oversize = 0;
 
   for (const entry of ORDER) {
-    let md = fs.readFileSync(path.join(REPO, entry.file), 'utf8');
+    // A checkout with core.autocrlf has CRLF line endings; the patterns below expect LF.
+    let md = fs.readFileSync(path.join(REPO, entry.file), 'utf8').replace(/\r\n/g, '\n');
     md = stripLogo(md);
     md = stripNav(md);
 
