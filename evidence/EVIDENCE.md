@@ -159,7 +159,7 @@ for its error on unchecked code and its `Quad` type ([C08.15](#c08-15),
 |---|---|---|
 | [C00.01 — A 61-check registry](#c00-01) | Reproduced here | PASS (2026-10-21) |
 | [C00.02 — Every Part III command was executed, and re-run for this edition](#c00-02) | Argument | Argument |
-| [C00.03 — Nineteen diagrams](#c00-03) | Reproduced here | PASS (2026-10-21) |
+| [C00.03 — Twenty diagrams](#c00-03) | Reproduced here | PASS (2026-10-21) |
 | [C00.04 — pip install shacl gives the library only](#c00-04) | Reproduced here | PASS (2026-10-21) |
 | [C00.05 — 54 or 55, and REA-021 or REA-022](#c00-05) | Reproduced here | PASS (2026-10-21) |
 | [C00.06 — Everything else is exactly reproducible](#c00-06) | Reproduced here | PASS (2026-10-21) |
@@ -526,12 +526,12 @@ A statement of method. This folder is the re-run: each `run` claim records the d
 ---
 
 <a id="c00-03"></a>
-### C00.03 — Nineteen diagrams
+### C00.03 — Twenty diagrams
 
 **In the manual:** [README, at the claim](manual/README.md#ev-c00-03) · [plain edition](../README.md#read-it-on-paper)  
 **Kind:** Reproduced here · **Result:** **PASS** (2026-10-21)
 
-> numbers, all nineteen diagrams rendered, and an index of commands, flags and check
+> numbers, all twenty diagrams rendered, and an index of commands, flags and check
 
 **Commands** (from the `evidence/` folder):
 
@@ -560,9 +560,9 @@ print(f"{total} diagrams in the chapters; README has {(repo / 'README.md').read_
 
 </details>
 
-**What is checked:** 19 Mermaid blocks across the chapters and the appendix (the README's own is the twentieth)
+**What is checked:** 19 Mermaid blocks across the chapters and the appendix, and the README's own, which the PDF keeps in its introduction: twenty
 
-**Recorded result:** PASS — step 1 output contains '19 diagrams in the chapters'
+**Recorded result:** PASS — step 1 output contains '19 diagrams in the chapters; README has 1 more'
 
 <details><summary>Output, as recorded</summary>
 
@@ -589,6 +589,8 @@ $ python scripts/count_mermaid.py ..
 ```
 
 </details>
+
+The previous wording said nineteen, which counted the chapters and not the PDF.
 
 ---
 

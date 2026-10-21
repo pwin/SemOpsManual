@@ -10,12 +10,14 @@ CLAIMS = [
           (F, "Every command shown in Part III was **executed for real**"), "argument",
           notes="A statement of method. This folder is the re-run: each `run` claim records the date it last ran, "
                 "and the environment table at the top of EVIDENCE.md gives the versions."),
-    Claim("C00.03", "Nineteen diagrams", "00",
-          (F, "numbers, all nineteen diagrams rendered, and an index of commands, flags and check"), "run",
+    Claim("C00.03", "Twenty diagrams", "00",
+          (F, "numbers, all twenty diagrams rendered, and an index of commands, flags and check"), "run",
           scripts=["scripts/count_mermaid.py"],
           steps=[Step("python scripts/count_mermaid.py ..")],
-          check=has(0, "19 diagrams in the chapters"),
-          checks="19 Mermaid blocks across the chapters and the appendix (the README's own is the twentieth)"),
+          check=has(0, "19 diagrams in the chapters; README has 1 more"),
+          checks="19 Mermaid blocks across the chapters and the appendix, and the README's own, which the PDF "
+                 "keeps in its introduction: twenty",
+          notes="The previous wording said nineteen, which counted the chapters and not the PDF."),
     Claim("C00.04", "pip install shacl gives the library only", "00",
           (F, "`pip install shacl`"), "run", same_as="C07.05"),
     Claim("C00.05", "54 or 55, and REA-021 or REA-022", "00",

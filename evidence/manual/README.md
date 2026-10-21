@@ -45,7 +45,7 @@ any of them.
 
 Every command shown in Part III was **executed for real**, against the ontology
 suite's own bundled `examples/acme_robotics/` fixture, and re-run for this edition
-between 13 and 15 October 2026. Where the output differs from what a strategy
+between 13 and 21 October 2026. Where the output differs from what a strategy
 document would lead you to expect, the manual reports what actually happened and
 explains why.
 [Chapter 9](docs/09-continuous-integration.md) has the sharpest example, where the
@@ -100,10 +100,10 @@ correct that nobody adopts.
 
 **[Download the A4 PDF](https://github.com/pwin/SemOpsManual/releases/latest)**:
 the whole manual as a single A4 document, with a title page, contents with page
-numbers, all nineteen diagrams rendered, and an index of commands, flags and check
+numbers, all twenty diagrams rendered, and an index of commands, flags and check
 identifiers.
 
-<a id="ev-c00-03"></a>*Evidence:* [C00.03 — Nineteen diagrams](../EVIDENCE.md#c00-03) (reproduced: PASS)
+<a id="ev-c00-03"></a>*Evidence:* [C00.03 — Twenty diagrams](../EVIDENCE.md#c00-03) (reproduced: PASS)
 
 The PDF is published as a release asset rather than committed, so the repository
 does not carry a fresh multi-megabyte binary for every revision. Build it yourself

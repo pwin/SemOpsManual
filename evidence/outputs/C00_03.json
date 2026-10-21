@@ -1,7 +1,7 @@
 {
  "id": "C00.03",
  "status": "PASS",
- "detail": "step 1 output contains '19 diagrams in the chapters'",
+ "detail": "step 1 output contains '19 diagrams in the chapters; README has 1 more'",
  "ran": "2026-10-21",
  "steps": [
   {
