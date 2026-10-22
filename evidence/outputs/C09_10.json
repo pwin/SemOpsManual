@@ -2,26 +2,26 @@
  "id": "C09.10",
  "status": "PASS",
  "detail": "default run writes findings.txt, full_results.csv, cucumber.json, report.html; and features/ and plots/; and none of the six retired summary files; --reports minimal writes exactly findings.txt and full_results.csv; full_results.csv has source_file and line columns",
- "ran": "2026-10-21",
+ "ran": "2026-10-22",
  "steps": [
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --engine sparql --own-namespace https://acme.example.org/ns/ --out-dir work/C09_10/default --fail-on never",
    "rc": 0,
-   "seconds": 4.7,
+   "seconds": 5.0,
    "stdout": "Findings: 23 total (1 Violation, 22 Warning, 0 Info)\nReports written to: ./work/C09_10/default\n  - work/C09_10/default/findings.txt (start here -- what, where, and the source line)\n  - work/C09_10/default/report.html\n  - work/C09_10/default/full_results.csv\n",
    "stderr": ""
   },
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --engine sparql --own-namespace https://acme.example.org/ns/ --out-dir work/C09_10/minimal --fail-on never --reports minimal",
    "rc": 0,
-   "seconds": 2.3,
+   "seconds": 3.4,
    "stdout": "Findings: 23 total (1 Violation, 22 Warning, 0 Info)\nReports written to: ./work/C09_10/minimal\n  - work/C09_10/minimal/findings.txt (start here -- what, where, and the source line)\n  - work/C09_10/minimal/full_results.csv\n",
    "stderr": ""
   },
   {
    "cmd": "python scripts/list_files.py work/C09_10/default",
    "rc": 0,
-   "seconds": 0.1,
+   "seconds": 0.2,
    "stdout": "   79,141  cucumber.json\n    1,232  features/conformance.feature\n      958  features/data-quality.feature\n    4,889  features/documentation-quality.feature\n    2,149  features/logical-cogency.feature\n    1,375  features/naming-style.feature\n    3,214  features/reasoning.feature\n      777  features/structural---runtime-efficiency.feature\n    2,608  features/structural-integrity.feature\n    1,318  features/tarql-query-consistency.feature\n      263  features/vocabulary-integrity.feature\n    6,312  findings.txt\n   10,848  full_results.csv\n   33,544  plots/category_breakdown.png\n   15,966  plots/severity_distribution.png\n   32,323  plots/top_offenders.png\n  138,168  report.html\n17 files, 335,085 bytes\n",
    "stderr": ""
   },

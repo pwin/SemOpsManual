@@ -31,7 +31,7 @@ runnable today**:
 
 | Tool | What it is | Get it |
 |---|---|---|
-| **Ontology Development Suite** | The desk: a VS Code extension with live diagnostics, outline, graph view, query workbench, and a TypeScript DSL for writing ontologies as code | [`.vsix` from the v0.16.1 release](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/releases/tag/v0.16.1) · npm [`ontology-suite`](https://www.npmjs.com/package/ontology-suite) |
+| **Ontology Development Suite** | The desk: a VS Code extension with live diagnostics, outline, graph view, query workbench, and a TypeScript DSL for writing ontologies as code | [`.vsix` from the v0.16.3 release](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/releases/tag/v0.16.3) · npm [`ontology-suite`](https://www.npmjs.com/package/ontology-suite) |
 | **Ontology Quality Suite** | The gate: a Python CLI and library with the 61-check registry, OWL2 reasoning, version diffing, change impact and repair, live-store checks | PyPI [`ontology-quality-suite`](https://pypi.org/project/ontology-quality-suite/) |
 | **SHACL Engine** | The validator underneath both: SHACL and SHACL-AF rules in Rust | PyPI [`shacl`](https://pypi.org/project/shacl/) · npm [`shacl-wasm`](https://www.npmjs.com/package/shacl-wasm), [`shacl-wasm-node`](https://www.npmjs.com/package/shacl-wasm-node) · CLI from the [releases](https://github.com/pwin/SHACL_Engine/releases) |
 | **HOLOS** | The store: RDF 1.2 and SPARQL 1.2, with access policy enforced at the index scan; the SPARQL engine underneath both suites | PyPI [`holosdb`](https://pypi.org/project/holosdb/) · npm [`holos-wasm`](https://www.npmjs.com/package/holos-wasm), [`holos-wasm-node`](https://www.npmjs.com/package/holos-wasm-node) · CLI from the [releases](https://github.com/pwin/triplestore/releases) |
@@ -45,7 +45,7 @@ any of them.
 
 Every command shown in Part III was **executed for real**, against the ontology
 suite's own bundled `examples/acme_robotics/` fixture, and re-run for this edition
-between 13 and 21 October 2026. Where the output differs from what a strategy
+between 13 and 22 October 2026. Where the output differs from what a strategy
 document would lead you to expect, the manual reports what actually happened and
 explains why.
 [Chapter 9](docs/09-continuous-integration.md) has the sharpest example, where the

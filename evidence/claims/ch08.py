@@ -82,8 +82,8 @@ CLAIMS = [
     Claim("C08.01", "Outline prompts resolve restriction names since 0.14.0", "08",
           (F, "Since 0.14.0 a restriction typed into those prompts resolves its names"), "source",
           sources=[src("extension CHANGELOG, 0.16.0: MAL-003, and Local Checks no longer fails on one",
-                       file("webapp", "CHANGELOG.md", "31-39"), "The statements that use a relative IRI are now reported"),
-                   src("extension CHANGELOG, 0.14.0", file("webapp", "CHANGELOG.md", "167-176"),
+                       file("webapp", "CHANGELOG.md", "99-107"), "The statements that use a relative IRI are now reported"),
+                   src("extension CHANGELOG, 0.14.0", file("webapp", "CHANGELOG.md", "235-244"),
                        "search it for the regular expression `<[^:>]+>`"),
                    src("extension commit d480ace (first released in v0.14.0)",
                        commit("webapp", "d480ace5adc99616ca36ca563af8feb3cb2fb99d"))]),
@@ -98,7 +98,7 @@ CLAIMS = [
                        "MDL-002: ex:Veterinarian owl:equivalentClass ex:AnimalDoctor"),
                    src("extension src/checks/malformed.ts (0.16.0)", file("webapp", "src/checks/malformed.ts", "10-15"),
                        "MAL-001: a qualified cardinality written with owl:cardinality (or min/max) beside owl:onClass."),
-                   src("extension CHANGELOG, 0.16.0", file("webapp", "CHANGELOG.md", "40-45"),
+                   src("extension CHANGELOG, 0.16.0", file("webapp", "CHANGELOG.md", "108-113"),
                        "this extension's own rather than the registry's")],
           notes="Neither family is in the shared registry.json, which is why the CLI cannot produce them."),
 
@@ -142,13 +142,13 @@ CLAIMS = [
 
     Claim("C08.08", "Blank nodes cross the repair boundary as skolem IRIs", "08",
           (F, "**It nearly renamed every blank node in the file.**"), "source",
-          sources=[src("extension CHANGELOG, 0.13.11", file("webapp", "CHANGELOG.md", "294-304"),
+          sources=[src("extension CHANGELOG, 0.13.11", file("webapp", "CHANGELOG.md", "362-372"),
                        "Blank nodes now cross the boundary as IRIs and come back as blank nodes"),
                    src("extension commit e4583b9", commit("webapp", "e4583b9a9d47f678bba2e5efaba7b7d0b21ca504"))]),
 
     Claim("C08.09", "A literal's base direction survives a repair since 0.13.12", "08",
           (F, "**It dropped a literal's base direction.**"), "source",
-          sources=[src("extension CHANGELOG, 0.13.12", file("webapp", "CHANGELOG.md", "255-260"),
+          sources=[src("extension CHANGELOG, 0.13.12", file("webapp", "CHANGELOG.md", "323-328"),
                        "datatype from `rdf:dirLangString` to `rdf:langString` in the user's own file"),
                    src("extension commit e3364fc (first released in v0.13.12)",
                        commit("webapp", "e3364fc5bf6b7a7c5028d5e868b5b3c12164ae2c"))]),
@@ -158,11 +158,11 @@ CLAIMS = [
           sources=[src("extension commit 71981b4 (first released in v0.13.5)",
                        commit("webapp", "71981b41283528abbd6fa509a2ffa8c3bd231270"),
                        "Stop reading CURIEs out of comments"),
-                   src("extension CHANGELOG, 0.13.5", file("webapp", "CHANGELOG.md", "429"), "a line whose *first* non-space character was `#`")]),
+                   src("extension CHANGELOG, 0.13.5", file("webapp", "CHANGELOG.md", "497"), "a line whose *first* non-space character was `#`")]),
 
     Claim("C08.11", "The unresolved-import warning names where it looked", "08",
           (F, "It now names the directory it searched and how"), "source",
-          sources=[src("extension CHANGELOG, 0.13.5", file("webapp", "CHANGELOG.md", "479"),
+          sources=[src("extension CHANGELOG, 0.13.5", file("webapp", "CHANGELOG.md", "547"),
                        "It now names the directory it searched and how many ontology files it found")]),
 
     Claim("C08.12", "The DSL script type-checks and builds against the npm package", "08",
@@ -357,7 +357,7 @@ CLAIMS = [
           checks="the script type-checks and builds; CarPart's restriction is on an anonymous [ owl:inverseOf "
                  "car:hasPart ], with Car as the filler, and no named inverse property is minted",
           needs=["node"],
-          sources=[src("extension CHANGELOG, 0.16.0", file("webapp", "CHANGELOG.md", "55-59"),
+          sources=[src("extension CHANGELOG, 0.16.0", file("webapp", "CHANGELOG.md", "123-127"),
                        "Manchester's `inverse p some C`, written as OWL 2 does with `[ owl:inverseOf p ]`")]),
 
     Claim("C08.33", "How the editor behaviour was established", "08",

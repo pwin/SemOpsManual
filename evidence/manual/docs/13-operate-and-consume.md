@@ -265,9 +265,9 @@ query-rewriting design leaks do not leak:
 | `COUNT(*)` of salaries, without the role | `0`: the aggregate counts the visible store |
 | Which named graphs exist, with a graph labelled at level 3 and no clearance | The labelled graph is missing from the list, and so is the fact that it exists |
 | The same, with `Principal(..., clearance=3)` | All three graphs |
-| The salary query with `.fail_closed()` on the policy | `HolosError: access denied by policy`, instead of a silent filter |
+| The salary query with `.fail_closed()` on the policy | A `HolosError` saying *access denied by policy*, instead of a silent filter |
 
-All verified at 0.22.0. HOLOS measures the cost at 8 ns per quad, about 1% of
+All verified at 0.25.0. HOLOS measures the cost at 8 ns per quad, about 1% of
 decoding the quad. The `holos query` command from the release takes the same
 policy as flags (`--deny-predicate … --except-role hr`, `--label-graph`,
 `--fail-closed`) and gives the same answers.
@@ -293,7 +293,9 @@ Three reasons this matters for SemOps, rather than only for security:
   a service account that sees everything ([Chapter 5](05-genai-and-agents.md)).
 
 `holosdb` also validates: `Store.validate("shapes.ttl")` returns a dictionary such
-as `{'conforms': False, 'violations': 1, 'engine': 'adapted'}`. Its `native`
+as `{'conforms': False, 'violations': 1, 'engine': 'adapted', 'results': [...]}`,
+and from 0.23.0 `results` holds each result, with its focus node, path, value,
+severity, constraint component, shape and message. Its `native`
 engine refuses a shapes graph that uses anything beyond SHACL Core (`sh:sparql`,
 for instance) with a `HolosError` naming the construct, rather than dropping the
 constraint and answering *conforms*. That refusal is the right one

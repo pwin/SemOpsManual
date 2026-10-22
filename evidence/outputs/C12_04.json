@@ -2,12 +2,12 @@
  "id": "C12.04",
  "status": "PASS",
  "detail": "step 1 output contains 'Suggested version bump: MAJOR', '1 class(es) used in TARQL but not declared in the ontology set:\\n  [undeclared_class] https://acme.example.org/ns/Engineer', 'employees.rq (confidence 100%)', 'Update to the renamed ontology term(s): https://acme.example.org/ns/Engineer -> https://acme.example.org/ns/SoftwareEngineer', 'Wrote 1/1 suggested repair(s) as .patch files', 'Re-run with --apply-repairs'; step 1 output has none of 'undeclared_property'; step 2 output contains 'repairs/01-rename_iri-employees.rq.patch'",
- "ran": "2026-10-21",
+ "ran": "2026-10-22",
  "steps": [
   {
    "cmd": "ontology-quality-suite consistency --new fixtures/acme_robotics/acme-org-v2.ttl --old fixtures/acme_robotics/acme-org-v1.ttl --queries fixtures/acme_robotics --import-dir fixtures/acme_robotics --out-dir work/C12_04/consistency",
    "rc": 0,
-   "seconds": 2.2,
+   "seconds": 2.3,
    "stdout": "Ontology version diff: fixtures/acme_robotics/acme-org-v1.ttl -> fixtures/acme_robotics/acme-org-v2.ttl\n\nRemoved classes [MAJOR]:\n  - https://acme.example.org/ns/Engineer\n\nRemoved subclass edges [MAJOR]:\n  - https://acme.example.org/ns/Engineer no longer rdfs:subClassOf https://acme.example.org/ns/Employee\n\nAdded classes [minor]:\n  - https://acme.example.org/ns/ProductManager\n  - https://acme.example.org/ns/SoftwareEngineer\n\nAdded properties [minor]:\n  - https://acme.example.org/ns/hireDate\n\nAdded subclass edges [minor]:\n  - https://acme.example.org/ns/ProductManager rdfs:subClassOf https://acme.example.org/ns/Employee\n  - https://acme.example.org/ns/SoftwareEngineer rdfs:subClassOf https://acme.example.org/ns/Employee\n\nAdded equivalentClass axioms [minor]:\n  - https://acme.example.org/ns/Engineer equivalentClass https://acme.example.org/ns/SoftwareEngineer\n\nSuggested version bump: MAJOR\n\n1 class(es) used in TARQL but not declared in the ontology set:\n  [undeclared_class] https://acme.example.org/ns/Engineer\n\n1 suggested repair(s):\n  [rename_iri] fixtures/acme_robotics/employees.rq (confidence 100%)\n    Update to the renamed ontology term(s): https://acme.example.org/ns/Engineer -> https://acme.example.org/ns/SoftwareEngineer\n\nWritten to: work/C12_04/consistency/consistency.txt\n\nWrote 1/1 suggested repair(s) as .patch files under work/C12_04/consistency/repairs (confidence >= 50%). Re-run with --apply-repairs to apply them directly.\n",
    "stderr": ""
   },

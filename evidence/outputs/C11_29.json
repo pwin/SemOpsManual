@@ -1,42 +1,42 @@
 {
  "id": "C11.29",
  "status": "PASS",
- "detail": "step 1 output contains 'conforms          false'; step 2 output contains 'conforms          false'; step 5 output contains \"'conforms': False\", 'HolosError: unsupported: sh:sparql is not implemented'; holos 0.22.0: step 1 exits 1; step 2 exits 1; step 3 exits 1; step 3 output contains 'conforms          false'; step 4 exits 1; step 6 exits 2; step 6 output contains 'sh:sparql'; step 7 exits 0",
- "ran": "2026-10-21",
+ "detail": "step 1 output contains 'conforms          false'; step 2 output contains 'conforms          false'; step 5 output contains \"'conforms': False\", 'HolosError: unsupported: sh:sparql is not implemented'; holos 0.25.0: step 1 exits 1; step 2 exits 1; step 3 exits 1; step 3 output contains 'conforms          false'; step 4 exits 1; step 6 exits 2; step 6 output contains 'sh:sparql'; step 7 exits 0",
+ "ran": "2026-10-22",
  "steps": [
   {
    "cmd": "holos validate --data data/shacl/data.ttl --shapes data/shacl/shapes-violation.ttl",
    "rc": 1,
    "seconds": 0.0,
-   "stdout": "bridged+compiled  3 triples, 2 shapes in 0.005s\nvalidated         0.001s\nconforms          false\nresults           1\n",
-   "stderr": "loaded 3 quads in 0.00s (760 quads/s)\nread 5 shape quads from data/shacl/shapes-violation.ttl, and kept none of them\n"
+   "stdout": "bridged+compiled  3 triples, 2 shapes in 0.000s\nvalidated         0.000s\nconforms          false\nresults           1\n",
+   "stderr": "loaded 3 quads in 0.00s (4313 quads/s)\nread 5 shape quads from data/shacl/shapes-violation.ttl, and kept none of them\n"
   },
   {
    "cmd": "holos validate --data data/shacl/data.ttl --shapes data/shacl/shapes-violation.ttl --engine adapted",
    "rc": 1,
    "seconds": 0.0,
    "stdout": "bridged+compiled  3 triples, 2 shapes in 0.000s\nvalidated         0.000s\nconforms          false\nresults           1\n",
-   "stderr": "loaded 3 quads in 0.00s (3611 quads/s)\nread 5 shape quads from data/shacl/shapes-violation.ttl, and kept none of them\n"
+   "stderr": "loaded 3 quads in 0.00s (3403 quads/s)\nread 5 shape quads from data/shacl/shapes-violation.ttl, and kept none of them\n"
   },
   {
    "cmd": "holos validate --data data/shacl/data.ttl --shapes data/shacl/shapes-sparql.ttl",
    "rc": 1,
    "seconds": 0.0,
-   "stdout": "bridged+compiled  3 triples, 1 shapes in 0.000s\nvalidated         0.002s\nconforms          false\nresults           1\n",
-   "stderr": "loaded 3 quads in 0.00s (5585 quads/s)\nread 6 shape quads from data/shacl/shapes-sparql.ttl, and kept none of them\n"
+   "stdout": "bridged+compiled  3 triples, 1 shapes in 0.001s\nvalidated         0.000s\nconforms          false\nresults           1\n",
+   "stderr": "loaded 3 quads in 0.00s (3063 quads/s)\nread 6 shape quads from data/shacl/shapes-sparql.ttl, and kept none of them\n"
   },
   {
    "cmd": "holos validate --data data/shacl/data.ttl --shapes data/shacl/shapes-sparql.ttl --engine adapted",
    "rc": 1,
    "seconds": 0.0,
    "stdout": "bridged+compiled  3 triples, 1 shapes in 0.000s\nvalidated         0.000s\nconforms          false\nresults           1\n",
-   "stderr": "loaded 3 quads in 0.00s (4175 quads/s)\nread 6 shape quads from data/shacl/shapes-sparql.ttl, and kept none of them\n"
+   "stderr": "loaded 3 quads in 0.00s (4855 quads/s)\nread 6 shape quads from data/shacl/shapes-sparql.ttl, and kept none of them\n"
   },
   {
    "cmd": "python scripts/holosdb_validate.py data/shacl/data.ttl data/shacl/shapes-violation.ttl data/shacl/shapes-sparql.ttl",
    "rc": 0,
    "seconds": 0.1,
-   "stdout": "adapted: {'conforms': False, 'violations': 1, 'engine': 'adapted'}\nnative:  {'conforms': False, 'violations': 1, 'engine': 'native'}\nnative, sh:sparql shapes: HolosError: unsupported: sh:sparql is not implemented by the incremental evaluator; validate                      through holos_shacl::engine::EngineRun instead\n",
+   "stdout": "adapted: {'conforms': False, 'violations': 1, 'engine': 'adapted', 'results': [{'focus': 'http://example.org/bob', 'path': 'http://example.org/name', 'value': None, 'severity': 'Violation', 'component': 'http://www.w3.org/ns/shacl#MinCountConstraintComponent', 'shape': '_:0_b0', 'message': None}]}\nnative:  {'conforms': False, 'violations': 1, 'engine': 'native', 'results': [{'focus': 'http://example.org/bob', 'path': 'http://example.org/name', 'value': None, 'severity': 'Violation', 'component': 'http://www.w3.org/ns/shacl#MinCountConstraintComponent', 'shape': '_:f122f814b2947a51e211236be39576ca', 'message': None}]}\nnative, sh:sparql shapes: HolosError: unsupported: sh:sparql is not implemented by the incremental evaluator; validate                      through holos_shacl::engine::EngineRun instead\n",
    "stderr": ""
   },
   {
@@ -44,20 +44,20 @@
    "rc": 2,
    "seconds": 0.0,
    "stdout": "",
-   "stderr": "loaded 3 quads in 0.00s (3646 quads/s)\nread 6 shape quads from data/shacl/shapes-sparql.ttl, and kept none of them\nError: unsupported: sh:sparql is not implemented by the incremental evaluator; validate                      through holos_shacl::engine::EngineRun instead\n"
+   "stderr": "loaded 3 quads in 0.00s (4115 quads/s)\nread 6 shape quads from data/shacl/shapes-sparql.ttl, and kept none of them\nError: unsupported: sh:sparql is not implemented by the incremental evaluator; validate                      through holos_shacl::engine::EngineRun instead\n"
   },
   {
    "cmd": "holos validate --data data/rules/nested-data.ttl --shapes data/shacl/shapes-violation.ttl",
    "rc": 0,
    "seconds": 0.0,
    "stdout": "bridged+compiled  2 triples, 2 shapes in 0.000s\nvalidated         0.000s\nconforms          true\nresults           0\n",
-   "stderr": "loaded 2 quads in 0.00s (1877 quads/s)\nread 5 shape quads from data/shacl/shapes-violation.ttl, and kept none of them\n"
+   "stderr": "loaded 2 quads in 0.00s (2787 quads/s)\nread 5 shape quads from data/shacl/shapes-violation.ttl, and kept none of them\n"
   },
   {
    "cmd": "holos --version",
    "rc": 0,
    "seconds": 0.0,
-   "stdout": "holos 0.22.0 (4d1ad30)\n",
+   "stdout": "holos 0.25.0 (b44aa1c)\n",
    "stderr": ""
   }
  ]

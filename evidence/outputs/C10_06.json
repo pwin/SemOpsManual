@@ -2,12 +2,12 @@
  "id": "C10.06",
  "status": "PASS",
  "detail": "step 2 output contains 'bind-facts.ttl', 'bind-review.txt'; sketch/bind-review.txt contains '1 query file(s), 3 BIND statement(s)', '1. Variables bound differently across files (0)', '2. Constructed-IRI variables never bound (0)', '3. CONSTRUCT variables not bound in the query (3)', '?name, ?role, ?skill'",
- "ran": "2026-10-21",
+ "ran": "2026-10-22",
  "steps": [
   {
    "cmd": "ontology-quality-suite sketch --queries fixtures/acme_robotics --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --out-dir work/C10_06/sketch --reports minimal",
    "rc": 0,
-   "seconds": 3.8,
+   "seconds": 2.1,
    "stdout": "Findings: 38 total (0 Violation, 0 Warning, 38 Info)\nReports written to: ./work/C10_06/sketch\n  - work/C10_06/sketch/findings.txt (start here -- what, where, and the source line)\n  - work/C10_06/sketch/full_results.csv\nSketch used 1 query file(s); 8 triples, 7 entities.\n",
    "stderr": ""
   },
@@ -15,7 +15,7 @@
    "cmd": "python scripts/list_files.py work/C10_06/sketch",
    "rc": 0,
    "seconds": 0.1,
-   "stdout": "    3,841  bind-facts.ttl\n      684  bind-review.txt\n    4,448  findings.txt\n   13,787  full_results.csv\n      707  sketch.ttl\n5 files, 23,467 bytes\n",
+   "stdout": "    3,841  bind-facts.ttl\n      684  bind-review.txt\n    4,448  findings.txt\n   13,787  full_results.csv\n      713  sketch.ttl\n5 files, 23,473 bytes\n",
    "stderr": ""
   }
  ]

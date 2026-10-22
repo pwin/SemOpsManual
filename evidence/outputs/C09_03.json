@@ -2,12 +2,12 @@
  "id": "C09.03",
  "status": "PASS",
  "detail": "step 1: 27 findings (1 V, 26 W, 0 I); excl/full_results.csv: {'DAT-002': 2, 'LOG-001': 1, 'QUA-001': 1, 'QUA-004': 3, 'QUA-009': 9, 'QUA-010': 9, 'STR-003': 1, 'STY-002': 1}; step 3 output contains 'value=http://xmlns.com/foaf/0.1/', 'value=http://xmlns.com/foaf/0.1/Person'; step 4 output contains 'focus=http://xmlns.com/foaf/0.1/Person'",
- "ran": "2026-10-21",
+ "ran": "2026-10-22",
  "steps": [
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --exclude-imports --engine sparql --out-dir work/C09_03/excl --fail-on never --reports minimal",
    "rc": 0,
-   "seconds": 2.5,
+   "seconds": 3.5,
    "stdout": "Findings: 27 total (1 Violation, 26 Warning, 0 Info)\nReports written to: ./work/C09_03/excl\n  - work/C09_03/excl/findings.txt (start here -- what, where, and the source line)\n  - work/C09_03/excl/full_results.csv\n",
    "stderr": ""
   },

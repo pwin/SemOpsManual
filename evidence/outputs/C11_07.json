@@ -2,7 +2,7 @@
  "id": "C11.07",
  "status": "PASS",
  "detail": "shacl 0.3.4: step 1 exits 2; step 1 output contains 'the shapes graph declares no shapes'; step 2 exits 2; step 2 output contains 'no --shapes was given'; step 3: conforms: true; step 3 exits 0",
- "ran": "2026-10-21",
+ "ran": "2026-10-22",
  "steps": [
   {
    "cmd": "shacl -d data/shacl/data.ttl -s data/shacl/no-shapes.ttl",

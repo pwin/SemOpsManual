@@ -2,7 +2,7 @@
  "id": "C10.13",
  "status": "PASS",
  "detail": "step 1 exits 0; step 2 exits 0; employees.shapes.ttl contains 'sh:targetClass acme:Employee', '[ sh:path acme:worksIn ; sh:nodeKind sh:IRI ]', '[ sh:path foaf:mbox ; sh:nodeKind sh:IRI ]'; report.ttl contains 'sh:conforms true'",
- "ran": "2026-10-21",
+ "ran": "2026-10-22",
  "steps": [
   {
    "cmd": "tarka shapes -q fixtures/acme_robotics/employees.rq -o work/C10_13/employees.shapes.ttl",

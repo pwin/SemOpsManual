@@ -2,7 +2,7 @@
  "id": "C10.17",
  "status": "PASS",
  "detail": "step 1 output contains 'WARNING: oxi-gen binary not found', 'Triplified 0 file(s)'",
- "ran": "2026-10-21",
+ "ran": "2026-10-22",
  "steps": [
   {
    "cmd": "ontology-quality-suite triplify --csv-dir fixtures/acme_robotics --queries fixtures/acme_robotics --out-dir work/C10_17/out",

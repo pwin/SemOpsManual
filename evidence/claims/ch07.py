@@ -36,15 +36,15 @@ CLAIMS = [
           (F, "> **Versions this edition was measured against.**"), "run",
           scripts=["scripts/versions.py"],
           steps=[Step("python scripts/versions.py")],
-          check=has(0, "PyPI ontology-quality-suite  0.24.1", "PyPI shacl                   0.3.4",
-                    "PyPI holosdb                 0.22.0", "PyPI tarka-rdf               0.1.1",
+          check=has(0, "PyPI ontology-quality-suite  0.24.3", "PyPI shacl                   0.3.4",
+                    "PyPI holosdb                 0.25.0", "PyPI tarka-rdf               0.1.1",
                     "release shacl                shacl 0.3.4", "release tarka                tarka 0.1.1",
-                    "release holos                holos 0.22.0", "npm ontology-suite           0.16.1",
-                    "npm shacl-wasm-node          0.3.4", "npm holos-wasm-node          0.22.0"),
+                    "release holos                holos 0.25.0", "npm ontology-suite           0.16.1",
+                    "npm shacl-wasm-node          0.3.4", "npm holos-wasm-node          0.25.0"),
           checks="the installed packages, release binaries and npm packages are the versions in the table",
           needs=["node"],
           notes="The testing repository was used at "
-                f"[6cdfb14]({commit('testing', '6cdfb14a3c2857b61dcb32f49f56a4829b0d0664')}); see C09.15."),
+                f"[7deaf86]({commit('testing', '7deaf86a523fb313ccf47572df4e7276c779e28e')}); see C09.15."),
 
     Claim("C07.02", "The engine changed and Chapter 9's figures did not", "07",
           (F, "every figure in [Chapter 9](09-continuous-integration.md) came out the"), "source",
@@ -63,25 +63,34 @@ CLAIMS = [
 
     Claim("C07.04", "The editor runs the same engines at the same versions", "07",
           (F, "the 44 portable checks run on **holosdb** in Python and on"), "source",
-          sources=[src("extension package.json (0.16.1)", file("webapp", "package.json", "489-493"),
-                       '"holos-wasm-node": "^0.21.0",'),
-                   src("extension package-lock.json (0.16.1): the holos-wasm-node it bundles",
-                       file("webapp", "package-lock.json"), '"node_modules/holos-wasm-node"')],
-          notes="Below 1.0 a caret admits patch releases only, so `^0.21.0` means 0.21.x. The 0.16.1 release's "
-                "lock file still resolves it to 0.21.0; C07.01 shows holosdb 0.22.0 under the CLI. What 0.21.1 and "
-                "0.22.0 changed, the store fix in C13.10 and the validate gate in C11.29, is in a part of HOLOS the "
-                "extension does not call: it validates with shacl-wasm-node."),
+          sources=[src("extension package.json (0.16.3)", file("webapp", "package.json", "489-493"),
+                       '"holos-wasm-node": "^0.25.0",'),
+                   src("extension package-lock.json (0.16.3): the holos-wasm-node it bundles",
+                       file("webapp", "package-lock.json"), '"node_modules/holos-wasm-node"'),
+                   src("suite uv.lock (0.24.3): the holosdb it locks", file("suite", "uv.lock", "167-168"),
+                       'version = "0.25.0"'),
+                   src("HOLOS commit 8b2a949: every query entry point through one pipeline",
+                       commit("holos", "8b2a9495af52ff56a7ebedd49e9dbd0f1ead93ce"),
+                       "Send every query entry point through one pipeline")],
+          notes="Below 1.0 a caret admits patch releases only, so `^0.25.0` means 0.25.x. The 0.16.3 release's "
+                "lock file resolves it to 0.25.0, the version C07.01 shows for holosdb and the CLI, and the suite "
+                "at 0.24.3 locks holosdb 0.25.0. The extension reaches HOLOS through `queryRdf`, the suite through "
+                "`Store.query`; from HOLOS 0.24.0 both run the same pipeline. What 0.25.0 changed, its own SHACL "
+                "validator, is in a part of HOLOS the extension does not call: it validates with shacl-wasm-node."),
 
     Claim("C07.05", "Both engines are runtime dependencies; owlready2 too; the wheels are libraries", "07",
           (F, "That one line now brings both engines: `holosdb` and `shacl` are runtime"), "run",
           scripts=["scripts/inspect_packages.py"],
           steps=[Step("python scripts/inspect_packages.py")],
-          check=checks(has(0, "commands installed: ontology-quality-suite", "holosdb>=0.15", "owlready2>=0.51",
+          check=checks(has(0, "commands installed: ontology-quality-suite", "owlready2>=0.51",
                            "shacl 0.3.4\n    commands installed: none (library only)",
                            "tarka-rdf 0.1.1\n    commands installed: none (library only)",
-                           "holosdb 0.22.0\n    commands installed: none (library only)"),
-                       by_version((0, 23, 0), has(0, "shacl<0.4,>=0.3.3"), has(0, "shacl<0.4,>=0.3.0"))),
-          checks="ontology-quality-suite declares holosdb, shacl (below 0.4; from 0.3.3 since suite 0.23.0, which "
+                           "holosdb 0.25.0\n    commands installed: none (library only)"),
+                       by_version((0, 23, 0), has(0, "shacl<0.4,>=0.3.3"), has(0, "shacl<0.4,>=0.3.0")),
+                       by_version((0, 24, 3), has(0, "holosdb>=0.24"),
+                                  by_version((0, 24, 2), has(0, "holosdb>=0.23"), has(0, "holosdb>=0.15")))),
+          checks="ontology-quality-suite declares holosdb (from 0.24 since suite 0.24.3, 0.23 at 0.24.2, 0.15 "
+                 "before), shacl (below 0.4; from 0.3.3 since suite 0.23.0, which "
                  "needs shacl.rdfs_closure) and owlready2 as runtime dependencies and installs the only command; "
                  "shacl, tarka-rdf and holosdb install none"),
 
@@ -148,7 +157,7 @@ CLAIMS = [
 
     Claim("C07.16", "--extra native-shacl parses but installs nothing", "07",
           (F, "(`uv sync --extra native-shacl` still parses but"), "source",
-          sources=[src("suite pyproject.toml (0.22.0)", file("suite", "pyproject.toml", "53-58"),
+          sources=[src("suite pyproject.toml (0.22.0)", file("suite", "pyproject.toml", "81-86"),
                        "It installs nothing: `shacl` is a runtime dependency now, not an opt-in.")]),
 
     Claim("C07.17", "A locked dependency does not move with pip --upgrade", "07",
@@ -176,7 +185,7 @@ CLAIMS = [
     Claim("C07.21", "Each release carries SHA256SUMS", "07",
           (F, "Windows, each release with a `SHA256SUMS` file. Check it."), "source",
           sources=[src("SHACL Engine v0.3.4 release", "https://github.com/pwin/SHACL_Engine/releases/tag/v0.3.4"),
-                   src("HOLOS v0.22.0 release", "https://github.com/pwin/triplestore/releases/tag/v0.22.0"),
+                   src("HOLOS v0.25.0 release", "https://github.com/pwin/triplestore/releases/tag/v0.25.0"),
                    src("tarka v0.1.1 release", "https://github.com/pwin/tarka/releases/tag/v0.1.1")],
           scripts=["tools/fetch_binaries.py"],
           notes="`tools/fetch_binaries.py` downloads each archive and refuses one whose SHA-256 does not match "

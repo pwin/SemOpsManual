@@ -2,12 +2,12 @@
  "id": "C08.16",
  "status": "PASS",
  "detail": "npm ontology-suite 0.16.1: step 1 exits 0",
- "ran": "2026-10-21",
+ "ran": "2026-10-22",
  "steps": [
   {
    "cmd": "node node_modules/typescript/bin/tsc --noEmit --strict --module nodenext --moduleResolution nodenext --target es2022 --skipLibCheck scripts/dsl/writer-types.ts",
    "rc": 0,
-   "seconds": 0.2,
+   "seconds": 0.3,
    "stdout": "",
    "stderr": ""
   }

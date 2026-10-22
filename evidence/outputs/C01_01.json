@@ -2,7 +2,7 @@
  "id": "C01.01",
  "status": "PASS",
  "detail": "step 1 output contains '10 systems: 45 potential point-to-point pairings', '20 systems: 190 potential point-to-point pairings'",
- "ran": "2026-10-21",
+ "ran": "2026-10-22",
  "steps": [
   {
    "cmd": "python scripts/pairings.py 10 20",

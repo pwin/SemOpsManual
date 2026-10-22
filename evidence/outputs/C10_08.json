@@ -2,7 +2,7 @@
  "id": "C10.08",
  "status": "PASS",
  "detail": "step 1 output contains '--ntriples', '--split', '--dedup', '--test', '--bind-empty-strings', '--gzip', '--no-header-row', '--delimiter', '--tab', '--header'; step 3 output contains '16 triples'",
- "ran": "2026-10-21",
+ "ran": "2026-10-22",
  "steps": [
   {
    "cmd": "tarka run --help",

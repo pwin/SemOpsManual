@@ -2,12 +2,12 @@
  "id": "C11.25",
  "status": "PASS",
  "detail": "step 1 output contains 'inference=none   conforms=true  results=0', 'inference=rules  conforms=false  results=1', 'inference=bogus  ERROR: unknown inference \"bogus\"'",
- "ran": "2026-10-21",
+ "ran": "2026-10-22",
  "steps": [
   {
    "cmd": "node scripts/wasm_conforms.mjs data/shacl",
    "rc": 0,
-   "seconds": 0.2,
+   "seconds": 0.3,
    "stdout": "shacl-wasm-node 0.3.4  shapes-warning.ttl     conforms=false  results=1  severities=http://www.w3.org/ns/shacl#Warning\nshacl-wasm-node 0.3.4  shapes-violation.ttl   conforms=false  results=1  severities=http://www.w3.org/ns/shacl#Violation\ninference=none   conforms=true  results=0\ninference=rules  conforms=false  results=1\ninference=bogus  ERROR: unknown inference \"bogus\": expected \"none\", \"rdfs\", \"rules\" or \"rules-iterated\"\n",
    "stderr": ""
   }

@@ -19,12 +19,12 @@ HOLOS_URL = f"http://127.0.0.1:{HOLOS_PORT}"
 
 _GH = "https://github.com/pwin"
 REPOS = {
-    "suite": (f"{_GH}/consolidated-ontology-quality-suite-python", "a24d3456c3329fe93b31cadefdfdf05329e82442"),   # v0.24.1
-    "webapp": (f"{_GH}/consolidated-ontology-quality-suite-webapp", "534ce517f9aabc0c27d33f1af5eb85f88296a16f"),   # v0.16.1
+    "suite": (f"{_GH}/consolidated-ontology-quality-suite-python", "0a23055c4bf354287795b8da4155d99f8687423c"),   # v0.24.3
+    "webapp": (f"{_GH}/consolidated-ontology-quality-suite-webapp", "a92175dfd1ec999c3b50fee886cc5b2d6ca3ee39"),   # v0.16.3
     "shacl": (f"{_GH}/SHACL_Engine", "986c31ba4e071560d51fed36e99abd8cb3747a87"),   # v0.3.4
-    "holos": (f"{_GH}/triplestore", "4d1ad30da6848feaea6e28713b99a2defd69d859"),   # v0.22.0
+    "holos": (f"{_GH}/triplestore", "b44aa1c508536220f1d0de4a9323cf4bbcc63563"),   # v0.25.0
     "tarka": (f"{_GH}/tarka", "88fe6184ffc77ee2a46b676cbcb1190620b52c49"),
-    "testing": (f"{_GH}/consolidated-ontology-quality-suite-python-testing", "6cdfb14a3c2857b61dcb32f49f56a4829b0d0664"),
+    "testing": (f"{_GH}/consolidated-ontology-quality-suite-python-testing", "7deaf86a523fb313ccf47572df4e7276c779e28e"),
     "manual": (f"{_GH}/SemOpsManual", ""),
 }
 

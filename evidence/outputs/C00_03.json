@@ -2,12 +2,12 @@
  "id": "C00.03",
  "status": "PASS",
  "detail": "step 1 output contains '19 diagrams in the chapters; README has 1 more'",
- "ran": "2026-10-21",
+ "ran": "2026-10-22",
  "steps": [
   {
    "cmd": "python scripts/count_mermaid.py ..",
    "rc": 0,
-   "seconds": 0.1,
+   "seconds": 0.2,
    "stdout": "2  docs/01-the-business-case.md\n1  docs/02-people-and-cognition.md\n2  docs/03-across-the-boundary.md\n1  docs/04-from-research-to-industry.md\n2  docs/05-genai-and-agents.md\n3  docs/06-stages-and-stories.md\n1  docs/07-the-toolchain.md\n1  docs/08-model-and-validate.md\n1  docs/09-continuous-integration.md\n1  docs/10-ingest-and-transform.md\n1  docs/11-rules-and-inference.md\n1  docs/12-release-and-change.md\n1  docs/13-operate-and-consume.md\n0  docs/14-coverage-and-gaps.md\n1  docs/15-adoption-roadmap.md\n0  docs/diagram-style.md\n19 diagrams in the chapters; README has 1 more\n",
    "stderr": ""
   }

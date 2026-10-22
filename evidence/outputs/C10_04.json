@@ -2,7 +2,7 @@
  "id": "C10.04",
  "status": "PASS",
  "detail": "tq/full_results.csv: {'TQL-004': 1}; TQL-004 carries source_file sites.rq and line 10 as fields; and not in the message text; its message says the triples are dropped; tq/findings.txt contains '> 10 |   BIND(CONCAT('",
- "ran": "2026-10-21",
+ "ran": "2026-10-22",
  "steps": [
   {
    "cmd": "ontology-quality-suite sketch --queries data/tql004/sites.rq --out-dir work/C10_04/tq --reports minimal --fail-on never",

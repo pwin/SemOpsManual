@@ -2,7 +2,7 @@
  "id": "C11.06",
  "status": "PASS",
  "detail": "step 1 output contains 'validate(data, shapes)                       conforms=False results=1', 'validate(shapes, data)  [swapped]            REFUSED: ValueError: the shapes graph declares no shapes, so this would report that the data conforms without having checked anything'",
- "ran": "2026-10-21",
+ "ran": "2026-10-22",
  "steps": [
   {
    "cmd": "python scripts/shacl_python.py data/shacl data/rules",

@@ -2,7 +2,7 @@
  "id": "C11.13",
  "status": "PASS",
  "detail": "step 1: conforms: true; step 1 exits 0; step 2: conforms: false",
- "ran": "2026-10-21",
+ "ran": "2026-10-22",
  "steps": [
   {
    "cmd": "shacl -d data/rules/box.ttl -s data/rules/sparql-rule.ttl -a",

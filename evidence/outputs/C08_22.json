@@ -2,7 +2,7 @@
  "id": "C08.22",
  "status": "PASS",
  "detail": "step 2: 0 findings (0 V, 0 W, 0 I); step 2 output contains \"WARNING: --sparql replaced the suite's own query tree: 1 project check(s) ran and 42 built-in check(s) did not.\"; the warning recommends @builtin; step 2 output has none of 'site-packages'",
- "ran": "2026-10-21",
+ "ran": "2026-10-22",
  "steps": [
   {
    "cmd": "tarka run -q fixtures/acme_robotics/employees.rq -i fixtures/acme_robotics/employees.csv -o work/C08_22/employees.ttl",
@@ -14,7 +14,7 @@
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --data work/C08_22/employees.ttl --registry fixtures/acme_robotics/custom_checks/registry.json --sparql fixtures/acme_robotics/custom_checks/sparql --engine sparql --out-dir work/C08_22/acm001 --reports minimal",
    "rc": 0,
-   "seconds": 2.4,
+   "seconds": 3.0,
    "stdout": "Findings: 0 total (0 Violation, 0 Warning, 0 Info)\nReports written to: ./work/C08_22/acm001\n  - work/C08_22/acm001/findings.txt (start here -- what, where, and the source line)\n  - work/C08_22/acm001/full_results.csv\n",
    "stderr": "WARNING: --sparql replaced the suite's own query tree: 1 project check(s) ran and 42 built-in check(s) did not. Pass --sparql @builtin as well to run both.\n"
   }

@@ -2,13 +2,13 @@
  "id": "C11.12",
  "status": "PASS",
  "detail": "step 1 output contains 'N=  1,000  with rules:   1,000 results on   1,000 distinct focus nodes', 'N=100,000  with rules: 100,000 results on 100,000 distinct focus nodes', 'without rules: 0 results'",
- "ran": "2026-10-21",
+ "ran": "2026-10-22",
  "steps": [
   {
    "cmd": "python scripts/rule_scale.py 1000 100000",
    "rc": 0,
-   "seconds": 5.9,
-   "stdout": "N=  1,000  with rules:   1,000 results on   1,000 distinct focus nodes (0.10 s)  without rules: 0 results\nN=100,000  with rules: 100,000 results on 100,000 distinct focus nodes (4.41 s)  without rules: 0 results\n",
+   "seconds": 5.3,
+   "stdout": "N=  1,000  with rules:   1,000 results on   1,000 distinct focus nodes (0.12 s)  without rules: 0 results\nN=100,000  with rules: 100,000 results on 100,000 distinct focus nodes (4.12 s)  without rules: 0 results\n",
    "stderr": ""
   }
  ]

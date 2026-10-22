@@ -1,8 +1,8 @@
 {
  "id": "C13.03",
  "status": "PASS",
- "detail": "step 5 output contains 'template vs ontology: clean', 'live data vs ontology: 1 undeclared class(es)', \"'classes_only_in_template': ['https://acme.example.org/ns/SoftwareEngineer']\", \"'classes_only_in_live_data': ['https://acme.example.org/ns/Engineer']\"; step 5 exits 1; step 6 output has none of '==='; step 6 output contains 'unknown graph role'; suite 0.24.1: step 6 exits 2; suite 0.24.1: the refusal is one line on stderr, with no traceback",
- "ran": "2026-10-21",
+ "detail": "step 5 output contains 'template vs ontology: clean', 'live data vs ontology: 1 undeclared class(es)', \"'classes_only_in_template': ['https://acme.example.org/ns/SoftwareEngineer']\", \"'classes_only_in_live_data': ['https://acme.example.org/ns/Engineer']\"; step 5 exits 1; step 6 output has none of '==='; step 6 output contains 'unknown graph role'; suite 0.24.3: step 6 exits 2; suite 0.24.3: the refusal is one line on stderr, with no traceback",
+ "ran": "2026-10-22",
  "steps": [
   {
    "cmd": "python scripts/gsp_put.py http://127.0.0.1:7899/graph https://acme.example.org/graph/ontology/2.0.0 fixtures/acme_robotics/acme-org-v2.ttl fixtures/acme_robotics/reference_vocab/foaf.rdf fixtures/acme_robotics/reference_vocab/org.ttl",
@@ -28,21 +28,21 @@
   {
    "cmd": "ontology-quality-suite consistency --new work/C13_03/repaired/acme-org-v2.ttl --old work/C13_03/repaired/acme-org-v1.ttl --queries work/C13_03/repaired --import-dir work/C13_03/repaired --apply-repairs --min-confidence 0.7 --out-dir work/C13_03/repair",
    "rc": 0,
-   "seconds": 2.1,
+   "seconds": 2.3,
    "stdout": "Ontology version diff: work/C13_03/repaired/acme-org-v1.ttl -> work/C13_03/repaired/acme-org-v2.ttl\n\nRemoved classes [MAJOR]:\n  - https://acme.example.org/ns/Engineer\n\nRemoved subclass edges [MAJOR]:\n  - https://acme.example.org/ns/Engineer no longer rdfs:subClassOf https://acme.example.org/ns/Employee\n\nAdded classes [minor]:\n  - https://acme.example.org/ns/ProductManager\n  - https://acme.example.org/ns/SoftwareEngineer\n\nAdded properties [minor]:\n  - https://acme.example.org/ns/hireDate\n\nAdded subclass edges [minor]:\n  - https://acme.example.org/ns/ProductManager rdfs:subClassOf https://acme.example.org/ns/Employee\n  - https://acme.example.org/ns/SoftwareEngineer rdfs:subClassOf https://acme.example.org/ns/Employee\n\nAdded equivalentClass axioms [minor]:\n  - https://acme.example.org/ns/Engineer equivalentClass https://acme.example.org/ns/SoftwareEngineer\n\nSuggested version bump: MAJOR\n\n1 class(es) used in TARQL but not declared in the ontology set:\n  [undeclared_class] https://acme.example.org/ns/Engineer\n\n1 suggested repair(s):\n  [rename_iri] work/C13_03/repaired/employees.rq (confidence 100%)\n    Update to the renamed ontology term(s): https://acme.example.org/ns/Engineer -> https://acme.example.org/ns/SoftwareEngineer\n\nWritten to: work/C13_03/repair/consistency.txt\n\nApplied 1/1 suggested repair(s) directly to their target files (confidence >= 70%).\n",
    "stderr": ""
   },
   {
    "cmd": "ontology-quality-suite consistency-remote --query-endpoint http://127.0.0.1:7899/query --manifest data/remote/graphs-v2-store-behind.json --out-dir work/C13_03/remote --fail-on-anything",
    "rc": 1,
-   "seconds": 1.9,
+   "seconds": 2.1,
    "stdout": "=== https://acme.example.org/graph/triplified/employees ===\n  source_tarql: work/C13_03/repaired/employees.rq\n  ontology_graph_uri: https://acme.example.org/graph/ontology/2.0.0\n  template vs ontology: clean\n  live data vs ontology: 1 undeclared class(es), 0 undeclared propert(y/ies)\n  template vs live data: 2 discrepanc(y/ies) {'classes_only_in_template': ['https://acme.example.org/ns/SoftwareEngineer'], 'classes_only_in_live_data': ['https://acme.example.org/ns/Engineer'], 'properties_only_in_template': [], 'properties_only_in_live_data': []}\n\nReports written to: ./work/C13_03/remote\n",
    "stderr": ""
   },
   {
    "cmd": "ontology-quality-suite consistency-remote --query-endpoint http://127.0.0.1:7899/query --manifest data/remote/graphs-role-typo.json --out-dir work/C13_03/typo --fail-on-anything",
    "rc": 2,
-   "seconds": 2.3,
+   "seconds": 1.7,
    "stdout": "",
    "stderr": "error: data/remote/graphs-role-typo.json: unknown graph role(s) ['triplified-data'] -- valid roles are ['ontology', 'triplified_data']. A role that matches neither is never compared, so the run would report nothing and succeed.\n"
   }

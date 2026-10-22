@@ -4,9 +4,9 @@
 #   python -m venv .venv            (or: uv venv .venv)
 #   .venv/bin/pip install -r requirements.txt      (Windows: .venv\Scripts\pip)
 #
-ontology-quality-suite==0.24.1
+ontology-quality-suite==0.24.3
 shacl==0.3.4
-holosdb==0.22.0
+holosdb==0.25.0
 tarka-rdf==0.1.1
 # A second, independent SPARQL engine, used only as a witness in claim C07.03
 # (it is not part of the toolchain).

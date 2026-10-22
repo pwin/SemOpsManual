@@ -2,7 +2,7 @@
  "id": "C11.02",
  "status": "PASS",
  "detail": "step 1 output contains 'inference=none             conforms=True results=0', 'inference=rules            conforms=False results=1', 'inference=rules-iterated   conforms=False results=1', 'inference=bogus            ERROR: unknown inference \"bogus\"'",
- "ran": "2026-10-21",
+ "ran": "2026-10-22",
  "steps": [
   {
    "cmd": "python scripts/shacl_python.py data/shacl data/rules",

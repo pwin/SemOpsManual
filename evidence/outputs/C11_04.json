@@ -2,7 +2,7 @@
  "id": "C11.04",
  "status": "PASS",
  "detail": "step 1: conforms: false; step 1 exits 1; step 2 exits 0; step 2 output contains 'sh:conforms true', 'sh:conformanceDisallows sh:Violation'; step 3 output contains '--allow-warnings', '--allow-infos', '--min-severity'",
- "ran": "2026-10-21",
+ "ran": "2026-10-22",
  "steps": [
   {
    "cmd": "shacl -d data/shacl/data.ttl -s data/shacl/shapes-warning.ttl",

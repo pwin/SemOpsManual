@@ -2,7 +2,7 @@
  "id": "C08.24",
  "status": "PASS",
  "detail": "step 2: 491 findings (54 V, 356 W, 81 I); all 491 findings have check id UNMAPPED; each keeps its severity; nearly all keep their message; none has a title or a remediation",
- "ran": "2026-10-21",
+ "ran": "2026-10-22",
  "steps": [
   {
    "cmd": "tarka run -q fixtures/acme_robotics/employees.rq -i fixtures/acme_robotics/employees.csv -o work/C08_24/employees.ttl",
@@ -14,7 +14,7 @@
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --data work/C08_24/employees.ttl --registry fixtures/acme_robotics/custom_checks/registry.json --sparql fixtures/acme_robotics/custom_checks/sparql --sparql @builtin --engine sparql --out-dir work/C08_24/out --reports minimal --fail-on never",
    "rc": 0,
-   "seconds": 3.7,
+   "seconds": 4.8,
    "stdout": "Findings: 491 total (54 Violation, 356 Warning, 81 Info)\nReports written to: ./work/C08_24/out\n  - work/C08_24/out/findings.txt (start here -- what, where, and the source line)\n  - work/C08_24/out/full_results.csv\n",
    "stderr": ""
   }

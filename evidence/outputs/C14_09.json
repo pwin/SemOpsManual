@@ -2,19 +2,19 @@
  "id": "C14.09",
  "status": "PASS",
  "detail": "step 1 output contains 'without_java: java on PATH now: none'; REA-022 says 'cannot find the file specified'; and not 'entity'",
- "ran": "2026-10-21",
+ "ran": "2026-10-22",
  "steps": [
   {
    "cmd": "python scripts/without_java.py ontology-quality-suite ontology --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --out-dir work/C14_09/out --reports minimal",
    "rc": 1,
-   "seconds": 3.7,
+   "seconds": 5.0,
    "stdout": "without_java: java on PATH now: none\nFindings: 2 total (1 Violation, 0 Warning, 1 Info)\nReports written to: ./work/C14_09/out\n  - work/C14_09/out/findings.txt (start here -- what, where, and the source line)\n  - work/C14_09/out/full_results.csv\n",
-   "stderr": "* Owlready2 * WARNING: DataProperty http://xmlns.com/foaf/0.1/name belongs to more than one entity types: [owl.DatatypeProperty, rdf-schema.label]; I'm trying to fix it...\n* Owlready2 * Running HermiT...\n    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp2q3l94ib -Y\n"
+   "stderr": "* Owlready2 * WARNING: DataProperty http://xmlns.com/foaf/0.1/name belongs to more than one entity types: [owl.DatatypeProperty, rdf-schema.label]; I'm trying to fix it...\n* Owlready2 * Running HermiT...\n    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp8e1ltl36 -Y\n"
   },
   {
    "cmd": "python scripts/summarise_findings.py work/C14_09/out/full_results.csv --by focus --check REA-022",
    "rc": 0,
-   "seconds": 0.1,
+   "seconds": 0.2,
    "stdout": "REA-022  focus=oq:Graph  path=-  value=-\ntotal 1: 0 Violation, 0 Warning, 1 Info\n",
    "stderr": ""
   }

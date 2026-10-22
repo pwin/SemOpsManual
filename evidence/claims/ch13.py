@@ -143,10 +143,15 @@ CLAIMS = [
                     "    g=http://example.com/public\n6.",
                     "6. named graphs, with clearance 3:\n    g=http://example.com/provenance\n"
                     "    g=http://example.com/public\n    g=http://example.com/reviews",
-                    "7. salary denied with fail_closed():\n    HolosError: access denied by policy",
+                    # holosdb 0.23.0 to 0.25.0 put "query evaluation failed: " before the denial
+                    # on this sorted query; the fix is in HOLOS after 0.25.0. Either way it is the
+                    # denial, so the check reads the class and the words, not the prefix.
+                    "7. salary denied with fail_closed():\n    HolosError: ",
+                    "access denied by policy\n8. (mistake)",
                     "8. (mistake) policy method called as a statement:\n    n=3"),
           checks="every row of the manual's table: no salaries without the role and all three with it; COUNT 0; "
-                 "the labelled graph absent without clearance and present with it; fail_closed raises; and a "
+                 "the labelled graph absent without clearance and present with it; fail_closed raises a HolosError "
+                 "saying access denied by policy; and a "
                  "policy method called as a statement leaves no policy (3 salaries counted)"),
 
     Claim("C13.07", "The fluent API mistake", "13",
@@ -169,7 +174,7 @@ CLAIMS = [
           checks="the same five answers as the Python API", needs=["holos-cli"]),
 
     Claim("C13.09", "8 ns per quad, by HOLOS's own measurement", "13",
-          (F, "All verified at 0.22.0. HOLOS measures the cost at 8 ns per quad, about 1% of"), "source",
+          (F, "All verified at 0.25.0. HOLOS measures the cost at 8 ns per quad, about 1% of"), "source",
           sources=[src("HOLOS ACCESS-CONTROL.md", file("holos", "ACCESS-CONTROL.md", "44"),
                        "It costs **8 ns per quad** — measured, and about 1% of what decoding the quad costs.")]),
 
@@ -202,7 +207,8 @@ CLAIMS = [
                        "Engine::with_transient_graph loads input inside a commit scope that is always rolled back"),
                    src("HOLOS commit 82e4d66, 'Cut 0.21.1'", commit("holos", "82e4d6686b3563db502ea68098a6f3fc9ce75d6b"),
                        "validation leaves nothing in the store it validates")],
-          notes="The recorded run uses 0.22.0, so it shows the fix made in 0.21.1. The same steps against the published 0.21.0 "
+          notes="The recorded run uses 0.25.0, so it shows the fix made in 0.21.1, and the results "
+                "the dictionary carries from 0.23.0. The same steps against the published 0.21.0 "
                 "gave: `violations [2, 4, 6]` for both engines; a 5-quad `urn:holos:python:shapes` graph after one "
                 "call, still there after reopening a persistent store; no warning for a planted leftover; and from "
                 "the CLI `results 2`, then `results 4`, with a `urn:holos:shapes` graph left behind. "
@@ -260,14 +266,22 @@ def _version(text, prefix):
 
 
 def _validation_and_the_store(r):
-    common = [has(0, "adapted: {'conforms': False, 'violations': 2, 'engine': 'adapted'}",
-                  "native:  {'conforms': False, 'violations': 2, 'engine': 'native'}",
-                  "HolosError: unsupported: sh:sparql is not implemented")(r),
-              (has(9, "--engine <NAME>          adapted (default) or native") if _version(r[2].out, "holos") >= (0, 22, 0)
-               else has(9, "--engine <NAME>          native (default) or adapted"))(r)]
     py, cli = _version(r[1].stdout, "holosdb"), _version(r[2].out, "holos")
     if py is None or cli is None:
         return False, "could not read the holosdb or holos version"
+    # From 0.23.0 the dictionary also carries the results, one entry per result.
+    if py >= (0, 23, 0):
+        summary = has(0, "adapted: {'conforms': False, 'violations': 2, 'engine': 'adapted', 'results': [",
+                      "native:  {'conforms': False, 'violations': 2, 'engine': 'native', 'results': [",
+                      "'focus': 'http://example.org/a'", "'focus': 'http://example.org/b'",
+                      "HolosError: unsupported: sh:sparql is not implemented")
+    else:
+        summary = has(0, "adapted: {'conforms': False, 'violations': 2, 'engine': 'adapted'}",
+                      "native:  {'conforms': False, 'violations': 2, 'engine': 'native'}",
+                      "HolosError: unsupported: sh:sparql is not implemented")
+    common = [summary(r),
+              (has(9, "--engine <NAME>          adapted (default) or native") if cli >= (0, 22, 0)
+               else has(9, "--engine <NAME>          native (default) or adapted"))(r)]
     if py >= (0, 21, 1):
         common.append(has(1, "adapted, three calls on one store: violations [2, 2, 2]",
                           "native, three calls on one store: violations [2, 2, 2]",

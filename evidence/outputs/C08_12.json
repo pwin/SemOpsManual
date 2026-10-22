@@ -2,7 +2,7 @@
  "id": "C08.12",
  "status": "PASS",
  "detail": "step 1 output contains '0.16.1'; step 2 exits 0; step 3 exits 0; step 4 exits 0",
- "ran": "2026-10-21",
+ "ran": "2026-10-22",
  "steps": [
   {
    "cmd": "node -p \"require('./node_modules/ontology-suite/package.json').version\"",
@@ -14,14 +14,14 @@
   {
    "cmd": "node node_modules/typescript/bin/tsc --noEmit --strict --module nodenext --moduleResolution nodenext --target es2022 --skipLibCheck scripts/dsl/acme.ontology.ts",
    "rc": 0,
-   "seconds": 0.3,
+   "seconds": 0.9,
    "stdout": "",
    "stderr": ""
   },
   {
    "cmd": "node node_modules/tsx/dist/cli.mjs scripts/dsl/acme.ontology.ts work/C08_12/acme.ttl",
    "rc": 0,
-   "seconds": 0.6,
+   "seconds": 3.5,
    "stdout": "",
    "stderr": ""
   },

@@ -2,42 +2,42 @@
  "id": "C13.08",
  "status": "PASS",
  "detail": "step 1 output has none of '95000'; step 2 output contains '95000', '88000', '102000'; step 3 exits non-zero (1); step 3 output contains 'access denied by policy'; step 4 output has none of 'http://example.com/reviews'; step 5 output contains 'http://example.com/reviews'",
- "ran": "2026-10-21",
+ "ran": "2026-10-22",
  "steps": [
   {
    "cmd": "holos query --data data/policy/hr.trig --query \"PREFIX ex: <http://example.com/> SELECT ?name ?salary WHERE { GRAPH ?g { ?e ex:name ?name OPTIONAL { ?e ex:salary ?salary } } } ORDER BY ?name\" --deny-predicate http://example.com/salary --except-role hr",
    "rc": 0,
    "seconds": 0.0,
    "stdout": "{\"head\":{\"vars\":[\"name\",\"salary\"]},\"results\":{\"bindings\":[{\"name\":{\"type\":\"literal\",\"value\":\"Alice\"}},{\"name\":{\"type\":\"literal\",\"value\":\"Bob\"}},{\"name\":{\"type\":\"literal\",\"value\":\"Carol\"}}]}}\n",
-   "stderr": "loaded 21 quads in 0.00s (17363 quads/s)\nnote: 3 quads withheld by policy\n"
+   "stderr": "loaded 21 quads in 0.00s (27382 quads/s)\nnote: 3 quads withheld by policy\n"
   },
   {
    "cmd": "holos query --data data/policy/hr.trig --query \"PREFIX ex: <http://example.com/> SELECT ?name ?salary WHERE { GRAPH ?g { ?e ex:name ?name OPTIONAL { ?e ex:salary ?salary } } } ORDER BY ?name\" --deny-predicate http://example.com/salary --except-role hr --role hr",
    "rc": 0,
    "seconds": 0.0,
    "stdout": "{\"head\":{\"vars\":[\"name\",\"salary\"]},\"results\":{\"bindings\":[{\"name\":{\"type\":\"literal\",\"value\":\"Alice\"},\"salary\":{\"type\":\"literal\",\"value\":\"95000\",\"datatype\":\"http://www.w3.org/2001/XMLSchema#integer\"}},{\"name\":{\"type\":\"literal\",\"value\":\"Bob\"},\"salary\":{\"type\":\"literal\",\"value\":\"88000\",\"datatype\":\"http://www.w3.org/2001/XMLSchema#integer\"}},{\"name\":{\"type\":\"literal\",\"value\":\"Carol\"},\"salary\":{\"type\":\"literal\",\"value\":\"102000\",\"datatype\":\"http://www.w3.org/2001/XMLSchema#integer\"}}]}}\n",
-   "stderr": "loaded 21 quads in 0.00s (17082 quads/s)\n"
+   "stderr": "loaded 21 quads in 0.00s (30324 quads/s)\n"
   },
   {
    "cmd": "holos query --data data/policy/hr.trig --query \"PREFIX ex: <http://example.com/> SELECT ?name ?salary WHERE { GRAPH ?g { ?e ex:name ?name OPTIONAL { ?e ex:salary ?salary } } } ORDER BY ?name\" --deny-predicate http://example.com/salary --fail-closed",
    "rc": 1,
    "seconds": 0.0,
    "stdout": "",
-   "stderr": "loaded 21 quads in 0.00s (28598 quads/s)\nError: query evaluation failed: access denied by policy\n\nCaused by:\n    access denied by policy\n"
+   "stderr": "loaded 21 quads in 0.00s (30973 quads/s)\nError: query evaluation failed: access denied by policy\n\nCaused by:\n    access denied by policy\n"
   },
   {
    "cmd": "holos query --data data/policy/hr.trig --query \"SELECT DISTINCT ?g WHERE { GRAPH ?g { ?s ?p ?o } } ORDER BY ?g\" --label-graph http://example.com/reviews=3",
    "rc": 0,
    "seconds": 0.0,
    "stdout": "{\"head\":{\"vars\":[\"g\"]},\"results\":{\"bindings\":[{\"g\":{\"type\":\"uri\",\"value\":\"http://example.com/provenance\"}},{\"g\":{\"type\":\"uri\",\"value\":\"http://example.com/public\"}}]}}\n",
-   "stderr": "loaded 21 quads in 0.00s (28432 quads/s)\nnote: 3 quads withheld by policy\n"
+   "stderr": "loaded 21 quads in 0.00s (17138 quads/s)\nnote: 3 quads withheld by policy\n"
   },
   {
    "cmd": "holos query --data data/policy/hr.trig --query \"SELECT DISTINCT ?g WHERE { GRAPH ?g { ?s ?p ?o } } ORDER BY ?g\" --label-graph http://example.com/reviews=3 --clearance 3",
    "rc": 0,
    "seconds": 0.0,
    "stdout": "{\"head\":{\"vars\":[\"g\"]},\"results\":{\"bindings\":[{\"g\":{\"type\":\"uri\",\"value\":\"http://example.com/provenance\"}},{\"g\":{\"type\":\"uri\",\"value\":\"http://example.com/public\"}},{\"g\":{\"type\":\"uri\",\"value\":\"http://example.com/reviews\"}}]}}\n",
-   "stderr": "loaded 21 quads in 0.00s (18615 quads/s)\n"
+   "stderr": "loaded 21 quads in 0.00s (14899 quads/s)\n"
   }
  ]
 }

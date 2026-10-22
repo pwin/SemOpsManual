@@ -2,12 +2,12 @@
  "id": "C11.30",
  "status": "PASS",
  "detail": "step 1 output contains '2 triples, 3 after the closure', '<http://example.org/bob> <http://example.org/parent> <http://example.org/carl>', 'literal typed as the range: False', 'triples typing something rdfs:Resource: 0'",
- "ran": "2026-10-21",
+ "ran": "2026-10-22",
  "steps": [
   {
    "cmd": "python scripts/rdfs_closure.py data/shacl/rdfs/data.ttl",
    "rc": 0,
-   "seconds": 0.3,
+   "seconds": 0.4,
    "stdout": "1. data/shacl/rdfs/data.ttl: 2 triples, 3 after the closure; gained:\n   <http://example.org/bob> <http://example.org/parent> <http://example.org/carl>\n2. a ranged property with a literal value: 2 triples after the closure; literal typed as the range: False\n3. triples typing something rdfs:Resource: 0\n",
    "stderr": ""
   }
