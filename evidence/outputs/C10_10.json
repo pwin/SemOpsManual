@@ -2,7 +2,7 @@
  "id": "C10.10",
  "status": "PASS",
  "detail": "step 1 output contains '1 template: 0 errors, 0 warnings'; step 4 output contains '40 triples', 'isomorphic: True'",
- "ran": "2026-10-22",
+ "ran": "2026-10-23",
  "steps": [
   {
    "cmd": "tarka lint -l data/ottr/employees.stottr",

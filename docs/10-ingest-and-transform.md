@@ -246,17 +246,18 @@ described information "bricks" that can be assembled, like Lego, into a house
 or a boat or a space rocket. OTTR templates are about as close to that as our
 field has come.
 
-> **One silent failure, found while checking this.** My first version of the
-> template had no `@prefix mailto:` line. tarka did not accept the `mailto:…`
-> cells as IRIs (each looks exactly like a prefixed name with an undeclared
-> prefix, and declaring `mailto:` fixed it), and, because `?mbox` is mandatory,
-> dropped **every row**. Exit 0, no message, zero
-> triples. Making the parameter optional instead dropped just the mailbox triple,
-> equally quietly. In bOTTR mode tarka reports every instance it leaves out and
-> exits 1. The `run` path does not, yet ([Chapter 14](14-coverage-and-gaps.md)
-> §14.4). (The two modes also disagree about the cell itself. The same rows
-> through a bOTTR map come out whole, because bOTTR reads a cell typed
-> `ottr:IRI` as a full IRI, and `mailto:…` is one.) Until it does, **count what came out**: an empty output from a
+> **One silent failure, found while checking this, and fixed since.** My first
+> version of the template had no `@prefix mailto:` line. Up to tarka 0.1.1, `run`
+> did not accept the `mailto:…` cells as IRIs (each looks exactly like a prefixed
+> name with an undeclared prefix), and, because `?mbox` is mandatory, dropped
+> **every row**. Exit 0, no message, zero triples. Making the parameter optional
+> instead dropped just the mailbox triple, equally quietly. *Fixed in tarka 0.2.0*
+> ([Chapter 14](14-coverage-and-gaps.md) §14.4): `run` now reads a cell typed
+> `ottr:IRI` as bOTTR does, a prefixed name with a declared prefix expanded and
+> anything else taken as a full IRI, so the same rows come out whole without the
+> prefix. A cell that cannot be an IRI at all (`n/a`) leaves its row out: tarka
+> names the row and the column, writes the other rows and exits 1, as its bOTTR
+> mode always did. Even so, **count what came out**: an empty output from a
 > non-empty input should fail your pipeline.
 
 ### Data frames, not just CSV

@@ -140,21 +140,22 @@ validator as `Store.validate()`. On 0.21.x, gate with the `shacl` CLI, or use
 
 <a id="ev-c14-03"></a>*Evidence:* [C14.03 — holos validate exited 0 on a non-conforming graph, up to 0.21.1](../../EVIDENCE.md#c14-03) (reproduced: PASS)
 
-### tarka drops instances it cannot build, silently
+### tarka dropped instances it could not build, silently (fixed in 0.2.0)
 
-An OTTR template whose `ottr:IRI` parameter receives a cell tarka does not accept
-as an IRI (a `mailto:…` value, with no `mailto:` prefix declared) drops the
-instance if the parameter is mandatory, or the triple if it is optional. No
-message, exit 0. On the acme mapping, that was every row. It happens the same way
-through the Python package: `Mapping.ottr(...).run_csv(...)` writes 0 triples and
-raises nothing (verified with `tarka-rdf` 0.1.1). The bOTTR path reports every
-instance it leaves out and exits 1; `run` does not.
+Up to 0.1.1, an OTTR template whose `ottr:IRI` parameter received a cell tarka
+did not accept as an IRI (a `mailto:…` value, with no `mailto:` prefix declared)
+dropped the instance if the parameter was mandatory, or the triple if it was
+optional. No message, exit 0. On the acme mapping, that was every row, and
+`Mapping.ottr(...).run_csv(...)` in the Python package wrote 0 triples and raised
+nothing. *Fixed in tarka 0.2.0*, which was this edition's *suggested
+improvement* taken up: `run` reads a cell typed `ottr:IRI` as bOTTR does, so
+`mailto:…` needs no prefix, and leaves out a row with a cell its parameter cannot
+take, naming the row and the column, writing the others and exiting 1, as bOTTR
+does. In Python, `triplify`, `write` and `run_csv` raise a `ValueError` listing
+the rows left out, once the rest is written, unless `strict=False` is given
+([Chapter 10](10-ingest-and-transform.md) §10.3).
 
-<a id="ev-c14-04"></a>*Evidence:* [C14.04 — tarka drops instances it cannot build, silently, in the CLI and in Python](../../EVIDENCE.md#c14-04) (reproduced: PASS)
-
-*Mitigation:* fail the pipeline on an empty output from a non-empty input
-([Chapter 10](10-ingest-and-transform.md) §10.3). *Suggested improvement:* report
-dropped instances on `run` as bOTTR does.
+<a id="ev-c14-04"></a>*Evidence:* [C14.04 — tarka dropped instances it could not build, silently, up to 0.1.1](../../EVIDENCE.md#c14-04) (reproduced: PASS)
 
 ### `docgen` reshuffles the page on every run
 

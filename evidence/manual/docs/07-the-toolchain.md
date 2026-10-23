@@ -45,7 +45,7 @@ read, because it is how the rest are kept honest.
 > | Ontology Development Suite | **0.16.3** | `ontology-dev-suite-0.16.3.vsix` from the v0.16.3 release; DSL as npm `ontology-suite` 0.16.1. 0.16.1 fixes two DSL defects this edition found ([Chapter 8](08-model-and-validate.md) §8.2); 0.16.2 and 0.16.3 move the engines it bundles to their current releases |
 > | SHACL Engine | **0.3.4** | PyPI `shacl`; npm `shacl-wasm`, `shacl-wasm-node`; the `shacl` command from the v0.3.4 release. 0.3.3 handed the RDFS closure out, which the suite needed for a fix (§7.4); 0.3.4 makes the command line refuse to validate against no shapes ([Chapter 11](11-rules-and-inference.md) §11.1) |
 > | HOLOS | **0.25.0** | PyPI `holosdb`; npm `holos-wasm`, `holos-wasm-node`; the `holos` command from the v0.25.0 release. Two releases were cut while this edition was being checked, for defects the checking found: 0.21.1 stopped validation writing into the store ([Chapter 13](13-operate-and-consume.md) §13.2), and 0.22.0 made `holos validate` a gate ([Chapter 11](11-rules-and-inference.md) §11.8). Three followed: 0.23.0 and 0.24.0 send every way of asking a query, from Python, the command line, the server and the browser, through one query pipeline, and 0.24.0 fixes a wrong answer it gave for a zero-length path; 0.25.0 brings five SHACL-SPARQL fixes into its validator |
-> | tarka | **0.1.1** | PyPI `tarka-rdf`; the `tarka` command from the v0.1.1 release |
+> | tarka | **0.2.0** | PyPI `tarka-rdf`; the `tarka` command from the v0.2.0 release |
 > | Testing repository | `7deaf86` | `main`, 22 October 2026 |
 >
 > These move quickly. The suite went from 0.14.2 to 0.24.3 between this

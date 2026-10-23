@@ -4,7 +4,8 @@
 
   1. the acme TARQL mapping, run with Mapping.tarql_file(...).run_csv(...)
   2. the same mapping as OTTR templates, compared triple for triple
-  3. the OTTR library without its `mailto:` prefix: the silent zero
+  3. the OTTR library without its `mailto:` prefix (since 0.2.0, the mailboxes are full
+     IRIs, as in bOTTR), and a mailbox that is not an IRI: a ValueError, the rest written
   4. the acme CSV as a Polars data frame, written to Parquet, and mapped from it
   5. the shapes tarka derives from the TARQL mapping
   6. a Polars integer column into an xsd:integer OTTR parameter: a typed literal
@@ -41,6 +42,13 @@ try:
     print(f"3. OTTR without the mailto: prefix: returned {ret!r}, raised nothing, wrote {n} triples")
 except Exception as exc:
     print(f"3. OTTR without the mailto: prefix: raised {type(exc).__name__}: {exc}")
+try:
+    o.run_csv(str(ottr / "employees-bad-mbox.csv"), str(work / "ottr-bad-mbox.nt"), format="ntriples")
+    print("   a mailbox that is not an IRI: raised nothing")
+except ValueError as exc:
+    n = len(lines(work / "ottr-bad-mbox.nt"))
+    print(f"   a mailbox that is not an IRI: ValueError ({' / '.join(str(exc).splitlines())}); "
+          f"the other rows written, {n} triples")
 
 df = pl.read_csv(acme / "employees.csv")
 df.write_parquet(work / "employees.parquet")
