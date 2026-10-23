@@ -1,8 +1,8 @@
 {
  "id": "C10.11",
  "status": "PASS",
- "detail": "step 1 exits 0; run -l: no message at all; step 2 output contains ': 0 triples'; step 3 exits 0; step 4 output contains ': 35 triples'; step 4 output has none of 'mbox'; step 5 exits 1; step 5 output contains '5 instances left out; the other 0 were made', 'row 1: argument 4 (id)'; step 6 exits 0; step 7 output contains ': 40 triples'",
- "ran": "2026-10-22",
+ "detail": "step 1 exits 0; run -l: no message; step 2 output contains ': 40 triples'; step 3 exits 0; step 4 output contains ': 40 triples'; step 5 exits 1; step 5 output contains \"tarka: left out: row 3: column mbox: 'n/a' is not an IRI\", 'tarka: 1 of 5 rows left out'; step 6 output contains ': 32 triples'; step 7 exits 1; step 7 output contains '5 of 5 instances left out; nothing was made', 'row 1: argument 4 (id)'; step 8 exits 0; step 9 output contains ': 40 triples'",
+ "ran": "2026-10-23",
  "steps": [
   {
    "cmd": "tarka run -l data/ottr/employees-no-mailto-prefix.stottr -T acme:Employee -i data/ottr/employees-iri.csv --ntriples -o work/C10_11/none.nt",
@@ -15,7 +15,7 @@
    "cmd": "python scripts/compare_ntriples.py work/C10_11/none.nt work/C10_11/none.nt",
    "rc": 0,
    "seconds": 0.3,
-   "stdout": "work/C10_11/none.nt: 0 triples\nwork/C10_11/none.nt: 0 triples\nisomorphic: True\n",
+   "stdout": "work/C10_11/none.nt: 40 triples\nwork/C10_11/none.nt: 40 triples\nisomorphic: True\n",
    "stderr": ""
   },
   {
@@ -28,8 +28,22 @@
   {
    "cmd": "python scripts/compare_ntriples.py work/C10_11/optional.nt work/C10_11/optional.nt",
    "rc": 0,
-   "seconds": 0.4,
-   "stdout": "work/C10_11/optional.nt: 35 triples\nwork/C10_11/optional.nt: 35 triples\nisomorphic: True\n",
+   "seconds": 0.3,
+   "stdout": "work/C10_11/optional.nt: 40 triples\nwork/C10_11/optional.nt: 40 triples\nisomorphic: True\n",
+   "stderr": ""
+  },
+  {
+   "cmd": "tarka run -l data/ottr/employees.stottr -T acme:Employee -i data/ottr/employees-bad-mbox.csv --ntriples -o work/C10_11/bad-mbox.nt",
+   "rc": 1,
+   "seconds": 0.0,
+   "stdout": "",
+   "stderr": "tarka: left out: row 3: column mbox: 'n/a' is not an IRI\ntarka: 1 of 5 rows left out\n"
+  },
+  {
+   "cmd": "python scripts/compare_ntriples.py work/C10_11/bad-mbox.nt work/C10_11/bad-mbox.nt",
+   "rc": 0,
+   "seconds": 0.3,
+   "stdout": "work/C10_11/bad-mbox.nt: 32 triples\nwork/C10_11/bad-mbox.nt: 32 triples\nisomorphic: True\n",
    "stderr": ""
   },
   {
@@ -37,7 +51,7 @@
    "rc": 1,
    "seconds": 0.0,
    "stdout": "",
-   "stderr": "tarka: left out: data/ottr/employees-bad-id.bottr.ttl: instance map 1 (acme:Employee), row 1: argument 4 (id): the value 'E001' is not in the lexical space of its datatype http://www.w3.org/2001/XMLSchema#integer\ntarka: left out: data/ottr/employees-bad-id.bottr.ttl: instance map 1 (acme:Employee), row 2: argument 4 (id): the value 'E002' is not in the lexical space of its datatype http://www.w3.org/2001/XMLSchema#integer\ntarka: left out: data/ottr/employees-bad-id.bottr.ttl: instance map 1 (acme:Employee), row 3: argument 4 (id): the value 'E003' is not in the lexical space of its datatype http://www.w3.org/2001/XMLSchema#integer\ntarka: left out: data/ottr/employees-bad-id.bottr.ttl: instance map 1 (acme:Employee), row 4: argument 4 (id): the value 'E004' is not in the lexical space of its datatype http://www.w3.org/2001/XMLSchema#integer\ntarka: left out: data/ottr/employees-bad-id.bottr.ttl: instance map 1 (acme:Employee), row 5: argument 4 (id): the value 'E005' is not in the lexical space of its datatype http://www.w3.org/2001/XMLSchema#integer\ntarka: 5 instances left out; the other 0 were made\n"
+   "stderr": "tarka: left out: data/ottr/employees-bad-id.bottr.ttl: instance map 1 (acme:Employee), row 1: argument 4 (id): the value 'E001' is not in the lexical space of its datatype http://www.w3.org/2001/XMLSchema#integer\ntarka: left out: data/ottr/employees-bad-id.bottr.ttl: instance map 1 (acme:Employee), row 2: argument 4 (id): the value 'E002' is not in the lexical space of its datatype http://www.w3.org/2001/XMLSchema#integer\ntarka: left out: data/ottr/employees-bad-id.bottr.ttl: instance map 1 (acme:Employee), row 3: argument 4 (id): the value 'E003' is not in the lexical space of its datatype http://www.w3.org/2001/XMLSchema#integer\ntarka: left out: data/ottr/employees-bad-id.bottr.ttl: instance map 1 (acme:Employee), row 4: argument 4 (id): the value 'E004' is not in the lexical space of its datatype http://www.w3.org/2001/XMLSchema#integer\ntarka: left out: data/ottr/employees-bad-id.bottr.ttl: instance map 1 (acme:Employee), row 5: argument 4 (id): the value 'E005' is not in the lexical space of its datatype http://www.w3.org/2001/XMLSchema#integer\ntarka: 5 of 5 instances left out; nothing was made\n"
   },
   {
    "cmd": "tarka bottr -l data/ottr/employees-no-mailto-prefix.stottr data/ottr/employees.bottr.ttl --ntriples -o work/C10_11/bottr.nt",

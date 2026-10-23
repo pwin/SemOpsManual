@@ -32,11 +32,11 @@ CLAIMS = [
     Claim("C14.03", "holos validate exited 0 on a non-conforming graph, up to 0.21.1", "14",
           (F, "Up to 0.21.1 both of its validators printed `conforms false` and returned exit"), "run", same_as="C11.29"),
 
-    Claim("C14.04", "tarka drops instances it cannot build, silently, in the CLI and in Python", "14",
-          (F, "An OTTR template whose `ottr:IRI` parameter receives a cell tarka does not accept"), "run",
+    Claim("C14.04", "tarka dropped instances it could not build, silently, up to 0.1.1", "14",
+          (F, "Up to 0.1.1, an OTTR template whose `ottr:IRI` parameter received a cell tarka"), "run",
           same_as="C10.11",
-          notes="The Python half is in C10.12: `Mapping.ottr(...).run_csv(...)` returns None, raises nothing and "
-                "writes 0 triples."),
+          notes="The Python half is in C10.12: since 0.2.0 `Mapping.ottr(...).run_csv(...)` reads the mailboxes "
+                "without the prefix, and raises a ValueError naming a row it leaves out."),
 
     Claim("C14.05", "docgen reshuffles the page on every run", "14",
           (F, "Still open at 0.24.1, re-checked rather than carried forward: three identical runs"), "run",

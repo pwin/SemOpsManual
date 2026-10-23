@@ -171,30 +171,40 @@ CLAIMS = [
           notes="The CSV for the template carries full IRIs, since an OTTR template receives IRIs rather than "
                 "building them."),
 
-    Claim("C10.11", "Without a mailto: prefix, run -l drops every row, silently", "10",
-          (F, "> **One silent failure, found while checking this.**"), "run",
+    Claim("C10.11", "Without a mailto: prefix, run -l dropped every row, silently, up to 0.1.1", "10",
+          (F, "> **One silent failure, found while checking this, and fixed since.**"), "run",
           data=["data/ottr/employees-no-mailto-prefix.stottr", "data/ottr/employees-optional-mbox.stottr",
-                "data/ottr/employees.bottr.ttl", "data/ottr/employees-bad-id.bottr.ttl"],
+                "data/ottr/employees-bad-mbox.csv", "data/ottr/employees.bottr.ttl",
+                "data/ottr/employees-bad-id.bottr.ttl"],
           steps=[Step("tarka run -l data/ottr/employees-no-mailto-prefix.stottr -T acme:Employee "
                       "-i data/ottr/employees-iri.csv --ntriples -o {work}/none.nt"),
                  Step("python scripts/compare_ntriples.py {work}/none.nt {work}/none.nt"),
                  Step("tarka run -l data/ottr/employees-optional-mbox.stottr -T acme:Employee "
                       "-i data/ottr/employees-iri.csv --ntriples -o {work}/optional.nt"),
                  Step("python scripts/compare_ntriples.py {work}/optional.nt {work}/optional.nt"),
+                 Step("tarka run -l data/ottr/employees.stottr -T acme:Employee "
+                      "-i data/ottr/employees-bad-mbox.csv --ntriples -o {work}/bad-mbox.nt"),
+                 Step("python scripts/compare_ntriples.py {work}/bad-mbox.nt {work}/bad-mbox.nt"),
                  Step("tarka bottr -l data/ottr/employees.stottr data/ottr/employees-bad-id.bottr.ttl --ntriples "
                       "-o {work}/bad-id.nt"),
                  Step("tarka bottr -l data/ottr/employees-no-mailto-prefix.stottr data/ottr/employees.bottr.ttl "
                       "--ntriples -o {work}/bottr.nt"),
                  Step("python scripts/compare_ntriples.py {work}/bottr.nt {work}/bottr.nt")],
-          check=checks(exit_code(0, 0), lambda r: ok(r[0].out.strip() == "", "run -l: no message at all",
+          check=checks(exit_code(0, 0), lambda r: ok(r[0].out.strip() == "", "run -l: no message",
                                                      f"run -l said: {r[0].out.strip()[:120]!r}"),
-                       has(1, ": 0 triples"), exit_code(2, 0), has(3, ": 35 triples"), lacks(3, "mbox"),
-                       exit_code(4, 1), has(4, "5 instances left out; the other 0 were made",
+                       has(1, ": 40 triples"), exit_code(2, 0), has(3, ": 40 triples"),
+                       exit_code(4, 1), has(4, "tarka: left out: row 3: column mbox: 'n/a' is not an IRI",
+                                            "tarka: 1 of 5 rows left out"),
+                       has(5, ": 32 triples"),
+                       exit_code(6, 1), has(6, "5 of 5 instances left out; nothing was made",
                                             "row 1: argument 4 (id)"),
-                       exit_code(5, 0), has(6, ": 40 triples")),
-          checks="run -l without the prefix: exit 0, no message, 0 triples; with ?mbox optional: exit 0, 35 "
-                 "triples; bOTTR with a cell it cannot build: each instance reported, exit 1; the same rows as "
-                 "a bOTTR map with no prefix: 40 triples",
+                       exit_code(7, 0), has(8, ": 40 triples")),
+          checks="since 0.2.0, run -l without the prefix: exit 0, no message, all 40 triples, as with ?mbox "
+                 "optional; a mailbox that is not an IRI: that row left out and named, the other 32 triples "
+                 "written, exit 1; bOTTR with a cell it cannot build: each instance reported, exit 1; the same "
+                 "rows as a bOTTR map with no prefix: 40 triples",
+          notes="Up to 0.1.1 the first run wrote 0 triples, and with ?mbox optional 35, each with exit 0 and no "
+                "message: the recorded run of the previous edition.",
           needs=["tarka-cli"]),
 
     Claim("C10.12", "Parquet input, data frames, and typed literals from typed columns", "10",
@@ -207,11 +217,14 @@ CLAIMS = [
           check=checks(has(0, "4. Polars frame of 5 rows -> 40 triples",
                            '"42"^^<http://www.w3.org/2001/XMLSchema#integer>',
                            "2. OTTR templates: 40 triples; identical to the TARQL output: True",
-                           "3. OTTR without the mailto: prefix: returned None, raised nothing, wrote 0 triples"),
+                           "3. OTTR without the mailto: prefix: returned None, raised nothing, wrote 40 triples",
+                           "a mailbox that is not an IRI: ValueError (1 row left out: / row 3: column mbox: 'n/a' "
+                           "is not an IRI); the other rows written, 32 triples"),
                        has(2, "isomorphic: True")),
           checks="a Polars frame maps to 40 triples; an Int64 column through an xsd:integer parameter gives "
                  '"42"^^xsd:integer; the CLI reads the Parquet file and gives the same 40 triples; the Python '
-                 "API shows the same silent zero as the CLI",
+                 "API, like the CLI since 0.2.0, reads the mailboxes without the prefix, and raises a ValueError "
+                 "naming a row it leaves out, once the rest is written",
           needs=["tarka-cli"]),
 
     Claim("C10.13", "Shapes from the mapping, and --validate conforms", "10",

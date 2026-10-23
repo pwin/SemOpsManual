@@ -130,17 +130,17 @@ for its error on unchecked code and its `Quad` type ([C08.15](#c08-15),
 
 | | Version |
 |---|---|
-| python | 3.12.13 |
+| python | 3.14.2 |
 | platform | Windows 11 (AMD64) |
 | PyPI ontology-quality-suite | 0.24.3 |
 | PyPI shacl | 0.3.4 |
 | PyPI holosdb | 0.25.0 |
-| PyPI tarka-rdf | 0.1.1 |
+| PyPI tarka-rdf | 0.2.0 |
 | PyPI rdflib | 7.6.0 |
 | PyPI pyoxigraph | 0.5.11 |
 | PyPI polars | 2.0.0 |
 | release shacl | shacl 0.3.4 |
-| release tarka | tarka 0.1.1 |
+| release tarka | tarka 0.2.0 |
 | release holos | holos 0.25.0 (b44aa1c) |
 | node | v20.19.5 |
 | npm ontology-suite | 0.16.1 |
@@ -161,8 +161,8 @@ for its error on unchecked code and its `Quad` type ([C08.15](#c08-15),
 | [C00.01 — A 61-check registry](#c00-01) | Reproduced here | PASS (2026-10-22) |
 | [C00.02 — Every Part III command was executed, and re-run for this edition](#c00-02) | Argument | Argument |
 | [C00.03 — Twenty diagrams](#c00-03) | Reproduced here | PASS (2026-10-22) |
-| [C00.04 — pip install shacl gives the library only](#c00-04) | Reproduced here | PASS (2026-10-22) |
-| [C00.05 — 54 or 55, and REA-021 or REA-022](#c00-05) | Reproduced here | PASS (2026-10-22) |
+| [C00.04 — pip install shacl gives the library only](#c00-04) | Reproduced here | PASS (2026-10-23) |
+| [C00.05 — 54 or 55, and REA-021 or REA-022](#c00-05) | Reproduced here | PASS (2026-10-23) |
 | [C00.06 — Everything else is exactly reproducible](#c00-06) | Reproduced here | PASS (2026-10-22) |
 
 ### 1. The business case
@@ -185,12 +185,12 @@ for its error on unchecked code and its `Quad` type ([C08.15](#c08-15),
 
 | Claim | Kind | Result |
 |---|---|---|
-| [C03.01 — foaf:name has domain owl:Thing, and the suite has been taught it](#c03-01) | Reproduced here | PASS (2026-10-22) |
+| [C03.01 — foaf:name has domain owl:Thing, and the suite has been taught it](#c03-01) | Reproduced here | PASS (2026-10-23) |
 | [C03.02 — version-diff says MAJOR, with the machine-readable diff](#c03-02) | Reproduced here | PASS (2026-10-22) |
 | [C03.03 — The tombstone is read in both directions](#c03-03) | Reproduced here | PASS (2026-10-22) |
 | [C03.04 — Policy at the scan for a consortium](#c03-04) | Reproduced here | PASS (2026-10-22) |
 | [C03.05 — A registry is a distributable artefact](#c03-05) | Reproduced here | PASS (2026-10-22) |
-| [C03.06 — Speak the protocol, not the product](#c03-06) | Reproduced here | PASS (2026-10-22) |
+| [C03.06 — Speak the protocol, not the product](#c03-06) | Reproduced here | PASS (2026-10-23) |
 
 ### 4. From research to industry
 
@@ -222,11 +222,11 @@ for its error on unchecked code and its `Quad` type ([C08.15](#c08-15),
 
 | Claim | Kind | Result |
 |---|---|---|
-| [C07.01 — The versions every Part III number was measured against](#c07-01) | Reproduced here | PASS (2026-10-22) |
+| [C07.01 — The versions every Part III number was measured against](#c07-01) | Reproduced here | PASS (2026-10-23) |
 | [C07.02 — The engine changed and Chapter 9's figures did not](#c07-02) | Cited from upstream | Cited from upstream |
 | [C07.03 — One registry: 61 checks in ten categories, 44 SPARQL files and 6 shape files](#c07-03) | Reproduced here | PASS (2026-10-22) |
 | [C07.04 — The editor runs the same engines at the same versions](#c07-04) | Cited from upstream | Cited from upstream |
-| [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05) | Reproduced here | PASS (2026-10-22) |
+| [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05) | Reproduced here | PASS (2026-10-23) |
 | [C07.06 — STY-003's message vanished on 60 of 65 findings](#c07-06) | Cited from upstream | Cited from upstream |
 | [C07.07 — STR() of a blank node: lenient, conformant, and the guard](#c07-07) | Reproduced here | PASS (2026-10-22) |
 | [C07.08 — pyshacl stays as a witness because it caught a real regression](#c07-08) | Cited from upstream | Cited from upstream |
@@ -241,7 +241,7 @@ for its error on unchecked code and its `Quad` type ([C08.15](#c08-15),
 | [C07.17 — A locked dependency does not move with pip --upgrade](#c07-17) | Cited from upstream | Cited from upstream |
 | [C07.18 — Oxigraph went in 0.13.11; the .vsix shrank from 20.2 to 17.5 MB](#c07-18) | Cited from upstream | Cited from upstream |
 | [C07.19 — vsce --no-dependencies packages an extension with no engines](#c07-19) | Cited from upstream | Cited from upstream |
-| [C07.20 — Only ontology-quality-suite installs a command](#c07-20) | Reproduced here | PASS (2026-10-22) |
+| [C07.20 — Only ontology-quality-suite installs a command](#c07-20) | Reproduced here | PASS (2026-10-23) |
 | [C07.21 — Each release carries SHA256SUMS](#c07-21) | Cited from upstream | Cited from upstream |
 | [C07.22 — --engine: native misses QUA-004; sparql and both give 23](#c07-22) | Reproduced here | PASS (2026-10-22) |
 | [C07.23 — The engine choice is not about speed at this size](#c07-23) | Reproduced here | PASS (2026-10-22) |
@@ -280,11 +280,11 @@ for its error on unchecked code and its `Quad` type ([C08.15](#c08-15),
 | [C08.19 — With HermiT running: REA-021, and up to 0.22.0 a false REA-020](#c08-19) | Reproduced here | PASS (2026-10-22) |
 | [C08.20 — --profile is off by default and repeatable](#c08-20) | Reproduced here | PASS (2026-10-22) |
 | [C08.21 — checks reports 479 findings against the fixture](#c08-21) | Reproduced here | PASS (2026-10-22) |
-| [C08.22 — A project tree alone now warns that 42 built-in checks did not run](#c08-22) | Reproduced here | PASS (2026-10-22) |
+| [C08.22 — A project tree alone now warns that 42 built-in checks did not run](#c08-22) | Reproduced here | PASS (2026-10-23) |
 | [C08.23 — Until 0.18.0 that run was silent; the testing repo's gate was in that state](#c08-23) | Cited from upstream | Cited from upstream |
-| [C08.24 — With @builtin and a one-entry registry, every built-in finding is UNMAPPED](#c08-24) | Reproduced here | PASS (2026-10-22) |
+| [C08.24 — With @builtin and a one-entry registry, every built-in finding is UNMAPPED](#c08-24) | Reproduced here | PASS (2026-10-23) |
 | [C08.25 — A merged registry names every finding, and ACM-001 fires on its fault only](#c08-25) | Reproduced here | PASS (2026-10-22) |
-| [C08.26 — The warning named the site path @builtin was made to avoid, until 0.24.0](#c08-26) | Reproduced here | PASS (2026-10-22) |
+| [C08.26 — The warning named the site path @builtin was made to avoid, until 0.24.0](#c08-26) | Reproduced here | PASS (2026-10-23) |
 | [C08.27 — Checks are discovered by walking the directory](#c08-27) | Cited from upstream | Cited from upstream |
 | [C08.28 — Every full run writes cucumber.json](#c08-28) | Reproduced here | PASS (2026-10-22) |
 | [C08.29 — Guard a label with isBlank; COALESCE is the weaker fix](#c08-29) | Reproduced here | PASS (2026-10-22) |
@@ -306,10 +306,10 @@ for its error on unchecked code and its `Quad` type ([C08.15](#c08-15),
 | [C09.06 — --themes groups findings under questions in your words](#c09-06) | Reproduced here | PASS (2026-10-22) |
 | [C09.07 — A near-miss namespace warns, on stderr, and offers only real namespaces](#c09-07) | Reproduced here | PASS (2026-10-22) |
 | [C09.08 — The warning fires only when there were findings to lose](#c09-08) | Cited from upstream | Cited from upstream |
-| [C09.09 — A scoped run keeps the 'reasoner did not run' finding, from 0.24.0](#c09-09) | Reproduced here | PASS (2026-10-22) |
+| [C09.09 — A scoped run keeps the 'reasoner did not run' finding, from 0.24.0](#c09-09) | Reproduced here | PASS (2026-10-23) |
 | [C09.10 — Which reports a run writes, and --reports minimal](#c09-10) | Reproduced here | PASS (2026-10-22) |
 | [C09.11 — The report set changed in 0.17.0, though REPORTS.md says 0.15.0](#c09-11) | Cited from upstream | Cited from upstream |
-| [C09.12 — The suite pins shacl below 0.4](#c09-12) | Reproduced here | PASS (2026-10-22) |
+| [C09.12 — The suite pins shacl below 0.4](#c09-12) | Reproduced here | PASS (2026-10-23) |
 | [C09.13 — --reports minimal writes two files](#c09-13) | Reproduced here | PASS (2026-10-22) |
 | [C09.14 — run reports 26 findings, one contradiction once, from 0.24.0](#c09-14) | Reproduced here | PASS (2026-10-22) |
 | [C09.15 — The testing repository: 165 passed, 10 skipped](#c09-15) | Reproduced here | PASS (2026-10-22) |
@@ -329,25 +329,25 @@ for its error on unchecked code and its `Quad` type ([C08.15](#c08-15),
 | [C10.02 — The 38 Infos, and what TQL-003 says](#c10-02) | Reproduced here | PASS (2026-10-22) |
 | [C10.03 — --queries, --query-pattern (alias --file-pattern), four extensions](#c10-03) | Reproduced here | PASS (2026-10-22) |
 | [C10.04 — TQL-004, with its position as fields](#c10-04) | Reproduced here | PASS (2026-10-22) |
-| [C10.05 — A CONCAT-built IRI: dropped as a subject, a literal as an object](#c10-05) | Reproduced here | PASS (2026-10-22) |
+| [C10.05 — A CONCAT-built IRI: dropped as a subject, a literal as an object](#c10-05) | Reproduced here | PASS (2026-10-23) |
 | [C10.06 — sketch writes bind-facts.ttl and bind-review.txt](#c10-06) | Reproduced here | PASS (2026-10-22) |
-| [C10.07 — tarka's output for E004 is the block quoted in earlier editions](#c10-07) | Reproduced here | PASS (2026-10-22) |
-| [C10.08 — tarka takes oxi-gen's options; --test N reads N rows](#c10-08) | Reproduced here | PASS (2026-10-22) |
+| [C10.07 — tarka's output for E004 is the block quoted in earlier editions](#c10-07) | Reproduced here | PASS (2026-10-23) |
+| [C10.08 — tarka takes oxi-gen's options; --test N reads N rows](#c10-08) | Reproduced here | PASS (2026-10-23) |
 | [C10.09 — 1.7× and 2.6× faster than oxi-gen, by tarka's own measurement](#c10-09) | Cited from upstream | Cited from upstream |
-| [C10.10 — The OTTR template lints clean and gives the same 40 triples](#c10-10) | Reproduced here | PASS (2026-10-22) |
-| [C10.11 — Without a mailto: prefix, run -l drops every row, silently](#c10-11) | Reproduced here | PASS (2026-10-22) |
-| [C10.12 — Parquet input, data frames, and typed literals from typed columns](#c10-12) | Reproduced here | PASS (2026-10-22) |
-| [C10.13 — Shapes from the mapping, and --validate conforms](#c10-13) | Reproduced here | PASS (2026-10-22) |
-| [C10.14 — Generated shapes accept the dangling departments](#c10-14) | Reproduced here | PASS (2026-10-22) |
-| [C10.15 — --post streams into holos-server: the graph arrives whole](#c10-15) | Reproduced here | PASS (2026-10-22) |
+| [C10.10 — The OTTR template lints clean and gives the same 40 triples](#c10-10) | Reproduced here | PASS (2026-10-23) |
+| [C10.11 — Without a mailto: prefix, run -l dropped every row, silently, up to 0.1.1](#c10-11) | Reproduced here | PASS (2026-10-23) |
+| [C10.12 — Parquet input, data frames, and typed literals from typed columns](#c10-12) | Reproduced here | PASS (2026-10-23) |
+| [C10.13 — Shapes from the mapping, and --validate conforms](#c10-13) | Reproduced here | PASS (2026-10-23) |
+| [C10.14 — Generated shapes accept the dangling departments](#c10-14) | Reproduced here | PASS (2026-10-23) |
+| [C10.15 — --post streams into holos-server: the graph arrives whole](#c10-15) | Reproduced here | PASS (2026-10-23) |
 | [C10.16 — tarka speaks the protocol, in RDF 1.1, with the engine built without RDF 1.2](#c10-16) | Cited from upstream | Cited from upstream |
 | [C10.17 — The suite's triplify still needs oxi-gen, and says so](#c10-17) | Reproduced here | PASS (2026-10-22) |
-| [C10.18 — data: 548 unscoped (549 at 0.23.0, 550 at 0.22.0), 54 scoped, with HermiT running](#c10-18) | Reproduced here | PASS (2026-10-22) |
-| [C10.19 — 54 when HermiT does not run, and from 0.24.0 the scoped report says so](#c10-19) | Reproduced here | PASS (2026-10-22) |
-| [C10.20 — Real defects: every worksIn target is untyped and dangling](#c10-20) | Reproduced here | PASS (2026-10-22) |
-| [C10.21 — Half the defects are mailboxes](#c10-21) | Reproduced here | PASS (2026-10-22) |
-| [C10.22 — CNF-005: Contractor never populated](#c10-22) | Reproduced here | PASS (2026-10-22) |
-| [C10.23 — REA-021 confirms LOG-001 by a different route](#c10-23) | Reproduced here | PASS (2026-10-22) |
+| [C10.18 — data: 548 unscoped (549 at 0.23.0, 550 at 0.22.0), 54 scoped, with HermiT running](#c10-18) | Reproduced here | PASS (2026-10-23) |
+| [C10.19 — 54 when HermiT does not run, and from 0.24.0 the scoped report says so](#c10-19) | Reproduced here | PASS (2026-10-23) |
+| [C10.20 — Real defects: every worksIn target is untyped and dangling](#c10-20) | Reproduced here | PASS (2026-10-23) |
+| [C10.21 — Half the defects are mailboxes](#c10-21) | Reproduced here | PASS (2026-10-23) |
+| [C10.22 — CNF-005: Contractor never populated](#c10-22) | Reproduced here | PASS (2026-10-23) |
+| [C10.23 — REA-021 confirms LOG-001 by a different route](#c10-23) | Reproduced here | PASS (2026-10-23) |
 | [C10.24 — The suite's walkthrough called it environment-flaky](#c10-24) | Cited from upstream | Cited from upstream |
 | [C10.25 — --sample caps the reasoning pass](#c10-25) | Reproduced here | PASS (2026-10-22) |
 | [C10.26 — CT-32 to CT-38: when every file is right and the set is wrong](#c10-26) | Cited from upstream | Cited from upstream |
@@ -368,7 +368,7 @@ for its error on unchecked code and its `Quad` type ([C08.15](#c08-15),
 | [C11.06 — The one-shots refuse an empty shapes graph](#c11-06) | Reproduced here | PASS (2026-10-22) |
 | [C11.07 — The CLI and an empty shapes graph: conforms up to 0.3.3, refused from 0.3.4](#c11-07) | Reproduced here | PASS (2026-10-22) |
 | [C11.08 — 425 of 426 W3C tests, the exception named](#c11-08) | Cited from upstream | Cited from upstream |
-| [C11.09 — holos rules materialises into a graph of its own](#c11-09) | Reproduced here | PASS (2026-10-22) |
+| [C11.09 — holos rules materialises into a graph of its own](#c11-09) | Reproduced here | PASS (2026-10-23) |
 | [C11.10 — RDFS closure lets a shape see a sub-property](#c11-10) | Reproduced here | PASS (2026-10-22) |
 | [C11.30 — Since 0.3.3 the closure is handed out, minus what RDF cannot write](#c11-30) | Reproduced here | PASS (2026-10-22) |
 | [C11.11 — Triple rules are off by default and fire with -a](#c11-11) | Reproduced here | PASS (2026-10-22) |
@@ -406,9 +406,9 @@ for its error on unchecked code and its `Quad` type ([C08.15](#c08-15),
 | [C12.09 — Comments used to be rewritten too](#c12-09) | Cited from upstream | Cited from upstream |
 | [C12.10 — String literals are still rewritten, deliberately](#c12-10) | Reproduced here | PASS (2026-10-22) |
 | [C12.11 — The same defect in the editor](#c12-11) | Cited from upstream | Cited from upstream |
-| [C12.12 — pattern-consistency catches MKT only from the output data](#c12-12) | Reproduced here | PASS (2026-10-22) |
-| [C12.13 — Omit --output-data and it reports clean](#c12-13) | Reproduced here | PASS (2026-10-22) |
-| [C12.14 — Both consistency commands are report-only by default](#c12-14) | Reproduced here | PASS (2026-10-22) |
+| [C12.12 — pattern-consistency catches MKT only from the output data](#c12-12) | Reproduced here | PASS (2026-10-23) |
+| [C12.13 — Omit --output-data and it reports clean](#c12-13) | Reproduced here | PASS (2026-10-23) |
+| [C12.14 — Both consistency commands are report-only by default](#c12-14) | Reproduced here | PASS (2026-10-23) |
 | [C12.15 — The approval workflow is not implemented here](#c12-15) | Argument | Argument |
 | [C12.16 — UPDATING.md as a governance playbook](#c12-16) | Cited from upstream | Cited from upstream |
 
@@ -416,10 +416,10 @@ for its error on unchecked code and its `Quad` type ([C08.15](#c08-15),
 
 | Claim | Kind | Result |
 |---|---|---|
-| [C13.01 — consistency-remote against holos-server; the imports rule applies in the store](#c13-01) | Reproduced here | PASS (2026-10-22) |
+| [C13.01 — consistency-remote against holos-server; the imports rule applies in the store](#c13-01) | Reproduced here | PASS (2026-10-23) |
 | [C13.02 — The manifest, as JSON or built in Python; the flags](#c13-02) | Reproduced here | PASS (2026-10-22) |
-| [C13.03 — The store a version behind: --fail-on-anything exits 1](#c13-03) | Reproduced here | PASS (2026-10-22) |
-| [C13.04 — A mistyped role is refused at load, from 0.24.0](#c13-04) | Reproduced here | PASS (2026-10-22) |
+| [C13.03 — The store a version behind: --fail-on-anything exits 1](#c13-03) | Reproduced here | PASS (2026-10-23) |
+| [C13.04 — A mistyped role is refused at load, from 0.24.0](#c13-04) | Reproduced here | PASS (2026-10-23) |
 | [C13.05 — SHACL validation flattens named graphs](#c13-05) | Reproduced here | PASS (2026-10-22) |
 | [C13.06 — Policy at the scan: rows without the column, unless you are in HR](#c13-06) | Reproduced here | PASS (2026-10-22) |
 | [C13.07 — The fluent API mistake](#c13-07) | Reproduced here | PASS (2026-10-22) |
@@ -437,25 +437,25 @@ for its error on unchecked code and its `Quad` type ([C08.15](#c08-15),
 
 | Claim | Kind | Result |
 |---|---|---|
-| [C14.01 — A scoped run could not see that the reasoner did not run (fixed in 0.24.0)](#c14-01) | Reproduced here | PASS (2026-10-22) |
+| [C14.01 — A scoped run could not see that the reasoner did not run (fixed in 0.24.0)](#c14-01) | Reproduced here | PASS (2026-10-23) |
 | [C14.02 — The shacl CLI reported conformance when it checked nothing, up to 0.3.3](#c14-02) | Reproduced here | PASS (2026-10-22) |
 | [C14.03 — holos validate exited 0 on a non-conforming graph, up to 0.21.1](#c14-03) | Reproduced here | PASS (2026-10-22) |
-| [C14.04 — tarka drops instances it cannot build, silently, in the CLI and in Python](#c14-04) | Reproduced here | PASS (2026-10-22) |
+| [C14.04 — tarka dropped instances it could not build, silently, up to 0.1.1](#c14-04) | Reproduced here | PASS (2026-10-23) |
 | [C14.05 — docgen reshuffles the page on every run](#c14-05) | Reproduced here | PASS (2026-10-22) |
 | [C14.06 — The reasoner's outcome follows the hash seed](#c14-06) | Reproduced here | PASS (2026-10-22) |
 | [C14.07 — SHACL validates the union of the named graphs](#c14-07) | Reproduced here | PASS (2026-10-22) |
 | [C14.08 — Almost: the seed decides most of owlready2's load, and not all of it](#c14-08) | Reproduced here | PASS (2026-10-22) |
 | [C14.09 — Without Java the message is the operating system's](#c14-09) | Reproduced here | PASS (2026-10-22) |
 | [C14.39 — REA-020 said inconsistent when only a class was unsatisfiable; fixed in 0.23.0](#c14-39) | Reproduced here | PASS (2026-10-22) |
-| [C14.10 — A mistyped manifest role compared nothing, successfully (fixed in 0.24.0)](#c14-10) | Reproduced here | PASS (2026-10-22) |
+| [C14.10 — A mistyped manifest role compared nothing, successfully (fixed in 0.24.0)](#c14-10) | Reproduced here | PASS (2026-10-23) |
 | [C14.11 — --help offers owlrl; asking for it gives a traceback](#c14-11) | Reproduced here | PASS (2026-10-22) |
 | [C14.12 — --inference is ignored under --engine sparql](#c14-12) | Reproduced here | PASS (2026-10-22) |
 | [C14.13 — The near-miss warning listed blank-node identifiers, until 0.24.0](#c14-13) | Reproduced here | PASS (2026-10-22) |
-| [C14.14 — --registry replaces, so @builtin with a house registry is UNMAPPED](#c14-14) | Reproduced here | PASS (2026-10-22) |
+| [C14.14 — --registry replaces, so @builtin with a house registry is UNMAPPED](#c14-14) | Reproduced here | PASS (2026-10-23) |
 | [C14.15 — One contradiction, two LOG-001s, until 0.24.0](#c14-15) | Reproduced here | PASS (2026-10-22) |
 | [C14.16 — The DSL's TypeError and Quad type, up to 0.16.0](#c14-16) | Reproduced here | PASS (2026-10-22) |
 | [C14.17 — triplify drives oxi-gen only](#c14-17) | Reproduced here | PASS (2026-10-22) |
-| [C14.18 — consistency and pattern-consistency are report-only by default](#c14-18) | Reproduced here | PASS (2026-10-22) |
+| [C14.18 — consistency and pattern-consistency are report-only by default](#c14-18) | Reproduced here | PASS (2026-10-23) |
 | [C14.19 — The holos CLI and holosdb defaulted to different validators, up to 0.21.1](#c14-19) | Reproduced here | PASS (2026-10-22) |
 | [C14.20 — sketch reads every file with the first file's prefixes](#c14-20) | Reproduced here | PASS (2026-10-22) |
 | [C14.21 — Documentation drift, upstream](#c14-21) | Reproduced here | PASS (2026-10-22) |
@@ -472,11 +472,11 @@ for its error on unchecked code and its `Quad` type ([C08.15](#c08-15),
 | [C14.42 — Closed: gates that could not fail, and the DSL's two rough edges](#c14-42) | Reproduced here | PASS (2026-10-22) |
 | [C14.30 — Early, but real: policy, rules, a triplifier](#c14-30) | Reproduced here | PASS (2026-10-22) |
 | [C14.31 — Wrong: the migration annotation's direction](#c14-31) | Reproduced here | PASS (2026-10-22) |
-| [C14.32 — Wrong: REA-022 as the tell in a scoped run](#c14-32) | Reproduced here | PASS (2026-10-22) |
+| [C14.32 — Wrong: REA-022 as the tell in a scoped run](#c14-32) | Reproduced here | PASS (2026-10-23) |
 | [C14.33 — Wrong: the reasoner as flaky](#c14-33) | Reproduced here | PASS (2026-10-22) |
-| [C14.34 — Wrong: the reasoner as an optional extra](#c14-34) | Reproduced here | PASS (2026-10-22) |
+| [C14.34 — Wrong: the reasoner as an optional extra](#c14-34) | Reproduced here | PASS (2026-10-23) |
 | [C14.35 — Wrong: stale numbers](#c14-35) | Cited from upstream | Cited from upstream |
-| [C14.36 — Wrong: where a CONCAT-built IRI goes](#c14-36) | Reproduced here | PASS (2026-10-22) |
+| [C14.36 — Wrong: where a CONCAT-built IRI goes](#c14-36) | Reproduced here | PASS (2026-10-23) |
 | [C14.37 — Wrong: when rules arrived in the SHACL engine](#c14-37) | Cited from upstream | Cited from upstream |
 | [C14.38 — Wrong: the SHACL engine's pass rate](#c14-38) | Cited from upstream | Cited from upstream |
 
@@ -485,7 +485,7 @@ for its error on unchecked code and its `Quad` type ([C08.15](#c08-15),
 | Claim | Kind | Result |
 |---|---|---|
 | [C15.01 — 479 unscoped, 23 scoped, four false with --exclude-imports](#c15-01) | Reproduced here | PASS (2026-10-22) |
-| [C15.02 — --output-data is not optional](#c15-02) | Reproduced here | PASS (2026-10-22) |
+| [C15.02 — --output-data is not optional](#c15-02) | Reproduced here | PASS (2026-10-23) |
 | [C15.03 — PYTHONHASHSEED for docgen](#c15-03) | Reproduced here | PASS (2026-10-22) |
 
 ### Appendix A — Diagram and brand conventions
@@ -599,11 +599,11 @@ The previous wording said nineteen, which counted the chapters and not the PDF.
 ### C00.04 — pip install shacl gives the library only
 
 **In the manual:** [README, at the claim](manual/README.md#ev-c00-04) · [plain edition](../README.md#run-it-yourself)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > `pip install shacl`
 
-**Evidence:** the same as [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05), which reproduces it: step 1 output contains 'commands installed: ontology-quality-suite', 'owlready2>=0.51', 'shacl 0.3.4/n    commands installed: none (library only)', 'tarka-rdf 0.1.1/n    commands installed: none (library only)', 'holosdb 0.25.0/n    commands installed: none (library only)'; suite 0.24.3: step 1 output contains 'shacl<0.4,>=0.3.3'; suite 0.24.3: step 1 output contains 'holosdb>=0.24'
+**Evidence:** the same as [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05), which reproduces it: step 1 output contains 'commands installed: ontology-quality-suite', 'owlready2>=0.51', 'shacl 0.3.4/n    commands installed: none (library only)', 'tarka-rdf 0.2.0/n    commands installed: none (library only)', 'holosdb 0.25.0/n    commands installed: none (library only)'; suite 0.24.3: step 1 output contains 'shacl<0.4,>=0.3.3'; suite 0.24.3: step 1 output contains 'holosdb>=0.24'
 
 ---
 
@@ -611,7 +611,7 @@ The previous wording said nineteen, which counted the chapters and not the PDF.
 ### C00.05 — 54 or 55, and REA-021 or REA-022
 
 **In the manual:** [README, at the claim](manual/README.md#ev-c00-05) · [plain edition](../README.md#conventions)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > **Two outputs move unless you pin one variable, and both are labelled where they
 
@@ -828,7 +828,7 @@ Annotated chapter: [manual/docs/03-across-the-boundary.md](manual/docs/03-across
 ### C03.01 — foaf:name has domain owl:Thing, and the suite has been taught it
 
 **In the manual:** [Chapter 3, at the claim](manual/docs/03-across-the-boundary.md#ev-c03-01) · [plain edition](../docs/03-across-the-boundary.md#c-open-ecosystem-the-stability-problem)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > The classic case is FOAF, which deliberately declares `foaf:name` with
 
@@ -862,7 +862,6 @@ Findings: 548 total (65 Violation, 363 Warning, 120 Info)
 Reports written to: ./work/C03_01/data
   - work/C03_01/data/findings.txt (start here -- what, where, and the source line)
   - work/C03_01/data/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp0ikgzvqi -Y
 [exit 0]
 ```
 
@@ -922,7 +921,7 @@ Reports written to: ./work/C03_01/data
 ### C03.06 — Speak the protocol, not the product
 
 **In the manual:** [Chapter 3, at the claim](manual/docs/03-across-the-boundary.md#ev-c03-06) · [plain edition](../docs/03-across-the-boundary.md#35-where-this-leaves-the-practice)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > One last design lesson, which I took from the triplifier rather than from a
 
@@ -1100,7 +1099,7 @@ Annotated chapter: [manual/docs/07-the-toolchain.md](manual/docs/07-the-toolchai
 ### C07.01 — The versions every Part III number was measured against
 
 **In the manual:** [Chapter 7, at the claim](manual/docs/07-the-toolchain.md#ev-c07-01) · [plain edition](../docs/07-the-toolchain.md#7-the-toolchain)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > > **Versions this edition was measured against.**
 
@@ -1135,23 +1134,23 @@ for k, v in versions().items():
 
 **What is checked:** the installed packages, release binaries and npm packages are the versions in the table
 
-**Recorded result:** PASS — step 1 output contains 'PyPI ontology-quality-suite  0.24.3', 'PyPI shacl                   0.3.4', 'PyPI holosdb                 0.25.0', 'PyPI tarka-rdf               0.1.1', 'release shacl                shacl 0.3.4', 'release tarka                tarka 0.1.1', 'release holos                holos 0.25.0', 'npm ontology-suite           0.16.1', 'npm shacl-wasm-node          0.3.4', 'npm holos-wasm-node          0.25.0'
+**Recorded result:** PASS — step 1 output contains 'PyPI ontology-quality-suite  0.24.3', 'PyPI shacl                   0.3.4', 'PyPI holosdb                 0.25.0', 'PyPI tarka-rdf               0.2.0', 'release shacl                shacl 0.3.4', 'release tarka                tarka 0.2.0', 'release holos                holos 0.25.0', 'npm ontology-suite           0.16.1', 'npm shacl-wasm-node          0.3.4', 'npm holos-wasm-node          0.25.0'
 
 <details><summary>Output, as recorded</summary>
 
 ```text
 $ python scripts/versions.py
-python                       3.12.13
+python                       3.14.2
 platform                     Windows 11 (AMD64)
 PyPI ontology-quality-suite  0.24.3
 PyPI shacl                   0.3.4
 PyPI holosdb                 0.25.0
-PyPI tarka-rdf               0.1.1
+PyPI tarka-rdf               0.2.0
 PyPI rdflib                  7.6.0
 PyPI pyoxigraph              0.5.11
 PyPI polars                  2.0.0
 release shacl                shacl 0.3.4
-release tarka                tarka 0.1.1
+release tarka                tarka 0.2.0
 release holos                holos 0.25.0 (b44aa1c)
 node                         v20.19.5
 npm ontology-suite           0.16.1
@@ -1159,7 +1158,6 @@ npm shacl-wasm-node          0.3.4
 npm holos-wasm-node          0.25.0
 npm typescript               7.0.2
 java (for HermiT)            openjdk version "25.0.3" 2026-04-21 LTS
-oxi-gen (testing repo only)  oxi_gen 0.5.1
 [exit 0]
 ```
 
@@ -1298,7 +1296,7 @@ Below 1.0 a caret admits patch releases only, so `^0.25.0` means 0.25.x. The 0.1
 ### C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries
 
 **In the manual:** [Chapter 7, at the claim](manual/docs/07-the-toolchain.md#ev-c07-05) · [plain edition](../docs/07-the-toolchain.md#the-python-suite)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > That one line now brings both engines: `holosdb` and `shacl` are runtime
 
@@ -1355,7 +1353,7 @@ print(f".rq checks building a message with STR(?...) and no isBlank guard: {len(
 
 **What is checked:** ontology-quality-suite declares holosdb (from 0.24 since suite 0.24.3, 0.23 at 0.24.2, 0.15 before), shacl (below 0.4; from 0.3.3 since suite 0.23.0, which needs shacl.rdfs_closure) and owlready2 as runtime dependencies and installs the only command; shacl, tarka-rdf and holosdb install none
 
-**Recorded result:** PASS — step 1 output contains 'commands installed: ontology-quality-suite', 'owlready2>=0.51', 'shacl 0.3.4/n    commands installed: none (library only)', 'tarka-rdf 0.1.1/n    commands installed: none (library only)', 'holosdb 0.25.0/n    commands installed: none (library only)'; suite 0.24.3: step 1 output contains 'shacl<0.4,>=0.3.3'; suite 0.24.3: step 1 output contains 'holosdb>=0.24'
+**Recorded result:** PASS — step 1 output contains 'commands installed: ontology-quality-suite', 'owlready2>=0.51', 'shacl 0.3.4/n    commands installed: none (library only)', 'tarka-rdf 0.2.0/n    commands installed: none (library only)', 'holosdb 0.25.0/n    commands installed: none (library only)'; suite 0.24.3: step 1 output contains 'shacl<0.4,>=0.3.3'; suite 0.24.3: step 1 output contains 'holosdb>=0.24'
 
 <details><summary>Output, as recorded</summary>
 
@@ -1367,7 +1365,7 @@ ontology-quality-suite 0.24.3
 shacl 0.3.4
     commands installed: none (library only)
     runtime dependencies: none
-tarka-rdf 0.1.1
+tarka-rdf 0.2.0
     commands installed: none (library only)
     runtime dependencies: polars>=1.30
 holosdb 0.25.0
@@ -1781,11 +1779,11 @@ C08.24 shows a query with no registry entry running and reporting as UNMAPPED.
 ### C07.20 — Only ontology-quality-suite installs a command
 
 **In the manual:** [Chapter 7, at the claim](manual/docs/07-the-toolchain.md#ev-c07-20) · [plain edition](../docs/07-the-toolchain.md#the-engine-the-store-and-the-triplifier)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > **The wheels are libraries only.**
 
-**Evidence:** the same as [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05), which reproduces it: step 1 output contains 'commands installed: ontology-quality-suite', 'owlready2>=0.51', 'shacl 0.3.4/n    commands installed: none (library only)', 'tarka-rdf 0.1.1/n    commands installed: none (library only)', 'holosdb 0.25.0/n    commands installed: none (library only)'; suite 0.24.3: step 1 output contains 'shacl<0.4,>=0.3.3'; suite 0.24.3: step 1 output contains 'holosdb>=0.24'
+**Evidence:** the same as [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05), which reproduces it: step 1 output contains 'commands installed: ontology-quality-suite', 'owlready2>=0.51', 'shacl 0.3.4/n    commands installed: none (library only)', 'tarka-rdf 0.2.0/n    commands installed: none (library only)', 'holosdb 0.25.0/n    commands installed: none (library only)'; suite 0.24.3: step 1 output contains 'shacl<0.4,>=0.3.3'; suite 0.24.3: step 1 output contains 'holosdb>=0.24'
 
 ---
 
@@ -1805,7 +1803,7 @@ C08.24 shows a query with no registry entry running and reporting as UNMAPPED.
     python tools/fetch_binaries.py
 
 For this machine's platform, fetches `shacl` (SHACL Engine 0.3.4), `tarka`
-(0.1.1) and `holos` + `holos-server` (HOLOS 0.25.0) from their GitHub releases,
+(0.2.0) and `holos` + `holos-server` (HOLOS 0.25.0) from their GitHub releases,
 verifies each archive against the release's SHA256SUMS, and unpacks it under
 evidence/bin/. Nothing is installed anywhere else. If a binary is already
 there, it is left alone; a superseded version of it is removed.
@@ -1824,7 +1822,7 @@ from pathlib import Path
 BIN = Path(__file__).resolve().parent.parent / "bin"
 RELEASES = {
     "shacl": ("pwin/SHACL_Engine", "v0.3.4", "shacl-0.3.4-{target}"),
-    "tarka": ("pwin/tarka", "v0.1.1", "tarka-0.1.1-{target}"),
+    "tarka": ("pwin/tarka", "v0.2.0", "tarka-0.2.0-{target}"),
     "holos": ("pwin/triplestore", "v0.25.0", "holos-0.25.0-{target}"),
 }
 
@@ -1902,7 +1900,7 @@ if __name__ == "__main__":
 
 - [SHACL Engine v0.3.4 release](https://github.com/pwin/SHACL_Engine/releases/tag/v0.3.4)
 - [HOLOS v0.25.0 release](https://github.com/pwin/triplestore/releases/tag/v0.25.0)
-- [tarka v0.1.1 release](https://github.com/pwin/tarka/releases/tag/v0.1.1)
+- [tarka v0.2.0 release](https://github.com/pwin/tarka/releases/tag/v0.2.0)
 
 `tools/fetch_binaries.py` downloads each archive and refuses one whose SHA-256 does not match the release's SHA256SUMS; the binaries used throughout this evidence came through it.
 
@@ -3025,7 +3023,7 @@ options:
 ### C08.22 — A project tree alone now warns that 42 built-in checks did not run
 
 **In the manual:** [Chapter 8, at the claim](manual/docs/08-model-and-validate.md#ev-c08-22) · [plain edition](../docs/08-model-and-validate.md#alongside-the-built-in-checks-not-instead-of-them)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > Point the CLI at that directory on its own and listen to what it says:
 
@@ -3078,7 +3076,7 @@ WARNING: --sparql replaced the suite's own query tree: 1 project check(s) ran an
 ### C08.24 — With @builtin and a one-entry registry, every built-in finding is UNMAPPED
 
 **In the manual:** [Chapter 8, at the claim](manual/docs/08-model-and-validate.md#ev-c08-24) · [plain edition](../docs/08-model-and-validate.md#alongside-the-built-in-checks-not-instead-of-them)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > **But the registry still replaces rather than composes.**
 
@@ -3215,7 +3213,7 @@ total 1: 1 Violation, 0 Warning, 0 Info
 ### C08.26 — The warning named the site path @builtin was made to avoid, until 0.24.0
 
 **In the manual:** [Chapter 8, at the claim](manual/docs/08-model-and-validate.md#ev-c08-26) · [plain edition](../docs/08-model-and-validate.md#alongside-the-built-in-checks-not-instead-of-them)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > Up to 0.23.0 the warning above recommended passing the
 
@@ -3711,7 +3709,7 @@ The warning is emitted only when the filter removes everything from a non-empty 
 ### C09.09 — A scoped run keeps the 'reasoner did not run' finding, from 0.24.0
 
 **In the manual:** [Chapter 9, at the claim](manual/docs/09-continuous-integration.md#ev-c09-09) · [plain edition](../docs/09-continuous-integration.md#what-the-filter-could-not-see-until-0240)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > findings about the run survive the filter
 
@@ -3878,11 +3876,11 @@ $ python scripts/list_files.py work/C09_10/minimal
 ### C09.12 — The suite pins shacl below 0.4
 
 **In the manual:** [Chapter 9, at the claim](manual/docs/09-continuous-integration.md#ev-c09-12) · [plain edition](../docs/09-continuous-integration.md#95-wiring-it-up)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > The suite responded by pinning `shacl>=0.3.0,<0.4`
 
-**Evidence:** the same as [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05), which reproduces it: step 1 output contains 'commands installed: ontology-quality-suite', 'owlready2>=0.51', 'shacl 0.3.4/n    commands installed: none (library only)', 'tarka-rdf 0.1.1/n    commands installed: none (library only)', 'holosdb 0.25.0/n    commands installed: none (library only)'; suite 0.24.3: step 1 output contains 'shacl<0.4,>=0.3.3'; suite 0.24.3: step 1 output contains 'holosdb>=0.24'
+**Evidence:** the same as [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05), which reproduces it: step 1 output contains 'commands installed: ontology-quality-suite', 'owlready2>=0.51', 'shacl 0.3.4/n    commands installed: none (library only)', 'tarka-rdf 0.2.0/n    commands installed: none (library only)', 'holosdb 0.25.0/n    commands installed: none (library only)'; suite 0.24.3: step 1 output contains 'shacl<0.4,>=0.3.3'; suite 0.24.3: step 1 output contains 'holosdb>=0.24'
 
 The installed package's declared dependencies include `shacl<0.4,>=0.3.0`; the reason is in the [pyproject comment](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/0a23055c4bf354287795b8da4155d99f8687423c/pyproject.toml#L33-L37).
 
@@ -4331,7 +4329,7 @@ Sketch used 1 query file(s); 1 triples, 1 entities.
 ### C10.05 — A CONCAT-built IRI: dropped as a subject, a literal as an object
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-05) · [plain edition](../docs/10-ingest-and-transform.md#the-query-itself-is-checked)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > `TQL-004` repays reading twice.
 
@@ -4459,7 +4457,7 @@ $ python scripts/list_files.py work/C10_06/sketch
 ### C10.07 — tarka's output for E004 is the block quoted in earlier editions
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-07) · [plain edition](../docs/10-ingest-and-transform.md#103-stage-2-produce-real-rdf-with-tarka)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > The output is genuine RDF, and for this fixture it is the same, term for term
 
@@ -4493,7 +4491,7 @@ $ tarka run -q fixtures/acme_robotics/employees.rq -i fixtures/acme_robotics/emp
 ### C10.08 — tarka takes oxi-gen's options; --test N reads N rows
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-08) · [plain edition](../docs/10-ingest-and-transform.md#103-stage-2-produce-real-rdf-with-tarka)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > tarka takes `oxi-gen`'s options
 
@@ -4543,7 +4541,7 @@ Options:
       --bind-empty-strings
           Bind empty cells as empty strings instead of leaving them unbound
       --test [<TEST>]
-… (25 lines omitted; full output in the outputs/ record)
+… (27 lines omitted; full output in the outputs/ record)
       --batch-size <BATCH_SIZE>
           Records to evaluate together [default: 512]
       --jobs <JOBS>
@@ -4589,7 +4587,7 @@ Not reproduced here: it needs oxi-gen and the 200,000-row file.
 ### C10.10 — The OTTR template lints clean and gives the same 40 triples
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-10) · [plain edition](../docs/10-ingest-and-transform.md#tarql-or-ottr-two-ways-to-say-the-same-mapping)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > Sorted, the 40 triples are identical to the TARQL query's. Verified.
 
@@ -4675,14 +4673,14 @@ The CSV for the template carries full IRIs, since an OTTR template receives IRIs
 ---
 
 <a id="c10-11"></a>
-### C10.11 — Without a mailto: prefix, run -l drops every row, silently
+### C10.11 — Without a mailto: prefix, run -l dropped every row, silently, up to 0.1.1
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-11) · [plain edition](../docs/10-ingest-and-transform.md#tarql-or-ottr-two-ways-to-say-the-same-mapping)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
-> > **One silent failure, found while checking this.**
+> > **One silent failure, found while checking this, and fixed since.**
 
-**Inputs:** [`data/ottr/employees-no-mailto-prefix.stottr`](data/ottr/employees-no-mailto-prefix.stottr), [`data/ottr/employees-optional-mbox.stottr`](data/ottr/employees-optional-mbox.stottr), [`data/ottr/employees.bottr.ttl`](data/ottr/employees.bottr.ttl), [`data/ottr/employees-bad-id.bottr.ttl`](data/ottr/employees-bad-id.bottr.ttl)
+**Inputs:** [`data/ottr/employees-no-mailto-prefix.stottr`](data/ottr/employees-no-mailto-prefix.stottr), [`data/ottr/employees-optional-mbox.stottr`](data/ottr/employees-optional-mbox.stottr), [`data/ottr/employees-bad-mbox.csv`](data/ottr/employees-bad-mbox.csv), [`data/ottr/employees.bottr.ttl`](data/ottr/employees.bottr.ttl), [`data/ottr/employees-bad-id.bottr.ttl`](data/ottr/employees-bad-id.bottr.ttl)
 
 <details><summary><code>data/ottr/employees-no-mailto-prefix.stottr</code></summary>
 
@@ -4734,6 +4732,19 @@ acme:Employee [ ottr:IRI ?employee, xsd:string ?name, ? ottr:IRI ?mbox, xsd:stri
 
 </details>
 
+<details><summary><code>data/ottr/employees-bad-mbox.csv</code></summary>
+
+```text
+employee,name,mbox,id,dept,role,skill
+https://acme.example.org/data/employee/E001,Grace Hopper,mailto:grace.hopper@acme.example.org,E001,https://acme.example.org/data/department/ENG,Software Engineer,Rust
+https://acme.example.org/data/employee/E002,Ada Lovelace,mailto:ada.lovelace@acme.example.org,E002,https://acme.example.org/data/department/ENG,Software Engineer,SPARQL
+https://acme.example.org/data/employee/E003,Alan Turing,n/a,E003,https://acme.example.org/data/department/ENG,Software Engineer,SHACL
+https://acme.example.org/data/employee/E004,Margaret Hamilton,mailto:margaret.hamilton@acme.example.org,E004,https://acme.example.org/data/department/QA,Test Engineer,Automation
+https://acme.example.org/data/employee/E005,Katherine Johnson,mailto:katherine.johnson@acme.example.org,E005,https://acme.example.org/data/department/MKT,Analyst,Forecasting
+```
+
+</details>
+
 <details><summary><code>data/ottr/employees.bottr.ttl</code></summary>
 
 ```turtle
@@ -4757,8 +4768,8 @@ acme:Employee [ ottr:IRI ?employee, xsd:string ?name, ? ottr:IRI ?mbox, xsd:stri
 ```turtle
 # Chapter 10 §10.3: a bOTTR map that cannot build any instance. The id column
 # is mapped as xsd:integer, and 'E001' is not one. bOTTR leaves each instance
-# out, names the row and the argument, and exits 1: the report `tarka run`
-# does not give.
+# out, names the row and the argument, and exits 1, as `tarka run` has done
+# too since 0.2.0.
 @prefix ottr: <http://ns.ottr.xyz/0.4/> .
 @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
 @prefix acme: <https://acme.example.org/ns/> .
@@ -4780,14 +4791,16 @@ tarka run -l data/ottr/employees-no-mailto-prefix.stottr -T acme:Employee -i dat
 python scripts/compare_ntriples.py work/C10_11/none.nt work/C10_11/none.nt
 tarka run -l data/ottr/employees-optional-mbox.stottr -T acme:Employee -i data/ottr/employees-iri.csv --ntriples -o work/C10_11/optional.nt
 python scripts/compare_ntriples.py work/C10_11/optional.nt work/C10_11/optional.nt
+tarka run -l data/ottr/employees.stottr -T acme:Employee -i data/ottr/employees-bad-mbox.csv --ntriples -o work/C10_11/bad-mbox.nt
+python scripts/compare_ntriples.py work/C10_11/bad-mbox.nt work/C10_11/bad-mbox.nt
 tarka bottr -l data/ottr/employees.stottr data/ottr/employees-bad-id.bottr.ttl --ntriples -o work/C10_11/bad-id.nt
 tarka bottr -l data/ottr/employees-no-mailto-prefix.stottr data/ottr/employees.bottr.ttl --ntriples -o work/C10_11/bottr.nt
 python scripts/compare_ntriples.py work/C10_11/bottr.nt work/C10_11/bottr.nt
 ```
 
-**What is checked:** run -l without the prefix: exit 0, no message, 0 triples; with ?mbox optional: exit 0, 35 triples; bOTTR with a cell it cannot build: each instance reported, exit 1; the same rows as a bOTTR map with no prefix: 40 triples
+**What is checked:** since 0.2.0, run -l without the prefix: exit 0, no message, all 40 triples, as with ?mbox optional; a mailbox that is not an IRI: that row left out and named, the other 32 triples written, exit 1; bOTTR with a cell it cannot build: each instance reported, exit 1; the same rows as a bOTTR map with no prefix: 40 triples
 
-**Recorded result:** PASS — step 1 exits 0; run -l: no message at all; step 2 output contains ': 0 triples'; step 3 exits 0; step 4 output contains ': 35 triples'; step 4 output has none of 'mbox'; step 5 exits 1; step 5 output contains '5 instances left out; the other 0 were made', 'row 1: argument 4 (id)'; step 6 exits 0; step 7 output contains ': 40 triples'
+**Recorded result:** PASS — step 1 exits 0; run -l: no message; step 2 output contains ': 40 triples'; step 3 exits 0; step 4 output contains ': 40 triples'; step 5 exits 1; step 5 output contains "tarka: left out: row 3: column mbox: 'n/a' is not an IRI", 'tarka: 1 of 5 rows left out'; step 6 output contains ': 32 triples'; step 7 exits 1; step 7 output contains '5 of 5 instances left out; nothing was made', 'row 1: argument 4 (id)'; step 8 exits 0; step 9 output contains ': 40 triples'
 
 <details><summary>Output, as recorded</summary>
 
@@ -4797,8 +4810,8 @@ $ tarka run -l data/ottr/employees-no-mailto-prefix.stottr -T acme:Employee -i d
 [exit 0]
 
 $ python scripts/compare_ntriples.py work/C10_11/none.nt work/C10_11/none.nt
-work/C10_11/none.nt: 0 triples
-work/C10_11/none.nt: 0 triples
+work/C10_11/none.nt: 40 triples
+work/C10_11/none.nt: 40 triples
 isomorphic: True
 [exit 0]
 
@@ -4807,8 +4820,19 @@ $ tarka run -l data/ottr/employees-optional-mbox.stottr -T acme:Employee -i data
 [exit 0]
 
 $ python scripts/compare_ntriples.py work/C10_11/optional.nt work/C10_11/optional.nt
-work/C10_11/optional.nt: 35 triples
-work/C10_11/optional.nt: 35 triples
+work/C10_11/optional.nt: 40 triples
+work/C10_11/optional.nt: 40 triples
+isomorphic: True
+[exit 0]
+
+$ tarka run -l data/ottr/employees.stottr -T acme:Employee -i data/ottr/employees-bad-mbox.csv --ntriples -o work/C10_11/bad-mbox.nt
+tarka: left out: row 3: column mbox: 'n/a' is not an IRI
+tarka: 1 of 5 rows left out
+[exit 1]
+
+$ python scripts/compare_ntriples.py work/C10_11/bad-mbox.nt work/C10_11/bad-mbox.nt
+work/C10_11/bad-mbox.nt: 32 triples
+work/C10_11/bad-mbox.nt: 32 triples
 isomorphic: True
 [exit 0]
 
@@ -4818,7 +4842,7 @@ tarka: left out: data/ottr/employees-bad-id.bottr.ttl: instance map 1 (acme:Empl
 tarka: left out: data/ottr/employees-bad-id.bottr.ttl: instance map 1 (acme:Employee), row 3: argument 4 (id): the value 'E003' is not in the lexical space of its datatype http://www.w3.org/2001/XMLSchema#integer
 tarka: left out: data/ottr/employees-bad-id.bottr.ttl: instance map 1 (acme:Employee), row 4: argument 4 (id): the value 'E004' is not in the lexical space of its datatype http://www.w3.org/2001/XMLSchema#integer
 tarka: left out: data/ottr/employees-bad-id.bottr.ttl: instance map 1 (acme:Employee), row 5: argument 4 (id): the value 'E005' is not in the lexical space of its datatype http://www.w3.org/2001/XMLSchema#integer
-tarka: 5 instances left out; the other 0 were made
+tarka: 5 of 5 instances left out; nothing was made
 [exit 1]
 
 $ tarka bottr -l data/ottr/employees-no-mailto-prefix.stottr data/ottr/employees.bottr.ttl --ntriples -o work/C10_11/bottr.nt
@@ -4834,13 +4858,15 @@ isomorphic: True
 
 </details>
 
+Up to 0.1.1 the first run wrote 0 triples, and with ?mbox optional 35, each with exit 0 and no message: the recorded run of the previous edition.
+
 ---
 
 <a id="c10-12"></a>
 ### C10.12 — Parquet input, data frames, and typed literals from typed columns
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-12) · [plain edition](../docs/10-ingest-and-transform.md#data-frames-not-just-csv)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > `-i` takes Parquet and Arrow IPC files as well as CSV, read with Polars, and the
 
@@ -4879,7 +4905,8 @@ python scripts/compare_ntriples.py work/C10_12/parquet.nt work/C10_12/tarql.nt
 
   1. the acme TARQL mapping, run with Mapping.tarql_file(...).run_csv(...)
   2. the same mapping as OTTR templates, compared triple for triple
-  3. the OTTR library without its `mailto:` prefix: the silent zero
+  3. the OTTR library without its `mailto:` prefix (since 0.2.0, the mailboxes are full
+     IRIs, as in bOTTR), and a mailbox that is not an IRI: a ValueError, the rest written
   4. the acme CSV as a Polars data frame, written to Parquet, and mapped from it
   5. the shapes tarka derives from the TARQL mapping
   6. a Polars integer column into an xsd:integer OTTR parameter: a typed literal
@@ -4916,6 +4943,13 @@ try:
     print(f"3. OTTR without the mailto: prefix: returned {ret!r}, raised nothing, wrote {n} triples")
 except Exception as exc:
     print(f"3. OTTR without the mailto: prefix: raised {type(exc).__name__}: {exc}")
+try:
+    o.run_csv(str(ottr / "employees-bad-mbox.csv"), str(work / "ottr-bad-mbox.nt"), format="ntriples")
+    print("   a mailbox that is not an IRI: raised nothing")
+except ValueError as exc:
+    n = len(lines(work / "ottr-bad-mbox.nt"))
+    print(f"   a mailbox that is not an IRI: ValueError ({' / '.join(str(exc).splitlines())}); "
+          f"the other rows written, {n} triples")
 
 df = pl.read_csv(acme / "employees.csv")
 df.write_parquet(work / "employees.parquet")
@@ -4938,9 +4972,9 @@ for subject, predicate, obj in typed.iter_rows():
 
 </details>
 
-**What is checked:** a Polars frame maps to 40 triples; an Int64 column through an xsd:integer parameter gives "42"^^xsd:integer; the CLI reads the Parquet file and gives the same 40 triples; the Python API shows the same silent zero as the CLI
+**What is checked:** a Polars frame maps to 40 triples; an Int64 column through an xsd:integer parameter gives "42"^^xsd:integer; the CLI reads the Parquet file and gives the same 40 triples; the Python API, like the CLI since 0.2.0, reads the mailboxes without the prefix, and raises a ValueError naming a row it leaves out, once the rest is written
 
-**Recorded result:** PASS — step 1 output contains '4. Polars frame of 5 rows -> 40 triples', '"42"^^<http://www.w3.org/2001/XMLSchema#integer>', '2. OTTR templates: 40 triples; identical to the TARQL output: True', '3. OTTR without the mailto: prefix: returned None, raised nothing, wrote 0 triples'; step 3 output contains 'isomorphic: True'
+**Recorded result:** PASS — step 1 output contains '4. Polars frame of 5 rows -> 40 triples', '"42"^^<http://www.w3.org/2001/XMLSchema#integer>', '2. OTTR templates: 40 triples; identical to the TARQL output: True', '3. OTTR without the mailto: prefix: returned None, raised nothing, wrote 40 triples', "a mailbox that is not an IRI: ValueError (1 row left out: / row 3: column mbox: 'n/a' is not an IRI); the other rows written, 32 triples"; step 3 output contains 'isomorphic: True'
 
 <details><summary>Output, as recorded</summary>
 
@@ -4948,7 +4982,8 @@ for subject, predicate, obj in typed.iter_rows():
 $ python scripts/tarka_python.py fixtures/acme_robotics data/ottr work/C10_12
 1. TARQL mapping: 40 triples
 2. OTTR templates: 40 triples; identical to the TARQL output: True
-3. OTTR without the mailto: prefix: returned None, raised nothing, wrote 0 triples
+3. OTTR without the mailto: prefix: returned None, raised nothing, wrote 40 triples
+   a mailbox that is not an IRI: ValueError (1 row left out: / row 3: column mbox: 'n/a' is not an IRI); the other rows written, 32 triples
 4. Polars frame of 5 rows -> 40 triples; Parquet written to work/C10_12/employees.parquet
 5. shapes derived from the mapping:
    shape:EmployeeShape a sh:NodeShape ;
@@ -4989,7 +5024,7 @@ isomorphic: True
 ### C10.13 — Shapes from the mapping, and --validate conforms
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-13) · [plain edition](../docs/10-ingest-and-transform.md#shapes-from-the-mapping-and-what-they-cannot-tell-you)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > and `tarka run … --validate` checks the output against them. On the acme data
 
@@ -5024,7 +5059,7 @@ $ tarka run -q fixtures/acme_robotics/employees.rq -i fixtures/acme_robotics/emp
 ### C10.14 — Generated shapes accept the dangling departments
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-14) · [plain edition](../docs/10-ingest-and-transform.md#shapes-from-the-mapping-and-what-they-cannot-tell-you)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > That is useful, and it is worth being exact about why.
 
@@ -5038,7 +5073,7 @@ The same run that conforms (C10.13) is the one in which `data` finds every `work
 ### C10.15 — --post streams into holos-server: the graph arrives whole
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-15) · [plain edition](../docs/10-ingest-and-transform.md#straight-into-a-store)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > Verified for this edition against `holos-server`: the
 
@@ -5127,7 +5162,7 @@ WARNING: oxi-gen binary not found. Build it with `cargo build --release` in the 
 ### C10.18 — data: 548 unscoped (549 at 0.23.0, 550 at 0.22.0), 54 scoped, with HermiT running
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-18) · [plain edition](../docs/10-ingest-and-transform.md#104-stage-3-data-assess-what-was-actually-produced)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > Findings: 548 total (66 Violation, 363 Warning, 119 Info)
 
@@ -5156,7 +5191,7 @@ Findings: 548 total (66 Violation, 363 Warning, 119 Info)
 Reports written to: ./work/C10_18/all
   - work/C10_18/all/findings.txt (start here -- what, where, and the source line)
   - work/C10_18/all/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpakcghi3n -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpqjx3z746 -Y
 [exit 0]
 
 $ ontology-quality-suite data work/C10_18/employees.ttl --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --engine sparql --own-namespace https://acme.example.org/ --out-dir work/C10_18/own --fail-on never --reports minimal
@@ -5164,7 +5199,7 @@ Findings: 54 total (12 Violation, 40 Warning, 2 Info)
 Reports written to: ./work/C10_18/own
   - work/C10_18/own/findings.txt (start here -- what, where, and the source line)
   - work/C10_18/own/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpdu2v0a26 -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp7vjlba6l -Y
 [exit 0]
 
 $ python scripts/summarise_findings.py work/C10_18/own/full_results.csv
@@ -5191,7 +5226,7 @@ total 54: 12 Violation, 40 Warning, 2 Info
 ### C10.19 — 54 when HermiT does not run, and from 0.24.0 the scoped report says so
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-19) · [plain edition](../docs/10-ingest-and-transform.md#54-or-55-and-how-the-report-tells-you-which-from-0240)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > That run gave 55 three times running. The fourth time it gave 54.
 
@@ -5271,7 +5306,7 @@ The manual's 'three times… the fourth time' describes unpinned runs. Java is h
 ### C10.20 — Real defects: every worksIn target is untyped and dangling
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-20) · [plain edition](../docs/10-ingest-and-transform.md#what-those-findings-actually-say)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > **Real data defects.** The largest group:
 
@@ -5300,16 +5335,16 @@ Findings: 54 total (12 Violation, 40 Warning, 2 Info)
 Reports written to: ./work/C10_20/own
   - work/C10_20/own/findings.txt (start here -- what, where, and the source line)
   - work/C10_20/own/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpkpfcnjxt -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmppmzwt1km -Y
 [exit 0]
 
 $ python scripts/summarise_findings.py work/C10_20/own/full_results.csv --by focus --check STR-006
-STR-006  focus=https://acme.example.org/data/employee/E001  path=https://acme.example.org/ns/worksIn  value=https://acme.example.org/data/department/ENG
 STR-006  focus=https://acme.example.org/data/employee/E001  path=http://xmlns.com/foaf/0.1/mbox  value=mailto:grace.hopper@acme.example.org
+STR-006  focus=https://acme.example.org/data/employee/E001  path=https://acme.example.org/ns/worksIn  value=https://acme.example.org/data/department/ENG
 STR-006  focus=https://acme.example.org/data/employee/E002  path=http://xmlns.com/foaf/0.1/mbox  value=mailto:ada.lovelace@acme.example.org
 STR-006  focus=https://acme.example.org/data/employee/E002  path=https://acme.example.org/ns/worksIn  value=https://acme.example.org/data/department/ENG
-STR-006  focus=https://acme.example.org/data/employee/E003  path=http://xmlns.com/foaf/0.1/mbox  value=mailto:alan.turing@acme.example.org
 STR-006  focus=https://acme.example.org/data/employee/E003  path=https://acme.example.org/ns/worksIn  value=https://acme.example.org/data/department/ENG
+STR-006  focus=https://acme.example.org/data/employee/E003  path=http://xmlns.com/foaf/0.1/mbox  value=mailto:alan.turing@acme.example.org
 STR-006  focus=https://acme.example.org/data/employee/E004  path=https://acme.example.org/ns/worksIn  value=https://acme.example.org/data/department/QA
 STR-006  focus=https://acme.example.org/data/employee/E004  path=http://xmlns.com/foaf/0.1/mbox  value=mailto:margaret.hamilton@acme.example.org
 STR-006  focus=https://acme.example.org/data/employee/E005  path=http://xmlns.com/foaf/0.1/mbox  value=mailto:katherine.johnson@acme.example.org
@@ -5332,7 +5367,7 @@ total 2: 0 Violation, 0 Warning, 2 Info
 ### C10.21 — Half the defects are mailboxes
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-21) · [plain edition](../docs/10-ingest-and-transform.md#what-those-findings-actually-say)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > Read the list to the end, though. Of the ten of each, five are the departments.
 
@@ -5344,7 +5379,7 @@ total 2: 0 Violation, 0 Warning, 2 Info
 ### C10.22 — CNF-005: Contractor never populated
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-22) · [plain edition](../docs/10-ingest-and-transform.md#what-those-findings-actually-say)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > Nothing is wrong. `acme:Contractor` is declared and this extract has no
 
@@ -5356,7 +5391,7 @@ total 2: 0 Violation, 0 Warning, 2 Info
 ### C10.23 — REA-021 confirms LOG-001 by a different route
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-23) · [plain edition](../docs/10-ingest-and-transform.md#the-reasoner-when-it-turns-up)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > When HermiT starts, the scoped run carries one extra finding:
 
@@ -6582,7 +6617,7 @@ shacl 0.3.4
 ### C11.09 — holos rules materialises into a graph of its own
 
 **In the manual:** [Chapter 11, at the claim](manual/docs/11-rules-and-inference.md#ev-c11-09) · [plain edition](../docs/11-rules-and-inference.md#112-four-ways-to-derive-a-triple)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > Verified on the acme employees, with one rule typing every `acme:Employee` as a
 
@@ -6625,17 +6660,17 @@ quads            40
 dictionary terms 31
 named graphs     0
 on disk          150.2 KiB
-free here        88.9 GiB
+free here        94.1 GiB
 room to compact  yes (needs up to 150.2 KiB)
 predicates by frequency
           10  <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
-           5  <http://xmlns.com/foaf/0.1/name>
+           5  <https://acme.example.org/ns/worksIn>
            5  <https://acme.example.org/ns/hasEmployeeId>
            5  <http://xmlns.com/foaf/0.1/mbox>
-           5  <https://acme.example.org/ns/worksIn>
-           5  <https://acme.example.org/ns/hasRole>
            5  <https://acme.example.org/ns/hasSkill>
-loaded 40 quads in 0.26s (151 quads/s)
+           5  <http://xmlns.com/foaf/0.1/name>
+           5  <https://acme.example.org/ns/hasRole>
+loaded 40 quads in 0.27s (145 quads/s)
 [exit 0]
 
 $ holos rules --store work/C11_09/store --rules data/holos/rules.rq
@@ -8455,7 +8490,7 @@ $ python scripts/diff_files.py data/rename-literal/employees.rq work/C12_10/q/em
 ### C12.12 — pattern-consistency catches MKT only from the output data
 
 **In the manual:** [Chapter 12, at the claim](manual/docs/12-release-and-change.md#ev-c12-12) · [plain edition](../docs/12-release-and-change.md#125-the-taxonomy-layer-pattern-consistency)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > **Caught**, from tarka's output just as from `oxi-gen`'s.
 
@@ -8520,7 +8555,7 @@ https://acme.example.org/data/department/SALES
 ### C12.13 — Omit --output-data and it reports clean
 
 **In the manual:** [Chapter 12, at the claim](manual/docs/12-release-and-change.md#ev-c12-13) · [plain edition](../docs/12-release-and-change.md#125-the-taxonomy-layer-pattern-consistency)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > Omit `--output-data` and this run reports clean: correctly, and uselessly.
 
@@ -8532,7 +8567,7 @@ https://acme.example.org/data/department/SALES
 ### C12.14 — Both consistency commands are report-only by default
 
 **In the manual:** [Chapter 12, at the claim](manual/docs/12-release-and-change.md#ev-c12-14) · [plain edition](../docs/12-release-and-change.md#126-governance-what-the-tooling-does-and-does-not-do)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > Look at the flags before you copy the commands into a pipeline.
 
@@ -8661,7 +8696,7 @@ Annotated chapter: [manual/docs/13-operate-and-consume.md](manual/docs/13-operat
 ### C13.01 — consistency-remote against holos-server; the imports rule applies in the store
 
 **In the manual:** [Chapter 13, at the claim](manual/docs/13-operate-and-consume.md#ev-c13-01) · [plain edition](../docs/13-operate-and-consume.md#the-manifest-is-the-interesting-part)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > will be reported as undeclared. Load the imports into a graph the manifest lists.
 
@@ -8873,7 +8908,7 @@ options:
 ### C13.03 — The store a version behind: --fail-on-anything exits 1
 
 **In the manual:** [Chapter 13, at the claim](manual/docs/13-operate-and-consume.md#ev-c13-03) · [plain edition](../docs/13-operate-and-consume.md#the-manifest-is-the-interesting-part)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > That structure enables a genuine **three-way check**: the live data graph, the
 
@@ -8991,7 +9026,7 @@ error: data/remote/graphs-role-typo.json: unknown graph role(s) ['triplified-dat
 ### C13.04 — A mistyped role is refused at load, from 0.24.0
 
 **In the manual:** [Chapter 13, at the claim](manual/docs/13-operate-and-consume.md#ev-c13-04) · [plain edition](../docs/13-operate-and-consume.md#finding-out-what-your-graph-uris-actually-are)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > > **`role` was not validated, and a typo cost you the whole check.**
 
@@ -9841,7 +9876,7 @@ Annotated chapter: [manual/docs/14-coverage-and-gaps.md](manual/docs/14-coverage
 ### C14.01 — A scoped run could not see that the reasoner did not run (fixed in 0.24.0)
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-01) · [plain edition](../docs/14-coverage-and-gaps.md#a-scoped-run-could-not-see-that-the-reasoner-did-not-run-fixed-in-0240)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > ### A scoped run could not see that the reasoner did not run (fixed in 0.24.0)
 
@@ -9874,16 +9909,16 @@ Annotated chapter: [manual/docs/14-coverage-and-gaps.md](manual/docs/14-coverage
 ---
 
 <a id="c14-04"></a>
-### C14.04 — tarka drops instances it cannot build, silently, in the CLI and in Python
+### C14.04 — tarka dropped instances it could not build, silently, up to 0.1.1
 
-**In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-04) · [plain edition](../docs/14-coverage-and-gaps.md#tarka-drops-instances-it-cannot-build-silently)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-04) · [plain edition](../docs/14-coverage-and-gaps.md#tarka-dropped-instances-it-could-not-build-silently-fixed-in-020)  
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
-> An OTTR template whose `ottr:IRI` parameter receives a cell tarka does not accept
+> Up to 0.1.1, an OTTR template whose `ottr:IRI` parameter received a cell tarka
 
-**Evidence:** the same as [C10.11 — Without a mailto: prefix, run -l drops every row, silently](#c10-11), which reproduces it: step 1 exits 0; run -l: no message at all; step 2 output contains ': 0 triples'; step 3 exits 0; step 4 output contains ': 35 triples'; step 4 output has none of 'mbox'; step 5 exits 1; step 5 output contains '5 instances left out; the other 0 were made', 'row 1: argument 4 (id)'; step 6 exits 0; step 7 output contains ': 40 triples'
+**Evidence:** the same as [C10.11 — Without a mailto: prefix, run -l dropped every row, silently, up to 0.1.1](#c10-11), which reproduces it: step 1 exits 0; run -l: no message; step 2 output contains ': 40 triples'; step 3 exits 0; step 4 output contains ': 40 triples'; step 5 exits 1; step 5 output contains "tarka: left out: row 3: column mbox: 'n/a' is not an IRI", 'tarka: 1 of 5 rows left out'; step 6 output contains ': 32 triples'; step 7 exits 1; step 7 output contains '5 of 5 instances left out; nothing was made', 'row 1: argument 4 (id)'; step 8 exits 0; step 9 output contains ': 40 triples'
 
-The Python half is in C10.12: `Mapping.ottr(...).run_csv(...)` returns None, raises nothing and writes 0 triples.
+The Python half is in C10.12: since 0.2.0 `Mapping.ottr(...).run_csv(...)` reads the mailboxes without the prefix, and raises a ValueError naming a row it leaves out.
 
 ---
 
@@ -10560,7 +10595,7 @@ Needs Java, and a hash seed under which owlready2 loads (5 here; see C14.06).
 ### C14.10 — A mistyped manifest role compared nothing, successfully (fixed in 0.24.0)
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-10) · [plain edition](../docs/14-coverage-and-gaps.md#a-mistyped-manifest-role-compared-nothing-successfully-fixed-in-0240)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > `consistency-remote` accepted any string as a graph's `role` and ignored all but
 
@@ -10608,7 +10643,7 @@ Needs Java, and a hash seed under which owlready2 loads (5 here; see C14.06).
 ### C14.14 — --registry replaces, so @builtin with a house registry is UNMAPPED
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-14) · [plain edition](../docs/14-coverage-and-gaps.md#smaller-ones-all-worth-a-line)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > | `--sparql` composes but `--registry` replaces
 
@@ -10656,7 +10691,7 @@ Needs Java, and a hash seed under which owlready2 loads (5 here; see C14.06).
 ### C14.18 — consistency and pattern-consistency are report-only by default
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-18) · [plain edition](../docs/14-coverage-and-gaps.md#smaller-ones-all-worth-a-line)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > | `consistency` and `pattern-consistency` exit 0 whatever they find
 
@@ -10943,7 +10978,7 @@ The shacl CLI's refusal is C11.07; the DSL's two fixes are C08.15 and C08.16.
 ### C14.32 — Wrong: REA-022 as the tell in a scoped run
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-32) · [plain edition](../docs/14-coverage-and-gaps.md#things-this-manual-had-wrong)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > **`REA-022` as the reasoner's tell in a scoped run.**
 
@@ -10967,11 +11002,11 @@ The shacl CLI's refusal is C11.07; the DSL's two fixes are C08.15 and C08.16.
 ### C14.34 — Wrong: the reasoner as an optional extra
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-34) · [plain edition](../docs/14-coverage-and-gaps.md#things-this-manual-had-wrong)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > **The reasoner as an "optional extra".**
 
-**Evidence:** the same as [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05), which reproduces it: step 1 output contains 'commands installed: ontology-quality-suite', 'owlready2>=0.51', 'shacl 0.3.4/n    commands installed: none (library only)', 'tarka-rdf 0.1.1/n    commands installed: none (library only)', 'holosdb 0.25.0/n    commands installed: none (library only)'; suite 0.24.3: step 1 output contains 'shacl<0.4,>=0.3.3'; suite 0.24.3: step 1 output contains 'holosdb>=0.24'
+**Evidence:** the same as [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05), which reproduces it: step 1 output contains 'commands installed: ontology-quality-suite', 'owlready2>=0.51', 'shacl 0.3.4/n    commands installed: none (library only)', 'tarka-rdf 0.2.0/n    commands installed: none (library only)', 'holosdb 0.25.0/n    commands installed: none (library only)'; suite 0.24.3: step 1 output contains 'shacl<0.4,>=0.3.3'; suite 0.24.3: step 1 output contains 'holosdb>=0.24'
 
 ---
 
@@ -10995,7 +11030,7 @@ Today's figures are reproduced in C09.02 (479), C09.04 (23) and C07.22 (22 or 23
 ### C14.36 — Wrong: where a CONCAT-built IRI goes
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-36) · [plain edition](../docs/14-coverage-and-gaps.md#things-this-manual-had-wrong)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > **Where a `CONCAT`-built IRI goes.**
 
@@ -11050,7 +11085,7 @@ Annotated chapter: [manual/docs/15-adoption-roadmap.md](manual/docs/15-adoption-
 ### C15.02 — --output-data is not optional
 
 **In the manual:** [Chapter 15, at the claim](manual/docs/15-adoption-roadmap.md#ev-c15-02) · [plain edition](../docs/15-adoption-roadmap.md#week-3--the-pipeline-stages)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-10-22)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-10-23)
 
 > Two things are not optional in practice. `--output-data` is one: without it,
 
