@@ -37,14 +37,14 @@ read, because it is how the rest are kept honest.
 >
 > | | Version | From |
 > |---|---|---|
-> | Ontology Quality Suite | **0.24.3** | PyPI `ontology-quality-suite`. Three releases were cut while this edition was being checked, for ten defects the checking found: 0.23.0 for three (§7.4, and [Chapter 14](14-coverage-and-gaps.md) §14.4), 0.24.0 for six more, every one of them a case where a run looked cleaner than it was ([Chapter 14](14-coverage-and-gaps.md) §14.6), and 0.24.1 for one that 0.24.0 itself introduced ([Chapter 13](13-operate-and-consume.md) §13.1). 0.24.2 and 0.24.3 change no code: they publish the suite's floor on holosdb, `>=0.24` from 0.24.3. Where a fix changed a figure, the manual gives both |
-> | Ontology Development Suite | **0.16.3** | `ontology-dev-suite-0.16.3.vsix` from the v0.16.3 release; DSL as npm `ontology-suite` 0.16.1. 0.16.1 fixes two DSL defects this edition found ([Chapter 8](08-model-and-validate.md) §8.2); 0.16.2 and 0.16.3 move the engines it bundles to their current releases |
+> | Ontology Quality Suite | **0.25.0** | PyPI `ontology-quality-suite`. Three releases were cut while this edition was being checked, for ten defects the checking found: 0.23.0 for three (§7.4, and [Chapter 14](14-coverage-and-gaps.md) §14.4), 0.24.0 for six more, every one of them a case where a run looked cleaner than it was ([Chapter 14](14-coverage-and-gaps.md) §14.6), and 0.24.1 for one that 0.24.0 itself introduced ([Chapter 13](13-operate-and-consume.md) §13.1). 0.24.2 and 0.24.3 change no code: they publish the suite's floor on holosdb, `>=0.24` from 0.24.3. 0.25.0 adds `--severity-policy` and `--stringency`, how strict each check is at each stage of a project, applied to finished findings; it moves no figure here. Where a fix changed a figure, the manual gives both |
+> | Ontology Development Suite | **0.17.1** | `ontology-dev-suite-0.17.1.vsix` from the v0.17.1 release; DSL as npm `ontology-suite` 0.16.1. 0.16.1 fixes two DSL defects this edition found ([Chapter 8](08-model-and-validate.md) §8.2); 0.17.0 reads the same severity policies as the suite; 0.16.2 to 0.17.1 move the engines it bundles to their current releases |
 > | SHACL Engine | **0.3.4** | PyPI `shacl`; npm `shacl-wasm`, `shacl-wasm-node`; the `shacl` command from the v0.3.4 release. 0.3.3 handed the RDFS closure out, which the suite needed for a fix (§7.4); 0.3.4 makes the command line refuse to validate against no shapes ([Chapter 11](11-rules-and-inference.md) §11.1) |
 > | HOLOS | **0.26.0** | PyPI `holosdb`; npm `holos-wasm`, `holos-wasm-node`; the `holos` command from the v0.26.0 release. Two releases were cut while this edition was being checked, for defects the checking found: 0.21.1 stopped validation writing into the store ([Chapter 13](13-operate-and-consume.md) §13.2), and 0.22.0 made `holos validate` a gate ([Chapter 11](11-rules-and-inference.md) §11.8). Three followed: 0.23.0 and 0.24.0 send every way of asking a query, from Python, the command line, the server and the browser, through one query pipeline, and 0.24.0 fixes a wrong answer it gave for a zero-length path; 0.25.0 brings five SHACL-SPARQL fixes into its validator; and 0.26.0 lets an in-memory store back up to a file, and needs Python 3.11 or later |
-> | tarka | **0.2.0** | PyPI `tarka-rdf`; the `tarka` command from the v0.2.0 release |
-> | Testing repository | `7deaf86` | `main`, 22 October 2026 |
+> | tarka | **0.2.1** | PyPI `tarka-rdf`; the `tarka` command from the v0.2.1 release. 0.2.0 stopped `run` dropping instances it could not build without saying so ([Chapter 10](10-ingest-and-transform.md) §10.3) |
+> | Testing repository | `31bda0d` | `main`, 3 November 2026 |
 >
-> These move quickly. The suite went from 0.14.2 to 0.24.3 between this
+> These move quickly. The suite went from 0.14.2 to 0.25.0 between this
 > edition and the last, and the engine underneath every check changed. Yet
 > every figure in [Chapter 9](09-continuous-integration.md) came out the
 > same, with one exception, and it is the useful kind: 0.24.0 stopped
@@ -93,9 +93,8 @@ edition the SHACL half also ran on one engine, the Rust validator, compiled
 natively for the CLI and to WebAssembly for the editor. Now the SPARQL half
 does too: the 44 portable checks run on **holosdb** in Python and on
 **holos-wasm-node** in the editor. The rule and the engine are the same on both
-sides, and so is the version where it matters: the 0.16.3 extension bundles
-holos-wasm-node 0.25.0, the suite at 0.24.3 locks holosdb 0.25.0, and 0.26.0,
-measured here, changes nothing a check runs. Since HOLOS 0.24.0 every
+sides, and so is the version: the 0.17.1 extension bundles holos-wasm-node
+0.26.0, and the suite's repository locks holosdb 0.26.0. Since HOLOS 0.24.0 every
 way into it, Python's and the editor's included, runs one query pipeline, so a
 check is planned the same way on both sides as well as written the same way.
 
@@ -485,7 +484,7 @@ where an IRI prefix off by one character produced a confidently empty report.
 ## 7.5 The fixture used throughout Part III
 
 Every command in Part III runs against
-[`examples/acme_robotics/`](https://github.com/pwin/consolidated-ontology-quality-suite-python/tree/develop/examples/acme_robotics)
+[`examples/acme_robotics/`](https://github.com/pwin/consolidated-ontology-quality-suite-python/tree/main/examples/acme_robotics)
 in the Python suite: a small org chart built on two real, standards-track
 vocabularies rather than an invented domain.
 
@@ -533,15 +532,15 @@ This manual is the SemOps layer. For tool-level depth:
 
 | Document | Covers |
 |---|---|
-| Suite [`PRIMER.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/develop/docs/PRIMER.md) | Task-oriented guide, worked examples, CI wiring |
-| Suite [`CHECKS.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/develop/docs/CHECKS.md) | All 61 checks, by category |
-| Suite [`ARCHITECTURE.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/develop/docs/ARCHITECTURE.md) | Which engine does the work, and why; file loading; benchmarks |
-| Suite [`REPORTS.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/develop/docs/REPORTS.md) | What each report is for, where finding positions come from, `--themes` |
-| Suite [`EXTENDING.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/develop/docs/EXTENDING.md) | Authoring your own checks; "the registry declares, the directories decide" |
-| Suite [`REASONING.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/develop/docs/REASONING.md) | Reasoner backends and their real limitations |
-| Suite [`CONSISTENCY_AND_REPAIR.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/develop/docs/CONSISTENCY_AND_REPAIR.md) | Finding-kind → fix-kind → confidence table |
-| Suite [`FUSEKI.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/develop/docs/FUSEKI.md) | Live-store manifest spec and Python API (any SPARQL endpoint) |
-| Suite [`VERSIONING.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/develop/docs/VERSIONING.md) · [`UPDATING.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/develop/docs/UPDATING.md) | Semver for ontologies; sequencing and rollback |
+| Suite [`PRIMER.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/main/docs/PRIMER.md) | Task-oriented guide, worked examples, CI wiring |
+| Suite [`CHECKS.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/main/docs/CHECKS.md) | All 61 checks, by category |
+| Suite [`ARCHITECTURE.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/main/docs/ARCHITECTURE.md) | Which engine does the work, and why; file loading; benchmarks |
+| Suite [`REPORTS.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/main/docs/REPORTS.md) | What each report is for, where finding positions come from, `--themes` |
+| Suite [`EXTENDING.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/main/docs/EXTENDING.md) | Authoring your own checks; "the registry declares, the directories decide" |
+| Suite [`REASONING.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/main/docs/REASONING.md) | Reasoner backends and their real limitations |
+| Suite [`CONSISTENCY_AND_REPAIR.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/main/docs/CONSISTENCY_AND_REPAIR.md) | Finding-kind → fix-kind → confidence table |
+| Suite [`FUSEKI.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/main/docs/FUSEKI.md) | Live-store manifest spec and Python API (any SPARQL endpoint) |
+| Suite [`VERSIONING.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/main/docs/VERSIONING.md) · [`UPDATING.md`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/main/docs/UPDATING.md) | Semver for ontologies; sequencing and rollback |
 | Extension [`README.md`](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/main/README.md) · [`TUTORIAL.md`](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/main/TUTORIAL.md) | The extension; Part 11 is the DSL |
 | HOLOS [`ACCESS-CONTROL.md`](https://github.com/pwin/triplestore/blob/develop/ACCESS-CONTROL.md) · [`holosdb` README](https://github.com/pwin/triplestore/blob/HEAD/crates/holos-python/README.md) | Policy at the scan: the guarantee, and the Python API |
 | tarka [`README.md`](https://github.com/pwin/tarka/blob/main/README.md) | TARQL, OTTR, data frames, shapes from mappings |

@@ -306,11 +306,12 @@ believes, which is how I came to carry one false claim for two months
   base dependency since the first commit. What is optional is Java.
 - The extension's `README.md` still names Oxigraph among its engines; it went in
   0.13.11.
-- The testing repository's README says sixteen fixtures and "18 Turtle files in 10
-  folders"; there are seventeen fixtures in fourteen folders.
+- The testing repository's README says "18 Turtle files in 10 folders"; there are
+  25 in fourteen. It said sixteen fixtures, too, until it was corrected to the
+  seventeen there are on 23 October.
 - The suite's `main` branch stopped at 0.18.0 while releases were tagged on
-  `develop`, now the default branch, until it caught up with 0.23.0. This manual
-  links `develop`.
+  `develop`, then the default branch, until it caught up with 0.23.0. The suite
+  retired `develop` on 23 October, and its links in this manual now go to `main`.
 
 ---
 

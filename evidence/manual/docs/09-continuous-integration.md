@@ -661,14 +661,15 @@ Seventeen fixtures, of which a sample:
 | `09-profile-violations` | `unionOf`, `complementOf`, `minCardinality 4` | `REA-010`, `REA-011`, `REA-012` |
 | `14-blank-node-focus` | untagged labels on anonymous restrictions and an `owl:Axiom` | `STY-003`, with a message |
 
-Re-run for this edition against suite 0.23.0, holosdb 0.21.0 and `shacl` 0.3.3:
-**165 passed, 10 skipped**, unchanged by the engine move. No fixture or
+Re-run for this edition against suite 0.25.0, holosdb 0.26.0 and `shacl` 0.3.4:
+**166 passed, 10 skipped**. The engine move changed none of it; the one test more
+than the 165 first recorded is one the repository has gained since. No fixture or
 expectation needed touching, and that is the point of what follows. (To run it
 yourself you need the suite checked out beside it, which is what it tests, and
 `oxi-gen` for the competency tests. Without `oxi-gen` forty of them stop at setup
 and say why.)
 
-<a id="ev-c09-15"></a>*Evidence:* [C09.15 — The testing repository: 165 passed, 10 skipped](../../EVIDENCE.md#c09-15) (reproduced: PASS)
+<a id="ev-c09-15"></a>*Evidence:* [C09.15 — The testing repository: 166 passed, 10 skipped](../../EVIDENCE.md#c09-15) (reproduced: PASS)
 
 **Assert check identifiers, not counts.** This is the whole trick. A regression
 then shows up as *"`LOG-004` no longer fires"*, a named and actionable failure,

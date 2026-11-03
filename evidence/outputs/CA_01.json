@@ -7,7 +7,7 @@
   {
    "cmd": "python scripts/contrast.py",
    "rc": 0,
-   "seconds": 0.0,
+   "seconds": 0.1,
    "stdout": "human   #FFE6DA with #14243A: 13.09:1\nci      #D9F4FA with #14243A: 13.60:1\ndata    #ECF7D5 with #14243A: 14.02:1\nops     #D9F5EC with #14243A: 13.57:1\ngovern  #FFF0D6 with #14243A: 13.91:1\ngap     #F1F3F5 with #14243A: 14.06:1\nlowest 13.09:1\n",
    "stderr": ""
   }

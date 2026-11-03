@@ -226,16 +226,17 @@ CLAIMS = [
                        counts("out/full_results.csv", {"LOG-001": 1, "REA-021": 1}, exact=False)),
           checks="26 total (2 V, 22 W, 2 I), exit 1, LOG-001 once and REA-021 once"),
 
-    Claim("C09.15", "The testing repository: 165 passed, 10 skipped", "09",
-          (F, "**165 passed, 10 skipped**, unchanged by the engine move."), "run",
+    Claim("C09.15", "The testing repository: 166 passed, 10 skipped", "09",
+          (F, "**166 passed, 10 skipped**. The engine move changed none of it; the one test more"), "run",
           steps=[Step("uv run pytest -q", cwd="$EVIDENCE_TESTING_REPO", timeout=900)],
-          check=has(0, "165 passed, 10 skipped"), checks="pytest reports 165 passed, 10 skipped",
+          check=has(0, "166 passed, 10 skipped"), checks="pytest reports 166 passed, 10 skipped",
           needs=["testing-repo", "oxi-gen"],
           notes="Set EVIDENCE_TESTING_REPO to a clone of the testing repository at "
-                f"[6cdfb14]({commit('testing', '6cdfb14a3c2857b61dcb32f49f56a4829b0d0664')}). It installs the suite "
-                "from a sibling checkout, `../consolidated_ontology_suite_python` (v0.23.0 here), and its competency "
+                f"[31bda0d]({commit('testing', '31bda0dea49a4e3669338f57b0e68c8f2ce5243f')}). It installs the suite "
+                "from a sibling checkout, `../consolidated_ontology_suite_python` (v0.25.0 here), and its competency "
                 "tests triplify with oxi-gen, found through ONTOLOGY_SUITE_OXI_GEN_BIN (0.5.1 here). The run resolved "
-                "holosdb 0.21.0 and shacl 0.3.3 from the testing repository's own lock. Without oxi-gen 40 of those "
+                "holosdb 0.26.0 and shacl 0.3.4 from the testing repository's own lock. At 6cdfb14, with suite "
+                "0.23.0, holosdb 0.21.0 and shacl 0.3.3, it was 165 passed, 10 skipped. Without oxi-gen 40 of those "
                 "tests error at setup, saying so."),
 
     Claim("C09.16", "The competency board: 27 green, 0 red", "09",
@@ -261,7 +262,7 @@ CLAIMS = [
     Claim("C09.19", "Seventeen fixtures; 58 of 61 checks pinned", "09",
           (F, "Seventeen fixtures, of which a sample:"), "source",
           sources=[src("testing repo detect.py (17 fixtures declared)", file("testing", "detect.py")),
-                   src("testing repo README", file("testing", "README.md", "35-37"),
+                   src("testing repo README", file("testing", "README.md", "38-40"),
                        "58 of the 61 checks are pinned by a test")]),
 
     Claim("C09.20", "The message assertion found EFF-001 within minutes", "09",

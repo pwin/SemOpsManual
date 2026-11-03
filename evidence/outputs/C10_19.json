@@ -1,7 +1,7 @@
 {
  "id": "C10.19",
  "status": "PASS",
- "detail": "suite 0.24.3: step 3: 54 findings (11 V, 40 W, 3 I); REA-022 present; REA-021 absent; suite 0.24.3: REA-022 present; REA-021 absent",
+ "detail": "suite 0.25.0: step 3: 54 findings (11 V, 40 W, 3 I); REA-022 present; REA-021 absent; suite 0.25.0: REA-022 present; REA-021 absent",
  "ran": "2026-11-03",
  "steps": [
   {

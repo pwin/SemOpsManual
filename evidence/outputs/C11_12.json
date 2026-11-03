@@ -7,8 +7,8 @@
   {
    "cmd": "python scripts/rule_scale.py 1000 100000",
    "rc": 0,
-   "seconds": 3.5,
-   "stdout": "N=  1,000  with rules:   1,000 results on   1,000 distinct focus nodes (0.06 s)  without rules: 0 results\nN=100,000  with rules: 100,000 results on 100,000 distinct focus nodes (2.74 s)  without rules: 0 results\n",
+   "seconds": 3.6,
+   "stdout": "N=  1,000  with rules:   1,000 results on   1,000 distinct focus nodes (0.06 s)  without rules: 0 results\nN=100,000  with rules: 100,000 results on 100,000 distinct focus nodes (2.80 s)  without rules: 0 results\n",
    "stderr": ""
   }
  ]

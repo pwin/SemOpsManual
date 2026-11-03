@@ -22,14 +22,14 @@
    "cmd": "python scripts/list_files.py work/C09_10/default",
    "rc": 0,
    "seconds": 0.1,
-   "stdout": "   79,141  cucumber.json\n    1,232  features/conformance.feature\n      958  features/data-quality.feature\n    4,889  features/documentation-quality.feature\n    2,149  features/logical-cogency.feature\n    1,375  features/naming-style.feature\n    3,214  features/reasoning.feature\n      777  features/structural---runtime-efficiency.feature\n    2,608  features/structural-integrity.feature\n    1,318  features/tarql-query-consistency.feature\n      263  features/vocabulary-integrity.feature\n    6,312  findings.txt\n   10,848  full_results.csv\n   33,544  plots/category_breakdown.png\n   15,966  plots/severity_distribution.png\n   32,323  plots/top_offenders.png\n  138,168  report.html\n17 files, 335,085 bytes\n",
+   "stdout": "   79,141  cucumber.json\n    1,232  features/conformance.feature\n      958  features/data-quality.feature\n    4,889  features/documentation-quality.feature\n    2,149  features/logical-cogency.feature\n    1,375  features/naming-style.feature\n    3,214  features/reasoning.feature\n      777  features/structural---runtime-efficiency.feature\n    2,608  features/structural-integrity.feature\n    1,318  features/tarql-query-consistency.feature\n      263  features/vocabulary-integrity.feature\n    6,312  findings.txt\n   10,889  full_results.csv\n   33,544  plots/category_breakdown.png\n   15,966  plots/severity_distribution.png\n   32,323  plots/top_offenders.png\n  138,168  report.html\n17 files, 335,126 bytes\n",
    "stderr": ""
   },
   {
    "cmd": "python scripts/list_files.py work/C09_10/minimal",
    "rc": 0,
    "seconds": 0.1,
-   "stdout": "    6,312  findings.txt\n   10,848  full_results.csv\n2 files, 17,160 bytes\n",
+   "stdout": "    6,312  findings.txt\n   10,889  full_results.csv\n2 files, 17,201 bytes\n",
    "stderr": ""
   }
  ]

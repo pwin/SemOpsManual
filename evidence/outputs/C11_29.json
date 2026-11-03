@@ -9,34 +9,34 @@
    "rc": 1,
    "seconds": 0.0,
    "stdout": "bridged+compiled  3 triples, 2 shapes in 0.000s\nvalidated         0.000s\nconforms          false\nresults           1\n",
-   "stderr": "loaded 3 quads in 0.00s (5582 quads/s)\nread 5 shape quads from data/shacl/shapes-violation.ttl, and kept none of them\n"
+   "stderr": "loaded 3 quads in 0.00s (6215 quads/s)\nread 5 shape quads from data/shacl/shapes-violation.ttl, and kept none of them\n"
   },
   {
    "cmd": "holos validate --data data/shacl/data.ttl --shapes data/shacl/shapes-violation.ttl --engine adapted",
    "rc": 1,
    "seconds": 0.0,
    "stdout": "bridged+compiled  3 triples, 2 shapes in 0.000s\nvalidated         0.000s\nconforms          false\nresults           1\n",
-   "stderr": "loaded 3 quads in 0.00s (5853 quads/s)\nread 5 shape quads from data/shacl/shapes-violation.ttl, and kept none of them\n"
+   "stderr": "loaded 3 quads in 0.00s (6147 quads/s)\nread 5 shape quads from data/shacl/shapes-violation.ttl, and kept none of them\n"
   },
   {
    "cmd": "holos validate --data data/shacl/data.ttl --shapes data/shacl/shapes-sparql.ttl",
    "rc": 1,
    "seconds": 0.0,
    "stdout": "bridged+compiled  3 triples, 1 shapes in 0.000s\nvalidated         0.000s\nconforms          false\nresults           1\n",
-   "stderr": "loaded 3 quads in 0.00s (6294 quads/s)\nread 6 shape quads from data/shacl/shapes-sparql.ttl, and kept none of them\n"
+   "stderr": "loaded 3 quads in 0.00s (3802 quads/s)\nread 6 shape quads from data/shacl/shapes-sparql.ttl, and kept none of them\n"
   },
   {
    "cmd": "holos validate --data data/shacl/data.ttl --shapes data/shacl/shapes-sparql.ttl --engine adapted",
    "rc": 1,
    "seconds": 0.0,
-   "stdout": "bridged+compiled  3 triples, 1 shapes in 0.001s\nvalidated         0.000s\nconforms          false\nresults           1\n",
-   "stderr": "loaded 3 quads in 0.00s (5335 quads/s)\nread 6 shape quads from data/shacl/shapes-sparql.ttl, and kept none of them\n"
+   "stdout": "bridged+compiled  3 triples, 1 shapes in 0.000s\nvalidated         0.000s\nconforms          false\nresults           1\n",
+   "stderr": "loaded 3 quads in 0.00s (5940 quads/s)\nread 6 shape quads from data/shacl/shapes-sparql.ttl, and kept none of them\n"
   },
   {
    "cmd": "python scripts/holosdb_validate.py data/shacl/data.ttl data/shacl/shapes-violation.ttl data/shacl/shapes-sparql.ttl",
    "rc": 0,
    "seconds": 0.1,
-   "stdout": "adapted: {'conforms': False, 'violations': 1, 'engine': 'adapted', 'results': [{'focus': 'http://example.org/bob', 'path': 'http://example.org/name', 'value': None, 'severity': 'Violation', 'component': 'http://www.w3.org/ns/shacl#MinCountConstraintComponent', 'shape': '_:0_b0', 'message': None}]}\nnative:  {'conforms': False, 'violations': 1, 'engine': 'native', 'results': [{'focus': 'http://example.org/bob', 'path': 'http://example.org/name', 'value': None, 'severity': 'Violation', 'component': 'http://www.w3.org/ns/shacl#MinCountConstraintComponent', 'shape': '_:f30909718c1d0068e0a872e70cd8d7e0', 'message': None}]}\nnative, sh:sparql shapes: HolosError: unsupported: sh:sparql is not implemented by the native evaluator; validate with the adapted engine instead\n",
+   "stdout": "adapted: {'conforms': False, 'violations': 1, 'engine': 'adapted', 'results': [{'focus': 'http://example.org/bob', 'path': 'http://example.org/name', 'value': None, 'severity': 'Violation', 'component': 'http://www.w3.org/ns/shacl#MinCountConstraintComponent', 'shape': '_:0_b0', 'message': None}]}\nnative:  {'conforms': False, 'violations': 1, 'engine': 'native', 'results': [{'focus': 'http://example.org/bob', 'path': 'http://example.org/name', 'value': None, 'severity': 'Violation', 'component': 'http://www.w3.org/ns/shacl#MinCountConstraintComponent', 'shape': '_:a15538abe654b53ef1cfee44f0530b29', 'message': None}]}\nnative, sh:sparql shapes: HolosError: unsupported: sh:sparql is not implemented by the native evaluator; validate with the adapted engine instead\n",
    "stderr": ""
   },
   {
@@ -44,14 +44,14 @@
    "rc": 2,
    "seconds": 0.0,
    "stdout": "",
-   "stderr": "loaded 3 quads in 0.00s (6206 quads/s)\nread 6 shape quads from data/shacl/shapes-sparql.ttl, and kept none of them\nError: unsupported: sh:sparql is not implemented by the native evaluator; validate with the adapted engine instead\n"
+   "stderr": "loaded 3 quads in 0.00s (3805 quads/s)\nread 6 shape quads from data/shacl/shapes-sparql.ttl, and kept none of them\nError: unsupported: sh:sparql is not implemented by the native evaluator; validate with the adapted engine instead\n"
   },
   {
    "cmd": "holos validate --data data/rules/nested-data.ttl --shapes data/shacl/shapes-violation.ttl",
    "rc": 0,
    "seconds": 0.0,
    "stdout": "bridged+compiled  2 triples, 2 shapes in 0.000s\nvalidated         0.000s\nconforms          true\nresults           0\n",
-   "stderr": "loaded 2 quads in 0.00s (4260 quads/s)\nread 5 shape quads from data/shacl/shapes-violation.ttl, and kept none of them\n"
+   "stderr": "loaded 2 quads in 0.00s (4307 quads/s)\nread 5 shape quads from data/shacl/shapes-violation.ttl, and kept none of them\n"
   },
   {
    "cmd": "holos --version",

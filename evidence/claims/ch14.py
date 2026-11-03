@@ -178,11 +178,14 @@ CLAIMS = [
                    src("extension README (0.15.0) names Oxigraph", file("webapp", "README.md", "86"),
                        "Oxigraph, `shacl-wasm`, and `eyereasoner` are all"),
                    src("testing repo README", file("testing", "README.md", "22"), "18 Turtle files in 10 folders"),
-                   src("testing repo README", file("testing", "README.md", "31"), "All 16 fixtures pass"),
+                   src("testing repo README at 7deaf86, before 79c53a2 corrected it",
+                       file("testing", "README.md", "31", ref="7deaf86a523fb313ccf47572df4e7276c779e28e"),
+                       "All 16 fixtures pass"),
                    src("suite commit 5d59713, 'Bump to 0.18.0': main's head until it was fast-forwarded to 0.23.0, as recorded while drafting",
                        commit("suite", "5d597132779a19dbfb7ccf8891723ca19d49ced3"), "Bump to 0.18.0")],
           notes="The testing repository's `ontologies/` holds 14 folders and 25 Turtle files at 6cdfb14; its "
-                "detect.py declares 17 fixtures (C09.19). The suite's default branch on GitHub is `develop`."),
+                "detect.py declares 17 fixtures (C09.19); both counts are the same at 31bda0d. The suite retired "
+                "`develop` on 23 October, and `main` is its default branch again."),
 
     Claim("C14.22", "The registry grew from 50 checks to 61", "14",
           (F, "registry grows, as it did from 50 checks to 61, and the scoped run is the one whose"), "source",
