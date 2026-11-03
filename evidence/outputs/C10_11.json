@@ -2,7 +2,7 @@
  "id": "C10.11",
  "status": "PASS",
  "detail": "step 1 exits 0; run -l: no message; step 2 output contains ': 40 triples'; step 3 exits 0; step 4 output contains ': 40 triples'; step 5 exits 1; step 5 output contains \"tarka: left out: row 3: column mbox: 'n/a' is not an IRI\", 'tarka: 1 of 5 rows left out'; step 6 output contains ': 32 triples'; step 7 exits 1; step 7 output contains '5 of 5 instances left out; nothing was made', 'row 1: argument 4 (id)'; step 8 exits 0; step 9 output contains ': 40 triples'",
- "ran": "2026-10-23",
+ "ran": "2026-11-03",
  "steps": [
   {
    "cmd": "tarka run -l data/ottr/employees-no-mailto-prefix.stottr -T acme:Employee -i data/ottr/employees-iri.csv --ntriples -o work/C10_11/none.nt",
@@ -14,7 +14,7 @@
   {
    "cmd": "python scripts/compare_ntriples.py work/C10_11/none.nt work/C10_11/none.nt",
    "rc": 0,
-   "seconds": 0.3,
+   "seconds": 0.2,
    "stdout": "work/C10_11/none.nt: 40 triples\nwork/C10_11/none.nt: 40 triples\nisomorphic: True\n",
    "stderr": ""
   },
@@ -28,7 +28,7 @@
   {
    "cmd": "python scripts/compare_ntriples.py work/C10_11/optional.nt work/C10_11/optional.nt",
    "rc": 0,
-   "seconds": 0.3,
+   "seconds": 0.2,
    "stdout": "work/C10_11/optional.nt: 40 triples\nwork/C10_11/optional.nt: 40 triples\nisomorphic: True\n",
    "stderr": ""
   },
@@ -42,7 +42,7 @@
   {
    "cmd": "python scripts/compare_ntriples.py work/C10_11/bad-mbox.nt work/C10_11/bad-mbox.nt",
    "rc": 0,
-   "seconds": 0.3,
+   "seconds": 0.2,
    "stdout": "work/C10_11/bad-mbox.nt: 32 triples\nwork/C10_11/bad-mbox.nt: 32 triples\nisomorphic: True\n",
    "stderr": ""
   },
@@ -63,7 +63,7 @@
   {
    "cmd": "python scripts/compare_ntriples.py work/C10_11/bottr.nt work/C10_11/bottr.nt",
    "rc": 0,
-   "seconds": 0.4,
+   "seconds": 0.2,
    "stdout": "work/C10_11/bottr.nt: 40 triples\nwork/C10_11/bottr.nt: 40 triples\nisomorphic: True\n",
    "stderr": ""
   }

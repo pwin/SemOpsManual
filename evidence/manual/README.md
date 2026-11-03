@@ -45,7 +45,7 @@ any of them.
 
 Every command shown in Part III was **executed for real**, against the ontology
 suite's own bundled `examples/acme_robotics/` fixture, and re-run for this edition
-between 13 and 22 October 2026. Where the output differs from what a strategy
+between 13 October and 3 November 2026. Where the output differs from what a strategy
 document would lead you to expect, the manual reports what actually happened and
 explains why.
 [Chapter 9](docs/09-continuous-integration.md) has the sharpest example, where the

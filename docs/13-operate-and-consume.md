@@ -251,7 +251,7 @@ query-rewriting design leaks do not leak:
 | The same, with `Principal(..., clearance=3)` | All three graphs |
 | The salary query with `.fail_closed()` on the policy | A `HolosError` saying *access denied by policy*, instead of a silent filter |
 
-All verified at 0.25.0. HOLOS measures the cost at 8 ns per quad, about 1% of
+All verified at 0.26.0. HOLOS measures the cost at 8 ns per quad, about 1% of
 decoding the quad. The `holos query` command from the release takes the same
 policy as flags (`--deny-predicate … --except-role hr`, `--label-graph`,
 `--fail-closed`) and gives the same answers.

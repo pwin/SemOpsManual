@@ -37,10 +37,10 @@ CLAIMS = [
           scripts=["scripts/versions.py"],
           steps=[Step("python scripts/versions.py")],
           check=has(0, "PyPI ontology-quality-suite  0.24.3", "PyPI shacl                   0.3.4",
-                    "PyPI holosdb                 0.25.0", "PyPI tarka-rdf               0.2.0",
+                    "PyPI holosdb                 0.26.0", "PyPI tarka-rdf               0.2.0",
                     "release shacl                shacl 0.3.4", "release tarka                tarka 0.2.0",
-                    "release holos                holos 0.25.0", "npm ontology-suite           0.16.1",
-                    "npm shacl-wasm-node          0.3.4", "npm holos-wasm-node          0.25.0"),
+                    "release holos                holos 0.26.0", "npm ontology-suite           0.16.1",
+                    "npm shacl-wasm-node          0.3.4", "npm holos-wasm-node          0.26.0"),
           checks="the installed packages, release binaries and npm packages are the versions in the table",
           needs=["node"],
           notes="The testing repository was used at "
@@ -73,10 +73,12 @@ CLAIMS = [
                        commit("holos", "8b2a9495af52ff56a7ebedd49e9dbd0f1ead93ce"),
                        "Send every query entry point through one pipeline")],
           notes="Below 1.0 a caret admits patch releases only, so `^0.25.0` means 0.25.x. The 0.16.3 release's "
-                "lock file resolves it to 0.25.0, the version C07.01 shows for holosdb and the CLI, and the suite "
-                "at 0.24.3 locks holosdb 0.25.0. The extension reaches HOLOS through `queryRdf`, the suite through "
-                "`Store.query`; from HOLOS 0.24.0 both run the same pipeline. What 0.25.0 changed, its own SHACL "
-                "validator, is in a part of HOLOS the extension does not call: it validates with shacl-wasm-node."),
+                "lock file resolves it to 0.25.0, and the suite at 0.24.3 locks holosdb 0.25.0: one release behind "
+                "the 0.26.0 C07.01 shows for holosdb and the CLI. 0.26.0 changes nothing a check runs; it adds "
+                "backups of an in-memory store, the Python 3.11 floor and two error messages. The extension reaches "
+                "HOLOS through `queryRdf`, the suite through `Store.query`; from HOLOS 0.24.0 both run the same "
+                "pipeline. HOLOS's own SHACL validator is a part the extension does not call: it validates with "
+                "shacl-wasm-node."),
 
     Claim("C07.05", "Both engines are runtime dependencies; owlready2 too; the wheels are libraries", "07",
           (F, "That one line now brings both engines: `holosdb` and `shacl` are runtime"), "run",
@@ -85,7 +87,7 @@ CLAIMS = [
           check=checks(has(0, "commands installed: ontology-quality-suite", "owlready2>=0.51",
                            "shacl 0.3.4\n    commands installed: none (library only)",
                            "tarka-rdf 0.2.0\n    commands installed: none (library only)",
-                           "holosdb 0.25.0\n    commands installed: none (library only)"),
+                           "holosdb 0.26.0\n    commands installed: none (library only)"),
                        by_version((0, 23, 0), has(0, "shacl<0.4,>=0.3.3"), has(0, "shacl<0.4,>=0.3.0")),
                        by_version((0, 24, 3), has(0, "holosdb>=0.24"),
                                   by_version((0, 24, 2), has(0, "holosdb>=0.23"), has(0, "holosdb>=0.15")))),
@@ -185,7 +187,7 @@ CLAIMS = [
     Claim("C07.21", "Each release carries SHA256SUMS", "07",
           (F, "Windows, each release with a `SHA256SUMS` file. Check it."), "source",
           sources=[src("SHACL Engine v0.3.4 release", "https://github.com/pwin/SHACL_Engine/releases/tag/v0.3.4"),
-                   src("HOLOS v0.25.0 release", "https://github.com/pwin/triplestore/releases/tag/v0.25.0"),
+                   src("HOLOS v0.26.0 release", "https://github.com/pwin/triplestore/releases/tag/v0.26.0"),
                    src("tarka v0.2.0 release", "https://github.com/pwin/tarka/releases/tag/v0.2.0")],
           scripts=["tools/fetch_binaries.py"],
           notes="`tools/fetch_binaries.py` downloads each archive and refuses one whose SHA-256 does not match "

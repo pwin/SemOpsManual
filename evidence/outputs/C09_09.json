@@ -2,7 +2,7 @@
  "id": "C09.09",
  "status": "PASS",
  "detail": "unscoped/full_results.csv: REA-022 present; REA-022's focus node is oq:Graph; scoped/full_results.csv: REA-022 present; REA-022's focus node is oq:Graph; step 2: 548 findings (65 V, 363 W, 120 I); step 3: 54 findings (11 V, 40 W, 3 I)",
- "ran": "2026-10-23",
+ "ran": "2026-11-03",
  "steps": [
   {
    "cmd": "tarka run -q fixtures/acme_robotics/employees.rq -i fixtures/acme_robotics/employees.csv -o work/C09_09/employees.ttl",
