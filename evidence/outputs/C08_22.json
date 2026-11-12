@@ -2,7 +2,7 @@
  "id": "C08.22",
  "status": "PASS",
  "detail": "step 2: 0 findings (0 V, 0 W, 0 I); step 2 output contains \"WARNING: --sparql replaced the suite's own query tree: 1 project check(s) ran and 42 built-in check(s) did not.\"; the warning recommends @builtin; step 2 output has none of 'site-packages'",
- "ran": "2026-11-03",
+ "ran": "2026-11-12",
  "steps": [
   {
    "cmd": "tarka run -q fixtures/acme_robotics/employees.rq -i fixtures/acme_robotics/employees.csv -o work/C08_22/employees.ttl",

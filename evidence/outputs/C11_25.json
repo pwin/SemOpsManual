@@ -2,7 +2,7 @@
  "id": "C11.25",
  "status": "PASS",
  "detail": "step 1 output contains 'inference=none   conforms=true  results=0', 'inference=rules  conforms=false  results=1', 'inference=bogus  ERROR: unknown inference \"bogus\"'",
- "ran": "2026-11-03",
+ "ran": "2026-11-12",
  "steps": [
   {
    "cmd": "node scripts/wasm_conforms.mjs data/shacl",

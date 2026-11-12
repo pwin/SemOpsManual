@@ -2,7 +2,7 @@
  "id": "C12.10",
  "status": "PASS",
  "detail": "step 3 output contains '+  BIND(\"acme:SoftwareEngineer\" AS ?role)', '+  ?employee a acme:Employee, acme:SoftwareEngineer ;'; step 3 output has none of '+# Every row'",
- "ran": "2026-11-03",
+ "ran": "2026-11-12",
  "steps": [
   {
    "cmd": "python scripts/copy_tree.py data/rename-literal work/C12_10/q",

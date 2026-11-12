@@ -2,7 +2,7 @@
  "id": "C12.03",
  "status": "PASS",
  "detail": "step 1 output contains '[undeclared_property] http://xmlns.com/foaf/0.1/mbox', '[undeclared_property] http://xmlns.com/foaf/0.1/name'",
- "ran": "2026-11-03",
+ "ran": "2026-11-12",
  "steps": [
   {
    "cmd": "ontology-quality-suite consistency --new fixtures/acme_robotics/acme-org-v2.ttl --old fixtures/acme_robotics/acme-org-v1.ttl --queries fixtures/acme_robotics --exclude-imports --out-dir work/C12_03/noimports",

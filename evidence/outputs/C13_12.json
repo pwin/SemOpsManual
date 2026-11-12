@@ -2,12 +2,12 @@
  "id": "C13.12",
  "status": "PASS",
  "detail": "three unpinned runs gave 3 different pages; two runs with PYTHONHASHSEED=0 gave the same page",
- "ran": "2026-11-03",
+ "ran": "2026-11-12",
  "steps": [
   {
    "cmd": "ontology-quality-suite docgen --ontology fixtures/acme_robotics/acme-org-v1.ttl --ref fixtures/acme_robotics/reference_vocab/org.ttl --ref fixtures/acme_robotics/reference_vocab/foaf.rdf --out-dir work/C13_12/run1",
    "rc": 0,
-   "seconds": 1.8,
+   "seconds": 1.7,
    "stdout": "Wrote work/C13_12/run1/ontology_doc_data.json: prefix='acme', 4 classes, 2 object properties, 3 datatype properties, 1 sections, 5 external terms (3 resolved).\nWrote work/C13_12/run1/ontology-documentation.html (4 classes, 2 object properties, 3 datatype properties, 5 external terms).\nReference documentation written to: work/C13_12/run1/ontology-documentation.html\n4 class diagram(s) written to: work/C13_12/run1/class-diagrams\n",
    "stderr": "NOTE: 2 external term(s) referenced with no --ref file resolving a definition:\n  - skos:ConceptScheme\n  - skos:inScheme\n"
   },
@@ -28,7 +28,7 @@
   {
    "cmd": "ontology-quality-suite docgen --ontology fixtures/acme_robotics/acme-org-v1.ttl --ref fixtures/acme_robotics/reference_vocab/org.ttl --ref fixtures/acme_robotics/reference_vocab/foaf.rdf --out-dir work/C13_12/seed0-a",
    "rc": 0,
-   "seconds": 1.8,
+   "seconds": 1.7,
    "stdout": "Wrote work/C13_12/seed0-a/ontology_doc_data.json: prefix='acme', 4 classes, 2 object properties, 3 datatype properties, 1 sections, 5 external terms (3 resolved).\nWrote work/C13_12/seed0-a/ontology-documentation.html (4 classes, 2 object properties, 3 datatype properties, 5 external terms).\nReference documentation written to: work/C13_12/seed0-a/ontology-documentation.html\n4 class diagram(s) written to: work/C13_12/seed0-a/class-diagrams\n",
    "stderr": "NOTE: 2 external term(s) referenced with no --ref file resolving a definition:\n  - skos:ConceptScheme\n  - skos:inScheme\n"
   },
@@ -43,7 +43,7 @@
    "cmd": "python scripts/sha256.py work/C13_12/run1/ontology-documentation.html work/C13_12/run2/ontology-documentation.html work/C13_12/run3/ontology-documentation.html work/C13_12/seed0-a/ontology-documentation.html work/C13_12/seed0-b/ontology-documentation.html",
    "rc": 0,
    "seconds": 0.7,
-   "stdout": "971c0cc03a58cc34 work/C13_12/run1/ontology-documentation.html\nbf2d4a50cd442604 work/C13_12/run2/ontology-documentation.html\nc148341dffd749b9 work/C13_12/run3/ontology-documentation.html\n4b065806e5fca839 work/C13_12/seed0-a/ontology-documentation.html\n4b065806e5fca839 work/C13_12/seed0-b/ontology-documentation.html\n",
+   "stdout": "d5a53dfc53d2dea1 work/C13_12/run1/ontology-documentation.html\na0b16c7c6b5dfe44 work/C13_12/run2/ontology-documentation.html\na92a9d0df68a2a37 work/C13_12/run3/ontology-documentation.html\n4b065806e5fca839 work/C13_12/seed0-a/ontology-documentation.html\n4b065806e5fca839 work/C13_12/seed0-b/ontology-documentation.html\n",
    "stderr": ""
   }
  ]

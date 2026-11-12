@@ -2,7 +2,7 @@
  "id": "C07.28",
  "status": "PASS",
  "detail": "step 1 output contains '2 owl:imports resolved:', 'http://xmlns.com/foaf/0.1/  <-  ', 'http://www.w3.org/ns/org#  <-  ', '[verbose] engine: sparql'",
- "ran": "2026-11-03",
+ "ran": "2026-11-12",
  "steps": [
   {
    "cmd": "ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --own-namespace https://acme.example.org/ns/ --engine sparql --out-dir work/C07_28/v --fail-on never --reports minimal -v",

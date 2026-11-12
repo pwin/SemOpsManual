@@ -2,7 +2,7 @@
  "id": "C08.06",
  "status": "PASS",
  "detail": "typo/full_results.csv: {'QUA-004': 2, 'QUA-005': 1, 'STR-001': 1}; step 2 output contains 'value=https://acme.example.org/ns/Empolyee'; no VOC-001 finding",
- "ran": "2026-11-03",
+ "ran": "2026-11-12",
  "steps": [
   {
    "cmd": "ontology-quality-suite checks --data data/typo/typo-data.ttl --engine sparql --out-dir work/C08_06/typo --fail-on never --reports minimal",

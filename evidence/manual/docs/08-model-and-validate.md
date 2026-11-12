@@ -330,7 +330,7 @@ defobjectproperty('worksIn', { domain: Employee, range: Department });
 defdatatypeproperty('hasEmployeeId', { domain: Employee, range: datatype('xsd:string') });
 ```
 
-Verified against the published 0.16.1 package. The interesting part is what
+Verified against the published 0.17.3 package. The interesting part is what
 catches which mistake.
 
 <a id="ev-c08-12"></a>*Evidence:* [C08.12 — The DSL script type-checks and builds against the npm package](../../EVIDENCE.md#c08-12) (reproduced: PASS)

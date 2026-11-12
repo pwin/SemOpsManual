@@ -2,7 +2,7 @@
  "id": "C12.02",
  "status": "PASS",
  "detail": "step 1 output contains 'Removed classes [MAJOR]:\\n  - https://acme.example.org/ns/ProductManager/n  - https://acme.example.org/ns/SoftwareEngineer', 'Removed properties [MAJOR]:\\n  - https://acme.example.org/ns/hireDate'",
- "ran": "2026-11-03",
+ "ran": "2026-11-12",
  "steps": [
   {
    "cmd": "ontology-quality-suite version-diff fixtures/acme_robotics/acme-org-v2.ttl fixtures/acme_robotics/acme-org-v1.ttl --exclude-imports --out-dir work/C12_02/rev",

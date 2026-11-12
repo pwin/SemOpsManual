@@ -2,7 +2,7 @@
  "id": "C12.08",
  "status": "PASS",
  "detail": "step 2 output contains 'Applied 1/1 suggested repair(s) directly to their target files (confidence >= 70%).'; step 3 output contains '@@ -14 +14 @@', '-  ?employee a acme:Employee, acme:Engineer ;', '+  ?employee a acme:Employee, acme:SoftwareEngineer ;'; and that is the only hunk",
- "ran": "2026-11-03",
+ "ran": "2026-11-12",
  "steps": [
   {
    "cmd": "python scripts/copy_tree.py fixtures/acme_robotics work/C12_08/acme",

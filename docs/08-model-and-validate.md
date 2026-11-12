@@ -306,7 +306,7 @@ defobjectproperty('worksIn', { domain: Employee, range: Department });
 defdatatypeproperty('hasEmployeeId', { domain: Employee, range: datatype('xsd:string') });
 ```
 
-Verified against the published 0.16.1 package. The interesting part is what
+Verified against the published 0.17.3 package. The interesting part is what
 catches which mistake.
 
 **The type checker catches a mistake of kind.** My first draft wrote

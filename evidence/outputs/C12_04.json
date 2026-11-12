@@ -2,7 +2,7 @@
  "id": "C12.04",
  "status": "PASS",
  "detail": "step 1 output contains 'Suggested version bump: MAJOR', '1 class(es) used in TARQL but not declared in the ontology set:\\n  [undeclared_class] https://acme.example.org/ns/Engineer', 'employees.rq (confidence 100%)', 'Update to the renamed ontology term(s): https://acme.example.org/ns/Engineer -> https://acme.example.org/ns/SoftwareEngineer', 'Wrote 1/1 suggested repair(s) as .patch files', 'Re-run with --apply-repairs'; step 1 output has none of 'undeclared_property'; step 2 output contains 'repairs/01-rename_iri-employees.rq.patch'",
- "ran": "2026-11-03",
+ "ran": "2026-11-12",
  "steps": [
   {
    "cmd": "ontology-quality-suite consistency --new fixtures/acme_robotics/acme-org-v2.ttl --old fixtures/acme_robotics/acme-org-v1.ttl --queries fixtures/acme_robotics --import-dir fixtures/acme_robotics --out-dir work/C12_04/consistency",
