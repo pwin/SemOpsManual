@@ -15,7 +15,7 @@
    "cmd": "shacl -d data/shacl/data.ttl -s data/shacl/shapes-violation.ttl",
    "rc": 1,
    "seconds": 0.0,
-   "stdout": "conforms: false\n  MinCountConstraintComponent | focus <http://example.org/bob> | value - | path <http://example.org/name>\n",
+   "stdout": "conforms: false\n  Violation MinCountConstraintComponent | focus <http://example.org/bob> | value - | path <http://example.org/name>\n",
    "stderr": ""
   },
   {

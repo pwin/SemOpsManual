@@ -15,7 +15,7 @@
    "cmd": "shacl -d data/rules/box.ttl -s data/rules/sparql-rule.ttl",
    "rc": 1,
    "seconds": 0.0,
-   "stdout": "conforms: false\n  HasValueConstraintComponent | focus <http://example.org/b> | value - | path <http://example.org/area>\n  MinCountConstraintComponent | focus <http://example.org/b> | value - | path <http://example.org/area>\n",
+   "stdout": "conforms: false\n  Violation HasValueConstraintComponent | focus <http://example.org/b> | value - | path <http://example.org/area>\n    area must be 12\n  Violation MinCountConstraintComponent | focus <http://example.org/b> | value - | path <http://example.org/area>\n    area must be 12\n",
    "stderr": ""
   }
  ]

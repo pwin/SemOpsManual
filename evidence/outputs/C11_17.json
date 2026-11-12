@@ -8,7 +8,7 @@
    "cmd": "shacl -d data/rules/chain.ttl -s data/rules/transitive.ttl -a",
    "rc": 1,
    "seconds": 0.0,
-   "stdout": "conforms: false\n  QualifiedMinCountConstraintComponent | focus <http://example.org/a> | value - | path <http://example.org/sub>\n",
+   "stdout": "conforms: false\n  Violation QualifiedMinCountConstraintComponent | focus <http://example.org/a> | value - | path <http://example.org/sub>\n    should reach ex:d transitively\n",
    "stderr": ""
   },
   {

@@ -15,7 +15,7 @@
    "cmd": "shacl -d data/rules/people.ttl -s data/rules/triple.ttl -a",
    "rc": 1,
    "seconds": 0.0,
-   "stdout": "conforms: false\n  MinCountConstraintComponent | focus <http://example.org/dave> | value - | path <http://example.org/contact>\n",
+   "stdout": "conforms: false\n  Violation MinCountConstraintComponent | focus <http://example.org/dave> | value - | path <http://example.org/contact>\n    Agent has no contact\n",
    "stderr": ""
   }
  ]

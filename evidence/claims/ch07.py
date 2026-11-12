@@ -36,11 +36,11 @@ CLAIMS = [
           (F, "> **Versions this edition was measured against.**"), "run",
           scripts=["scripts/versions.py"],
           steps=[Step("python scripts/versions.py")],
-          check=has(0, "PyPI ontology-quality-suite  0.27.0", "PyPI shacl                   0.3.4",
-                    "PyPI holosdb                 0.26.1", "PyPI tarka-rdf               0.2.1",
-                    "release shacl                shacl 0.3.4", "release tarka                tarka 0.2.1",
+          check=has(0, "PyPI ontology-quality-suite  0.27.0", "PyPI shacl                   0.3.5",
+                    "PyPI holosdb                 0.26.1", "PyPI tarka-rdf               0.2.2",
+                    "release shacl                shacl 0.3.5", "release tarka                tarka 0.2.2",
                     "release holos                holos 0.26.1", "npm ontology-suite           0.17.3",
-                    "npm shacl-wasm-node          0.3.4", "npm holos-wasm-node          0.26.1"),
+                    "npm shacl-wasm-node          0.3.5", "npm holos-wasm-node          0.26.1"),
           checks="the installed packages, release binaries and npm packages are the versions in the table",
           needs=["node"],
           notes="The testing repository was used at "
@@ -63,9 +63,9 @@ CLAIMS = [
 
     Claim("C07.04", "The editor runs the same engines at the same versions", "07",
           (F, "the 44 portable checks run on **holosdb** in Python and on"), "source",
-          sources=[src("extension package.json (0.17.3)", file("webapp", "package.json", "500-509"),
+          sources=[src("extension package.json (0.17.4)", file("webapp", "package.json", "500-509"),
                        '"holos-wasm-node": "^0.26.1",'),
-                   src("extension package-lock.json (0.17.3): the holos-wasm-node it bundles",
+                   src("extension package-lock.json (0.17.4): the holos-wasm-node it bundles",
                        file("webapp", "package-lock.json"), '"node_modules/holos-wasm-node"'),
                    src("suite uv.lock at the 0.27.0 release: the holosdb it locks",
                        file("suite", "uv.lock", "167-168"),
@@ -73,7 +73,7 @@ CLAIMS = [
                    src("HOLOS commit 8b2a949: every query entry point through one pipeline",
                        commit("holos", "8b2a9495af52ff56a7ebedd49e9dbd0f1ead93ce"),
                        "Send every query entry point through one pipeline")],
-          notes="Below 1.0 a caret admits patch releases only, so `^0.26.1` means 0.26.x. The 0.17.3 release's "
+          notes="Below 1.0 a caret admits patch releases only, so `^0.26.1` means 0.26.x. The 0.17.4 release's "
                 "lock file resolves it to 0.26.1, and the suite's 0.27.0 release locks the same 0.26.1 -- so the "
                 "two sides are on one version exactly, which is what C07.01 shows for holosdb and the CLI. "
                 "Earlier editions needed a caveat here, because the suite's released lock trailed its "
@@ -86,8 +86,8 @@ CLAIMS = [
           scripts=["scripts/inspect_packages.py"],
           steps=[Step("python scripts/inspect_packages.py")],
           check=checks(has(0, "commands installed: ontology-quality-suite", "owlready2>=0.51",
-                           "shacl 0.3.4\n    commands installed: none (library only)",
-                           "tarka-rdf 0.2.1\n    commands installed: none (library only)",
+                           "shacl 0.3.5\n    commands installed: none (library only)",
+                           "tarka-rdf 0.2.2\n    commands installed: none (library only)",
                            "holosdb 0.26.1\n    commands installed: none (library only)"),
                        by_version((0, 23, 0), has(0, "shacl<0.4,>=0.3.3"), has(0, "shacl<0.4,>=0.3.0")),
                        by_version((0, 24, 3), has(0, "holosdb>=0.24"),
@@ -187,9 +187,9 @@ CLAIMS = [
 
     Claim("C07.21", "Each release carries SHA256SUMS", "07",
           (F, "Windows, each release with a `SHA256SUMS` file. Check it."), "source",
-          sources=[src("SHACL Engine v0.3.4 release", "https://github.com/pwin/SHACL_Engine/releases/tag/v0.3.4"),
-                   src("HOLOS v0.26.0 release", "https://github.com/pwin/triplestore/releases/tag/v0.26.0"),
-                   src("tarka v0.2.0 release", "https://github.com/pwin/tarka/releases/tag/v0.2.0")],
+          sources=[src("SHACL Engine v0.3.5 release", "https://github.com/pwin/SHACL_Engine/releases/tag/v0.3.5"),
+                   src("HOLOS v0.26.1 release", "https://github.com/pwin/triplestore/releases/tag/v0.26.1"),
+                   src("tarka v0.2.2 release", "https://github.com/pwin/tarka/releases/tag/v0.2.2")],
           scripts=["tools/fetch_binaries.py"],
           notes="`tools/fetch_binaries.py` downloads each archive and refuses one whose SHA-256 does not match "
                 "the release's SHA256SUMS; the binaries used throughout this evidence came through it."),

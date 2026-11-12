@@ -2,8 +2,8 @@
 
     python tools/fetch_binaries.py
 
-For this machine's platform, fetches `shacl` (SHACL Engine 0.3.4), `tarka`
-(0.2.1) and `holos` + `holos-server` (HOLOS 0.26.1) from their GitHub releases,
+For this machine's platform, fetches `shacl` (SHACL Engine 0.3.5), `tarka`
+(0.2.2) and `holos` + `holos-server` (HOLOS 0.26.1) from their GitHub releases,
 verifies each archive against the release's SHA256SUMS, and unpacks it under
 evidence/bin/. Nothing is installed anywhere else. If a binary is already
 there, it is left alone; a superseded version of it is removed.
@@ -21,8 +21,8 @@ from pathlib import Path
 
 BIN = Path(__file__).resolve().parent.parent / "bin"
 RELEASES = {
-    "shacl": ("pwin/SHACL_Engine", "v0.3.4", "shacl-0.3.4-{target}"),
-    "tarka": ("pwin/tarka", "v0.2.1", "tarka-0.2.1-{target}"),
+    "shacl": ("pwin/SHACL_Engine", "v0.3.5", "shacl-0.3.5-{target}"),
+    "tarka": ("pwin/tarka", "v0.2.2", "tarka-0.2.2-{target}"),
     "holos": ("pwin/triplestore", "v0.26.1", "holos-0.26.1-{target}"),
 }
 

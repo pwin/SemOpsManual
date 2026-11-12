@@ -8,7 +8,7 @@
    "cmd": "shacl -d data/rules/negation-data.ttl -s data/rules/negation.ttl -a",
    "rc": 1,
    "seconds": 0.0,
-   "stdout": "conforms: false\n  MaxCountConstraintComponent | focus <http://example.org/a> | value - | path <http://example.org/name>\n",
+   "stdout": "conforms: false\n  Violation MaxCountConstraintComponent | focus <http://example.org/a> | value - | path <http://example.org/name>\n    marked Unnamed, yet it has a name\n",
    "stderr": ""
   },
   {

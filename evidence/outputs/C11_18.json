@@ -15,7 +15,7 @@
    "cmd": "shacl -d data/rules/order-data.ttl -s data/rules/order.ttl -a --iterate-rules 5",
    "rc": 1,
    "seconds": 0.0,
-   "stdout": "conforms: false\n  MinCountConstraintComponent | focus <http://example.org/p> | value - | path <http://example.org/nope>\n",
+   "stdout": "conforms: false\n  Violation MinCountConstraintComponent | focus <http://example.org/p> | value - | path <http://example.org/nope>\n    reached Step2\n",
    "stderr": ""
   }
  ]

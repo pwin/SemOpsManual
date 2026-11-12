@@ -7,7 +7,7 @@
   {
    "cmd": "node -p \"require('./node_modules/ontology-suite/package.json').version\"",
    "rc": 0,
-   "seconds": 0.1,
+   "seconds": 0.0,
    "stdout": "0.17.3\n",
    "stderr": ""
   },
@@ -21,7 +21,7 @@
   {
    "cmd": "node node_modules/tsx/dist/cli.mjs scripts/dsl/acme.ontology.ts work/C08_12/acme.ttl",
    "rc": 0,
-   "seconds": 0.4,
+   "seconds": 0.3,
    "stdout": "",
    "stderr": ""
   },
