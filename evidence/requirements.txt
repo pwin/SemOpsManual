@@ -4,7 +4,7 @@
 #   python -m venv .venv            (or: uv venv .venv)
 #   .venv/bin/pip install -r requirements.txt      (Windows: .venv\Scripts\pip)
 #
-ontology-quality-suite==0.26.0
+ontology-quality-suite==0.27.0
 shacl==0.3.4
 holosdb==0.26.1
 tarka-rdf==0.2.1

@@ -36,7 +36,7 @@ CLAIMS = [
           (F, "> **Versions this edition was measured against.**"), "run",
           scripts=["scripts/versions.py"],
           steps=[Step("python scripts/versions.py")],
-          check=has(0, "PyPI ontology-quality-suite  0.26.0", "PyPI shacl                   0.3.4",
+          check=has(0, "PyPI ontology-quality-suite  0.27.0", "PyPI shacl                   0.3.4",
                     "PyPI holosdb                 0.26.1", "PyPI tarka-rdf               0.2.1",
                     "release shacl                shacl 0.3.4", "release tarka                tarka 0.2.1",
                     "release holos                holos 0.26.1", "npm ontology-suite           0.17.3",
@@ -67,14 +67,14 @@ CLAIMS = [
                        '"holos-wasm-node": "^0.26.1",'),
                    src("extension package-lock.json (0.17.3): the holos-wasm-node it bundles",
                        file("webapp", "package-lock.json"), '"node_modules/holos-wasm-node"'),
-                   src("suite uv.lock at the 0.26.0 release: the holosdb it locks",
+                   src("suite uv.lock at the 0.27.0 release: the holosdb it locks",
                        file("suite", "uv.lock", "167-168"),
                        'version = "0.26.1"'),
                    src("HOLOS commit 8b2a949: every query entry point through one pipeline",
                        commit("holos", "8b2a9495af52ff56a7ebedd49e9dbd0f1ead93ce"),
                        "Send every query entry point through one pipeline")],
           notes="Below 1.0 a caret admits patch releases only, so `^0.26.1` means 0.26.x. The 0.17.3 release's "
-                "lock file resolves it to 0.26.1, and the suite's 0.26.0 release locks the same 0.26.1 -- so the "
+                "lock file resolves it to 0.26.1, and the suite's 0.27.0 release locks the same 0.26.1 -- so the "
                 "two sides are on one version exactly, which is what C07.01 shows for holosdb and the CLI. "
                 "Earlier editions needed a caveat here, because the suite's released lock trailed its "
                 "repository's; it does not now. The extension reaches HOLOS through `queryRdf`, the suite "
