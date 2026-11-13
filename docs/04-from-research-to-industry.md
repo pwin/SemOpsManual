@@ -215,8 +215,8 @@ that broke production.
 
 HOLOS reports its W3C results as **two numbers, because either alone misleads**:
 correctness (how much of what runs passes) and coverage (how much of the suite runs
-at all). Its SPARQL 1.1 line reads 512 of 512 for correctness and 82% for coverage.
-A single "100%" would have been true, and would have hidden the 113 tests the
+at all). Its SPARQL 1.1 line reads 511 of 511 for correctness and 82% for coverage.
+A single "100%" would have been true, and would have hidden the 114 tests the
 harness does not yet run. The same project withdrew its original 500,000
 quads-per-second target in writing, explaining that it "was written before anything
 was measured", and published where the time actually goes instead.

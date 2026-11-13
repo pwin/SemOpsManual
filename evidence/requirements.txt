@@ -5,8 +5,8 @@
 #   .venv/bin/pip install -r requirements.txt      (Windows: .venv\Scripts\pip)
 #
 ontology-quality-suite==0.27.0
-shacl==0.3.5
-holosdb==0.26.1
+shacl==0.3.6
+holosdb==0.26.2
 tarka-rdf==0.2.2
 # A second, independent SPARQL engine, used only as a witness in claim C07.03
 # (it is not part of the toolchain).

@@ -36,11 +36,11 @@ CLAIMS = [
           (F, "> **Versions this edition was measured against.**"), "run",
           scripts=["scripts/versions.py"],
           steps=[Step("python scripts/versions.py")],
-          check=has(0, "PyPI ontology-quality-suite  0.27.0", "PyPI shacl                   0.3.5",
-                    "PyPI holosdb                 0.26.1", "PyPI tarka-rdf               0.2.2",
-                    "release shacl                shacl 0.3.5", "release tarka                tarka 0.2.2",
-                    "release holos                holos 0.26.1", "npm ontology-suite           0.17.3",
-                    "npm shacl-wasm-node          0.3.5", "npm holos-wasm-node          0.26.1"),
+          check=has(0, "PyPI ontology-quality-suite  0.27.0", "PyPI shacl                   0.3.6",
+                    "PyPI holosdb                 0.26.2", "PyPI tarka-rdf               0.2.2",
+                    "release shacl                shacl 0.3.6", "release tarka                tarka 0.2.2",
+                    "release holos                holos 0.26.2", "npm ontology-suite           0.17.3",
+                    "npm shacl-wasm-node          0.3.6", "npm holos-wasm-node          0.26.2"),
           checks="the installed packages, release binaries and npm packages are the versions in the table",
           needs=["node"],
           notes="The testing repository was used at "
@@ -75,9 +75,10 @@ CLAIMS = [
                        "Send every query entry point through one pipeline")],
           notes="Below 1.0 a caret admits patch releases only, so `^0.26.1` means 0.26.x. The 0.17.4 release's "
                 "lock file resolves it to 0.26.1, and the suite's 0.27.0 release locks the same 0.26.1 -- so the "
-                "two sides are on one version exactly, which is what C07.01 shows for holosdb and the CLI. "
-                "Earlier editions needed a caveat here, because the suite's released lock trailed its "
-                "repository's; it does not now. The extension reaches HOLOS through `queryRdf`, the suite "
+                "two released sides are on one version exactly. HOLOS 0.26.2 has since been published, and C07.01 "
+                "installs it, as a reader would; the suite's repository locks it from bdb9937, ahead of any "
+                "suite release, and the extension's 0.17.5, which bundles it, is merged but not yet released. "
+                "Both sides move to 0.26.2 together, as they moved to 0.26.1. The extension reaches HOLOS through `queryRdf`, the suite "
                 "through `Store.query`; from HOLOS 0.24.0 both run the same pipeline. HOLOS's own SHACL validator "
                 "is a part the extension does not call: it validates with shacl-wasm-node."),
 
@@ -86,9 +87,9 @@ CLAIMS = [
           scripts=["scripts/inspect_packages.py"],
           steps=[Step("python scripts/inspect_packages.py")],
           check=checks(has(0, "commands installed: ontology-quality-suite", "owlready2>=0.51",
-                           "shacl 0.3.5\n    commands installed: none (library only)",
+                           "shacl 0.3.6\n    commands installed: none (library only)",
                            "tarka-rdf 0.2.2\n    commands installed: none (library only)",
-                           "holosdb 0.26.1\n    commands installed: none (library only)"),
+                           "holosdb 0.26.2\n    commands installed: none (library only)"),
                        by_version((0, 23, 0), has(0, "shacl<0.4,>=0.3.3"), has(0, "shacl<0.4,>=0.3.0")),
                        by_version((0, 24, 3), has(0, "holosdb>=0.24"),
                                   by_version((0, 24, 2), has(0, "holosdb>=0.23"), has(0, "holosdb>=0.15")))),
@@ -187,8 +188,8 @@ CLAIMS = [
 
     Claim("C07.21", "Each release carries SHA256SUMS", "07",
           (F, "Windows, each release with a `SHA256SUMS` file. Check it."), "source",
-          sources=[src("SHACL Engine v0.3.5 release", "https://github.com/pwin/SHACL_Engine/releases/tag/v0.3.5"),
-                   src("HOLOS v0.26.1 release", "https://github.com/pwin/triplestore/releases/tag/v0.26.1"),
+          sources=[src("SHACL Engine v0.3.6 release", "https://github.com/pwin/SHACL_Engine/releases/tag/v0.3.6"),
+                   src("HOLOS v0.26.2 release", "https://github.com/pwin/triplestore/releases/tag/v0.26.2"),
                    src("tarka v0.2.2 release", "https://github.com/pwin/tarka/releases/tag/v0.2.2")],
           scripts=["tools/fetch_binaries.py"],
           notes="`tools/fetch_binaries.py` downloads each archive and refuses one whose SHA-256 does not match "
@@ -213,7 +214,12 @@ CLAIMS = [
                                                                f"{s.seconds:.1f} s" for s in r.steps)),
           checks="nothing is asserted about the times; they are recorded. Each run must succeed",
           notes="Times vary by machine. Three repeated runs here gave native 1.7 s, sparql 2.0–2.1 s and "
-                "native+sparql 2.1–2.3 s."),
+                "native+sparql 2.1–2.3 s. The recording above is from 13 November, with this machine busy with "
+                "other work (40% CPU when checked): three runs gave native 2.9–3.0 s, sparql 3.6–3.9 s and "
+                "native+sparql 3.9–4.1 s. Interleaved under the same load, four runs each of holosdb 0.26.1 with "
+                "shacl 0.3.5 and of holosdb 0.26.2 with shacl 0.3.6 gave medians of 3.0 and 2.9 s (native), 3.8 "
+                "and 3.7 s (sparql), and 3.9 and 4.0 s (native+sparql): the load moved the times, the release "
+                "did not."),
 
     Claim("C07.24", "Until 0.6.0 the shapes put sh:severity in the wrong place", "07",
           (F, "**The severity lesson is about shape authoring, not engines.**"), "source",

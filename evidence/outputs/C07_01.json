@@ -1,14 +1,14 @@
 {
  "id": "C07.01",
  "status": "PASS",
- "detail": "step 1 output contains 'PyPI ontology-quality-suite  0.27.0', 'PyPI shacl                   0.3.5', 'PyPI holosdb                 0.26.1', 'PyPI tarka-rdf               0.2.2', 'release shacl                shacl 0.3.5', 'release tarka                tarka 0.2.2', 'release holos                holos 0.26.1', 'npm ontology-suite           0.17.3', 'npm shacl-wasm-node          0.3.5', 'npm holos-wasm-node          0.26.1'",
- "ran": "2026-11-12",
+ "detail": "step 1 output contains 'PyPI ontology-quality-suite  0.27.0', 'PyPI shacl                   0.3.6', 'PyPI holosdb                 0.26.2', 'PyPI tarka-rdf               0.2.2', 'release shacl                shacl 0.3.6', 'release tarka                tarka 0.2.2', 'release holos                holos 0.26.2', 'npm ontology-suite           0.17.3', 'npm shacl-wasm-node          0.3.6', 'npm holos-wasm-node          0.26.2'",
+ "ran": "2026-11-13",
  "steps": [
   {
    "cmd": "python scripts/versions.py",
    "rc": 0,
-   "seconds": 0.5,
-   "stdout": "python                       3.12.13\nplatform                     Windows 11 (AMD64)\nPyPI ontology-quality-suite  0.27.0\nPyPI shacl                   0.3.5\nPyPI holosdb                 0.26.1\nPyPI tarka-rdf               0.2.2\nPyPI rdflib                  7.6.0\nPyPI pyoxigraph              0.5.11\nPyPI polars                  2.0.0\nrelease shacl                shacl 0.3.5\nrelease tarka                tarka 0.2.2\nrelease holos                holos 0.26.1 (666238f)\nnode                         v22.21.1\nnpm ontology-suite           0.17.3\nnpm shacl-wasm-node          0.3.5\nnpm holos-wasm-node          0.26.1\nnpm typescript               7.0.2\njava (for HermiT)            openjdk version \"25.0.3\" 2026-04-21 LTS\noxi-gen (testing repo only)  oxi_gen 0.5.1\n",
+   "seconds": 2.0,
+   "stdout": "python                       3.12.13\nplatform                     Windows 11 (AMD64)\nPyPI ontology-quality-suite  0.27.0\nPyPI shacl                   0.3.6\nPyPI holosdb                 0.26.2\nPyPI tarka-rdf               0.2.2\nPyPI rdflib                  7.6.0\nPyPI pyoxigraph              0.5.11\nPyPI polars                  2.0.0\nrelease shacl                shacl 0.3.6\nrelease tarka                tarka 0.2.2\nrelease holos                holos 0.26.2 (3d9c46f)\nnode                         v22.21.1\nnpm ontology-suite           0.17.3\nnpm shacl-wasm-node          0.3.6\nnpm holos-wasm-node          0.26.2\nnpm typescript               7.0.2\njava (for HermiT)            openjdk version \"25.0.3\" 2026-04-21 LTS\noxi-gen (testing repo only)  oxi_gen 0.5.1\n",
    "stderr": ""
   }
  ]

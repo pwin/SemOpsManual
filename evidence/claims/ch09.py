@@ -232,10 +232,10 @@ CLAIMS = [
           check=has(0, "166 passed, 10 skipped"), checks="pytest reports 166 passed, 10 skipped",
           needs=["testing-repo", "oxi-gen"],
           notes="Set EVIDENCE_TESTING_REPO to a clone of the testing repository at "
-                f"[eb114f4]({commit('testing', 'eb114f471fe67130fb21f6fe30778aa89aa37970')}). It installs the suite "
+                f"[9ed651c]({commit('testing', '9ed651ce69b7faae429d96de27996fc1baff8065')}). It installs the suite "
                 "from a sibling checkout, `../consolidated_ontology_suite_python` (v0.27.0 here), and its competency "
                 "tests triplify with oxi-gen, found through ONTOLOGY_SUITE_OXI_GEN_BIN (0.5.1 here). The run resolved "
-                "holosdb 0.26.1 and shacl 0.3.4 from the testing repository's own lock. At 6cdfb14, with suite "
+                "holosdb 0.26.2 and shacl 0.3.6 from the testing repository's own lock. At 6cdfb14, with suite "
                 "0.23.0, holosdb 0.21.0 and shacl 0.3.3, it was 165 passed, 10 skipped. Without oxi-gen 40 of those "
                 "tests error at setup, saying so."),
 
