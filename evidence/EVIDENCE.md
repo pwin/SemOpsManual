@@ -153,7 +153,7 @@ for its error on unchecked code and its `Quad` type ([C08.15](#c08-15),
 
 ## Summary
 
-256 claims: 179 reproduced here, by 105 distinct runs (179 pass, 0 fail, 0 not yet run), 65 cited from upstream, 12 arguments. 129 source citations, 123 of them checked against the cited commit (the quoted words found in the commit message or in the file at the cited lines).
+256 claims: 179 reproduced here, by 105 distinct runs (179 pass, 0 fail, 0 not yet run), 65 cited from upstream, 12 arguments. 130 source citations, 124 of them checked against the cited commit (the quoted words found in the commit message or in the file at the cited lines).
 
 ### Introduction (README)
 
@@ -313,8 +313,8 @@ for its error on unchecked code and its `Quad` type ([C08.15](#c08-15),
 | [C09.12 — The suite pins shacl below 0.4](#c09-12) | Reproduced here | PASS (2026-11-13) |
 | [C09.13 — --reports minimal writes two files](#c09-13) | Reproduced here | PASS (2026-11-13) |
 | [C09.14 — run reports 26 findings, one contradiction once, from 0.24.0](#c09-14) | Reproduced here | PASS (2026-11-13) |
-| [C09.15 — The testing repository: 166 passed, 10 skipped](#c09-15) | Reproduced here | PASS (2026-11-13) |
-| [C09.16 — The competency board: 27 green, 0 red](#c09-16) | Reproduced here | PASS (2026-11-13) |
+| [C09.15 — The testing repository: 166 passed, 10 skipped](#c09-15) | Reproduced here | PASS (2026-11-18) |
+| [C09.16 — The competency board: 27 green, 0 red](#c09-16) | Reproduced here | PASS (2026-11-18) |
 | [C09.17 — Fourteen of 38 questions need no data](#c09-17) | Cited from upstream | Cited from upstream |
 | [C09.18 — A clean minimal ontology is not writable](#c09-18) | Cited from upstream | Cited from upstream |
 | [C09.19 — Seventeen fixtures; 58 of 61 checks pinned](#c09-19) | Cited from upstream | Cited from upstream |
@@ -459,7 +459,7 @@ for its error on unchecked code and its `Quad` type ([C08.15](#c08-15),
 | [C14.18 — consistency and pattern-consistency are report-only by default](#c14-18) | Reproduced here | PASS (2026-11-13) |
 | [C14.19 — The holos CLI and holosdb defaulted to different validators, up to 0.21.1](#c14-19) | Reproduced here | PASS (2026-11-13) |
 | [C14.20 — sketch reads every file with the first file's prefixes](#c14-20) | Reproduced here | PASS (2026-11-13) |
-| [C14.21 — Documentation drift, upstream](#c14-21) | Reproduced here | PASS (2026-11-13) |
+| [C14.21 — Documentation drift, upstream](#c14-21) | Reproduced here | PASS (2026-11-18) |
 | [C14.22 — The registry grew from 50 checks to 61](#c14-22) | Cited from upstream | Cited from upstream |
 | [C14.23 — Closed: the engines are the toolchain's own](#c14-23) | Reproduced here | PASS (2026-11-13) |
 | [C14.24 — Closed: messages on blank nodes](#c14-24) | Reproduced here | PASS (2026-11-13) |
@@ -999,9 +999,9 @@ That owlready2 installs with the suite is C07.05; LOG-001 without any reasoner i
 
 **Sources:**
 
-- [HOLOS README, conformance table](https://github.com/pwin/triplestore/blob/3d9c46f37f54188c1a801b67030ca3a14bac2b04/README.md#L122): “| SPARQL 1.1 | **511/511** · 100% | 511/625 · **82%** |” (quote found, checked 2026-11-13)
-- [HOLOS README, tests not yet run](https://github.com/pwin/triplestore/blob/3d9c46f37f54188c1a801b67030ca3a14bac2b04/README.md#L155): “| SPARQL 1.1 | **511 / 511** | 0 | 114 | **0** |” (quote found, checked 2026-11-13)
-- [HOLOS README, the withdrawn target](https://github.com/pwin/triplestore/blob/3d9c46f37f54188c1a801b67030ca3a14bac2b04/README.md#L106): “it was written before anything was measured” (quote found, checked 2026-11-13)
+- [HOLOS README, conformance table](https://github.com/pwin/triplestore/blob/3d9c46f37f54188c1a801b67030ca3a14bac2b04/README.md#L122): “| SPARQL 1.1 | **511/511** · 100% | 511/625 · **82%** |” (quote found, checked 2026-11-18)
+- [HOLOS README, tests not yet run](https://github.com/pwin/triplestore/blob/3d9c46f37f54188c1a801b67030ca3a14bac2b04/README.md#L155): “| SPARQL 1.1 | **511 / 511** | 0 | 114 | **0** |” (quote found, checked 2026-11-18)
+- [HOLOS README, the withdrawn target](https://github.com/pwin/triplestore/blob/3d9c46f37f54188c1a801b67030ca3a14bac2b04/README.md#L106): “it was written before anything was measured” (quote found, checked 2026-11-18)
 
 ---
 
@@ -1044,7 +1044,7 @@ Reported results from the literature in the chapter's references; not reproduced
 
 **Sources:**
 
-- [suite docs/REPORTS.md](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a4d08d054d168aade8daaffa4ed32df040d72311/docs/REPORTS.md#L8): “a person at a terminal, or an agent” (quote found, checked 2026-11-13)
+- [suite docs/REPORTS.md](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a4d08d054d168aade8daaffa4ed32df040d72311/docs/REPORTS.md#L8): “a person at a terminal, or an agent” (quote found, checked 2026-11-18)
 
 The '[a blank node]' fix it mentions is C07.07 and C07.09.
 
@@ -1179,7 +1179,7 @@ The testing repository was used at [31bda0d](https://github.com/pwin/consolidate
 
 **Sources:**
 
-- [the previous edition of Chapter 9 (suite 0.14.2, rdflib and pyshacl)](https://github.com/pwin/SemOpsManual/blob/fc6de6da90d54a57bbbd2163ebc5b5dfe246ec40/docs/09-continuous-integration.md#L56): “Findings: 479 total (55 Violation, 340 Warning, 84 Info)” (quote found, checked 2026-11-13)
+- [the previous edition of Chapter 9 (suite 0.14.2, rdflib and pyshacl)](https://github.com/pwin/SemOpsManual/blob/fc6de6da90d54a57bbbd2163ebc5b5dfe246ec40/docs/09-continuous-integration.md#L56): “Findings: 479 total (55 Violation, 340 Warning, 84 Info)” (quote found, checked 2026-11-18)
 
 Today's figures, on holosdb and the shacl engine, are reproduced in C09.02 (479: 55/340/84), C09.03 (27) and C09.04 (23).
 
@@ -1285,12 +1285,12 @@ portable .rq checks: 44; SHACL shape files: 6
 
 **Sources:**
 
-- [extension package.json (0.17.4)](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/d6deaa6cba957f895563066dbc40709297a2cb5f/package.json#L500-L509): “"holos-wasm-node": "^0.26.1",” (quote found, checked 2026-11-13)
-- [extension package-lock.json (0.17.4): the holos-wasm-node it bundles](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/d6deaa6cba957f895563066dbc40709297a2cb5f/package-lock.json): “"node_modules/holos-wasm-node"” (quote found, checked 2026-11-13)
-- [suite uv.lock at the 0.27.0 release: the holosdb it locks](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a4d08d054d168aade8daaffa4ed32df040d72311/uv.lock#L167-L168): “version = "0.26.1"” (quote found, checked 2026-11-13)
-- [HOLOS commit 8b2a949: every query entry point through one pipeline](https://github.com/pwin/triplestore/commit/8b2a9495af52ff56a7ebedd49e9dbd0f1ead93ce): “Send every query entry point through one pipeline” (quote found, checked 2026-11-13)
+- [extension package.json (0.17.5)](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/package.json#L500-L509): “"holos-wasm-node": "^0.26.2",” (quote found, checked 2026-11-18)
+- [extension package-lock.json (0.17.5): the holos-wasm-node it bundles](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/package-lock.json): “"node_modules/holos-wasm-node"” (quote found, checked 2026-11-18)
+- [suite uv.lock on main from bdb9937: the holosdb it locks](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/bdb9937f59c277d26450c4e79129cfbeff8a7cec/uv.lock#L167-L168): “version = "0.26.2"” (quote found, checked 2026-11-18)
+- [HOLOS commit 8b2a949: every query entry point through one pipeline](https://github.com/pwin/triplestore/commit/8b2a9495af52ff56a7ebedd49e9dbd0f1ead93ce): “Send every query entry point through one pipeline” (quote found, checked 2026-11-18)
 
-Below 1.0 a caret admits patch releases only, so `^0.26.1` means 0.26.x. The 0.17.4 release's lock file resolves it to 0.26.1, and the suite's 0.27.0 release locks the same 0.26.1 -- so the two released sides are on one version exactly. HOLOS 0.26.2 has since been published, and C07.01 installs it, as a reader would; the suite's repository locks it from bdb9937, ahead of any suite release, and the extension's 0.17.5, which bundles it, is merged but not yet released. Both sides move to 0.26.2 together, as they moved to 0.26.1. The extension reaches HOLOS through `queryRdf`, the suite through `Store.query`; from HOLOS 0.24.0 both run the same pipeline. HOLOS's own SHACL validator is a part the extension does not call: it validates with shacl-wasm-node.
+Below 1.0 a caret admits patch releases only, so `^0.26.2` means 0.26.x. The 0.17.5 release's lock file resolves it to 0.26.2, and the suite's repository locks the same 0.26.2 from bdb9937 -- so the two sides are on one version exactly. The suite's last release, 0.27.0, still locks 0.26.1, but a lock is not what an install reads: `pip install ontology-quality-suite` resolves holosdb 0.26.2, which is what C07.01 installs. The extension reaches HOLOS through `queryRdf`, the suite through `Store.query`; from HOLOS 0.24.0 both run the same pipeline. HOLOS's own SHACL validator is a part the extension does not call: it validates with shacl-wasm-node.
 
 ---
 
@@ -1394,7 +1394,7 @@ portable .rq checks: 44; SHACL shape files: 6
 
 **Sources:**
 
-- [suite commit 9e6f99c](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/9e6f99c420699294917b608a36869500150933e9): “BIND left the variable unbound and the template dropped the message -- 60 of 65 findings on the stress fixture” (quote found, checked 2026-11-13)
+- [suite commit 9e6f99c](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/9e6f99c420699294917b608a36869500150933e9): “BIND left the variable unbound and the template dropped the message -- 60 of 65 findings on the stress fixture” (quote found, checked 2026-11-18)
 
 ---
 
@@ -1531,7 +1531,7 @@ $ python scripts/engine_leniency.py
 
 **Sources:**
 
-- [suite commit 9e6f99c](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/9e6f99c420699294917b608a36869500150933e9): “pyshacl is what caught the isIRI($this) blank-node regression in shacl 0.1.5” (quote found, checked 2026-11-13)
+- [suite commit 9e6f99c](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/9e6f99c420699294917b608a36869500150933e9): “pyshacl is what caught the isIRI($this) blank-node regression in shacl 0.1.5” (quote found, checked 2026-11-18)
 
 ---
 
@@ -1545,8 +1545,8 @@ $ python scripts/engine_leniency.py
 
 **Sources:**
 
-- [suite commit 9e6f99c](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/9e6f99c420699294917b608a36869500150933e9): “merge._anonymous_key matches anonymous findings positionally within (check, path, value)” (quote found, checked 2026-11-13)
-- [extension commit 7198f91](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/7198f91e256b613503ad385f666460006c4631fe): “The text "[a blank node]" is deliberately identical to the queries'” (quote found, checked 2026-11-13)
+- [suite commit 9e6f99c](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/9e6f99c420699294917b608a36869500150933e9): “merge._anonymous_key matches anonymous findings positionally within (check, path, value)” (quote found, checked 2026-11-18)
+- [extension commit 7198f91](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/7198f91e256b613503ad385f666460006c4631fe): “The text "[a blank node]" is deliberately identical to the queries'” (quote found, checked 2026-11-18)
 
 ---
 
@@ -1686,7 +1686,7 @@ _:r1 a sh:ValidationResult ;
 
 **Sources:**
 
-- [suite docs/EXTENDING.md](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a4d08d054d168aade8daaffa4ed32df040d72311/docs/EXTENDING.md#L29): “The registry declares; the directories decide.” (quote found, checked 2026-11-13)
+- [suite docs/EXTENDING.md](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a4d08d054d168aade8daaffa4ed32df040d72311/docs/EXTENDING.md#L29): “The registry declares; the directories decide.” (quote found, checked 2026-11-18)
 
 C08.24 shows a query with no registry entry running and reporting as UNMAPPED.
 
@@ -1714,8 +1714,8 @@ C08.24 shows a query with no registry entry running and reporting as UNMAPPED.
 
 **Sources:**
 
-- [suite commit 6295588](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/629558887b2d7fd378229e736be841de8e68ae28): “The cases are hand-written, not generated from either implementation.” (quote found, checked 2026-11-13)
-- [extension commit 6489c1a](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/6489c1ae0c17a4cf7c30c2571dd6a605dbd90383): “A fixture of 16 cases now states that, and both repos carry it.” (quote found, checked 2026-11-13)
+- [suite commit 6295588](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/629558887b2d7fd378229e736be841de8e68ae28): “The cases are hand-written, not generated from either implementation.” (quote found, checked 2026-11-18)
+- [extension commit 6489c1a](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/6489c1ae0c17a4cf7c30c2571dd6a605dbd90383): “A fixture of 16 cases now states that, and both repos carry it.” (quote found, checked 2026-11-18)
 
 ---
 
@@ -1729,7 +1729,7 @@ C08.24 shows a query with no registry entry running and reporting as UNMAPPED.
 
 **Sources:**
 
-- [suite pyproject.toml (0.22.0)](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a4d08d054d168aade8daaffa4ed32df040d72311/pyproject.toml#L81-L86): “It installs nothing: `shacl` is a runtime dependency now, not an opt-in.” (quote found, checked 2026-11-13)
+- [suite pyproject.toml (0.22.0)](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a4d08d054d168aade8daaffa4ed32df040d72311/pyproject.toml#L81-L86): “It installs nothing: `shacl` is a runtime dependency now, not an opt-in.” (quote found, checked 2026-11-18)
 
 ---
 
@@ -1743,9 +1743,9 @@ C08.24 shows a query with no registry entry running and reporting as UNMAPPED.
 
 **Sources:**
 
-- [suite commit 1b6000a](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/1b6000aa96742b04b2e70f29d07298bad3770a2d): “uv pip install --upgrade does not move it: uv run re-syncs from uv.lock, so uv lock --upgrade-package is the step.” (quote found, checked 2026-11-13)
-- [suite commit 091e0e4](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/091e0e4effe1a9cbaddccc63436851decac09035): “The committed uv.lock had gone stale at 0.14.3” (quote found, checked 2026-11-13)
-- [suite uv.lock at the 0.22.0 release](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/749af3e1be749ace3aab3ea4b492d72b3b21dbde/uv.lock#L167-L168): “version = "0.15.0"” (quote found, checked 2026-11-13)
+- [suite commit 1b6000a](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/1b6000aa96742b04b2e70f29d07298bad3770a2d): “uv pip install --upgrade does not move it: uv run re-syncs from uv.lock, so uv lock --upgrade-package is the step.” (quote found, checked 2026-11-18)
+- [suite commit 091e0e4](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/091e0e4effe1a9cbaddccc63436851decac09035): “The committed uv.lock had gone stale at 0.14.3” (quote found, checked 2026-11-18)
+- [suite uv.lock at the 0.22.0 release](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/749af3e1be749ace3aab3ea4b492d72b3b21dbde/uv.lock#L167-L168): “version = "0.15.0"” (quote found, checked 2026-11-18)
 
 ---
 
@@ -1759,7 +1759,7 @@ C08.24 shows a query with no registry entry running and reporting as UNMAPPED.
 
 **Sources:**
 
-- [extension commit e4583b9](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/e4583b9a9d47f678bba2e5efaba7b7d0b21ca504): “The vsix goes from 20.22 MB to 17.52 MB.” (quote found, checked 2026-11-13)
+- [extension commit e4583b9](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/e4583b9a9d47f678bba2e5efaba7b7d0b21ca504): “The vsix goes from 20.22 MB to 17.52 MB.” (quote found, checked 2026-11-18)
 
 ---
 
@@ -1773,7 +1773,7 @@ C08.24 shows a query with no registry entry running and reporting as UNMAPPED.
 
 **Sources:**
 
-- [extension commit ec96b93](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/ec96b93b163f8c11b85cf90ecc5c9151f927c0b6): “contains none of the engines” (quote found, checked 2026-11-13)
+- [extension commit ec96b93](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/ec96b93b163f8c11b85cf90ecc5c9151f927c0b6): “contains none of the engines” (quote found, checked 2026-11-18)
 
 ---
 
@@ -2034,8 +2034,8 @@ Times vary by machine. Three repeated runs here gave native 1.7 s, sparql 2.0–
 
 **Sources:**
 
-- [this manual's earlier edition (14 August 2026, suite 0.5.x), measured then](https://github.com/pwin/SemOpsManual/blob/aba4679abe7456c70fd638ae18e0084e07f2f3b1/docs/07-the-toolchain.md#L197-L198): “`both` reports **five Violations where `native+sparql` reports two**” (quote found, checked 2026-11-13)
-- [suite commit 2f4950c (0.6.0)](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/2f4950c4436868fb6ea203c0ce271727b256cfef): “sh:severity was declared inside each sh:sparql [...] SPARQLConstraint block rather than on the enclosing shape, where SHACL defines it.” (quote found, checked 2026-11-13)
+- [this manual's earlier edition (14 August 2026, suite 0.5.x), measured then](https://github.com/pwin/SemOpsManual/blob/aba4679abe7456c70fd638ae18e0084e07f2f3b1/docs/07-the-toolchain.md#L197-L198): “`both` reports **five Violations where `native+sparql` reports two**” (quote found, checked 2026-11-18)
+- [suite commit 2f4950c (0.6.0)](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/2f4950c4436868fb6ea203c0ce271727b256cfef): “sh:severity was declared inside each sh:sparql [...] SPARQLConstraint block rather than on the enclosing shape, where SHACL defines it.” (quote found, checked 2026-11-18)
 
 The commit gives its own measurement on a different fixture: 17 V / 1 W / 0 I under pyshacl against 1 / 15 / 2 under the native engine, for the same 18 findings.
 
@@ -2213,8 +2213,8 @@ before 479, after 489
 
 **Sources:**
 
-- [suite pipeline.py at 0.22.0: inference applied inside `if uses_shacl:`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/749af3e1be749ace3aab3ea4b492d72b3b21dbde/ontology_suite/pipeline.py#L141-L168): “if inference not in ("none", "rdfs"):” (quote found, checked 2026-11-13)
-- [suite commit d7d7a98, the fix](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/d7d7a987cb754221b6c57a5997445628e219851b): “The closure is now materialised once, centrally, and both arms read the result.” (quote found, checked 2026-11-13)
+- [suite pipeline.py at 0.22.0: inference applied inside `if uses_shacl:`](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/749af3e1be749ace3aab3ea4b492d72b3b21dbde/ontology_suite/pipeline.py#L141-L168): “if inference not in ("none", "rdfs"):” (quote found, checked 2026-11-18)
+- [suite commit d7d7a98, the fix](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/d7d7a987cb754221b6c57a5997445628e219851b): “The closure is now materialised once, centrally, and both arms read the result.” (quote found, checked 2026-11-18)
 
 ---
 
@@ -2352,9 +2352,9 @@ Annotated chapter: [manual/docs/08-model-and-validate.md](manual/docs/08-model-a
 
 **Sources:**
 
-- [extension CHANGELOG, 0.16.0: MAL-003, and Local Checks no longer fails on one](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/d6deaa6cba957f895563066dbc40709297a2cb5f/CHANGELOG.md#L291-L292): “The statements that use a relative IRI are now reported” (quote found, checked 2026-11-13)
-- [extension CHANGELOG, 0.14.0](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/d6deaa6cba957f895563066dbc40709297a2cb5f/CHANGELOG.md#L428-L429): “search it for the regular expression `<[^:>]+>`” (quote found, checked 2026-11-13)
-- [extension commit d480ace (first released in v0.14.0)](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/d480ace5adc99616ca36ca563af8feb3cb2fb99d) (exists, checked 2026-11-13)
+- [extension CHANGELOG, 0.16.0: MAL-003, and Local Checks no longer fails on one](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/CHANGELOG.md#L323-L324): “The statements that use a relative IRI are now reported” (quote found, checked 2026-11-18)
+- [extension CHANGELOG, 0.14.0](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/CHANGELOG.md#L460-L461): “search it for the regular expression `<[^:>]+>`” (quote found, checked 2026-11-18)
+- [extension commit d480ace (first released in v0.14.0)](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/d480ace5adc99616ca36ca563af8feb3cb2fb99d) (exists, checked 2026-11-18)
 
 ---
 
@@ -2382,9 +2382,9 @@ The editor and the CLI read the same registry; C07.03 counts it in the installed
 
 **Sources:**
 
-- [extension src/checks/modellingGuidance.test.ts](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/d6deaa6cba957f895563066dbc40709297a2cb5f/src/checks/modellingGuidance.test.ts#L20-L24): “MDL-002: ex:Veterinarian owl:equivalentClass ex:AnimalDoctor” (quote found, checked 2026-11-13)
-- [extension src/checks/malformed.ts (0.16.0)](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/d6deaa6cba957f895563066dbc40709297a2cb5f/src/checks/malformed.ts#L10-L15): “MAL-001: a qualified cardinality written with owl:cardinality (or min/max) beside owl:onClass.” (quote found, checked 2026-11-13)
-- [extension CHANGELOG, 0.16.0](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/d6deaa6cba957f895563066dbc40709297a2cb5f/CHANGELOG.md#L294-L298): “this extension's own rather than the registry's” (quote found, checked 2026-11-13)
+- [extension src/checks/modellingGuidance.test.ts](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/src/checks/modellingGuidance.test.ts#L20-L24): “MDL-002: ex:Veterinarian owl:equivalentClass ex:AnimalDoctor” (quote found, checked 2026-11-18)
+- [extension src/checks/malformed.ts (0.16.0)](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/src/checks/malformed.ts#L10-L15): “MAL-001: a qualified cardinality written with owl:cardinality (or min/max) beside owl:onClass.” (quote found, checked 2026-11-18)
+- [extension CHANGELOG, 0.16.0](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/CHANGELOG.md#L326-L330): “this extension's own rather than the registry's” (quote found, checked 2026-11-18)
 
 Neither family is in the shared registry.json, which is why the CLI cannot produce them.
 
@@ -2400,8 +2400,8 @@ Neither family is in the shared registry.json, which is why the CLI cannot produ
 
 **Sources:**
 
-- [suite tests/test_check_coverage.py, EXTENSION_ONLY_IDS](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a4d08d054d168aade8daaffa4ed32df040d72311/tests/test_check_coverage.py#L94-L97): “checks/vocabularyChecks.ts -- a closed-world scan of the axiom positions” (quote found, checked 2026-11-13)
-- [extension src/checks/registryCoverage.test.ts](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/d6deaa6cba957f895563066dbc40709297a2cb5f/src/checks/registryCoverage.test.ts#L25-L27): “the three checks only *this* extension can produce, VOC-001/REA-005/REA-006” (quote found, checked 2026-11-13)
+- [suite tests/test_check_coverage.py, EXTENSION_ONLY_IDS](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a4d08d054d168aade8daaffa4ed32df040d72311/tests/test_check_coverage.py#L94-L97): “checks/vocabularyChecks.ts -- a closed-world scan of the axiom positions” (quote found, checked 2026-11-18)
+- [extension src/checks/registryCoverage.test.ts](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/src/checks/registryCoverage.test.ts#L25-L27): “the three checks only *this* extension can produce, VOC-001/REA-005/REA-006” (quote found, checked 2026-11-18)
 
 C08.06 shows the consequence: the CLI reports the typo as STR-001, never as VOC-001.
 
@@ -2417,8 +2417,8 @@ C08.06 shows the consequence: the CLI reports the typo as STR-001, never as VOC-
 
 **Sources:**
 
-- [extension registryCoverage.test.ts, CLI_ONLY](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/d6deaa6cba957f895563066dbc40709297a2cb5f/src/checks/registryCoverage.test.ts#L33-L61): “'TQL-004', 'TQL-005',” (quote found, checked 2026-11-13)
-- [the same test: a query it cannot run is not counted](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/d6deaa6cba957f895563066dbc40709297a2cb5f/src/checks/registryCoverage.test.ts#L99-L107): “make the CLI_ONLY list above assert something false while still passing” (quote found, checked 2026-11-13)
+- [extension registryCoverage.test.ts, CLI_ONLY](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/src/checks/registryCoverage.test.ts#L33-L61): “'TQL-004', 'TQL-005',” (quote found, checked 2026-11-18)
+- [the same test: a query it cannot run is not counted](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/src/checks/registryCoverage.test.ts#L99-L107): “make the CLI_ONLY list above assert something false while still passing” (quote found, checked 2026-11-18)
 
 CLI_ONLY lists REA-020, REA-021, REA-022, REA-010, REA-011, REA-012, CNF-001, CNF-002, CNF-005, TQL-004 and TQL-005: eleven.
 
@@ -2488,7 +2488,7 @@ total 1: 1 Violation, 0 Warning, 0 Info
 
 **Sources:**
 
-- [extension resources/checks-registry/repairs/manifest.json](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/d6deaa6cba957f895563066dbc40709297a2cb5f/resources/checks-registry/repairs/manifest.json): “PRJ-REQUIRED” (quote found, checked 2026-11-13)
+- [extension resources/checks-registry/repairs/manifest.json](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/resources/checks-registry/repairs/manifest.json): “PRJ-REQUIRED” (quote found, checked 2026-11-18)
 
 The manifest's `checks` object has 16 keys: LOG-003, MDL-001, MDL-002, MDL-003, PRJ-REQUIRED, QUA-001, QUA-002, QUA-004, QUA-005, QUA-007, STR-001, STR-002, STR-005, STR-007, STR-008, STY-003.
 
@@ -2504,8 +2504,8 @@ The manifest's `checks` object has 16 keys: LOG-003, MDL-001, MDL-002, MDL-003, 
 
 **Sources:**
 
-- [extension CHANGELOG, 0.13.11](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/d6deaa6cba957f895563066dbc40709297a2cb5f/CHANGELOG.md#L554-L557): “Blank nodes now cross the boundary as IRIs and come back as blank nodes” (quote found, checked 2026-11-13)
-- [extension commit e4583b9](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/e4583b9a9d47f678bba2e5efaba7b7d0b21ca504) (exists, checked 2026-11-13)
+- [extension CHANGELOG, 0.13.11](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/CHANGELOG.md#L586-L589): “Blank nodes now cross the boundary as IRIs and come back as blank nodes” (quote found, checked 2026-11-18)
+- [extension commit e4583b9](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/e4583b9a9d47f678bba2e5efaba7b7d0b21ca504) (exists, checked 2026-11-18)
 
 ---
 
@@ -2519,8 +2519,8 @@ The manifest's `checks` object has 16 keys: LOG-003, MDL-001, MDL-002, MDL-003, 
 
 **Sources:**
 
-- [extension CHANGELOG, 0.13.12](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/d6deaa6cba957f895563066dbc40709297a2cb5f/CHANGELOG.md#L507-L513): “datatype from `rdf:dirLangString` to `rdf:langString` in the user's own file” (quote found, checked 2026-11-13)
-- [extension commit e3364fc (first released in v0.13.12)](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/e3364fc5bf6b7a7c5028d5e868b5b3c12164ae2c) (exists, checked 2026-11-13)
+- [extension CHANGELOG, 0.13.12](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/CHANGELOG.md#L539-L545): “datatype from `rdf:dirLangString` to `rdf:langString` in the user's own file” (quote found, checked 2026-11-18)
+- [extension commit e3364fc (first released in v0.13.12)](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/e3364fc5bf6b7a7c5028d5e868b5b3c12164ae2c) (exists, checked 2026-11-18)
 
 ---
 
@@ -2534,8 +2534,8 @@ The manifest's `checks` object has 16 keys: LOG-003, MDL-001, MDL-002, MDL-003, 
 
 **Sources:**
 
-- [extension commit 71981b4 (first released in v0.13.5)](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/71981b41283528abbd6fa509a2ffa8c3bd231270): “Stop reading CURIEs out of comments” (quote found, checked 2026-11-13)
-- [extension CHANGELOG, 0.13.5](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/d6deaa6cba957f895563066dbc40709297a2cb5f/CHANGELOG.md#L680-L682): “a line whose *first* non-space character was `#`” (quote found, checked 2026-11-13)
+- [extension commit 71981b4 (first released in v0.13.5)](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/71981b41283528abbd6fa509a2ffa8c3bd231270): “Stop reading CURIEs out of comments” (quote found, checked 2026-11-18)
+- [extension CHANGELOG, 0.13.5](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/CHANGELOG.md#L712-L714): “a line whose *first* non-space character was `#`” (quote found, checked 2026-11-18)
 
 ---
 
@@ -2549,7 +2549,7 @@ The manifest's `checks` object has 16 keys: LOG-003, MDL-001, MDL-002, MDL-003, 
 
 **Sources:**
 
-- [extension CHANGELOG, 0.13.5](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/d6deaa6cba957f895563066dbc40709297a2cb5f/CHANGELOG.md#L728-L732): “It now names the directory it searched and how many ontology files it found” (quote found, checked 2026-11-13)
+- [extension CHANGELOG, 0.13.5](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/CHANGELOG.md#L760-L764): “It now names the directory it searched and how many ontology files it found” (quote found, checked 2026-11-18)
 
 ---
 
@@ -2766,7 +2766,7 @@ Node.js v22.21.1
 
 **Sources:**
 
-- [extension commit 2f1a6ce (0.16.1)](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/2f1a6ce960f60b1d77bd16f5655cabcc43f78d42): “Check the DSL's arguments, so unchecked code gets an error that names its mistake” (quote found, checked 2026-11-13)
+- [extension commit 2f1a6ce (0.16.1)](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/2f1a6ce960f60b1d77bd16f5655cabcc43f78d42): “Check the DSL's arguments, so unchecked code gets an error that names its mistake” (quote found, checked 2026-11-18)
 
 ---
 
@@ -2817,7 +2817,7 @@ $ node node_modules/typescript/bin/tsc --noEmit --strict --module nodenext --mod
 
 **Sources:**
 
-- [extension commit dbb0cdf (0.16.1)](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/dbb0cdf74ed2180c58c05b8068311be2bc3e07c7): “Give the DSL's Quad the RDF/JS shape, so build().quads goes to n3's Writer uncast” (quote found, checked 2026-11-13)
+- [extension commit dbb0cdf (0.16.1)](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/dbb0cdf74ed2180c58c05b8068311be2bc3e07c7): “Give the DSL's Quad the RDF/JS shape, so build().quads goes to n3's Writer uncast” (quote found, checked 2026-11-18)
 
 ---
 
@@ -3075,7 +3075,7 @@ WARNING: --sparql replaced the suite's own query tree: 1 project check(s) ran an
 
 **Sources:**
 
-- [suite commit cae9ef2 (first released in v0.18.0)](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/cae9ef21cf33ceb8eba33ef94da66b32bf810ded): “the separate testing repo's CI gate config named eight CMP-* queries, its merged registry declared 61 checks, and the gate reported a clean run” (quote found, checked 2026-11-13)
+- [suite commit cae9ef2 (first released in v0.18.0)](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/cae9ef21cf33ceb8eba33ef94da66b32bf810ded): “the separate testing repo's CI gate config named eight CMP-* queries, its merged registry declared 61 checks, and the gate reported a clean run” (quote found, checked 2026-11-18)
 
 ---
 
@@ -3238,7 +3238,7 @@ total 1: 1 Violation, 0 Warning, 0 Info
 
 **Sources:**
 
-- [suite commit cae9ef2](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/cae9ef21cf33ceb8eba33ef94da66b32bf810ded): “Discovery is filesystem-based and consults the registry only afterwards, so a query with no entry still runs and reports UNMAPPED, and an entry with no file never fires at all.” (quote found, checked 2026-11-13)
+- [suite commit cae9ef2](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/cae9ef21cf33ceb8eba33ef94da66b32bf810ded): “Discovery is filesystem-based and consults the registry only afterwards, so a query with no entry still runs and reports UNMAPPED, and an entry with no file never fires at all.” (quote found, checked 2026-11-18)
 
 C08.24 shows the first half: queries with no registry entry still ran, and reported UNMAPPED.
 
@@ -3278,7 +3278,7 @@ C08.24 shows the first half: queries with no registry entry still ran, and repor
 
 **Sources:**
 
-- [testing repo CT-39 README](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/9ed651ce69b7faae429d96de27996fc1baff8065/experiments/SpecificTests/CT-39-finding-names-something-findable/README.md#L1): “CT-39 — A finding names something a reader can find” (quote found, checked 2026-11-13)
+- [testing repo CT-39 README](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/98b8fd42b21608f3cb9d82b533cbf9fa711241fa/experiments/SpecificTests/CT-39-finding-names-something-findable/README.md#L1): “CT-39 — A finding names something a reader can find” (quote found, checked 2026-11-18)
 
 ---
 
@@ -3304,7 +3304,7 @@ C08.24 shows the first half: queries with no registry entry still ran, and repor
 
 **Sources:**
 
-- [suite commit 2f4950c](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/2f4950c4436868fb6ea203c0ce271727b256cfef): “matched nothing (REA-001's symmetry assumption, DAT-001's UNION of FILTER-only branches, EFF-002's unjoined $this, and DAT-001's boolean branch above)” (quote found, checked 2026-11-13)
+- [suite commit 2f4950c](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/2f4950c4436868fb6ea203c0ce271727b256cfef): “matched nothing (REA-001's symmetry assumption, DAT-001's UNION of FILTER-only branches, EFF-002's unjoined $this, and DAT-001's boolean branch above)” (quote found, checked 2026-11-18)
 
 ---
 
@@ -3372,7 +3372,7 @@ https://example.org/cars/hasPart,https://example.org/cars/Car
 
 **Sources:**
 
-- [extension CHANGELOG, 0.16.0](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/d6deaa6cba957f895563066dbc40709297a2cb5f/CHANGELOG.md#L306-L312): “Manchester's `inverse p some C`, written as OWL 2 does with `[ owl:inverseOf p ]`” (quote found, checked 2026-11-13)
+- [extension CHANGELOG, 0.16.0](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/CHANGELOG.md#L338-L344): “Manchester's `inverse p some C`, written as OWL 2 does with `[ owl:inverseOf p ]`” (quote found, checked 2026-11-18)
 
 ---
 
@@ -3384,7 +3384,7 @@ https://example.org/cars/hasPart,https://example.org/cars/Car
 
 > **How the editor behaviour in this chapter was established.**
 
-A statement of method. The extension's unit tests were run on a Windows checkout of [534ce51](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/534ce517f9aabc0c27d33f1af5eb85f88296a16f) (the 0.16.1 release), with core.autocrlf on: 56 files, 509 tests, all passing, which matches the release's own count ([CHANGELOG](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/d6deaa6cba957f895563066dbc40709297a2cb5f/CHANGELOG.md#L30)). At 0.16.0 ([02ffaf6](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf)) the same run gave 55 files and 466 tests, all passing. The DSL claims (C08.12–C08.16, C08.34) are reproduced here from the npm package.
+A statement of method. The extension's unit tests were run on a Windows checkout of [534ce51](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/534ce517f9aabc0c27d33f1af5eb85f88296a16f) (the 0.16.1 release), with core.autocrlf on: 56 files, 509 tests, all passing, which matches the release's own count ([CHANGELOG](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/CHANGELOG.md#L30)). At 0.16.0 ([02ffaf6](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf)) the same run gave 55 files and 466 tests, all passing. The DSL claims (C08.12–C08.16, C08.34) are reproduced here from the npm package.
 
 ---
 
@@ -3706,7 +3706,7 @@ WARNING: --own-namespace http://example.org/acme# matched none of the 479 findin
 
 **Sources:**
 
-- [suite cli.py, _filter_own_namespace](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a4d08d054d168aade8daaffa4ed32df040d72311/ontology_suite/cli.py#L248-L319): “if rows and not matched:” (quote found, checked 2026-11-13)
+- [suite cli.py, _filter_own_namespace](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a4d08d054d168aade8daaffa4ed32df040d72311/ontology_suite/cli.py#L248-L319): “if rows and not matched:” (quote found, checked 2026-11-18)
 
 The warning is emitted only when the filter removes everything from a non-empty set of rows; an empty run never reaches it. The condition tests `matched` rather than the returned `kept`: 0.24.0 keeps run-level findings such as REA-022 through the filter, and counting those as a match would switch this warning off on exactly the runs that most need it.
 
@@ -3873,9 +3873,9 @@ $ python scripts/list_files.py work/C09_10/minimal
 
 **Sources:**
 
-- [suite commit f6ee897, 'Say where the finding is, and say each thing once'](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/f6ee897c7065569805c27cc7c8af0c2ff0738a8b): “Six files stopped being written: summary_by_category, summary_by_check and top_offenders” (quote found, checked 2026-11-13)
-- [suite commit 1af2a2d, 'Bump to 0.17.0' (the first tag containing f6ee897)](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/1af2a2d5a77eaa7cb07b03ee75bf1ec282c35bfe): “Minor rather than patch: six report files are no longer written” (quote found, checked 2026-11-13)
-- [suite docs/REPORTS.md](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a4d08d054d168aade8daaffa4ed32df040d72311/docs/REPORTS.md#L18): “## What changed in 0.15.0” (quote found, checked 2026-11-13)
+- [suite commit f6ee897, 'Say where the finding is, and say each thing once'](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/f6ee897c7065569805c27cc7c8af0c2ff0738a8b): “Six files stopped being written: summary_by_category, summary_by_check and top_offenders” (quote found, checked 2026-11-18)
+- [suite commit 1af2a2d, 'Bump to 0.17.0' (the first tag containing f6ee897)](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/1af2a2d5a77eaa7cb07b03ee75bf1ec282c35bfe): “Minor rather than patch: six report files are no longer written” (quote found, checked 2026-11-18)
+- [suite docs/REPORTS.md](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a4d08d054d168aade8daaffa4ed32df040d72311/docs/REPORTS.md#L18): “## What changed in 0.15.0” (quote found, checked 2026-11-18)
 
 ---
 
@@ -3951,7 +3951,7 @@ total 1: 1 Violation, 0 Warning, 0 Info
 ### C09.15 — The testing repository: 166 passed, 10 skipped
 
 **In the manual:** [Chapter 9, at the claim](manual/docs/09-continuous-integration.md#ev-c09-15) · [plain edition](../docs/09-continuous-integration.md#the-pattern-a-fixture-per-error-category)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **166 passed, 10 skipped**. The engine move changed none of it; the one test more
 
@@ -3974,28 +3974,28 @@ $ uv run pytest -q
 ................................                                         [100%]
 ============================== warnings summary ===============================
 competency_tests/test_competency.py::test_competency_test_is_evidenced[1]
-  <tmp>/claude/9d013a7a99d3da68/e093eaec-924b-4b60-bd7a-c49f70d21da7/scratchpad/evrun/consolidated_ontology_suite_python/ontology_suite/sketch/prefix_alignment.py:211: DeprecationWarning: Dataset.default_context is deprecated, use Dataset.default_graph instead.
+  <tmp>/claude/9d013a7a99d3da68/e093eaec-924b-4b60-bd7a-c49f70d21da7/scratchpad/evrun2/consolidated_ontology_suite_python/ontology_suite/sketch/prefix_alignment.py:211: DeprecationWarning: Dataset.default_context is deprecated, use Dataset.default_graph instead.
     default = getattr(dataset, "default_graph", None) or dataset.default_context
 tests/test_detection.py::test_expected_checks_fire[06-datatype-conformance]
 tests/test_detection.py::test_both_formulations_still_find_what_they_both_used_to
 tests/test_detection.py::test_each_formulation_agrees_about_severity[06-datatype-conformance]
 tests/test_detection.py::test_datatype_errors_are_found_whatever_the_reasoner[auto]
 tests/test_detection.py::test_every_finding_carries_a_message[06-datatype-conformance]
-  <tmp>/claude/9d013a7a99d3da68/e093eaec-924b-4b60-bd7a-c49f70d21da7/scratchpad/evrun/consolidated-ontology-suite-python-testing/.venv/Lib/site-packages/rdflib/term.py:1862: UserWarning: Parsing weird boolean, 'yes' does not map to True or False
+  <tmp>/claude/9d013a7a99d3da68/e093eaec-924b-4b60-bd7a-c49f70d21da7/scratchpad/evrun2/consolidated-ontology-suite-python-testing/.venv/Lib/site-packages/rdflib/term.py:1862: UserWarning: Parsing weird boolean, 'yes' does not map to True or False
     warnings.warn(
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-166 passed, 10 skipped, 6 warnings in 50.99s
+166 passed, 10 skipped, 6 warnings in 38.56s
 Using CPython 3.12.13
 Creating virtual environment at: .venv
-   Building ontology-quality-suite @ file:///<tmp>/claude/9d013a7a99d3da68/e093eaec-924b-4b60-bd7a-c49f70d21da7/scratchpad/evrun/consolidated_ontology_suite_python
-      Built ontology-quality-suite @ file:///<tmp>/claude/9d013a7a99d3da68/e093eaec-924b-4b60-bd7a-c49f70d21da7/scratchpad/evrun/consolidated_ontology_suite_python
-Installed 26 packages in 2.00s
+   Building ontology-quality-suite @ file:///<tmp>/claude/9d013a7a99d3da68/e093eaec-924b-4b60-bd7a-c49f70d21da7/scratchpad/evrun2/consolidated_ontology_suite_python
+      Built ontology-quality-suite @ file:///<tmp>/claude/9d013a7a99d3da68/e093eaec-924b-4b60-bd7a-c49f70d21da7/scratchpad/evrun2/consolidated_ontology_suite_python
+Installed 26 packages in 1.74s
 [exit 0]
 ```
 
 </details>
 
-Set EVIDENCE_TESTING_REPO to a clone of the testing repository at [9ed651c](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/commit/9ed651ce69b7faae429d96de27996fc1baff8065). It installs the suite from a sibling checkout, `../consolidated_ontology_suite_python` (v0.27.0 here), and its competency tests triplify with oxi-gen, found through ONTOLOGY_SUITE_OXI_GEN_BIN (0.5.1 here). The run resolved holosdb 0.26.2 and shacl 0.3.6 from the testing repository's own lock. At 6cdfb14, with suite 0.23.0, holosdb 0.21.0 and shacl 0.3.3, it was 165 passed, 10 skipped. Without oxi-gen 40 of those tests error at setup, saying so.
+Set EVIDENCE_TESTING_REPO to a clone of the testing repository at [98b8fd4](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/commit/98b8fd42b21608f3cb9d82b533cbf9fa711241fa). It installs the suite from a sibling checkout, `../consolidated_ontology_suite_python` (v0.27.0 here), and its competency tests triplify with oxi-gen, found through ONTOLOGY_SUITE_OXI_GEN_BIN (0.5.1 here). The run resolved holosdb 0.26.2 and shacl 0.3.6 from the testing repository's own lock. At 6cdfb14, with suite 0.23.0, holosdb 0.21.0 and shacl 0.3.3, it was 165 passed, 10 skipped. Without oxi-gen 40 of those tests error at setup, saying so.
 
 ---
 
@@ -4003,7 +4003,7 @@ Set EVIDENCE_TESTING_REPO to a clone of the testing repository at [9ed651c](http
 ### C09.16 — The competency board: 27 green, 0 red
 
 **In the manual:** [Chapter 9, at the claim](manual/docs/09-continuous-integration.md#ev-c09-16) · [plain edition](../docs/09-continuous-integration.md#one-folder-per-question)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Re-run for this edition: **27 green, 0 red**, in two minutes.
 
@@ -4069,7 +4069,7 @@ Needs the same sibling suite checkout as C09.15.
 
 **Sources:**
 
-- [testing repo experiments/SpecificTests/REVIEW.md](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/9ed651ce69b7faae429d96de27996fc1baff8065/experiments/SpecificTests/REVIEW.md#L32-L41): “Half the tests can be answered before a row of data exists.” (quote found, checked 2026-11-13)
+- [testing repo experiments/SpecificTests/REVIEW.md](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/98b8fd42b21608f3cb9d82b533cbf9fa711241fa/experiments/SpecificTests/REVIEW.md#L32-L41): “Half the tests can be answered before a row of data exists.” (quote found, checked 2026-11-18)
 
 ---
 
@@ -4083,7 +4083,7 @@ Needs the same sibling suite checkout as C09.15.
 
 **Sources:**
 
-- [testing repo commit fb24a3d](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/commit/fb24a3d302409deea6b31da5d061a3edb54839a2): “A clean minimal ontology turns out not to be writable, which is worth knowing before a clean run is read as proof.” (quote found, checked 2026-11-13)
+- [testing repo commit fb24a3d](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/commit/fb24a3d302409deea6b31da5d061a3edb54839a2): “A clean minimal ontology turns out not to be writable, which is worth knowing before a clean run is read as proof.” (quote found, checked 2026-11-18)
 
 ---
 
@@ -4097,8 +4097,8 @@ Needs the same sibling suite checkout as C09.15.
 
 **Sources:**
 
-- [testing repo detect.py (17 fixtures declared)](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/9ed651ce69b7faae429d96de27996fc1baff8065/detect.py) (exists, checked 2026-11-13)
-- [testing repo README](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/9ed651ce69b7faae429d96de27996fc1baff8065/README.md#L38-L40): “58 of the 61 checks are pinned by a test” (quote found, checked 2026-11-13)
+- [testing repo detect.py (17 fixtures declared)](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/98b8fd42b21608f3cb9d82b533cbf9fa711241fa/detect.py) (exists, checked 2026-11-18)
+- [testing repo README](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/98b8fd42b21608f3cb9d82b533cbf9fa711241fa/README.md#L38-L40): “58 of the 61 checks are pinned by a test” (quote found, checked 2026-11-18)
 
 ---
 
@@ -4112,8 +4112,8 @@ Needs the same sibling suite checkout as C09.15.
 
 **Sources:**
 
-- [testing repo commit 34606a4](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/commit/34606a42744cba730cc58944155549631225d621): “The second found EFF-001 immediately, on 10-efficiency” (quote found, checked 2026-11-13)
-- [suite commit 5360394](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/5360394d1ac92537998116245662b15fee8636c7) (exists, checked 2026-11-13)
+- [testing repo commit 34606a4](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/commit/34606a42744cba730cc58944155549631225d621): “The second found EFF-001 immediately, on 10-efficiency” (quote found, checked 2026-11-18)
+- [suite commit 5360394](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/5360394d1ac92537998116245662b15fee8636c7) (exists, checked 2026-11-18)
 
 ---
 
@@ -4127,8 +4127,8 @@ Needs the same sibling suite checkout as C09.15.
 
 **Sources:**
 
-- [testing repo ontology-suite.yml](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/9ed651ce69b7faae429d96de27996fc1baff8065/ontology-suite.yml) (exists, checked 2026-11-13)
-- [testing repo commit 3c5afbd](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/commit/3c5afbdb2c5196ebd3f2c7c05be6ceb07c8e9c28): “the gate ran eight checks while its merged registry declared 61” (quote found, checked 2026-11-13)
+- [testing repo ontology-suite.yml](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/98b8fd42b21608f3cb9d82b533cbf9fa711241fa/ontology-suite.yml) (exists, checked 2026-11-18)
+- [testing repo commit 3c5afbd](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/commit/3c5afbdb2c5196ebd3f2c7c05be6ceb07c8e9c28): “the gate ran eight checks while its merged registry declared 61” (quote found, checked 2026-11-18)
 
 ---
 
@@ -4491,7 +4491,7 @@ $ tarka run -q fixtures/acme_robotics/employees.rq -i fixtures/acme_robotics/emp
 
 **Sources:**
 
-- [the previous edition's oxi-gen listing](https://github.com/pwin/SemOpsManual/blob/fc6de6da90d54a57bbbd2163ebc5b5dfe246ec40/docs/10-ingest-and-transform.md): “foaf:mbox <mailto:margaret.hamilton@acme.example.org> ;” (quote found, checked 2026-11-13)
+- [the previous edition's oxi-gen listing](https://github.com/pwin/SemOpsManual/blob/fc6de6da90d54a57bbbd2163ebc5b5dfe246ec40/docs/10-ingest-and-transform.md): “foaf:mbox <mailto:margaret.hamilton@acme.example.org> ;” (quote found, checked 2026-11-18)
 
 ---
 
@@ -4585,7 +4585,7 @@ isomorphic: True
 
 **Sources:**
 
-- [tarka README](https://github.com/pwin/tarka/blob/9a346083212ee6450fef537551dd6478092ff024/README.md#L41-L43): “tarka ran the TARQL query 1.7 times as fast as oxi-gen, and the OTTR templates 2.6 times as fast.” (quote found, checked 2026-11-13)
+- [tarka README](https://github.com/pwin/tarka/blob/9a346083212ee6450fef537551dd6478092ff024/README.md#L41-L43): “tarka ran the TARQL query 1.7 times as fast as oxi-gen, and the OTTR templates 2.6 times as fast.” (quote found, checked 2026-11-18)
 
 Not reproduced here: it needs oxi-gen and the 200,000-row file.
 
@@ -5129,8 +5129,8 @@ https://acme.example.org/graph/triplified/employees,40
 
 **Sources:**
 
-- [tarka commit 26f256a](https://github.com/pwin/tarka/commit/26f256a28f10d299a4cf1c5dd49ba52cd37122a7) (exists, checked 2026-11-13)
-- [tarka README](https://github.com/pwin/tarka/blob/9a346083212ee6450fef537551dd6478092ff024/README.md#L45): “tarka works with RDF 1.1 and SPARQL 1.1.” (quote found, checked 2026-11-13)
+- [tarka commit 26f256a](https://github.com/pwin/tarka/commit/26f256a28f10d299a4cf1c5dd49ba52cd37122a7) (exists, checked 2026-11-18)
+- [tarka README](https://github.com/pwin/tarka/blob/9a346083212ee6450fef537551dd6478092ff024/README.md#L45): “tarka works with RDF 1.1 and SPARQL 1.1.” (quote found, checked 2026-11-18)
 
 ---
 
@@ -5417,7 +5417,7 @@ total 2: 0 Violation, 0 Warning, 2 Info
 
 **Sources:**
 
-- [suite docs/ACME_ROBOTICS_WALKTHROUGH.md](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a4d08d054d168aade8daaffa4ed32df040d72311/docs/ACME_ROBOTICS_WALKTHROUGH.md#L73): “occasionally environment-flaky” (quote found, checked 2026-11-13)
+- [suite docs/ACME_ROBOTICS_WALKTHROUGH.md](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a4d08d054d168aade8daaffa4ed32df040d72311/docs/ACME_ROBOTICS_WALKTHROUGH.md#L73): “occasionally environment-flaky” (quote found, checked 2026-11-18)
 
 The seed mechanism is reproduced in C14.06.
 
@@ -5501,8 +5501,8 @@ options:
 
 **Sources:**
 
-- [testing repo commit 1370f6c](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/commit/1370f6c5362501c91a584bb1f3fe022720ed4357) (exists, checked 2026-11-13)
-- [testing repo drift.py (CT-34, 35, 36, 38)](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/9ed651ce69b7faae429d96de27996fc1baff8065/experiments/SpecificTests/AGGREGATE-mapping-drift/drift.py#L1-L9): “CT-34, CT-35, CT-36, CT-38 -- drift across a *set* of mappings.” (quote found, checked 2026-11-13)
+- [testing repo commit 1370f6c](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/commit/1370f6c5362501c91a584bb1f3fe022720ed4357) (exists, checked 2026-11-18)
+- [testing repo drift.py (CT-34, 35, 36, 38)](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/98b8fd42b21608f3cb9d82b533cbf9fa711241fa/experiments/SpecificTests/AGGREGATE-mapping-drift/drift.py#L1-L9): “CT-34, CT-35, CT-36, CT-38 -- drift across a *set* of mappings.” (quote found, checked 2026-11-18)
 
 ---
 
@@ -5516,7 +5516,7 @@ options:
 
 **Sources:**
 
-- [testing repo CT-32 README](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/9ed651ce69b7faae429d96de27996fc1baff8065/experiments/SpecificTests/CT-32-property-outside-its-domain/README.md): “This mapping is wired to no CSV, which settles the argument.” (quote found, checked 2026-11-13)
+- [testing repo CT-32 README](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/98b8fd42b21608f3cb9d82b533cbf9fa711241fa/experiments/SpecificTests/CT-32-property-outside-its-domain/README.md): “This mapping is wired to no CSV, which settles the argument.” (quote found, checked 2026-11-18)
 
 ---
 
@@ -6229,9 +6229,9 @@ inference=bogus            ERROR: unknown inference "bogus"; use "none", "rdfs",
 
 **Sources:**
 
-- [engine commit 8de05ba, 'Implement SHACL-AF rules' (after the v0.1.7 tag, version string still 0.1.7)](https://github.com/pwin/SHACL_Engine/commit/8de05bae23e410d97c040743f4ca7e0eb4ff6947): “`$this` was never substituted into a `CONSTRUCT` query.” (quote found, checked 2026-11-13)
-- [engine commit 637ebf5, rules in both bindings (before v0.1.8)](https://github.com/pwin/SHACL_Engine/commit/637ebf5b0dc9715bc1af4102cb7cd964c92374f2): “Rules reach the WASM and Python bindings as inference modes” (quote found, checked 2026-11-13)
-- [engine commit 2134124, v0.1.9](https://github.com/pwin/SHACL_Engine/commit/2134124fb3268ec4700f39ba66ad576e31fff004): “this version exists so all three channels carry the same number rather than leaving npm a release behind” (quote found, checked 2026-11-13)
+- [engine commit 8de05ba, 'Implement SHACL-AF rules' (after the v0.1.7 tag, version string still 0.1.7)](https://github.com/pwin/SHACL_Engine/commit/8de05bae23e410d97c040743f4ca7e0eb4ff6947): “`$this` was never substituted into a `CONSTRUCT` query.” (quote found, checked 2026-11-18)
+- [engine commit 637ebf5, rules in both bindings (before v0.1.8)](https://github.com/pwin/SHACL_Engine/commit/637ebf5b0dc9715bc1af4102cb7cd964c92374f2): “Rules reach the WASM and Python bindings as inference modes” (quote found, checked 2026-11-18)
+- [engine commit 2134124, v0.1.9](https://github.com/pwin/SHACL_Engine/commit/2134124fb3268ec4700f39ba66ad576e31fff004): “this version exists so all three channels carry the same number rather than leaving npm a release behind” (quote found, checked 2026-11-18)
 
 `git tag --contains 8de05ba` begins at v0.1.8. The v0.1.7 tree has no `-a`/`--advanced` flag in the CLI; the commit that adds it still declares version 0.1.7 in Cargo.toml.
 
@@ -6357,7 +6357,7 @@ Options:
 
 **Sources:**
 
-- [engine commit 2006c4e (0.3.0)](https://github.com/pwin/SHACL_Engine/commit/2006c4e5766f8145d025a118c0d96ec3c2bfcb74): “The harness had recomputed the expected report's conformance under the engine's own rule instead of reading the value the test wrote, so it agreed with itself.” (quote found, checked 2026-11-13)
+- [engine commit 2006c4e (0.3.0)](https://github.com/pwin/SHACL_Engine/commit/2006c4e5766f8145d025a118c0d96ec3c2bfcb74): “The harness had recomputed the expected report's conformance under the engine's own rule instead of reading the value the test wrote, so it agreed with itself.” (quote found, checked 2026-11-18)
 
 ---
 
@@ -6438,7 +6438,7 @@ inference=bogus  ERROR: unknown inference "bogus": expected "none", "rdfs", "rul
 
 **Sources:**
 
-- [engine commit 2eea15d](https://github.com/pwin/SHACL_Engine/commit/2eea15d58b6a9bf277c13a9dfbef93d47f1d5aa3) (exists, checked 2026-11-13)
+- [engine commit 2eea15d](https://github.com/pwin/SHACL_Engine/commit/2eea15d58b6a9bf277c13a9dfbef93d47f1d5aa3) (exists, checked 2026-11-18)
 
 ---
 
@@ -6538,7 +6538,7 @@ inference=bogus            ERROR: unknown inference "bogus"; use "none", "rdfs",
 
 **Sources:**
 
-- [engine commit a567c2e (0.2.0)](https://github.com/pwin/SHACL_Engine/commit/a567c2edfb93e8053058c8976eef8fd95388a292): “validating against no shapes conforms” (quote found, checked 2026-11-13)
+- [engine commit a567c2e (0.2.0)](https://github.com/pwin/SHACL_Engine/commit/a567c2edfb93e8053058c8976eef8fd95388a292): “validating against no shapes conforms” (quote found, checked 2026-11-18)
 
 ---
 
@@ -6599,8 +6599,8 @@ shacl 0.3.6
 
 **Sources:**
 
-- [engine commit 986c31b (0.3.4)](https://github.com/pwin/SHACL_Engine/commit/986c31ba4e071560d51fed36e99abd8cb3747a87): “Refuse to validate against no shapes on the command line” (quote found, checked 2026-11-13)
-- [engine README, coming from pySHACL](https://github.com/pwin/SHACL_Engine/blob/7fbd8942a48c953a4bcbfd3405547e582b65f855/README.md#L302-L305): “reports `Conforms: True` and exits 0; this exits 2 unless you pass” (quote found, checked 2026-11-13)
+- [engine commit 986c31b (0.3.4)](https://github.com/pwin/SHACL_Engine/commit/986c31ba4e071560d51fed36e99abd8cb3747a87): “Refuse to validate against no shapes on the command line” (quote found, checked 2026-11-18)
+- [engine README, coming from pySHACL](https://github.com/pwin/SHACL_Engine/blob/7fbd8942a48c953a4bcbfd3405547e582b65f855/README.md#L302-L305): “reports `Conforms: True` and exits 0; this exits 2 unless you pass” (quote found, checked 2026-11-18)
 
 ---
 
@@ -6614,10 +6614,10 @@ shacl 0.3.6
 
 **Sources:**
 
-- [engine README](https://github.com/pwin/SHACL_Engine/blob/7fbd8942a48c953a4bcbfd3405547e582b65f855/README.md#L315-L316): “425 of 426” (quote found, checked 2026-11-13)
-- [engine README, the subquery rule](https://github.com/pwin/SHACL_Engine/blob/7fbd8942a48c953a4bcbfd3405547e582b65f855/README.md#L339-L346): “0.3.0 briefly enforced the letter of the rule and passed all 426.” (quote found, checked 2026-11-13)
-- [engine commit 1944802 (0.3.1)](https://github.com/pwin/SHACL_Engine/commit/1944802e9a33b0116d6b660045c9d2813f9ef2d5) (exists, checked 2026-11-13)
-- [engine README, the EARL report](https://github.com/pwin/SHACL_Engine/blob/7fbd8942a48c953a4bcbfd3405547e582b65f855/README.md#L389-L392): “The W3C compiles a specification's implementation report from EARL files” (quote found, checked 2026-11-13)
+- [engine README](https://github.com/pwin/SHACL_Engine/blob/7fbd8942a48c953a4bcbfd3405547e582b65f855/README.md#L315-L316): “425 of 426” (quote found, checked 2026-11-18)
+- [engine README, the subquery rule](https://github.com/pwin/SHACL_Engine/blob/7fbd8942a48c953a4bcbfd3405547e582b65f855/README.md#L339-L346): “0.3.0 briefly enforced the letter of the rule and passed all 426.” (quote found, checked 2026-11-18)
+- [engine commit 1944802 (0.3.1)](https://github.com/pwin/SHACL_Engine/commit/1944802e9a33b0116d6b660045c9d2813f9ef2d5) (exists, checked 2026-11-18)
+- [engine README, the EARL report](https://github.com/pwin/SHACL_Engine/blob/7fbd8942a48c953a4bcbfd3405547e582b65f855/README.md#L389-L392): “The W3C compiles a specification's implementation report from EARL files” (quote found, checked 2026-11-18)
 
 ---
 
@@ -6855,7 +6855,7 @@ $ python scripts/rdfs_closure.py data/shacl/rdfs/data.ttl
 
 **Sources:**
 
-- [engine commit 66eb9f9](https://github.com/pwin/SHACL_Engine/commit/66eb9f9e065615ea338723ef16e095aa7bd3cd79): “Entailments RDF cannot express are dropped rather than refused.” (quote found, checked 2026-11-13)
+- [engine commit 66eb9f9](https://github.com/pwin/SHACL_Engine/commit/66eb9f9e065615ea338723ef16e095aa7bd3cd79): “Entailments RDF cannot express are dropped rather than refused.” (quote found, checked 2026-11-18)
 
 ---
 
@@ -7094,7 +7094,7 @@ conforms: false
 
 **Sources:**
 
-- [engine commit d7769bf](https://github.com/pwin/SHACL_Engine/commit/d7769bfd0a310e78876976bf8ba7c69ad3fab61b): “With no sh:prefixes on a query, only declarations on nodes typed sh:ShapesGraph apply.” (quote found, checked 2026-11-13)
+- [engine commit d7769bf](https://github.com/pwin/SHACL_Engine/commit/d7769bfd0a310e78876976bf8ba7c69ad3fab61b): “With no sh:prefixes on a query, only declarations on nodes typed sh:ShapesGraph apply.” (quote found, checked 2026-11-18)
 
 ---
 
@@ -7108,7 +7108,7 @@ conforms: false
 
 **Sources:**
 
-- [engine commit 637ebf5](https://github.com/pwin/SHACL_Engine/commit/637ebf5b0dc9715bc1af4102cb7cd964c92374f2): “Rule compile errors are held on the rule now and raised only if that rule would have fired” (quote found, checked 2026-11-13)
+- [engine commit 637ebf5](https://github.com/pwin/SHACL_Engine/commit/637ebf5b0dc9715bc1af4102cb7cd964c92374f2): “Rule compile errors are held on the rule now and raised only if that rule would have fired” (quote found, checked 2026-11-18)
 
 ---
 
@@ -7393,7 +7393,7 @@ Shown with two sh:order levels in one pass, which is the same mechanism iteratio
 
 **Sources:**
 
-- [engine commit 8de05ba](https://github.com/pwin/SHACL_Engine/commit/8de05bae23e410d97c040743f4ca7e0eb4ff6947): “Rules return a new graph rather than expanding the caller's.” (quote found, checked 2026-11-13)
+- [engine commit 8de05ba](https://github.com/pwin/SHACL_Engine/commit/8de05bae23e410d97c040743f4ca7e0eb4ff6947): “Rules return a new graph rather than expanding the caller's.” (quote found, checked 2026-11-18)
 
 ---
 
@@ -7407,11 +7407,11 @@ Shown with two sh:order levels in one pass, which is the same mechanism iteratio
 
 **Sources:**
 
-- [the previous edition's rules-at-scale table](https://github.com/pwin/SemOpsManual/blob/fc6de6da90d54a57bbbd2163ebc5b5dfe246ec40/docs/11-rules-and-inference.md#L333): “| 100,000 | ~690,000 | 2.7s | **11.9s** |” (quote found, checked 2026-11-13)
-- [the previous edition's pySHACL comparison](https://github.com/pwin/SemOpsManual/blob/fc6de6da90d54a57bbbd2163ebc5b5dfe246ec40/docs/11-rules-and-inference.md#L346): “| 1,000 | 0.040s | 2.992s | 75× |” (quote found, checked 2026-11-13)
-- [the previous edition's WebAssembly table](https://github.com/pwin/SemOpsManual/blob/fc6de6da90d54a57bbbd2163ebc5b5dfe246ec40/docs/11-rules-and-inference.md#L371): “| 100,000 | 400,000 | **12,611 ms** | **3,119 ms** | 329 MB |” (quote found, checked 2026-11-13)
-- [engine README, current timings](https://github.com/pwin/SHACL_Engine/blob/7fbd8942a48c953a4bcbfd3405547e582b65f855/README.md#L68-L71): “| cached index, all cores — the defaults | **0.23s** |” (quote found, checked 2026-11-13)
-- [engine commit 6fa00e3 (0.3.0)](https://github.com/pwin/SHACL_Engine/commit/6fa00e3deb2e02b5b32e6a1a78f7360e33da31e8) (exists, checked 2026-11-13)
+- [the previous edition's rules-at-scale table](https://github.com/pwin/SemOpsManual/blob/fc6de6da90d54a57bbbd2163ebc5b5dfe246ec40/docs/11-rules-and-inference.md#L333): “| 100,000 | ~690,000 | 2.7s | **11.9s** |” (quote found, checked 2026-11-18)
+- [the previous edition's pySHACL comparison](https://github.com/pwin/SemOpsManual/blob/fc6de6da90d54a57bbbd2163ebc5b5dfe246ec40/docs/11-rules-and-inference.md#L346): “| 1,000 | 0.040s | 2.992s | 75× |” (quote found, checked 2026-11-18)
+- [the previous edition's WebAssembly table](https://github.com/pwin/SemOpsManual/blob/fc6de6da90d54a57bbbd2163ebc5b5dfe246ec40/docs/11-rules-and-inference.md#L371): “| 100,000 | 400,000 | **12,611 ms** | **3,119 ms** | 329 MB |” (quote found, checked 2026-11-18)
+- [engine README, current timings](https://github.com/pwin/SHACL_Engine/blob/7fbd8942a48c953a4bcbfd3405547e582b65f855/README.md#L68-L71): “| cached index, all cores — the defaults | **0.23s** |” (quote found, checked 2026-11-18)
+- [engine commit 6fa00e3 (0.3.0)](https://github.com/pwin/SHACL_Engine/commit/6fa00e3deb2e02b5b32e6a1a78f7360e33da31e8) (exists, checked 2026-11-18)
 
 Recorded measurements, not reproduced here. C11.12 reproduces the result counts behind the first table, at 1,000 and 100,000.
 
@@ -7427,8 +7427,8 @@ Recorded measurements, not reproduced here. C11.12 reproduces the result counts 
 
 **Sources:**
 
-- [engine README](https://github.com/pwin/SHACL_Engine/blob/7fbd8942a48c953a4bcbfd3405547e582b65f855/README.md#L117-L118): “A graph is held three times over, once per permutation” (quote found, checked 2026-11-13)
-- [engine README](https://github.com/pwin/SHACL_Engine/blob/7fbd8942a48c953a4bcbfd3405547e582b65f855/README.md#L101): “That order is by focus node” (quote found, checked 2026-11-13)
+- [engine README](https://github.com/pwin/SHACL_Engine/blob/7fbd8942a48c953a4bcbfd3405547e582b65f855/README.md#L117-L118): “A graph is held three times over, once per permutation” (quote found, checked 2026-11-18)
+- [engine README](https://github.com/pwin/SHACL_Engine/blob/7fbd8942a48c953a4bcbfd3405547e582b65f855/README.md#L101): “That order is by focus node” (quote found, checked 2026-11-18)
 
 ---
 
@@ -7561,7 +7561,7 @@ error: applying SHACL-AF rules: invalid shapes graph: unsupported node expressio
 
 **Sources:**
 
-- [engine README, what does not work](https://github.com/pwin/SHACL_Engine/blob/7fbd8942a48c953a4bcbfd3405547e582b65f855/README.md#L483-L492): “is vendored under `testsuite/shacl12/tests/rules/` but is not wired into the” (quote found, checked 2026-11-13)
+- [engine README, what does not work](https://github.com/pwin/SHACL_Engine/blob/7fbd8942a48c953a4bcbfd3405547e582b65f855/README.md#L483-L492): “is vendored under `testsuite/shacl12/tests/rules/` but is not wired into the” (quote found, checked 2026-11-18)
 
 ---
 
@@ -7652,7 +7652,7 @@ inference=bogus  ERROR: unknown inference "bogus": expected "none", "rdfs", "rul
 
 **Sources:**
 
-- [extension src/checks/shaclRunner.ts](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/d6deaa6cba957f895563066dbc40709297a2cb5f/src/checks/shaclRunner.ts#L25-L31): “so this deliberately stays at `"none"`” (quote found, checked 2026-11-13)
+- [extension src/checks/shaclRunner.ts](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/src/checks/shaclRunner.ts#L25-L31): “so this deliberately stays at `"none"`” (quote found, checked 2026-11-18)
 
 ---
 
@@ -7871,7 +7871,7 @@ holos 0.26.2 (3d9c46f)
 
 **Sources:**
 
-- [HOLOS commit 462bb56 (0.22.0)](https://github.com/pwin/triplestore/commit/462bb56e66db312f7b49c29d6af2ef91c905c61c): “Make holos validate a gate: exit 1 on violations, and default to adapted” (quote found, checked 2026-11-13)
+- [HOLOS commit 462bb56 (0.22.0)](https://github.com/pwin/triplestore/commit/462bb56e66db312f7b49c29d6af2ef91c905c61c): “Make holos validate a gate: exit 1 on violations, and default to adapted” (quote found, checked 2026-11-18)
 
 ---
 
@@ -8297,8 +8297,8 @@ Wrote 1/1 suggested repair(s) as .patch files under work/C12_05/replaced-by-reve
 
 **Sources:**
 
-- [suite commit 67513c4, 12 August 2026](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/67513c4ebd1cba9d2a67d204b363606bbb942650): “symmetric-direction rename-migration annotations” (quote found, checked 2026-11-13)
-- [suite versioning/rename_detection.py](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a4d08d054d168aade8daaffa4ed32df040d72311/ontology_suite/versioning/rename_detection.py#L25-L30): “``dcterms:isReplacedBy`` is directional by definition and only recognized old -> new” (quote found, checked 2026-11-13)
+- [suite commit 67513c4, 12 August 2026](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/67513c4ebd1cba9d2a67d204b363606bbb942650): “symmetric-direction rename-migration annotations” (quote found, checked 2026-11-18)
+- [suite versioning/rename_detection.py](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a4d08d054d168aade8daaffa4ed32df040d72311/ontology_suite/versioning/rename_detection.py#L25-L30): “``dcterms:isReplacedBy`` is directional by definition and only recognized old -> new” (quote found, checked 2026-11-18)
 
 ---
 
@@ -8390,7 +8390,7 @@ $ python scripts/diff_files.py fixtures/acme_robotics/employees.rq work/C12_08/a
 
 **Sources:**
 
-- [suite commit 64e300a (first released in v0.14.1)](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/64e300a1c42f4822ab17018438c7cda327b938cf): “`--apply-repairs` rewrote comments as well as code.” (quote found, checked 2026-11-13)
+- [suite commit 64e300a (first released in v0.14.1)](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/64e300a1c42f4822ab17018438c7cda327b938cf): “`--apply-repairs` rewrote comments as well as code.” (quote found, checked 2026-11-18)
 
 ---
 
@@ -8484,7 +8484,7 @@ $ python scripts/diff_files.py data/rename-literal/employees.rq work/C12_10/q/em
 
 **Sources:**
 
-- [suite commit 64e300a](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/64e300a1c42f4822ab17018438c7cda327b938cf): “String literals are deliberately still rewritten: a TARQL IRI template is built out of literals” (quote found, checked 2026-11-13)
+- [suite commit 64e300a](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/64e300a1c42f4822ab17018438c7cda327b938cf): “String literals are deliberately still rewritten: a TARQL IRI template is built out of literals” (quote found, checked 2026-11-18)
 
 ---
 
@@ -8697,7 +8697,7 @@ A statement about scope. The evidence the table lists is reproduced in C09.04, C
 
 **Sources:**
 
-- [suite docs/UPDATING.md](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a4d08d054d168aade8daaffa4ed32df040d72311/docs/UPDATING.md#L1): “Updating the semantic specification ecosystem: a playbook” (quote found, checked 2026-11-13)
+- [suite docs/UPDATING.md](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a4d08d054d168aade8daaffa4ed32df040d72311/docs/UPDATING.md#L1): “Updating the semantic specification ecosystem: a playbook” (quote found, checked 2026-11-18)
 
 ---
 
@@ -9329,7 +9329,7 @@ loaded 21 quads in 0.00s (23171 quads/s)
 
 **Sources:**
 
-- [HOLOS ACCESS-CONTROL.md](https://github.com/pwin/triplestore/blob/3d9c46f37f54188c1a801b67030ca3a14bac2b04/ACCESS-CONTROL.md#L44): “It costs **8 ns per quad** — measured, and about 1% of what decoding the quad costs.” (quote found, checked 2026-11-13)
+- [HOLOS ACCESS-CONTROL.md](https://github.com/pwin/triplestore/blob/3d9c46f37f54188c1a801b67030ca3a14bac2b04/ACCESS-CONTROL.md#L44): “It costs **8 ns per quad** — measured, and about 1% of what decoding the quad costs.” (quote found, checked 2026-11-18)
 
 ---
 
@@ -9630,8 +9630,8 @@ OPTIONS
 
 **Sources:**
 
-- [HOLOS commit cd5af4b](https://github.com/pwin/triplestore/commit/cd5af4b32082458ee087d92948020a1b77cd3e9d): “Engine::with_transient_graph loads input inside a commit scope that is always rolled back” (quote found, checked 2026-11-13)
-- [HOLOS commit 82e4d66, 'Cut 0.21.1'](https://github.com/pwin/triplestore/commit/82e4d6686b3563db502ea68098a6f3fc9ce75d6b): “validation leaves nothing in the store it validates” (quote found, checked 2026-11-13)
+- [HOLOS commit cd5af4b](https://github.com/pwin/triplestore/commit/cd5af4b32082458ee087d92948020a1b77cd3e9d): “Engine::with_transient_graph loads input inside a commit scope that is always rolled back” (quote found, checked 2026-11-18)
+- [HOLOS commit 82e4d66, 'Cut 0.21.1'](https://github.com/pwin/triplestore/commit/82e4d6686b3563db502ea68098a6f3fc9ce75d6b): “validation leaves nothing in the store it validates” (quote found, checked 2026-11-18)
 
 The recorded run uses 0.26.0, so it shows the fix made in 0.21.1, and the results the dictionary carries from 0.23.0. The same steps against the published 0.21.0 gave: `violations [2, 4, 6]` for both engines; a 5-quad `urn:holos:python:shapes` graph after one call, still there after reopening a persistent store; no warning for a planted leftover; and from the CLI `results 2`, then `results 4`, with a `urn:holos:shapes` graph left behind. The Python method's default engine, adapted, is in its signature: [holos-python lib.rs](https://github.com/pwin/triplestore/blob/3d9c46f37f54188c1a801b67030ca3a14bac2b04/crates/holos-python/src/lib.rs#L647-L674).
 
@@ -10388,7 +10388,7 @@ failures were while building: <http://xmlns.com/foaf/0.1/primaryTopic> (29)
 
 **Sources:**
 
-- [suite reasoning/backends/external_backend.py: a fresh TemporaryDirectory, loaded by path](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a4d08d054d168aade8daaffa4ed32df040d72311/ontology_suite/reasoning/backends/external_backend.py#L140-L155): “onto = world.get_ontology(str(owl_path)).load()” (quote found, checked 2026-11-13)
+- [suite reasoning/backends/external_backend.py: a fresh TemporaryDirectory, loaded by path](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a4d08d054d168aade8daaffa4ed32df040d72311/ontology_suite/reasoning/backends/external_backend.py#L140-L155): “onto = world.get_ontology(str(owl_path)).load()” (quote found, checked 2026-11-18)
 
 HermiT is never called here: the failure, when it comes, is in loading.
 
@@ -10596,10 +10596,10 @@ total 0: 0 Violation, 0 Warning, 0 Info
 
 **Sources:**
 
-- [suite external_backend.py at 0.22.0, the belt-and-braces rule](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/749af3e1be749ace3aab3ea4b492d72b3b21dbde/ontology_suite/reasoning/backends/external_backend.py#L128-L133): “thing_or_nothing = {owlready2.Thing, owlready2.owl.Nothing}” (quote found, checked 2026-11-13)
-- [testing repo detect.py, 03b-unsatisfiable-class, at 6d078a1](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/6d078a118959760409e13076650c2d62a4f6dc90/detect.py#L115-L128): “forbidden=("REA-001", "CNF-001", "CNF-002"),” (quote found, checked 2026-11-13)
-- [suite commit d7d7a98, the fix](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/d7d7a987cb754221b6c57a5997445628e219851b): “REA-020 said "inconsistent" for a merely unsatisfiable class” (quote found, checked 2026-11-13)
-- [testing repo commit 6cdfb14: 03b now forbids REA-020](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/commit/6cdfb14a3c2857b61dcb32f49f56a4829b0d0664): “Forbid REA-020 where the class is unsatisfiable but the ontology is not” (quote found, checked 2026-11-13)
+- [suite external_backend.py at 0.22.0, the belt-and-braces rule](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/749af3e1be749ace3aab3ea4b492d72b3b21dbde/ontology_suite/reasoning/backends/external_backend.py#L128-L133): “thing_or_nothing = {owlready2.Thing, owlready2.owl.Nothing}” (quote found, checked 2026-11-18)
+- [testing repo detect.py, 03b-unsatisfiable-class, at 6d078a1](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/6d078a118959760409e13076650c2d62a4f6dc90/detect.py#L115-L128): “forbidden=("REA-001", "CNF-001", "CNF-002"),” (quote found, checked 2026-11-18)
+- [suite commit d7d7a98, the fix](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/d7d7a987cb754221b6c57a5997445628e219851b): “REA-020 said "inconsistent" for a merely unsatisfiable class” (quote found, checked 2026-11-18)
+- [testing repo commit 6cdfb14: 03b now forbids REA-020](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/commit/6cdfb14a3c2857b61dcb32f49f56a4829b0d0664): “Forbid REA-020 where the class is unsatisfiable but the ontology is not” (quote found, checked 2026-11-18)
 
 Needs Java, and a hash seed under which owlready2 loads (5 here; see C14.06).
 
@@ -10741,7 +10741,7 @@ Needs Java, and a hash seed under which owlready2 loads (5 here; see C14.06).
 ### C14.21 — Documentation drift, upstream
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-21) · [plain edition](../docs/14-coverage-and-gaps.md#documentation-drift-upstream)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > None of these changes what a tool does. All of them change what a careful reader
 
@@ -10805,13 +10805,14 @@ options:
 
 **Sources:**
 
-- [suite docs/REPORTS.md says 0.15.0 (see C09.11 for 0.17.0)](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a4d08d054d168aade8daaffa4ed32df040d72311/docs/REPORTS.md#L18): “## What changed in 0.15.0” (quote found, checked 2026-11-13)
-- [suite docs/REASONING.md](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a4d08d054d168aade8daaffa4ed32df040d72311/docs/REASONING.md#L107): “Uses `owlready2` (the `reasoner` extra: `uv sync --extra reasoner`)” (quote found, checked 2026-11-13)
-- [suite pyproject.toml at its first commit: owlready2 a base dependency](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/d0ba3679644360c31118295f9ba8738c85111e95/pyproject.toml#L14): “"owlready2>=0.51",” (quote found, checked 2026-11-13)
-- [extension README (0.15.0) names Oxigraph](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/d6deaa6cba957f895563066dbc40709297a2cb5f/README.md#L86): “Oxigraph, `shacl-wasm`, and `eyereasoner` are all” (quote found, checked 2026-11-13)
-- [testing repo README](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/9ed651ce69b7faae429d96de27996fc1baff8065/README.md#L22): “18 Turtle files in 10 folders” (quote found, checked 2026-11-13)
-- [testing repo README at 7deaf86, before 79c53a2 corrected it](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/7deaf86a523fb313ccf47572df4e7276c779e28e/README.md#L31): “All 16 fixtures pass” (quote found, checked 2026-11-13)
-- [suite commit 5d59713, 'Bump to 0.18.0': main's head until it was fast-forwarded to 0.23.0, as recorded while drafting](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/5d597132779a19dbfb7ccf8891723ca19d49ced3): “Bump to 0.18.0” (quote found, checked 2026-11-13)
+- [suite docs/REPORTS.md says 0.15.0 (see C09.11 for 0.17.0)](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a4d08d054d168aade8daaffa4ed32df040d72311/docs/REPORTS.md#L18): “## What changed in 0.15.0” (quote found, checked 2026-11-18)
+- [suite docs/REASONING.md](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a4d08d054d168aade8daaffa4ed32df040d72311/docs/REASONING.md#L107): “Uses `owlready2` (the `reasoner` extra: `uv sync --extra reasoner`)” (quote found, checked 2026-11-18)
+- [suite pyproject.toml at its first commit: owlready2 a base dependency](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/d0ba3679644360c31118295f9ba8738c85111e95/pyproject.toml#L14): “"owlready2>=0.51",” (quote found, checked 2026-11-18)
+- [extension README up to 0.17.4 names Oxigraph](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/d6deaa6cba957f895563066dbc40709297a2cb5f/README.md#L86): “Oxigraph, `shacl-wasm`, and `eyereasoner` are all” (quote found, checked 2026-11-18)
+- [extension README at 0.17.5 names HOLOS](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/README.md#L86): “HOLOS (`holos-wasm-node`), `shacl-wasm-node`, and `eyereasoner` are all” (quote found, checked 2026-11-18)
+- [testing repo README](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/98b8fd42b21608f3cb9d82b533cbf9fa711241fa/README.md#L22): “18 Turtle files in 10 folders” (quote found, checked 2026-11-18)
+- [testing repo README at 7deaf86, before 79c53a2 corrected it](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/7deaf86a523fb313ccf47572df4e7276c779e28e/README.md#L31): “All 16 fixtures pass” (quote found, checked 2026-11-18)
+- [suite commit 5d59713, 'Bump to 0.18.0': main's head until it was fast-forwarded to 0.23.0, as recorded while drafting](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/5d597132779a19dbfb7ccf8891723ca19d49ced3): “Bump to 0.18.0” (quote found, checked 2026-11-18)
 
 The testing repository's `ontologies/` holds 14 folders and 25 Turtle files at 6cdfb14; its detect.py declares 17 fixtures (C09.19); both counts are the same at 31bda0d. The suite retired `develop` on 23 October, and `main` is its default branch again.
 
@@ -10892,11 +10893,11 @@ Counted from the tagged files: 50 entries at v0.5.0 and v0.8.0, 56 at v0.10.0, 6
 
 **Sources:**
 
-- [suite commit cd72df1: language-tagged literals, and per-row entities](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/cd72df19132e76cb91d3f775943c054d3a1e617a): “Both found by the sibling fixture repo” (quote found, checked 2026-11-13)
-- [suite commit 9defc24: the namespace legend](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/9defc24d331866420b6532f407612ed35089d834) (exists, checked 2026-11-13)
-- [testing repo CT-01 README: the legend's false finding, until suite 0.20.0](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/9ed651ce69b7faae429d96de27996fc1baff8065/experiments/SpecificTests/CT-01-iri-template-drift/README.md#L50-L52): “It held one entry until suite 0.20.0.” (quote found, checked 2026-11-13)
-- [suite commit def9038: the default namespace](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/def9038a8d43cfcf421c0c04b90ee0e400cd8df1): “Found while building an isolated fixture for CT-3” (quote found, checked 2026-11-13)
-- [suite commit cae9ef2: --sparql replacing the built-ins](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/cae9ef21cf33ceb8eba33ef94da66b32bf810ded): “Found in exactly that state: the separate testing repo's CI gate config” (quote found, checked 2026-11-13)
+- [suite commit cd72df1: language-tagged literals, and per-row entities](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/cd72df19132e76cb91d3f775943c054d3a1e617a): “Both found by the sibling fixture repo” (quote found, checked 2026-11-18)
+- [suite commit 9defc24: the namespace legend](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/9defc24d331866420b6532f407612ed35089d834) (exists, checked 2026-11-18)
+- [testing repo CT-01 README: the legend's false finding, until suite 0.20.0](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/98b8fd42b21608f3cb9d82b533cbf9fa711241fa/experiments/SpecificTests/CT-01-iri-template-drift/README.md#L50-L52): “It held one entry until suite 0.20.0.” (quote found, checked 2026-11-18)
+- [suite commit def9038: the default namespace](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/def9038a8d43cfcf421c0c04b90ee0e400cd8df1): “Found while building an isolated fixture for CT-3” (quote found, checked 2026-11-18)
+- [suite commit cae9ef2: --sparql replacing the built-ins](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/cae9ef21cf33ceb8eba33ef94da66b32bf810ded): “Found in exactly that state: the separate testing repo's CI gate config” (quote found, checked 2026-11-18)
 
 ---
 
@@ -11034,7 +11035,7 @@ The shacl CLI's refusal is C11.07; the DSL's two fixes are C08.15 and C08.16.
 
 **Sources:**
 
-- [the previous edition's Chapter 8](https://github.com/pwin/SemOpsManual/blob/fc6de6da90d54a57bbbd2163ebc5b5dfe246ec40/docs/08-model-and-validate.md#L326): “close to 300 findings” (quote found, checked 2026-11-13)
+- [the previous edition's Chapter 8](https://github.com/pwin/SemOpsManual/blob/fc6de6da90d54a57bbbd2163ebc5b5dfe246ec40/docs/08-model-and-validate.md#L326): “close to 300 findings” (quote found, checked 2026-11-18)
 
 Today's figures are reproduced in C09.02 (479), C09.04 (23) and C07.22 (22 or 23).
 

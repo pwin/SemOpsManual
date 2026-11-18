@@ -304,8 +304,9 @@ believes, which is how I came to carry one false claim for two months
   pyshacl", and `native` is "not a default dependency". Rewritten in 0.23.0.
 - The suite's `REASONING.md` calls `owlready2` the `reasoner` extra; it has been a
   base dependency since the first commit. What is optional is Java.
-- The extension's `README.md` still names Oxigraph among its engines; it went in
-  0.13.11.
+- The extension's `README.md` named Oxigraph among its engines until 0.17.5, and so
+  did its tutorial and a setting's description; Oxigraph went in 0.13.11.
+  Corrected in 0.17.5.
 - The testing repository's README says "18 Turtle files in 10 folders"; there are
   25 in fourteen. It said sixteen fixtures, too, until it was corrected to the
   seventeen there are on 23 October.

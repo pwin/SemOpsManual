@@ -63,22 +63,21 @@ CLAIMS = [
 
     Claim("C07.04", "The editor runs the same engines at the same versions", "07",
           (F, "the 44 portable checks run on **holosdb** in Python and on"), "source",
-          sources=[src("extension package.json (0.17.4)", file("webapp", "package.json", "500-509"),
-                       '"holos-wasm-node": "^0.26.1",'),
-                   src("extension package-lock.json (0.17.4): the holos-wasm-node it bundles",
+          sources=[src("extension package.json (0.17.5)", file("webapp", "package.json", "500-509"),
+                       '"holos-wasm-node": "^0.26.2",'),
+                   src("extension package-lock.json (0.17.5): the holos-wasm-node it bundles",
                        file("webapp", "package-lock.json"), '"node_modules/holos-wasm-node"'),
-                   src("suite uv.lock at the 0.27.0 release: the holosdb it locks",
-                       file("suite", "uv.lock", "167-168"),
-                       'version = "0.26.1"'),
+                   src("suite uv.lock on main from bdb9937: the holosdb it locks",
+                       file("suite", "uv.lock", "167-168", ref="bdb9937f59c277d26450c4e79129cfbeff8a7cec"),
+                       'version = "0.26.2"'),
                    src("HOLOS commit 8b2a949: every query entry point through one pipeline",
                        commit("holos", "8b2a9495af52ff56a7ebedd49e9dbd0f1ead93ce"),
                        "Send every query entry point through one pipeline")],
-          notes="Below 1.0 a caret admits patch releases only, so `^0.26.1` means 0.26.x. The 0.17.4 release's "
-                "lock file resolves it to 0.26.1, and the suite's 0.27.0 release locks the same 0.26.1 -- so the "
-                "two released sides are on one version exactly. HOLOS 0.26.2 has since been published, and C07.01 "
-                "installs it, as a reader would; the suite's repository locks it from bdb9937, ahead of any "
-                "suite release, and the extension's 0.17.5, which bundles it, is merged but not yet released. "
-                "Both sides move to 0.26.2 together, as they moved to 0.26.1. The extension reaches HOLOS through `queryRdf`, the suite "
+          notes="Below 1.0 a caret admits patch releases only, so `^0.26.2` means 0.26.x. The 0.17.5 release's "
+                "lock file resolves it to 0.26.2, and the suite's repository locks the same 0.26.2 from bdb9937 -- "
+                "so the two sides are on one version exactly. The suite's last release, 0.27.0, still locks "
+                "0.26.1, but a lock is not what an install reads: `pip install ontology-quality-suite` resolves "
+                "holosdb 0.26.2, which is what C07.01 installs. The extension reaches HOLOS through `queryRdf`, the suite "
                 "through `Store.query`; from HOLOS 0.24.0 both run the same pipeline. HOLOS's own SHACL validator "
                 "is a part the extension does not call: it validates with shacl-wasm-node."),
 
