@@ -54,8 +54,8 @@ are recorded but never asserted.
 
 **Which versions.** The packages are installed as a reader would install them,
 from PyPI and npm, not from any repository's lock file. So holosdb resolves to
-0.26.2 and shacl to 0.3.6 here. The suite's own `uv.lock` holds holosdb 0.26.1 and
-shacl 0.3.4 in the 0.27.0 release and 0.26.2 and 0.3.6 on `main` since 13
+0.26.4 and shacl to 0.3.8 here. The suite's own `uv.lock` holds holosdb 0.26.1 and
+shacl 0.3.4 in the 0.27.0 release and 0.26.4 and 0.3.8 on `main` since 18
 November, and held holosdb 0.15.0 at 0.22.0 (C07.17), which is why the lock is not
 what this reads. Where a release changed what a claim should see, the claim checks the
 installed version and says which side of the change it ran on: suite 0.23.0

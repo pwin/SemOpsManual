@@ -69,8 +69,8 @@ CLAIMS = [
           (F, "**The surfaces disagreed for two releases.**"), "run",
           scripts=["scripts/wasm_conforms.mjs"],
           steps=[Step(f"node scripts/wasm_conforms.mjs {S}")],
-          check=has(0, "shacl-wasm-node 0.3.6  shapes-warning.ttl     conforms=false"),
-          checks="shacl-wasm-node 0.3.6 calls a warnings-only graph non-conforming (0.3.0 and 0.3.1 did not)",
+          check=has(0, "shacl-wasm-node 0.3.8  shapes-warning.ttl     conforms=false"),
+          checks="shacl-wasm-node 0.3.8 calls a warnings-only graph non-conforming (0.3.0 and 0.3.1 did not)",
           needs=["node"],
           sources=[src("engine commit 2eea15d", commit("shacl", "2eea15d58b6a9bf277c13a9dfbef93d47f1d5aa3"))]),
 

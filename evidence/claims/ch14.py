@@ -177,7 +177,7 @@ CLAIMS = [
                        '"owlready2>=0.51",'),
                    src("extension README up to 0.17.4 names Oxigraph", file("webapp", "README.md", "86", ref="d6deaa6cba957f895563066dbc40709297a2cb5f"),
                        "Oxigraph, `shacl-wasm`, and `eyereasoner` are all"),
-                   src("extension README at 0.17.5 names HOLOS", file("webapp", "README.md", "86"),
+                   src("extension README from 0.17.5 names HOLOS", file("webapp", "README.md", "86"),
                        "HOLOS (`holos-wasm-node`), `shacl-wasm-node`, and `eyereasoner` are all"),
                    src("testing repo README", file("testing", "README.md", "22"), "18 Turtle files in 10 folders"),
                    src("testing repo README at 7deaf86, before 79c53a2 corrected it",

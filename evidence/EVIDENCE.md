@@ -54,8 +54,8 @@ are recorded but never asserted.
 
 **Which versions.** The packages are installed as a reader would install them,
 from PyPI and npm, not from any repository's lock file. So holosdb resolves to
-0.26.2 and shacl to 0.3.6 here. The suite's own `uv.lock` holds holosdb 0.26.1 and
-shacl 0.3.4 in the 0.27.0 release and 0.26.2 and 0.3.6 on `main` since 13
+0.26.4 and shacl to 0.3.8 here. The suite's own `uv.lock` holds holosdb 0.26.1 and
+shacl 0.3.4 in the 0.27.0 release and 0.26.4 and 0.3.8 on `main` since 18
 November, and held holosdb 0.15.0 at 0.22.0 (C07.17), which is why the lock is not
 what this reads. Where a release changed what a claim should see, the claim checks the
 installed version and says which side of the change it ran on: suite 0.23.0
@@ -134,19 +134,19 @@ for its error on unchecked code and its `Quad` type ([C08.15](#c08-15),
 | python | 3.12.13 |
 | platform | Windows 11 (AMD64) |
 | PyPI ontology-quality-suite | 0.27.0 |
-| PyPI shacl | 0.3.6 |
-| PyPI holosdb | 0.26.2 |
+| PyPI shacl | 0.3.8 |
+| PyPI holosdb | 0.26.4 |
 | PyPI tarka-rdf | 0.2.2 |
 | PyPI rdflib | 7.6.0 |
 | PyPI pyoxigraph | 0.5.11 |
 | PyPI polars | 2.0.0 |
-| release shacl | shacl 0.3.6 |
+| release shacl | shacl 0.3.8 |
 | release tarka | tarka 0.2.2 |
-| release holos | holos 0.26.2 (3d9c46f) |
+| release holos | holos 0.26.4 (27aabce) |
 | node | v22.21.1 |
 | npm ontology-suite | 0.17.3 |
-| npm shacl-wasm-node | 0.3.6 |
-| npm holos-wasm-node | 0.26.2 |
+| npm shacl-wasm-node | 0.3.8 |
+| npm holos-wasm-node | 0.26.4 |
 | npm typescript | 7.0.2 |
 | java (for HermiT) | openjdk version "25.0.3" 2026-04-21 LTS |
 | oxi-gen (testing repo only) | oxi_gen 0.5.1 |
@@ -159,18 +159,18 @@ for its error on unchecked code and its `Quad` type ([C08.15](#c08-15),
 
 | Claim | Kind | Result |
 |---|---|---|
-| [C00.01 — A 61-check registry](#c00-01) | Reproduced here | PASS (2026-11-13) |
+| [C00.01 — A 61-check registry](#c00-01) | Reproduced here | PASS (2026-11-18) |
 | [C00.02 — Every Part III command was executed, and re-run for this edition](#c00-02) | Argument | Argument |
-| [C00.03 — Twenty diagrams](#c00-03) | Reproduced here | PASS (2026-11-13) |
-| [C00.04 — pip install shacl gives the library only](#c00-04) | Reproduced here | PASS (2026-11-13) |
-| [C00.05 — 54 or 55, and REA-021 or REA-022](#c00-05) | Reproduced here | PASS (2026-11-13) |
-| [C00.06 — Everything else is exactly reproducible](#c00-06) | Reproduced here | PASS (2026-11-13) |
+| [C00.03 — Twenty diagrams](#c00-03) | Reproduced here | PASS (2026-11-18) |
+| [C00.04 — pip install shacl gives the library only](#c00-04) | Reproduced here | PASS (2026-11-18) |
+| [C00.05 — 54 or 55, and REA-021 or REA-022](#c00-05) | Reproduced here | PASS (2026-11-18) |
+| [C00.06 — Everything else is exactly reproducible](#c00-06) | Reproduced here | PASS (2026-11-18) |
 
 ### 1. The business case
 
 | Claim | Kind | Result |
 |---|---|---|
-| [C01.01 — Ten systems, forty-five pairings; twenty, a hundred and ninety](#c01-01) | Reproduced here | PASS (2026-11-13) |
+| [C01.01 — Ten systems, forty-five pairings; twenty, a hundred and ninety](#c01-01) | Reproduced here | PASS (2026-11-18) |
 | [C01.02 — An ontology decays without deliberate maintenance](#c01-02) | Argument | Argument |
 
 ### 2. People and cognition
@@ -179,27 +179,27 @@ for its error on unchecked code and its `Quad` type ([C08.15](#c08-15),
 |---|---|---|
 | [C02.01 — Building the vocabulary exposes fracture lines](#c02-01) | Argument | Argument |
 | [C02.02 — Organisations move from labels to verbs](#c02-02) | Argument | Argument |
-| [C02.03 — gist 14.1.0: 42 of 66 object properties constrain neither; gist 13: 40 of 63](#c02-03) | Reproduced here | PASS (2026-11-13) |
-| [C02.04 — 479 findings, 23 once scoped](#c02-04) | Reproduced here | PASS (2026-11-13) |
+| [C02.03 — gist 14.1.0: 42 of 66 object properties constrain neither; gist 13: 40 of 63](#c02-03) | Reproduced here | PASS (2026-11-18) |
+| [C02.04 — 479 findings, 23 once scoped](#c02-04) | Reproduced here | PASS (2026-11-18) |
 
 ### 3. Across the boundary: peers and supply chains
 
 | Claim | Kind | Result |
 |---|---|---|
-| [C03.01 — foaf:name has domain owl:Thing, and the suite has been taught it](#c03-01) | Reproduced here | PASS (2026-11-13) |
-| [C03.02 — version-diff says MAJOR, with the machine-readable diff](#c03-02) | Reproduced here | PASS (2026-11-13) |
-| [C03.03 — The tombstone is read in both directions](#c03-03) | Reproduced here | PASS (2026-11-13) |
-| [C03.04 — Policy at the scan for a consortium](#c03-04) | Reproduced here | PASS (2026-11-13) |
-| [C03.05 — A registry is a distributable artefact](#c03-05) | Reproduced here | PASS (2026-11-13) |
-| [C03.06 — Speak the protocol, not the product](#c03-06) | Reproduced here | PASS (2026-11-13) |
+| [C03.01 — foaf:name has domain owl:Thing, and the suite has been taught it](#c03-01) | Reproduced here | PASS (2026-11-18) |
+| [C03.02 — version-diff says MAJOR, with the machine-readable diff](#c03-02) | Reproduced here | PASS (2026-11-18) |
+| [C03.03 — The tombstone is read in both directions](#c03-03) | Reproduced here | PASS (2026-11-18) |
+| [C03.04 — Policy at the scan for a consortium](#c03-04) | Reproduced here | PASS (2026-11-18) |
+| [C03.05 — A registry is a distributable artefact](#c03-05) | Reproduced here | PASS (2026-11-18) |
+| [C03.06 — Speak the protocol, not the product](#c03-06) | Reproduced here | PASS (2026-11-18) |
 
 ### 4. From research to industry
 
 | Claim | Kind | Result |
 |---|---|---|
-| [C04.01 — REA-022 carries owlready2's internal error](#c04-01) | Reproduced here | PASS (2026-11-13) |
-| [C04.02 — The failure is in owlready2's loader, not HermiT](#c04-02) | Reproduced here | PASS (2026-11-13) |
-| [C04.03 — Without Java, the operating system's message; LOG-001 regardless](#c04-03) | Reproduced here | PASS (2026-11-13) |
+| [C04.01 — REA-022 carries owlready2's internal error](#c04-01) | Reproduced here | PASS (2026-11-18) |
+| [C04.02 — The failure is in owlready2's loader, not HermiT](#c04-02) | Reproduced here | PASS (2026-11-18) |
+| [C04.03 — Without Java, the operating system's message; LOG-001 regardless](#c04-03) | Reproduced here | PASS (2026-11-18) |
 | [C04.04 — A perfect SHACL score broke production; 0.3.1 took 425](#c04-04) | Cited from upstream | Cited from upstream |
 | [C04.05 — HOLOS reports correctness and coverage: 511 of 511, 82%](#c04-05) | Cited from upstream | Cited from upstream |
 | [C04.06 — A research artefact's implicit expiry date](#c04-06) | Argument | Argument |
@@ -210,8 +210,8 @@ for its error on unchecked code and its `Quad` type ([C08.15](#c08-15),
 |---|---|---|
 | [C05.01 — Grounding in graphs improves step-wise reasoning and recall](#c05-01) | Argument | Argument |
 | [C05.02 — findings.txt is addressed to a person or an agent](#c05-02) | Cited from upstream | Cited from upstream |
-| [C05.03 — Tombstones at 100% apply; guesses at 57% do not](#c05-03) | Reproduced here | PASS (2026-11-13) |
-| [C05.04 — An agent as a principal with roles](#c05-04) | Reproduced here | PASS (2026-11-13) |
+| [C05.03 — Tombstones at 100% apply; guesses at 57% do not](#c05-03) | Reproduced here | PASS (2026-11-18) |
+| [C05.04 — An agent as a principal with roles](#c05-04) | Reproduced here | PASS (2026-11-18) |
 
 ### 6. Stages and stories
 
@@ -223,18 +223,18 @@ for its error on unchecked code and its `Quad` type ([C08.15](#c08-15),
 
 | Claim | Kind | Result |
 |---|---|---|
-| [C07.01 — The versions every Part III number was measured against](#c07-01) | Reproduced here | PASS (2026-11-13) |
+| [C07.01 — The versions every Part III number was measured against](#c07-01) | Reproduced here | PASS (2026-11-18) |
 | [C07.02 — The engine changed and Chapter 9's figures did not](#c07-02) | Cited from upstream | Cited from upstream |
-| [C07.03 — One registry: 61 checks in ten categories, 44 SPARQL files and 6 shape files](#c07-03) | Reproduced here | PASS (2026-11-13) |
+| [C07.03 — One registry: 61 checks in ten categories, 44 SPARQL files and 6 shape files](#c07-03) | Reproduced here | PASS (2026-11-18) |
 | [C07.04 — The editor runs the same engines at the same versions](#c07-04) | Cited from upstream | Cited from upstream |
-| [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05) | Reproduced here | PASS (2026-11-13) |
+| [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05) | Reproduced here | PASS (2026-11-18) |
 | [C07.06 — STY-003's message vanished on 60 of 65 findings](#c07-06) | Cited from upstream | Cited from upstream |
-| [C07.07 — STR() of a blank node: lenient, conformant, and the guard](#c07-07) | Reproduced here | PASS (2026-11-13) |
+| [C07.07 — STR() of a blank node: lenient, conformant, and the guard](#c07-07) | Reproduced here | PASS (2026-11-18) |
 | [C07.08 — pyshacl stays as a witness because it caught a real regression](#c07-08) | Cited from upstream | Cited from upstream |
 | [C07.09 — Positional dedup, '[a blank node]' in both repositories, owlrl leaves the checks path](#c07-09) | Cited from upstream | Cited from upstream |
 | [C07.10 — The extension adds six checks of its own: three MDL, three MAL](#c07-10) | Cited from upstream | Cited from upstream |
 | [C07.11 — VOC-001 is declared, not runnable, by the CLI](#c07-11) | Cited from upstream | Cited from upstream |
-| [C07.12 — Severity belongs to the shape that produces the result](#c07-12) | Reproduced here | PASS (2026-11-13) |
+| [C07.12 — Severity belongs to the shape that produces the result](#c07-12) | Reproduced here | PASS (2026-11-18) |
 | [C07.13 — The registry declares; the directories decide](#c07-13) | Cited from upstream | Cited from upstream |
 | [C07.14 — Eleven CLI-only checks, three extension-only](#c07-14) | Cited from upstream | Cited from upstream |
 | [C07.15 — A sixteen-case comment fixture both repositories carry](#c07-15) | Cited from upstream | Cited from upstream |
@@ -242,77 +242,77 @@ for its error on unchecked code and its `Quad` type ([C08.15](#c08-15),
 | [C07.17 — A locked dependency does not move with pip --upgrade](#c07-17) | Cited from upstream | Cited from upstream |
 | [C07.18 — Oxigraph went in 0.13.11; the .vsix shrank from 20.2 to 17.5 MB](#c07-18) | Cited from upstream | Cited from upstream |
 | [C07.19 — vsce --no-dependencies packages an extension with no engines](#c07-19) | Cited from upstream | Cited from upstream |
-| [C07.20 — Only ontology-quality-suite installs a command](#c07-20) | Reproduced here | PASS (2026-11-13) |
+| [C07.20 — Only ontology-quality-suite installs a command](#c07-20) | Reproduced here | PASS (2026-11-18) |
 | [C07.21 — Each release carries SHA256SUMS](#c07-21) | Cited from upstream | Cited from upstream |
-| [C07.22 — --engine: native misses QUA-004; sparql and both give 23](#c07-22) | Reproduced here | PASS (2026-11-13) |
-| [C07.23 — The engine choice is not about speed at this size](#c07-23) | Reproduced here | PASS (2026-11-13) |
+| [C07.22 — --engine: native misses QUA-004; sparql and both give 23](#c07-22) | Reproduced here | PASS (2026-11-18) |
+| [C07.23 — The engine choice is not about speed at this size](#c07-23) | Reproduced here | PASS (2026-11-18) |
 | [C07.24 — Until 0.6.0 the shapes put sh:severity in the wrong place](#c07-24) | Cited from upstream | Cited from upstream |
-| [C07.25 — My own node-shape severity mistake](#c07-25) | Reproduced here | PASS (2026-11-13) |
-| [C07.26 — --inference owlrl is refused: a traceback at 0.22.0, a usage error from 0.23.0](#c07-26) | Reproduced here | PASS (2026-11-13) |
-| [C07.27 — --inference rdfs: half the suite at 0.22.0, every engine from 0.23.0](#c07-27) | Reproduced here | PASS (2026-11-13) |
-| [C07.28 — --verbose shows what each input resolved to](#c07-28) | Reproduced here | PASS (2026-11-13) |
-| [C07.29 — Each deliberate flaw produces exactly one finding](#c07-29) | Reproduced here | PASS (2026-11-13) |
-| [C07.30 — v2 renames Engineer, with a migration annotation, and adds a class and a property](#c07-30) | Reproduced here | PASS (2026-11-13) |
+| [C07.25 — My own node-shape severity mistake](#c07-25) | Reproduced here | PASS (2026-11-18) |
+| [C07.26 — --inference owlrl is refused: a traceback at 0.22.0, a usage error from 0.23.0](#c07-26) | Reproduced here | PASS (2026-11-18) |
+| [C07.27 — --inference rdfs: half the suite at 0.22.0, every engine from 0.23.0](#c07-27) | Reproduced here | PASS (2026-11-18) |
+| [C07.28 — --verbose shows what each input resolved to](#c07-28) | Reproduced here | PASS (2026-11-18) |
+| [C07.29 — Each deliberate flaw produces exactly one finding](#c07-29) | Reproduced here | PASS (2026-11-18) |
+| [C07.30 — v2 renames Engineer, with a migration annotation, and adds a class and a property](#c07-30) | Reproduced here | PASS (2026-11-18) |
 | [C07.31 — The testing repository: seventeen fixtures, a 38-question board](#c07-31) | Cited from upstream | Cited from upstream |
-| [C07.32 — A lenient engine let a check pass in tests and fail in the field](#c07-32) | Reproduced here | PASS (2026-11-13) |
+| [C07.32 — A lenient engine let a check pass in tests and fail in the field](#c07-32) | Reproduced here | PASS (2026-11-18) |
 
 ### 8. Model and validate
 
 | Claim | Kind | Result |
 |---|---|---|
 | [C08.01 — Outline prompts resolve restriction names since 0.14.0](#c08-01) | Cited from upstream | Cited from upstream |
-| [C08.02 — Run Local Checks reads 44 SPARQL and 6 SHACL files from the 61-check registry](#c08-02) | Reproduced here | PASS (2026-11-13) |
+| [C08.02 — Run Local Checks reads 44 SPARQL and 6 SHACL files from the 61-check registry](#c08-02) | Reproduced here | PASS (2026-11-18) |
 | [C08.03 — Six checks only the editor has: three MDL, and since 0.16.0 three MAL](#c08-03) | Cited from upstream | Cited from upstream |
 | [C08.04 — VOC-001 is declared in the registry but only the extension runs it](#c08-04) | Cited from upstream | Cited from upstream |
 | [C08.05 — Eleven checks the editor cannot produce, two held back explicitly](#c08-05) | Cited from upstream | Cited from upstream |
-| [C08.06 — The CLI catches the typo as STR-001, not VOC-001](#c08-06) | Reproduced here | PASS (2026-11-13) |
+| [C08.06 — The CLI catches the typo as STR-001, not VOC-001](#c08-06) | Reproduced here | PASS (2026-11-18) |
 | [C08.07 — Sixteen checks offer a Quick Fix](#c08-07) | Cited from upstream | Cited from upstream |
 | [C08.08 — Blank nodes cross the repair boundary as skolem IRIs](#c08-08) | Cited from upstream | Cited from upstream |
 | [C08.09 — A literal's base direction survives a repair since 0.13.12](#c08-09) | Cited from upstream | Cited from upstream |
 | [C08.10 — Refactoring masks comments since 0.13.5](#c08-10) | Cited from upstream | Cited from upstream |
 | [C08.11 — The unresolved-import warning names where it looked](#c08-11) | Cited from upstream | Cited from upstream |
-| [C08.12 — The DSL script type-checks and builds against the npm package](#c08-12) | Reproduced here | PASS (2026-11-13) |
-| [C08.13 — tsc refuses a bare string as a datatype range (TS2322)](#c08-13) | Reproduced here | PASS (2026-11-13) |
-| [C08.14 — The gate catches the contradiction in the script's output](#c08-14) | Reproduced here | PASS (2026-11-13) |
-| [C08.15 — Unchecked code: an internal TypeError up to 0.16.0, an error naming the mistake from 0.16.1](#c08-15) | Reproduced here | PASS (2026-11-13) |
-| [C08.16 — build().quads and n3's Writer: TS2345 up to 0.16.0, no cast needed from 0.16.1](#c08-16) | Reproduced here | PASS (2026-11-13) |
-| [C08.17 — ontology reports 2 findings, and findings.txt quotes the line](#c08-17) | Reproduced here | PASS (2026-11-13) |
-| [C08.18 — LOG-001's message is a model of what a message should be](#c08-18) | Reproduced here | PASS (2026-11-13) |
-| [C08.19 — With HermiT running: REA-021, and up to 0.22.0 a false REA-020](#c08-19) | Reproduced here | PASS (2026-11-13) |
-| [C08.20 — --profile is off by default and repeatable](#c08-20) | Reproduced here | PASS (2026-11-13) |
-| [C08.21 — checks reports 479 findings against the fixture](#c08-21) | Reproduced here | PASS (2026-11-13) |
-| [C08.22 — A project tree alone now warns that 42 built-in checks did not run](#c08-22) | Reproduced here | PASS (2026-11-13) |
+| [C08.12 — The DSL script type-checks and builds against the npm package](#c08-12) | Reproduced here | PASS (2026-11-18) |
+| [C08.13 — tsc refuses a bare string as a datatype range (TS2322)](#c08-13) | Reproduced here | PASS (2026-11-18) |
+| [C08.14 — The gate catches the contradiction in the script's output](#c08-14) | Reproduced here | PASS (2026-11-18) |
+| [C08.15 — Unchecked code: an internal TypeError up to 0.16.0, an error naming the mistake from 0.16.1](#c08-15) | Reproduced here | PASS (2026-11-18) |
+| [C08.16 — build().quads and n3's Writer: TS2345 up to 0.16.0, no cast needed from 0.16.1](#c08-16) | Reproduced here | PASS (2026-11-18) |
+| [C08.17 — ontology reports 2 findings, and findings.txt quotes the line](#c08-17) | Reproduced here | PASS (2026-11-18) |
+| [C08.18 — LOG-001's message is a model of what a message should be](#c08-18) | Reproduced here | PASS (2026-11-18) |
+| [C08.19 — With HermiT running: REA-021, and up to 0.22.0 a false REA-020](#c08-19) | Reproduced here | PASS (2026-11-18) |
+| [C08.20 — --profile is off by default and repeatable](#c08-20) | Reproduced here | PASS (2026-11-18) |
+| [C08.21 — checks reports 479 findings against the fixture](#c08-21) | Reproduced here | PASS (2026-11-18) |
+| [C08.22 — A project tree alone now warns that 42 built-in checks did not run](#c08-22) | Reproduced here | PASS (2026-11-18) |
 | [C08.23 — Until 0.18.0 that run was silent; the testing repo's gate was in that state](#c08-23) | Cited from upstream | Cited from upstream |
-| [C08.24 — With @builtin and a one-entry registry, every built-in finding is UNMAPPED](#c08-24) | Reproduced here | PASS (2026-11-13) |
-| [C08.25 — A merged registry names every finding, and ACM-001 fires on its fault only](#c08-25) | Reproduced here | PASS (2026-11-13) |
-| [C08.26 — The warning named the site path @builtin was made to avoid, until 0.24.0](#c08-26) | Reproduced here | PASS (2026-11-13) |
+| [C08.24 — With @builtin and a one-entry registry, every built-in finding is UNMAPPED](#c08-24) | Reproduced here | PASS (2026-11-18) |
+| [C08.25 — A merged registry names every finding, and ACM-001 fires on its fault only](#c08-25) | Reproduced here | PASS (2026-11-18) |
+| [C08.26 — The warning named the site path @builtin was made to avoid, until 0.24.0](#c08-26) | Reproduced here | PASS (2026-11-18) |
 | [C08.27 — Checks are discovered by walking the directory](#c08-27) | Cited from upstream | Cited from upstream |
-| [C08.28 — Every full run writes cucumber.json](#c08-28) | Reproduced here | PASS (2026-11-13) |
-| [C08.29 — Guard a label with isBlank; COALESCE is the weaker fix](#c08-29) | Reproduced here | PASS (2026-11-13) |
+| [C08.28 — Every full run writes cucumber.json](#c08-28) | Reproduced here | PASS (2026-11-18) |
+| [C08.29 — Guard a label with isBlank; COALESCE is the weaker fix](#c08-29) | Reproduced here | PASS (2026-11-18) |
 | [C08.30 — CT-39 asserts that a finding names something findable](#c08-30) | Cited from upstream | Cited from upstream |
-| [C08.31 — sh:severity on a node shape does not reach its property shapes](#c08-31) | Reproduced here | PASS (2026-11-13) |
+| [C08.31 — sh:severity on a node shape does not reach its property shapes](#c08-31) | Reproduced here | PASS (2026-11-18) |
 | [C08.32 — Four checks shipped that matched nothing](#c08-32) | Cited from upstream | Cited from upstream |
-| [C08.34 — inverse(p): the inline inverse, new in the DSL at 0.16.0](#c08-34) | Reproduced here | PASS (2026-11-13) |
+| [C08.34 — inverse(p): the inline inverse, new in the DSL at 0.16.0](#c08-34) | Reproduced here | PASS (2026-11-18) |
 | [C08.33 — How the editor behaviour was established](#c08-33) | Argument | Argument |
 
 ### 9. Continuous integration
 
 | Claim | Kind | Result |
 |---|---|---|
-| [C09.01 — --fail-on Violation exits non-zero on the fixture](#c09-01) | Reproduced here | PASS (2026-11-13) |
-| [C09.02 — The unscoped run reports 479 findings, every time](#c09-02) | Reproduced here | PASS (2026-11-13) |
-| [C09.03 — --exclude-imports gives 27 findings, four of them false](#c09-03) | Reproduced here | PASS (2026-11-13) |
-| [C09.04 — --own-namespace gives 23 findings, all Acme's](#c09-04) | Reproduced here | PASS (2026-11-13) |
-| [C09.05 — The three runs compared: 479, 27, 23](#c09-05) | Reproduced here | PASS (2026-11-13) |
-| [C09.06 — --themes groups findings under questions in your words](#c09-06) | Reproduced here | PASS (2026-11-13) |
-| [C09.07 — A near-miss namespace warns, on stderr, and offers only real namespaces](#c09-07) | Reproduced here | PASS (2026-11-13) |
+| [C09.01 — --fail-on Violation exits non-zero on the fixture](#c09-01) | Reproduced here | PASS (2026-11-18) |
+| [C09.02 — The unscoped run reports 479 findings, every time](#c09-02) | Reproduced here | PASS (2026-11-18) |
+| [C09.03 — --exclude-imports gives 27 findings, four of them false](#c09-03) | Reproduced here | PASS (2026-11-18) |
+| [C09.04 — --own-namespace gives 23 findings, all Acme's](#c09-04) | Reproduced here | PASS (2026-11-18) |
+| [C09.05 — The three runs compared: 479, 27, 23](#c09-05) | Reproduced here | PASS (2026-11-18) |
+| [C09.06 — --themes groups findings under questions in your words](#c09-06) | Reproduced here | PASS (2026-11-18) |
+| [C09.07 — A near-miss namespace warns, on stderr, and offers only real namespaces](#c09-07) | Reproduced here | PASS (2026-11-18) |
 | [C09.08 — The warning fires only when there were findings to lose](#c09-08) | Cited from upstream | Cited from upstream |
-| [C09.09 — A scoped run keeps the 'reasoner did not run' finding, from 0.24.0](#c09-09) | Reproduced here | PASS (2026-11-13) |
-| [C09.10 — Which reports a run writes, and --reports minimal](#c09-10) | Reproduced here | PASS (2026-11-13) |
+| [C09.09 — A scoped run keeps the 'reasoner did not run' finding, from 0.24.0](#c09-09) | Reproduced here | PASS (2026-11-18) |
+| [C09.10 — Which reports a run writes, and --reports minimal](#c09-10) | Reproduced here | PASS (2026-11-18) |
 | [C09.11 — The report set changed in 0.17.0, though REPORTS.md says 0.15.0](#c09-11) | Cited from upstream | Cited from upstream |
-| [C09.12 — The suite pins shacl below 0.4](#c09-12) | Reproduced here | PASS (2026-11-13) |
-| [C09.13 — --reports minimal writes two files](#c09-13) | Reproduced here | PASS (2026-11-13) |
-| [C09.14 — run reports 26 findings, one contradiction once, from 0.24.0](#c09-14) | Reproduced here | PASS (2026-11-13) |
+| [C09.12 — The suite pins shacl below 0.4](#c09-12) | Reproduced here | PASS (2026-11-18) |
+| [C09.13 — --reports minimal writes two files](#c09-13) | Reproduced here | PASS (2026-11-18) |
+| [C09.14 — run reports 26 findings, one contradiction once, from 0.24.0](#c09-14) | Reproduced here | PASS (2026-11-18) |
 | [C09.15 — The testing repository: 166 passed, 10 skipped](#c09-15) | Reproduced here | PASS (2026-11-18) |
 | [C09.16 — The competency board: 27 green, 0 red](#c09-16) | Reproduced here | PASS (2026-11-18) |
 | [C09.17 — Fourteen of 38 questions need no data](#c09-17) | Cited from upstream | Cited from upstream |
@@ -326,90 +326,90 @@ for its error on unchecked code and its `Quad` type ([C08.15](#c08-15),
 
 | Claim | Kind | Result |
 |---|---|---|
-| [C10.01 — sketch: 38 Infos, 8 triples and 7 entities from one query file](#c10-01) | Reproduced here | PASS (2026-11-13) |
-| [C10.02 — The 38 Infos, and what TQL-003 says](#c10-02) | Reproduced here | PASS (2026-11-13) |
-| [C10.03 — --queries, --query-pattern (alias --file-pattern), four extensions](#c10-03) | Reproduced here | PASS (2026-11-13) |
-| [C10.04 — TQL-004, with its position as fields](#c10-04) | Reproduced here | PASS (2026-11-13) |
-| [C10.05 — A CONCAT-built IRI: dropped as a subject, a literal as an object](#c10-05) | Reproduced here | PASS (2026-11-13) |
-| [C10.06 — sketch writes bind-facts.ttl and bind-review.txt](#c10-06) | Reproduced here | PASS (2026-11-13) |
-| [C10.07 — tarka's output for E004 is the block quoted in earlier editions](#c10-07) | Reproduced here | PASS (2026-11-13) |
-| [C10.08 — tarka takes oxi-gen's options; --test N reads N rows](#c10-08) | Reproduced here | PASS (2026-11-13) |
+| [C10.01 — sketch: 38 Infos, 8 triples and 7 entities from one query file](#c10-01) | Reproduced here | PASS (2026-11-18) |
+| [C10.02 — The 38 Infos, and what TQL-003 says](#c10-02) | Reproduced here | PASS (2026-11-18) |
+| [C10.03 — --queries, --query-pattern (alias --file-pattern), four extensions](#c10-03) | Reproduced here | PASS (2026-11-18) |
+| [C10.04 — TQL-004, with its position as fields](#c10-04) | Reproduced here | PASS (2026-11-18) |
+| [C10.05 — A CONCAT-built IRI: dropped as a subject, a literal as an object](#c10-05) | Reproduced here | PASS (2026-11-18) |
+| [C10.06 — sketch writes bind-facts.ttl and bind-review.txt](#c10-06) | Reproduced here | PASS (2026-11-18) |
+| [C10.07 — tarka's output for E004 is the block quoted in earlier editions](#c10-07) | Reproduced here | PASS (2026-11-18) |
+| [C10.08 — tarka takes oxi-gen's options; --test N reads N rows](#c10-08) | Reproduced here | PASS (2026-11-18) |
 | [C10.09 — 1.7× and 2.6× faster than oxi-gen, by tarka's own measurement](#c10-09) | Cited from upstream | Cited from upstream |
-| [C10.10 — The OTTR template lints clean and gives the same 40 triples](#c10-10) | Reproduced here | PASS (2026-11-13) |
-| [C10.11 — Without a mailto: prefix, run -l dropped every row, silently, up to 0.1.1](#c10-11) | Reproduced here | PASS (2026-11-13) |
-| [C10.12 — Parquet input, data frames, and typed literals from typed columns](#c10-12) | Reproduced here | PASS (2026-11-13) |
-| [C10.13 — Shapes from the mapping, and --validate conforms](#c10-13) | Reproduced here | PASS (2026-11-13) |
-| [C10.14 — Generated shapes accept the dangling departments](#c10-14) | Reproduced here | PASS (2026-11-13) |
-| [C10.15 — --post streams into holos-server: the graph arrives whole](#c10-15) | Reproduced here | PASS (2026-11-13) |
+| [C10.10 — The OTTR template lints clean and gives the same 40 triples](#c10-10) | Reproduced here | PASS (2026-11-18) |
+| [C10.11 — Without a mailto: prefix, run -l dropped every row, silently, up to 0.1.1](#c10-11) | Reproduced here | PASS (2026-11-18) |
+| [C10.12 — Parquet input, data frames, and typed literals from typed columns](#c10-12) | Reproduced here | PASS (2026-11-18) |
+| [C10.13 — Shapes from the mapping, and --validate conforms](#c10-13) | Reproduced here | PASS (2026-11-18) |
+| [C10.14 — Generated shapes accept the dangling departments](#c10-14) | Reproduced here | PASS (2026-11-18) |
+| [C10.15 — --post streams into holos-server: the graph arrives whole](#c10-15) | Reproduced here | PASS (2026-11-18) |
 | [C10.16 — tarka speaks the protocol, in RDF 1.1, with the engine built without RDF 1.2](#c10-16) | Cited from upstream | Cited from upstream |
-| [C10.17 — The suite's triplify still needs oxi-gen, and says so](#c10-17) | Reproduced here | PASS (2026-11-13) |
-| [C10.18 — data: 548 unscoped (549 at 0.23.0, 550 at 0.22.0), 54 scoped, with HermiT running](#c10-18) | Reproduced here | PASS (2026-11-13) |
-| [C10.19 — 54 when HermiT does not run, and from 0.24.0 the scoped report says so](#c10-19) | Reproduced here | PASS (2026-11-13) |
-| [C10.20 — Real defects: every worksIn target is untyped and dangling](#c10-20) | Reproduced here | PASS (2026-11-13) |
-| [C10.21 — Half the defects are mailboxes](#c10-21) | Reproduced here | PASS (2026-11-13) |
-| [C10.22 — CNF-005: Contractor never populated](#c10-22) | Reproduced here | PASS (2026-11-13) |
-| [C10.23 — REA-021 confirms LOG-001 by a different route](#c10-23) | Reproduced here | PASS (2026-11-13) |
+| [C10.17 — The suite's triplify still needs oxi-gen, and says so](#c10-17) | Reproduced here | PASS (2026-11-18) |
+| [C10.18 — data: 548 unscoped (549 at 0.23.0, 550 at 0.22.0), 54 scoped, with HermiT running](#c10-18) | Reproduced here | PASS (2026-11-18) |
+| [C10.19 — 54 when HermiT does not run, and from 0.24.0 the scoped report says so](#c10-19) | Reproduced here | PASS (2026-11-18) |
+| [C10.20 — Real defects: every worksIn target is untyped and dangling](#c10-20) | Reproduced here | PASS (2026-11-18) |
+| [C10.21 — Half the defects are mailboxes](#c10-21) | Reproduced here | PASS (2026-11-18) |
+| [C10.22 — CNF-005: Contractor never populated](#c10-22) | Reproduced here | PASS (2026-11-18) |
+| [C10.23 — REA-021 confirms LOG-001 by a different route](#c10-23) | Reproduced here | PASS (2026-11-18) |
 | [C10.24 — The suite's walkthrough called it environment-flaky](#c10-24) | Cited from upstream | Cited from upstream |
-| [C10.25 — --sample caps the reasoning pass](#c10-25) | Reproduced here | PASS (2026-11-13) |
+| [C10.25 — --sample caps the reasoning pass](#c10-25) | Reproduced here | PASS (2026-11-18) |
 | [C10.26 — CT-32 to CT-38: when every file is right and the set is wrong](#c10-26) | Cited from upstream | Cited from upstream |
 | [C10.27 — CT-32's mapping is wired to no CSV](#c10-27) | Cited from upstream | Cited from upstream |
-| [C10.28 — tq:PrefixBinding and the per-file sketch dataset](#c10-28) | Reproduced here | PASS (2026-11-13) |
-| [C10.29 — The merged sketch and one prefix bound two ways: odd file first](#c10-29) | Reproduced here | PASS (2026-11-13) |
-| [C10.30 — The merged sketch and one prefix bound two ways: odd file last](#c10-30) | Reproduced here | PASS (2026-11-13) |
+| [C10.28 — tq:PrefixBinding and the per-file sketch dataset](#c10-28) | Reproduced here | PASS (2026-11-18) |
+| [C10.29 — The merged sketch and one prefix bound two ways: odd file first](#c10-29) | Reproduced here | PASS (2026-11-18) |
+| [C10.30 — The merged sketch and one prefix bound two ways: odd file last](#c10-30) | Reproduced here | PASS (2026-11-18) |
 
 ### 11. Rules and inference
 
 | Claim | Kind | Result |
 |---|---|---|
-| [C11.01 — The suite and the extension do not run SHACL-AF rules](#c11-01) | Reproduced here | PASS (2026-11-13) |
-| [C11.02 — The Python surface: inference modes, and an unknown one is an error](#c11-02) | Reproduced here | PASS (2026-11-13) |
+| [C11.01 — The suite and the extension do not run SHACL-AF rules](#c11-01) | Reproduced here | PASS (2026-11-18) |
+| [C11.02 — The Python surface: inference modes, and an unknown one is an error](#c11-02) | Reproduced here | PASS (2026-11-18) |
 | [C11.03 — Rules shipped in 0.1.8; the $this fix came with them](#c11-03) | Cited from upstream | Cited from upstream |
-| [C11.04 — Warnings break conformance; --allow-warnings records the choice](#c11-04) | Reproduced here | PASS (2026-11-13) |
-| [C11.05 — The WebAssembly build agrees since 0.3.2](#c11-05) | Reproduced here | PASS (2026-11-13) |
-| [C11.06 — The one-shots refuse an empty shapes graph](#c11-06) | Reproduced here | PASS (2026-11-13) |
-| [C11.07 — The CLI and an empty shapes graph: conforms up to 0.3.3, refused from 0.3.4](#c11-07) | Reproduced here | PASS (2026-11-13) |
+| [C11.04 — Warnings break conformance; --allow-warnings records the choice](#c11-04) | Reproduced here | PASS (2026-11-18) |
+| [C11.05 — The WebAssembly build agrees since 0.3.2](#c11-05) | Reproduced here | PASS (2026-11-18) |
+| [C11.06 — The one-shots refuse an empty shapes graph](#c11-06) | Reproduced here | PASS (2026-11-18) |
+| [C11.07 — The CLI and an empty shapes graph: conforms up to 0.3.3, refused from 0.3.4](#c11-07) | Reproduced here | PASS (2026-11-18) |
 | [C11.08 — 425 of 426 W3C tests, the exception named](#c11-08) | Cited from upstream | Cited from upstream |
-| [C11.09 — holos rules materialises into a graph of its own](#c11-09) | Reproduced here | PASS (2026-11-13) |
-| [C11.10 — RDFS closure lets a shape see a sub-property](#c11-10) | Reproduced here | PASS (2026-11-13) |
-| [C11.30 — Since 0.3.3 the closure is handed out, minus what RDF cannot write](#c11-30) | Reproduced here | PASS (2026-11-13) |
-| [C11.11 — Triple rules are off by default and fire with -a](#c11-11) | Reproduced here | PASS (2026-11-13) |
-| [C11.12 — One result per source instance, at 1,000 and 100,000](#c11-12) | Reproduced here | PASS (2026-11-13) |
-| [C11.13 — A SPARQL rule computes the area, and validation sees it](#c11-13) | Reproduced here | PASS (2026-11-13) |
+| [C11.09 — holos rules materialises into a graph of its own](#c11-09) | Reproduced here | PASS (2026-11-18) |
+| [C11.10 — RDFS closure lets a shape see a sub-property](#c11-10) | Reproduced here | PASS (2026-11-18) |
+| [C11.30 — Since 0.3.3 the closure is handed out, minus what RDF cannot write](#c11-30) | Reproduced here | PASS (2026-11-18) |
+| [C11.11 — Triple rules are off by default and fire with -a](#c11-11) | Reproduced here | PASS (2026-11-18) |
+| [C11.12 — One result per source instance, at 1,000 and 100,000](#c11-12) | Reproduced here | PASS (2026-11-18) |
+| [C11.13 — A SPARQL rule computes the area, and validation sees it](#c11-13) | Reproduced here | PASS (2026-11-18) |
 | [C11.14 — Since 0.3.0 only sh:ShapesGraph declarations apply](#c11-14) | Cited from upstream | Cited from upstream |
 | [C11.15 — Rule compile errors are held on the rule](#c11-15) | Cited from upstream | Cited from upstream |
-| [C11.16 — Hazard 1: a rule on a shape with no target never fires](#c11-16) | Reproduced here | PASS (2026-11-13) |
-| [C11.17 — Hazard 2: one pass does not close a transitive rule](#c11-17) | Reproduced here | PASS (2026-11-13) |
-| [C11.18 — Hazard 3: equal sh:order cannot see each other's inferences](#c11-18) | Reproduced here | PASS (2026-11-13) |
-| [C11.19 — Hazard 4: a conclusion from absence outlives the absence](#c11-19) | Reproduced here | PASS (2026-11-13) |
+| [C11.16 — Hazard 1: a rule on a shape with no target never fires](#c11-16) | Reproduced here | PASS (2026-11-18) |
+| [C11.17 — Hazard 2: one pass does not close a transitive rule](#c11-17) | Reproduced here | PASS (2026-11-18) |
+| [C11.18 — Hazard 3: equal sh:order cannot see each other's inferences](#c11-18) | Reproduced here | PASS (2026-11-18) |
+| [C11.19 — Hazard 4: a conclusion from absence outlives the absence](#c11-19) | Reproduced here | PASS (2026-11-18) |
 | [C11.20 — Rules never modify the input graph](#c11-20) | Cited from upstream | Cited from upstream |
 | [C11.21 — The previous edition's timings, and 0.3.0's own measurement](#c11-21) | Cited from upstream | Cited from upstream |
 | [C11.22 — The index holds the graph three times; results sorted by focus node](#c11-22) | Cited from upstream | Cited from upstream |
-| [C11.23 — --build-index caches the parsed graph](#c11-23) | Reproduced here | PASS (2026-11-13) |
-| [C11.24 — A SHACL function in a rule is an error, exit 2](#c11-24) | Reproduced here | PASS (2026-11-13) |
-| [C11.25 — Rules in WebAssembly, and an unknown mode is an error there too](#c11-25) | Reproduced here | PASS (2026-11-13) |
+| [C11.23 — --build-index caches the parsed graph](#c11-23) | Reproduced here | PASS (2026-11-18) |
+| [C11.24 — A SHACL function in a rule is an error, exit 2](#c11-24) | Reproduced here | PASS (2026-11-18) |
+| [C11.25 — Rules in WebAssembly, and an unknown mode is an error there too](#c11-25) | Reproduced here | PASS (2026-11-18) |
 | [C11.26 — The editor asks for inference 'none', deliberately](#c11-26) | Cited from upstream | Cited from upstream |
-| [C11.27 — Named graphs are flattened](#c11-27) | Reproduced here | PASS (2026-11-13) |
-| [C11.28 — Exit codes 0, 1 and 2](#c11-28) | Reproduced here | PASS (2026-11-13) |
-| [C11.29 — holos validate: exit 0 whatever it found up to 0.21.1, a gate from 0.22.0](#c11-29) | Reproduced here | PASS (2026-11-13) |
+| [C11.27 — Named graphs are flattened](#c11-27) | Reproduced here | PASS (2026-11-18) |
+| [C11.28 — Exit codes 0, 1 and 2](#c11-28) | Reproduced here | PASS (2026-11-18) |
+| [C11.29 — holos validate: exit 0 whatever it found up to 0.21.1, a gate from 0.22.0](#c11-29) | Reproduced here | PASS (2026-11-18) |
 
 ### 12. Release and change
 
 | Claim | Kind | Result |
 |---|---|---|
-| [C12.01 — version-diff: the verdict comes from the axioms](#c12-01) | Reproduced here | PASS (2026-11-13) |
-| [C12.02 — Reversed, the diff describes the inverse release](#c12-02) | Reproduced here | PASS (2026-11-13) |
-| [C12.03 — Without FOAF resolved, consistency reports foaf:name and foaf:mbox](#c12-03) | Reproduced here | PASS (2026-11-13) |
-| [C12.04 — consistency: what breaks, and a 100% repair](#c12-04) | Reproduced here | PASS (2026-11-13) |
-| [C12.05 — The tombstone is read in both directions; isReplacedBy in one](#c12-05) | Reproduced here | PASS (2026-11-13) |
+| [C12.01 — version-diff: the verdict comes from the axioms](#c12-01) | Reproduced here | PASS (2026-11-18) |
+| [C12.02 — Reversed, the diff describes the inverse release](#c12-02) | Reproduced here | PASS (2026-11-18) |
+| [C12.03 — Without FOAF resolved, consistency reports foaf:name and foaf:mbox](#c12-03) | Reproduced here | PASS (2026-11-18) |
+| [C12.04 — consistency: what breaks, and a 100% repair](#c12-04) | Reproduced here | PASS (2026-11-18) |
+| [C12.05 — The tombstone is read in both directions; isReplacedBy in one](#c12-05) | Reproduced here | PASS (2026-11-18) |
 | [C12.06 — Symmetric since suite 0.3.5, 12 August 2026](#c12-06) | Cited from upstream | Cited from upstream |
-| [C12.07 — The reversed equivalentClass at 100%](#c12-07) | Reproduced here | PASS (2026-11-13) |
-| [C12.08 — --apply-repairs changes the one code line on line 14](#c12-08) | Reproduced here | PASS (2026-11-13) |
+| [C12.07 — The reversed equivalentClass at 100%](#c12-07) | Reproduced here | PASS (2026-11-18) |
+| [C12.08 — --apply-repairs changes the one code line on line 14](#c12-08) | Reproduced here | PASS (2026-11-18) |
 | [C12.09 — Comments used to be rewritten too](#c12-09) | Cited from upstream | Cited from upstream |
-| [C12.10 — String literals are still rewritten, deliberately](#c12-10) | Reproduced here | PASS (2026-11-13) |
+| [C12.10 — String literals are still rewritten, deliberately](#c12-10) | Reproduced here | PASS (2026-11-18) |
 | [C12.11 — The same defect in the editor](#c12-11) | Cited from upstream | Cited from upstream |
-| [C12.12 — pattern-consistency catches MKT only from the output data](#c12-12) | Reproduced here | PASS (2026-11-13) |
-| [C12.13 — Omit --output-data and it reports clean](#c12-13) | Reproduced here | PASS (2026-11-13) |
-| [C12.14 — Both consistency commands are report-only by default](#c12-14) | Reproduced here | PASS (2026-11-13) |
+| [C12.12 — pattern-consistency catches MKT only from the output data](#c12-12) | Reproduced here | PASS (2026-11-18) |
+| [C12.13 — Omit --output-data and it reports clean](#c12-13) | Reproduced here | PASS (2026-11-18) |
+| [C12.14 — Both consistency commands are report-only by default](#c12-14) | Reproduced here | PASS (2026-11-18) |
 | [C12.15 — The approval workflow is not implemented here](#c12-15) | Argument | Argument |
 | [C12.16 — UPDATING.md as a governance playbook](#c12-16) | Cited from upstream | Cited from upstream |
 
@@ -417,20 +417,20 @@ for its error on unchecked code and its `Quad` type ([C08.15](#c08-15),
 
 | Claim | Kind | Result |
 |---|---|---|
-| [C13.01 — consistency-remote against holos-server; the imports rule applies in the store](#c13-01) | Reproduced here | PASS (2026-11-13) |
-| [C13.02 — The manifest, as JSON or built in Python; the flags](#c13-02) | Reproduced here | PASS (2026-11-13) |
-| [C13.03 — The store a version behind: --fail-on-anything exits 1](#c13-03) | Reproduced here | PASS (2026-11-13) |
-| [C13.04 — A mistyped role is refused at load, from 0.24.0](#c13-04) | Reproduced here | PASS (2026-11-13) |
-| [C13.05 — SHACL validation flattens named graphs](#c13-05) | Reproduced here | PASS (2026-11-13) |
-| [C13.06 — Policy at the scan: rows without the column, unless you are in HR](#c13-06) | Reproduced here | PASS (2026-11-13) |
-| [C13.07 — The fluent API mistake](#c13-07) | Reproduced here | PASS (2026-11-13) |
-| [C13.08 — The holos command gives the same answers](#c13-08) | Reproduced here | PASS (2026-11-13) |
+| [C13.01 — consistency-remote against holos-server; the imports rule applies in the store](#c13-01) | Reproduced here | PASS (2026-11-18) |
+| [C13.02 — The manifest, as JSON or built in Python; the flags](#c13-02) | Reproduced here | PASS (2026-11-18) |
+| [C13.03 — The store a version behind: --fail-on-anything exits 1](#c13-03) | Reproduced here | PASS (2026-11-18) |
+| [C13.04 — A mistyped role is refused at load, from 0.24.0](#c13-04) | Reproduced here | PASS (2026-11-18) |
+| [C13.05 — SHACL validation flattens named graphs](#c13-05) | Reproduced here | PASS (2026-11-18) |
+| [C13.06 — Policy at the scan: rows without the column, unless you are in HR](#c13-06) | Reproduced here | PASS (2026-11-18) |
+| [C13.07 — The fluent API mistake](#c13-07) | Reproduced here | PASS (2026-11-18) |
+| [C13.08 — The holos command gives the same answers](#c13-08) | Reproduced here | PASS (2026-11-18) |
 | [C13.09 — 8 ns per quad, by HOLOS's own measurement](#c13-09) | Cited from upstream | Cited from upstream |
-| [C13.10 — Validation and the store: written into it up to 0.21.0, untouched from 0.21.1](#c13-10) | Reproduced here | PASS (2026-11-13) |
-| [C13.11 — docgen: 4 classes, 5 external terms, 3 resolved](#c13-11) | Reproduced here | PASS (2026-11-13) |
-| [C13.12 — Three runs, three pages; pinned, one](#c13-12) | Reproduced here | PASS (2026-11-13) |
-| [C13.13 — Every row carries source_file and line](#c13-13) | Reproduced here | PASS (2026-11-13) |
-| [C13.14 — HOLOS: embeddable, RDF 1.2, GeoSPARQL](#c13-14) | Reproduced here | PASS (2026-11-13) |
+| [C13.10 — Validation and the store: written into it up to 0.21.0, untouched from 0.21.1](#c13-10) | Reproduced here | PASS (2026-11-18) |
+| [C13.11 — docgen: 4 classes, 5 external terms, 3 resolved](#c13-11) | Reproduced here | PASS (2026-11-18) |
+| [C13.12 — Three runs, three pages; pinned, one](#c13-12) | Reproduced here | PASS (2026-11-18) |
+| [C13.13 — Every row carries source_file and line](#c13-13) | Reproduced here | PASS (2026-11-18) |
+| [C13.14 — HOLOS: embeddable, RDF 1.2, GeoSPARQL](#c13-14) | Reproduced here | PASS (2026-11-18) |
 | [C13.15 — The editor's checks run on holos-wasm-node](#c13-15) | Cited from upstream | Cited from upstream |
 | [C13.16 — Observability and APIs are not covered](#c13-16) | Argument | Argument |
 
@@ -438,46 +438,46 @@ for its error on unchecked code and its `Quad` type ([C08.15](#c08-15),
 
 | Claim | Kind | Result |
 |---|---|---|
-| [C14.01 — A scoped run could not see that the reasoner did not run (fixed in 0.24.0)](#c14-01) | Reproduced here | PASS (2026-11-13) |
-| [C14.02 — The shacl CLI reported conformance when it checked nothing, up to 0.3.3](#c14-02) | Reproduced here | PASS (2026-11-13) |
-| [C14.03 — holos validate exited 0 on a non-conforming graph, up to 0.21.1](#c14-03) | Reproduced here | PASS (2026-11-13) |
-| [C14.04 — tarka dropped instances it could not build, silently, up to 0.1.1](#c14-04) | Reproduced here | PASS (2026-11-13) |
-| [C14.05 — docgen reshuffles the page on every run](#c14-05) | Reproduced here | PASS (2026-11-13) |
-| [C14.06 — The reasoner's outcome follows the hash seed](#c14-06) | Reproduced here | PASS (2026-11-13) |
-| [C14.07 — SHACL validates the union of the named graphs](#c14-07) | Reproduced here | PASS (2026-11-13) |
-| [C14.08 — Almost: the seed decides most of owlready2's load, and not all of it](#c14-08) | Reproduced here | PASS (2026-11-13) |
-| [C14.09 — Without Java the message is the operating system's](#c14-09) | Reproduced here | PASS (2026-11-13) |
-| [C14.39 — REA-020 said inconsistent when only a class was unsatisfiable; fixed in 0.23.0](#c14-39) | Reproduced here | PASS (2026-11-13) |
-| [C14.10 — A mistyped manifest role compared nothing, successfully (fixed in 0.24.0)](#c14-10) | Reproduced here | PASS (2026-11-13) |
-| [C14.11 — --help offers owlrl; asking for it gives a traceback](#c14-11) | Reproduced here | PASS (2026-11-13) |
-| [C14.12 — --inference is ignored under --engine sparql](#c14-12) | Reproduced here | PASS (2026-11-13) |
-| [C14.13 — The near-miss warning listed blank-node identifiers, until 0.24.0](#c14-13) | Reproduced here | PASS (2026-11-13) |
-| [C14.14 — --registry replaces, so @builtin with a house registry is UNMAPPED](#c14-14) | Reproduced here | PASS (2026-11-13) |
-| [C14.15 — One contradiction, two LOG-001s, until 0.24.0](#c14-15) | Reproduced here | PASS (2026-11-13) |
-| [C14.16 — The DSL's TypeError and Quad type, up to 0.16.0](#c14-16) | Reproduced here | PASS (2026-11-13) |
-| [C14.17 — triplify drives oxi-gen only](#c14-17) | Reproduced here | PASS (2026-11-13) |
-| [C14.18 — consistency and pattern-consistency are report-only by default](#c14-18) | Reproduced here | PASS (2026-11-13) |
-| [C14.19 — The holos CLI and holosdb defaulted to different validators, up to 0.21.1](#c14-19) | Reproduced here | PASS (2026-11-13) |
-| [C14.20 — sketch reads every file with the first file's prefixes](#c14-20) | Reproduced here | PASS (2026-11-13) |
+| [C14.01 — A scoped run could not see that the reasoner did not run (fixed in 0.24.0)](#c14-01) | Reproduced here | PASS (2026-11-18) |
+| [C14.02 — The shacl CLI reported conformance when it checked nothing, up to 0.3.3](#c14-02) | Reproduced here | PASS (2026-11-18) |
+| [C14.03 — holos validate exited 0 on a non-conforming graph, up to 0.21.1](#c14-03) | Reproduced here | PASS (2026-11-18) |
+| [C14.04 — tarka dropped instances it could not build, silently, up to 0.1.1](#c14-04) | Reproduced here | PASS (2026-11-18) |
+| [C14.05 — docgen reshuffles the page on every run](#c14-05) | Reproduced here | PASS (2026-11-18) |
+| [C14.06 — The reasoner's outcome follows the hash seed](#c14-06) | Reproduced here | PASS (2026-11-18) |
+| [C14.07 — SHACL validates the union of the named graphs](#c14-07) | Reproduced here | PASS (2026-11-18) |
+| [C14.08 — Almost: the seed decides most of owlready2's load, and not all of it](#c14-08) | Reproduced here | PASS (2026-11-18) |
+| [C14.09 — Without Java the message is the operating system's](#c14-09) | Reproduced here | PASS (2026-11-18) |
+| [C14.39 — REA-020 said inconsistent when only a class was unsatisfiable; fixed in 0.23.0](#c14-39) | Reproduced here | PASS (2026-11-18) |
+| [C14.10 — A mistyped manifest role compared nothing, successfully (fixed in 0.24.0)](#c14-10) | Reproduced here | PASS (2026-11-18) |
+| [C14.11 — --help offers owlrl; asking for it gives a traceback](#c14-11) | Reproduced here | PASS (2026-11-18) |
+| [C14.12 — --inference is ignored under --engine sparql](#c14-12) | Reproduced here | PASS (2026-11-18) |
+| [C14.13 — The near-miss warning listed blank-node identifiers, until 0.24.0](#c14-13) | Reproduced here | PASS (2026-11-18) |
+| [C14.14 — --registry replaces, so @builtin with a house registry is UNMAPPED](#c14-14) | Reproduced here | PASS (2026-11-18) |
+| [C14.15 — One contradiction, two LOG-001s, until 0.24.0](#c14-15) | Reproduced here | PASS (2026-11-18) |
+| [C14.16 — The DSL's TypeError and Quad type, up to 0.16.0](#c14-16) | Reproduced here | PASS (2026-11-18) |
+| [C14.17 — triplify drives oxi-gen only](#c14-17) | Reproduced here | PASS (2026-11-18) |
+| [C14.18 — consistency and pattern-consistency are report-only by default](#c14-18) | Reproduced here | PASS (2026-11-18) |
+| [C14.19 — The holos CLI and holosdb defaulted to different validators, up to 0.21.1](#c14-19) | Reproduced here | PASS (2026-11-18) |
+| [C14.20 — sketch reads every file with the first file's prefixes](#c14-20) | Reproduced here | PASS (2026-11-18) |
 | [C14.21 — Documentation drift, upstream](#c14-21) | Reproduced here | PASS (2026-11-18) |
 | [C14.22 — The registry grew from 50 checks to 61](#c14-22) | Cited from upstream | Cited from upstream |
-| [C14.23 — Closed: the engines are the toolchain's own](#c14-23) | Reproduced here | PASS (2026-11-13) |
-| [C14.24 — Closed: messages on blank nodes](#c14-24) | Reproduced here | PASS (2026-11-13) |
-| [C14.25 — Closed: findings say where they are](#c14-25) | Reproduced here | PASS (2026-11-13) |
-| [C14.26 — Closed: house rules compose with the built-ins](#c14-26) | Reproduced here | PASS (2026-11-13) |
+| [C14.23 — Closed: the engines are the toolchain's own](#c14-23) | Reproduced here | PASS (2026-11-18) |
+| [C14.24 — Closed: messages on blank nodes](#c14-24) | Reproduced here | PASS (2026-11-18) |
+| [C14.25 — Closed: findings say where they are](#c14-25) | Reproduced here | PASS (2026-11-18) |
+| [C14.26 — Closed: house rules compose with the built-ins](#c14-26) | Reproduced here | PASS (2026-11-18) |
 | [C14.27 — Five suite defects found by the testing repository](#c14-27) | Cited from upstream | Cited from upstream |
-| [C14.28 — Closed: sh:conforms follows the specification](#c14-28) | Reproduced here | PASS (2026-11-13) |
+| [C14.28 — Closed: sh:conforms follows the specification](#c14-28) | Reproduced here | PASS (2026-11-18) |
 | [C14.29 — Closed: the repair engine keeps blank nodes and base directions](#c14-29) | Cited from upstream | Cited from upstream |
-| [C14.40 — Closed: HOLOS validation leaves the store as it found it, from 0.21.1](#c14-40) | Reproduced here | PASS (2026-11-13) |
-| [C14.41 — Closed: three suite defects this edition found, fixed in 0.23.0](#c14-41) | Reproduced here | PASS (2026-11-13) |
-| [C14.42 — Closed: gates that could not fail, and the DSL's two rough edges](#c14-42) | Reproduced here | PASS (2026-11-13) |
-| [C14.30 — Early, but real: policy, rules, a triplifier](#c14-30) | Reproduced here | PASS (2026-11-13) |
-| [C14.31 — Wrong: the migration annotation's direction](#c14-31) | Reproduced here | PASS (2026-11-13) |
-| [C14.32 — Wrong: REA-022 as the tell in a scoped run](#c14-32) | Reproduced here | PASS (2026-11-13) |
-| [C14.33 — Wrong: the reasoner as flaky](#c14-33) | Reproduced here | PASS (2026-11-13) |
-| [C14.34 — Wrong: the reasoner as an optional extra](#c14-34) | Reproduced here | PASS (2026-11-13) |
+| [C14.40 — Closed: HOLOS validation leaves the store as it found it, from 0.21.1](#c14-40) | Reproduced here | PASS (2026-11-18) |
+| [C14.41 — Closed: three suite defects this edition found, fixed in 0.23.0](#c14-41) | Reproduced here | PASS (2026-11-18) |
+| [C14.42 — Closed: gates that could not fail, and the DSL's two rough edges](#c14-42) | Reproduced here | PASS (2026-11-18) |
+| [C14.30 — Early, but real: policy, rules, a triplifier](#c14-30) | Reproduced here | PASS (2026-11-18) |
+| [C14.31 — Wrong: the migration annotation's direction](#c14-31) | Reproduced here | PASS (2026-11-18) |
+| [C14.32 — Wrong: REA-022 as the tell in a scoped run](#c14-32) | Reproduced here | PASS (2026-11-18) |
+| [C14.33 — Wrong: the reasoner as flaky](#c14-33) | Reproduced here | PASS (2026-11-18) |
+| [C14.34 — Wrong: the reasoner as an optional extra](#c14-34) | Reproduced here | PASS (2026-11-18) |
 | [C14.35 — Wrong: stale numbers](#c14-35) | Cited from upstream | Cited from upstream |
-| [C14.36 — Wrong: where a CONCAT-built IRI goes](#c14-36) | Reproduced here | PASS (2026-11-13) |
+| [C14.36 — Wrong: where a CONCAT-built IRI goes](#c14-36) | Reproduced here | PASS (2026-11-18) |
 | [C14.37 — Wrong: when rules arrived in the SHACL engine](#c14-37) | Cited from upstream | Cited from upstream |
 | [C14.38 — Wrong: the SHACL engine's pass rate](#c14-38) | Cited from upstream | Cited from upstream |
 
@@ -485,15 +485,15 @@ for its error on unchecked code and its `Quad` type ([C08.15](#c08-15),
 
 | Claim | Kind | Result |
 |---|---|---|
-| [C15.01 — 479 unscoped, 23 scoped, four false with --exclude-imports](#c15-01) | Reproduced here | PASS (2026-11-13) |
-| [C15.02 — --output-data is not optional](#c15-02) | Reproduced here | PASS (2026-11-13) |
-| [C15.03 — PYTHONHASHSEED for docgen](#c15-03) | Reproduced here | PASS (2026-11-13) |
+| [C15.01 — 479 unscoped, 23 scoped, four false with --exclude-imports](#c15-01) | Reproduced here | PASS (2026-11-18) |
+| [C15.02 — --output-data is not optional](#c15-02) | Reproduced here | PASS (2026-11-18) |
+| [C15.03 — PYTHONHASHSEED for docgen](#c15-03) | Reproduced here | PASS (2026-11-18) |
 
 ### Appendix A — Diagram and brand conventions
 
 | Claim | Kind | Result |
 |---|---|---|
-| [CA.01 — All six fills clear 12:1 against the text colour](#ca-01) | Reproduced here | PASS (2026-11-13) |
+| [CA.01 — All six fills clear 12:1 against the text colour](#ca-01) | Reproduced here | PASS (2026-11-18) |
 | [CA.02 — FOAF is published as RDF/XML](#ca-02) | Argument | Argument |
 
 ---
@@ -507,7 +507,7 @@ Annotated chapter: [manual/README.md](manual/README.md) · plain chapter: [../RE
 ### C00.01 — A 61-check registry
 
 **In the manual:** [README, at the claim](manual/README.md#ev-c00-01) · [plain edition](../README.md#what-this-is)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > The gate: a Python CLI and library with the 61-check registry
 
@@ -531,7 +531,7 @@ A statement of method. This folder is the re-run: each `run` claim records the d
 ### C00.03 — Twenty diagrams
 
 **In the manual:** [README, at the claim](manual/README.md#ev-c00-03) · [plain edition](../README.md#read-it-on-paper)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > numbers, all twenty diagrams rendered, and an index of commands, flags and check
 
@@ -600,11 +600,11 @@ The previous wording said nineteen, which counted the chapters and not the PDF.
 ### C00.04 — pip install shacl gives the library only
 
 **In the manual:** [README, at the claim](manual/README.md#ev-c00-04) · [plain edition](../README.md#run-it-yourself)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > `pip install shacl`
 
-**Evidence:** the same as [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05), which reproduces it: step 1 output contains 'commands installed: ontology-quality-suite', 'owlready2>=0.51', 'shacl 0.3.6/n    commands installed: none (library only)', 'tarka-rdf 0.2.2/n    commands installed: none (library only)', 'holosdb 0.26.2/n    commands installed: none (library only)'; suite 0.27.0: step 1 output contains 'shacl<0.4,>=0.3.3'; suite 0.27.0: step 1 output contains 'holosdb>=0.24'
+**Evidence:** the same as [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05), which reproduces it: step 1 output contains 'commands installed: ontology-quality-suite', 'owlready2>=0.51', 'shacl 0.3.8/n    commands installed: none (library only)', 'tarka-rdf 0.2.2/n    commands installed: none (library only)', 'holosdb 0.26.4/n    commands installed: none (library only)'; suite 0.27.0: step 1 output contains 'shacl<0.4,>=0.3.3'; suite 0.27.0: step 1 output contains 'holosdb>=0.24'
 
 ---
 
@@ -612,7 +612,7 @@ The previous wording said nineteen, which counted the chapters and not the PDF.
 ### C00.05 — 54 or 55, and REA-021 or REA-022
 
 **In the manual:** [README, at the claim](manual/README.md#ev-c00-05) · [plain edition](../README.md#conventions)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **Two outputs move unless you pin one variable, and both are labelled where they
 
@@ -626,7 +626,7 @@ The 54 is C10.19; the hash seed's part, and the residual it does not control, ar
 ### C00.06 — Everything else is exactly reproducible
 
 **In the manual:** [README, at the claim](manual/README.md#ev-c00-06) · [plain edition](../README.md#conventions)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Everything else is exactly reproducible across repeated runs, and survived a change of the engine
 
@@ -645,7 +645,7 @@ Annotated chapter: [manual/docs/01-the-business-case.md](manual/docs/01-the-busi
 ### C01.01 — Ten systems, forty-five pairings; twenty, a hundred and ninety
 
 **In the manual:** [Chapter 1, at the claim](manual/docs/01-the-business-case.md#ev-c01-01) · [plain edition](../docs/01-the-business-case.md#integration-cost-that-scales-quadratically)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > mappings. Ten systems is forty-five potential pairings; twenty is a hundred and
 
@@ -733,7 +733,7 @@ From the author's Semantic Arts article 'From Labels to Verbs — Child's Play!'
 ### C02.03 — gist 14.1.0: 42 of 66 object properties constrain neither; gist 13: 40 of 63
 
 **In the manual:** [Chapter 2, at the claim](manual/docs/02-people-and-cognition.md#ev-c02-03) · [plain edition](../docs/02-people-and-cognition.md#from-labels-to-verbs)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > current release, gist 14.1.0, 42 of its 66 object properties constrain neither;
 
@@ -812,7 +812,7 @@ Downloads the two releases from Semantic Arts' GitHub; nothing of gist is copied
 ### C02.04 — 479 findings, 23 once scoped
 
 **In the manual:** [Chapter 2, at the claim](manual/docs/02-people-and-cognition.md#ev-c02-04) · [plain edition](../docs/02-people-and-cognition.md#the-479-finding-report)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > FOAF imports resolved produces **479 findings**. Adding a single flag that scopes
 
@@ -829,7 +829,7 @@ Annotated chapter: [manual/docs/03-across-the-boundary.md](manual/docs/03-across
 ### C03.01 — foaf:name has domain owl:Thing, and the suite has been taught it
 
 **In the manual:** [Chapter 3, at the claim](manual/docs/03-across-the-boundary.md#ev-c03-01) · [plain edition](../docs/03-across-the-boundary.md#c-open-ecosystem-the-stability-problem)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > The classic case is FOAF, which deliberately declares `foaf:name` with
 
@@ -874,7 +874,7 @@ Reports written to: ./work/C03_01/data
 ### C03.02 — version-diff says MAJOR, with the machine-readable diff
 
 **In the manual:** [Chapter 3, at the claim](manual/docs/03-across-the-boundary.md#ev-c03-02) · [plain edition](../docs/03-across-the-boundary.md#33-the-cross-boundary-release-problem)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **The bump decision must be evidence-based, not a judgement call.**
 
@@ -886,7 +886,7 @@ Reports written to: ./work/C03_01/data
 ### C03.03 — The tombstone is read in both directions
 
 **In the manual:** [Chapter 3, at the claim](manual/docs/03-across-the-boundary.md#ev-c03-03) · [plain edition](../docs/03-across-the-boundary.md#migration-annotations-are-a-cross-boundary-contract)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Earlier editions of this manual told you that the suite's rename detection read this
 
@@ -898,7 +898,7 @@ Reports written to: ./work/C03_01/data
 ### C03.04 — Policy at the scan for a consortium
 
 **In the manual:** [Chapter 3, at the claim](manual/docs/03-across-the-boundary.md#ev-c03-04) · [plain edition](../docs/03-across-the-boundary.md#a-peer-consortium-the-coordination-problem)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > knowing even though the component is young. A store that enforces access policy **at
 
@@ -910,7 +910,7 @@ Reports written to: ./work/C03_01/data
 ### C03.05 — A registry is a distributable artefact
 
 **In the manual:** [Chapter 3, at the claim](manual/docs/03-across-the-boundary.md#ev-c03-05) · [plain edition](../docs/03-across-the-boundary.md#b-supply-chain-the-capability-asymmetry-problem)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > - Publish your SHACL shapes and check registry as files, not as prose in a PDF. The
 
@@ -922,7 +922,7 @@ Reports written to: ./work/C03_01/data
 ### C03.06 — Speak the protocol, not the product
 
 **In the manual:** [Chapter 3, at the claim](manual/docs/03-across-the-boundary.md#ev-c03-06) · [plain edition](../docs/03-across-the-boundary.md#35-where-this-leaves-the-practice)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > One last design lesson, which I took from the triplifier rather than from a
 
@@ -941,11 +941,11 @@ Annotated chapter: [manual/docs/04-from-research-to-industry.md](manual/docs/04-
 ### C04.01 — REA-022 carries owlready2's internal error
 
 **In the manual:** [Chapter 4, at the claim](manual/docs/04-from-research-to-industry.md#ev-c04-01) · [plain edition](../docs/04-from-research-to-industry.md#43-a-verified-example-from-this-manuals-own-toolchain)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > > The external DL reasoner ('hermit') could not be run: `cannot access local
 
-**Evidence:** the same as [C14.06 — The reasoner's outcome follows the hash seed](#c14-06), which reproduces it: seed 5: HermiT ran 10 of 10, did not run 0; seed 0: HermiT ran 2 of 10, did not run 8; step 1 output contains "could not be run: cannot access local variable 'entity' where it is not associated with a value"
+**Evidence:** the same as [C14.06 — The reasoner's outcome follows the hash seed](#c14-06), which reproduces it: seed 5: HermiT ran 10 of 10, did not run 0; seed 0: HermiT ran 1 of 10, did not run 9; step 1 output contains "could not be run: cannot access local variable 'entity' where it is not associated with a value"
 
 C14.06's record lists the REA-022 messages its seed-0 runs produced. 'Five runs of ten' describes this edition's unpinned runs.
 
@@ -955,11 +955,11 @@ C14.06's record lists the REA-022 messages its seed-0 runs produced. 'Five runs 
 ### C04.02 — The failure is in owlready2's loader, not HermiT
 
 **In the manual:** [Chapter 4, at the claim](manual/docs/04-from-research-to-industry.md#ev-c04-02) · [plain edition](../docs/04-from-research-to-industry.md#43-a-verified-example-from-this-manuals-own-toolchain)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Reading the traceback for this edition showed something else: owlready2's *loader*
 
-**Evidence:** the same as [C14.08 — Almost: the seed decides most of owlready2's load, and not all of it](#c14-08), which reproduces it: line 2. failed 14 times (at least 9); line 3. loaded 15 times (at least 13); every failure was owlready2 building foaf:primaryTopic
+**Evidence:** the same as [C14.08 — Almost: the seed decides most of owlready2's load, and not all of it](#c14-08), which reproduces it: line 2. failed 15 times (at least 9); line 3. loaded 15 times (at least 13); every failure was owlready2 building foaf:primaryTopic
 
 ---
 
@@ -967,7 +967,7 @@ C14.06's record lists the REA-022 messages its seed-0 runs produced. 'Five runs 
 ### C04.03 — Without Java, the operating system's message; LOG-001 regardless
 
 **In the manual:** [Chapter 4, at the claim](manual/docs/04-from-research-to-industry.md#ev-c04-03) · [plain edition](../docs/04-from-research-to-industry.md#43-a-verified-example-from-this-manuals-own-toolchain)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **Java runtime** HermiT runs in. Hide Java and `REA-022` says so in different
 
@@ -999,9 +999,9 @@ That owlready2 installs with the suite is C07.05; LOG-001 without any reasoner i
 
 **Sources:**
 
-- [HOLOS README, conformance table](https://github.com/pwin/triplestore/blob/3d9c46f37f54188c1a801b67030ca3a14bac2b04/README.md#L122): “| SPARQL 1.1 | **511/511** · 100% | 511/625 · **82%** |” (quote found, checked 2026-11-18)
-- [HOLOS README, tests not yet run](https://github.com/pwin/triplestore/blob/3d9c46f37f54188c1a801b67030ca3a14bac2b04/README.md#L155): “| SPARQL 1.1 | **511 / 511** | 0 | 114 | **0** |” (quote found, checked 2026-11-18)
-- [HOLOS README, the withdrawn target](https://github.com/pwin/triplestore/blob/3d9c46f37f54188c1a801b67030ca3a14bac2b04/README.md#L106): “it was written before anything was measured” (quote found, checked 2026-11-18)
+- [HOLOS README, conformance table](https://github.com/pwin/triplestore/blob/27aabce3a1b5579f13d7d274398300e856a6e77d/README.md#L122): “| SPARQL 1.1 | **511/511** · 100% | 511/625 · **82%** |” (quote found, checked 2026-11-18)
+- [HOLOS README, tests not yet run](https://github.com/pwin/triplestore/blob/27aabce3a1b5579f13d7d274398300e856a6e77d/README.md#L155): “| SPARQL 1.1 | **511 / 511** | 0 | 114 | **0** |” (quote found, checked 2026-11-18)
+- [HOLOS README, the withdrawn target](https://github.com/pwin/triplestore/blob/27aabce3a1b5579f13d7d274398300e856a6e77d/README.md#L106): “it was written before anything was measured” (quote found, checked 2026-11-18)
 
 ---
 
@@ -1054,7 +1054,7 @@ The '[a blank node]' fix it mentions is C07.07 and C07.09.
 ### C05.03 — Tombstones at 100% apply; guesses at 57% do not
 
 **In the manual:** [Chapter 5, at the claim](manual/docs/05-genai-and-agents.md#ev-c05-03) · [plain edition](../docs/05-genai-and-agents.md#53-agents-as-participants-in-the-pipeline)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > an explicit tombstone comes in at 100% and applies; the same rename guessed from
 
@@ -1066,7 +1066,7 @@ The '[a blank node]' fix it mentions is C07.07 and C07.09.
 ### C05.04 — An agent as a principal with roles
 
 **In the manual:** [Chapter 5, at the claim](manual/docs/05-genai-and-agents.md#ev-c05-04) · [plain edition](../docs/05-genai-and-agents.md#53-agents-as-participants-in-the-pipeline)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > service account that reads and writes everything. A store that enforces policy at the
 
@@ -1100,7 +1100,7 @@ Annotated chapter: [manual/docs/07-the-toolchain.md](manual/docs/07-the-toolchai
 ### C07.01 — The versions every Part III number was measured against
 
 **In the manual:** [Chapter 7, at the claim](manual/docs/07-the-toolchain.md#ev-c07-01) · [plain edition](../docs/07-the-toolchain.md#7-the-toolchain)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > > **Versions this edition was measured against.**
 
@@ -1135,7 +1135,7 @@ for k, v in versions().items():
 
 **What is checked:** the installed packages, release binaries and npm packages are the versions in the table
 
-**Recorded result:** PASS — step 1 output contains 'PyPI ontology-quality-suite  0.27.0', 'PyPI shacl                   0.3.6', 'PyPI holosdb                 0.26.2', 'PyPI tarka-rdf               0.2.2', 'release shacl                shacl 0.3.6', 'release tarka                tarka 0.2.2', 'release holos                holos 0.26.2', 'npm ontology-suite           0.17.3', 'npm shacl-wasm-node          0.3.6', 'npm holos-wasm-node          0.26.2'
+**Recorded result:** PASS — step 1 output contains 'PyPI ontology-quality-suite  0.27.0', 'PyPI shacl                   0.3.8', 'PyPI holosdb                 0.26.4', 'PyPI tarka-rdf               0.2.2', 'release shacl                shacl 0.3.8', 'release tarka                tarka 0.2.2', 'release holos                holos 0.26.4', 'npm ontology-suite           0.17.3', 'npm shacl-wasm-node          0.3.8', 'npm holos-wasm-node          0.26.4'
 
 <details><summary>Output, as recorded</summary>
 
@@ -1144,19 +1144,19 @@ $ python scripts/versions.py
 python                       3.12.13
 platform                     Windows 11 (AMD64)
 PyPI ontology-quality-suite  0.27.0
-PyPI shacl                   0.3.6
-PyPI holosdb                 0.26.2
+PyPI shacl                   0.3.8
+PyPI holosdb                 0.26.4
 PyPI tarka-rdf               0.2.2
 PyPI rdflib                  7.6.0
 PyPI pyoxigraph              0.5.11
 PyPI polars                  2.0.0
-release shacl                shacl 0.3.6
+release shacl                shacl 0.3.8
 release tarka                tarka 0.2.2
-release holos                holos 0.26.2 (3d9c46f)
+release holos                holos 0.26.4 (27aabce)
 node                         v22.21.1
 npm ontology-suite           0.17.3
-npm shacl-wasm-node          0.3.6
-npm holos-wasm-node          0.26.2
+npm shacl-wasm-node          0.3.8
+npm holos-wasm-node          0.26.4
 npm typescript               7.0.2
 java (for HermiT)            openjdk version "25.0.3" 2026-04-21 LTS
 oxi-gen (testing repo only)  oxi_gen 0.5.1
@@ -1189,7 +1189,7 @@ Today's figures, on holosdb and the shacl engine, are reproduced in C09.02 (479:
 ### C07.03 — One registry: 61 checks in ten categories, 44 SPARQL files and 6 shape files
 
 **In the manual:** [Chapter 7, at the claim](manual/docs/07-the-toolchain.md#ev-c07-03) · [plain edition](../docs/07-the-toolchain.md#71-the-idea-one-registry-two-runtimes-one-set-of-engines)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > The suite's quality rules are not code. They are **data**
 
@@ -1255,13 +1255,13 @@ $ python scripts/inspect_packages.py
 ontology-quality-suite 0.27.0
     commands installed: ontology-quality-suite
     runtime dependencies: holosdb>=0.24, matplotlib>=3.7.0, owlready2>=0.51, owlrl>=6.0.2, pandas>=2.0.0, rdflib>=7.6.0, shacl<0.4,>=0.3.3, tabulate>=0.9.0
-shacl 0.3.6
+shacl 0.3.8
     commands installed: none (library only)
     runtime dependencies: none
 tarka-rdf 0.2.2
     commands installed: none (library only)
     runtime dependencies: polars>=1.30
-holosdb 0.26.2
+holosdb 0.26.4
     commands installed: none (library only)
     runtime dependencies: none
 registry entries: 61 in 10 categories (conformance, data, efficiency, logical, quality, reasoning, structural, style, tarql, vocabulary)
@@ -1285,12 +1285,12 @@ portable .rq checks: 44; SHACL shape files: 6
 
 **Sources:**
 
-- [extension package.json (0.17.5)](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/package.json#L500-L509): “"holos-wasm-node": "^0.26.2",” (quote found, checked 2026-11-18)
-- [extension package-lock.json (0.17.5): the holos-wasm-node it bundles](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/package-lock.json): “"node_modules/holos-wasm-node"” (quote found, checked 2026-11-18)
-- [suite uv.lock on main from bdb9937: the holosdb it locks](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/bdb9937f59c277d26450c4e79129cfbeff8a7cec/uv.lock#L167-L168): “version = "0.26.2"” (quote found, checked 2026-11-18)
+- [extension package.json (0.17.6)](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/362d343de835ded5a6de9efc414846632ef9053f/package.json#L500-L509): “"holos-wasm-node": "^0.26.4",” (quote found, checked 2026-11-18)
+- [extension package-lock.json (0.17.6): the holos-wasm-node it bundles](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/362d343de835ded5a6de9efc414846632ef9053f/package-lock.json): “"node_modules/holos-wasm-node"” (quote found, checked 2026-11-18)
+- [suite uv.lock on main from 9182f9e: the holosdb it locks](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/9182f9e6f4411c72624d9e1a9e61f13e41d2fdb9/uv.lock#L167-L168): “version = "0.26.4"” (quote found, checked 2026-11-18)
 - [HOLOS commit 8b2a949: every query entry point through one pipeline](https://github.com/pwin/triplestore/commit/8b2a9495af52ff56a7ebedd49e9dbd0f1ead93ce): “Send every query entry point through one pipeline” (quote found, checked 2026-11-18)
 
-Below 1.0 a caret admits patch releases only, so `^0.26.2` means 0.26.x. The 0.17.5 release's lock file resolves it to 0.26.2, and the suite's repository locks the same 0.26.2 from bdb9937 -- so the two sides are on one version exactly. The suite's last release, 0.27.0, still locks 0.26.1, but a lock is not what an install reads: `pip install ontology-quality-suite` resolves holosdb 0.26.2, which is what C07.01 installs. The extension reaches HOLOS through `queryRdf`, the suite through `Store.query`; from HOLOS 0.24.0 both run the same pipeline. HOLOS's own SHACL validator is a part the extension does not call: it validates with shacl-wasm-node.
+Below 1.0 a caret admits patch releases only, so `^0.26.4` means 0.26.x. The 0.17.6 release's lock file resolves it to 0.26.4, and the suite's repository locks the same 0.26.4 from 9182f9e -- so the two sides are on one version exactly. The suite's last release, 0.27.0, still locks 0.26.1, but a lock is not what an install reads: `pip install ontology-quality-suite` resolves holosdb 0.26.4, which is what C07.01 installs. The extension reaches HOLOS through `queryRdf`, the suite through `Store.query`; from HOLOS 0.24.0 both run the same pipeline. HOLOS's own SHACL validator is a part the extension does not call: it validates with shacl-wasm-node.
 
 ---
 
@@ -1298,7 +1298,7 @@ Below 1.0 a caret admits patch releases only, so `^0.26.2` means 0.26.x. The 0.1
 ### C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries
 
 **In the manual:** [Chapter 7, at the claim](manual/docs/07-the-toolchain.md#ev-c07-05) · [plain edition](../docs/07-the-toolchain.md#the-python-suite)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > That one line now brings both engines: `holosdb` and `shacl` are runtime
 
@@ -1355,7 +1355,7 @@ print(f".rq checks building a message with STR(?...) and no isBlank guard: {len(
 
 **What is checked:** ontology-quality-suite declares holosdb (from 0.24 since suite 0.24.3, 0.23 at 0.24.2, 0.15 before), shacl (below 0.4; from 0.3.3 since suite 0.23.0, which needs shacl.rdfs_closure) and owlready2 as runtime dependencies and installs the only command; shacl, tarka-rdf and holosdb install none
 
-**Recorded result:** PASS — step 1 output contains 'commands installed: ontology-quality-suite', 'owlready2>=0.51', 'shacl 0.3.6/n    commands installed: none (library only)', 'tarka-rdf 0.2.2/n    commands installed: none (library only)', 'holosdb 0.26.2/n    commands installed: none (library only)'; suite 0.27.0: step 1 output contains 'shacl<0.4,>=0.3.3'; suite 0.27.0: step 1 output contains 'holosdb>=0.24'
+**Recorded result:** PASS — step 1 output contains 'commands installed: ontology-quality-suite', 'owlready2>=0.51', 'shacl 0.3.8/n    commands installed: none (library only)', 'tarka-rdf 0.2.2/n    commands installed: none (library only)', 'holosdb 0.26.4/n    commands installed: none (library only)'; suite 0.27.0: step 1 output contains 'shacl<0.4,>=0.3.3'; suite 0.27.0: step 1 output contains 'holosdb>=0.24'
 
 <details><summary>Output, as recorded</summary>
 
@@ -1364,13 +1364,13 @@ $ python scripts/inspect_packages.py
 ontology-quality-suite 0.27.0
     commands installed: ontology-quality-suite
     runtime dependencies: holosdb>=0.24, matplotlib>=3.7.0, owlready2>=0.51, owlrl>=6.0.2, pandas>=2.0.0, rdflib>=7.6.0, shacl<0.4,>=0.3.3, tabulate>=0.9.0
-shacl 0.3.6
+shacl 0.3.8
     commands installed: none (library only)
     runtime dependencies: none
 tarka-rdf 0.2.2
     commands installed: none (library only)
     runtime dependencies: polars>=1.30
-holosdb 0.26.2
+holosdb 0.26.4
     commands installed: none (library only)
     runtime dependencies: none
 registry entries: 61 in 10 categories (conformance, data, efficiency, logical, quality, reasoning, structural, style, tarql, vocabulary)
@@ -1402,7 +1402,7 @@ portable .rq checks: 44; SHACL shape files: 6
 ### C07.07 — STR() of a blank node: lenient, conformant, and the guard
 
 **In the manual:** [Chapter 7, at the claim](manual/docs/07-the-toolchain.md#ev-c07-07) · [plain edition](../docs/07-the-toolchain.md#why-own-the-engines)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > What happened next depended on the engine:
 
@@ -1503,11 +1503,11 @@ for label, q in (("unguarded STR(?e)", UNGUARDED), ("COALESCE(STR(?e), ...)", CO
 ```text
 $ python scripts/engine_leniency.py
 == unguarded STR(?e)
-   rdflib      ['A label on n79abc27381be486986ce8367ab79c78cb1 has no language tag.']
+   rdflib      ['A label on n48819e8490cc4695bee9a48420b841aeb1 has no language tag.']
    holosdb     ['(unbound)']
    pyoxigraph  ['(unbound)']
 == COALESCE(STR(?e), ...)
-   rdflib      ['A label on n60aa4d26b4ee4250aab8fe1ae149a232b1 has no language tag.']
+   rdflib      ['A label on n2d0448aa70ed4823b3b9cf85ed6711cfb1 has no language tag.']
    holosdb     ['A label on [a blank node] has no language tag.']
    pyoxigraph  ['A label on [a blank node] has no language tag.']
 == guarded IF(isBlank(?e), ...)
@@ -1578,7 +1578,7 @@ $ python scripts/engine_leniency.py
 ### C07.12 — Severity belongs to the shape that produces the result
 
 **In the manual:** [Chapter 7, at the claim](manual/docs/07-the-toolchain.md#ev-c07-12) · [plain edition](../docs/07-the-toolchain.md#--engine)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **Severity belongs to the shape that produces the result.**
 
@@ -1781,11 +1781,11 @@ C08.24 shows a query with no registry entry running and reporting as UNMAPPED.
 ### C07.20 — Only ontology-quality-suite installs a command
 
 **In the manual:** [Chapter 7, at the claim](manual/docs/07-the-toolchain.md#ev-c07-20) · [plain edition](../docs/07-the-toolchain.md#the-engine-the-store-and-the-triplifier)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **The wheels are libraries only.**
 
-**Evidence:** the same as [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05), which reproduces it: step 1 output contains 'commands installed: ontology-quality-suite', 'owlready2>=0.51', 'shacl 0.3.6/n    commands installed: none (library only)', 'tarka-rdf 0.2.2/n    commands installed: none (library only)', 'holosdb 0.26.2/n    commands installed: none (library only)'; suite 0.27.0: step 1 output contains 'shacl<0.4,>=0.3.3'; suite 0.27.0: step 1 output contains 'holosdb>=0.24'
+**Evidence:** the same as [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05), which reproduces it: step 1 output contains 'commands installed: ontology-quality-suite', 'owlready2>=0.51', 'shacl 0.3.8/n    commands installed: none (library only)', 'tarka-rdf 0.2.2/n    commands installed: none (library only)', 'holosdb 0.26.4/n    commands installed: none (library only)'; suite 0.27.0: step 1 output contains 'shacl<0.4,>=0.3.3'; suite 0.27.0: step 1 output contains 'holosdb>=0.24'
 
 ---
 
@@ -1804,8 +1804,8 @@ C08.24 shows a query with no registry entry running and reporting as UNMAPPED.
 
     python tools/fetch_binaries.py
 
-For this machine's platform, fetches `shacl` (SHACL Engine 0.3.6), `tarka`
-(0.2.2) and `holos` + `holos-server` (HOLOS 0.26.2) from their GitHub releases,
+For this machine's platform, fetches `shacl` (SHACL Engine 0.3.8), `tarka`
+(0.2.2) and `holos` + `holos-server` (HOLOS 0.26.4) from their GitHub releases,
 verifies each archive against the release's SHA256SUMS, and unpacks it under
 evidence/bin/. Nothing is installed anywhere else. If a binary is already
 there, it is left alone; a superseded version of it is removed.
@@ -1823,9 +1823,9 @@ from pathlib import Path
 
 BIN = Path(__file__).resolve().parent.parent / "bin"
 RELEASES = {
-    "shacl": ("pwin/SHACL_Engine", "v0.3.6", "shacl-0.3.6-{target}"),
+    "shacl": ("pwin/SHACL_Engine", "v0.3.8", "shacl-0.3.8-{target}"),
     "tarka": ("pwin/tarka", "v0.2.2", "tarka-0.2.2-{target}"),
-    "holos": ("pwin/triplestore", "v0.26.2", "holos-0.26.2-{target}"),
+    "holos": ("pwin/triplestore", "v0.26.4", "holos-0.26.4-{target}"),
 }
 
 
@@ -1900,8 +1900,8 @@ if __name__ == "__main__":
 
 **Sources:**
 
-- [SHACL Engine v0.3.6 release](https://github.com/pwin/SHACL_Engine/releases/tag/v0.3.6)
-- [HOLOS v0.26.2 release](https://github.com/pwin/triplestore/releases/tag/v0.26.2)
+- [SHACL Engine v0.3.8 release](https://github.com/pwin/SHACL_Engine/releases/tag/v0.3.8)
+- [HOLOS v0.26.4 release](https://github.com/pwin/triplestore/releases/tag/v0.26.4)
 - [tarka v0.2.2 release](https://github.com/pwin/tarka/releases/tag/v0.2.2)
 
 `tools/fetch_binaries.py` downloads each archive and refuses one whose SHA-256 does not match the release's SHA256SUMS; the binaries used throughout this evidence came through it.
@@ -1912,7 +1912,7 @@ if __name__ == "__main__":
 ### C07.22 — --engine: native misses QUA-004; sparql and both give 23
 
 **In the manual:** [Chapter 7, at the claim](manual/docs/07-the-toolchain.md#ev-c07-22) · [plain edition](../docs/07-the-toolchain.md#--engine)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > All modes, against this manual's fixture with `--own-namespace`, same ontology,
 
@@ -1977,7 +1977,7 @@ Reports written to: ./work/C07_22/both
 ### C07.23 — The engine choice is not about speed at this size
 
 **In the manual:** [Chapter 7, at the claim](manual/docs/07-the-toolchain.md#ev-c07-23) · [plain edition](../docs/07-the-toolchain.md#--engine)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > On the unscoped run the three take about 1.7 s (`native`), 2.0 s (`sparql`) and
 
@@ -1991,7 +1991,7 @@ ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl 
 
 **What is checked:** nothing is asserted about the times; they are recorded. Each run must succeed
 
-**Recorded result:** PASS — whole-process times: native 3.0 s, native+sparql 4.1 s, sparql 3.9 s
+**Recorded result:** PASS — whole-process times: native 1.9 s, native+sparql 2.4 s, sparql 2.3 s
 
 <details><summary>Output, as recorded</summary>
 
@@ -2020,7 +2020,7 @@ Reports written to: ./work/C07_23/sparql
 
 </details>
 
-Times vary by machine. Three repeated runs here gave native 1.7 s, sparql 2.0–2.1 s and native+sparql 2.1–2.3 s. The recording above is from 13 November, with this machine busy with other work (40% CPU when checked): three runs gave native 2.9–3.0 s, sparql 3.6–3.9 s and native+sparql 3.9–4.1 s. Interleaved under the same load, four runs each of holosdb 0.26.1 with shacl 0.3.5 and of holosdb 0.26.2 with shacl 0.3.6 gave medians of 3.0 and 2.9 s (native), 3.8 and 3.7 s (sparql), and 3.9 and 4.0 s (native+sparql): the load moved the times, the release did not.
+Times vary by machine. Three repeated runs here gave native 1.7 s, sparql 2.0–2.1 s and native+sparql 2.1–2.3 s. On 13 November, with this machine busy with other work (40% CPU when checked): three runs gave native 2.9–3.0 s, sparql 3.6–3.9 s and native+sparql 3.9–4.1 s. Interleaved under the same load, four runs each of holosdb 0.26.1 with shacl 0.3.5 and of holosdb 0.26.2 with shacl 0.3.6 gave medians of 3.0 and 2.9 s (native), 3.8 and 3.7 s (sparql), and 3.9 and 4.0 s (native+sparql): the load moved the times, the release did not.
 
 ---
 
@@ -2045,7 +2045,7 @@ The commit gives its own measurement on a different fixture: 17 V / 1 W / 0 I un
 ### C07.25 — My own node-shape severity mistake
 
 **In the manual:** [Chapter 7, at the claim](manual/docs/07-the-toolchain.md#ev-c07-25) · [plain edition](../docs/07-the-toolchain.md#--engine)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > I tripped over the same thing myself while testing the engine for this
 
@@ -2057,7 +2057,7 @@ The commit gives its own measurement on a different fixture: 17 V / 1 W / 0 I un
 ### C07.26 — --inference owlrl is refused: a traceback at 0.22.0, a usage error from 0.23.0
 
 **In the manual:** [Chapter 7, at the claim](manual/docs/07-the-toolchain.md#ev-c07-26) · [plain edition](../docs/07-the-toolchain.md#--engine)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > > **`--inference owlrl` and `both` are gone from the checks path.**
 
@@ -2143,7 +2143,7 @@ options:
 ### C07.27 — --inference rdfs: half the suite at 0.22.0, every engine from 0.23.0
 
 **In the manual:** [Chapter 7, at the claim](manual/docs/07-the-toolchain.md#ev-c07-27) · [plain edition](../docs/07-the-toolchain.md#--engine)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **And `--inference rdfs` reached only half the suite until 0.23.0.**
 
@@ -2222,7 +2222,7 @@ before 479, after 489
 ### C07.28 — --verbose shows what each input resolved to
 
 **In the manual:** [Chapter 7, at the claim](manual/docs/07-the-toolchain.md#ev-c07-28) · [plain edition](../docs/07-the-toolchain.md#--verbose)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Every subcommand takes `-v`/`--verbose`, which prints what each input option
 
@@ -2260,7 +2260,7 @@ Reports written to: ./work/C07_28/v
 ### C07.29 — Each deliberate flaw produces exactly one finding
 
 **In the manual:** [Chapter 7, at the claim](manual/docs/07-the-toolchain.md#ev-c07-29) · [plain edition](../docs/07-the-toolchain.md#75-the-fixture-used-throughout-part-iii)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Each deliberate flaw produces **exactly one finding**
 
@@ -2305,7 +2305,7 @@ total 23: 1 Violation, 22 Warning, 0 Info
 ### C07.30 — v2 renames Engineer, with a migration annotation, and adds a class and a property
 
 **In the manual:** [Chapter 7, at the claim](manual/docs/07-the-toolchain.md#ev-c07-30) · [plain edition](../docs/07-the-toolchain.md#75-the-fixture-used-throughout-part-iii)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > `acme-org-v2.ttl` is a plausible next release.
 
@@ -2329,7 +2329,7 @@ total 23: 1 Violation, 22 Warning, 0 Info
 ### C07.32 — A lenient engine let a check pass in tests and fail in the field
 
 **In the manual:** [Chapter 7, at the claim](manual/docs/07-the-toolchain.md#ev-c07-32) · [plain edition](../docs/07-the-toolchain.md#7-the-toolchain)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **A lenient engine let a check pass in the
 
@@ -2352,8 +2352,8 @@ Annotated chapter: [manual/docs/08-model-and-validate.md](manual/docs/08-model-a
 
 **Sources:**
 
-- [extension CHANGELOG, 0.16.0: MAL-003, and Local Checks no longer fails on one](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/CHANGELOG.md#L323-L324): “The statements that use a relative IRI are now reported” (quote found, checked 2026-11-18)
-- [extension CHANGELOG, 0.14.0](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/CHANGELOG.md#L460-L461): “search it for the regular expression `<[^:>]+>`” (quote found, checked 2026-11-18)
+- [extension CHANGELOG, 0.16.0: MAL-003, and Local Checks no longer fails on one](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/362d343de835ded5a6de9efc414846632ef9053f/CHANGELOG.md#L349-L350): “The statements that use a relative IRI are now reported” (quote found, checked 2026-11-18)
+- [extension CHANGELOG, 0.14.0](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/362d343de835ded5a6de9efc414846632ef9053f/CHANGELOG.md#L486-L487): “search it for the regular expression `<[^:>]+>`” (quote found, checked 2026-11-18)
 - [extension commit d480ace (first released in v0.14.0)](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/d480ace5adc99616ca36ca563af8feb3cb2fb99d) (exists, checked 2026-11-18)
 
 ---
@@ -2362,7 +2362,7 @@ Annotated chapter: [manual/docs/08-model-and-validate.md](manual/docs/08-model-a
 ### C08.02 — Run Local Checks reads 44 SPARQL and 6 SHACL files from the 61-check registry
 
 **In the manual:** [Chapter 8, at the claim](manual/docs/08-model-and-validate.md#ev-c08-02) · [plain edition](../docs/08-model-and-validate.md#live-diagnostics-including-one-shacl-cannot-give-you)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > *Run Local Checks* evaluates the 44 SPARQL and 6 SHACL check files
 
@@ -2382,9 +2382,9 @@ The editor and the CLI read the same registry; C07.03 counts it in the installed
 
 **Sources:**
 
-- [extension src/checks/modellingGuidance.test.ts](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/src/checks/modellingGuidance.test.ts#L20-L24): “MDL-002: ex:Veterinarian owl:equivalentClass ex:AnimalDoctor” (quote found, checked 2026-11-18)
-- [extension src/checks/malformed.ts (0.16.0)](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/src/checks/malformed.ts#L10-L15): “MAL-001: a qualified cardinality written with owl:cardinality (or min/max) beside owl:onClass.” (quote found, checked 2026-11-18)
-- [extension CHANGELOG, 0.16.0](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/CHANGELOG.md#L326-L330): “this extension's own rather than the registry's” (quote found, checked 2026-11-18)
+- [extension src/checks/modellingGuidance.test.ts](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/362d343de835ded5a6de9efc414846632ef9053f/src/checks/modellingGuidance.test.ts#L20-L24): “MDL-002: ex:Veterinarian owl:equivalentClass ex:AnimalDoctor” (quote found, checked 2026-11-18)
+- [extension src/checks/malformed.ts (0.16.0)](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/362d343de835ded5a6de9efc414846632ef9053f/src/checks/malformed.ts#L10-L15): “MAL-001: a qualified cardinality written with owl:cardinality (or min/max) beside owl:onClass.” (quote found, checked 2026-11-18)
+- [extension CHANGELOG, 0.16.0](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/362d343de835ded5a6de9efc414846632ef9053f/CHANGELOG.md#L352-L356): “this extension's own rather than the registry's” (quote found, checked 2026-11-18)
 
 Neither family is in the shared registry.json, which is why the CLI cannot produce them.
 
@@ -2401,7 +2401,7 @@ Neither family is in the shared registry.json, which is why the CLI cannot produ
 **Sources:**
 
 - [suite tests/test_check_coverage.py, EXTENSION_ONLY_IDS](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a4d08d054d168aade8daaffa4ed32df040d72311/tests/test_check_coverage.py#L94-L97): “checks/vocabularyChecks.ts -- a closed-world scan of the axiom positions” (quote found, checked 2026-11-18)
-- [extension src/checks/registryCoverage.test.ts](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/src/checks/registryCoverage.test.ts#L25-L27): “the three checks only *this* extension can produce, VOC-001/REA-005/REA-006” (quote found, checked 2026-11-18)
+- [extension src/checks/registryCoverage.test.ts](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/362d343de835ded5a6de9efc414846632ef9053f/src/checks/registryCoverage.test.ts#L25-L27): “the three checks only *this* extension can produce, VOC-001/REA-005/REA-006” (quote found, checked 2026-11-18)
 
 C08.06 shows the consequence: the CLI reports the typo as STR-001, never as VOC-001.
 
@@ -2417,8 +2417,8 @@ C08.06 shows the consequence: the CLI reports the typo as STR-001, never as VOC-
 
 **Sources:**
 
-- [extension registryCoverage.test.ts, CLI_ONLY](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/src/checks/registryCoverage.test.ts#L33-L61): “'TQL-004', 'TQL-005',” (quote found, checked 2026-11-18)
-- [the same test: a query it cannot run is not counted](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/src/checks/registryCoverage.test.ts#L99-L107): “make the CLI_ONLY list above assert something false while still passing” (quote found, checked 2026-11-18)
+- [extension registryCoverage.test.ts, CLI_ONLY](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/362d343de835ded5a6de9efc414846632ef9053f/src/checks/registryCoverage.test.ts#L33-L61): “'TQL-004', 'TQL-005',” (quote found, checked 2026-11-18)
+- [the same test: a query it cannot run is not counted](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/362d343de835ded5a6de9efc414846632ef9053f/src/checks/registryCoverage.test.ts#L99-L107): “make the CLI_ONLY list above assert something false while still passing” (quote found, checked 2026-11-18)
 
 CLI_ONLY lists REA-020, REA-021, REA-022, REA-010, REA-011, REA-012, CNF-001, CNF-002, CNF-005, TQL-004 and TQL-005: eleven.
 
@@ -2428,7 +2428,7 @@ CLI_ONLY lists REA-020, REA-021, REA-022, REA-010, REA-011, REA-012, CNF-001, CN
 ### C08.06 — The CLI catches the typo as STR-001, not VOC-001
 
 **In the manual:** [Chapter 8, at the claim](manual/docs/08-model-and-validate.md#ev-c08-06) · [plain edition](../docs/08-model-and-validate.md#live-diagnostics-including-one-shacl-cannot-give-you)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Run against that file, the CLI reports `STR-001`; `VOC-001` is not among its findings.
 
@@ -2488,7 +2488,7 @@ total 1: 1 Violation, 0 Warning, 0 Info
 
 **Sources:**
 
-- [extension resources/checks-registry/repairs/manifest.json](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/resources/checks-registry/repairs/manifest.json): “PRJ-REQUIRED” (quote found, checked 2026-11-18)
+- [extension resources/checks-registry/repairs/manifest.json](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/362d343de835ded5a6de9efc414846632ef9053f/resources/checks-registry/repairs/manifest.json): “PRJ-REQUIRED” (quote found, checked 2026-11-18)
 
 The manifest's `checks` object has 16 keys: LOG-003, MDL-001, MDL-002, MDL-003, PRJ-REQUIRED, QUA-001, QUA-002, QUA-004, QUA-005, QUA-007, STR-001, STR-002, STR-005, STR-007, STR-008, STY-003.
 
@@ -2504,7 +2504,7 @@ The manifest's `checks` object has 16 keys: LOG-003, MDL-001, MDL-002, MDL-003, 
 
 **Sources:**
 
-- [extension CHANGELOG, 0.13.11](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/CHANGELOG.md#L586-L589): “Blank nodes now cross the boundary as IRIs and come back as blank nodes” (quote found, checked 2026-11-18)
+- [extension CHANGELOG, 0.13.11](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/362d343de835ded5a6de9efc414846632ef9053f/CHANGELOG.md#L612-L615): “Blank nodes now cross the boundary as IRIs and come back as blank nodes” (quote found, checked 2026-11-18)
 - [extension commit e4583b9](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/e4583b9a9d47f678bba2e5efaba7b7d0b21ca504) (exists, checked 2026-11-18)
 
 ---
@@ -2519,7 +2519,7 @@ The manifest's `checks` object has 16 keys: LOG-003, MDL-001, MDL-002, MDL-003, 
 
 **Sources:**
 
-- [extension CHANGELOG, 0.13.12](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/CHANGELOG.md#L539-L545): “datatype from `rdf:dirLangString` to `rdf:langString` in the user's own file” (quote found, checked 2026-11-18)
+- [extension CHANGELOG, 0.13.12](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/362d343de835ded5a6de9efc414846632ef9053f/CHANGELOG.md#L565-L571): “datatype from `rdf:dirLangString` to `rdf:langString` in the user's own file” (quote found, checked 2026-11-18)
 - [extension commit e3364fc (first released in v0.13.12)](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/e3364fc5bf6b7a7c5028d5e868b5b3c12164ae2c) (exists, checked 2026-11-18)
 
 ---
@@ -2535,7 +2535,7 @@ The manifest's `checks` object has 16 keys: LOG-003, MDL-001, MDL-002, MDL-003, 
 **Sources:**
 
 - [extension commit 71981b4 (first released in v0.13.5)](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/71981b41283528abbd6fa509a2ffa8c3bd231270): “Stop reading CURIEs out of comments” (quote found, checked 2026-11-18)
-- [extension CHANGELOG, 0.13.5](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/CHANGELOG.md#L712-L714): “a line whose *first* non-space character was `#`” (quote found, checked 2026-11-18)
+- [extension CHANGELOG, 0.13.5](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/362d343de835ded5a6de9efc414846632ef9053f/CHANGELOG.md#L738-L740): “a line whose *first* non-space character was `#`” (quote found, checked 2026-11-18)
 
 ---
 
@@ -2549,7 +2549,7 @@ The manifest's `checks` object has 16 keys: LOG-003, MDL-001, MDL-002, MDL-003, 
 
 **Sources:**
 
-- [extension CHANGELOG, 0.13.5](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/CHANGELOG.md#L760-L764): “It now names the directory it searched and how many ontology files it found” (quote found, checked 2026-11-18)
+- [extension CHANGELOG, 0.13.5](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/362d343de835ded5a6de9efc414846632ef9053f/CHANGELOG.md#L786-L790): “It now names the directory it searched and how many ontology files it found” (quote found, checked 2026-11-18)
 
 ---
 
@@ -2557,7 +2557,7 @@ The manifest's `checks` object has 16 keys: LOG-003, MDL-001, MDL-002, MDL-003, 
 ### C08.12 — The DSL script type-checks and builds against the npm package
 
 **In the manual:** [Chapter 8, at the claim](manual/docs/08-model-and-validate.md#ev-c08-12) · [plain edition](../docs/08-model-and-validate.md#82-ontologies-as-code-literally)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Verified against the published 0.17.3 package.
 
@@ -2640,7 +2640,7 @@ The script is the manual's listing plus four lines that write the Turtle to a fi
 ### C08.13 — tsc refuses a bare string as a datatype range (TS2322)
 
 **In the manual:** [Chapter 8, at the claim](manual/docs/08-model-and-validate.md#ev-c08-13) · [plain edition](../docs/08-model-and-validate.md#82-ontologies-as-code-literally)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **The type checker catches a mistake of kind.**
 
@@ -2687,7 +2687,7 @@ The manual quotes the error at line 16 of its first draft; this file is shorter,
 ### C08.14 — The gate catches the contradiction in the script's output
 
 **In the manual:** [Chapter 8, at the claim](manual/docs/08-model-and-validate.md#ev-c08-14) · [plain edition](../docs/08-model-and-validate.md#82-ontologies-as-code-literally)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **The gate catches a mistake of logic.**
 
@@ -2714,7 +2714,7 @@ Findings: 2 total (2 Violation, 0 Warning, 0 Info)
 Reports written to: ./work/C08_14/gate
   - work/C08_14/gate/findings.txt (start here -- what, where, and the source line)
   - work/C08_14/gate/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp32c_q9kj -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpwwu8ih08 -Y
 [exit 1]
 ```
 
@@ -2726,7 +2726,7 @@ Reports written to: ./work/C08_14/gate
 ### C08.15 — Unchecked code: an internal TypeError up to 0.16.0, an error naming the mistake from 0.16.1
 
 **In the manual:** [Chapter 8, at the claim](manual/docs/08-model-and-validate.md#ev-c08-15) · [plain edition](../docs/08-model-and-validate.md#82-ontologies-as-code-literally)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **Code the checker did not see still gets an error, and since 0.16.1 a useful
 
@@ -2774,7 +2774,7 @@ Node.js v22.21.1
 ### C08.16 — build().quads and n3's Writer: TS2345 up to 0.16.0, no cast needed from 0.16.1
 
 **In the manual:** [Chapter 8, at the claim](manual/docs/08-model-and-validate.md#ev-c08-16) · [plain edition](../docs/08-model-and-validate.md#82-ontologies-as-code-literally)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **`build().quads` goes straight to n3's `Writer` from 0.16.1**
 
@@ -2825,7 +2825,7 @@ $ node node_modules/typescript/bin/tsc --noEmit --strict --module nodenext --mod
 ### C08.17 — ontology reports 2 findings, and findings.txt quotes the line
 
 **In the manual:** [Chapter 8, at the claim](manual/docs/08-model-and-validate.md#ev-c08-17) · [plain edition](../docs/08-model-and-validate.md#83-the-tightest-cli-loop-ontology)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > That first report is new since the last edition
 
@@ -2881,7 +2881,6 @@ Reports written to: ./work/C08_17/ontology
   - work/C08_17/ontology/findings.txt (start here -- what, where, and the source line)
   - work/C08_17/ontology/report.html
   - work/C08_17/ontology/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp4o5x5b4m -Y
 [exit 1]
 ```
 
@@ -2895,7 +2894,7 @@ Java is hidden here so that the reasoner's failure is certain. With Java visible
 ### C08.18 — LOG-001's message is a model of what a message should be
 
 **In the manual:** [Chapter 8, at the claim](manual/docs/08-model-and-validate.md#ev-c08-18) · [plain edition](../docs/08-model-and-validate.md#83-the-tightest-cli-loop-ontology)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > No description-logic background is needed to act on that.
 
@@ -2907,7 +2906,7 @@ Java is hidden here so that the reasoner's failure is certain. With Java visible
 ### C08.19 — With HermiT running: REA-021, and up to 0.22.0 a false REA-020
 
 **In the manual:** [Chapter 8, at the claim](manual/docs/08-model-and-validate.md#ev-c08-19) · [plain edition](../docs/08-model-and-validate.md#83-the-tightest-cli-loop-ontology)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **You may see a different second finding.**
 
@@ -2930,7 +2929,7 @@ Findings: 2 total (2 Violation, 0 Warning, 0 Info)
 Reports written to: ./work/C08_19/seed5
   - work/C08_19/seed5/findings.txt (start here -- what, where, and the source line)
   - work/C08_19/seed5/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp_d3jisq1 -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpk5_mkfiu -Y
 [exit 1]
 
 $ python scripts/summarise_findings.py work/C08_19/seed5/full_results.csv
@@ -2950,7 +2949,7 @@ C14.06 shows how the hash seed decides whether HermiT runs; C14.39 why REA-020 w
 ### C08.20 — --profile is off by default and repeatable
 
 **In the manual:** [Chapter 8, at the claim](manual/docs/08-model-and-validate.md#ev-c08-20) · [plain edition](../docs/08-model-and-validate.md#83-the-tightest-cli-loop-ontology)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **Want a specific OWL2 profile checked?**
 
@@ -3018,7 +3017,7 @@ options:
 ### C08.21 — checks reports 479 findings against the fixture
 
 **In the manual:** [Chapter 8, at the claim](manual/docs/08-model-and-validate.md#ev-c08-21) · [plain edition](../docs/08-model-and-validate.md#84-the-full-registry-checks)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > this reports **479 findings** (55 Violations, 340 Warnings, 84 Infos),
 
@@ -3030,7 +3029,7 @@ options:
 ### C08.22 — A project tree alone now warns that 42 built-in checks did not run
 
 **In the manual:** [Chapter 8, at the claim](manual/docs/08-model-and-validate.md#ev-c08-22) · [plain edition](../docs/08-model-and-validate.md#alongside-the-built-in-checks-not-instead-of-them)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Point the CLI at that directory on its own and listen to what it says:
 
@@ -3083,7 +3082,7 @@ WARNING: --sparql replaced the suite's own query tree: 1 project check(s) ran an
 ### C08.24 — With @builtin and a one-entry registry, every built-in finding is UNMAPPED
 
 **In the manual:** [Chapter 8, at the claim](manual/docs/08-model-and-validate.md#ev-c08-24) · [plain edition](../docs/08-model-and-validate.md#alongside-the-built-in-checks-not-instead-of-them)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **But the registry still replaces rather than composes.**
 
@@ -3121,7 +3120,7 @@ Reports written to: ./work/C08_24/out
 ### C08.25 — A merged registry names every finding, and ACM-001 fires on its fault only
 
 **In the manual:** [Chapter 8, at the claim](manual/docs/08-model-and-validate.md#ev-c08-25) · [plain edition](../docs/08-model-and-validate.md#alongside-the-built-in-checks-not-instead-of-them)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > (the built-in entries plus your own) as a generated file, pass that to
 
@@ -3220,7 +3219,7 @@ total 1: 1 Violation, 0 Warning, 0 Info
 ### C08.26 — The warning named the site path @builtin was made to avoid, until 0.24.0
 
 **In the manual:** [Chapter 8, at the claim](manual/docs/08-model-and-validate.md#ev-c08-26) · [plain edition](../docs/08-model-and-validate.md#alongside-the-built-in-checks-not-instead-of-them)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Up to 0.23.0 the warning above recommended passing the
 
@@ -3248,7 +3247,7 @@ C08.24 shows the first half: queries with no registry entry still ran, and repor
 ### C08.28 — Every full run writes cucumber.json
 
 **In the manual:** [Chapter 8, at the claim](manual/docs/08-model-and-validate.md#ev-c08-28) · [plain edition](../docs/08-model-and-validate.md#alongside-the-built-in-checks-not-instead-of-them)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **Fill in the cucumber fields.**
 
@@ -3260,7 +3259,7 @@ C08.24 shows the first half: queries with no registry entry still ran, and repor
 ### C08.29 — Guard a label with isBlank; COALESCE is the weaker fix
 
 **In the manual:** [Chapter 8, at the claim](manual/docs/08-model-and-validate.md#ev-c08-29) · [plain edition](../docs/08-model-and-validate.md#the-contract-a-check-has-to-satisfy)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **Never build a message out of a label.**
 
@@ -3278,7 +3277,7 @@ C08.24 shows the first half: queries with no registry entry still ran, and repor
 
 **Sources:**
 
-- [testing repo CT-39 README](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/98b8fd42b21608f3cb9d82b533cbf9fa711241fa/experiments/SpecificTests/CT-39-finding-names-something-findable/README.md#L1): “CT-39 — A finding names something a reader can find” (quote found, checked 2026-11-18)
+- [testing repo CT-39 README](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/05ec27d13c2018c8427eb8cfe5a98474ee522789/experiments/SpecificTests/CT-39-finding-names-something-findable/README.md#L1): “CT-39 — A finding names something a reader can find” (quote found, checked 2026-11-18)
 
 ---
 
@@ -3286,7 +3285,7 @@ C08.24 shows the first half: queries with no registry entry still ran, and repor
 ### C08.31 — sh:severity on a node shape does not reach its property shapes
 
 **In the manual:** [Chapter 8, at the claim](manual/docs/08-model-and-validate.md#ev-c08-31) · [plain edition](../docs/08-model-and-validate.md#writing-the-shacl-half-too)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **Put `sh:severity` on the shape that produces the result.**
 
@@ -3312,7 +3311,7 @@ C08.24 shows the first half: queries with no registry entry still ran, and repor
 ### C08.34 — inverse(p): the inline inverse, new in the DSL at 0.16.0
 
 **In the manual:** [Chapter 8, at the claim](manual/docs/08-model-and-validate.md#ev-c08-34) · [plain edition](../docs/08-model-and-validate.md#82-ontologies-as-code-literally)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > restriction builder also takes `inverse(p)`, the inline inverse that `MDL-001`
 
@@ -3372,7 +3371,7 @@ https://example.org/cars/hasPart,https://example.org/cars/Car
 
 **Sources:**
 
-- [extension CHANGELOG, 0.16.0](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/CHANGELOG.md#L338-L344): “Manchester's `inverse p some C`, written as OWL 2 does with `[ owl:inverseOf p ]`” (quote found, checked 2026-11-18)
+- [extension CHANGELOG, 0.16.0](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/362d343de835ded5a6de9efc414846632ef9053f/CHANGELOG.md#L364-L370): “Manchester's `inverse p some C`, written as OWL 2 does with `[ owl:inverseOf p ]`” (quote found, checked 2026-11-18)
 
 ---
 
@@ -3384,7 +3383,7 @@ https://example.org/cars/hasPart,https://example.org/cars/Car
 
 > **How the editor behaviour in this chapter was established.**
 
-A statement of method. The extension's unit tests were run on a Windows checkout of [534ce51](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/534ce517f9aabc0c27d33f1af5eb85f88296a16f) (the 0.16.1 release), with core.autocrlf on: 56 files, 509 tests, all passing, which matches the release's own count ([CHANGELOG](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/CHANGELOG.md#L30)). At 0.16.0 ([02ffaf6](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf)) the same run gave 55 files and 466 tests, all passing. The DSL claims (C08.12–C08.16, C08.34) are reproduced here from the npm package.
+A statement of method. The extension's unit tests were run on a Windows checkout of [534ce51](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/534ce517f9aabc0c27d33f1af5eb85f88296a16f) (the 0.16.1 release), with core.autocrlf on: 56 files, 509 tests, all passing, which matches the release's own count ([CHANGELOG](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/362d343de835ded5a6de9efc414846632ef9053f/CHANGELOG.md#L30)). At 0.16.0 ([02ffaf6](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/commit/02ffaf6c35dae3e2b47fff9f723e501d24dc26cf)) the same run gave 55 files and 466 tests, all passing. The DSL claims (C08.12–C08.16, C08.34) are reproduced here from the npm package.
 
 ---
 
@@ -3397,7 +3396,7 @@ Annotated chapter: [manual/docs/09-continuous-integration.md](manual/docs/09-con
 ### C09.01 — --fail-on Violation exits non-zero on the fixture
 
 **In the manual:** [Chapter 9, at the claim](manual/docs/09-continuous-integration.md#ev-c09-01) · [plain edition](../docs/09-continuous-integration.md#91-the-mechanism)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > `--fail-on` takes `Violation`, `Warning`, `Info` or `never`.
 
@@ -3432,7 +3431,7 @@ Reports written to: ./work/C09_01/gate
 ### C09.02 — The unscoped run reports 479 findings, every time
 
 **In the manual:** [Chapter 9, at the claim](manual/docs/09-continuous-integration.md#ev-c09-02) · [plain edition](../docs/09-continuous-integration.md#92-the-problem-479-findings)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > 479 every time, and 479 on a new engine.
 
@@ -3483,7 +3482,7 @@ Reports written to: ./work/C09_02/run3
 ### C09.03 — --exclude-imports gives 27 findings, four of them false
 
 **In the manual:** [Chapter 9, at the claim](manual/docs/09-continuous-integration.md#ev-c09-03) · [plain edition](../docs/09-continuous-integration.md#93-the-obvious-fix-is-wrong)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > 479 findings become **27**.
 
@@ -3546,7 +3545,7 @@ total 3: 0 Violation, 3 Warning, 0 Info
 ### C09.04 — --own-namespace gives 23 findings, all Acme's
 
 **In the manual:** [Chapter 9, at the claim](manual/docs/09-continuous-integration.md#ev-c09-04) · [plain edition](../docs/09-continuous-integration.md#94-the-right-fix---own-namespace)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **Twenty-three findings. All twenty-three are Acme's. None are artefacts.**
 
@@ -3593,7 +3592,7 @@ total 23: 1 Violation, 22 Warning, 0 Info
 ### C09.05 — The three runs compared: 479, 27, 23
 
 **In the manual:** [Chapter 9, at the claim](manual/docs/09-continuous-integration.md#ev-c09-05) · [plain edition](../docs/09-continuous-integration.md#94-the-right-fix---own-namespace)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > | `--own-namespace` | **23** | 23 | 0 | 0 |
 
@@ -3607,7 +3606,7 @@ The table's three rows are C09.02 (479), C09.03 (27, four false) and C09.04 (23)
 ### C09.06 — --themes groups findings under questions in your words
 
 **In the manual:** [Chapter 9, at the claim](manual/docs/09-continuous-integration.md#ev-c09-06) · [plain edition](../docs/09-continuous-integration.md#reading-the-23-as-questions-not-as-check-ids)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > `--themes` takes a small file mapping check ids to
 
@@ -3666,7 +3665,7 @@ total 23: 1 Violation, 22 Warning, 0 Info
 ### C09.07 — A near-miss namespace warns, on stderr, and offers only real namespaces
 
 **In the manual:** [Chapter 9, at the claim](manual/docs/09-continuous-integration.md#ev-c09-07) · [plain edition](../docs/09-continuous-integration.md#a-real-mistake-worth-repeating)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **The tool now says so.** Reported from that experience
 
@@ -3716,7 +3715,7 @@ The warning is emitted only when the filter removes everything from a non-empty 
 ### C09.09 — A scoped run keeps the 'reasoner did not run' finding, from 0.24.0
 
 **In the manual:** [Chapter 9, at the claim](manual/docs/09-continuous-integration.md#ev-c09-09) · [plain edition](../docs/09-continuous-integration.md#what-the-filter-could-not-see-until-0240)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > findings about the run survive the filter
 
@@ -3796,7 +3795,7 @@ Reports written to: ./work/C09_09/scoped
 ### C09.10 — Which reports a run writes, and --reports minimal
 
 **In the manual:** [Chapter 9, at the claim](manual/docs/09-continuous-integration.md#ev-c09-10) · [plain edition](../docs/09-continuous-integration.md#95-wiring-it-up)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > | `findings.txt` | A person at a terminal, or an agent
 
@@ -3883,11 +3882,11 @@ $ python scripts/list_files.py work/C09_10/minimal
 ### C09.12 — The suite pins shacl below 0.4
 
 **In the manual:** [Chapter 9, at the claim](manual/docs/09-continuous-integration.md#ev-c09-12) · [plain edition](../docs/09-continuous-integration.md#95-wiring-it-up)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > The suite responded by pinning `shacl>=0.3.0,<0.4`
 
-**Evidence:** the same as [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05), which reproduces it: step 1 output contains 'commands installed: ontology-quality-suite', 'owlready2>=0.51', 'shacl 0.3.6/n    commands installed: none (library only)', 'tarka-rdf 0.2.2/n    commands installed: none (library only)', 'holosdb 0.26.2/n    commands installed: none (library only)'; suite 0.27.0: step 1 output contains 'shacl<0.4,>=0.3.3'; suite 0.27.0: step 1 output contains 'holosdb>=0.24'
+**Evidence:** the same as [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05), which reproduces it: step 1 output contains 'commands installed: ontology-quality-suite', 'owlready2>=0.51', 'shacl 0.3.8/n    commands installed: none (library only)', 'tarka-rdf 0.2.2/n    commands installed: none (library only)', 'holosdb 0.26.4/n    commands installed: none (library only)'; suite 0.27.0: step 1 output contains 'shacl<0.4,>=0.3.3'; suite 0.27.0: step 1 output contains 'holosdb>=0.24'
 
 The installed package's declared dependencies include `shacl<0.4,>=0.3.0`; the reason is in the [pyproject comment](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a4d08d054d168aade8daaffa4ed32df040d72311/pyproject.toml#L33-L37).
 
@@ -3897,7 +3896,7 @@ The installed package's declared dependencies include `shacl<0.4,>=0.3.0`; the r
 ### C09.13 — --reports minimal writes two files
 
 **In the manual:** [Chapter 9, at the claim](manual/docs/09-continuous-integration.md#ev-c09-13) · [plain edition](../docs/09-continuous-integration.md#95-wiring-it-up)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > `--reports minimal` writes only `findings.txt` and `full_results.csv`.
 
@@ -3909,7 +3908,7 @@ The installed package's declared dependencies include `shacl<0.4,>=0.3.0`; the r
 ### C09.14 — run reports 26 findings, one contradiction once, from 0.24.0
 
 **In the manual:** [Chapter 9, at the claim](manual/docs/09-continuous-integration.md#ev-c09-14) · [plain edition](../docs/09-continuous-integration.md#96-the-one-command-version)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > The two Violations are `LOG-001`, the deliberate
 
@@ -3934,7 +3933,7 @@ Findings: 26 total (2 Violation, 22 Warning, 2 Info)
 Reports written to: ./work/C09_14/out
   - work/C09_14/out/findings.txt (start here -- what, where, and the source line)
   - work/C09_14/out/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp8za8_nll -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpbip9cdmg -Y
 [exit 1]
 
 $ python scripts/summarise_findings.py work/C09_14/out/full_results.csv --by focus --check LOG-001
@@ -3974,28 +3973,28 @@ $ uv run pytest -q
 ................................                                         [100%]
 ============================== warnings summary ===============================
 competency_tests/test_competency.py::test_competency_test_is_evidenced[1]
-  <tmp>/claude/9d013a7a99d3da68/e093eaec-924b-4b60-bd7a-c49f70d21da7/scratchpad/evrun2/consolidated_ontology_suite_python/ontology_suite/sketch/prefix_alignment.py:211: DeprecationWarning: Dataset.default_context is deprecated, use Dataset.default_graph instead.
+  <tmp>/claude/9d013a7a99d3da68/e093eaec-924b-4b60-bd7a-c49f70d21da7/scratchpad/evrun3/consolidated_ontology_suite_python/ontology_suite/sketch/prefix_alignment.py:211: DeprecationWarning: Dataset.default_context is deprecated, use Dataset.default_graph instead.
     default = getattr(dataset, "default_graph", None) or dataset.default_context
 tests/test_detection.py::test_expected_checks_fire[06-datatype-conformance]
 tests/test_detection.py::test_both_formulations_still_find_what_they_both_used_to
 tests/test_detection.py::test_each_formulation_agrees_about_severity[06-datatype-conformance]
 tests/test_detection.py::test_datatype_errors_are_found_whatever_the_reasoner[auto]
 tests/test_detection.py::test_every_finding_carries_a_message[06-datatype-conformance]
-  <tmp>/claude/9d013a7a99d3da68/e093eaec-924b-4b60-bd7a-c49f70d21da7/scratchpad/evrun2/consolidated-ontology-suite-python-testing/.venv/Lib/site-packages/rdflib/term.py:1862: UserWarning: Parsing weird boolean, 'yes' does not map to True or False
+  <tmp>/claude/9d013a7a99d3da68/e093eaec-924b-4b60-bd7a-c49f70d21da7/scratchpad/evrun3/consolidated-ontology-suite-python-testing/.venv/Lib/site-packages/rdflib/term.py:1862: UserWarning: Parsing weird boolean, 'yes' does not map to True or False
     warnings.warn(
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-166 passed, 10 skipped, 6 warnings in 38.56s
+166 passed, 10 skipped, 6 warnings in 32.51s
 Using CPython 3.12.13
 Creating virtual environment at: .venv
-   Building ontology-quality-suite @ file:///<tmp>/claude/9d013a7a99d3da68/e093eaec-924b-4b60-bd7a-c49f70d21da7/scratchpad/evrun2/consolidated_ontology_suite_python
-      Built ontology-quality-suite @ file:///<tmp>/claude/9d013a7a99d3da68/e093eaec-924b-4b60-bd7a-c49f70d21da7/scratchpad/evrun2/consolidated_ontology_suite_python
-Installed 26 packages in 1.74s
+   Building ontology-quality-suite @ file:///<tmp>/claude/9d013a7a99d3da68/e093eaec-924b-4b60-bd7a-c49f70d21da7/scratchpad/evrun3/consolidated_ontology_suite_python
+      Built ontology-quality-suite @ file:///<tmp>/claude/9d013a7a99d3da68/e093eaec-924b-4b60-bd7a-c49f70d21da7/scratchpad/evrun3/consolidated_ontology_suite_python
+Installed 26 packages in 1.64s
 [exit 0]
 ```
 
 </details>
 
-Set EVIDENCE_TESTING_REPO to a clone of the testing repository at [98b8fd4](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/commit/98b8fd42b21608f3cb9d82b533cbf9fa711241fa). It installs the suite from a sibling checkout, `../consolidated_ontology_suite_python` (v0.27.0 here), and its competency tests triplify with oxi-gen, found through ONTOLOGY_SUITE_OXI_GEN_BIN (0.5.1 here). The run resolved holosdb 0.26.2 and shacl 0.3.6 from the testing repository's own lock. At 6cdfb14, with suite 0.23.0, holosdb 0.21.0 and shacl 0.3.3, it was 165 passed, 10 skipped. Without oxi-gen 40 of those tests error at setup, saying so.
+Set EVIDENCE_TESTING_REPO to a clone of the testing repository at [05ec27d](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/commit/05ec27d13c2018c8427eb8cfe5a98474ee522789). It installs the suite from a sibling checkout, `../consolidated_ontology_suite_python` (v0.27.0 here), and its competency tests triplify with oxi-gen, found through ONTOLOGY_SUITE_OXI_GEN_BIN (0.5.1 here). The run resolved holosdb 0.26.4 and shacl 0.3.8 from the testing repository's own lock. At 6cdfb14, with suite 0.23.0, holosdb 0.21.0 and shacl 0.3.3, it was 165 passed, 10 skipped. Without oxi-gen 40 of those tests error at setup, saying so.
 
 ---
 
@@ -4069,7 +4068,7 @@ Needs the same sibling suite checkout as C09.15.
 
 **Sources:**
 
-- [testing repo experiments/SpecificTests/REVIEW.md](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/98b8fd42b21608f3cb9d82b533cbf9fa711241fa/experiments/SpecificTests/REVIEW.md#L32-L41): “Half the tests can be answered before a row of data exists.” (quote found, checked 2026-11-18)
+- [testing repo experiments/SpecificTests/REVIEW.md](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/05ec27d13c2018c8427eb8cfe5a98474ee522789/experiments/SpecificTests/REVIEW.md#L32-L41): “Half the tests can be answered before a row of data exists.” (quote found, checked 2026-11-18)
 
 ---
 
@@ -4097,8 +4096,8 @@ Needs the same sibling suite checkout as C09.15.
 
 **Sources:**
 
-- [testing repo detect.py (17 fixtures declared)](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/98b8fd42b21608f3cb9d82b533cbf9fa711241fa/detect.py) (exists, checked 2026-11-18)
-- [testing repo README](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/98b8fd42b21608f3cb9d82b533cbf9fa711241fa/README.md#L38-L40): “58 of the 61 checks are pinned by a test” (quote found, checked 2026-11-18)
+- [testing repo detect.py (17 fixtures declared)](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/05ec27d13c2018c8427eb8cfe5a98474ee522789/detect.py) (exists, checked 2026-11-18)
+- [testing repo README](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/05ec27d13c2018c8427eb8cfe5a98474ee522789/README.md#L38-L40): “58 of the 61 checks are pinned by a test” (quote found, checked 2026-11-18)
 
 ---
 
@@ -4127,7 +4126,7 @@ Needs the same sibling suite checkout as C09.15.
 
 **Sources:**
 
-- [testing repo ontology-suite.yml](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/98b8fd42b21608f3cb9d82b533cbf9fa711241fa/ontology-suite.yml) (exists, checked 2026-11-18)
+- [testing repo ontology-suite.yml](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/05ec27d13c2018c8427eb8cfe5a98474ee522789/ontology-suite.yml) (exists, checked 2026-11-18)
 - [testing repo commit 3c5afbd](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/commit/3c5afbdb2c5196ebd3f2c7c05be6ceb07c8e9c28): “the gate ran eight checks while its merged registry declared 61” (quote found, checked 2026-11-18)
 
 ---
@@ -4153,7 +4152,7 @@ Annotated chapter: [manual/docs/10-ingest-and-transform.md](manual/docs/10-inges
 ### C10.01 — sketch: 38 Infos, 8 triples and 7 entities from one query file
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-01) · [plain edition](../docs/10-ingest-and-transform.md#102-stage-1-sketch-before-any-csv-is-read)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > The summary line is the useful part: **8 triples, 7 entities from 1 query
 
@@ -4203,7 +4202,7 @@ total 3: 0 Violation, 0 Warning, 3 Info
 ### C10.02 — The 38 Infos, and what TQL-003 says
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-02) · [plain edition](../docs/10-ingest-and-transform.md#102-stage-1-sketch-before-any-csv-is-read)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > The 38 Infos are 35 × `CNF-005`
 
@@ -4215,7 +4214,7 @@ total 3: 0 Violation, 0 Warning, 3 Info
 ### C10.03 — --queries, --query-pattern (alias --file-pattern), four extensions
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-03) · [plain edition](../docs/10-ingest-and-transform.md#102-stage-1-sketch-before-any-csv-is-read)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > `--queries` takes a file or a directory. Use `--query-pattern` to narrow or widen
 
@@ -4283,7 +4282,7 @@ options:
 ### C10.04 — TQL-004, with its position as fields
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-04) · [plain edition](../docs/10-ingest-and-transform.md#the-query-itself-is-checked)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Since 0.17.0 the TARQL checks carry their position as **fields**
 
@@ -4337,7 +4336,7 @@ Sketch used 1 query file(s); 1 triples, 1 entities.
 ### C10.05 — A CONCAT-built IRI: dropped as a subject, a literal as an object
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-05) · [plain edition](../docs/10-ingest-and-transform.md#the-query-itself-is-checked)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > `TQL-004` repays reading twice.
 
@@ -4421,7 +4420,7 @@ $ tarka run -q data/tql004/works-in.rq -i data/tql004/depts.csv --ntriples
 ### C10.06 — sketch writes bind-facts.ttl and bind-review.txt
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-06) · [plain edition](../docs/10-ingest-and-transform.md#the-query-itself-is-checked)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > The stage also writes **`bind-facts.ttl`**
 
@@ -4465,7 +4464,7 @@ $ python scripts/list_files.py work/C10_06/sketch
 ### C10.07 — tarka's output for E004 is the block quoted in earlier editions
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-07) · [plain edition](../docs/10-ingest-and-transform.md#103-stage-2-produce-real-rdf-with-tarka)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > The output is genuine RDF, and for this fixture it is the same, term for term
 
@@ -4499,7 +4498,7 @@ $ tarka run -q fixtures/acme_robotics/employees.rq -i fixtures/acme_robotics/emp
 ### C10.08 — tarka takes oxi-gen's options; --test N reads N rows
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-08) · [plain edition](../docs/10-ingest-and-transform.md#103-stage-2-produce-real-rdf-with-tarka)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > tarka takes `oxi-gen`'s options
 
@@ -4595,7 +4594,7 @@ Not reproduced here: it needs oxi-gen and the 200,000-row file.
 ### C10.10 — The OTTR template lints clean and gives the same 40 triples
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-10) · [plain edition](../docs/10-ingest-and-transform.md#tarql-or-ottr-two-ways-to-say-the-same-mapping)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Sorted, the 40 triples are identical to the TARQL query's. Verified.
 
@@ -4684,7 +4683,7 @@ The CSV for the template carries full IRIs, since an OTTR template receives IRIs
 ### C10.11 — Without a mailto: prefix, run -l dropped every row, silently, up to 0.1.1
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-11) · [plain edition](../docs/10-ingest-and-transform.md#tarql-or-ottr-two-ways-to-say-the-same-mapping)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > > **One silent failure, found while checking this, and fixed since.**
 
@@ -4874,7 +4873,7 @@ Up to 0.1.1 the first run wrote 0 triples, and with ?mbox optional 35, each with
 ### C10.12 — Parquet input, data frames, and typed literals from typed columns
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-12) · [plain edition](../docs/10-ingest-and-transform.md#data-frames-not-just-csv)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > `-i` takes Parquet and Arrow IPC files as well as CSV, read with Polars, and the
 
@@ -5032,7 +5031,7 @@ isomorphic: True
 ### C10.13 — Shapes from the mapping, and --validate conforms
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-13) · [plain edition](../docs/10-ingest-and-transform.md#shapes-from-the-mapping-and-what-they-cannot-tell-you)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > and `tarka run … --validate` checks the output against them. On the acme data
 
@@ -5067,7 +5066,7 @@ $ tarka run -q fixtures/acme_robotics/employees.rq -i fixtures/acme_robotics/emp
 ### C10.14 — Generated shapes accept the dangling departments
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-14) · [plain edition](../docs/10-ingest-and-transform.md#shapes-from-the-mapping-and-what-they-cannot-tell-you)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > That is useful, and it is worth being exact about why.
 
@@ -5081,7 +5080,7 @@ The same run that conforms (C10.13) is the one in which `data` finds every `work
 ### C10.15 — --post streams into holos-server: the graph arrives whole
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-15) · [plain edition](../docs/10-ingest-and-transform.md#straight-into-a-store)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Verified for this edition against `holos-server`: the
 
@@ -5138,7 +5137,7 @@ https://acme.example.org/graph/triplified/employees,40
 ### C10.17 — The suite's triplify still needs oxi-gen, and says so
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-17) · [plain edition](../docs/10-ingest-and-transform.md#the-suites-triplify-for-now)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > If you have no `oxi-gen` build, `triplify` says so in a warning and
 
@@ -5170,7 +5169,7 @@ WARNING: oxi-gen binary not found. Build it with `cargo build --release` in the 
 ### C10.18 — data: 548 unscoped (549 at 0.23.0, 550 at 0.22.0), 54 scoped, with HermiT running
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-18) · [plain edition](../docs/10-ingest-and-transform.md#104-stage-3-data-assess-what-was-actually-produced)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Findings: 548 total (66 Violation, 363 Warning, 119 Info)
 
@@ -5199,7 +5198,7 @@ Findings: 548 total (66 Violation, 363 Warning, 119 Info)
 Reports written to: ./work/C10_18/all
   - work/C10_18/all/findings.txt (start here -- what, where, and the source line)
   - work/C10_18/all/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp6a_irb3s -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp0uh__qus -Y
 [exit 0]
 
 $ ontology-quality-suite data work/C10_18/employees.ttl --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --engine sparql --own-namespace https://acme.example.org/ --out-dir work/C10_18/own --fail-on never --reports minimal
@@ -5207,7 +5206,7 @@ Findings: 54 total (12 Violation, 40 Warning, 2 Info)
 Reports written to: ./work/C10_18/own
   - work/C10_18/own/findings.txt (start here -- what, where, and the source line)
   - work/C10_18/own/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp3_dmu0zl -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpbtowefna -Y
 [exit 0]
 
 $ python scripts/summarise_findings.py work/C10_18/own/full_results.csv
@@ -5234,7 +5233,7 @@ total 54: 12 Violation, 40 Warning, 2 Info
 ### C10.19 — 54 when HermiT does not run, and from 0.24.0 the scoped report says so
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-19) · [plain edition](../docs/10-ingest-and-transform.md#54-or-55-and-how-the-report-tells-you-which-from-0240)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > That run gave 55 three times running. The fourth time it gave 54.
 
@@ -5314,7 +5313,7 @@ The manual's 'three times… the fourth time' describes unpinned runs. Java is h
 ### C10.20 — Real defects: every worksIn target is untyped and dangling
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-20) · [plain edition](../docs/10-ingest-and-transform.md#what-those-findings-actually-say)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **Real data defects.** The largest group:
 
@@ -5343,18 +5342,18 @@ Findings: 54 total (12 Violation, 40 Warning, 2 Info)
 Reports written to: ./work/C10_20/own
   - work/C10_20/own/findings.txt (start here -- what, where, and the source line)
   - work/C10_20/own/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpt49mzoub -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpvc5d7rwt -Y
 [exit 0]
 
 $ python scripts/summarise_findings.py work/C10_20/own/full_results.csv --by focus --check STR-006
 STR-006  focus=https://acme.example.org/data/employee/E001  path=https://acme.example.org/ns/worksIn  value=https://acme.example.org/data/department/ENG
 STR-006  focus=https://acme.example.org/data/employee/E001  path=http://xmlns.com/foaf/0.1/mbox  value=mailto:grace.hopper@acme.example.org
-STR-006  focus=https://acme.example.org/data/employee/E002  path=https://acme.example.org/ns/worksIn  value=https://acme.example.org/data/department/ENG
 STR-006  focus=https://acme.example.org/data/employee/E002  path=http://xmlns.com/foaf/0.1/mbox  value=mailto:ada.lovelace@acme.example.org
+STR-006  focus=https://acme.example.org/data/employee/E002  path=https://acme.example.org/ns/worksIn  value=https://acme.example.org/data/department/ENG
 STR-006  focus=https://acme.example.org/data/employee/E003  path=https://acme.example.org/ns/worksIn  value=https://acme.example.org/data/department/ENG
 STR-006  focus=https://acme.example.org/data/employee/E003  path=http://xmlns.com/foaf/0.1/mbox  value=mailto:alan.turing@acme.example.org
-STR-006  focus=https://acme.example.org/data/employee/E004  path=https://acme.example.org/ns/worksIn  value=https://acme.example.org/data/department/QA
 STR-006  focus=https://acme.example.org/data/employee/E004  path=http://xmlns.com/foaf/0.1/mbox  value=mailto:margaret.hamilton@acme.example.org
+STR-006  focus=https://acme.example.org/data/employee/E004  path=https://acme.example.org/ns/worksIn  value=https://acme.example.org/data/department/QA
 STR-006  focus=https://acme.example.org/data/employee/E005  path=http://xmlns.com/foaf/0.1/mbox  value=mailto:katherine.johnson@acme.example.org
 STR-006  focus=https://acme.example.org/data/employee/E005  path=https://acme.example.org/ns/worksIn  value=https://acme.example.org/data/department/MKT
 total 10: 10 Violation, 0 Warning, 0 Info
@@ -5375,7 +5374,7 @@ total 2: 0 Violation, 0 Warning, 2 Info
 ### C10.21 — Half the defects are mailboxes
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-21) · [plain edition](../docs/10-ingest-and-transform.md#what-those-findings-actually-say)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Read the list to the end, though. Of the ten of each, five are the departments.
 
@@ -5387,7 +5386,7 @@ total 2: 0 Violation, 0 Warning, 2 Info
 ### C10.22 — CNF-005: Contractor never populated
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-22) · [plain edition](../docs/10-ingest-and-transform.md#what-those-findings-actually-say)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Nothing is wrong. `acme:Contractor` is declared and this extract has no
 
@@ -5399,7 +5398,7 @@ total 2: 0 Violation, 0 Warning, 2 Info
 ### C10.23 — REA-021 confirms LOG-001 by a different route
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-23) · [plain edition](../docs/10-ingest-and-transform.md#the-reasoner-when-it-turns-up)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > When HermiT starts, the scoped run carries one extra finding:
 
@@ -5427,7 +5426,7 @@ The seed mechanism is reproduced in C14.06.
 ### C10.25 — --sample caps the reasoning pass
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-25) · [plain edition](../docs/10-ingest-and-transform.md#large-graphs)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > For a data graph too large to reason over in full, `--sample N` caps the
 
@@ -5502,7 +5501,7 @@ options:
 **Sources:**
 
 - [testing repo commit 1370f6c](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/commit/1370f6c5362501c91a584bb1f3fe022720ed4357) (exists, checked 2026-11-18)
-- [testing repo drift.py (CT-34, 35, 36, 38)](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/98b8fd42b21608f3cb9d82b533cbf9fa711241fa/experiments/SpecificTests/AGGREGATE-mapping-drift/drift.py#L1-L9): “CT-34, CT-35, CT-36, CT-38 -- drift across a *set* of mappings.” (quote found, checked 2026-11-18)
+- [testing repo drift.py (CT-34, 35, 36, 38)](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/05ec27d13c2018c8427eb8cfe5a98474ee522789/experiments/SpecificTests/AGGREGATE-mapping-drift/drift.py#L1-L9): “CT-34, CT-35, CT-36, CT-38 -- drift across a *set* of mappings.” (quote found, checked 2026-11-18)
 
 ---
 
@@ -5516,7 +5515,7 @@ options:
 
 **Sources:**
 
-- [testing repo CT-32 README](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/98b8fd42b21608f3cb9d82b533cbf9fa711241fa/experiments/SpecificTests/CT-32-property-outside-its-domain/README.md): “This mapping is wired to no CSV, which settles the argument.” (quote found, checked 2026-11-18)
+- [testing repo CT-32 README](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/05ec27d13c2018c8427eb8cfe5a98474ee522789/experiments/SpecificTests/CT-32-property-outside-its-domain/README.md): “This mapping is wired to no CSV, which settles the argument.” (quote found, checked 2026-11-18)
 
 ---
 
@@ -5524,7 +5523,7 @@ options:
 ### C10.28 — tq:PrefixBinding and the per-file sketch dataset
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-28) · [plain edition](../docs/10-ingest-and-transform.md#106-when-every-file-is-right-and-the-set-is-wrong)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > The suite now publishes two facts that make set-level questions a query rather
 
@@ -5672,7 +5671,7 @@ named graphs: ['legacy.rq', 'payroll.rq', 'people.rq']
 ### C10.29 — The merged sketch and one prefix bound two ways: odd file first
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-29) · [plain edition](../docs/10-ingest-and-transform.md#106-when-every-file-is-right-and-the-set-is-wrong)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > > **And one thing the merged sketch got wrong, until 0.23.0.**
 
@@ -5780,7 +5779,7 @@ Sketch used 2 query file(s); 3 triples, 3 entities.
 ### C10.30 — The merged sketch and one prefix bound two ways: odd file last
 
 **In the manual:** [Chapter 10, at the claim](manual/docs/10-ingest-and-transform.md#ev-c10-30) · [plain edition](../docs/10-ingest-and-transform.md#106-when-every-file-is-right-and-the-set-is-wrong)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > It cuts the other way too, which is worse.
 
@@ -5894,7 +5893,7 @@ Annotated chapter: [manual/docs/11-rules-and-inference.md](manual/docs/11-rules-
 ### C11.01 — The suite and the extension do not run SHACL-AF rules
 
 **In the manual:** [Chapter 11, at the claim](manual/docs/11-rules-and-inference.md#ev-c11-01) · [plain edition](../docs/11-rules-and-inference.md#111-the-engine-that-runs-the-rules)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > The Ontology Quality Suite does not run SHACL-AF rules (there is no `--advanced`
 
@@ -6091,7 +6090,7 @@ options:
 ### C11.02 — The Python surface: inference modes, and an unknown one is an error
 
 **In the manual:** [Chapter 11, at the claim](manual/docs/11-rules-and-inference.md#ev-c11-02) · [plain edition](../docs/11-rules-and-inference.md#111-the-engine-that-runs-the-rules)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > From Python, rules are reached through the `inference` argument rather than a
 
@@ -6199,7 +6198,7 @@ for mode in ("none", "rdfs", "rules", "rules-iterated", "bogus"):
 
 ```text
 $ python scripts/shacl_python.py data/shacl data/rules
-shacl 0.3.6
+shacl 0.3.8
 validate(data, shapes)                       conforms=False results=1
 validate(shapes, data)  [swapped]            REFUSED: ValueError: the shapes graph declares no shapes, so this would report that the data conforms without having checked anything. Note the argument order is validate(data, shapes). To validate against an empty shapes graph deliberately, use Shapes.from_file and check len() yourself.
 validate(data, no-shapes)                    REFUSED: ValueError: the shapes graph declares no shapes, so this would report that the data conforms without having checked anything. Note the argument order is validate(data, shapes). To validate against an empty shapes graph deliberately, use Shapes.from_file and check len() yourself.
@@ -6241,7 +6240,7 @@ inference=bogus            ERROR: unknown inference "bogus"; use "none", "rdfs",
 ### C11.04 — Warnings break conformance; --allow-warnings records the choice
 
 **In the manual:** [Chapter 11, at the claim](manual/docs/11-rules-and-inference.md#ev-c11-04) · [plain edition](../docs/11-rules-and-inference.md#what-030-changed-what-conforms-means)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Verified on 0.3.4, with a shape whose only result is a Warning:
 
@@ -6365,7 +6364,7 @@ Options:
 ### C11.05 — The WebAssembly build agrees since 0.3.2
 
 **In the manual:** [Chapter 11, at the claim](manual/docs/11-rules-and-inference.md#ev-c11-05) · [plain edition](../docs/11-rules-and-inference.md#what-030-changed-what-conforms-means)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **The surfaces disagreed for two releases.**
 
@@ -6418,16 +6417,16 @@ for (const mode of ['none', 'rules', 'bogus']) {
 
 </details>
 
-**What is checked:** shacl-wasm-node 0.3.6 calls a warnings-only graph non-conforming (0.3.0 and 0.3.1 did not)
+**What is checked:** shacl-wasm-node 0.3.8 calls a warnings-only graph non-conforming (0.3.0 and 0.3.1 did not)
 
-**Recorded result:** PASS — step 1 output contains 'shacl-wasm-node 0.3.6  shapes-warning.ttl     conforms=false'
+**Recorded result:** PASS — step 1 output contains 'shacl-wasm-node 0.3.8  shapes-warning.ttl     conforms=false'
 
 <details><summary>Output, as recorded</summary>
 
 ```text
 $ node scripts/wasm_conforms.mjs data/shacl
-shacl-wasm-node 0.3.6  shapes-warning.ttl     conforms=false  results=1  severities=http://www.w3.org/ns/shacl#Warning
-shacl-wasm-node 0.3.6  shapes-violation.ttl   conforms=false  results=1  severities=http://www.w3.org/ns/shacl#Violation
+shacl-wasm-node 0.3.8  shapes-warning.ttl     conforms=false  results=1  severities=http://www.w3.org/ns/shacl#Warning
+shacl-wasm-node 0.3.8  shapes-violation.ttl   conforms=false  results=1  severities=http://www.w3.org/ns/shacl#Violation
 inference=none   conforms=true  results=0
 inference=rules  conforms=false  results=1
 inference=bogus  ERROR: unknown inference "bogus": expected "none", "rdfs", "rules" or "rules-iterated"
@@ -6446,7 +6445,7 @@ inference=bogus  ERROR: unknown inference "bogus": expected "none", "rdfs", "rul
 ### C11.06 — The one-shots refuse an empty shapes graph
 
 **In the manual:** [Chapter 11, at the claim](manual/docs/11-rules-and-inference.md#ev-c11-06) · [plain edition](../docs/11-rules-and-inference.md#what-020-changed-and-the-one-surface-it-did-not-reach)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > So the one-shots now refuse a shapes graph that declares nothing.
 
@@ -6518,7 +6517,7 @@ for mode in ("none", "rdfs", "rules", "rules-iterated", "bogus"):
 
 ```text
 $ python scripts/shacl_python.py data/shacl data/rules
-shacl 0.3.6
+shacl 0.3.8
 validate(data, shapes)                       conforms=False results=1
 validate(shapes, data)  [swapped]            REFUSED: ValueError: the shapes graph declares no shapes, so this would report that the data conforms without having checked anything. Note the argument order is validate(data, shapes). To validate against an empty shapes graph deliberately, use Shapes.from_file and check len() yourself.
 validate(data, no-shapes)                    REFUSED: ValueError: the shapes graph declares no shapes, so this would report that the data conforms without having checked anything. Note the argument order is validate(data, shapes). To validate against an empty shapes graph deliberately, use Shapes.from_file and check len() yourself.
@@ -6546,7 +6545,7 @@ inference=bogus            ERROR: unknown inference "bogus"; use "none", "rdfs",
 ### C11.07 — The CLI and an empty shapes graph: conforms up to 0.3.3, refused from 0.3.4
 
 **In the manual:** [Chapter 11, at the claim](manual/docs/11-rules-and-inference.md#ev-c11-07) · [plain edition](../docs/11-rules-and-inference.md#what-020-changed-and-the-one-surface-it-did-not-reach)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **Until 0.3.4 the command line did not refuse.**
 
@@ -6573,7 +6572,7 @@ shacl --version
 
 **What is checked:** up to 0.3.3: both runs say conforms true and exit 0. From 0.3.4: both exit 2, one saying the shapes graph declares no shapes and the other that no --shapes was given, and --allow-no-shapes restores the old answer
 
-**Recorded result:** PASS — shacl 0.3.6: step 1 exits 2; step 1 output contains 'the shapes graph declares no shapes'; step 2 exits 2; step 2 output contains 'no --shapes was given'; step 3: conforms: true; step 3 exits 0
+**Recorded result:** PASS — shacl 0.3.8: step 1 exits 2; step 1 output contains 'the shapes graph declares no shapes'; step 2 exits 2; step 2 output contains 'no --shapes was given'; step 3: conforms: true; step 3 exits 0
 
 <details><summary>Output, as recorded</summary>
 
@@ -6591,7 +6590,7 @@ conforms: true
 [exit 0]
 
 $ shacl --version
-shacl 0.3.6
+shacl 0.3.8
 [exit 0]
 ```
 
@@ -6600,7 +6599,7 @@ shacl 0.3.6
 **Sources:**
 
 - [engine commit 986c31b (0.3.4)](https://github.com/pwin/SHACL_Engine/commit/986c31ba4e071560d51fed36e99abd8cb3747a87): “Refuse to validate against no shapes on the command line” (quote found, checked 2026-11-18)
-- [engine README, coming from pySHACL](https://github.com/pwin/SHACL_Engine/blob/7fbd8942a48c953a4bcbfd3405547e582b65f855/README.md#L302-L305): “reports `Conforms: True` and exits 0; this exits 2 unless you pass” (quote found, checked 2026-11-18)
+- [engine README, coming from pySHACL](https://github.com/pwin/SHACL_Engine/blob/e030c8c1fd05e7a8fcd3ec7db203e980f03755fc/README.md#L302-L305): “reports `Conforms: True` and exits 0; this exits 2 unless you pass” (quote found, checked 2026-11-18)
 
 ---
 
@@ -6614,10 +6613,10 @@ shacl 0.3.6
 
 **Sources:**
 
-- [engine README](https://github.com/pwin/SHACL_Engine/blob/7fbd8942a48c953a4bcbfd3405547e582b65f855/README.md#L315-L316): “425 of 426” (quote found, checked 2026-11-18)
-- [engine README, the subquery rule](https://github.com/pwin/SHACL_Engine/blob/7fbd8942a48c953a4bcbfd3405547e582b65f855/README.md#L339-L346): “0.3.0 briefly enforced the letter of the rule and passed all 426.” (quote found, checked 2026-11-18)
+- [engine README](https://github.com/pwin/SHACL_Engine/blob/e030c8c1fd05e7a8fcd3ec7db203e980f03755fc/README.md#L315-L316): “425 of 426” (quote found, checked 2026-11-18)
+- [engine README, the subquery rule](https://github.com/pwin/SHACL_Engine/blob/e030c8c1fd05e7a8fcd3ec7db203e980f03755fc/README.md#L339-L346): “0.3.0 briefly enforced the letter of the rule and passed all 426.” (quote found, checked 2026-11-18)
 - [engine commit 1944802 (0.3.1)](https://github.com/pwin/SHACL_Engine/commit/1944802e9a33b0116d6b660045c9d2813f9ef2d5) (exists, checked 2026-11-18)
-- [engine README, the EARL report](https://github.com/pwin/SHACL_Engine/blob/7fbd8942a48c953a4bcbfd3405547e582b65f855/README.md#L389-L392): “The W3C compiles a specification's implementation report from EARL files” (quote found, checked 2026-11-18)
+- [engine README, the EARL report](https://github.com/pwin/SHACL_Engine/blob/e030c8c1fd05e7a8fcd3ec7db203e980f03755fc/README.md#L389-L392): “The W3C compiles a specification's implementation report from EARL files” (quote found, checked 2026-11-18)
 
 ---
 
@@ -6625,7 +6624,7 @@ shacl 0.3.6
 ### C11.09 — holos rules materialises into a graph of its own
 
 **In the manual:** [Chapter 11, at the claim](manual/docs/11-rules-and-inference.md#ev-c11-09) · [plain edition](../docs/11-rules-and-inference.md#112-four-ways-to-derive-a-triple)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Verified on the acme employees, with one rule typing every `acme:Employee` as a
 
@@ -6668,17 +6667,17 @@ quads            40
 dictionary terms 31
 named graphs     0
 on disk          150.2 KiB
-free here        53.0 GiB
+free here        105.7 GiB
 room to compact  yes (needs up to 150.2 KiB)
 predicates by frequency
           10  <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
-           5  <http://xmlns.com/foaf/0.1/mbox>
            5  <https://acme.example.org/ns/hasSkill>
-           5  <https://acme.example.org/ns/hasEmployeeId>
            5  <https://acme.example.org/ns/hasRole>
            5  <https://acme.example.org/ns/worksIn>
            5  <http://xmlns.com/foaf/0.1/name>
-loaded 40 quads in 0.30s (134 quads/s)
+           5  <http://xmlns.com/foaf/0.1/mbox>
+           5  <https://acme.example.org/ns/hasEmployeeId>
+loaded 40 quads in 0.18s (221 quads/s)
 [exit 0]
 
 $ holos rules --store work/C11_09/store --rules data/holos/rules.rq
@@ -6702,7 +6701,7 @@ $ holos query --store work/C11_09/store --query "SELECT ?g (COUNT(*) AS ?n) WHER
 ### C11.10 — RDFS closure lets a shape see a sub-property
 
 **In the manual:** [Chapter 11, at the claim](manual/docs/11-rules-and-inference.md#ev-c11-10) · [plain edition](../docs/11-rules-and-inference.md#why-rdfs-closure-is-not-optional-trivia)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > SHACL follows `rdfs:subClassOf` when deciding class membership, and **nothing
 
@@ -6766,7 +6765,7 @@ conforms: false
 ### C11.30 — Since 0.3.3 the closure is handed out, minus what RDF cannot write
 
 **In the manual:** [Chapter 11, at the claim](manual/docs/11-rules-and-inference.md#ev-c11-30) · [plain edition](../docs/11-rules-and-inference.md#why-rdfs-closure-is-not-optional-trivia)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Since 0.3.3 the engine also hands the closure out: `shacl.rdfs_closure` in Python,
 
@@ -6863,7 +6862,7 @@ $ python scripts/rdfs_closure.py data/shacl/rdfs/data.ttl
 ### C11.11 — Triple rules are off by default and fire with -a
 
 **In the manual:** [Chapter 11, at the claim](manual/docs/11-rules-and-inference.md#ev-c11-11) · [plain edition](../docs/11-rules-and-inference.md#113-triple-rules)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Rules are **off by default** and enabled with `-a`:
 
@@ -6936,7 +6935,7 @@ conforms: false
 ### C11.12 — One result per source instance, at 1,000 and 100,000
 
 **In the manual:** [Chapter 11, at the claim](manual/docs/11-rules-and-inference.md#ev-c11-12) · [plain edition](../docs/11-rules-and-inference.md#verified-behaviour)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > inferred `ex:Party` instances against a shape requiring a property none of them
 
@@ -7007,8 +7006,8 @@ with tempfile.TemporaryDirectory() as tmp:
 
 ```text
 $ python scripts/rule_scale.py 1000 100000
-N=  1,000  with rules:   1,000 results on   1,000 distinct focus nodes (0.11 s)  without rules: 0 results
-N=100,000  with rules: 100,000 results on 100,000 distinct focus nodes (4.02 s)  without rules: 0 results
+N=  1,000  with rules:   1,000 results on   1,000 distinct focus nodes (0.06 s)  without rules: 0 results
+N=100,000  with rules: 100,000 results on 100,000 distinct focus nodes (3.18 s)  without rules: 0 results
 [exit 0]
 ```
 
@@ -7020,7 +7019,7 @@ N=100,000  with rules: 100,000 results on 100,000 distinct focus nodes (4.02 s) 
 ### C11.13 — A SPARQL rule computes the area, and validation sees it
 
 **In the manual:** [Chapter 11, at the claim](manual/docs/11-rules-and-inference.md#ev-c11-13) · [plain edition](../docs/11-rules-and-inference.md#114-sparql-rules)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Verified at 0.3.4: with `width 3` and `height 4`, a shape asserting
 
@@ -7116,7 +7115,7 @@ conforms: false
 ### C11.16 — Hazard 1: a rule on a shape with no target never fires
 
 **In the manual:** [Chapter 11, at the claim](manual/docs/11-rules-and-inference.md#ev-c11-16) · [plain edition](../docs/11-rules-and-inference.md#115-four-ways-to-get-a-wrong-answer)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Verified: the rule never runs, nothing is inferred, and no message says so.
 
@@ -7176,7 +7175,7 @@ conforms: true
 ### C11.17 — Hazard 2: one pass does not close a transitive rule
 
 **In the manual:** [Chapter 11, at the claim](manual/docs/11-rules-and-inference.md#ev-c11-17) · [plain edition](../docs/11-rules-and-inference.md#115-four-ways-to-get-a-wrong-answer)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **One pass, so a transitive rule does not close.**
 
@@ -7243,7 +7242,7 @@ conforms: true
 ### C11.18 — Hazard 3: equal sh:order cannot see each other's inferences
 
 **In the manual:** [Chapter 11, at the claim](manual/docs/11-rules-and-inference.md#ev-c11-18) · [plain edition](../docs/11-rules-and-inference.md#115-four-ways-to-get-a-wrong-answer)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **Rules at the same `sh:order` cannot see each other's inferences.**
 
@@ -7311,7 +7310,7 @@ conforms: false
 ### C11.19 — Hazard 4: a conclusion from absence outlives the absence
 
 **In the manual:** [Chapter 11, at the claim](manual/docs/11-rules-and-inference.md#ev-c11-19) · [plain edition](../docs/11-rules-and-inference.md#115-four-ways-to-get-a-wrong-answer)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **Negation is not monotonic, and iteration exposes it.**
 
@@ -7410,7 +7409,7 @@ Shown with two sh:order levels in one pass, which is the same mechanism iteratio
 - [the previous edition's rules-at-scale table](https://github.com/pwin/SemOpsManual/blob/fc6de6da90d54a57bbbd2163ebc5b5dfe246ec40/docs/11-rules-and-inference.md#L333): “| 100,000 | ~690,000 | 2.7s | **11.9s** |” (quote found, checked 2026-11-18)
 - [the previous edition's pySHACL comparison](https://github.com/pwin/SemOpsManual/blob/fc6de6da90d54a57bbbd2163ebc5b5dfe246ec40/docs/11-rules-and-inference.md#L346): “| 1,000 | 0.040s | 2.992s | 75× |” (quote found, checked 2026-11-18)
 - [the previous edition's WebAssembly table](https://github.com/pwin/SemOpsManual/blob/fc6de6da90d54a57bbbd2163ebc5b5dfe246ec40/docs/11-rules-and-inference.md#L371): “| 100,000 | 400,000 | **12,611 ms** | **3,119 ms** | 329 MB |” (quote found, checked 2026-11-18)
-- [engine README, current timings](https://github.com/pwin/SHACL_Engine/blob/7fbd8942a48c953a4bcbfd3405547e582b65f855/README.md#L68-L71): “| cached index, all cores — the defaults | **0.23s** |” (quote found, checked 2026-11-18)
+- [engine README, current timings](https://github.com/pwin/SHACL_Engine/blob/e030c8c1fd05e7a8fcd3ec7db203e980f03755fc/README.md#L68-L71): “| cached index, all cores — the defaults | **0.23s** |” (quote found, checked 2026-11-18)
 - [engine commit 6fa00e3 (0.3.0)](https://github.com/pwin/SHACL_Engine/commit/6fa00e3deb2e02b5b32e6a1a78f7360e33da31e8) (exists, checked 2026-11-18)
 
 Recorded measurements, not reproduced here. C11.12 reproduces the result counts behind the first table, at 1,000 and 100,000.
@@ -7427,8 +7426,8 @@ Recorded measurements, not reproduced here. C11.12 reproduces the result counts 
 
 **Sources:**
 
-- [engine README](https://github.com/pwin/SHACL_Engine/blob/7fbd8942a48c953a4bcbfd3405547e582b65f855/README.md#L117-L118): “A graph is held three times over, once per permutation” (quote found, checked 2026-11-18)
-- [engine README](https://github.com/pwin/SHACL_Engine/blob/7fbd8942a48c953a4bcbfd3405547e582b65f855/README.md#L101): “That order is by focus node” (quote found, checked 2026-11-18)
+- [engine README](https://github.com/pwin/SHACL_Engine/blob/e030c8c1fd05e7a8fcd3ec7db203e980f03755fc/README.md#L117-L118): “A graph is held three times over, once per permutation” (quote found, checked 2026-11-18)
+- [engine README](https://github.com/pwin/SHACL_Engine/blob/e030c8c1fd05e7a8fcd3ec7db203e980f03755fc/README.md#L101): “That order is by focus node” (quote found, checked 2026-11-18)
 
 ---
 
@@ -7436,7 +7435,7 @@ Recorded measurements, not reproduced here. C11.12 reproduces the result counts 
 ### C11.23 — --build-index caches the parsed graph
 
 **In the manual:** [Chapter 11, at the claim](manual/docs/11-rules-and-inference.md#ev-c11-23) · [plain edition](../docs/11-rules-and-inference.md#116-rules-at-scale)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > (The CLI now offers `--build-index`,
 
@@ -7504,7 +7503,7 @@ Options:
 ### C11.24 — A SHACL function in a rule is an error, exit 2
 
 **In the manual:** [Chapter 11, at the claim](manual/docs/11-rules-and-inference.md#ev-c11-24) · [plain edition](../docs/11-rules-and-inference.md#117-what-is-not-there)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > | **SHACL functions** (`sh:SPARQLFunction`) | A rule calling one errors (exit 2) rather than returning
 
@@ -7561,7 +7560,7 @@ error: applying SHACL-AF rules: invalid shapes graph: unsupported node expressio
 
 **Sources:**
 
-- [engine README, what does not work](https://github.com/pwin/SHACL_Engine/blob/7fbd8942a48c953a4bcbfd3405547e582b65f855/README.md#L483-L492): “is vendored under `testsuite/shacl12/tests/rules/` but is not wired into the” (quote found, checked 2026-11-18)
+- [engine README, what does not work](https://github.com/pwin/SHACL_Engine/blob/e030c8c1fd05e7a8fcd3ec7db203e980f03755fc/README.md#L483-L492): “is vendored under `testsuite/shacl12/tests/rules/` but is not wired into the” (quote found, checked 2026-11-18)
 
 ---
 
@@ -7569,7 +7568,7 @@ error: applying SHACL-AF rules: invalid shapes graph: unsupported node expressio
 ### C11.25 — Rules in WebAssembly, and an unknown mode is an error there too
 
 **In the manual:** [Chapter 11, at the claim](manual/docs/11-rules-and-inference.md#ev-c11-25) · [plain edition](../docs/11-rules-and-inference.md#rules-in-the-browser-the-engine-can-the-editor-does-not)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Every binding runs rules, CLI, Python and WebAssembly alike, through the same
 
@@ -7630,8 +7629,8 @@ for (const mode of ['none', 'rules', 'bogus']) {
 
 ```text
 $ node scripts/wasm_conforms.mjs data/shacl
-shacl-wasm-node 0.3.6  shapes-warning.ttl     conforms=false  results=1  severities=http://www.w3.org/ns/shacl#Warning
-shacl-wasm-node 0.3.6  shapes-violation.ttl   conforms=false  results=1  severities=http://www.w3.org/ns/shacl#Violation
+shacl-wasm-node 0.3.8  shapes-warning.ttl     conforms=false  results=1  severities=http://www.w3.org/ns/shacl#Warning
+shacl-wasm-node 0.3.8  shapes-violation.ttl   conforms=false  results=1  severities=http://www.w3.org/ns/shacl#Violation
 inference=none   conforms=true  results=0
 inference=rules  conforms=false  results=1
 inference=bogus  ERROR: unknown inference "bogus": expected "none", "rdfs", "rules" or "rules-iterated"
@@ -7652,7 +7651,7 @@ inference=bogus  ERROR: unknown inference "bogus": expected "none", "rdfs", "rul
 
 **Sources:**
 
-- [extension src/checks/shaclRunner.ts](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/src/checks/shaclRunner.ts#L25-L31): “so this deliberately stays at `"none"`” (quote found, checked 2026-11-18)
+- [extension src/checks/shaclRunner.ts](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/362d343de835ded5a6de9efc414846632ef9053f/src/checks/shaclRunner.ts#L25-L31): “so this deliberately stays at `"none"`” (quote found, checked 2026-11-18)
 
 ---
 
@@ -7660,7 +7659,7 @@ inference=bogus  ERROR: unknown inference "bogus": expected "none", "rdfs", "rul
 ### C11.27 — Named graphs are flattened
 
 **In the manual:** [Chapter 11, at the claim](manual/docs/11-rules-and-inference.md#ev-c11-27) · [plain edition](../docs/11-rules-and-inference.md#named-graphs-are-flattened-in-the-engine)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Worth repeating because rules make it sharper: quad syntaxes parse, and then every
 
@@ -7672,7 +7671,7 @@ inference=bogus  ERROR: unknown inference "bogus": expected "none", "rdfs", "rul
 ### C11.28 — Exit codes 0, 1 and 2
 
 **In the manual:** [Chapter 11, at the claim](manual/docs/11-rules-and-inference.md#ev-c11-28) · [plain edition](../docs/11-rules-and-inference.md#exit-codes-make-this-gateable)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Verified across all three at 0.3.4.
 
@@ -7713,7 +7712,7 @@ error: applying SHACL-AF rules: invalid shapes graph: unsupported node expressio
 ### C11.29 — holos validate: exit 0 whatever it found up to 0.21.1, a gate from 0.22.0
 
 **In the manual:** [Chapter 11, at the claim](manual/docs/11-rules-and-inference.md#ev-c11-29) · [plain edition](../docs/11-rules-and-inference.md#exit-codes-make-this-gateable)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > > **`holos validate` became a gate in HOLOS 0.22.0.**
 
@@ -7800,7 +7799,7 @@ if len(sys.argv) > 3:
 
 **What is checked:** both engines print conforms false. Up to 0.21.1 they exit 0 doing so, and the default (native) engine refuses sh:sparql. From 0.22.0 a non-conforming graph exits 1 and a conforming one 0, the default is adapted, which validates sh:sparql, and only --engine native refuses it, with exit 2. holosdb's Store.validate() returns a dictionary with conforms False either way
 
-**Recorded result:** PASS — step 1 output contains 'conforms          false'; step 2 output contains 'conforms          false'; step 5 output contains "'conforms': False", 'HolosError: unsupported: sh:sparql is not implemented'; holos 0.26.2: step 1 exits 1; step 2 exits 1; step 3 exits 1; step 3 output contains 'conforms          false'; step 4 exits 1; step 6 exits 2; step 6 output contains 'sh:sparql'; step 7 exits 0
+**Recorded result:** PASS — step 1 output contains 'conforms          false'; step 2 output contains 'conforms          false'; step 5 output contains "'conforms': False", 'HolosError: unsupported: sh:sparql is not implemented'; holos 0.26.4: step 1 exits 1; step 2 exits 1; step 3 exits 1; step 3 output contains 'conforms          false'; step 4 exits 1; step 6 exits 2; step 6 output contains 'sh:sparql'; step 7 exits 0
 
 <details><summary>Output, as recorded</summary>
 
@@ -7810,7 +7809,7 @@ bridged+compiled  3 triples, 2 shapes in 0.000s
 validated         0.000s
 conforms          false
 results           1
-loaded 3 quads in 0.00s (4973 quads/s)
+loaded 3 quads in 0.00s (4312 quads/s)
 read 5 shape quads from data/shacl/shapes-violation.ttl, and kept none of them
 [exit 1]
 
@@ -7819,7 +7818,7 @@ bridged+compiled  3 triples, 2 shapes in 0.000s
 validated         0.000s
 conforms          false
 results           1
-loaded 3 quads in 0.00s (5006 quads/s)
+loaded 3 quads in 0.00s (4651 quads/s)
 read 5 shape quads from data/shacl/shapes-violation.ttl, and kept none of them
 [exit 1]
 
@@ -7828,7 +7827,7 @@ bridged+compiled  3 triples, 1 shapes in 0.000s
 validated         0.000s
 conforms          false
 results           1
-loaded 3 quads in 0.00s (5234 quads/s)
+loaded 3 quads in 0.00s (4389 quads/s)
 read 6 shape quads from data/shacl/shapes-sparql.ttl, and kept none of them
 [exit 1]
 
@@ -7837,18 +7836,18 @@ bridged+compiled  3 triples, 1 shapes in 0.000s
 validated         0.000s
 conforms          false
 results           1
-loaded 3 quads in 0.00s (4641 quads/s)
+loaded 3 quads in 0.00s (5074 quads/s)
 read 6 shape quads from data/shacl/shapes-sparql.ttl, and kept none of them
 [exit 1]
 
 $ python scripts/holosdb_validate.py data/shacl/data.ttl data/shacl/shapes-violation.ttl data/shacl/shapes-sparql.ttl
 adapted: {'conforms': False, 'violations': 1, 'engine': 'adapted', 'results': [{'focus': 'http://example.org/bob', 'path': 'http://example.org/name', 'value': None, 'severity': 'Violation', 'component': 'http://www.w3.org/ns/shacl#MinCountConstraintComponent', 'shape': '_:0_b0', 'message': None}]}
-native:  {'conforms': False, 'violations': 1, 'engine': 'native', 'results': [{'focus': 'http://example.org/bob', 'path': 'http://example.org/name', 'value': None, 'severity': 'Violation', 'component': 'http://www.w3.org/ns/shacl#MinCountConstraintComponent', 'shape': '_:e5e8c9f7a785d018ad9054c0665043c6', 'message': None}]}
+native:  {'conforms': False, 'violations': 1, 'engine': 'native', 'results': [{'focus': 'http://example.org/bob', 'path': 'http://example.org/name', 'value': None, 'severity': 'Violation', 'component': 'http://www.w3.org/ns/shacl#MinCountConstraintComponent', 'shape': '_:bedfc76e2ef7f9c712e653ea5bc970f2', 'message': None}]}
 native, sh:sparql shapes: HolosError: unsupported: sh:sparql is not implemented by the native evaluator; validate with the adapted engine instead
 [exit 0]
 
 $ holos validate --data data/shacl/data.ttl --shapes data/shacl/shapes-sparql.ttl --engine native
-loaded 3 quads in 0.00s (4457 quads/s)
+loaded 3 quads in 0.00s (4468 quads/s)
 read 6 shape quads from data/shacl/shapes-sparql.ttl, and kept none of them
 Error: unsupported: sh:sparql is not implemented by the native evaluator; validate with the adapted engine instead
 [exit 2]
@@ -7858,12 +7857,12 @@ bridged+compiled  2 triples, 2 shapes in 0.000s
 validated         0.000s
 conforms          true
 results           0
-loaded 2 quads in 0.00s (2734 quads/s)
+loaded 2 quads in 0.00s (3408 quads/s)
 read 5 shape quads from data/shacl/shapes-violation.ttl, and kept none of them
 [exit 0]
 
 $ holos --version
-holos 0.26.2 (3d9c46f)
+holos 0.26.4 (27aabce)
 [exit 0]
 ```
 
@@ -7884,7 +7883,7 @@ Annotated chapter: [manual/docs/12-release-and-change.md](manual/docs/12-release
 ### C12.01 — version-diff: the verdict comes from the axioms
 
 **In the manual:** [Chapter 12, at the claim](manual/docs/12-release-and-change.md#ev-c12-01) · [plain edition](../docs/12-release-and-change.md#121-evidence-based-semver-version-diff)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Real output (IRIs shortened to `acme:` here for width):
 
@@ -7959,7 +7958,7 @@ Written to: work/C12_01/gate/diff.txt
 ### C12.02 — Reversed, the diff describes the inverse release
 
 **In the manual:** [Chapter 12, at the claim](manual/docs/12-release-and-change.md#ev-c12-02) · [plain edition](../docs/12-release-and-change.md#121-evidence-based-semver-version-diff)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Note the argument order: **old first, then new**.
 
@@ -8005,7 +8004,7 @@ Written to: work/C12_02/rev/diff.txt
 ### C12.03 — Without FOAF resolved, consistency reports foaf:name and foaf:mbox
 
 **In the manual:** [Chapter 12, at the claim](manual/docs/12-release-and-change.md#ev-c12-03) · [plain edition](../docs/12-release-and-change.md#121-evidence-based-semver-version-diff)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **Note also `--exclude-imports` here, where §12.2 uses `--import-dir`.**
 
@@ -8062,7 +8061,7 @@ Wrote 2/2 suggested repair(s) as .patch files under work/C12_03/noimports/repair
 ### C12.04 — consistency: what breaks, and a 100% repair
 
 **In the manual:** [Chapter 12, at the claim](manual/docs/12-release-and-change.md#ev-c12-04) · [plain edition](../docs/12-release-and-change.md#122-change-impact-consistency)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > `consistency` runs the version diff *and* checks every transformation query
 
@@ -8121,7 +8120,7 @@ $ python scripts/list_files.py work/C12_04/consistency
 ### C12.05 — The tombstone is read in both directions; isReplacedBy in one
 
 **In the manual:** [Chapter 12, at the claim](manual/docs/12-release-and-change.md#ev-c12-05) · [plain edition](../docs/12-release-and-change.md#123-the-migration-annotation-and-a-correction-about-its-direction)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > | `acme:SoftwareEngineer dcterms:isReplacedBy acme:Engineer` | **57%**, below a 0.7 apply threshold |
 
@@ -8306,7 +8305,7 @@ Wrote 1/1 suggested repair(s) as .patch files under work/C12_05/replaced-by-reve
 ### C12.07 — The reversed equivalentClass at 100%
 
 **In the manual:** [Chapter 12, at the claim](manual/docs/12-release-and-change.md#ev-c12-07) · [plain edition](../docs/12-release-and-change.md#123-the-migration-annotation-and-a-correction-about-its-direction)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > from. Verified again for this edition on the acme fixture, with the triple
 
@@ -8318,7 +8317,7 @@ Wrote 1/1 suggested repair(s) as .patch files under work/C12_05/replaced-by-reve
 ### C12.08 — --apply-repairs changes the one code line on line 14
 
 **In the manual:** [Chapter 12, at the claim](manual/docs/12-release-and-change.md#ev-c12-08) · [plain edition](../docs/12-release-and-change.md#it-used-to-mangle-comments-and-the-fix-is-instructive)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > outside comments only**: re-verified for this edition, the diff of the repaired
 
@@ -8398,7 +8397,7 @@ $ python scripts/diff_files.py fixtures/acme_robotics/employees.rq work/C12_08/a
 ### C12.10 — String literals are still rewritten, deliberately
 
 **In the manual:** [Chapter 12, at the claim](manual/docs/12-release-and-change.md#ev-c12-10) · [plain edition](../docs/12-release-and-change.md#it-used-to-mangle-comments-and-the-fix-is-instructive)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > The judgement underneath is worth borrowing. String **literals** are still
 
@@ -8504,7 +8503,7 @@ $ python scripts/diff_files.py data/rename-literal/employees.rq work/C12_10/q/em
 ### C12.12 — pattern-consistency catches MKT only from the output data
 
 **In the manual:** [Chapter 12, at the claim](manual/docs/12-release-and-change.md#ev-c12-12) · [plain edition](../docs/12-release-and-change.md#125-the-taxonomy-layer-pattern-consistency)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **Caught**, from tarka's output just as from `oxi-gen`'s.
 
@@ -8569,7 +8568,7 @@ https://acme.example.org/data/department/SALES
 ### C12.13 — Omit --output-data and it reports clean
 
 **In the manual:** [Chapter 12, at the claim](manual/docs/12-release-and-change.md#ev-c12-13) · [plain edition](../docs/12-release-and-change.md#125-the-taxonomy-layer-pattern-consistency)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Omit `--output-data` and this run reports clean: correctly, and uselessly.
 
@@ -8581,7 +8580,7 @@ https://acme.example.org/data/department/SALES
 ### C12.14 — Both consistency commands are report-only by default
 
 **In the manual:** [Chapter 12, at the claim](manual/docs/12-release-and-change.md#ev-c12-14) · [plain edition](../docs/12-release-and-change.md#126-governance-what-the-tooling-does-and-does-not-do)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Look at the flags before you copy the commands into a pipeline.
 
@@ -8710,7 +8709,7 @@ Annotated chapter: [manual/docs/13-operate-and-consume.md](manual/docs/13-operat
 ### C13.01 — consistency-remote against holos-server; the imports rule applies in the store
 
 **In the manual:** [Chapter 13, at the claim](manual/docs/13-operate-and-consume.md#ev-c13-01) · [plain edition](../docs/13-operate-and-consume.md#the-manifest-is-the-interesting-part)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > will be reported as undeclared. Load the imports into a graph the manifest lists.
 
@@ -8811,7 +8810,7 @@ Reports written to: ./work/C13_01/with-imports
 ### C13.02 — The manifest, as JSON or built in Python; the flags
 
 **In the manual:** [Chapter 13, at the claim](manual/docs/13-operate-and-consume.md#ev-c13-02) · [plain edition](../docs/13-operate-and-consume.md#the-manifest-is-the-interesting-part)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Or build it in Python, which is worth doing if the URIs come from somewhere
 
@@ -8922,7 +8921,7 @@ options:
 ### C13.03 — The store a version behind: --fail-on-anything exits 1
 
 **In the manual:** [Chapter 13, at the claim](manual/docs/13-operate-and-consume.md#ev-c13-03) · [plain edition](../docs/13-operate-and-consume.md#the-manifest-is-the-interesting-part)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > That structure enables a genuine **three-way check**: the live data graph, the
 
@@ -9040,7 +9039,7 @@ error: data/remote/graphs-role-typo.json: unknown graph role(s) ['triplified-dat
 ### C13.04 — A mistyped role is refused at load, from 0.24.0
 
 **In the manual:** [Chapter 13, at the claim](manual/docs/13-operate-and-consume.md#ev-c13-04) · [plain edition](../docs/13-operate-and-consume.md#finding-out-what-your-graph-uris-actually-are)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > > **`role` was not validated, and a typo cost you the whole check.**
 
@@ -9052,7 +9051,7 @@ error: data/remote/graphs-role-typo.json: unknown graph role(s) ['triplified-dat
 ### C13.05 — SHACL validation flattens named graphs
 
 **In the manual:** [Chapter 13, at the claim](manual/docs/13-operate-and-consume.md#ev-c13-05) · [plain edition](../docs/13-operate-and-consume.md#named-graphs-are-a-decision-you-make-once)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > > **But SHACL validation itself does not see them.**
 
@@ -9064,7 +9063,7 @@ error: data/remote/graphs-role-typo.json: unknown graph role(s) ['triplified-dat
 ### C13.06 — Policy at the scan: rows without the column, unless you are in HR
 
 **In the manual:** [Chapter 13, at the claim](manual/docs/13-operate-and-consume.md#ev-c13-06) · [plain edition](../docs/13-operate-and-consume.md#132-access-policy-at-the-scan)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Here it is through the `holosdb` package from PyPI, on HOLOS's small HR example,
 
@@ -9217,7 +9216,7 @@ $ python scripts/holosdb_policy.py data/policy/hr.trig
 ### C13.07 — The fluent API mistake
 
 **In the manual:** [Chapter 13, at the claim](manual/docs/13-operate-and-consume.md#ev-c13-07) · [plain edition](../docs/13-operate-and-consume.md#132-access-policy-at-the-scan)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > fluent API: each `Policy` method returns a new policy. Calling them as statements
 
@@ -9229,7 +9228,7 @@ $ python scripts/holosdb_policy.py data/policy/hr.trig
 ### C13.08 — The holos command gives the same answers
 
 **In the manual:** [Chapter 13, at the claim](manual/docs/13-operate-and-consume.md#ev-c13-08) · [plain edition](../docs/13-operate-and-consume.md#132-access-policy-at-the-scan)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > The `holos query` command from the release takes the same
 
@@ -9287,17 +9286,17 @@ holos query --data data/policy/hr.trig --query "SELECT DISTINCT ?g WHERE { GRAPH
 ```text
 $ holos query --data data/policy/hr.trig --query "PREFIX ex: <http://example.com/> SELECT ?name ?salary WHERE { GRAPH ?g { ?e ex:name ?name OPTIONAL { ?e ex:salary ?salary } } } ORDER BY ?name" --deny-predicate http://example.com/salary --except-role hr
 {"head":{"vars":["name","salary"]},"results":{"bindings":[{"name":{"type":"literal","value":"Alice"}},{"name":{"type":"literal","value":"Bob"}},{"name":{"type":"literal","value":"Carol"}}]}}
-loaded 21 quads in 0.00s (29825 quads/s)
+loaded 21 quads in 0.00s (27792 quads/s)
 note: 3 quads withheld by policy
 [exit 0]
 
 $ holos query --data data/policy/hr.trig --query "PREFIX ex: <http://example.com/> SELECT ?name ?salary WHERE { GRAPH ?g { ?e ex:name ?name OPTIONAL { ?e ex:salary ?salary } } } ORDER BY ?name" --deny-predicate http://example.com/salary --except-role hr --role hr
 {"head":{"vars":["name","salary"]},"results":{"bindings":[{"name":{"type":"literal","value":"Alice"},"salary":{"type":"literal","value":"95000","datatype":"http://www.w3.org/2001/XMLSchema#integer"}},{"name":{"type":"literal","value":"Bob"},"salary":{"type":"literal","value":"88000","datatype":"http://www.w3.org/2001/XMLSchema#integer"}},{"name":{"type":"literal","value":"Carol"},"salary":{"type":"literal","value":"102000","datatype":"http://www.w3.org/2001/XMLSchema#integer"}}]}}
-loaded 21 quads in 0.00s (24834 quads/s)
+loaded 21 quads in 0.00s (29033 quads/s)
 [exit 0]
 
 $ holos query --data data/policy/hr.trig --query "PREFIX ex: <http://example.com/> SELECT ?name ?salary WHERE { GRAPH ?g { ?e ex:name ?name OPTIONAL { ?e ex:salary ?salary } } } ORDER BY ?name" --deny-predicate http://example.com/salary --fail-closed
-loaded 21 quads in 0.00s (20080 quads/s)
+loaded 21 quads in 0.00s (26538 quads/s)
 Error: query evaluation failed: access denied by policy
 Caused by:
     access denied by policy
@@ -9305,13 +9304,13 @@ Caused by:
 
 $ holos query --data data/policy/hr.trig --query "SELECT DISTINCT ?g WHERE { GRAPH ?g { ?s ?p ?o } } ORDER BY ?g" --label-graph http://example.com/reviews=3
 {"head":{"vars":["g"]},"results":{"bindings":[{"g":{"type":"uri","value":"http://example.com/provenance"}},{"g":{"type":"uri","value":"http://example.com/public"}}]}}
-loaded 21 quads in 0.00s (31277 quads/s)
+loaded 21 quads in 0.00s (28830 quads/s)
 note: 3 quads withheld by policy
 [exit 0]
 
 $ holos query --data data/policy/hr.trig --query "SELECT DISTINCT ?g WHERE { GRAPH ?g { ?s ?p ?o } } ORDER BY ?g" --label-graph http://example.com/reviews=3 --clearance 3
 {"head":{"vars":["g"]},"results":{"bindings":[{"g":{"type":"uri","value":"http://example.com/provenance"}},{"g":{"type":"uri","value":"http://example.com/public"}},{"g":{"type":"uri","value":"http://example.com/reviews"}}]}}
-loaded 21 quads in 0.00s (23171 quads/s)
+loaded 21 quads in 0.00s (31583 quads/s)
 [exit 0]
 ```
 
@@ -9329,7 +9328,7 @@ loaded 21 quads in 0.00s (23171 quads/s)
 
 **Sources:**
 
-- [HOLOS ACCESS-CONTROL.md](https://github.com/pwin/triplestore/blob/3d9c46f37f54188c1a801b67030ca3a14bac2b04/ACCESS-CONTROL.md#L44): “It costs **8 ns per quad** — measured, and about 1% of what decoding the quad costs.” (quote found, checked 2026-11-18)
+- [HOLOS ACCESS-CONTROL.md](https://github.com/pwin/triplestore/blob/27aabce3a1b5579f13d7d274398300e856a6e77d/ACCESS-CONTROL.md#L44): “It costs **8 ns per quad** — measured, and about 1% of what decoding the quad costs.” (quote found, checked 2026-11-18)
 
 ---
 
@@ -9337,7 +9336,7 @@ loaded 21 quads in 0.00s (23171 quads/s)
 ### C13.10 — Validation and the store: written into it up to 0.21.0, untouched from 0.21.1
 
 **In the manual:** [Chapter 13, at the claim](manual/docs/13-operate-and-consume.md#ev-c13-10) · [plain edition](../docs/13-operate-and-consume.md#132-access-policy-at-the-scan)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Two things to know before you validate a store you care about.
 
@@ -9512,19 +9511,19 @@ if len(sys.argv) > 3:
 
 **What is checked:** on a fresh store both engines report the 2 true violations, and native refuses sh:sparql; the CLI's default engine is native. Then, by version. At 0.21.0: three calls on one store report 2, 4 and 6; one validate() leaves a 5-quad shapes graph, which survives reopening a persistent store; the CLI with --store does the same. From 0.21.1: 2, 2 and 2; no graph left, on disk or in memory; a leftover shapes graph is reported with the DROP GRAPH that removes it, by Python and by the CLI
 
-**Recorded result:** PASS — holosdb 0.26.2, holos 0.26.2: step 1 output contains "adapted: {'conforms': False, 'violations': 2, 'engine': 'adapted', 'results': [", "native:  {'conforms': False, 'violations': 2, 'engine': 'native', 'results': [", "'focus': 'http://example.org/a'", "'focus': 'http://example.org/b'", 'HolosError: unsupported: sh:sparql is not implemented'; step 10 output contains '--engine <NAME>          adapted (default) or native'; step 2 output contains 'adapted, three calls on one store: violations [2, 2, 2]', 'native, three calls on one store: violations [2, 2, 2]', 'named graphs after one validate(): []', 'named graphs in the persistent store after reopening: []', 'store.update("DROP GRAPH <urn:holos:python:shapes>") removes them'; step 5 output contains 'results           2'; step 6 output contains 'results           2'; step 7 output has none of 'urn:holos:shapes'; step 9 output contains 'note: <urn:holos:shapes> holds 1 quads', 'DROP GRAPH <urn:holos:shapes>'
+**Recorded result:** PASS — holosdb 0.26.4, holos 0.26.4: step 1 output contains "adapted: {'conforms': False, 'violations': 2, 'engine': 'adapted', 'results': [", "native:  {'conforms': False, 'violations': 2, 'engine': 'native', 'results': [", "'focus': 'http://example.org/a'", "'focus': 'http://example.org/b'", 'HolosError: unsupported: sh:sparql is not implemented'; step 10 output contains '--engine <NAME>          adapted (default) or native'; step 2 output contains 'adapted, three calls on one store: violations [2, 2, 2]', 'native, three calls on one store: violations [2, 2, 2]', 'named graphs after one validate(): []', 'named graphs in the persistent store after reopening: []', 'store.update("DROP GRAPH <urn:holos:python:shapes>") removes them'; step 5 output contains 'results           2'; step 6 output contains 'results           2'; step 7 output has none of 'urn:holos:shapes'; step 9 output contains 'note: <urn:holos:shapes> holds 1 quads', 'DROP GRAPH <urn:holos:shapes>'
 
 <details><summary>Output, as recorded</summary>
 
 ```text
 $ python scripts/holosdb_validate.py data/shacl/two-unnamed.ttl data/shacl/shapes-violation.ttl data/shacl/shapes-sparql.ttl
 adapted: {'conforms': False, 'violations': 2, 'engine': 'adapted', 'results': [{'focus': 'http://example.org/a', 'path': 'http://example.org/name', 'value': None, 'severity': 'Violation', 'component': 'http://www.w3.org/ns/shacl#MinCountConstraintComponent', 'shape': '_:0_b0', 'message': None}, {'focus': 'http://example.org/b', 'path': 'http://example.org/name', 'value': None, 'severity': 'Violation', 'component': 'http://www.w3.org/ns/shacl#MinCountConstraintComponent', 'shape': '_:0_b0', 'message': None}]}
-native:  {'conforms': False, 'violations': 2, 'engine': 'native', 'results': [{'focus': 'http://example.org/a', 'path': 'http://example.org/name', 'value': None, 'severity': 'Violation', 'component': 'http://www.w3.org/ns/shacl#MinCountConstraintComponent', 'shape': '_:ef02a4ecbffd4cca996ab30657ae400f', 'message': None}, {'focus': 'http://example.org/b', 'path': 'http://example.org/name', 'value': None, 'severity': 'Violation', 'component': 'http://www.w3.org/ns/shacl#MinCountConstraintComponent', 'shape': '_:ef02a4ecbffd4cca996ab30657ae400f', 'message': None}]}
+native:  {'conforms': False, 'violations': 2, 'engine': 'native', 'results': [{'focus': 'http://example.org/a', 'path': 'http://example.org/name', 'value': None, 'severity': 'Violation', 'component': 'http://www.w3.org/ns/shacl#MinCountConstraintComponent', 'shape': '_:d95771d3736d1ab3fbe6c5179e726da4', 'message': None}, {'focus': 'http://example.org/b', 'path': 'http://example.org/name', 'value': None, 'severity': 'Violation', 'component': 'http://www.w3.org/ns/shacl#MinCountConstraintComponent', 'shape': '_:d95771d3736d1ab3fbe6c5179e726da4', 'message': None}]}
 native, sh:sparql shapes: HolosError: unsupported: sh:sparql is not implemented by the native evaluator; validate with the adapted engine instead
 [exit 0]
 
 $ python scripts/holosdb_validate_repeat.py data/shacl/two-unnamed.ttl data/shacl/shapes-violation.ttl work/C13_10/store
-holosdb 0.26.2
+holosdb 0.26.4
 1. adapted, three calls on one store: violations [2, 2, 2]
 1. native, three calls on one store: violations [2, 2, 2]
 2. named graphs after one validate(): []
@@ -9534,7 +9533,7 @@ holosdb 0.26.2
 [exit 0]
 
 $ holos --version
-holos 0.26.2 (3d9c46f)
+holos 0.26.4 (27aabce)
 [exit 0]
 
 $ holos stats --data data/shacl/two-unnamed.ttl --store work/C13_10/cli-store
@@ -9542,12 +9541,12 @@ quads            4
 dictionary terms 5
 named graphs     0
 on disk          140.9 KiB
-free here        53.0 GiB
+free here        105.7 GiB
 room to compact  yes (needs up to 140.9 KiB)
 predicates by frequency
            3  <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
            1  <http://example.org/name>
-loaded 4 quads in 0.25s (15 quads/s)
+loaded 4 quads in 0.23s (17 quads/s)
 [exit 0]
 
 $ holos validate --store work/C13_10/cli-store --shapes data/shacl/shapes-violation.ttl
@@ -9571,7 +9570,7 @@ $ holos query --store work/C13_10/cli-store --query "SELECT ?g (COUNT(*) AS ?n) 
 [exit 0]
 
 $ holos update --store work/C13_10/cli-store --update "INSERT DATA { GRAPH <urn:holos:shapes> { <urn:x:s> <urn:x:p> <urn:x:o> } }"
-inserted 1 deleted 0 graphs +0 -0 in 0.197s
+inserted 1 deleted 0 graphs +0 -0 in 0.151s
 [exit 0]
 
 $ holos validate --store work/C13_10/cli-store --shapes data/shacl/shapes-violation.ttl
@@ -9633,7 +9632,7 @@ OPTIONS
 - [HOLOS commit cd5af4b](https://github.com/pwin/triplestore/commit/cd5af4b32082458ee087d92948020a1b77cd3e9d): “Engine::with_transient_graph loads input inside a commit scope that is always rolled back” (quote found, checked 2026-11-18)
 - [HOLOS commit 82e4d66, 'Cut 0.21.1'](https://github.com/pwin/triplestore/commit/82e4d6686b3563db502ea68098a6f3fc9ce75d6b): “validation leaves nothing in the store it validates” (quote found, checked 2026-11-18)
 
-The recorded run uses 0.26.0, so it shows the fix made in 0.21.1, and the results the dictionary carries from 0.23.0. The same steps against the published 0.21.0 gave: `violations [2, 4, 6]` for both engines; a 5-quad `urn:holos:python:shapes` graph after one call, still there after reopening a persistent store; no warning for a planted leftover; and from the CLI `results 2`, then `results 4`, with a `urn:holos:shapes` graph left behind. The Python method's default engine, adapted, is in its signature: [holos-python lib.rs](https://github.com/pwin/triplestore/blob/3d9c46f37f54188c1a801b67030ca3a14bac2b04/crates/holos-python/src/lib.rs#L647-L674).
+The recorded run uses 0.26.0, so it shows the fix made in 0.21.1, and the results the dictionary carries from 0.23.0. The same steps against the published 0.21.0 gave: `violations [2, 4, 6]` for both engines; a 5-quad `urn:holos:python:shapes` graph after one call, still there after reopening a persistent store; no warning for a planted leftover; and from the CLI `results 2`, then `results 4`, with a `urn:holos:shapes` graph left behind. The Python method's default engine, adapted, is in its signature: [holos-python lib.rs](https://github.com/pwin/triplestore/blob/27aabce3a1b5579f13d7d274398300e856a6e77d/crates/holos-python/src/lib.rs#L647-L674).
 
 ---
 
@@ -9641,7 +9640,7 @@ The recorded run uses 0.26.0, so it shows the fix made in 0.21.1, and the result
 ### C13.11 — docgen: 4 classes, 5 external terms, 3 resolved
 
 **In the manual:** [Chapter 13, at the claim](manual/docs/13-operate-and-consume.md#ev-c13-11) · [plain edition](../docs/13-operate-and-consume.md#133-documentation-as-a-product-docgen)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > 2 object properties, 3 datatype properties, 1 sections,
 
@@ -9700,7 +9699,7 @@ $ python scripts/list_files.py work/C13_11/docs
 ### C13.12 — Three runs, three pages; pinned, one
 
 **In the manual:** [Chapter 13, at the claim](manual/docs/13-operate-and-consume.md#ev-c13-12) · [plain edition](../docs/13-operate-and-consume.md#still-open-the-page-is-reshuffled-on-every-run)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Re-checked at 0.24.1: three identical runs, three different files.
 
@@ -9717,7 +9716,7 @@ python scripts/sha256.py work/C13_12/run1/ontology-documentation.html work/C13_1
 
 **What is checked:** the three unpinned runs give at least two different pages (each run draws its own hash seed, so three matching by chance is possible but unlikely); the two pinned runs give the same page
 
-**Recorded result:** PASS — three unpinned runs gave 2 different pages; two runs with PYTHONHASHSEED=0 gave the same page
+**Recorded result:** PASS — three unpinned runs gave 3 different pages; two runs with PYTHONHASHSEED=0 gave the same page
 
 <details><summary>Output, as recorded</summary>
 
@@ -9773,9 +9772,9 @@ NOTE: 2 external term(s) referenced with no --ref file resolving a definition:
 [exit 0]
 
 $ python scripts/sha256.py work/C13_12/run1/ontology-documentation.html work/C13_12/run2/ontology-documentation.html work/C13_12/run3/ontology-documentation.html work/C13_12/seed0-a/ontology-documentation.html work/C13_12/seed0-b/ontology-documentation.html
-74060115269918bb work/C13_12/run1/ontology-documentation.html
-d75c4dce51f9a936 work/C13_12/run2/ontology-documentation.html
-74060115269918bb work/C13_12/run3/ontology-documentation.html
+bf2d4a50cd442604 work/C13_12/run1/ontology-documentation.html
+ad87a513e35e7f38 work/C13_12/run2/ontology-documentation.html
+b36d0c127cb2e9f0 work/C13_12/run3/ontology-documentation.html
 4b065806e5fca839 work/C13_12/seed0-a/ontology-documentation.html
 4b065806e5fca839 work/C13_12/seed0-b/ontology-documentation.html
 [exit 0]
@@ -9793,7 +9792,7 @@ d75c4dce51f9a936 work/C13_12/run2/ontology-documentation.html
 ### C13.13 — Every row carries source_file and line
 
 **In the manual:** [Chapter 13, at the claim](manual/docs/13-operate-and-consume.md#ev-c13-13) · [plain edition](../docs/13-operate-and-consume.md#134-observability-not-covered)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > > **Every check run writes `full_results.csv`. Retain them, timestamped.**
 
@@ -9805,7 +9804,7 @@ d75c4dce51f9a936 work/C13_12/run2/ontology-documentation.html
 ### C13.14 — HOLOS: embeddable, RDF 1.2, GeoSPARQL
 
 **In the manual:** [Chapter 13, at the claim](manual/docs/13-operate-and-consume.md#ev-c13-14) · [plain edition](../docs/13-operate-and-consume.md#135-knowledge-products-and-apis-not-covered)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > | Python · JS | HOLOS (`holosdb`, `holos-wasm`) | Policy at the scan, RDF 1.2, GeoSPARQL; early |
 
@@ -9890,7 +9889,7 @@ Annotated chapter: [manual/docs/14-coverage-and-gaps.md](manual/docs/14-coverage
 ### C14.01 — A scoped run could not see that the reasoner did not run (fixed in 0.24.0)
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-01) · [plain edition](../docs/14-coverage-and-gaps.md#a-scoped-run-could-not-see-that-the-reasoner-did-not-run-fixed-in-0240)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > ### A scoped run could not see that the reasoner did not run (fixed in 0.24.0)
 
@@ -9902,11 +9901,11 @@ Annotated chapter: [manual/docs/14-coverage-and-gaps.md](manual/docs/14-coverage
 ### C14.02 — The shacl CLI reported conformance when it checked nothing, up to 0.3.3
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-02) · [plain edition](../docs/14-coverage-and-gaps.md#the-shacl-cli-reported-conformance-when-it-checked-nothing-fixed-in-034)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > The one-shot Python and JavaScript calls have refused a shapes graph that declares
 
-**Evidence:** the same as [C11.07 — The CLI and an empty shapes graph: conforms up to 0.3.3, refused from 0.3.4](#c11-07), which reproduces it: shacl 0.3.6: step 1 exits 2; step 1 output contains 'the shapes graph declares no shapes'; step 2 exits 2; step 2 output contains 'no --shapes was given'; step 3: conforms: true; step 3 exits 0
+**Evidence:** the same as [C11.07 — The CLI and an empty shapes graph: conforms up to 0.3.3, refused from 0.3.4](#c11-07), which reproduces it: shacl 0.3.8: step 1 exits 2; step 1 output contains 'the shapes graph declares no shapes'; step 2 exits 2; step 2 output contains 'no --shapes was given'; step 3: conforms: true; step 3 exits 0
 
 ---
 
@@ -9914,11 +9913,11 @@ Annotated chapter: [manual/docs/14-coverage-and-gaps.md](manual/docs/14-coverage
 ### C14.03 — holos validate exited 0 on a non-conforming graph, up to 0.21.1
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-03) · [plain edition](../docs/14-coverage-and-gaps.md#holos-validate-exited-0-on-a-non-conforming-graph-fixed-in-0220)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Up to 0.21.1 both of its validators printed `conforms false` and returned exit
 
-**Evidence:** the same as [C11.29 — holos validate: exit 0 whatever it found up to 0.21.1, a gate from 0.22.0](#c11-29), which reproduces it: step 1 output contains 'conforms          false'; step 2 output contains 'conforms          false'; step 5 output contains "'conforms': False", 'HolosError: unsupported: sh:sparql is not implemented'; holos 0.26.2: step 1 exits 1; step 2 exits 1; step 3 exits 1; step 3 output contains 'conforms          false'; step 4 exits 1; step 6 exits 2; step 6 output contains 'sh:sparql'; step 7 exits 0
+**Evidence:** the same as [C11.29 — holos validate: exit 0 whatever it found up to 0.21.1, a gate from 0.22.0](#c11-29), which reproduces it: step 1 output contains 'conforms          false'; step 2 output contains 'conforms          false'; step 5 output contains "'conforms': False", 'HolosError: unsupported: sh:sparql is not implemented'; holos 0.26.4: step 1 exits 1; step 2 exits 1; step 3 exits 1; step 3 output contains 'conforms          false'; step 4 exits 1; step 6 exits 2; step 6 output contains 'sh:sparql'; step 7 exits 0
 
 ---
 
@@ -9926,7 +9925,7 @@ Annotated chapter: [manual/docs/14-coverage-and-gaps.md](manual/docs/14-coverage
 ### C14.04 — tarka dropped instances it could not build, silently, up to 0.1.1
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-04) · [plain edition](../docs/14-coverage-and-gaps.md#tarka-dropped-instances-it-could-not-build-silently-fixed-in-020)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Up to 0.1.1, an OTTR template whose `ottr:IRI` parameter received a cell tarka
 
@@ -9940,11 +9939,11 @@ The Python half is in C10.12: since 0.2.0 `Mapping.ottr(...).run_csv(...)` reads
 ### C14.05 — docgen reshuffles the page on every run
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-05) · [plain edition](../docs/14-coverage-and-gaps.md#docgen-reshuffles-the-page-on-every-run)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Still open at 0.24.1, re-checked rather than carried forward: three identical runs
 
-**Evidence:** the same as [C13.12 — Three runs, three pages; pinned, one](#c13-12), which reproduces it: three unpinned runs gave 2 different pages; two runs with PYTHONHASHSEED=0 gave the same page
+**Evidence:** the same as [C13.12 — Three runs, three pages; pinned, one](#c13-12), which reproduces it: three unpinned runs gave 3 different pages; two runs with PYTHONHASHSEED=0 gave the same page
 
 ---
 
@@ -9952,7 +9951,7 @@ The Python half is in C10.12: since 0.2.0 `Mapping.ottr(...).run_csv(...)` reads
 ### C14.06 — The reasoner's outcome follows the hash seed
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-06) · [plain edition](../docs/14-coverage-and-gaps.md#the-dl-reasoner-fails-on-some-hash-seeds-not-at-random)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > It is not random, and it is not HermiT.
 
@@ -10089,16 +10088,16 @@ with tempfile.TemporaryDirectory() as tmp:
 
 **What is checked:** ten runs per seed through the suite: seed 5 runs HermiT in at least 9, seed 0 fails in at least 7. The thresholds sit below the recorded tallies on purpose: C14.08 shows the one thing the seed does not control, and where the failure happens
 
-**Recorded result:** PASS — seed 5: HermiT ran 10 of 10, did not run 0; seed 0: HermiT ran 2 of 10, did not run 8; step 1 output contains "could not be run: cannot access local variable 'entity' where it is not associated with a value"
+**Recorded result:** PASS — seed 5: HermiT ran 10 of 10, did not run 0; seed 0: HermiT ran 1 of 10, did not run 9; step 1 output contains "could not be run: cannot access local variable 'entity' where it is not associated with a value"
 
 <details><summary>Output, as recorded</summary>
 
 ```text
 $ python scripts/reasoner_seeds.py work/C14_06 10 0 5
-PYTHONHASHSEED=0: HermiT ran 2 of 10, did not run 8 of 10
+PYTHONHASHSEED=0: HermiT ran 1 of 10, did not run 9 of 10
 PYTHONHASHSEED=5: HermiT ran 10 of 10, did not run 0 of 10
 REA-022 messages seen:
-  8 x  The external DL reasoner ('hermit') could not be run: cannot access local variable 'entity' where it is not associated with a value
+  9 x  The external DL reasoner ('hermit') could not be run: cannot access local variable 'entity' where it is not associated with a value
 [exit 0]
 ```
 
@@ -10110,7 +10109,7 @@ REA-022 messages seen:
 ### C14.07 — SHACL validates the union of the named graphs
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-07) · [plain edition](../docs/14-coverage-and-gaps.md#the-shacl-engine-cannot-scope-validation-to-a-named-graph)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Quad syntaxes parse, and then every named graph and the default graph are merged
 
@@ -10223,7 +10222,7 @@ Options:
 ### C14.08 — Almost: the seed decides most of owlready2's load, and not all of it
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-08) · [plain edition](../docs/14-coverage-and-gaps.md#the-dl-reasoner-fails-on-some-hash-seeds-not-at-random)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > *Almost*, because I had first written "every time", and the evidence for this
 
@@ -10371,14 +10370,14 @@ with tempfile.TemporaryDirectory() as tmp:
 
 **What is checked:** loading the merged ontology straight into owlready2, with the load path and blank-node labels fixed: seed 0 fails in at least 9 of 15 and seed 5 loads in at least 13 of 15; every failure is while building foaf:primaryTopic. The exact tallies, including any loads that go the other way, are recorded rather than asserted
 
-**Recorded result:** PASS — line 2. failed 14 times (at least 9); line 3. loaded 15 times (at least 13); every failure was owlready2 building foaf:primaryTopic
+**Recorded result:** PASS — line 2. failed 15 times (at least 9); line 3. loaded 15 times (at least 13); every failure was owlready2 building foaf:primaryTopic
 
 <details><summary>Output, as recorded</summary>
 
 ```text
 $ python scripts/load_repeat.py work/C14_08 15
-1. PYTHONHASHSEED=0, fresh temporary directory: loaded 0 of 15, failed 15 of 15
-2. PYTHONHASHSEED=0, fixed path and blank-node labels: loaded 1 of 15, failed 14 of 15
+1. PYTHONHASHSEED=0, fresh temporary directory: loaded 1 of 15, failed 14 of 15
+2. PYTHONHASHSEED=0, fixed path and blank-node labels: loaded 0 of 15, failed 15 of 15
 3. PYTHONHASHSEED=5, fixed path and blank-node labels: loaded 15 of 15, failed 0 of 15
 failures were while building: <http://xmlns.com/foaf/0.1/primaryTopic> (29)
 [exit 0]
@@ -10398,7 +10397,7 @@ HermiT is never called here: the failure, when it comes, is in loading.
 ### C14.09 — Without Java the message is the operating system's
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-09) · [plain edition](../docs/14-coverage-and-gaps.md#the-dl-reasoner-fails-on-some-hash-seeds-not-at-random)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > "cannot find the file specified", so a genuinely missing Java *is*
 
@@ -10452,7 +10451,7 @@ Findings: 2 total (1 Violation, 0 Warning, 1 Info)
 Reports written to: ./work/C14_09/out
   - work/C14_09/out/findings.txt (start here -- what, where, and the source line)
   - work/C14_09/out/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpt9n4xmf5 -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpakb24o63 -Y
 [exit 1]
 
 $ python scripts/summarise_findings.py work/C14_09/out/full_results.csv --by focus --check REA-022
@@ -10469,7 +10468,7 @@ total 1: 0 Violation, 0 Warning, 1 Info
 ### C14.39 — REA-020 said inconsistent when only a class was unsatisfiable; fixed in 0.23.0
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-39) · [plain edition](../docs/14-coverage-and-gaps.md#rea-020-said-inconsistent-when-one-class-was-unsatisfiable-fixed-in-0230)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > When HermiT does run on the fixture, suite 0.22.0 reports `REA-020`
 
@@ -10555,7 +10554,7 @@ $ python scripts/hermit_verdict.py fixtures/acme_robotics/acme-org-v1.ttl fixtur
 HermiT: consistent (no OwlReadyInconsistentOntologyError)
 unsatisfiable classes: ['http://www.w3.org/2002/07/owl#Nothing', 'https://acme.example.org/ns/Contractor']
 owl:Nothing among them: True
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpf9xiklgo -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp8dzsj1rg -Y
 [exit 0]
 
 $ ontology-quality-suite ontology --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --out-dir work/C14_39/acme --reports minimal
@@ -10563,7 +10562,7 @@ Findings: 2 total (2 Violation, 0 Warning, 0 Info)
 Reports written to: ./work/C14_39/acme
   - work/C14_39/acme/findings.txt (start here -- what, where, and the source line)
   - work/C14_39/acme/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpucaqciaw -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpzpjciy77 -Y
 [exit 1]
 
 $ python scripts/summarise_findings.py work/C14_39/acme/full_results.csv
@@ -10576,7 +10575,7 @@ $ python scripts/hermit_verdict.py data/reasoner/clean.ttl
 HermiT: consistent (no OwlReadyInconsistentOntologyError)
 unsatisfiable classes: none
 owl:Nothing among them: False
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp1kd0gwi8 -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpivf26jf4 -Y
 [exit 0]
 
 $ ontology-quality-suite ontology --ontology data/reasoner/clean.ttl --out-dir work/C14_39/clean --reports minimal
@@ -10584,7 +10583,7 @@ Findings: 0 total (0 Violation, 0 Warning, 0 Info)
 Reports written to: ./work/C14_39/clean
   - work/C14_39/clean/findings.txt (start here -- what, where, and the source line)
   - work/C14_39/clean/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpenkba46n -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpai7c8o_h -Y
 [exit 0]
 
 $ python scripts/summarise_findings.py work/C14_39/clean/full_results.csv
@@ -10609,7 +10608,7 @@ Needs Java, and a hash seed under which owlready2 loads (5 here; see C14.06).
 ### C14.10 — A mistyped manifest role compared nothing, successfully (fixed in 0.24.0)
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-10) · [plain edition](../docs/14-coverage-and-gaps.md#a-mistyped-manifest-role-compared-nothing-successfully-fixed-in-0240)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > `consistency-remote` accepted any string as a graph's `role` and ignored all but
 
@@ -10621,7 +10620,7 @@ Needs Java, and a hash seed under which owlready2 loads (5 here; see C14.06).
 ### C14.11 — --help offers owlrl; asking for it gives a traceback
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-11) · [plain edition](../docs/14-coverage-and-gaps.md#smaller-ones-all-worth-a-line)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > | At 0.22.0, `--help` offers `--inference owlrl` and `both`, and asking for one gives a Python traceback
 
@@ -10633,7 +10632,7 @@ Needs Java, and a hash seed under which owlready2 loads (5 here; see C14.06).
 ### C14.12 — --inference is ignored under --engine sparql
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-12) · [plain edition](../docs/14-coverage-and-gaps.md#smaller-ones-all-worth-a-line)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > | At 0.22.0, `--inference` reaches the shapes only
 
@@ -10645,7 +10644,7 @@ Needs Java, and a hash seed under which owlready2 loads (5 here; see C14.06).
 ### C14.13 — The near-miss warning listed blank-node identifiers, until 0.24.0
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-13) · [plain edition](../docs/14-coverage-and-gaps.md#smaller-ones-all-worth-a-line)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > | Up to 0.23.0, the `--own-namespace` near-miss warning lists two blank-node identifiers
 
@@ -10657,7 +10656,7 @@ Needs Java, and a hash seed under which owlready2 loads (5 here; see C14.06).
 ### C14.14 — --registry replaces, so @builtin with a house registry is UNMAPPED
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-14) · [plain edition](../docs/14-coverage-and-gaps.md#smaller-ones-all-worth-a-line)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > | `--sparql` composes but `--registry` replaces
 
@@ -10669,7 +10668,7 @@ Needs Java, and a hash seed under which owlready2 loads (5 here; see C14.06).
 ### C14.15 — One contradiction, two LOG-001s, until 0.24.0
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-15) · [plain edition](../docs/14-coverage-and-gaps.md#smaller-ones-all-worth-a-line)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > | Up to 0.23.0, `data` and `run` report one contradiction as two `LOG-001`s
 
@@ -10681,7 +10680,7 @@ Needs Java, and a hash seed under which owlready2 loads (5 here; see C14.06).
 ### C14.16 — The DSL's TypeError and Quad type, up to 0.16.0
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-16) · [plain edition](../docs/14-coverage-and-gaps.md#smaller-ones-all-worth-a-line)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > | Up to 0.16.0, the DSL gives unchecked code an internal `TypeError`
 
@@ -10693,7 +10692,7 @@ Needs Java, and a hash seed under which owlready2 loads (5 here; see C14.06).
 ### C14.17 — triplify drives oxi-gen only
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-17) · [plain edition](../docs/14-coverage-and-gaps.md#smaller-ones-all-worth-a-line)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > | The suite's `triplify` and the extension's *Run Full Triplify* drive `oxi-gen` only
 
@@ -10705,7 +10704,7 @@ Needs Java, and a hash seed under which owlready2 loads (5 here; see C14.06).
 ### C14.18 — consistency and pattern-consistency are report-only by default
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-18) · [plain edition](../docs/14-coverage-and-gaps.md#smaller-ones-all-worth-a-line)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > | `consistency` and `pattern-consistency` exit 0 whatever they find
 
@@ -10717,11 +10716,11 @@ Needs Java, and a hash seed under which owlready2 loads (5 here; see C14.06).
 ### C14.19 — The holos CLI and holosdb defaulted to different validators, up to 0.21.1
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-19) · [plain edition](../docs/14-coverage-and-gaps.md#smaller-ones-all-worth-a-line)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > | Up to 0.21.1, the `holos validate` command defaults to the `native` engine and `holosdb`'s
 
-**Evidence:** the same as [C13.10 — Validation and the store: written into it up to 0.21.0, untouched from 0.21.1](#c13-10), which reproduces it: holosdb 0.26.2, holos 0.26.2: step 1 output contains "adapted: {'conforms': False, 'violations': 2, 'engine': 'adapted', 'results': [", "native:  {'conforms': False, 'violations': 2, 'engine': 'native', 'results': [", "'focus': 'http://example.org/a'", "'focus': 'http://example.org/b'", 'HolosError: unsupported: sh:sparql is not implemented'; step 10 output contains '--engine <NAME>          adapted (default) or native'; step 2 output contains 'adapted, three calls on one store: violations [2, 2, 2]', 'native, three calls on one store: violations [2, 2, 2]', 'named graphs after one validate(): []', 'named graphs in the persistent store after reopening: []', 'store.update("DROP GRAPH <urn:holos:python:shapes>") removes them'; step 5 output contains 'results           2'; step 6 output contains 'results           2'; step 7 output has none of 'urn:holos:shapes'; step 9 output contains 'note: <urn:holos:shapes> holds 1 quads', 'DROP GRAPH <urn:holos:shapes>'
+**Evidence:** the same as [C13.10 — Validation and the store: written into it up to 0.21.0, untouched from 0.21.1](#c13-10), which reproduces it: holosdb 0.26.4, holos 0.26.4: step 1 output contains "adapted: {'conforms': False, 'violations': 2, 'engine': 'adapted', 'results': [", "native:  {'conforms': False, 'violations': 2, 'engine': 'native', 'results': [", "'focus': 'http://example.org/a'", "'focus': 'http://example.org/b'", 'HolosError: unsupported: sh:sparql is not implemented'; step 10 output contains '--engine <NAME>          adapted (default) or native'; step 2 output contains 'adapted, three calls on one store: violations [2, 2, 2]', 'native, three calls on one store: violations [2, 2, 2]', 'named graphs after one validate(): []', 'named graphs in the persistent store after reopening: []', 'store.update("DROP GRAPH <urn:holos:python:shapes>") removes them'; step 5 output contains 'results           2'; step 6 output contains 'results           2'; step 7 output has none of 'urn:holos:shapes'; step 9 output contains 'note: <urn:holos:shapes> holds 1 quads', 'DROP GRAPH <urn:holos:shapes>'
 
 ---
 
@@ -10729,7 +10728,7 @@ Needs Java, and a hash seed under which owlready2 loads (5 here; see C14.06).
 ### C14.20 — sketch reads every file with the first file's prefixes
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-20) · [plain edition](../docs/14-coverage-and-gaps.md#smaller-ones-all-worth-a-line)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > | At 0.22.0, when two query files bind one prefix differently, `sketch` reads every file
 
@@ -10809,8 +10808,8 @@ options:
 - [suite docs/REASONING.md](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/a4d08d054d168aade8daaffa4ed32df040d72311/docs/REASONING.md#L107): “Uses `owlready2` (the `reasoner` extra: `uv sync --extra reasoner`)” (quote found, checked 2026-11-18)
 - [suite pyproject.toml at its first commit: owlready2 a base dependency](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/d0ba3679644360c31118295f9ba8738c85111e95/pyproject.toml#L14): “"owlready2>=0.51",” (quote found, checked 2026-11-18)
 - [extension README up to 0.17.4 names Oxigraph](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/d6deaa6cba957f895563066dbc40709297a2cb5f/README.md#L86): “Oxigraph, `shacl-wasm`, and `eyereasoner` are all” (quote found, checked 2026-11-18)
-- [extension README at 0.17.5 names HOLOS](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/b6bd2e2eba654f65c81f24ca2473f73ec7d821a4/README.md#L86): “HOLOS (`holos-wasm-node`), `shacl-wasm-node`, and `eyereasoner` are all” (quote found, checked 2026-11-18)
-- [testing repo README](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/98b8fd42b21608f3cb9d82b533cbf9fa711241fa/README.md#L22): “18 Turtle files in 10 folders” (quote found, checked 2026-11-18)
+- [extension README from 0.17.5 names HOLOS](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/362d343de835ded5a6de9efc414846632ef9053f/README.md#L86): “HOLOS (`holos-wasm-node`), `shacl-wasm-node`, and `eyereasoner` are all” (quote found, checked 2026-11-18)
+- [testing repo README](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/05ec27d13c2018c8427eb8cfe5a98474ee522789/README.md#L22): “18 Turtle files in 10 folders” (quote found, checked 2026-11-18)
 - [testing repo README at 7deaf86, before 79c53a2 corrected it](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/7deaf86a523fb313ccf47572df4e7276c779e28e/README.md#L31): “All 16 fixtures pass” (quote found, checked 2026-11-18)
 - [suite commit 5d59713, 'Bump to 0.18.0': main's head until it was fast-forwarded to 0.23.0, as recorded while drafting](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/5d597132779a19dbfb7ccf8891723ca19d49ced3): “Bump to 0.18.0” (quote found, checked 2026-11-18)
 
@@ -10839,7 +10838,7 @@ Counted from the tagged files: 50 entries at v0.5.0 and v0.8.0, 56 at v0.10.0, 6
 ### C14.23 — Closed: the engines are the toolchain's own
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-23) · [plain edition](../docs/14-coverage-and-gaps.md#gaps-and-rough-edges-that-have-closed)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **The engines are the toolchain's own.**
 
@@ -10851,7 +10850,7 @@ Counted from the tagged files: 50 entries at v0.5.0 and v0.8.0, 56 at v0.10.0, 6
 ### C14.24 — Closed: messages on blank nodes
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-24) · [plain edition](../docs/14-coverage-and-gaps.md#gaps-and-rough-edges-that-have-closed)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **Messages on blank nodes.**
 
@@ -10863,7 +10862,7 @@ Counted from the tagged files: 50 entries at v0.5.0 and v0.8.0, 56 at v0.10.0, 6
 ### C14.25 — Closed: findings say where they are
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-25) · [plain edition](../docs/14-coverage-and-gaps.md#gaps-and-rough-edges-that-have-closed)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **Findings say where they are.**
 
@@ -10875,7 +10874,7 @@ Counted from the tagged files: 50 entries at v0.5.0 and v0.8.0, 56 at v0.10.0, 6
 ### C14.26 — Closed: house rules compose with the built-ins
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-26) · [plain edition](../docs/14-coverage-and-gaps.md#gaps-and-rough-edges-that-have-closed)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **House rules compose with the built-ins.**
 
@@ -10895,7 +10894,7 @@ Counted from the tagged files: 50 entries at v0.5.0 and v0.8.0, 56 at v0.10.0, 6
 
 - [suite commit cd72df1: language-tagged literals, and per-row entities](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/cd72df19132e76cb91d3f775943c054d3a1e617a): “Both found by the sibling fixture repo” (quote found, checked 2026-11-18)
 - [suite commit 9defc24: the namespace legend](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/9defc24d331866420b6532f407612ed35089d834) (exists, checked 2026-11-18)
-- [testing repo CT-01 README: the legend's false finding, until suite 0.20.0](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/98b8fd42b21608f3cb9d82b533cbf9fa711241fa/experiments/SpecificTests/CT-01-iri-template-drift/README.md#L50-L52): “It held one entry until suite 0.20.0.” (quote found, checked 2026-11-18)
+- [testing repo CT-01 README: the legend's false finding, until suite 0.20.0](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/blob/05ec27d13c2018c8427eb8cfe5a98474ee522789/experiments/SpecificTests/CT-01-iri-template-drift/README.md#L50-L52): “It held one entry until suite 0.20.0.” (quote found, checked 2026-11-18)
 - [suite commit def9038: the default namespace](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/def9038a8d43cfcf421c0c04b90ee0e400cd8df1): “Found while building an isolated fixture for CT-3” (quote found, checked 2026-11-18)
 - [suite commit cae9ef2: --sparql replacing the built-ins](https://github.com/pwin/consolidated-ontology-quality-suite-python/commit/cae9ef21cf33ceb8eba33ef94da66b32bf810ded): “Found in exactly that state: the separate testing repo's CI gate config” (quote found, checked 2026-11-18)
 
@@ -10905,7 +10904,7 @@ Counted from the tagged files: 50 entries at v0.5.0 and v0.8.0, 56 at v0.10.0, 6
 ### C14.28 — Closed: sh:conforms follows the specification
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-28) · [plain edition](../docs/14-coverage-and-gaps.md#gaps-and-rough-edges-that-have-closed)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **`sh:conforms` means what the specification says**, from engine 0.3.0, and the
 
@@ -10929,11 +10928,11 @@ Counted from the tagged files: 50 entries at v0.5.0 and v0.8.0, 56 at v0.10.0, 6
 ### C14.40 — Closed: HOLOS validation leaves the store as it found it, from 0.21.1
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-40) · [plain edition](../docs/14-coverage-and-gaps.md#gaps-and-rough-edges-that-have-closed)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **HOLOS validation leaves the store as it found it**, from 0.21.1.
 
-**Evidence:** the same as [C13.10 — Validation and the store: written into it up to 0.21.0, untouched from 0.21.1](#c13-10), which reproduces it: holosdb 0.26.2, holos 0.26.2: step 1 output contains "adapted: {'conforms': False, 'violations': 2, 'engine': 'adapted', 'results': [", "native:  {'conforms': False, 'violations': 2, 'engine': 'native', 'results': [", "'focus': 'http://example.org/a'", "'focus': 'http://example.org/b'", 'HolosError: unsupported: sh:sparql is not implemented'; step 10 output contains '--engine <NAME>          adapted (default) or native'; step 2 output contains 'adapted, three calls on one store: violations [2, 2, 2]', 'native, three calls on one store: violations [2, 2, 2]', 'named graphs after one validate(): []', 'named graphs in the persistent store after reopening: []', 'store.update("DROP GRAPH <urn:holos:python:shapes>") removes them'; step 5 output contains 'results           2'; step 6 output contains 'results           2'; step 7 output has none of 'urn:holos:shapes'; step 9 output contains 'note: <urn:holos:shapes> holds 1 quads', 'DROP GRAPH <urn:holos:shapes>'
+**Evidence:** the same as [C13.10 — Validation and the store: written into it up to 0.21.0, untouched from 0.21.1](#c13-10), which reproduces it: holosdb 0.26.4, holos 0.26.4: step 1 output contains "adapted: {'conforms': False, 'violations': 2, 'engine': 'adapted', 'results': [", "native:  {'conforms': False, 'violations': 2, 'engine': 'native', 'results': [", "'focus': 'http://example.org/a'", "'focus': 'http://example.org/b'", 'HolosError: unsupported: sh:sparql is not implemented'; step 10 output contains '--engine <NAME>          adapted (default) or native'; step 2 output contains 'adapted, three calls on one store: violations [2, 2, 2]', 'native, three calls on one store: violations [2, 2, 2]', 'named graphs after one validate(): []', 'named graphs in the persistent store after reopening: []', 'store.update("DROP GRAPH <urn:holos:python:shapes>") removes them'; step 5 output contains 'results           2'; step 6 output contains 'results           2'; step 7 output has none of 'urn:holos:shapes'; step 9 output contains 'note: <urn:holos:shapes> holds 1 quads', 'DROP GRAPH <urn:holos:shapes>'
 
 ---
 
@@ -10941,7 +10940,7 @@ Counted from the tagged files: 50 entries at v0.5.0 and v0.8.0, 56 at v0.10.0, 6
 ### C14.41 — Closed: three suite defects this edition found, fixed in 0.23.0
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-41) · [plain edition](../docs/14-coverage-and-gaps.md#gaps-and-rough-edges-that-have-closed)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **Three suite defects this edition found are fixed in 0.23.0**
 
@@ -10955,11 +10954,11 @@ The other two are C14.39 (REA-020) and C10.29 and C10.30 (sketch).
 ### C14.42 — Closed: gates that could not fail, and the DSL's two rough edges
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-42) · [plain edition](../docs/14-coverage-and-gaps.md#gaps-and-rough-edges-that-have-closed)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **Gates that could not fail, now can**: the `shacl` CLI refuses to validate
 
-**Evidence:** the same as [C11.29 — holos validate: exit 0 whatever it found up to 0.21.1, a gate from 0.22.0](#c11-29), which reproduces it: step 1 output contains 'conforms          false'; step 2 output contains 'conforms          false'; step 5 output contains "'conforms': False", 'HolosError: unsupported: sh:sparql is not implemented'; holos 0.26.2: step 1 exits 1; step 2 exits 1; step 3 exits 1; step 3 output contains 'conforms          false'; step 4 exits 1; step 6 exits 2; step 6 output contains 'sh:sparql'; step 7 exits 0
+**Evidence:** the same as [C11.29 — holos validate: exit 0 whatever it found up to 0.21.1, a gate from 0.22.0](#c11-29), which reproduces it: step 1 output contains 'conforms          false'; step 2 output contains 'conforms          false'; step 5 output contains "'conforms': False", 'HolosError: unsupported: sh:sparql is not implemented'; holos 0.26.4: step 1 exits 1; step 2 exits 1; step 3 exits 1; step 3 output contains 'conforms          false'; step 4 exits 1; step 6 exits 2; step 6 output contains 'sh:sparql'; step 7 exits 0
 
 The shacl CLI's refusal is C11.07; the DSL's two fixes are C08.15 and C08.16.
 
@@ -10969,7 +10968,7 @@ The shacl CLI's refusal is C11.07; the DSL's two fixes are C08.15 and C08.16.
 ### C14.30 — Early, but real: policy, rules, a triplifier
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-30) · [plain edition](../docs/14-coverage-and-gaps.md#gaps-and-rough-edges-that-have-closed)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **Early, but real:** read access policy at the index scan, with classification,
 
@@ -10981,7 +10980,7 @@ The shacl CLI's refusal is C11.07; the DSL's two fixes are C08.15 and C08.16.
 ### C14.31 — Wrong: the migration annotation's direction
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-31) · [plain edition](../docs/14-coverage-and-gaps.md#things-this-manual-had-wrong)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **The migration annotation's direction.** Every earlier edition said rename
 
@@ -10993,7 +10992,7 @@ The shacl CLI's refusal is C11.07; the DSL's two fixes are C08.15 and C08.16.
 ### C14.32 — Wrong: REA-022 as the tell in a scoped run
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-32) · [plain edition](../docs/14-coverage-and-gaps.md#things-this-manual-had-wrong)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **`REA-022` as the reasoner's tell in a scoped run.**
 
@@ -11005,11 +11004,11 @@ The shacl CLI's refusal is C11.07; the DSL's two fixes are C08.15 and C08.16.
 ### C14.33 — Wrong: the reasoner as flaky
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-33) · [plain edition](../docs/14-coverage-and-gaps.md#things-this-manual-had-wrong)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **The reasoner as "flaky".**
 
-**Evidence:** the same as [C14.06 — The reasoner's outcome follows the hash seed](#c14-06), which reproduces it: seed 5: HermiT ran 10 of 10, did not run 0; seed 0: HermiT ran 2 of 10, did not run 8; step 1 output contains "could not be run: cannot access local variable 'entity' where it is not associated with a value"
+**Evidence:** the same as [C14.06 — The reasoner's outcome follows the hash seed](#c14-06), which reproduces it: seed 5: HermiT ran 10 of 10, did not run 0; seed 0: HermiT ran 1 of 10, did not run 9; step 1 output contains "could not be run: cannot access local variable 'entity' where it is not associated with a value"
 
 ---
 
@@ -11017,11 +11016,11 @@ The shacl CLI's refusal is C11.07; the DSL's two fixes are C08.15 and C08.16.
 ### C14.34 — Wrong: the reasoner as an optional extra
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-34) · [plain edition](../docs/14-coverage-and-gaps.md#things-this-manual-had-wrong)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **The reasoner as an "optional extra".**
 
-**Evidence:** the same as [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05), which reproduces it: step 1 output contains 'commands installed: ontology-quality-suite', 'owlready2>=0.51', 'shacl 0.3.6/n    commands installed: none (library only)', 'tarka-rdf 0.2.2/n    commands installed: none (library only)', 'holosdb 0.26.2/n    commands installed: none (library only)'; suite 0.27.0: step 1 output contains 'shacl<0.4,>=0.3.3'; suite 0.27.0: step 1 output contains 'holosdb>=0.24'
+**Evidence:** the same as [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05), which reproduces it: step 1 output contains 'commands installed: ontology-quality-suite', 'owlready2>=0.51', 'shacl 0.3.8/n    commands installed: none (library only)', 'tarka-rdf 0.2.2/n    commands installed: none (library only)', 'holosdb 0.26.4/n    commands installed: none (library only)'; suite 0.27.0: step 1 output contains 'shacl<0.4,>=0.3.3'; suite 0.27.0: step 1 output contains 'holosdb>=0.24'
 
 ---
 
@@ -11045,7 +11044,7 @@ Today's figures are reproduced in C09.02 (479), C09.04 (23) and C07.22 (22 or 23
 ### C14.36 — Wrong: where a CONCAT-built IRI goes
 
 **In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-36) · [plain edition](../docs/14-coverage-and-gaps.md#things-this-manual-had-wrong)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **Where a `CONCAT`-built IRI goes.**
 
@@ -11086,7 +11085,7 @@ Annotated chapter: [manual/docs/15-adoption-roadmap.md](manual/docs/15-adoption-
 ### C15.01 — 479 unscoped, 23 scoped, four false with --exclude-imports
 
 **In the manual:** [Chapter 15, at the claim](manual/docs/15-adoption-roadmap.md#ev-c15-01) · [plain edition](../docs/15-adoption-roadmap.md#week-2--scope-the-registry-then-add-it)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > **Do not skip `--own-namespace`.** Unscoped, the fixture in this manual produces 479
 
@@ -11100,7 +11099,7 @@ Annotated chapter: [manual/docs/15-adoption-roadmap.md](manual/docs/15-adoption-
 ### C15.02 — --output-data is not optional
 
 **In the manual:** [Chapter 15, at the claim](manual/docs/15-adoption-roadmap.md#ev-c15-02) · [plain edition](../docs/15-adoption-roadmap.md#week-3--the-pipeline-stages)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Two things are not optional in practice. `--output-data` is one: without it,
 
@@ -11112,11 +11111,11 @@ Annotated chapter: [manual/docs/15-adoption-roadmap.md](manual/docs/15-adoption-
 ### C15.03 — PYTHONHASHSEED for docgen
 
 **In the manual:** [Chapter 15, at the claim](manual/docs/15-adoption-roadmap.md#ev-c15-03) · [plain edition](../docs/15-adoption-roadmap.md#week-4--documentation-and-artefacts)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > Publish it. The `PYTHONHASHSEED` is a workaround, not decoration. Without it
 
-**Evidence:** the same as [C13.12 — Three runs, three pages; pinned, one](#c13-12), which reproduces it: three unpinned runs gave 2 different pages; two runs with PYTHONHASHSEED=0 gave the same page
+**Evidence:** the same as [C13.12 — Three runs, three pages; pinned, one](#c13-12), which reproduces it: three unpinned runs gave 3 different pages; two runs with PYTHONHASHSEED=0 gave the same page
 
 ---
 
@@ -11129,7 +11128,7 @@ Annotated chapter: [manual/docs/diagram-style.md](manual/docs/diagram-style.md) 
 ### CA.01 — All six fills clear 12:1 against the text colour
 
 **In the manual:** [Appendix A, at the claim](manual/docs/diagram-style.md#ev-ca-01) · [plain edition](../docs/diagram-style.md#a6-accessibility)  
-**Kind:** Reproduced here · **Result:** **PASS** (2026-11-13)
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-18)
 
 > - Palette contrast: all six fills carry the `#14243A` text colour at a contrast
 
