@@ -54,15 +54,16 @@ are recorded but never asserted.
 
 **Which versions.** The packages are installed as a reader would install them,
 from PyPI and npm, not from any repository's lock file. So holosdb resolves to
-0.26.4 and shacl to 0.3.8 here. The suite's own `uv.lock` holds holosdb 0.26.1 and
-shacl 0.3.4 in the 0.27.0 release and 0.26.4 and 0.3.8 on `main` since 18
-November, and held holosdb 0.15.0 at 0.22.0 (C07.17), which is why the lock is not
-what this reads. Where a release changed what a claim should see, the claim checks the
+0.27.0 and shacl to 0.3.9 here, while the suite's own 0.28.0 release locks holosdb
+0.26.4 and shacl 0.3.8, the versions the 0.18.0 extension bundles (C07.04, C07.33).
+The lock held holosdb 0.15.0 at 0.22.0 (C07.17), which is why it is not what this
+reads. Where a release changed what a claim should see, the claim checks the
 installed version and says which side of the change it ran on: suite 0.23.0
 (C07.05, C07.26, C07.27, C08.19, C10.18, C10.29, C10.30, C14.21, C14.39), suite
 0.24.0 (C10.18, C10.19), 0.24.1 (C13.03), and 0.24.2 and 0.24.3 (C07.05); the
 engine's CLI at 0.3.4 (C11.07); HOLOS 0.21.1 (C13.10), 0.22.0 (C11.29, C13.10) and
-0.23.0 (C13.10); and the DSL at 0.16.1 (C08.15, C08.16).
+0.23.0 (C13.10); and the DSL at 0.16.1 (C08.15, C08.16). C07.33 runs two engine
+releases side by side, 0.3.8 and 0.3.9, rather than branching on one.
 
 **What the machine needs.** Python 3.11 or later and Node 20 or later; the binaries
 come from `tools/fetch_binaries.py`. A Java runtime, for the claims in which HermiT

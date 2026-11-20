@@ -174,7 +174,7 @@ CLAIMS = [
           checks="the same five answers as the Python API", needs=["holos-cli"]),
 
     Claim("C13.09", "8 ns per quad, by HOLOS's own measurement", "13",
-          (F, "All verified at 0.26.0. HOLOS measures the cost at 8 ns per quad, about 1% of"), "source",
+          (F, "All verified at 0.27.0. HOLOS measures the cost at 8 ns per quad, about 1% of"), "source",
           sources=[src("HOLOS ACCESS-CONTROL.md", file("holos", "ACCESS-CONTROL.md", "44"),
                        "It costs **8 ns per quad** — measured, and about 1% of what decoding the quad costs.")]),
 
@@ -207,7 +207,7 @@ CLAIMS = [
                        "Engine::with_transient_graph loads input inside a commit scope that is always rolled back"),
                    src("HOLOS commit 82e4d66, 'Cut 0.21.1'", commit("holos", "82e4d6686b3563db502ea68098a6f3fc9ce75d6b"),
                        "validation leaves nothing in the store it validates")],
-          notes="The recorded run uses 0.26.0, so it shows the fix made in 0.21.1, and the results "
+          notes="The recorded run uses 0.27.0, so it shows the fix made in 0.21.1, and the results "
                 "the dictionary carries from 0.23.0. The same steps against the published 0.21.0 "
                 "gave: `violations [2, 4, 6]` for both engines; a 5-quad `urn:holos:python:shapes` graph after one "
                 "call, still there after reopening a persistent store; no warning for a planted leftover; and from "

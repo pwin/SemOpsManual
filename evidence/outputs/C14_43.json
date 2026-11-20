@@ -1,0 +1,29 @@
+{
+ "id": "C14.43",
+ "status": "PASS",
+ "detail": "tarka 0.3.1: step 1 exits 1; step 1 output contains 'no column for the mandatory parameter id, so every instance would be left out', '(the columns: employee, name, mbox, employee_id, dept, role, skill)'; step 2 output has none of 'renamed.nt'",
+ "ran": "2026-11-20",
+ "steps": [
+  {
+   "cmd": "tarka run -l data/ottr/employees.stottr -T acme:Employee -i data/ottr/employees-renamed-id.csv --ntriples -o work/C14_43/renamed.nt",
+   "rc": 1,
+   "seconds": 0.0,
+   "stdout": "",
+   "stderr": "tarka: the input has no column for the mandatory parameter id, so every instance would be left out (the columns: employee, name, mbox, employee_id, dept, role, skill). A parameter reads the column of its own name\n"
+  },
+  {
+   "cmd": "python scripts/list_files.py work/C14_43",
+   "rc": 0,
+   "seconds": 0.1,
+   "stdout": "0 files, 0 bytes\n",
+   "stderr": ""
+  },
+  {
+   "cmd": "tarka --version",
+   "rc": 0,
+   "seconds": 0.0,
+   "stdout": "tarka 0.3.1\n",
+   "stderr": ""
+  }
+ ]
+}

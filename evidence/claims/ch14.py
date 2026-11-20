@@ -1,7 +1,8 @@
 """Chapter 14 — Coverage and gaps."""
 import re
 
-from ._common import (ACME, SUITE, V1, Claim, Step, all_of, by_version, checks, commit, file, has, lacks, ok, src)
+from ._common import (ACME, SUITE, V1, Claim, Step, all_of, by_tool, by_version, checks, commit, exit_code, file,
+                      has, lacks, ok, src)
 
 F = "docs/14-coverage-and-gaps.md"
 PREV = "fc6de6da90d54a57bbbd2163ebc5b5dfe246ec40"
@@ -31,6 +32,28 @@ CLAIMS = [
 
     Claim("C14.03", "holos validate exited 0 on a non-conforming graph, up to 0.21.1", "14",
           (F, "Up to 0.21.1 both of its validators printed `conforms false` and returned exit"), "run", same_as="C11.29"),
+
+    Claim("C14.43", "A mandatory OTTR parameter with no column stops the run, from tarka 0.3.1", "14",
+          (F, "**The other way to lose every instance went in 0.3.1.**"), "run",
+          data=["data/ottr/employees.stottr", "data/ottr/employees-renamed-id.csv"],
+          steps=[Step("tarka run -l data/ottr/employees.stottr -T acme:Employee "
+                      "-i data/ottr/employees-renamed-id.csv --ntriples -o {work}/renamed.nt"),
+                 Step("python scripts/list_files.py {work}"),
+                 Step("tarka --version")],
+          check=by_tool(2, "tarka", (0, 3, 1),
+                        checks(exit_code(0, 1),
+                               has(0, "no column for the mandatory parameter id, so every instance would be left out",
+                                   "(the columns: employee, name, mbox, employee_id, dept, role, skill)"),
+                               lacks(1, "renamed.nt")),
+                        checks(lacks(0, "no column for the mandatory parameter"))),
+          checks="from 0.3.1: exit 1, the message names the parameter and lists the columns, and no output file "
+                 "is written. Before 0.3.1 there is no such message",
+          needs=["tarka-cli"],
+          sources=[src("tarka CHANGELOG, 0.3.1", file("tarka", "CHANGELOG.md", "5-9"),
+                       "Before, the run went")],
+          notes="The CSV is the acme employees file with its `id` column renamed `employee_id`. The CHANGELOG adds "
+                "that the message names the nearest column when there is one (`floor_area` for `?floorArea`); "
+                "`employee_id` is not near enough to `id` for that, so the message lists them all."),
 
     Claim("C14.04", "tarka dropped instances it could not build, silently, up to 0.1.1", "14",
           (F, "Up to 0.1.1, an OTTR template whose `ottr:IRI` parameter received a cell tarka"), "run",

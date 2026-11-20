@@ -153,7 +153,7 @@ CLAIMS = [
 
     Claim("C10.09", "1.7× and 2.6× faster than oxi-gen, by tarka's own measurement", "10",
           (F, "Its own measurement, on a"), "source",
-          sources=[src("tarka README", file("tarka", "README.md", "41-43"),
+          sources=[src("tarka README", file("tarka", "README.md", "44-46"),
                        "tarka ran the TARQL query 1.7 times as fast as oxi-gen, and the OTTR templates 2.6 times as fast.")],
           notes="Not reproduced here: it needs oxi-gen and the 200,000-row file."),
 
@@ -259,7 +259,7 @@ CLAIMS = [
     Claim("C10.16", "tarka speaks the protocol, in RDF 1.1, with the engine built without RDF 1.2", "10",
           (F, "tarka speaks the protocol rather than linking any particular store in"), "source",
           sources=[src("tarka commit 26f256a", commit("tarka", "26f256a28f10d299a4cf1c5dd49ba52cd37122a7")),
-                   src("tarka README", file("tarka", "README.md", "45"), "tarka works with RDF 1.1 and SPARQL 1.1.")]),
+                   src("tarka README", file("tarka", "README.md", "48"), "tarka works with RDF 1.1 and SPARQL 1.1.")]),
 
     Claim("C10.17", "The suite's triplify still needs oxi-gen, and says so", "10",
           (F, "If you have no `oxi-gen` build, `triplify` says so in a warning and"), "run",

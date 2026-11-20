@@ -34,8 +34,8 @@ npm ci
 
 What gets installed, and from where:
 
-- **PyPI:** `ontology-quality-suite` 0.28.0, `shacl` 0.3.8, `holosdb` 0.26.4,
-  `tarka-rdf` 0.2.2, and `pyoxigraph` 0.5.11 (a second SPARQL engine, used only as
+- **PyPI:** `ontology-quality-suite` 0.28.0, `shacl` 0.3.9, `holosdb` 0.27.0,
+  `tarka-rdf` 0.3.1, and `pyoxigraph` 0.5.13 (a second SPARQL engine, used only as
   a witness in one claim). `requirements.txt` is the authority, and this list
   follows it.
 - **GitHub releases:** the `shacl`, `tarka`, `holos` and `holos-server` commands,

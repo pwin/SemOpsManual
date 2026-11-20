@@ -1,7 +1,7 @@
 {
  "id": "C11.07",
  "status": "PASS",
- "detail": "shacl 0.3.8: step 1 exits 2; step 1 output contains 'the shapes graph declares no shapes'; step 2 exits 2; step 2 output contains 'no --shapes was given'; step 3: conforms: true; step 3 exits 0",
+ "detail": "shacl 0.3.9: step 1 exits 2; step 1 output contains 'the shapes graph declares no shapes'; step 2 exits 2; step 2 output contains 'no --shapes was given'; step 3: conforms: true; step 3 exits 0",
  "ran": "2026-11-20",
  "steps": [
   {
@@ -29,7 +29,7 @@
    "cmd": "shacl --version",
    "rc": 0,
    "seconds": 0.0,
-   "stdout": "shacl 0.3.8\n",
+   "stdout": "shacl 0.3.9\n",
    "stderr": ""
   }
  ]

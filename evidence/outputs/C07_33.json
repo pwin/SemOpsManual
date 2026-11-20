@@ -1,0 +1,22 @@
+{
+ "id": "C07.33",
+ "status": "PASS",
+ "detail": "step 1 output contains 'shacl-wasm-node 0.3.8  conforms=true  results=0', 'shacl-wasm-node 0.3.9  conforms=false  results=1  focus=ex:globex'; step 2 output contains 'conforms: false', 'focus <https://example.org/globex>'; step 2 output has none of 'focus <https://example.org/acme>'; step 2 exits 1",
+ "ran": "2026-11-20",
+ "steps": [
+  {
+   "cmd": "node scripts/datatype_gap.mjs data/datatypes",
+   "rc": 0,
+   "seconds": 0.3,
+   "stdout": "shacl-wasm-node 0.3.8  conforms=true  results=0  focus=-\nshacl-wasm-node 0.3.9  conforms=false  results=1  focus=ex:globex\n",
+   "stderr": ""
+  },
+  {
+   "cmd": "shacl -d data/datatypes/data.ttl -s data/datatypes/shapes.ttl",
+   "rc": 1,
+   "seconds": 0.0,
+   "stdout": "conforms: false\n  Violation DatatypeConstraintComponent | focus <https://example.org/globex> | value \"not-a-year\"^^<http://www.w3.org/2001/XMLSchema#gYear> | path <https://example.org/founded>\n",
+   "stderr": ""
+  }
+ ]
+}

@@ -54,15 +54,16 @@ are recorded but never asserted.
 
 **Which versions.** The packages are installed as a reader would install them,
 from PyPI and npm, not from any repository's lock file. So holosdb resolves to
-0.26.4 and shacl to 0.3.8 here. The suite's own `uv.lock` holds holosdb 0.26.1 and
-shacl 0.3.4 in the 0.27.0 release and 0.26.4 and 0.3.8 on `main` since 18
-November, and held holosdb 0.15.0 at 0.22.0 (C07.17), which is why the lock is not
-what this reads. Where a release changed what a claim should see, the claim checks the
+0.27.0 and shacl to 0.3.9 here, while the suite's own 0.28.0 release locks holosdb
+0.26.4 and shacl 0.3.8, the versions the 0.18.0 extension bundles (C07.04, C07.33).
+The lock held holosdb 0.15.0 at 0.22.0 (C07.17), which is why it is not what this
+reads. Where a release changed what a claim should see, the claim checks the
 installed version and says which side of the change it ran on: suite 0.23.0
 (C07.05, C07.26, C07.27, C08.19, C10.18, C10.29, C10.30, C14.21, C14.39), suite
 0.24.0 (C10.18, C10.19), 0.24.1 (C13.03), and 0.24.2 and 0.24.3 (C07.05); the
 engine's CLI at 0.3.4 (C11.07); HOLOS 0.21.1 (C13.10), 0.22.0 (C11.29, C13.10) and
-0.23.0 (C13.10); and the DSL at 0.16.1 (C08.15, C08.16).
+0.23.0 (C13.10); and the DSL at 0.16.1 (C08.15, C08.16). C07.33 runs two engine
+releases side by side, 0.3.8 and 0.3.9, rather than branching on one.
 
 **What the machine needs.** Python 3.11 or later and Node 20 or later; the binaries
 come from `tools/fetch_binaries.py`. A Java runtime, for the claims in which HermiT
@@ -134,26 +135,26 @@ for its error on unchecked code and its `Quad` type ([C08.15](#c08-15),
 | python | 3.12.13 |
 | platform | Windows 11 (AMD64) |
 | PyPI ontology-quality-suite | 0.28.0 |
-| PyPI shacl | 0.3.8 |
-| PyPI holosdb | 0.26.4 |
-| PyPI tarka-rdf | 0.2.2 |
+| PyPI shacl | 0.3.9 |
+| PyPI holosdb | 0.27.0 |
+| PyPI tarka-rdf | 0.3.1 |
 | PyPI rdflib | 7.6.0 |
-| PyPI pyoxigraph | 0.5.11 |
+| PyPI pyoxigraph | 0.5.13 |
 | PyPI polars | 2.0.0 |
-| release shacl | shacl 0.3.8 |
-| release tarka | tarka 0.2.2 |
-| release holos | holos 0.26.4 (27aabce) |
+| release shacl | shacl 0.3.9 |
+| release tarka | tarka 0.3.1 |
+| release holos | holos 0.27.0 (1034260) |
 | node | v22.21.1 |
 | npm ontology-suite | 0.17.3 |
-| npm shacl-wasm-node | 0.3.8 |
-| npm holos-wasm-node | 0.26.4 |
+| npm shacl-wasm-node | 0.3.9 |
+| npm holos-wasm-node | 0.27.0 |
 | npm typescript | 7.0.2 |
 | java (for HermiT) | openjdk version "25.0.3" 2026-04-21 LTS |
 | oxi-gen (testing repo only) | oxi_gen 0.5.1 |
 
 ## Summary
 
-256 claims: 179 reproduced here, by 105 distinct runs (179 pass, 0 fail, 0 not yet run), 65 cited from upstream, 12 arguments. 130 source citations, 124 of them checked against the cited commit (the quoted words found in the commit message or in the file at the cited lines).
+258 claims: 181 reproduced here, by 107 distinct runs (181 pass, 0 fail, 0 not yet run), 65 cited from upstream, 12 arguments. 133 source citations, 127 of them checked against the cited commit (the quoted words found in the commit message or in the file at the cited lines).
 
 ### Introduction (README)
 
@@ -227,6 +228,7 @@ for its error on unchecked code and its `Quad` type ([C08.15](#c08-15),
 | [C07.02 — The engine changed and Chapter 9's figures did not](#c07-02) | Cited from upstream | Cited from upstream |
 | [C07.03 — One registry: 61 checks in ten categories, 44 SPARQL files and 6 shape files](#c07-03) | Reproduced here | PASS (2026-11-20) |
 | [C07.04 — The editor runs the same engines at the same versions](#c07-04) | Cited from upstream | Cited from upstream |
+| [C07.33 — sh:datatype xsd:gYear: accepted by the editor's 0.3.8, refused by 0.3.9](#c07-33) | Reproduced here | PASS (2026-11-20) |
 | [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05) | Reproduced here | PASS (2026-11-20) |
 | [C07.06 — STY-003's message vanished on 60 of 65 findings](#c07-06) | Cited from upstream | Cited from upstream |
 | [C07.07 — STR() of a blank node: lenient, conformant, and the guard](#c07-07) | Reproduced here | PASS (2026-11-20) |
@@ -441,6 +443,7 @@ for its error on unchecked code and its `Quad` type ([C08.15](#c08-15),
 | [C14.01 — A scoped run could not see that the reasoner did not run (fixed in 0.24.0)](#c14-01) | Reproduced here | PASS (2026-11-20) |
 | [C14.02 — The shacl CLI reported conformance when it checked nothing, up to 0.3.3](#c14-02) | Reproduced here | PASS (2026-11-20) |
 | [C14.03 — holos validate exited 0 on a non-conforming graph, up to 0.21.1](#c14-03) | Reproduced here | PASS (2026-11-20) |
+| [C14.43 — A mandatory OTTR parameter with no column stops the run, from tarka 0.3.1](#c14-43) | Reproduced here | PASS (2026-11-20) |
 | [C14.04 — tarka dropped instances it could not build, silently, up to 0.1.1](#c14-04) | Reproduced here | PASS (2026-11-20) |
 | [C14.05 — docgen reshuffles the page on every run](#c14-05) | Reproduced here | PASS (2026-11-20) |
 | [C14.06 — The reasoner's outcome follows the hash seed](#c14-06) | Reproduced here | PASS (2026-11-20) |
@@ -604,7 +607,7 @@ The previous wording said nineteen, which counted the chapters and not the PDF.
 
 > `pip install shacl`
 
-**Evidence:** the same as [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05), which reproduces it: step 1 output contains 'commands installed: ontology-quality-suite', 'owlready2>=0.51', 'shacl 0.3.8/n    commands installed: none (library only)', 'tarka-rdf 0.2.2/n    commands installed: none (library only)', 'holosdb 0.26.4/n    commands installed: none (library only)'; suite 0.28.0: step 1 output contains 'shacl<0.4,>=0.3.3'; suite 0.28.0: step 1 output contains 'holosdb>=0.24'
+**Evidence:** the same as [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05), which reproduces it: step 1 output contains 'commands installed: ontology-quality-suite', 'owlready2>=0.51', 'shacl 0.3.9/n    commands installed: none (library only)', 'tarka-rdf 0.3.1/n    commands installed: none (library only)', 'holosdb 0.27.0/n    commands installed: none (library only)'; suite 0.28.0: step 1 output contains 'shacl<0.4,>=0.3.3'; suite 0.28.0: step 1 output contains 'holosdb>=0.24'
 
 ---
 
@@ -945,7 +948,7 @@ Annotated chapter: [manual/docs/04-from-research-to-industry.md](manual/docs/04-
 
 > > The external DL reasoner ('hermit') could not be run: `cannot access local
 
-**Evidence:** the same as [C14.06 — The reasoner's outcome follows the hash seed](#c14-06), which reproduces it: seed 5: HermiT ran 10 of 10, did not run 0; seed 0: HermiT ran 0 of 10, did not run 10; step 1 output contains "could not be run: cannot access local variable 'entity' where it is not associated with a value"
+**Evidence:** the same as [C14.06 — The reasoner's outcome follows the hash seed](#c14-06), which reproduces it: seed 5: HermiT ran 10 of 10, did not run 0; seed 0: HermiT ran 2 of 10, did not run 8; step 1 output contains "could not be run: cannot access local variable 'entity' where it is not associated with a value"
 
 C14.06's record lists the REA-022 messages its seed-0 runs produced. 'Five runs of ten' describes this edition's unpinned runs.
 
@@ -959,7 +962,7 @@ C14.06's record lists the REA-022 messages its seed-0 runs produced. 'Five runs 
 
 > Reading the traceback for this edition showed something else: owlready2's *loader*
 
-**Evidence:** the same as [C14.08 — Almost: the seed decides most of owlready2's load, and not all of it](#c14-08), which reproduces it: line 2. failed 13 times (at least 9); line 3. loaded 15 times (at least 13); every failure was owlready2 building foaf:primaryTopic
+**Evidence:** the same as [C14.08 — Almost: the seed decides most of owlready2's load, and not all of it](#c14-08), which reproduces it: line 2. failed 15 times (at least 9); line 3. loaded 15 times (at least 13); every failure was owlready2 building foaf:primaryTopic
 
 ---
 
@@ -999,9 +1002,9 @@ That owlready2 installs with the suite is C07.05; LOG-001 without any reasoner i
 
 **Sources:**
 
-- [HOLOS README, conformance table](https://github.com/pwin/triplestore/blob/27aabce3a1b5579f13d7d274398300e856a6e77d/README.md#L122): “| SPARQL 1.1 | **511/511** · 100% | 511/625 · **82%** |” (quote found, checked 2026-11-20)
-- [HOLOS README, tests not yet run](https://github.com/pwin/triplestore/blob/27aabce3a1b5579f13d7d274398300e856a6e77d/README.md#L155): “| SPARQL 1.1 | **511 / 511** | 0 | 114 | **0** |” (quote found, checked 2026-11-20)
-- [HOLOS README, the withdrawn target](https://github.com/pwin/triplestore/blob/27aabce3a1b5579f13d7d274398300e856a6e77d/README.md#L106): “it was written before anything was measured” (quote found, checked 2026-11-20)
+- [HOLOS README, conformance table](https://github.com/pwin/triplestore/blob/1034260144088cac1b96678f37679a44b1f50f9d/README.md#L122): “| SPARQL 1.1 | **511/511** · 100% | 511/625 · **82%** |” (quote found, checked 2026-11-20)
+- [HOLOS README, tests not yet run](https://github.com/pwin/triplestore/blob/1034260144088cac1b96678f37679a44b1f50f9d/README.md#L155): “| SPARQL 1.1 | **511 / 511** | 0 | 114 | **0** |” (quote found, checked 2026-11-20)
+- [HOLOS README, the withdrawn target](https://github.com/pwin/triplestore/blob/1034260144088cac1b96678f37679a44b1f50f9d/README.md#L106): “it was written before anything was measured” (quote found, checked 2026-11-20)
 
 ---
 
@@ -1135,7 +1138,7 @@ for k, v in versions().items():
 
 **What is checked:** the installed packages, release binaries and npm packages are the versions in the table
 
-**Recorded result:** PASS — step 1 output contains 'PyPI ontology-quality-suite  0.28.0', 'PyPI shacl                   0.3.8', 'PyPI holosdb                 0.26.4', 'PyPI tarka-rdf               0.2.2', 'release shacl                shacl 0.3.8', 'release tarka                tarka 0.2.2', 'release holos                holos 0.26.4', 'npm ontology-suite           0.17.3', 'npm shacl-wasm-node          0.3.8', 'npm holos-wasm-node          0.26.4'
+**Recorded result:** PASS — step 1 output contains 'PyPI ontology-quality-suite  0.28.0', 'PyPI shacl                   0.3.9', 'PyPI holosdb                 0.27.0', 'PyPI tarka-rdf               0.3.1', 'release shacl                shacl 0.3.9', 'release tarka                tarka 0.3.1', 'release holos                holos 0.27.0', 'npm ontology-suite           0.17.3', 'npm shacl-wasm-node          0.3.9', 'npm holos-wasm-node          0.27.0'
 
 <details><summary>Output, as recorded</summary>
 
@@ -1144,28 +1147,27 @@ $ python scripts/versions.py
 python                       3.12.13
 platform                     Windows 11 (AMD64)
 PyPI ontology-quality-suite  0.28.0
-PyPI shacl                   0.3.8
-PyPI holosdb                 0.26.4
-PyPI tarka-rdf               0.2.2
+PyPI shacl                   0.3.9
+PyPI holosdb                 0.27.0
+PyPI tarka-rdf               0.3.1
 PyPI rdflib                  7.6.0
-PyPI pyoxigraph              0.5.11
+PyPI pyoxigraph              0.5.13
 PyPI polars                  2.0.0
-release shacl                shacl 0.3.8
-release tarka                tarka 0.2.2
-release holos                holos 0.26.4 (27aabce)
+release shacl                shacl 0.3.9
+release tarka                tarka 0.3.1
+release holos                holos 0.27.0 (1034260)
 node                         v22.21.1
 npm ontology-suite           0.17.3
-npm shacl-wasm-node          0.3.8
-npm holos-wasm-node          0.26.4
+npm shacl-wasm-node          0.3.9
+npm holos-wasm-node          0.27.0
 npm typescript               7.0.2
 java (for HermiT)            openjdk version "25.0.3" 2026-04-21 LTS
-oxi-gen (testing repo only)  oxi_gen 0.5.1
 [exit 0]
 ```
 
 </details>
 
-The testing repository was used at [31bda0d](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/commit/31bda0dea49a4e3669338f57b0e68c8f2ce5243f); see C09.15.
+The testing repository was used at [05ec27d](https://github.com/pwin/consolidated-ontology-quality-suite-python-testing/commit/05ec27d13c2018c8427eb8cfe5a98474ee522789); see C09.15.
 
 ---
 
@@ -1255,13 +1257,13 @@ $ python scripts/inspect_packages.py
 ontology-quality-suite 0.28.0
     commands installed: ontology-quality-suite
     runtime dependencies: holosdb>=0.24, matplotlib>=3.7.0, owlready2>=0.51, owlrl>=6.0.2, pandas>=2.0.0, rdflib>=7.6.0, shacl<0.4,>=0.3.3, tabulate>=0.9.0
-shacl 0.3.8
+shacl 0.3.9
     commands installed: none (library only)
     runtime dependencies: none
-tarka-rdf 0.2.2
+tarka-rdf 0.3.1
     commands installed: none (library only)
     runtime dependencies: polars>=1.30
-holosdb 0.26.4
+holosdb 0.27.0
     commands installed: none (library only)
     runtime dependencies: none
 registry entries: 61 in 10 categories (conformance, data, efficiency, logical, quality, reasoning, structural, style, tarql, vocabulary)
@@ -1290,7 +1292,115 @@ portable .rq checks: 44; SHACL shape files: 6
 - [suite uv.lock on main from 9182f9e: the holosdb it locks](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/9182f9e6f4411c72624d9e1a9e61f13e41d2fdb9/uv.lock#L167-L168): “version = "0.26.4"” (quote found, checked 2026-11-20)
 - [HOLOS commit 8b2a949: every query entry point through one pipeline](https://github.com/pwin/triplestore/commit/8b2a9495af52ff56a7ebedd49e9dbd0f1ead93ce): “Send every query entry point through one pipeline” (quote found, checked 2026-11-20)
 
-Below 1.0 a caret admits patch releases only, so `^0.26.4` means 0.26.x. The 0.18.0 release's lock file resolves it to 0.26.4, and the suite's 0.28.0 release locks the same 0.26.4 -- so the two sides are on one version exactly, in the lock as well as in what an install resolves. Earlier editions needed a caveat here because the suite's released lock trailed its repository's; 0.28.0 ships that lock and it does not. The extension reaches HOLOS through `queryRdf`, the suite through `Store.query`; from HOLOS 0.24.0 both run the same pipeline. HOLOS's own SHACL validator is a part the extension does not call: it validates with shacl-wasm-node.
+Below 1.0 a caret admits patch releases only, so `^0.26.4` means 0.26.x. The 0.18.0 release's lock file resolves it to 0.26.4, and the suite's 0.28.0 release locks the same 0.26.4, so the two locks agree exactly. A fresh install of the suite resolves holosdb 0.27.0 (its floor is `>=0.24`; C07.01), whose changes from 0.26.4 are `sh:datatype` checking in its validators and Rust re-exports, neither on the query path the 44 checks take ([CHANGELOG](https://github.com/pwin/triplestore/blob/1034260144088cac1b96678f37679a44b1f50f9d/CHANGELOG.md#L6-L51)). The extension reaches HOLOS through `queryRdf`, the suite through `Store.query`; from HOLOS 0.24.0 both run the same pipeline. HOLOS's own SHACL validator is a part the extension does not call: it validates with shacl-wasm-node.
+
+---
+
+<a id="c07-33"></a>
+### C07.33 — sh:datatype xsd:gYear: accepted by the editor's 0.3.8, refused by 0.3.9
+
+**In the manual:** [Chapter 7, at the claim](manual/docs/07-the-toolchain.md#ev-c07-33) · [plain edition](../docs/07-the-toolchain.md#71-the-idea-one-registry-two-runtimes-one-set-of-engines)  
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-20)
+
+> "Near enough" has a price, and the SHACL side shows it.
+
+**Inputs:** [`data/datatypes/shapes.ttl`](data/datatypes/shapes.ttl), [`data/datatypes/data.ttl`](data/datatypes/data.ttl)
+
+<details><summary><code>data/datatypes/shapes.ttl</code></summary>
+
+```turtle
+# Chapter 7 §7.1: one sh:datatype constraint on a datatype the engine
+# checked by name only until 0.3.9 (xsd:gYear is one of seven).
+@prefix sh:  <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex:  <https://example.org/> .
+
+ex:FoundingShape a sh:NodeShape ;
+    sh:targetClass ex:Company ;
+    sh:property [ sh:path ex:founded ; sh:datatype xsd:gYear ] .
+```
+
+</details>
+
+<details><summary><code>data/datatypes/data.ttl</code></summary>
+
+```turtle
+# One well-formed xsd:gYear and one that is not a year at all.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex:  <https://example.org/> .
+
+ex:acme   a ex:Company ; ex:founded "1972"^^xsd:gYear .
+ex:globex a ex:Company ; ex:founded "not-a-year"^^xsd:gYear .
+```
+
+</details>
+
+**Commands** (from the `evidence/` folder):
+
+```bash
+node scripts/datatype_gap.mjs data/datatypes
+shacl -d data/datatypes/data.ttl -s data/datatypes/shapes.ttl
+```
+
+<details><summary><code>scripts/datatype_gap.mjs</code></summary>
+
+```javascript
+// Chapter 7 §7.1: the editor and CI on one sh:datatype constraint.
+//
+//   node scripts/datatype_gap.mjs data/datatypes
+//
+// Until 0.3.9 the engine checked the lexical form of only some datatypes, and
+// let seven through by name: "not-a-year"^^xsd:gYear satisfied
+// sh:datatype xsd:gYear. The extension's 0.18.0 release bundles shacl-wasm-node
+// 0.3.8; a fresh install of the suite resolves shacl 0.3.9. This validates the
+// same data through both builds (0.3.8 is installed under an npm alias) and
+// names the focus node of each result.
+import { createRequire } from 'node:module';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+
+const require = createRequire(import.meta.url);
+const dir = process.argv[2];
+const shapes = readFileSync(join(dir, 'shapes.ttl'), 'utf8');
+const data = readFileSync(join(dir, 'data.ttl'), 'utf8');
+
+for (const name of ['shacl-wasm-node-0.3.8', 'shacl-wasm-node']) {
+  const { Validator } = require(name);
+  const { version } = require(`${name}/package.json`);
+  const report = Validator.fromTurtle(shapes).validateTurtle(data, null, 'none');
+  const focus = report.results.map((r) => String(r.focusNode ?? r.focus ?? '?').replace('https://example.org/', 'ex:'));
+  console.log(`shacl-wasm-node ${version}  conforms=${report.conforms}  results=${report.results.length}  focus=${focus.join(',') || '-'}`);
+}
+```
+
+</details>
+
+**What is checked:** shacl-wasm-node 0.3.8, the build the 0.18.0 extension bundles, accepts "not-a-year"^^xsd:gYear; 0.3.9 and the shacl 0.3.9 command refuse it, exit 1, and accept "1972"
+
+**Recorded result:** PASS — step 1 output contains 'shacl-wasm-node 0.3.8  conforms=true  results=0', 'shacl-wasm-node 0.3.9  conforms=false  results=1  focus=ex:globex'; step 2 output contains 'conforms: false', 'focus <https://example.org/globex>'; step 2 output has none of 'focus <https://example.org/acme>'; step 2 exits 1
+
+<details><summary>Output, as recorded</summary>
+
+```text
+$ node scripts/datatype_gap.mjs data/datatypes
+shacl-wasm-node 0.3.8  conforms=true  results=0  focus=-
+shacl-wasm-node 0.3.9  conforms=false  results=1  focus=ex:globex
+[exit 0]
+
+$ shacl -d data/datatypes/data.ttl -s data/datatypes/shapes.ttl
+conforms: false
+  Violation DatatypeConstraintComponent | focus <https://example.org/globex> | value "not-a-year"^^<http://www.w3.org/2001/XMLSchema#gYear> | path <https://example.org/founded>
+[exit 1]
+```
+
+</details>
+
+**Sources:**
+
+- [engine commit 75cdb43 (0.3.9)](https://github.com/pwin/SHACL_Engine/commit/75cdb434220305a19ba922776768de04fb8ed13d): “Check the seven datatypes sh:datatype was letting through” (quote found, checked 2026-11-20)
+- [extension package-lock.json (0.18.0): the shacl-wasm-node it bundles](https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/0c1be110af1175ddc98a354c2010814d39b57902/package-lock.json): “"node_modules/shacl-wasm-node"” (quote found, checked 2026-11-20)
+
+0.3.8 is installed beside 0.3.9 under an npm alias, `shacl-wasm-node-0.3.8`, so both builds run in one process. The suite's own shapes use none of the seven datatypes (gYear, gYearMonth, gMonth, gDay, gMonthDay, dayTimeDuration, yearMonthDuration).
 
 ---
 
@@ -1355,7 +1465,7 @@ print(f".rq checks building a message with STR(?...) and no isBlank guard: {len(
 
 **What is checked:** ontology-quality-suite declares holosdb (from 0.24 since suite 0.24.3, 0.23 at 0.24.2, 0.15 before), shacl (below 0.4; from 0.3.3 since suite 0.23.0, which needs shacl.rdfs_closure) and owlready2 as runtime dependencies and installs the only command; shacl, tarka-rdf and holosdb install none
 
-**Recorded result:** PASS — step 1 output contains 'commands installed: ontology-quality-suite', 'owlready2>=0.51', 'shacl 0.3.8/n    commands installed: none (library only)', 'tarka-rdf 0.2.2/n    commands installed: none (library only)', 'holosdb 0.26.4/n    commands installed: none (library only)'; suite 0.28.0: step 1 output contains 'shacl<0.4,>=0.3.3'; suite 0.28.0: step 1 output contains 'holosdb>=0.24'
+**Recorded result:** PASS — step 1 output contains 'commands installed: ontology-quality-suite', 'owlready2>=0.51', 'shacl 0.3.9/n    commands installed: none (library only)', 'tarka-rdf 0.3.1/n    commands installed: none (library only)', 'holosdb 0.27.0/n    commands installed: none (library only)'; suite 0.28.0: step 1 output contains 'shacl<0.4,>=0.3.3'; suite 0.28.0: step 1 output contains 'holosdb>=0.24'
 
 <details><summary>Output, as recorded</summary>
 
@@ -1364,13 +1474,13 @@ $ python scripts/inspect_packages.py
 ontology-quality-suite 0.28.0
     commands installed: ontology-quality-suite
     runtime dependencies: holosdb>=0.24, matplotlib>=3.7.0, owlready2>=0.51, owlrl>=6.0.2, pandas>=2.0.0, rdflib>=7.6.0, shacl<0.4,>=0.3.3, tabulate>=0.9.0
-shacl 0.3.8
+shacl 0.3.9
     commands installed: none (library only)
     runtime dependencies: none
-tarka-rdf 0.2.2
+tarka-rdf 0.3.1
     commands installed: none (library only)
     runtime dependencies: polars>=1.30
-holosdb 0.26.4
+holosdb 0.27.0
     commands installed: none (library only)
     runtime dependencies: none
 registry entries: 61 in 10 categories (conformance, data, efficiency, logical, quality, reasoning, structural, style, tarql, vocabulary)
@@ -1503,11 +1613,11 @@ for label, q in (("unguarded STR(?e)", UNGUARDED), ("COALESCE(STR(?e), ...)", CO
 ```text
 $ python scripts/engine_leniency.py
 == unguarded STR(?e)
-   rdflib      ['A label on ndd4d97d223b6400bb6cb2e90958912bdb1 has no language tag.']
+   rdflib      ['A label on n4c8f4cd8a56d40298a778d91daf3f6c9b1 has no language tag.']
    holosdb     ['(unbound)']
    pyoxigraph  ['(unbound)']
 == COALESCE(STR(?e), ...)
-   rdflib      ['A label on n42d21db6f78140fd86eb90e19b3359a1b1 has no language tag.']
+   rdflib      ['A label on n9079f266d3cb426cb2fe7664b163fd8db1 has no language tag.']
    holosdb     ['A label on [a blank node] has no language tag.']
    pyoxigraph  ['A label on [a blank node] has no language tag.']
 == guarded IF(isBlank(?e), ...)
@@ -1785,7 +1895,7 @@ C08.24 shows a query with no registry entry running and reporting as UNMAPPED.
 
 > **The wheels are libraries only.**
 
-**Evidence:** the same as [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05), which reproduces it: step 1 output contains 'commands installed: ontology-quality-suite', 'owlready2>=0.51', 'shacl 0.3.8/n    commands installed: none (library only)', 'tarka-rdf 0.2.2/n    commands installed: none (library only)', 'holosdb 0.26.4/n    commands installed: none (library only)'; suite 0.28.0: step 1 output contains 'shacl<0.4,>=0.3.3'; suite 0.28.0: step 1 output contains 'holosdb>=0.24'
+**Evidence:** the same as [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05), which reproduces it: step 1 output contains 'commands installed: ontology-quality-suite', 'owlready2>=0.51', 'shacl 0.3.9/n    commands installed: none (library only)', 'tarka-rdf 0.3.1/n    commands installed: none (library only)', 'holosdb 0.27.0/n    commands installed: none (library only)'; suite 0.28.0: step 1 output contains 'shacl<0.4,>=0.3.3'; suite 0.28.0: step 1 output contains 'holosdb>=0.24'
 
 ---
 
@@ -1804,8 +1914,8 @@ C08.24 shows a query with no registry entry running and reporting as UNMAPPED.
 
     python tools/fetch_binaries.py
 
-For this machine's platform, fetches `shacl` (SHACL Engine 0.3.8), `tarka`
-(0.2.2) and `holos` + `holos-server` (HOLOS 0.26.4) from their GitHub releases,
+For this machine's platform, fetches `shacl` (SHACL Engine 0.3.9), `tarka`
+(0.3.1) and `holos` + `holos-server` (HOLOS 0.27.0) from their GitHub releases,
 verifies each archive against the release's SHA256SUMS, and unpacks it under
 evidence/bin/. Nothing is installed anywhere else. If a binary is already
 there, it is left alone; a superseded version of it is removed.
@@ -1823,9 +1933,9 @@ from pathlib import Path
 
 BIN = Path(__file__).resolve().parent.parent / "bin"
 RELEASES = {
-    "shacl": ("pwin/SHACL_Engine", "v0.3.8", "shacl-0.3.8-{target}"),
-    "tarka": ("pwin/tarka", "v0.2.2", "tarka-0.2.2-{target}"),
-    "holos": ("pwin/triplestore", "v0.26.4", "holos-0.26.4-{target}"),
+    "shacl": ("pwin/SHACL_Engine", "v0.3.9", "shacl-0.3.9-{target}"),
+    "tarka": ("pwin/tarka", "v0.3.1", "tarka-0.3.1-{target}"),
+    "holos": ("pwin/triplestore", "v0.27.0", "holos-0.27.0-{target}"),
 }
 
 
@@ -1900,9 +2010,9 @@ if __name__ == "__main__":
 
 **Sources:**
 
-- [SHACL Engine v0.3.8 release](https://github.com/pwin/SHACL_Engine/releases/tag/v0.3.8)
-- [HOLOS v0.26.4 release](https://github.com/pwin/triplestore/releases/tag/v0.26.4)
-- [tarka v0.2.2 release](https://github.com/pwin/tarka/releases/tag/v0.2.2)
+- [SHACL Engine v0.3.9 release](https://github.com/pwin/SHACL_Engine/releases/tag/v0.3.9)
+- [HOLOS v0.27.0 release](https://github.com/pwin/triplestore/releases/tag/v0.27.0)
+- [tarka v0.3.1 release](https://github.com/pwin/tarka/releases/tag/v0.3.1)
 
 `tools/fetch_binaries.py` downloads each archive and refuses one whose SHA-256 does not match the release's SHA256SUMS; the binaries used throughout this evidence came through it.
 
@@ -1991,7 +2101,7 @@ ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl 
 
 **What is checked:** nothing is asserted about the times; they are recorded. Each run must succeed
 
-**Recorded result:** PASS — whole-process times: native 2.3 s, native+sparql 2.9 s, sparql 2.8 s
+**Recorded result:** PASS — whole-process times: native 3.1 s, native+sparql 3.7 s, sparql 3.4 s
 
 <details><summary>Output, as recorded</summary>
 
@@ -2242,8 +2352,8 @@ ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl 
 $ ontology-quality-suite checks --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --own-namespace https://acme.example.org/ns/ --engine sparql --out-dir work/C07_28/v --fail-on never --reports minimal -v
 [verbose] fixtures/acme_robotics/acme-org-v1.ttl:
   2 owl:imports resolved:
-    http://xmlns.com/foaf/0.1/  <-  fixtures/acme_robotics/reference_vocab/foaf.rdf
     http://www.w3.org/ns/org#  <-  fixtures/acme_robotics/reference_vocab/org.ttl
+    http://xmlns.com/foaf/0.1/  <-  fixtures/acme_robotics/reference_vocab/foaf.rdf
 [verbose] engine: sparql
 Findings: 23 total (1 Violation, 22 Warning, 0 Info)
 Reports written to: ./work/C07_28/v
@@ -2714,7 +2824,7 @@ Findings: 2 total (2 Violation, 0 Warning, 0 Info)
 Reports written to: ./work/C08_14/gate
   - work/C08_14/gate/findings.txt (start here -- what, where, and the source line)
   - work/C08_14/gate/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpch784dhf -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpdlp1i37q -Y
 [exit 1]
 ```
 
@@ -2929,7 +3039,7 @@ Findings: 2 total (2 Violation, 0 Warning, 0 Info)
 Reports written to: ./work/C08_19/seed5
   - work/C08_19/seed5/findings.txt (start here -- what, where, and the source line)
   - work/C08_19/seed5/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpbvbxdfod -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp7jfrt_tt -Y
 [exit 1]
 
 $ python scripts/summarise_findings.py work/C08_19/seed5/full_results.csv
@@ -3886,7 +3996,7 @@ $ python scripts/list_files.py work/C09_10/minimal
 
 > The suite responded by pinning `shacl>=0.3.0,<0.4`
 
-**Evidence:** the same as [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05), which reproduces it: step 1 output contains 'commands installed: ontology-quality-suite', 'owlready2>=0.51', 'shacl 0.3.8/n    commands installed: none (library only)', 'tarka-rdf 0.2.2/n    commands installed: none (library only)', 'holosdb 0.26.4/n    commands installed: none (library only)'; suite 0.28.0: step 1 output contains 'shacl<0.4,>=0.3.3'; suite 0.28.0: step 1 output contains 'holosdb>=0.24'
+**Evidence:** the same as [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05), which reproduces it: step 1 output contains 'commands installed: ontology-quality-suite', 'owlready2>=0.51', 'shacl 0.3.9/n    commands installed: none (library only)', 'tarka-rdf 0.3.1/n    commands installed: none (library only)', 'holosdb 0.27.0/n    commands installed: none (library only)'; suite 0.28.0: step 1 output contains 'shacl<0.4,>=0.3.3'; suite 0.28.0: step 1 output contains 'holosdb>=0.24'
 
 The installed package's declared dependencies include `shacl<0.4,>=0.3.0`; the reason is in the [pyproject comment](https://github.com/pwin/consolidated-ontology-quality-suite-python/blob/d9300e62b8c142367ad14f52d3d2fd7ff6d6021b/pyproject.toml#L33-L37).
 
@@ -3933,7 +4043,7 @@ Findings: 26 total (2 Violation, 22 Warning, 2 Info)
 Reports written to: ./work/C09_14/out
   - work/C09_14/out/findings.txt (start here -- what, where, and the source line)
   - work/C09_14/out/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp0k2nh4q7 -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp58s4w7g4 -Y
 [exit 1]
 
 $ python scripts/summarise_findings.py work/C09_14/out/full_results.csv --by focus --check LOG-001
@@ -3973,21 +4083,22 @@ $ uv run pytest -q
 ................................                                         [100%]
 ============================== warnings summary ===============================
 competency_tests/test_competency.py::test_competency_test_is_evidenced[1]
-  C:\repos/consolidated_ontology_suite_python/ontology_suite/sketch/prefix_alignment.py:211: DeprecationWarning: Dataset.default_context is deprecated, use Dataset.default_graph instead.
+  <tmp>/claude/04c64bae26a30c5d/a18b25d3-8470-4427-bd56-07be6e720a26/scratchpad/consolidated_ontology_suite_python/ontology_suite/sketch/prefix_alignment.py:211: DeprecationWarning: Dataset.default_context is deprecated, use Dataset.default_graph instead.
     default = getattr(dataset, "default_graph", None) or dataset.default_context
 tests/test_detection.py::test_expected_checks_fire[06-datatype-conformance]
 tests/test_detection.py::test_both_formulations_still_find_what_they_both_used_to
 tests/test_detection.py::test_each_formulation_agrees_about_severity[06-datatype-conformance]
 tests/test_detection.py::test_datatype_errors_are_found_whatever_the_reasoner[auto]
 tests/test_detection.py::test_every_finding_carries_a_message[06-datatype-conformance]
-  C:\repos/consolidated-ontology-suite-python-testing/.venv/Lib/site-packages/rdflib/term.py:1862: UserWarning: Parsing weird boolean, 'yes' does not map to True or False
+  <tmp>/claude/04c64bae26a30c5d/a18b25d3-8470-4427-bd56-07be6e720a26/scratchpad/testing-clone/.venv/Lib/site-packages/rdflib/term.py:1862: UserWarning: Parsing weird boolean, 'yes' does not map to True or False
     warnings.warn(
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-166 passed, 10 skipped, 6 warnings in 31.17s
-   Building ontology-quality-suite @ file:///C:/repos/consolidated_ontology_suite_python
-      Built ontology-quality-suite @ file:///C:/repos/consolidated_ontology_suite_python
-Uninstalled 3 packages in 41ms
-Installed 3 packages in 19ms
+166 passed, 10 skipped, 6 warnings in 55.31s
+Using CPython 3.12.13
+Creating virtual environment at: .venv
+   Building ontology-quality-suite @ file:///<tmp>/claude/04c64bae26a30c5d/a18b25d3-8470-4427-bd56-07be6e720a26/scratchpad/consolidated_ontology_suite_python
+      Built ontology-quality-suite @ file:///<tmp>/claude/04c64bae26a30c5d/a18b25d3-8470-4427-bd56-07be6e720a26/scratchpad/consolidated_ontology_suite_python
+Installed 26 packages in 13.41s
 [exit 0]
 ```
 
@@ -4528,6 +4639,8 @@ Options:
           A root template, by IRI or prefixed name; its parameters are CSV columns. Repeat it to instantiate several templates for every row
       --list <COLUMN> <SEPARATOR>
           The cells of a list-typed parameter are split on SEPARATOR
+      --lang <COLUMN> <TAG>
+          The cells of a parameter are strings in language TAG (needed for rdf:langString)
   -i, --input <INPUT>
           The input: a CSV file, or a Parquet or Arrow IPC file (default: the file the query names with FROM, else standard input)
   -d, --delimiter <DELIMITER>
@@ -4545,9 +4658,7 @@ Options:
       --split <ORIGINAL> <SPLIT> <DELIMITER>
           Repeat each row once per part of column ORIGINAL split on DELIMITER, with the part in column SPLIT
       --bind-empty-strings
-          Bind empty cells as empty strings instead of leaving them unbound
-      --test [<N>]
-… (27 lines omitted; full output in the outputs/ record)
+… (29 lines omitted; full output in the outputs/ record)
       --batch-size <BATCH_SIZE>
           Records to evaluate together [default: 512]
       --jobs <JOBS>
@@ -4583,7 +4694,7 @@ isomorphic: True
 
 **Sources:**
 
-- [tarka README](https://github.com/pwin/tarka/blob/9a346083212ee6450fef537551dd6478092ff024/README.md#L41-L43): “tarka ran the TARQL query 1.7 times as fast as oxi-gen, and the OTTR templates 2.6 times as fast.” (quote found, checked 2026-11-20)
+- [tarka README](https://github.com/pwin/tarka/blob/0cecf53b06d2c95a840b8aa6f4087f44e81a06da/README.md#L44-L46): “tarka ran the TARQL query 1.7 times as fast as oxi-gen, and the OTTR templates 2.6 times as fast.” (quote found, checked 2026-11-20)
 
 Not reproduced here: it needs oxi-gen and the 200,000-row file.
 
@@ -5128,7 +5239,7 @@ https://acme.example.org/graph/triplified/employees,40
 **Sources:**
 
 - [tarka commit 26f256a](https://github.com/pwin/tarka/commit/26f256a28f10d299a4cf1c5dd49ba52cd37122a7) (exists, checked 2026-11-20)
-- [tarka README](https://github.com/pwin/tarka/blob/9a346083212ee6450fef537551dd6478092ff024/README.md#L45): “tarka works with RDF 1.1 and SPARQL 1.1.” (quote found, checked 2026-11-20)
+- [tarka README](https://github.com/pwin/tarka/blob/0cecf53b06d2c95a840b8aa6f4087f44e81a06da/README.md#L48): “tarka works with RDF 1.1 and SPARQL 1.1.” (quote found, checked 2026-11-20)
 
 ---
 
@@ -5197,7 +5308,7 @@ Findings: 548 total (66 Violation, 363 Warning, 119 Info)
 Reports written to: ./work/C10_18/all
   - work/C10_18/all/findings.txt (start here -- what, where, and the source line)
   - work/C10_18/all/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpksg7r6hj -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp5ejs5hby -Y
 [exit 0]
 
 $ ontology-quality-suite data work/C10_18/employees.ttl --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --engine sparql --own-namespace https://acme.example.org/ --out-dir work/C10_18/own --fail-on never --reports minimal
@@ -5205,7 +5316,7 @@ Findings: 54 total (12 Violation, 40 Warning, 2 Info)
 Reports written to: ./work/C10_18/own
   - work/C10_18/own/findings.txt (start here -- what, where, and the source line)
   - work/C10_18/own/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp652ut9dh -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp2tid58q8 -Y
 [exit 0]
 
 $ python scripts/summarise_findings.py work/C10_18/own/full_results.csv
@@ -5341,7 +5452,7 @@ Findings: 54 total (12 Violation, 40 Warning, 2 Info)
 Reports written to: ./work/C10_20/own
   - work/C10_20/own/findings.txt (start here -- what, where, and the source line)
   - work/C10_20/own/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp3f9bna99 -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpyrp2k1nk -Y
 [exit 0]
 
 $ python scripts/summarise_findings.py work/C10_20/own/full_results.csv --by focus --check STR-006
@@ -6197,7 +6308,7 @@ for mode in ("none", "rdfs", "rules", "rules-iterated", "bogus"):
 
 ```text
 $ python scripts/shacl_python.py data/shacl data/rules
-shacl 0.3.8
+shacl 0.3.9
 validate(data, shapes)                       conforms=False results=1
 validate(shapes, data)  [swapped]            REFUSED: ValueError: the shapes graph declares no shapes, so this would report that the data conforms without having checked anything. Note the argument order is validate(data, shapes). To validate against an empty shapes graph deliberately, use Shapes.from_file and check len() yourself.
 validate(data, no-shapes)                    REFUSED: ValueError: the shapes graph declares no shapes, so this would report that the data conforms without having checked anything. Note the argument order is validate(data, shapes). To validate against an empty shapes graph deliberately, use Shapes.from_file and check len() yourself.
@@ -6416,16 +6527,16 @@ for (const mode of ['none', 'rules', 'bogus']) {
 
 </details>
 
-**What is checked:** shacl-wasm-node 0.3.8 calls a warnings-only graph non-conforming (0.3.0 and 0.3.1 did not)
+**What is checked:** shacl-wasm-node 0.3.9 calls a warnings-only graph non-conforming (0.3.0 and 0.3.1 did not)
 
-**Recorded result:** PASS — step 1 output contains 'shacl-wasm-node 0.3.8  shapes-warning.ttl     conforms=false'
+**Recorded result:** PASS — step 1 output contains 'shacl-wasm-node 0.3.9  shapes-warning.ttl     conforms=false'
 
 <details><summary>Output, as recorded</summary>
 
 ```text
 $ node scripts/wasm_conforms.mjs data/shacl
-shacl-wasm-node 0.3.8  shapes-warning.ttl     conforms=false  results=1  severities=http://www.w3.org/ns/shacl#Warning
-shacl-wasm-node 0.3.8  shapes-violation.ttl   conforms=false  results=1  severities=http://www.w3.org/ns/shacl#Violation
+shacl-wasm-node 0.3.9  shapes-warning.ttl     conforms=false  results=1  severities=http://www.w3.org/ns/shacl#Warning
+shacl-wasm-node 0.3.9  shapes-violation.ttl   conforms=false  results=1  severities=http://www.w3.org/ns/shacl#Violation
 inference=none   conforms=true  results=0
 inference=rules  conforms=false  results=1
 inference=bogus  ERROR: unknown inference "bogus": expected "none", "rdfs", "rules" or "rules-iterated"
@@ -6516,7 +6627,7 @@ for mode in ("none", "rdfs", "rules", "rules-iterated", "bogus"):
 
 ```text
 $ python scripts/shacl_python.py data/shacl data/rules
-shacl 0.3.8
+shacl 0.3.9
 validate(data, shapes)                       conforms=False results=1
 validate(shapes, data)  [swapped]            REFUSED: ValueError: the shapes graph declares no shapes, so this would report that the data conforms without having checked anything. Note the argument order is validate(data, shapes). To validate against an empty shapes graph deliberately, use Shapes.from_file and check len() yourself.
 validate(data, no-shapes)                    REFUSED: ValueError: the shapes graph declares no shapes, so this would report that the data conforms without having checked anything. Note the argument order is validate(data, shapes). To validate against an empty shapes graph deliberately, use Shapes.from_file and check len() yourself.
@@ -6571,7 +6682,7 @@ shacl --version
 
 **What is checked:** up to 0.3.3: both runs say conforms true and exit 0. From 0.3.4: both exit 2, one saying the shapes graph declares no shapes and the other that no --shapes was given, and --allow-no-shapes restores the old answer
 
-**Recorded result:** PASS — shacl 0.3.8: step 1 exits 2; step 1 output contains 'the shapes graph declares no shapes'; step 2 exits 2; step 2 output contains 'no --shapes was given'; step 3: conforms: true; step 3 exits 0
+**Recorded result:** PASS — shacl 0.3.9: step 1 exits 2; step 1 output contains 'the shapes graph declares no shapes'; step 2 exits 2; step 2 output contains 'no --shapes was given'; step 3: conforms: true; step 3 exits 0
 
 <details><summary>Output, as recorded</summary>
 
@@ -6589,7 +6700,7 @@ conforms: true
 [exit 0]
 
 $ shacl --version
-shacl 0.3.8
+shacl 0.3.9
 [exit 0]
 ```
 
@@ -6598,7 +6709,7 @@ shacl 0.3.8
 **Sources:**
 
 - [engine commit 986c31b (0.3.4)](https://github.com/pwin/SHACL_Engine/commit/986c31ba4e071560d51fed36e99abd8cb3747a87): “Refuse to validate against no shapes on the command line” (quote found, checked 2026-11-20)
-- [engine README, coming from pySHACL](https://github.com/pwin/SHACL_Engine/blob/e030c8c1fd05e7a8fcd3ec7db203e980f03755fc/README.md#L302-L305): “reports `Conforms: True` and exits 0; this exits 2 unless you pass” (quote found, checked 2026-11-20)
+- [engine README, coming from pySHACL](https://github.com/pwin/SHACL_Engine/blob/75cdb434220305a19ba922776768de04fb8ed13d/README.md#L302-L305): “reports `Conforms: True` and exits 0; this exits 2 unless you pass” (quote found, checked 2026-11-20)
 
 ---
 
@@ -6612,10 +6723,10 @@ shacl 0.3.8
 
 **Sources:**
 
-- [engine README](https://github.com/pwin/SHACL_Engine/blob/e030c8c1fd05e7a8fcd3ec7db203e980f03755fc/README.md#L315-L316): “425 of 426” (quote found, checked 2026-11-20)
-- [engine README, the subquery rule](https://github.com/pwin/SHACL_Engine/blob/e030c8c1fd05e7a8fcd3ec7db203e980f03755fc/README.md#L339-L346): “0.3.0 briefly enforced the letter of the rule and passed all 426.” (quote found, checked 2026-11-20)
+- [engine README](https://github.com/pwin/SHACL_Engine/blob/75cdb434220305a19ba922776768de04fb8ed13d/README.md#L315-L316): “425 of 426” (quote found, checked 2026-11-20)
+- [engine README, the subquery rule](https://github.com/pwin/SHACL_Engine/blob/75cdb434220305a19ba922776768de04fb8ed13d/README.md#L339-L346): “0.3.0 briefly enforced the letter of the rule and passed all 426.” (quote found, checked 2026-11-20)
 - [engine commit 1944802 (0.3.1)](https://github.com/pwin/SHACL_Engine/commit/1944802e9a33b0116d6b660045c9d2813f9ef2d5) (exists, checked 2026-11-20)
-- [engine README, the EARL report](https://github.com/pwin/SHACL_Engine/blob/e030c8c1fd05e7a8fcd3ec7db203e980f03755fc/README.md#L389-L392): “The W3C compiles a specification's implementation report from EARL files” (quote found, checked 2026-11-20)
+- [engine README, the EARL report](https://github.com/pwin/SHACL_Engine/blob/75cdb434220305a19ba922776768de04fb8ed13d/README.md#L389-L392): “The W3C compiles a specification's implementation report from EARL files” (quote found, checked 2026-11-20)
 
 ---
 
@@ -6666,17 +6777,17 @@ quads            40
 dictionary terms 31
 named graphs     0
 on disk          150.2 KiB
-free here        60.0 GiB
+free here        51.8 GiB
 room to compact  yes (needs up to 150.2 KiB)
 predicates by frequency
           10  <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
-           5  <https://acme.example.org/ns/hasRole>
-           5  <https://acme.example.org/ns/worksIn>
-           5  <https://acme.example.org/ns/hasEmployeeId>
            5  <http://xmlns.com/foaf/0.1/name>
-           5  <https://acme.example.org/ns/hasSkill>
            5  <http://xmlns.com/foaf/0.1/mbox>
-loaded 40 quads in 0.20s (199 quads/s)
+           5  <https://acme.example.org/ns/hasEmployeeId>
+           5  <https://acme.example.org/ns/worksIn>
+           5  <https://acme.example.org/ns/hasRole>
+           5  <https://acme.example.org/ns/hasSkill>
+loaded 40 quads in 0.27s (150 quads/s)
 [exit 0]
 
 $ holos rules --store work/C11_09/store --rules data/holos/rules.rq
@@ -7005,8 +7116,8 @@ with tempfile.TemporaryDirectory() as tmp:
 
 ```text
 $ python scripts/rule_scale.py 1000 100000
-N=  1,000  with rules:   1,000 results on   1,000 distinct focus nodes (0.06 s)  without rules: 0 results
-N=100,000  with rules: 100,000 results on 100,000 distinct focus nodes (3.32 s)  without rules: 0 results
+N=  1,000  with rules:   1,000 results on   1,000 distinct focus nodes (0.10 s)  without rules: 0 results
+N=100,000  with rules: 100,000 results on 100,000 distinct focus nodes (4.44 s)  without rules: 0 results
 [exit 0]
 ```
 
@@ -7408,7 +7519,7 @@ Shown with two sh:order levels in one pass, which is the same mechanism iteratio
 - [the previous edition's rules-at-scale table](https://github.com/pwin/SemOpsManual/blob/fc6de6da90d54a57bbbd2163ebc5b5dfe246ec40/docs/11-rules-and-inference.md#L333): “| 100,000 | ~690,000 | 2.7s | **11.9s** |” (quote found, checked 2026-11-20)
 - [the previous edition's pySHACL comparison](https://github.com/pwin/SemOpsManual/blob/fc6de6da90d54a57bbbd2163ebc5b5dfe246ec40/docs/11-rules-and-inference.md#L346): “| 1,000 | 0.040s | 2.992s | 75× |” (quote found, checked 2026-11-20)
 - [the previous edition's WebAssembly table](https://github.com/pwin/SemOpsManual/blob/fc6de6da90d54a57bbbd2163ebc5b5dfe246ec40/docs/11-rules-and-inference.md#L371): “| 100,000 | 400,000 | **12,611 ms** | **3,119 ms** | 329 MB |” (quote found, checked 2026-11-20)
-- [engine README, current timings](https://github.com/pwin/SHACL_Engine/blob/e030c8c1fd05e7a8fcd3ec7db203e980f03755fc/README.md#L68-L71): “| cached index, all cores — the defaults | **0.23s** |” (quote found, checked 2026-11-20)
+- [engine README, current timings](https://github.com/pwin/SHACL_Engine/blob/75cdb434220305a19ba922776768de04fb8ed13d/README.md#L68-L71): “| cached index, all cores — the defaults | **0.23s** |” (quote found, checked 2026-11-20)
 - [engine commit 6fa00e3 (0.3.0)](https://github.com/pwin/SHACL_Engine/commit/6fa00e3deb2e02b5b32e6a1a78f7360e33da31e8) (exists, checked 2026-11-20)
 
 Recorded measurements, not reproduced here. C11.12 reproduces the result counts behind the first table, at 1,000 and 100,000.
@@ -7425,8 +7536,8 @@ Recorded measurements, not reproduced here. C11.12 reproduces the result counts 
 
 **Sources:**
 
-- [engine README](https://github.com/pwin/SHACL_Engine/blob/e030c8c1fd05e7a8fcd3ec7db203e980f03755fc/README.md#L117-L118): “A graph is held three times over, once per permutation” (quote found, checked 2026-11-20)
-- [engine README](https://github.com/pwin/SHACL_Engine/blob/e030c8c1fd05e7a8fcd3ec7db203e980f03755fc/README.md#L101): “That order is by focus node” (quote found, checked 2026-11-20)
+- [engine README](https://github.com/pwin/SHACL_Engine/blob/75cdb434220305a19ba922776768de04fb8ed13d/README.md#L117-L118): “A graph is held three times over, once per permutation” (quote found, checked 2026-11-20)
+- [engine README](https://github.com/pwin/SHACL_Engine/blob/75cdb434220305a19ba922776768de04fb8ed13d/README.md#L101): “That order is by focus node” (quote found, checked 2026-11-20)
 
 ---
 
@@ -7559,7 +7670,7 @@ error: applying SHACL-AF rules: invalid shapes graph: unsupported node expressio
 
 **Sources:**
 
-- [engine README, what does not work](https://github.com/pwin/SHACL_Engine/blob/e030c8c1fd05e7a8fcd3ec7db203e980f03755fc/README.md#L483-L492): “is vendored under `testsuite/shacl12/tests/rules/` but is not wired into the” (quote found, checked 2026-11-20)
+- [engine README, what does not work](https://github.com/pwin/SHACL_Engine/blob/75cdb434220305a19ba922776768de04fb8ed13d/README.md#L483-L492): “is vendored under `testsuite/shacl12/tests/rules/` but is not wired into the” (quote found, checked 2026-11-20)
 
 ---
 
@@ -7628,8 +7739,8 @@ for (const mode of ['none', 'rules', 'bogus']) {
 
 ```text
 $ node scripts/wasm_conforms.mjs data/shacl
-shacl-wasm-node 0.3.8  shapes-warning.ttl     conforms=false  results=1  severities=http://www.w3.org/ns/shacl#Warning
-shacl-wasm-node 0.3.8  shapes-violation.ttl   conforms=false  results=1  severities=http://www.w3.org/ns/shacl#Violation
+shacl-wasm-node 0.3.9  shapes-warning.ttl     conforms=false  results=1  severities=http://www.w3.org/ns/shacl#Warning
+shacl-wasm-node 0.3.9  shapes-violation.ttl   conforms=false  results=1  severities=http://www.w3.org/ns/shacl#Violation
 inference=none   conforms=true  results=0
 inference=rules  conforms=false  results=1
 inference=bogus  ERROR: unknown inference "bogus": expected "none", "rdfs", "rules" or "rules-iterated"
@@ -7798,7 +7909,7 @@ if len(sys.argv) > 3:
 
 **What is checked:** both engines print conforms false. Up to 0.21.1 they exit 0 doing so, and the default (native) engine refuses sh:sparql. From 0.22.0 a non-conforming graph exits 1 and a conforming one 0, the default is adapted, which validates sh:sparql, and only --engine native refuses it, with exit 2. holosdb's Store.validate() returns a dictionary with conforms False either way
 
-**Recorded result:** PASS — step 1 output contains 'conforms          false'; step 2 output contains 'conforms          false'; step 5 output contains "'conforms': False", 'HolosError: unsupported: sh:sparql is not implemented'; holos 0.26.4: step 1 exits 1; step 2 exits 1; step 3 exits 1; step 3 output contains 'conforms          false'; step 4 exits 1; step 6 exits 2; step 6 output contains 'sh:sparql'; step 7 exits 0
+**Recorded result:** PASS — step 1 output contains 'conforms          false'; step 2 output contains 'conforms          false'; step 5 output contains "'conforms': False", 'HolosError: unsupported: sh:sparql is not implemented'; holos 0.27.0: step 1 exits 1; step 2 exits 1; step 3 exits 1; step 3 output contains 'conforms          false'; step 4 exits 1; step 6 exits 2; step 6 output contains 'sh:sparql'; step 7 exits 0
 
 <details><summary>Output, as recorded</summary>
 
@@ -7808,7 +7919,7 @@ bridged+compiled  3 triples, 2 shapes in 0.000s
 validated         0.000s
 conforms          false
 results           1
-loaded 3 quads in 0.00s (4391 quads/s)
+loaded 3 quads in 0.00s (2606 quads/s)
 read 5 shape quads from data/shacl/shapes-violation.ttl, and kept none of them
 [exit 1]
 
@@ -7817,7 +7928,7 @@ bridged+compiled  3 triples, 2 shapes in 0.000s
 validated         0.000s
 conforms          false
 results           1
-loaded 3 quads in 0.00s (4710 quads/s)
+loaded 3 quads in 0.00s (3481 quads/s)
 read 5 shape quads from data/shacl/shapes-violation.ttl, and kept none of them
 [exit 1]
 
@@ -7826,7 +7937,7 @@ bridged+compiled  3 triples, 1 shapes in 0.000s
 validated         0.000s
 conforms          false
 results           1
-loaded 3 quads in 0.00s (4887 quads/s)
+loaded 3 quads in 0.00s (3562 quads/s)
 read 6 shape quads from data/shacl/shapes-sparql.ttl, and kept none of them
 [exit 1]
 
@@ -7835,18 +7946,18 @@ bridged+compiled  3 triples, 1 shapes in 0.000s
 validated         0.000s
 conforms          false
 results           1
-loaded 3 quads in 0.00s (4783 quads/s)
+loaded 3 quads in 0.00s (3617 quads/s)
 read 6 shape quads from data/shacl/shapes-sparql.ttl, and kept none of them
 [exit 1]
 
 $ python scripts/holosdb_validate.py data/shacl/data.ttl data/shacl/shapes-violation.ttl data/shacl/shapes-sparql.ttl
 adapted: {'conforms': False, 'violations': 1, 'engine': 'adapted', 'results': [{'focus': 'http://example.org/bob', 'path': 'http://example.org/name', 'value': None, 'severity': 'Violation', 'component': 'http://www.w3.org/ns/shacl#MinCountConstraintComponent', 'shape': '_:0_b0', 'message': None}]}
-native:  {'conforms': False, 'violations': 1, 'engine': 'native', 'results': [{'focus': 'http://example.org/bob', 'path': 'http://example.org/name', 'value': None, 'severity': 'Violation', 'component': 'http://www.w3.org/ns/shacl#MinCountConstraintComponent', 'shape': '_:b816f873b89584e79b5f6365eb93e548', 'message': None}]}
+native:  {'conforms': False, 'violations': 1, 'engine': 'native', 'results': [{'focus': 'http://example.org/bob', 'path': 'http://example.org/name', 'value': None, 'severity': 'Violation', 'component': 'http://www.w3.org/ns/shacl#MinCountConstraintComponent', 'shape': '_:c3ee929c56851a30c6c4440ff2ee8dd', 'message': None}]}
 native, sh:sparql shapes: HolosError: unsupported: sh:sparql is not implemented by the native evaluator; validate with the adapted engine instead
 [exit 0]
 
 $ holos validate --data data/shacl/data.ttl --shapes data/shacl/shapes-sparql.ttl --engine native
-loaded 3 quads in 0.00s (4646 quads/s)
+loaded 3 quads in 0.00s (3151 quads/s)
 read 6 shape quads from data/shacl/shapes-sparql.ttl, and kept none of them
 Error: unsupported: sh:sparql is not implemented by the native evaluator; validate with the adapted engine instead
 [exit 2]
@@ -7856,12 +7967,12 @@ bridged+compiled  2 triples, 2 shapes in 0.000s
 validated         0.000s
 conforms          true
 results           0
-loaded 2 quads in 0.00s (2980 quads/s)
+loaded 2 quads in 0.00s (2518 quads/s)
 read 5 shape quads from data/shacl/shapes-violation.ttl, and kept none of them
 [exit 0]
 
 $ holos --version
-holos 0.26.4 (27aabce)
+holos 0.27.0 (1034260)
 [exit 0]
 ```
 
@@ -9285,17 +9396,17 @@ holos query --data data/policy/hr.trig --query "SELECT DISTINCT ?g WHERE { GRAPH
 ```text
 $ holos query --data data/policy/hr.trig --query "PREFIX ex: <http://example.com/> SELECT ?name ?salary WHERE { GRAPH ?g { ?e ex:name ?name OPTIONAL { ?e ex:salary ?salary } } } ORDER BY ?name" --deny-predicate http://example.com/salary --except-role hr
 {"head":{"vars":["name","salary"]},"results":{"bindings":[{"name":{"type":"literal","value":"Alice"}},{"name":{"type":"literal","value":"Bob"}},{"name":{"type":"literal","value":"Carol"}}]}}
-loaded 21 quads in 0.00s (24775 quads/s)
+loaded 21 quads in 0.00s (17385 quads/s)
 note: 3 quads withheld by policy
 [exit 0]
 
 $ holos query --data data/policy/hr.trig --query "PREFIX ex: <http://example.com/> SELECT ?name ?salary WHERE { GRAPH ?g { ?e ex:name ?name OPTIONAL { ?e ex:salary ?salary } } } ORDER BY ?name" --deny-predicate http://example.com/salary --except-role hr --role hr
 {"head":{"vars":["name","salary"]},"results":{"bindings":[{"name":{"type":"literal","value":"Alice"},"salary":{"type":"literal","value":"95000","datatype":"http://www.w3.org/2001/XMLSchema#integer"}},{"name":{"type":"literal","value":"Bob"},"salary":{"type":"literal","value":"88000","datatype":"http://www.w3.org/2001/XMLSchema#integer"}},{"name":{"type":"literal","value":"Carol"},"salary":{"type":"literal","value":"102000","datatype":"http://www.w3.org/2001/XMLSchema#integer"}}]}}
-loaded 21 quads in 0.00s (30417 quads/s)
+loaded 21 quads in 0.00s (16575 quads/s)
 [exit 0]
 
 $ holos query --data data/policy/hr.trig --query "PREFIX ex: <http://example.com/> SELECT ?name ?salary WHERE { GRAPH ?g { ?e ex:name ?name OPTIONAL { ?e ex:salary ?salary } } } ORDER BY ?name" --deny-predicate http://example.com/salary --fail-closed
-loaded 21 quads in 0.00s (28696 quads/s)
+loaded 21 quads in 0.00s (21315 quads/s)
 Error: query evaluation failed: access denied by policy
 Caused by:
     access denied by policy
@@ -9303,13 +9414,13 @@ Caused by:
 
 $ holos query --data data/policy/hr.trig --query "SELECT DISTINCT ?g WHERE { GRAPH ?g { ?s ?p ?o } } ORDER BY ?g" --label-graph http://example.com/reviews=3
 {"head":{"vars":["g"]},"results":{"bindings":[{"g":{"type":"uri","value":"http://example.com/provenance"}},{"g":{"type":"uri","value":"http://example.com/public"}}]}}
-loaded 21 quads in 0.00s (27386 quads/s)
+loaded 21 quads in 0.00s (7266 quads/s)
 note: 3 quads withheld by policy
 [exit 0]
 
 $ holos query --data data/policy/hr.trig --query "SELECT DISTINCT ?g WHERE { GRAPH ?g { ?s ?p ?o } } ORDER BY ?g" --label-graph http://example.com/reviews=3 --clearance 3
 {"head":{"vars":["g"]},"results":{"bindings":[{"g":{"type":"uri","value":"http://example.com/provenance"}},{"g":{"type":"uri","value":"http://example.com/public"}},{"g":{"type":"uri","value":"http://example.com/reviews"}}]}}
-loaded 21 quads in 0.00s (32833 quads/s)
+loaded 21 quads in 0.00s (14664 quads/s)
 [exit 0]
 ```
 
@@ -9323,11 +9434,11 @@ loaded 21 quads in 0.00s (32833 quads/s)
 **In the manual:** [Chapter 13, at the claim](manual/docs/13-operate-and-consume.md#ev-c13-09) · [plain edition](../docs/13-operate-and-consume.md#132-access-policy-at-the-scan)  
 **Kind:** Cited from upstream · **Result:** Cited from upstream
 
-> All verified at 0.26.0. HOLOS measures the cost at 8 ns per quad, about 1% of
+> All verified at 0.27.0. HOLOS measures the cost at 8 ns per quad, about 1% of
 
 **Sources:**
 
-- [HOLOS ACCESS-CONTROL.md](https://github.com/pwin/triplestore/blob/27aabce3a1b5579f13d7d274398300e856a6e77d/ACCESS-CONTROL.md#L44): “It costs **8 ns per quad** — measured, and about 1% of what decoding the quad costs.” (quote found, checked 2026-11-20)
+- [HOLOS ACCESS-CONTROL.md](https://github.com/pwin/triplestore/blob/1034260144088cac1b96678f37679a44b1f50f9d/ACCESS-CONTROL.md#L44): “It costs **8 ns per quad** — measured, and about 1% of what decoding the quad costs.” (quote found, checked 2026-11-20)
 
 ---
 
@@ -9510,19 +9621,19 @@ if len(sys.argv) > 3:
 
 **What is checked:** on a fresh store both engines report the 2 true violations, and native refuses sh:sparql; the CLI's default engine is native. Then, by version. At 0.21.0: three calls on one store report 2, 4 and 6; one validate() leaves a 5-quad shapes graph, which survives reopening a persistent store; the CLI with --store does the same. From 0.21.1: 2, 2 and 2; no graph left, on disk or in memory; a leftover shapes graph is reported with the DROP GRAPH that removes it, by Python and by the CLI
 
-**Recorded result:** PASS — holosdb 0.26.4, holos 0.26.4: step 1 output contains "adapted: {'conforms': False, 'violations': 2, 'engine': 'adapted', 'results': [", "native:  {'conforms': False, 'violations': 2, 'engine': 'native', 'results': [", "'focus': 'http://example.org/a'", "'focus': 'http://example.org/b'", 'HolosError: unsupported: sh:sparql is not implemented'; step 10 output contains '--engine <NAME>          adapted (default) or native'; step 2 output contains 'adapted, three calls on one store: violations [2, 2, 2]', 'native, three calls on one store: violations [2, 2, 2]', 'named graphs after one validate(): []', 'named graphs in the persistent store after reopening: []', 'store.update("DROP GRAPH <urn:holos:python:shapes>") removes them'; step 5 output contains 'results           2'; step 6 output contains 'results           2'; step 7 output has none of 'urn:holos:shapes'; step 9 output contains 'note: <urn:holos:shapes> holds 1 quads', 'DROP GRAPH <urn:holos:shapes>'
+**Recorded result:** PASS — holosdb 0.27.0, holos 0.27.0: step 1 output contains "adapted: {'conforms': False, 'violations': 2, 'engine': 'adapted', 'results': [", "native:  {'conforms': False, 'violations': 2, 'engine': 'native', 'results': [", "'focus': 'http://example.org/a'", "'focus': 'http://example.org/b'", 'HolosError: unsupported: sh:sparql is not implemented'; step 10 output contains '--engine <NAME>          adapted (default) or native'; step 2 output contains 'adapted, three calls on one store: violations [2, 2, 2]', 'native, three calls on one store: violations [2, 2, 2]', 'named graphs after one validate(): []', 'named graphs in the persistent store after reopening: []', 'store.update("DROP GRAPH <urn:holos:python:shapes>") removes them'; step 5 output contains 'results           2'; step 6 output contains 'results           2'; step 7 output has none of 'urn:holos:shapes'; step 9 output contains 'note: <urn:holos:shapes> holds 1 quads', 'DROP GRAPH <urn:holos:shapes>'
 
 <details><summary>Output, as recorded</summary>
 
 ```text
 $ python scripts/holosdb_validate.py data/shacl/two-unnamed.ttl data/shacl/shapes-violation.ttl data/shacl/shapes-sparql.ttl
 adapted: {'conforms': False, 'violations': 2, 'engine': 'adapted', 'results': [{'focus': 'http://example.org/a', 'path': 'http://example.org/name', 'value': None, 'severity': 'Violation', 'component': 'http://www.w3.org/ns/shacl#MinCountConstraintComponent', 'shape': '_:0_b0', 'message': None}, {'focus': 'http://example.org/b', 'path': 'http://example.org/name', 'value': None, 'severity': 'Violation', 'component': 'http://www.w3.org/ns/shacl#MinCountConstraintComponent', 'shape': '_:0_b0', 'message': None}]}
-native:  {'conforms': False, 'violations': 2, 'engine': 'native', 'results': [{'focus': 'http://example.org/a', 'path': 'http://example.org/name', 'value': None, 'severity': 'Violation', 'component': 'http://www.w3.org/ns/shacl#MinCountConstraintComponent', 'shape': '_:d187e56771a05b8b93231857301d4c96', 'message': None}, {'focus': 'http://example.org/b', 'path': 'http://example.org/name', 'value': None, 'severity': 'Violation', 'component': 'http://www.w3.org/ns/shacl#MinCountConstraintComponent', 'shape': '_:d187e56771a05b8b93231857301d4c96', 'message': None}]}
+native:  {'conforms': False, 'violations': 2, 'engine': 'native', 'results': [{'focus': 'http://example.org/a', 'path': 'http://example.org/name', 'value': None, 'severity': 'Violation', 'component': 'http://www.w3.org/ns/shacl#MinCountConstraintComponent', 'shape': '_:bc6508039cb6c06de96e5890d6b48162', 'message': None}, {'focus': 'http://example.org/b', 'path': 'http://example.org/name', 'value': None, 'severity': 'Violation', 'component': 'http://www.w3.org/ns/shacl#MinCountConstraintComponent', 'shape': '_:bc6508039cb6c06de96e5890d6b48162', 'message': None}]}
 native, sh:sparql shapes: HolosError: unsupported: sh:sparql is not implemented by the native evaluator; validate with the adapted engine instead
 [exit 0]
 
 $ python scripts/holosdb_validate_repeat.py data/shacl/two-unnamed.ttl data/shacl/shapes-violation.ttl work/C13_10/store
-holosdb 0.26.4
+holosdb 0.27.0
 1. adapted, three calls on one store: violations [2, 2, 2]
 1. native, three calls on one store: violations [2, 2, 2]
 2. named graphs after one validate(): []
@@ -9532,7 +9643,7 @@ holosdb 0.26.4
 [exit 0]
 
 $ holos --version
-holos 0.26.4 (27aabce)
+holos 0.27.0 (1034260)
 [exit 0]
 
 $ holos stats --data data/shacl/two-unnamed.ttl --store work/C13_10/cli-store
@@ -9540,12 +9651,12 @@ quads            4
 dictionary terms 5
 named graphs     0
 on disk          140.9 KiB
-free here        60.0 GiB
+free here        51.8 GiB
 room to compact  yes (needs up to 140.9 KiB)
 predicates by frequency
            3  <http://www.w3.org/1999/02/22-rdf-syntax-ns#type>
            1  <http://example.org/name>
-loaded 4 quads in 0.23s (17 quads/s)
+loaded 4 quads in 0.26s (15 quads/s)
 [exit 0]
 
 $ holos validate --store work/C13_10/cli-store --shapes data/shacl/shapes-violation.ttl
@@ -9569,7 +9680,7 @@ $ holos query --store work/C13_10/cli-store --query "SELECT ?g (COUNT(*) AS ?n) 
 [exit 0]
 
 $ holos update --store work/C13_10/cli-store --update "INSERT DATA { GRAPH <urn:holos:shapes> { <urn:x:s> <urn:x:p> <urn:x:o> } }"
-inserted 1 deleted 0 graphs +0 -0 in 0.154s
+inserted 1 deleted 0 graphs +0 -0 in 0.231s
 [exit 0]
 
 $ holos validate --store work/C13_10/cli-store --shapes data/shacl/shapes-violation.ttl
@@ -9631,7 +9742,7 @@ OPTIONS
 - [HOLOS commit cd5af4b](https://github.com/pwin/triplestore/commit/cd5af4b32082458ee087d92948020a1b77cd3e9d): “Engine::with_transient_graph loads input inside a commit scope that is always rolled back” (quote found, checked 2026-11-20)
 - [HOLOS commit 82e4d66, 'Cut 0.21.1'](https://github.com/pwin/triplestore/commit/82e4d6686b3563db502ea68098a6f3fc9ce75d6b): “validation leaves nothing in the store it validates” (quote found, checked 2026-11-20)
 
-The recorded run uses 0.26.0, so it shows the fix made in 0.21.1, and the results the dictionary carries from 0.23.0. The same steps against the published 0.21.0 gave: `violations [2, 4, 6]` for both engines; a 5-quad `urn:holos:python:shapes` graph after one call, still there after reopening a persistent store; no warning for a planted leftover; and from the CLI `results 2`, then `results 4`, with a `urn:holos:shapes` graph left behind. The Python method's default engine, adapted, is in its signature: [holos-python lib.rs](https://github.com/pwin/triplestore/blob/27aabce3a1b5579f13d7d274398300e856a6e77d/crates/holos-python/src/lib.rs#L647-L674).
+The recorded run uses 0.27.0, so it shows the fix made in 0.21.1, and the results the dictionary carries from 0.23.0. The same steps against the published 0.21.0 gave: `violations [2, 4, 6]` for both engines; a 5-quad `urn:holos:python:shapes` graph after one call, still there after reopening a persistent store; no warning for a planted leftover; and from the CLI `results 2`, then `results 4`, with a `urn:holos:shapes` graph left behind. The Python method's default engine, adapted, is in its signature: [holos-python lib.rs](https://github.com/pwin/triplestore/blob/1034260144088cac1b96678f37679a44b1f50f9d/crates/holos-python/src/lib.rs#L647-L674).
 
 ---
 
@@ -9771,9 +9882,9 @@ NOTE: 2 external term(s) referenced with no --ref file resolving a definition:
 [exit 0]
 
 $ python scripts/sha256.py work/C13_12/run1/ontology-documentation.html work/C13_12/run2/ontology-documentation.html work/C13_12/run3/ontology-documentation.html work/C13_12/seed0-a/ontology-documentation.html work/C13_12/seed0-b/ontology-documentation.html
-d4fac3615eb2ae28 work/C13_12/run1/ontology-documentation.html
-76a9093a308dd9ee work/C13_12/run2/ontology-documentation.html
-95e2df7633ccf069 work/C13_12/run3/ontology-documentation.html
+a11c020212da9b6c work/C13_12/run1/ontology-documentation.html
+3e98cde9cbb8bd98 work/C13_12/run2/ontology-documentation.html
+aa5156382234cca7 work/C13_12/run3/ontology-documentation.html
 4b065806e5fca839 work/C13_12/seed0-a/ontology-documentation.html
 4b065806e5fca839 work/C13_12/seed0-b/ontology-documentation.html
 [exit 0]
@@ -9904,7 +10015,7 @@ Annotated chapter: [manual/docs/14-coverage-and-gaps.md](manual/docs/14-coverage
 
 > The one-shot Python and JavaScript calls have refused a shapes graph that declares
 
-**Evidence:** the same as [C11.07 — The CLI and an empty shapes graph: conforms up to 0.3.3, refused from 0.3.4](#c11-07), which reproduces it: shacl 0.3.8: step 1 exits 2; step 1 output contains 'the shapes graph declares no shapes'; step 2 exits 2; step 2 output contains 'no --shapes was given'; step 3: conforms: true; step 3 exits 0
+**Evidence:** the same as [C11.07 — The CLI and an empty shapes graph: conforms up to 0.3.3, refused from 0.3.4](#c11-07), which reproduces it: shacl 0.3.9: step 1 exits 2; step 1 output contains 'the shapes graph declares no shapes'; step 2 exits 2; step 2 output contains 'no --shapes was given'; step 3: conforms: true; step 3 exits 0
 
 ---
 
@@ -9916,14 +10027,100 @@ Annotated chapter: [manual/docs/14-coverage-and-gaps.md](manual/docs/14-coverage
 
 > Up to 0.21.1 both of its validators printed `conforms false` and returned exit
 
-**Evidence:** the same as [C11.29 — holos validate: exit 0 whatever it found up to 0.21.1, a gate from 0.22.0](#c11-29), which reproduces it: step 1 output contains 'conforms          false'; step 2 output contains 'conforms          false'; step 5 output contains "'conforms': False", 'HolosError: unsupported: sh:sparql is not implemented'; holos 0.26.4: step 1 exits 1; step 2 exits 1; step 3 exits 1; step 3 output contains 'conforms          false'; step 4 exits 1; step 6 exits 2; step 6 output contains 'sh:sparql'; step 7 exits 0
+**Evidence:** the same as [C11.29 — holos validate: exit 0 whatever it found up to 0.21.1, a gate from 0.22.0](#c11-29), which reproduces it: step 1 output contains 'conforms          false'; step 2 output contains 'conforms          false'; step 5 output contains "'conforms': False", 'HolosError: unsupported: sh:sparql is not implemented'; holos 0.27.0: step 1 exits 1; step 2 exits 1; step 3 exits 1; step 3 output contains 'conforms          false'; step 4 exits 1; step 6 exits 2; step 6 output contains 'sh:sparql'; step 7 exits 0
+
+---
+
+<a id="c14-43"></a>
+### C14.43 — A mandatory OTTR parameter with no column stops the run, from tarka 0.3.1
+
+**In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-43) · [plain edition](../docs/14-coverage-and-gaps.md#tarka-dropped-instances-it-could-not-build-silently-fixed-in-020-and-031)  
+**Kind:** Reproduced here · **Result:** **PASS** (2026-11-20)
+
+> **The other way to lose every instance went in 0.3.1.**
+
+**Inputs:** [`data/ottr/employees.stottr`](data/ottr/employees.stottr), [`data/ottr/employees-renamed-id.csv`](data/ottr/employees-renamed-id.csv)
+
+<details><summary><code>data/ottr/employees.stottr</code></summary>
+
+```text
+@prefix mailto: <mailto:> .
+@prefix acme: <https://acme.example.org/ns/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix ottr: <http://ns.ottr.xyz/0.4/> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+acme:Employee [ ottr:IRI ?employee, xsd:string ?name, ottr:IRI ?mbox, xsd:string ?id,
+                ottr:IRI ?dept, xsd:string ?role, xsd:string ?skill ] :: {
+    ottr:Triple(?employee, rdf:type, acme:Employee),
+    ottr:Triple(?employee, rdf:type, acme:Engineer),
+    ottr:Triple(?employee, foaf:name, ?name),
+    ottr:Triple(?employee, foaf:mbox, ?mbox),
+    ottr:Triple(?employee, acme:hasEmployeeId, ?id),
+    ottr:Triple(?employee, acme:worksIn, ?dept),
+    ottr:Triple(?employee, acme:hasRole, ?role),
+    ottr:Triple(?employee, acme:hasSkill, ?skill)
+} .
+```
+
+</details>
+
+<details><summary><code>data/ottr/employees-renamed-id.csv</code></summary>
+
+```text
+employee,name,mbox,employee_id,dept,role,skill
+https://acme.example.org/data/employee/E001,Grace Hopper,mailto:grace.hopper@acme.example.org,E001,https://acme.example.org/data/department/ENG,Software Engineer,Rust
+https://acme.example.org/data/employee/E002,Ada Lovelace,mailto:ada.lovelace@acme.example.org,E002,https://acme.example.org/data/department/ENG,Software Engineer,SPARQL
+https://acme.example.org/data/employee/E003,Alan Turing,mailto:alan.turing@acme.example.org,E003,https://acme.example.org/data/department/ENG,Software Engineer,SHACL
+https://acme.example.org/data/employee/E004,Margaret Hamilton,mailto:margaret.hamilton@acme.example.org,E004,https://acme.example.org/data/department/QA,Test Engineer,Automation
+https://acme.example.org/data/employee/E005,Katherine Johnson,mailto:katherine.johnson@acme.example.org,E005,https://acme.example.org/data/department/MKT,Analyst,Forecasting
+```
+
+</details>
+
+**Commands** (from the `evidence/` folder):
+
+```bash
+tarka run -l data/ottr/employees.stottr -T acme:Employee -i data/ottr/employees-renamed-id.csv --ntriples -o work/C14_43/renamed.nt
+python scripts/list_files.py work/C14_43
+tarka --version
+```
+
+**What is checked:** from 0.3.1: exit 1, the message names the parameter and lists the columns, and no output file is written. Before 0.3.1 there is no such message
+
+**Recorded result:** PASS — tarka 0.3.1: step 1 exits 1; step 1 output contains 'no column for the mandatory parameter id, so every instance would be left out', '(the columns: employee, name, mbox, employee_id, dept, role, skill)'; step 2 output has none of 'renamed.nt'
+
+<details><summary>Output, as recorded</summary>
+
+```text
+$ tarka run -l data/ottr/employees.stottr -T acme:Employee -i data/ottr/employees-renamed-id.csv --ntriples -o work/C14_43/renamed.nt
+tarka: the input has no column for the mandatory parameter id, so every instance would be left out (the columns: employee, name, mbox, employee_id, dept, role, skill). A parameter reads the column of its own name
+[exit 1]
+
+$ python scripts/list_files.py work/C14_43
+0 files, 0 bytes
+[exit 0]
+
+$ tarka --version
+tarka 0.3.1
+[exit 0]
+```
+
+</details>
+
+**Sources:**
+
+- [tarka CHANGELOG, 0.3.1](https://github.com/pwin/tarka/blob/0cecf53b06d2c95a840b8aa6f4087f44e81a06da/CHANGELOG.md#L5-L9): “Before, the run went” (quote found, checked 2026-11-20)
+
+The CSV is the acme employees file with its `id` column renamed `employee_id`. The CHANGELOG adds that the message names the nearest column when there is one (`floor_area` for `?floorArea`); `employee_id` is not near enough to `id` for that, so the message lists them all.
 
 ---
 
 <a id="c14-04"></a>
 ### C14.04 — tarka dropped instances it could not build, silently, up to 0.1.1
 
-**In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-04) · [plain edition](../docs/14-coverage-and-gaps.md#tarka-dropped-instances-it-could-not-build-silently-fixed-in-020)  
+**In the manual:** [Chapter 14, at the claim](manual/docs/14-coverage-and-gaps.md#ev-c14-04) · [plain edition](../docs/14-coverage-and-gaps.md#tarka-dropped-instances-it-could-not-build-silently-fixed-in-020-and-031)  
 **Kind:** Reproduced here · **Result:** **PASS** (2026-11-20)
 
 > Up to 0.1.1, an OTTR template whose `ottr:IRI` parameter received a cell tarka
@@ -10087,16 +10284,16 @@ with tempfile.TemporaryDirectory() as tmp:
 
 **What is checked:** ten runs per seed through the suite: seed 5 runs HermiT in at least 9, seed 0 fails in at least 7. The thresholds sit below the recorded tallies on purpose: C14.08 shows the one thing the seed does not control, and where the failure happens
 
-**Recorded result:** PASS — seed 5: HermiT ran 10 of 10, did not run 0; seed 0: HermiT ran 0 of 10, did not run 10; step 1 output contains "could not be run: cannot access local variable 'entity' where it is not associated with a value"
+**Recorded result:** PASS — seed 5: HermiT ran 10 of 10, did not run 0; seed 0: HermiT ran 2 of 10, did not run 8; step 1 output contains "could not be run: cannot access local variable 'entity' where it is not associated with a value"
 
 <details><summary>Output, as recorded</summary>
 
 ```text
 $ python scripts/reasoner_seeds.py work/C14_06 10 0 5
-PYTHONHASHSEED=0: HermiT ran 0 of 10, did not run 10 of 10
+PYTHONHASHSEED=0: HermiT ran 2 of 10, did not run 8 of 10
 PYTHONHASHSEED=5: HermiT ran 10 of 10, did not run 0 of 10
 REA-022 messages seen:
-  10 x  The external DL reasoner ('hermit') could not be run: cannot access local variable 'entity' where it is not associated with a value
+  8 x  The external DL reasoner ('hermit') could not be run: cannot access local variable 'entity' where it is not associated with a value
 [exit 0]
 ```
 
@@ -10369,16 +10566,16 @@ with tempfile.TemporaryDirectory() as tmp:
 
 **What is checked:** loading the merged ontology straight into owlready2, with the load path and blank-node labels fixed: seed 0 fails in at least 9 of 15 and seed 5 loads in at least 13 of 15; every failure is while building foaf:primaryTopic. The exact tallies, including any loads that go the other way, are recorded rather than asserted
 
-**Recorded result:** PASS — line 2. failed 13 times (at least 9); line 3. loaded 15 times (at least 13); every failure was owlready2 building foaf:primaryTopic
+**Recorded result:** PASS — line 2. failed 15 times (at least 9); line 3. loaded 15 times (at least 13); every failure was owlready2 building foaf:primaryTopic
 
 <details><summary>Output, as recorded</summary>
 
 ```text
 $ python scripts/load_repeat.py work/C14_08 15
-1. PYTHONHASHSEED=0, fresh temporary directory: loaded 0 of 15, failed 15 of 15
-2. PYTHONHASHSEED=0, fixed path and blank-node labels: loaded 2 of 15, failed 13 of 15
+1. PYTHONHASHSEED=0, fresh temporary directory: loaded 1 of 15, failed 14 of 15
+2. PYTHONHASHSEED=0, fixed path and blank-node labels: loaded 0 of 15, failed 15 of 15
 3. PYTHONHASHSEED=5, fixed path and blank-node labels: loaded 15 of 15, failed 0 of 15
-failures were while building: <http://xmlns.com/foaf/0.1/primaryTopic> (28)
+failures were while building: <http://xmlns.com/foaf/0.1/primaryTopic> (29)
 [exit 0]
 ```
 
@@ -10450,7 +10647,7 @@ Findings: 2 total (1 Violation, 0 Warning, 1 Info)
 Reports written to: ./work/C14_09/out
   - work/C14_09/out/findings.txt (start here -- what, where, and the source line)
   - work/C14_09/out/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpi4uhz9em -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpfat7xoou -Y
 [exit 1]
 
 $ python scripts/summarise_findings.py work/C14_09/out/full_results.csv --by focus --check REA-022
@@ -10553,7 +10750,7 @@ $ python scripts/hermit_verdict.py fixtures/acme_robotics/acme-org-v1.ttl fixtur
 HermiT: consistent (no OwlReadyInconsistentOntologyError)
 unsatisfiable classes: ['http://www.w3.org/2002/07/owl#Nothing', 'https://acme.example.org/ns/Contractor']
 owl:Nothing among them: True
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp_9pwerue -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmp9y5khlqx -Y
 [exit 0]
 
 $ ontology-quality-suite ontology --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --out-dir work/C14_39/acme --reports minimal
@@ -10561,7 +10758,7 @@ Findings: 2 total (2 Violation, 0 Warning, 0 Info)
 Reports written to: ./work/C14_39/acme
   - work/C14_39/acme/findings.txt (start here -- what, where, and the source line)
   - work/C14_39/acme/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpfiboy7j3 -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpct_hhol5 -Y
 [exit 1]
 
 $ python scripts/summarise_findings.py work/C14_39/acme/full_results.csv
@@ -10574,7 +10771,7 @@ $ python scripts/hermit_verdict.py data/reasoner/clean.ttl
 HermiT: consistent (no OwlReadyInconsistentOntologyError)
 unsatisfiable classes: none
 owl:Nothing among them: False
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpac3k8zd9 -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmppy367sxh -Y
 [exit 0]
 
 $ ontology-quality-suite ontology --ontology data/reasoner/clean.ttl --out-dir work/C14_39/clean --reports minimal
@@ -10582,7 +10779,7 @@ Findings: 0 total (0 Violation, 0 Warning, 0 Info)
 Reports written to: ./work/C14_39/clean
   - work/C14_39/clean/findings.txt (start here -- what, where, and the source line)
   - work/C14_39/clean/full_results.csv
-    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpqxa7ccbs -Y
+    java -Xmx2000M -cp ./.venv/Lib/site-packages/owlready2/hermit;./.venv/Lib/site-packages/owlready2/hermit/HermiT.jar org.semanticweb.HermiT.cli.CommandLine -c -O -D -I file:///<tmp>/tmpfzxyr1g1 -Y
 [exit 0]
 
 $ python scripts/summarise_findings.py work/C14_39/clean/full_results.csv
@@ -10719,7 +10916,7 @@ Needs Java, and a hash seed under which owlready2 loads (5 here; see C14.06).
 
 > | Up to 0.21.1, the `holos validate` command defaults to the `native` engine and `holosdb`'s
 
-**Evidence:** the same as [C13.10 — Validation and the store: written into it up to 0.21.0, untouched from 0.21.1](#c13-10), which reproduces it: holosdb 0.26.4, holos 0.26.4: step 1 output contains "adapted: {'conforms': False, 'violations': 2, 'engine': 'adapted', 'results': [", "native:  {'conforms': False, 'violations': 2, 'engine': 'native', 'results': [", "'focus': 'http://example.org/a'", "'focus': 'http://example.org/b'", 'HolosError: unsupported: sh:sparql is not implemented'; step 10 output contains '--engine <NAME>          adapted (default) or native'; step 2 output contains 'adapted, three calls on one store: violations [2, 2, 2]', 'native, three calls on one store: violations [2, 2, 2]', 'named graphs after one validate(): []', 'named graphs in the persistent store after reopening: []', 'store.update("DROP GRAPH <urn:holos:python:shapes>") removes them'; step 5 output contains 'results           2'; step 6 output contains 'results           2'; step 7 output has none of 'urn:holos:shapes'; step 9 output contains 'note: <urn:holos:shapes> holds 1 quads', 'DROP GRAPH <urn:holos:shapes>'
+**Evidence:** the same as [C13.10 — Validation and the store: written into it up to 0.21.0, untouched from 0.21.1](#c13-10), which reproduces it: holosdb 0.27.0, holos 0.27.0: step 1 output contains "adapted: {'conforms': False, 'violations': 2, 'engine': 'adapted', 'results': [", "native:  {'conforms': False, 'violations': 2, 'engine': 'native', 'results': [", "'focus': 'http://example.org/a'", "'focus': 'http://example.org/b'", 'HolosError: unsupported: sh:sparql is not implemented'; step 10 output contains '--engine <NAME>          adapted (default) or native'; step 2 output contains 'adapted, three calls on one store: violations [2, 2, 2]', 'native, three calls on one store: violations [2, 2, 2]', 'named graphs after one validate(): []', 'named graphs in the persistent store after reopening: []', 'store.update("DROP GRAPH <urn:holos:python:shapes>") removes them'; step 5 output contains 'results           2'; step 6 output contains 'results           2'; step 7 output has none of 'urn:holos:shapes'; step 9 output contains 'note: <urn:holos:shapes> holds 1 quads', 'DROP GRAPH <urn:holos:shapes>'
 
 ---
 
@@ -10931,7 +11128,7 @@ Counted from the tagged files: 50 entries at v0.5.0 and v0.8.0, 56 at v0.10.0, 6
 
 > **HOLOS validation leaves the store as it found it**, from 0.21.1.
 
-**Evidence:** the same as [C13.10 — Validation and the store: written into it up to 0.21.0, untouched from 0.21.1](#c13-10), which reproduces it: holosdb 0.26.4, holos 0.26.4: step 1 output contains "adapted: {'conforms': False, 'violations': 2, 'engine': 'adapted', 'results': [", "native:  {'conforms': False, 'violations': 2, 'engine': 'native', 'results': [", "'focus': 'http://example.org/a'", "'focus': 'http://example.org/b'", 'HolosError: unsupported: sh:sparql is not implemented'; step 10 output contains '--engine <NAME>          adapted (default) or native'; step 2 output contains 'adapted, three calls on one store: violations [2, 2, 2]', 'native, three calls on one store: violations [2, 2, 2]', 'named graphs after one validate(): []', 'named graphs in the persistent store after reopening: []', 'store.update("DROP GRAPH <urn:holos:python:shapes>") removes them'; step 5 output contains 'results           2'; step 6 output contains 'results           2'; step 7 output has none of 'urn:holos:shapes'; step 9 output contains 'note: <urn:holos:shapes> holds 1 quads', 'DROP GRAPH <urn:holos:shapes>'
+**Evidence:** the same as [C13.10 — Validation and the store: written into it up to 0.21.0, untouched from 0.21.1](#c13-10), which reproduces it: holosdb 0.27.0, holos 0.27.0: step 1 output contains "adapted: {'conforms': False, 'violations': 2, 'engine': 'adapted', 'results': [", "native:  {'conforms': False, 'violations': 2, 'engine': 'native', 'results': [", "'focus': 'http://example.org/a'", "'focus': 'http://example.org/b'", 'HolosError: unsupported: sh:sparql is not implemented'; step 10 output contains '--engine <NAME>          adapted (default) or native'; step 2 output contains 'adapted, three calls on one store: violations [2, 2, 2]', 'native, three calls on one store: violations [2, 2, 2]', 'named graphs after one validate(): []', 'named graphs in the persistent store after reopening: []', 'store.update("DROP GRAPH <urn:holos:python:shapes>") removes them'; step 5 output contains 'results           2'; step 6 output contains 'results           2'; step 7 output has none of 'urn:holos:shapes'; step 9 output contains 'note: <urn:holos:shapes> holds 1 quads', 'DROP GRAPH <urn:holos:shapes>'
 
 ---
 
@@ -10957,7 +11154,7 @@ The other two are C14.39 (REA-020) and C10.29 and C10.30 (sketch).
 
 > **Gates that could not fail, now can**: the `shacl` CLI refuses to validate
 
-**Evidence:** the same as [C11.29 — holos validate: exit 0 whatever it found up to 0.21.1, a gate from 0.22.0](#c11-29), which reproduces it: step 1 output contains 'conforms          false'; step 2 output contains 'conforms          false'; step 5 output contains "'conforms': False", 'HolosError: unsupported: sh:sparql is not implemented'; holos 0.26.4: step 1 exits 1; step 2 exits 1; step 3 exits 1; step 3 output contains 'conforms          false'; step 4 exits 1; step 6 exits 2; step 6 output contains 'sh:sparql'; step 7 exits 0
+**Evidence:** the same as [C11.29 — holos validate: exit 0 whatever it found up to 0.21.1, a gate from 0.22.0](#c11-29), which reproduces it: step 1 output contains 'conforms          false'; step 2 output contains 'conforms          false'; step 5 output contains "'conforms': False", 'HolosError: unsupported: sh:sparql is not implemented'; holos 0.27.0: step 1 exits 1; step 2 exits 1; step 3 exits 1; step 3 output contains 'conforms          false'; step 4 exits 1; step 6 exits 2; step 6 output contains 'sh:sparql'; step 7 exits 0
 
 The shacl CLI's refusal is C11.07; the DSL's two fixes are C08.15 and C08.16.
 
@@ -11007,7 +11204,7 @@ The shacl CLI's refusal is C11.07; the DSL's two fixes are C08.15 and C08.16.
 
 > **The reasoner as "flaky".**
 
-**Evidence:** the same as [C14.06 — The reasoner's outcome follows the hash seed](#c14-06), which reproduces it: seed 5: HermiT ran 10 of 10, did not run 0; seed 0: HermiT ran 0 of 10, did not run 10; step 1 output contains "could not be run: cannot access local variable 'entity' where it is not associated with a value"
+**Evidence:** the same as [C14.06 — The reasoner's outcome follows the hash seed](#c14-06), which reproduces it: seed 5: HermiT ran 10 of 10, did not run 0; seed 0: HermiT ran 2 of 10, did not run 8; step 1 output contains "could not be run: cannot access local variable 'entity' where it is not associated with a value"
 
 ---
 
@@ -11019,7 +11216,7 @@ The shacl CLI's refusal is C11.07; the DSL's two fixes are C08.15 and C08.16.
 
 > **The reasoner as an "optional extra".**
 
-**Evidence:** the same as [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05), which reproduces it: step 1 output contains 'commands installed: ontology-quality-suite', 'owlready2>=0.51', 'shacl 0.3.8/n    commands installed: none (library only)', 'tarka-rdf 0.2.2/n    commands installed: none (library only)', 'holosdb 0.26.4/n    commands installed: none (library only)'; suite 0.28.0: step 1 output contains 'shacl<0.4,>=0.3.3'; suite 0.28.0: step 1 output contains 'holosdb>=0.24'
+**Evidence:** the same as [C07.05 — Both engines are runtime dependencies; owlready2 too; the wheels are libraries](#c07-05), which reproduces it: step 1 output contains 'commands installed: ontology-quality-suite', 'owlready2>=0.51', 'shacl 0.3.9/n    commands installed: none (library only)', 'tarka-rdf 0.3.1/n    commands installed: none (library only)', 'holosdb 0.27.0/n    commands installed: none (library only)'; suite 0.28.0: step 1 output contains 'shacl<0.4,>=0.3.3'; suite 0.28.0: step 1 output contains 'holosdb>=0.24'
 
 ---
 

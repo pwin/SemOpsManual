@@ -21,9 +21,9 @@ _GH = "https://github.com/pwin"
 REPOS = {
     "suite": (f"{_GH}/consolidated-ontology-quality-suite-python", "d9300e62b8c142367ad14f52d3d2fd7ff6d6021b"),   # v0.28.0
     "webapp": (f"{_GH}/consolidated-ontology-quality-suite-webapp", "0c1be110af1175ddc98a354c2010814d39b57902"),   # v0.18.0
-    "shacl": (f"{_GH}/SHACL_Engine", "e030c8c1fd05e7a8fcd3ec7db203e980f03755fc"),   # v0.3.8
-    "holos": (f"{_GH}/triplestore", "27aabce3a1b5579f13d7d274398300e856a6e77d"),   # v0.26.4
-    "tarka": (f"{_GH}/tarka", "9a346083212ee6450fef537551dd6478092ff024"),   # v0.2.2
+    "shacl": (f"{_GH}/SHACL_Engine", "75cdb434220305a19ba922776768de04fb8ed13d"),   # v0.3.9
+    "holos": (f"{_GH}/triplestore", "1034260144088cac1b96678f37679a44b1f50f9d"),   # v0.27.0
+    "tarka": (f"{_GH}/tarka", "0cecf53b06d2c95a840b8aa6f4087f44e81a06da"),   # v0.3.1
     "testing": (f"{_GH}/consolidated-ontology-quality-suite-python-testing", "05ec27d13c2018c8427eb8cfe5a98474ee522789"),
     "manual": (f"{_GH}/SemOpsManual", ""),
 }

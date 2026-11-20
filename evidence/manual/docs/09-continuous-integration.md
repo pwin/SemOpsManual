@@ -661,7 +661,7 @@ Seventeen fixtures, of which a sample:
 | `09-profile-violations` | `unionOf`, `complementOf`, `minCardinality 4` | `REA-010`, `REA-011`, `REA-012` |
 | `14-blank-node-focus` | untagged labels on anonymous restrictions and an `owl:Axiom` | `STY-003`, with a message |
 
-Re-run for this edition against suite 0.25.0, holosdb 0.26.0 and `shacl` 0.3.4:
+Re-run for this edition against suite 0.28.0, holosdb 0.26.4 and `shacl` 0.3.8:
 **166 passed, 10 skipped**. The engine move changed none of it; the one test more
 than the 165 first recorded is one the repository has gained since. No fixture or
 expectation needed touching, and that is the point of what follows. (To run it

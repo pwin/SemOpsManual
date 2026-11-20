@@ -28,14 +28,14 @@
   {
    "cmd": "ontology-quality-suite sketch --queries work/C10_30/last --ontology fixtures/acme_robotics/acme-org-v1.ttl --import-dir fixtures/acme_robotics --out-dir work/C10_30/out --reports minimal --fail-on never",
    "rc": 0,
-   "seconds": 1.8,
+   "seconds": 2.8,
    "stdout": "Findings: 38 total (0 Violation, 1 Warning, 37 Info)\nReports written to: ./work/C10_30/out\n  - work/C10_30/out/findings.txt (start here -- what, where, and the source line)\n  - work/C10_30/out/full_results.csv\nSketch used 3 query file(s); 4 triples, 4 entities.\n",
    "stderr": "warning: prefix 'acme:' means <https://acme.example.org/ns/> in an earlier file and <https://acme.example.org/ns#> in zz-legacy.rq; each file is read with its own definition, and the legend below shows the first\n"
   },
   {
    "cmd": "python scripts/summarise_findings.py work/C10_30/out/full_results.csv --by focus --check CNF-001",
    "rc": 0,
-   "seconds": 0.1,
+   "seconds": 0.2,
    "stdout": "CNF-001  focus=https://acme.example.org/ns#Department  path=-  value=-\ntotal 1: 0 Violation, 1 Warning, 0 Info\n",
    "stderr": ""
   }

@@ -1,47 +1,47 @@
 {
- "https://github.com/pwin/SHACL_Engine/blob/e030c8c1fd05e7a8fcd3ec7db203e980f03755fc/README.md#L101": {
+ "https://github.com/pwin/SHACL_Engine/blob/75cdb434220305a19ba922776768de04fb8ed13d/README.md#L101": {
   "checked": "2026-11-20",
   "claim": "C11.22",
   "detail": "README.md L101",
   "ok": true
  },
- "https://github.com/pwin/SHACL_Engine/blob/e030c8c1fd05e7a8fcd3ec7db203e980f03755fc/README.md#L117-L118": {
+ "https://github.com/pwin/SHACL_Engine/blob/75cdb434220305a19ba922776768de04fb8ed13d/README.md#L117-L118": {
   "checked": "2026-11-20",
   "claim": "C11.22",
   "detail": "README.md L117-L118",
   "ok": true
  },
- "https://github.com/pwin/SHACL_Engine/blob/e030c8c1fd05e7a8fcd3ec7db203e980f03755fc/README.md#L302-L305": {
+ "https://github.com/pwin/SHACL_Engine/blob/75cdb434220305a19ba922776768de04fb8ed13d/README.md#L302-L305": {
   "checked": "2026-11-20",
   "claim": "C11.07",
   "detail": "README.md L302-L305",
   "ok": true
  },
- "https://github.com/pwin/SHACL_Engine/blob/e030c8c1fd05e7a8fcd3ec7db203e980f03755fc/README.md#L315-L316": {
+ "https://github.com/pwin/SHACL_Engine/blob/75cdb434220305a19ba922776768de04fb8ed13d/README.md#L315-L316": {
   "checked": "2026-11-20",
   "claim": "C11.08",
   "detail": "README.md L315-L316",
   "ok": true
  },
- "https://github.com/pwin/SHACL_Engine/blob/e030c8c1fd05e7a8fcd3ec7db203e980f03755fc/README.md#L339-L346": {
+ "https://github.com/pwin/SHACL_Engine/blob/75cdb434220305a19ba922776768de04fb8ed13d/README.md#L339-L346": {
   "checked": "2026-11-20",
   "claim": "C11.08",
   "detail": "README.md L339-L346",
   "ok": true
  },
- "https://github.com/pwin/SHACL_Engine/blob/e030c8c1fd05e7a8fcd3ec7db203e980f03755fc/README.md#L389-L392": {
+ "https://github.com/pwin/SHACL_Engine/blob/75cdb434220305a19ba922776768de04fb8ed13d/README.md#L389-L392": {
   "checked": "2026-11-20",
   "claim": "C11.08",
   "detail": "README.md L389-L392",
   "ok": true
  },
- "https://github.com/pwin/SHACL_Engine/blob/e030c8c1fd05e7a8fcd3ec7db203e980f03755fc/README.md#L483-L492": {
+ "https://github.com/pwin/SHACL_Engine/blob/75cdb434220305a19ba922776768de04fb8ed13d/README.md#L483-L492": {
   "checked": "2026-11-20",
   "claim": "C11.24",
   "detail": "README.md L483-L492",
   "ok": true
  },
- "https://github.com/pwin/SHACL_Engine/blob/e030c8c1fd05e7a8fcd3ec7db203e980f03755fc/README.md#L68-L71": {
+ "https://github.com/pwin/SHACL_Engine/blob/75cdb434220305a19ba922776768de04fb8ed13d/README.md#L68-L71": {
   "checked": "2026-11-20",
   "claim": "C11.21",
   "detail": "README.md L68-L71",
@@ -87,6 +87,12 @@
   "checked": "2026-11-20",
   "claim": "C11.21",
   "detail": "commit 6fa00e3",
+  "ok": true
+ },
+ "https://github.com/pwin/SHACL_Engine/commit/75cdb434220305a19ba922776768de04fb8ed13d": {
+  "checked": "2026-11-20",
+  "claim": "C07.33",
+  "detail": "commit 75cdb43",
   "ok": true
  },
  "https://github.com/pwin/SHACL_Engine/commit/8de05bae23e410d97c040743f4ca7e0eb4ff6947": {
@@ -499,7 +505,7 @@
  },
  "https://github.com/pwin/consolidated-ontology-quality-suite-webapp/blob/0c1be110af1175ddc98a354c2010814d39b57902/package-lock.json": {
   "checked": "2026-11-20",
-  "claim": "C07.04",
+  "claim": "C07.33",
   "detail": "package-lock.json",
   "ok": true
  },
@@ -611,16 +617,22 @@
   "detail": "commit ec96b93",
   "ok": true
  },
- "https://github.com/pwin/tarka/blob/9a346083212ee6450fef537551dd6478092ff024/README.md#L41-L43": {
+ "https://github.com/pwin/tarka/blob/0cecf53b06d2c95a840b8aa6f4087f44e81a06da/CHANGELOG.md#L5-L9": {
   "checked": "2026-11-20",
-  "claim": "C10.09",
-  "detail": "README.md L41-L43",
+  "claim": "C14.43",
+  "detail": "CHANGELOG.md L5-L9",
   "ok": true
  },
- "https://github.com/pwin/tarka/blob/9a346083212ee6450fef537551dd6478092ff024/README.md#L45": {
+ "https://github.com/pwin/tarka/blob/0cecf53b06d2c95a840b8aa6f4087f44e81a06da/README.md#L44-L46": {
+  "checked": "2026-11-20",
+  "claim": "C10.09",
+  "detail": "README.md L44-L46",
+  "ok": true
+ },
+ "https://github.com/pwin/tarka/blob/0cecf53b06d2c95a840b8aa6f4087f44e81a06da/README.md#L48": {
   "checked": "2026-11-20",
   "claim": "C10.16",
-  "detail": "README.md L45",
+  "detail": "README.md L48",
   "ok": true
  },
  "https://github.com/pwin/tarka/commit/26f256a28f10d299a4cf1c5dd49ba52cd37122a7": {
@@ -629,25 +641,25 @@
   "detail": "commit 26f256a",
   "ok": true
  },
- "https://github.com/pwin/triplestore/blob/27aabce3a1b5579f13d7d274398300e856a6e77d/ACCESS-CONTROL.md#L44": {
+ "https://github.com/pwin/triplestore/blob/1034260144088cac1b96678f37679a44b1f50f9d/ACCESS-CONTROL.md#L44": {
   "checked": "2026-11-20",
   "claim": "C13.09",
   "detail": "ACCESS-CONTROL.md L44",
   "ok": true
  },
- "https://github.com/pwin/triplestore/blob/27aabce3a1b5579f13d7d274398300e856a6e77d/README.md#L106": {
+ "https://github.com/pwin/triplestore/blob/1034260144088cac1b96678f37679a44b1f50f9d/README.md#L106": {
   "checked": "2026-11-20",
   "claim": "C04.05",
   "detail": "README.md L106",
   "ok": true
  },
- "https://github.com/pwin/triplestore/blob/27aabce3a1b5579f13d7d274398300e856a6e77d/README.md#L122": {
+ "https://github.com/pwin/triplestore/blob/1034260144088cac1b96678f37679a44b1f50f9d/README.md#L122": {
   "checked": "2026-11-20",
   "claim": "C04.05",
   "detail": "README.md L122",
   "ok": true
  },
- "https://github.com/pwin/triplestore/blob/27aabce3a1b5579f13d7d274398300e856a6e77d/README.md#L155": {
+ "https://github.com/pwin/triplestore/blob/1034260144088cac1b96678f37679a44b1f50f9d/README.md#L155": {
   "checked": "2026-11-20",
   "claim": "C04.05",
   "detail": "README.md L155",

@@ -140,7 +140,7 @@ validator as `Store.validate()`. On 0.21.x, gate with the `shacl` CLI, or use
 
 <a id="ev-c14-03"></a>*Evidence:* [C14.03 — holos validate exited 0 on a non-conforming graph, up to 0.21.1](../../EVIDENCE.md#c14-03) (reproduced: PASS)
 
-### tarka dropped instances it could not build, silently (fixed in 0.2.0)
+### tarka dropped instances it could not build, silently (fixed in 0.2.0 and 0.3.1)
 
 Up to 0.1.1, an OTTR template whose `ottr:IRI` parameter received a cell tarka
 did not accept as an IRI (a `mailto:…` value, with no `mailto:` prefix declared)
@@ -156,6 +156,21 @@ the rows left out, once the rest is written, unless `strict=False` is given
 ([Chapter 10](10-ingest-and-transform.md) §10.3).
 
 <a id="ev-c14-04"></a>*Evidence:* [C14.04 — tarka dropped instances it could not build, silently, up to 0.1.1](../../EVIDENCE.md#c14-04) (reproduced: PASS)
+
+**The other way to lose every instance went in 0.3.1.** A parameter reads the
+column of its own name, so a mandatory parameter whose column was missing or
+named differently (`employee_id` for `?id`) left out every instance, again
+without a word. 0.3.1 stops the run before it reads a row, exits 1, writes
+nothing, and lists the columns it does have:
+
+<a id="ev-c14-43"></a>*Evidence:* [C14.43 — A mandatory OTTR parameter with no column stops the run, from tarka 0.3.1](../../EVIDENCE.md#c14-43) (reproduced: PASS)
+
+```
+tarka: the input has no column for the mandatory parameter id, so every instance
+would be left out (the columns: employee, name, mbox, employee_id, dept, role, skill).
+```
+
+A missing column for an optional parameter is a warning.
 
 ### `docgen` reshuffles the page on every run
 

@@ -1,0 +1,9 @@
+# Chapter 7 §7.1: one sh:datatype constraint on a datatype the engine
+# checked by name only until 0.3.9 (xsd:gYear is one of seven).
+@prefix sh:  <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex:  <https://example.org/> .
+
+ex:FoundingShape a sh:NodeShape ;
+    sh:targetClass ex:Company ;
+    sh:property [ sh:path ex:founded ; sh:datatype xsd:gYear ] .

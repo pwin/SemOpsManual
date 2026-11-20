@@ -14,7 +14,7 @@
   {
    "cmd": "python scripts/compare_ntriples.py work/C10_11/none.nt work/C10_11/none.nt",
    "rc": 0,
-   "seconds": 0.3,
+   "seconds": 0.5,
    "stdout": "work/C10_11/none.nt: 40 triples\nwork/C10_11/none.nt: 40 triples\nisomorphic: True\n",
    "stderr": ""
   },
@@ -28,7 +28,7 @@
   {
    "cmd": "python scripts/compare_ntriples.py work/C10_11/optional.nt work/C10_11/optional.nt",
    "rc": 0,
-   "seconds": 0.3,
+   "seconds": 0.4,
    "stdout": "work/C10_11/optional.nt: 40 triples\nwork/C10_11/optional.nt: 40 triples\nisomorphic: True\n",
    "stderr": ""
   },
@@ -42,7 +42,7 @@
   {
    "cmd": "python scripts/compare_ntriples.py work/C10_11/bad-mbox.nt work/C10_11/bad-mbox.nt",
    "rc": 0,
-   "seconds": 0.3,
+   "seconds": 0.4,
    "stdout": "work/C10_11/bad-mbox.nt: 32 triples\nwork/C10_11/bad-mbox.nt: 32 triples\nisomorphic: True\n",
    "stderr": ""
   },
@@ -63,7 +63,7 @@
   {
    "cmd": "python scripts/compare_ntriples.py work/C10_11/bottr.nt work/C10_11/bottr.nt",
    "rc": 0,
-   "seconds": 0.4,
+   "seconds": 0.5,
    "stdout": "work/C10_11/bottr.nt: 40 triples\nwork/C10_11/bottr.nt: 40 triples\nisomorphic: True\n",
    "stderr": ""
   }

@@ -1,0 +1,6 @@
+# One well-formed xsd:gYear and one that is not a year at all.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex:  <https://example.org/> .
+
+ex:acme   a ex:Company ; ex:founded "1972"^^xsd:gYear .
+ex:globex a ex:Company ; ex:founded "not-a-year"^^xsd:gYear .
