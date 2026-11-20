@@ -2,7 +2,7 @@
  "id": "C13.02",
  "status": "PASS",
  "detail": "step 1 output contains '\"role\": \"triplified_data\"', '\"source_tarql\": \"queries/employees.rq\"', '\"ontology_graph_uri\": \"https://acme.example.org/graph/ontology/2.0.0\"'; step 2 output contains '--auth-user', '--auth-password', '--sample-limit', '--fail-on-anything', '--fail-on-misalignment'",
- "ran": "2026-11-18",
+ "ran": "2026-11-20",
  "steps": [
   {
    "cmd": "python scripts/build_manifest.py work/C13_02/graphs.json",

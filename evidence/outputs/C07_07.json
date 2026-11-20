@@ -2,13 +2,13 @@
  "id": "C07.07",
  "status": "PASS",
  "detail": "unguarded: rdflib names an internal identifier; holosdb and pyoxigraph leave the message unbound; COALESCE: rdflib still names the identifier, the other two say '[a blank node]'; IF(isBlank(...)): all three say '[a blank node]'",
- "ran": "2026-11-18",
+ "ran": "2026-11-20",
  "steps": [
   {
    "cmd": "python scripts/engine_leniency.py",
    "rc": 0,
-   "seconds": 0.5,
-   "stdout": "== unguarded STR(?e)\n   rdflib      ['A label on n48819e8490cc4695bee9a48420b841aeb1 has no language tag.']\n   holosdb     ['(unbound)']\n   pyoxigraph  ['(unbound)']\n== COALESCE(STR(?e), ...)\n   rdflib      ['A label on n2d0448aa70ed4823b3b9cf85ed6711cfb1 has no language tag.']\n   holosdb     ['A label on [a blank node] has no language tag.']\n   pyoxigraph  ['A label on [a blank node] has no language tag.']\n== guarded IF(isBlank(?e), ...)\n   rdflib      ['A label on [a blank node] has no language tag.']\n   holosdb     ['A label on [a blank node] has no language tag.']\n   pyoxigraph  ['A label on [a blank node] has no language tag.']\n",
+   "seconds": 0.6,
+   "stdout": "== unguarded STR(?e)\n   rdflib      ['A label on ndd4d97d223b6400bb6cb2e90958912bdb1 has no language tag.']\n   holosdb     ['(unbound)']\n   pyoxigraph  ['(unbound)']\n== COALESCE(STR(?e), ...)\n   rdflib      ['A label on n42d21db6f78140fd86eb90e19b3359a1b1 has no language tag.']\n   holosdb     ['A label on [a blank node] has no language tag.']\n   pyoxigraph  ['A label on [a blank node] has no language tag.']\n== guarded IF(isBlank(?e), ...)\n   rdflib      ['A label on [a blank node] has no language tag.']\n   holosdb     ['A label on [a blank node] has no language tag.']\n   pyoxigraph  ['A label on [a blank node] has no language tag.']\n",
    "stderr": ""
   }
  ]

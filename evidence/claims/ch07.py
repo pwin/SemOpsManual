@@ -36,7 +36,7 @@ CLAIMS = [
           (F, "> **Versions this edition was measured against.**"), "run",
           scripts=["scripts/versions.py"],
           steps=[Step("python scripts/versions.py")],
-          check=has(0, "PyPI ontology-quality-suite  0.27.0", "PyPI shacl                   0.3.8",
+          check=has(0, "PyPI ontology-quality-suite  0.28.0", "PyPI shacl                   0.3.8",
                     "PyPI holosdb                 0.26.4", "PyPI tarka-rdf               0.2.2",
                     "release shacl                shacl 0.3.8", "release tarka                tarka 0.2.2",
                     "release holos                holos 0.26.4", "npm ontology-suite           0.17.3",
@@ -63,9 +63,9 @@ CLAIMS = [
 
     Claim("C07.04", "The editor runs the same engines at the same versions", "07",
           (F, "the 44 portable checks run on **holosdb** in Python and on"), "source",
-          sources=[src("extension package.json (0.17.6)", file("webapp", "package.json", "500-509"),
+          sources=[src("extension package.json (0.18.0)", file("webapp", "package.json", "500-509"),
                        '"holos-wasm-node": "^0.26.4",'),
-                   src("extension package-lock.json (0.17.6): the holos-wasm-node it bundles",
+                   src("extension package-lock.json (0.18.0): the holos-wasm-node it bundles",
                        file("webapp", "package-lock.json"), '"node_modules/holos-wasm-node"'),
                    src("suite uv.lock on main from 9182f9e: the holosdb it locks",
                        file("suite", "uv.lock", "167-168", ref="9182f9e6f4411c72624d9e1a9e61f13e41d2fdb9"),
@@ -73,11 +73,11 @@ CLAIMS = [
                    src("HOLOS commit 8b2a949: every query entry point through one pipeline",
                        commit("holos", "8b2a9495af52ff56a7ebedd49e9dbd0f1ead93ce"),
                        "Send every query entry point through one pipeline")],
-          notes="Below 1.0 a caret admits patch releases only, so `^0.26.4` means 0.26.x. The 0.17.6 release's "
-                "lock file resolves it to 0.26.4, and the suite's repository locks the same 0.26.4 from 9182f9e -- "
-                "so the two sides are on one version exactly. The suite's last release, 0.27.0, still locks "
-                "0.26.1, but a lock is not what an install reads: `pip install ontology-quality-suite` resolves "
-                "holosdb 0.26.4, which is what C07.01 installs. The extension reaches HOLOS through `queryRdf`, the suite "
+          notes="Below 1.0 a caret admits patch releases only, so `^0.26.4` means 0.26.x. The 0.18.0 release's "
+                "lock file resolves it to 0.26.4, and the suite's 0.28.0 release locks the same 0.26.4 -- so the "
+                "two sides are on one version exactly, in the lock as well as in what an install resolves. "
+                "Earlier editions needed a caveat here because the suite's released lock trailed its "
+                "repository's; 0.28.0 ships that lock and it does not. The extension reaches HOLOS through `queryRdf`, the suite "
                 "through `Store.query`; from HOLOS 0.24.0 both run the same pipeline. HOLOS's own SHACL validator "
                 "is a part the extension does not call: it validates with shacl-wasm-node."),
 
